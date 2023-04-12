@@ -67,7 +67,7 @@ namespace Ban3.Infrastructures.Common.Extensions
                                       .GetField(e.ToString())
                                       .GetCustomAttributes(typeof(EnumAttachedAttribute), true);
 
-                if (attacheds != null && attacheds.Length > 0)
+                if (attacheds.Length > 0)
                 {
                     EnumAttachedAttribute aa = attacheds[0] as EnumAttachedAttribute;
 

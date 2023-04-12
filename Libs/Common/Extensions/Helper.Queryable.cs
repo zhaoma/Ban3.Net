@@ -9,10 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-using Ban3.Infrastructures.Common.Contracts.Models;
 using Ban3.Infrastructures.Common.Extensions.Comparers;
 
 namespace Ban3.Infrastructures.Common.Extensions
