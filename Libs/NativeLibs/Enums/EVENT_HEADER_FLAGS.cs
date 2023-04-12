@@ -1,0 +1,17 @@
+﻿using System;
+
+namespace Ban3.Infrastructures.NativeLibs.Enums
+{
+    [Flags]
+    public enum EVENT_HEADER_FLAGS
+    {
+        EVENT_HEADER_FLAG_EXTENDED_INFO,
+        EVENT_HEADER_FLAG_PRIVATE_SESSION,
+        EVENT_HEADER_FLAG_STRING_ONLY,
+        EVENT_HEADER_FLAG_TRACE_MESSAGE,
+        EVENT_HEADER_FLAG_NO_CPUTIME,
+        EVENT_HEADER_FLAG_32_BIT_HEADER,
+        EVENT_HEADER_FLAG_64_BIT_HEADER,
+        EVENT_HEADER_FLAG_CLASSIC_HEADER
+    }
+}

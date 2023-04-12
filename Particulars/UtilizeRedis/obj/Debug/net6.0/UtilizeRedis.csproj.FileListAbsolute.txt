@@ -1,0 +1,14 @@
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeRedis.deps.json
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeRedis.dll
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeRedis.pdb
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeRedis.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\UtilizeRedis.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\UtilizeRedis.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\UtilizeRedis.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\UtilizeRedis.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\UtilizeRedis.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\UtilizeRedis.csproj.CopyComplete
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\ban3.Infrastructures.Particulars.UtilizeRedis.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\refint\ban3.Infrastructures.Particulars.UtilizeRedis.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\ban3.Infrastructures.Particulars.UtilizeRedis.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeRedis\obj\Debug\net6.0\ref\ban3.Infrastructures.Particulars.UtilizeRedis.dll

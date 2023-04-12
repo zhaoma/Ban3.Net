@@ -1,0 +1,14 @@
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaEastmoney.deps.json
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaEastmoney.dll
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaEastmoney.pdb
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaEastmoney.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\ViaEastmoney.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\ViaEastmoney.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\ViaEastmoney.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\ViaEastmoney.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\ViaEastmoney.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\ViaEastmoney.csproj.CopyComplete
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\ban3.Infrastructures.Platforms.ViaEastmoney.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\refint\ban3.Infrastructures.Platforms.ViaEastmoney.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\ban3.Infrastructures.Platforms.ViaEastmoney.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaEastmoney\obj\Debug\net6.0\ref\ban3.Infrastructures.Platforms.ViaEastmoney.dll

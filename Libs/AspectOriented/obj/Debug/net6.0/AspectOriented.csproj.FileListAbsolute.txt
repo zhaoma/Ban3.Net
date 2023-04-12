@@ -1,0 +1,16 @@
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\bin\Debug\net6.0\ban3.Infrastructures.AspectOriented.deps.json
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\bin\Debug\net6.0\ban3.Infrastructures.AspectOriented.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\bin\Debug\net6.0\ban3.Infrastructures.AspectOriented.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\bin\Debug\net6.0\ban3.Infrastructures.Common.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\bin\Debug\net6.0\ban3.Infrastructures.Common.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\bin\Debug\net6.0\ban3.Infrastructures.Common.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\AspectOriented.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\AspectOriented.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\AspectOriented.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\AspectOriented.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\AspectOriented.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\AspectOriented.csproj.CopyComplete
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\ban3.Infrastructures.AspectOriented.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\refint\ban3.Infrastructures.AspectOriented.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\ban3.Infrastructures.AspectOriented.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\AspectOriented\obj\Debug\net6.0\ref\ban3.Infrastructures.AspectOriented.dll

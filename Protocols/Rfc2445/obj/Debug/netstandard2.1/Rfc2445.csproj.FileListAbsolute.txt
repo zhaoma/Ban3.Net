@@ -1,0 +1,10 @@
+D:\GIT\Ban3.Net\Protocols\Rfc2445\bin\Debug\netstandard2.1\Ban3.Protocols.Rfc2445.deps.json
+D:\GIT\Ban3.Net\Protocols\Rfc2445\bin\Debug\netstandard2.1\Ban3.Protocols.Rfc2445.dll
+D:\GIT\Ban3.Net\Protocols\Rfc2445\bin\Debug\netstandard2.1\Ban3.Protocols.Rfc2445.pdb
+D:\GIT\Ban3.Net\Protocols\Rfc2445\obj\Debug\netstandard2.1\Rfc2445.csproj.AssemblyReference.cache
+D:\GIT\Ban3.Net\Protocols\Rfc2445\obj\Debug\netstandard2.1\Rfc2445.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\Ban3.Net\Protocols\Rfc2445\obj\Debug\netstandard2.1\Rfc2445.AssemblyInfoInputs.cache
+D:\GIT\Ban3.Net\Protocols\Rfc2445\obj\Debug\netstandard2.1\Rfc2445.AssemblyInfo.cs
+D:\GIT\Ban3.Net\Protocols\Rfc2445\obj\Debug\netstandard2.1\Rfc2445.csproj.CoreCompileInputs.cache
+D:\GIT\Ban3.Net\Protocols\Rfc2445\obj\Debug\netstandard2.1\Ban3.Protocols.Rfc2445.dll
+D:\GIT\Ban3.Net\Protocols\Rfc2445\obj\Debug\netstandard2.1\Ban3.Protocols.Rfc2445.pdb

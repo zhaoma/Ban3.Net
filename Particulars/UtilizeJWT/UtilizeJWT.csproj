@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <NullableContextOptions>enable </NullableContextOptions>
+    <AssemblyName>ban3.Infrastructures.Particulars.UtilizeJWT</AssemblyName>
+    <RootNamespace>Ban3.Infrastructures.Particulars.UtilizeJWT</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\output\</OutputPath>
+    <DocumentationFile>..\..\..\output\ban3.Infrastructures.Particulars.UtilizeJWT.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

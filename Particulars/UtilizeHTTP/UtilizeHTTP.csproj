@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <NullableContextOptions>enable </NullableContextOptions>
+    <AssemblyName>ban3.Infrastructures.Particulars.UtilizeHTTP</AssemblyName>
+    <RootNamespace>Ban3.Infrastructures.Particulars.UtilizeHTTP</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\..\output\</OutputPath>
+    <DocumentationFile>..\..\..\output\ban3.Infrastructures.Particulars.UtilizeHTTP.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="108.0.3" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="System.Text.Encoding.CodePages" />
+  </ItemGroup>
+</Project>

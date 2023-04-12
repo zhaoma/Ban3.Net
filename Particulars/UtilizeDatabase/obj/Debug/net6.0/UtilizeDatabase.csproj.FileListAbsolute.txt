@@ -1,0 +1,14 @@
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeDatabase.deps.json
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeDatabase.dll
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeDatabase.pdb
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeDatabase.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\UtilizeDatabase.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\UtilizeDatabase.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\UtilizeDatabase.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\UtilizeDatabase.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\UtilizeDatabase.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\UtilizeDatabase.csproj.CopyComplete
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\ban3.Infrastructures.Particulars.UtilizeDatabase.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\refint\ban3.Infrastructures.Particulars.UtilizeDatabase.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\ban3.Infrastructures.Particulars.UtilizeDatabase.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeDatabase\obj\Debug\net6.0\ref\ban3.Infrastructures.Particulars.UtilizeDatabase.dll

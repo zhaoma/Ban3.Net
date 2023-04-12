@@ -1,0 +1,14 @@
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeHTTP.deps.json
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeHTTP.dll
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeHTTP.pdb
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeHTTP.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\UtilizeHTTP.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\UtilizeHTTP.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\UtilizeHTTP.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\UtilizeHTTP.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\UtilizeHTTP.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\UtilizeHTTP.csproj.CopyComplete
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\ban3.Infrastructures.Particulars.UtilizeHTTP.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\refint\ban3.Infrastructures.Particulars.UtilizeHTTP.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\ban3.Infrastructures.Particulars.UtilizeHTTP.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeHTTP\obj\Debug\net6.0\ref\ban3.Infrastructures.Particulars.UtilizeHTTP.dll

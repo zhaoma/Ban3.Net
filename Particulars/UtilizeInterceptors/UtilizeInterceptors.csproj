@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <NullableContextOptions>enable </NullableContextOptions>
+    <RootNamespace>Ban3.Infrastructures.Plugins.UtilizeInterceptors</RootNamespace>
+    <AssemblyName>ban3.Infrastructures.Plugins.UtilizeInterceptors</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\output</OutputPath>
+    <DocumentationFile>..\..\..\output\ban3.Infrastructures.Plugins.UtilizeInterceptors.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Microsoft.Extensions.Configuration.UserSecrets" />
+    <None Remove="Castle.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+    <PackageReference Include="Castle.Core" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj" />
+  </ItemGroup>
+  
+</Project>

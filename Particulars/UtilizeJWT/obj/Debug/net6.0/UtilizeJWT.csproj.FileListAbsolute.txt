@@ -1,0 +1,14 @@
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeJWT.deps.json
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeJWT.dll
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeJWT.pdb
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Particulars.UtilizeJWT.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\UtilizeJWT.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\UtilizeJWT.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\UtilizeJWT.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\UtilizeJWT.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\UtilizeJWT.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\UtilizeJWT.csproj.CopyComplete
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\ban3.Infrastructures.Particulars.UtilizeJWT.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\refint\ban3.Infrastructures.Particulars.UtilizeJWT.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\ban3.Infrastructures.Particulars.UtilizeJWT.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Particulars\UtilizeJWT\obj\Debug\net6.0\ref\ban3.Infrastructures.Particulars.UtilizeJWT.dll

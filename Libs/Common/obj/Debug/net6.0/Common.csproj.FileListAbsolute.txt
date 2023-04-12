@@ -1,0 +1,13 @@
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Common.deps.json
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Common.dll
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Common.pdb
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Common.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Common\obj\Debug\net6.0\Common.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Common\obj\Debug\net6.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Common\obj\Debug\net6.0\Common.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Common\obj\Debug\net6.0\Common.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Common\obj\Debug\net6.0\Common.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Common\obj\Debug\net6.0\ban3.Infrastructures.Common.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Common\obj\Debug\net6.0\refint\ban3.Infrastructures.Common.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Common\obj\Debug\net6.0\ban3.Infrastructures.Common.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Common\obj\Debug\net6.0\ref\ban3.Infrastructures.Common.dll

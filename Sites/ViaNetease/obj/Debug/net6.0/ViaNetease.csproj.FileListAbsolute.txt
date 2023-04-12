@@ -1,0 +1,14 @@
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaNetease.deps.json
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaNetease.dll
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaNetease.pdb
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaNetease.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\ViaNetease.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\ViaNetease.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\ViaNetease.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\ViaNetease.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\ViaNetease.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\ViaNetease.csproj.CopyComplete
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\ban3.Infrastructures.Platforms.ViaNetease.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\refint\ban3.Infrastructures.Platforms.ViaNetease.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\ban3.Infrastructures.Platforms.ViaNetease.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaNetease\obj\Debug\net6.0\ref\ban3.Infrastructures.Platforms.ViaNetease.dll

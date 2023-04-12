@@ -1,0 +1,14 @@
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaSohu.deps.json
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaSohu.dll
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaSohu.pdb
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaSohu.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\ViaSohu.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\ViaSohu.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\ViaSohu.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\ViaSohu.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\ViaSohu.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\ViaSohu.csproj.CopyComplete
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\ban3.Infrastructures.Platforms.ViaSohu.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\refint\ban3.Infrastructures.Platforms.ViaSohu.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\ban3.Infrastructures.Platforms.ViaSohu.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSohu\obj\Debug\net6.0\ref\ban3.Infrastructures.Platforms.ViaSohu.dll

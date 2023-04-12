@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Ban3.Protocols.Rfc2445</AssemblyName>
+    <RootNamespace>Ban3.Protocols.Rfc2445</RootNamespace>
+  </PropertyGroup>
+
+</Project>

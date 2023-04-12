@@ -1,0 +1,24 @@
+{
+  "runtimeTarget": {
+    "name": ".NETStandard,Version=v2.1/",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETStandard,Version=v2.1": {},
+    ".NETStandard,Version=v2.1/": {
+      "Ban3.Protocols.Rfc2445/1.0.0": {
+        "runtime": {
+          "Ban3.Protocols.Rfc2445.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Ban3.Protocols.Rfc2445/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <NullableContextOptions>enable </NullableContextOptions>
+    <RootNamespace>Ban3.Infrastructures.Particulars.UtilizeRedis</RootNamespace>
+    <AssemblyName>ban3.Infrastructures.Particulars.UtilizeRedis</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>..\..\..\output\ban3.Infrastructures.Particulars.UtilizeRedis.xml</DocumentationFile>
+    <OutputPath>..\..\..\output\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.6.80" />
+  </ItemGroup>
+
+</Project>

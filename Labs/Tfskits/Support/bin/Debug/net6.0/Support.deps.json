@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Support/1.0.0": {
+        "dependencies": {
+          "Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common": "1.0.0",
+          "Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common.Reference": "1.0.0.0"
+        },
+        "runtime": {
+          "Support.dll": {}
+        }
+      },
+      "Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common/1.0.0": {
+        "runtime": {
+          "Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common.dll": {}
+        }
+      },
+      "Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common.Reference/1.0.0.0": {
+        "runtime": {
+          "Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Support/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common.Reference/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

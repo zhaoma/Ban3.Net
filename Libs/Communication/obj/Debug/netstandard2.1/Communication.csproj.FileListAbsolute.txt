@@ -1,0 +1,10 @@
+D:\GIT\Ban3.Net\Libs\Communication\obj\Debug\netstandard2.1\Communication.csproj.AssemblyReference.cache
+D:\GIT\Ban3.Net\Libs\Communication\obj\Debug\netstandard2.1\Communication.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\Ban3.Net\Libs\Communication\obj\Debug\netstandard2.1\Communication.AssemblyInfoInputs.cache
+D:\GIT\Ban3.Net\Libs\Communication\obj\Debug\netstandard2.1\Communication.AssemblyInfo.cs
+D:\GIT\Ban3.Net\Libs\Communication\obj\Debug\netstandard2.1\Communication.csproj.CoreCompileInputs.cache
+D:\GIT\Ban3.Net\Libs\Communication\bin\Debug\netstandard2.1\Ban3.Infrastructures.Communication.deps.json
+D:\GIT\Ban3.Net\Libs\Communication\bin\Debug\netstandard2.1\Ban3.Infrastructures.Communication.dll
+D:\GIT\Ban3.Net\Libs\Communication\bin\Debug\netstandard2.1\Ban3.Infrastructures.Communication.pdb
+D:\GIT\Ban3.Net\Libs\Communication\obj\Debug\netstandard2.1\Ban3.Infrastructures.Communication.dll
+D:\GIT\Ban3.Net\Libs\Communication\obj\Debug\netstandard2.1\Ban3.Infrastructures.Communication.pdb

@@ -1,0 +1,14 @@
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaSina.deps.json
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaSina.dll
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaSina.pdb
+D:\GIT\fintry\src\Ban3dotnet\output\net6.0\ban3.Infrastructures.Platforms.ViaSina.xml
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\ViaSina.csproj.AssemblyReference.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\ViaSina.GeneratedMSBuildEditorConfig.editorconfig
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\ViaSina.AssemblyInfoInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\ViaSina.AssemblyInfo.cs
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\ViaSina.csproj.CoreCompileInputs.cache
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\ViaSina.csproj.CopyComplete
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\ban3.Infrastructures.Platforms.ViaSina.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\refint\ban3.Infrastructures.Platforms.ViaSina.dll
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\ban3.Infrastructures.Platforms.ViaSina.pdb
+D:\GIT\fintry\src\Ban3dotnet\Infrastructures\Platforms\ViaSina\obj\Debug\net6.0\ref\ban3.Infrastructures.Platforms.ViaSina.dll
