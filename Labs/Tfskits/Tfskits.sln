@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Infrastructrues", "4.Infr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\..\Libs\Common\Common.csproj", "{AF7702F9-8AFB-432B-991A-89AC39FDE8F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetHttp", "..\..\Libs\NetHttp\NetHttp.csproj", "{1A16ED63-3764-4AD6-897F-4216B36148E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{AF7702F9-8AFB-432B-991A-89AC39FDE8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF7702F9-8AFB-432B-991A-89AC39FDE8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF7702F9-8AFB-432B-991A-89AC39FDE8F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A16ED63-3764-4AD6-897F-4216B36148E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A16ED63-3764-4AD6-897F-4216B36148E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A16ED63-3764-4AD6-897F-4216B36148E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A16ED63-3764-4AD6-897F-4216B36148E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{A61CA465-9A97-4936-94EC-E23BBA4AD45C} = {5779D459-F5A2-4CB7-874D-A2F54E28DE2A}
 		{4ED05C33-683F-438B-B8C3-84E82E136551} = {F5BBCFB4-8DB8-4FB5-83B3-EFF643C2312C}
 		{AF7702F9-8AFB-432B-991A-89AC39FDE8F7} = {4ED05C33-683F-438B-B8C3-84E82E136551}
+		{1A16ED63-3764-4AD6-897F-4216B36148E1} = {4ED05C33-683F-438B-B8C3-84E82E136551}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01EB0EEC-4EE4-4B8F-AD9A-0DD3DBA1A717}

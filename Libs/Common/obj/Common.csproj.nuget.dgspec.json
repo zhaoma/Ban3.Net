@@ -45,18 +45,6 @@
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "dependencies": {
-            "Dapper": {
-              "target": "Package",
-              "version": "[2.0.123, )"
-            },
-            "Dapper.Contrib": {
-              "target": "Package",
-              "version": "[2.0.78, )"
-            },
-            "Microsoft.AspNetCore.Http": {
-              "target": "Package",
-              "version": "[2.2.2, )"
-            },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -65,21 +53,9 @@
               "target": "Package",
               "version": "[13.0.2, )"
             },
-            "System.Drawing.Common": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
             "System.IO": {
               "target": "Package",
               "version": "[4.3.0, )"
-            },
-            "System.IO.Ports": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "System.Runtime.Caching": {
-              "target": "Package",
-              "version": "[7.0.0, )"
             },
             "System.Threading.Tasks": {
               "target": "Package",
