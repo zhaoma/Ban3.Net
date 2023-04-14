@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
@@ -16,13 +12,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// <summary>
         /// The class to represent a collection of REST reference links.
         /// </summary>
-        [JsonPropertyName("_links")]
+        [JsonProperty("_links")]
         public ReferenceLinks Links { get; set; }
 
         /// <summary>
         /// The name of the attachment.
         /// </summary>
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
     }

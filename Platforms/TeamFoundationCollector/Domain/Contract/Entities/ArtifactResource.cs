@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
@@ -15,37 +11,37 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// <summary>
         /// The class to represent a collection of REST reference links.
         /// </summary>
-        [JsonPropertyName("_links")]
+        [JsonProperty("_links")]
         public ReferenceLinks Links { get; set; }
 
         /// <summary>
         /// Type-specific data about the artifact.
         /// </summary>
-        [JsonPropertyName("data")]
+        [JsonProperty("data")]
         public string Data { get; set; }
 
         /// <summary>
         /// A link to download the resource.
         /// </summary>
-        [JsonPropertyName("downloadUrl")]
+        [JsonProperty("downloadUrl")]
         public string DownloadUrl { get; set; }
 
         /// <summary>
         /// Type-specific properties of the artifact.
         /// </summary>
-        [JsonPropertyName("properties")]
+        [JsonProperty("properties")]
         public object Properties { get; set; }
 
         /// <summary>
         /// The type of the resource: File container, version control folder, UNC path, etc.
         /// </summary>
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public string Type { get; set; }
 
         /// <summary>
         /// The full http link to the resource.
         /// </summary>
-        [JsonPropertyName("url")]
+        [JsonProperty("url")]
         public string Url { get; set; }
     }
 }

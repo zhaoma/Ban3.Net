@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common.Enums;
+﻿
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
 {
+    /// <summary>
+    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get?view=azure-devops-rest-7.0&tabs=HTTP#definitions
+    /// </summary>
     public class ItemsGet
     {
         public string Path { get; set; }

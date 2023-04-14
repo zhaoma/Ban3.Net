@@ -21,11 +21,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributes
             
             )
         {
-            Method = (HttpMethod)Enum.Parse(typeof(HttpMethod), method);
+            Method =method;
             Path = path;
         }
 
-        public HttpMethod Method { get; set; }
+        public string Method { get; set; }
 
         public string Path { get; set; }
 

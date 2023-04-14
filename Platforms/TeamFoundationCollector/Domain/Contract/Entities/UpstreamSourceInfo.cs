@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common.Enums;
+﻿
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
@@ -17,31 +13,31 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// <summary>
         /// Locator for connecting to the upstream source in a user friendly format, that may potentially change over time
         /// </summary>
-        [JsonPropertyName("displayLocation")]
+        [JsonProperty("displayLocation")]
         public string DisplayLocation { get; set; }
 
         /// <summary>
         /// Identity of the upstream source.
         /// </summary>
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
         /// Locator for connecting to the upstream source
         /// </summary>
-        [JsonPropertyName("location")]
+        [JsonProperty("location")]
         public string Location { get; set; }
 
         /// <summary>
         /// Display name.
         /// </summary>
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Source type, such as Public or Internal.
         /// </summary>
-        [JsonPropertyName("sourceType")]
+        [JsonProperty("sourceType")]
         public PackagingSourceType SourceType { get; set; }
     }
 }

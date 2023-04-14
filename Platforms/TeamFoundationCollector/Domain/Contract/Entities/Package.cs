@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
@@ -16,44 +17,44 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// <summary>
         /// Related REST links.
         /// </summary>
-        [JsonPropertyName("_links")]
+        [JsonProperty("_links")]
         public ReferenceLinks Links { get; set; }
 
         /// <summary>
         /// If and when the package was deleted.
         /// </summary>
-        [JsonPropertyName("deletedDate")]
+        [JsonProperty("deletedDate")]
         public string DeletedDate { get; set; }
 
         /// <summary>
         /// Package Id.
         /// </summary>
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public string Id { get; set; }
 
         /// <summary>
         /// The display name of the package.
         /// </summary>
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// If and when the package was permanently deleted.
         /// </summary>
-        [JsonPropertyName("permanentlyDeletedDate")]
+        [JsonProperty("permanentlyDeletedDate")]
         public string PermanentlyDeletedDate { get; set; }
 
         /// <summary>
         /// The history of upstream sources for this package.
         /// The first source in the list is the immediate source from which this package was saved.
         /// </summary>
-        [JsonPropertyName("sourceChain")]
+        [JsonProperty("sourceChain")]
         public UpstreamSourceInfo[] SourceChain { get; set; }
 
         /// <summary>
         /// The version of the package.
         /// </summary>
-        [JsonPropertyName("version")]
+        [JsonProperty("version")]
         public string Version { get; set; }
     }
 }

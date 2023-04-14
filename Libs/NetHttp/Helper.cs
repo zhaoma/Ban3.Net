@@ -9,24 +9,24 @@ namespace Ban3.Infrastructures.NetHttp
 {
     public static class Helper
     {
-        public static Task<HttpResponseMessage> Send(this TargetHost host, TargetResource resource)
+        public static HttpResponseMessage Request(this TargetHost host, TargetResource resource)
         {
             var client = host.Client();
 
-            var result= client.SendAsync(resource.Request());
-            //client.Dispose();
+            var result = client.SendAsync(resource.Request()).Result;
+            
+            client.Dispose();
 
             return result;
         }
 
-        public static Task<string> GetString(this TargetHost host, TargetResource resource)
+        public static string GetString(this TargetHost host, TargetResource resource)
         {
             var client = host.Client();
 
-            var result = client.GetStringAsync(resource.Url);
-
-            result.EnsureSuccessStatusCode.
-            //client.Dispose();
+            var result = client.GetStringAsync(resource.Url).Result;
+            
+            client.Dispose();
 
             return result;
         }

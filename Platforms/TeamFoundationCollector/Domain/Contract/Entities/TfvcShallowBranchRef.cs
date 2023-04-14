@@ -1,4 +1,6 @@
-﻿namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
+﻿using Newtonsoft.Json;
+
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
 /// This is the shallow branchref class.
@@ -9,5 +11,6 @@ public class TfvcShallowBranchRef
     /// <summary>
     /// Path for the branch.
     /// </summary>
+    [JsonProperty("path")]
     public string Path { get; set; }
 }

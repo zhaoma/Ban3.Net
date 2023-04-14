@@ -13,11 +13,22 @@ var host = new Ban3.Infrastructures.NetHttp.Entries.TargetHost
 var url =
     $"{host.BaseUrl}/tfs/CT/_apis/tfvc/items/$/CTS/Development/ICS/SHA.SERV/CT.Serv/Tst/BE.Impl/XrayPath/XrayPathConfig.cs?versionType=Latest&versionOptions=None";
 
-
 var resource=new TargetResource
 {
     Url=url
 };
 
-var content = host.(resource).Result.Content.ReadAsStream();
-Console.WriteLine(content);
+/*
+
+host.Send(resource).ContinueWith(task =>
+{
+    var result = task.Result.Content.ReadAsStringAsync().Result;
+    Console.WriteLine(result);
+});
+
+Console.ReadKey();
+
+*/
+
+var result = host.Request(resource);
+Console.WriteLine(result.Content.ReadAsStringAsync().Result);

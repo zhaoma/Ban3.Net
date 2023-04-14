@@ -1,21 +1,30 @@
-﻿namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
+﻿using Newtonsoft.Json;
+
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
 /// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get?view=azure-devops-server-rest-6.0&tabs=HTTP#filecontentmetadata
 /// </summary>
 public class FileContentMetadata
 {
+    [JsonProperty("contentType")]
     public string ContentType { get; set; }
 
+    [JsonProperty("encoding")]
     public int Encoding { get; set; }
 
+    [JsonProperty("extension")]
     public string Extension { get; set; }
 
+    [JsonProperty("fileName")]
     public string FileName { get; set; }
 
+    [JsonProperty("isBinary")]
     public bool IsBinary { get; set; }
 
+    [JsonProperty("isImage")]
     public bool IsImage { get; set; }
 
-    public string VsLink { get; set; }
+    [JsonProperty("vsLink")]
+    public string VSLink { get; set; }
 }

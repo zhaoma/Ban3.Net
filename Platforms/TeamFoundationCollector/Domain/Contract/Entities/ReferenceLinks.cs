@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
@@ -16,7 +17,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The readonly view of the links.
         /// Because Reference links are readonly, we only want to expose them as read only.
         /// </summary>
-        [JsonPropertyName("links")]
+        [JsonProperty("links")]
         public object Links { get; set; }
     }
 }

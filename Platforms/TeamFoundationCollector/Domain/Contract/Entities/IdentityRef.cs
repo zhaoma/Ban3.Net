@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
@@ -8,7 +9,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 public class IdentityRef
 {
 
-    [JsonPropertyName("_links")] 
+    [JsonProperty("_links")] 
     public ReferenceLinks Links { get; set; }
 
     /// <summary>

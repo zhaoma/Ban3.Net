@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
@@ -11,25 +12,25 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// <summary>
         /// Artifact Id of the package.
         /// </summary>
-        [JsonPropertyName("artifactId")]
+        [JsonProperty("artifactId")]
         public string ArtifactId { get; set; }
 
         /// <summary>
         /// UTC date the package was deleted.
         /// </summary>
-        [JsonPropertyName("deletedDate")]
+        [JsonProperty("deletedDate")]
         public string DeletedDate { get; set; }
 
         /// <summary>
         /// Group Id of the package.
         /// </summary>
-        [JsonPropertyName("groupId")]
+        [JsonProperty("groupId")]
         public string GroupId { get; set; }
 
         /// <summary>
         /// Version of the package.
         /// </summary>
-        [JsonPropertyName("version")]
+        [JsonProperty("version")]
         public string Version { get; set; }
     }
 }
