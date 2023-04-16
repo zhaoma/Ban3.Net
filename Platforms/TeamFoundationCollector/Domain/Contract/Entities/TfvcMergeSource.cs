@@ -18,7 +18,7 @@ public class TfvcMergeSource
     /// The server item of the merge source
     /// </summary>
     [JsonProperty("serverItem")]
-    public string ServerItem { get; set; }
+    public string ServerItem { get; set; } = string.Empty;
 
     /// <summary>
     /// Start of the version range

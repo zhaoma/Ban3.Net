@@ -18,17 +18,17 @@ public class PropertiesCollection
     public int Count { get; set; }
 
     [JsonProperty("item")]
-    public object Item { get; set; }
+    public object? Item { get; set; }
 
     /// <summary>
     /// The set of keys in the collection.
     /// </summary>
     [JsonProperty("keys")]
-    public string[] Keys { get; set; }
+    public List<string>? Keys { get; set; }
 
     /// <summary>
     /// The set of values in the collection.
     /// </summary>
     [JsonProperty("values")]
-    public string[,] Values { get; set; }
+    public Dictionary<string,string>? Values { get; set; }
 }

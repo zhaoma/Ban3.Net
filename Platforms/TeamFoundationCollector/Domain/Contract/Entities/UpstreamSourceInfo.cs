@@ -14,25 +14,25 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Locator for connecting to the upstream source in a user friendly format, that may potentially change over time
         /// </summary>
         [JsonProperty("displayLocation")]
-        public string DisplayLocation { get; set; }
+        public string DisplayLocation { get; set; } = string.Empty;
 
         /// <summary>
         /// Identity of the upstream source.
         /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = string.Empty;
 
         /// <summary>
         /// Locator for connecting to the upstream source
         /// </summary>
         [JsonProperty("location")]
-        public string Location { get; set; }
+        public string Location { get; set; } = string.Empty;
 
         /// <summary>
         /// Display name.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Source type, such as Public or Internal.

@@ -13,24 +13,24 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Artifact Id of the package.
         /// </summary>
         [JsonProperty("artifactId")]
-        public string ArtifactId { get; set; }
+        public string ArtifactId { get; set; } = string.Empty;
 
         /// <summary>
         /// UTC date the package was deleted.
         /// </summary>
         [JsonProperty("deletedDate")]
-        public string DeletedDate { get; set; }
+        public string DeletedDate { get; set; } = string.Empty;
 
         /// <summary>
         /// Group Id of the package.
         /// </summary>
         [JsonProperty("groupId")]
-        public string GroupId { get; set; }
+        public string GroupId { get; set; } = string.Empty;
 
         /// <summary>
         /// Version of the package.
         /// </summary>
         [JsonProperty("version")]
-        public string Version { get; set; }
+        public string Version { get; set; } = string.Empty;
     }
 }

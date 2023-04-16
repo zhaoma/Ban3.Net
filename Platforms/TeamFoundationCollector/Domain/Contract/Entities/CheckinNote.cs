@@ -8,8 +8,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 public class CheckinNote
 {
     [JsonProperty("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [JsonProperty("value")]
-    public string Value { get; set; }
+    public string Value { get; set; } = string.Empty;
 }

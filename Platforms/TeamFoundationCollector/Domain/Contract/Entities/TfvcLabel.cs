@@ -13,5 +13,6 @@ public class TfvcLabel
     /// List of items.
     /// </summary>
     [JsonProperty("items")]
-    public IEnumerable<TfvcItem> Items { get; set; }
+    public List<TfvcItem>? Items { get; set; }
+
 }

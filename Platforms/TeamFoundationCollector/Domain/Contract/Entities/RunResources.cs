@@ -9,7 +9,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
     public class RunResources
     {
         [JsonProperty("repositories")]
-        public Dictionary<string,RepositoryResource> Repositories { get; set; }
+        public Dictionary<string,RepositoryResource>? Repositories { get; set; }
 
     }
 }

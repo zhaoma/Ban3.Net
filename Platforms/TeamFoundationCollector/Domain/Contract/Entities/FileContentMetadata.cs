@@ -8,16 +8,16 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 public class FileContentMetadata
 {
     [JsonProperty("contentType")]
-    public string ContentType { get; set; }
+    public string ContentType { get; set; } = string.Empty;
 
     [JsonProperty("encoding")]
     public int Encoding { get; set; }
 
     [JsonProperty("extension")]
-    public string Extension { get; set; }
+    public string Extension { get; set; } = string.Empty;
 
     [JsonProperty("fileName")]
-    public string FileName { get; set; }
+    public string FileName { get; set; } = string.Empty;
 
     [JsonProperty("isBinary")]
     public bool IsBinary { get; set; }
@@ -26,5 +26,5 @@ public class FileContentMetadata
     public bool IsImage { get; set; }
 
     [JsonProperty("vsLink")]
-    public string VSLink { get; set; }
+    public string VSLink { get; set; } = string.Empty;
 }

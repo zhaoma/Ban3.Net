@@ -12,11 +12,11 @@ public class TfvcPolicyFailureInfo
     /// Policy failure message.
     /// </summary>
     [JsonProperty("message")]
-    public string Message { get; set; }
+    public string Message { get; set; } = string.Empty;
 
     /// <summary>
     /// Name of the policy that failed.
     /// </summary>
     [JsonProperty("policyName")]
-    public string PolicyName { get; set; }
+    public string PolicyName { get; set; } = string.Empty;
 }

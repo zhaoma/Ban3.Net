@@ -12,41 +12,41 @@ public class RetentionLease
     /// When the lease was created.
     /// </summary>
     [JsonProperty("createdOn")]
-    public string CreatedOn { get; set; }
+    public string CreatedOn { get; set; } = string.Empty;
 
     /// <summary>
     /// The pipeline definition of the run.
     /// </summary>
     [JsonProperty("definitionId")]
-    public string DefinitionId { get; set; }
+    public string DefinitionId { get; set; } = string.Empty;
 
     /// <summary>
     /// The unique identifier for this lease.
     /// </summary>
     [JsonProperty("leaseId")]
-    public string LeaseId { get; set; }
+    public string LeaseId { get; set; } = string.Empty;
 
     /// <summary>
     /// Non-unique string that identifies the owner of a retention lease.
     /// </summary>
     [JsonProperty("ownerId")]
-    public string OwnerId { get; set; }
+    public string OwnerId { get; set; } = string.Empty;
 
     /// <summary>
     /// If set, this lease will also prevent the pipeline from being deleted while the lease is still valid.
     /// </summary>
     [JsonProperty("protectPipeline")]
-    public string ProtectPipeline { get; set; }
+    public string ProtectPipeline { get; set; } = string.Empty;
 
     /// <summary>
     /// The pipeline run protected by this lease.
     /// </summary>
     [JsonProperty("runId")]
-    public string RunId { get; set; }
+    public string RunId { get; set; } = string.Empty;
 
     /// <summary>
     /// The last day the lease is considered valid.
     /// </summary>
     [JsonProperty("validUntil")]
-    public string ValidUntil { get; set; }
+    public string ValidUntil { get; set; } = string.Empty;
 }

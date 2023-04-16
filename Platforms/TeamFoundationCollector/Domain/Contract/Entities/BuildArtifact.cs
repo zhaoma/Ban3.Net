@@ -15,17 +15,17 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// <summary>
         /// The name of the artifact.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// The actual resource.
         /// </summary>
-        public ArtifactResource Resource { get; set; }
+        public ArtifactResource? Resource { get; set; }
 
         /// <summary>
         /// The artifact source, which will be the ID of the job that produced this artifact.
         /// If an artifact is associated with multiple sources, this points to the first source.
         /// </summary>
-        public string Source { get; set; }
+        public string Source { get; set; } = string.Empty;
     }
 }

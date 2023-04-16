@@ -14,28 +14,28 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Pipeline folder
         /// </summary>
         [JsonProperty("folder")]
-        public string Folder { get; set; }
+        public string Folder { get; set; } = string.Empty;
 
         /// <summary>
         /// Pipeline ID
         /// </summary>
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = string.Empty;
 
         /// <summary>
         /// Pipeline name
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Revision number
         /// </summary>
         [JsonProperty("revision")]
-        public string Revision { get; set; }
+        public string Revision { get; set; } = string.Empty;
 
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
 
     }
 }

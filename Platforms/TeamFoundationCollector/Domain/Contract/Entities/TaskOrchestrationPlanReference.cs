@@ -18,5 +18,5 @@ public class TaskOrchestrationPlanReference
     /// The ID of the plan.
     /// </summary>
     [JsonProperty("planId")]
-    public string PlanId { get; set; }
+    public string PlanId { get; set; } = string.Empty;
 }

@@ -17,7 +17,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The date and time the log was created.
         /// </summary>
         [JsonProperty("createdOn")]
-        public string CreatedOn { get; set; }
+        public string CreatedOn { get; set; } = string.Empty;
 
         /// <summary>
         /// The ID of the log.
@@ -29,7 +29,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The date and time the log was last changed.
         /// </summary>
         [JsonProperty("lastChangedOn")]
-        public string LastChangedOn { get; set; }
+        public string LastChangedOn { get; set; } = string.Empty;
 
         /// <summary>
         /// The number of lines in the log.
@@ -41,10 +41,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// A signed url allowing limited-time anonymous access to private resources.
         /// </summary>
         [JsonProperty("signedContent")]
-        public SignedUrl SignedContent { get; set; }
+        public SignedUrl? SignedContent { get; set; }
 
         [JsonProperty("url")]
-	    public string Url { get; set; }
+	    public string Url { get; set; } = string.Empty;
     }
 }
 

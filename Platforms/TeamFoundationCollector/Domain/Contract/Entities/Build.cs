@@ -13,19 +13,19 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The class to represent a collection of REST reference links.
         /// </summary>
         [JsonProperty("_links")]
-        public ReferenceLinks Links { get; set; }
+        public ReferenceLinks? Links { get; set; }
 
         /// <summary>
         /// The agent specification for the build.
         /// </summary>
         [JsonProperty("agentSpecification")]
-        public AgentSpecification AgentSpecification { get; set; }
-
+        public AgentSpecification? AgentSpecification { get; set; }
+        
         /// <summary>
         /// The build number/name of the build.
         /// </summary>
         [JsonProperty("buildNumber")]
-        public string BuildNumber { get; set; }
+        public string BuildNumber { get; set; } = string.Empty;
 
         /// <summary>
         /// The build number revision.
@@ -38,13 +38,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// This is only set if the definition type is Xaml.
         /// </summary>
         [JsonProperty("controller")]
-        public BuildController Controller { get; set; }
+        public BuildController? Controller { get; set; }
 
         /// <summary>
         /// The definition associated with the build.
         /// </summary>
         [JsonProperty("definition")]
-        public DefinitionReference Definition { get; set; }
+        public DefinitionReference? Definition { get; set; }
 
         /// <summary>
         /// Indicates whether the build has been deleted.
@@ -56,31 +56,31 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The identity of the process or person that deleted the build.
         /// </summary>
         [JsonProperty("definition")]
-        public IdentityRef DeletedBy { get; set; }
+        public IdentityRef? DeletedBy { get; set; }
 
         /// <summary>
         /// The date the build was deleted.
         /// </summary>
         [JsonProperty("definition")]
-        public string DeletedDate { get; set; }
+        public string DeletedDate { get; set; } = string.Empty;
 
         /// <summary>
         /// The description of how the build was deleted.
         /// </summary>
         [JsonProperty("deletedReason")]
-        public string DeletedReason { get; set; }
+        public string DeletedReason { get; set; } = string.Empty;
 
         /// <summary>
         /// A list of demands that represents the agent capabilities required by this build.
         /// </summary>
         [JsonProperty("demands")]
-        public Demand[] Demands { get; set; }
+        public List<Demand>? Demands { get; set; }
 
         /// <summary>
         /// The time that the build was completed.
         /// </summary>
         [JsonProperty("finishTime")]
-        public string FinishTime { get; set; }
+        public string FinishTime { get; set; } = string.Empty;
 
         /// <summary>
         /// The ID of the build.
@@ -92,37 +92,37 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The identity representing the process or person that last changed the build.
         /// </summary>
         [JsonProperty("lastChangedBy")]
-        public IdentityRef LastChangedBy { get; set; }
+        public IdentityRef? LastChangedBy { get; set; }
 
         /// <summary>
         /// The date the build was last changed.
         /// </summary>
         [JsonProperty("lastChangedDate")]
-        public string LastChangedDate { get; set; }
+        public string LastChangedDate { get; set; } = string.Empty;
 
         /// <summary>
         /// Information about the build logs.
         /// </summary>
         [JsonProperty("logs")]
-        public BuildLogReference Logs { get; set; }
+        public BuildLogReference? Logs { get; set; }
 
         /// <summary>
         /// The orchestration plan for the build.
         /// </summary>
         [JsonProperty("orchestrationPlan")]
-        public TaskOrchestrationPlanReference OrchestrationPlan { get; set; }
+        public TaskOrchestrationPlanReference? OrchestrationPlan { get; set; }
 
         /// <summary>
         /// The parameters for the build.
         /// </summary>
         [JsonProperty("parameters")]
-        public string Parameters { get; set; }
+        public string Parameters { get; set; } = string.Empty;
 
         /// <summary>
         /// Orchestration plans associated with the build (build, cleanup)
         /// </summary>
         [JsonProperty("plans")]
-        public TaskOrchestrationPlanReference[] Plans { get; set; }
+        public List<TaskOrchestrationPlanReference>? Plans { get; set; }
 
         /// <summary>
         /// The build's priority.
@@ -134,7 +134,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The team project.
         /// </summary>
         [JsonProperty("project")]
-        public TeamProjectReference Project { get; set; }
+        public TeamProjectReference? Project { get; set; }
 
         /// <summary>
         /// The class represents a property bag as a collection of key-value pairs.
@@ -143,13 +143,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// other primitives are retuned as a String. Byte[] expected as base64 encoded string.
         /// </summary>
         [JsonProperty("properties")]
-        public PropertiesCollection Properties { get; set; }
+        public PropertiesCollection? Properties { get; set; }
 
         /// <summary>
         /// The quality of the xaml build (good, bad, etc.)
         /// </summary>
         [JsonProperty("quality")]
-        public string Quality { get; set; }
+        public string Quality { get; set; } = string.Empty;
 
         /// <summary>
         /// The queue.
@@ -157,7 +157,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// WARNING: this field is deprecated and does not corresponds to the jobs queues.
         /// </summary>
         [JsonProperty("queue")]
-        public AgentPoolQueue Queue { get; set; }
+        public AgentPoolQueue? Queue { get; set; }
 
         /// <summary>
         /// Additional options for queueing the build.
@@ -176,7 +176,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The time that the build was queued.
         /// </summary>
         [JsonProperty("queueTime")]
-        public string QueueTime { get; set; }
+        public string QueueTime { get; set; } = string.Empty;
 
         /// <summary>
         /// The reason that the build was created.
@@ -188,19 +188,19 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The repository.
         /// </summary>
         [JsonProperty("repository")]
-        public BuildRepository Repository { get; set; }
+        public BuildRepository? Repository { get; set; }
 
         /// <summary>
         /// The identity that queued the build.
         /// </summary>
         [JsonProperty("requestedBy")]
-        public IdentityRef RequestedBy { get; set; }
+        public IdentityRef? RequestedBy { get; set; }
 
         /// <summary>
         /// The identity on whose behalf the build was queued.
         /// </summary>
         [JsonProperty("requestedFor")]
-        public IdentityRef RequestedFor { get; set; }
+        public IdentityRef? RequestedFor { get; set; }
 
         /// <summary>
         /// The build result.
@@ -218,19 +218,19 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The source branch.
         /// </summary>
         [JsonProperty("sourceBranch")]
-        public string SourceBranch { get; set; }
+        public string SourceBranch { get; set; } = string.Empty;
 
         /// <summary>
         /// The source version.
         /// </summary>
         [JsonProperty("sourceVersion")]
-        public string SourceVersion { get; set; }
+        public string SourceVersion { get; set; } = string.Empty;
 
         /// <summary>
         /// The time that the build was started.
         /// </summary>
         [JsonProperty("startTime")]
-        public string StartTime { get; set; }
+        public string StartTime { get; set; } = string.Empty;
 
         /// <summary>
         /// The status of the build.
@@ -242,42 +242,42 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// 
         /// </summary>
         [JsonProperty("tags")]
-        public string[] Tags { get; set; }
+        public List<string>? Tags { get; set; }
 
         /// <summary>
         /// Parameters to template expression evaluation
         /// </summary>
         [JsonProperty("templateParameters")]
-        public object TemplateParameters { get; set; }
+        public object? TemplateParameters { get; set; }
 
         /// <summary>
         /// Sourceprovider-specific information about what triggered the build
         /// </summary>
         [JsonProperty("triggerInfo")]
-        public object TriggerInfo { get; set; }
+        public object? TriggerInfo { get; set; }
 
         /// <summary>
         /// The build that triggered this build via a Build completion trigger.
         /// </summary>
         [JsonProperty("triggeredByBuild")]
-        public Build TriggeredByBuild { get; set; }
+        public Build? TriggeredByBuild { get; set; }
 
         /// <summary>
         /// The URI of the build.
         /// </summary>
         [JsonProperty("uri")]
-        public string Uri { get; set; }
+        public string Uri { get; set; } = string.Empty;
 
         /// <summary>
         /// The REST URL of the build.
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
 
         /// <summary>
         /// Represents the result of validating a build request.
         /// </summary>
         [JsonProperty("validationResults")]
-        public BuildRequestValidationResult[] ValidationResults { get; set; }
+        public List<BuildRequestValidationResult>? ValidationResults { get; set; }
     }
 }

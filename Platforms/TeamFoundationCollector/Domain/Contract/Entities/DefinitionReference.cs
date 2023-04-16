@@ -13,7 +13,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The date this version of the definition was created.
         /// </summary>
         [JsonProperty("createdDate")]
-        public string CreateDate { get; set; }
+        public string CreateDate { get; set; } = string.Empty;
 
         /// <summary>
         /// The ID of the referenced definition.
@@ -25,19 +25,19 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The name of the referenced definition.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// The folder path of the definition.
         /// </summary>
         [JsonProperty("path")]
-        public string Path { get; set; }
+        public string Path { get; set; } = string.Empty;
 
         /// <summary>
         /// A reference to the project.
         /// </summary>
         [JsonProperty("project")]
-        public TeamProjectReference Project { get; set; }
+        public TeamProjectReference? Project { get; set; }
 
         /// <summary>
         /// A value that indicates whether builds can be queued against this definition.
@@ -61,12 +61,12 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The definition's URI.
         /// </summary>
         [JsonProperty("uri")]
-        public string Uri { get; set; }
+        public string Uri { get; set; } = string.Empty;
 
         /// <summary>
         /// The REST URL of the definition.
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
     }
 }

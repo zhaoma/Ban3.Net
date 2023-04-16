@@ -13,25 +13,25 @@ public class TfvcChangeset
     /// Account Id of the changeset.
     /// </summary>
     [JsonProperty("accountId")]
-    public string AccountId { get; set; }
+    public string AccountId { get; set; } = string.Empty;
 
     /// <summary>
     /// List of associated changes.
     /// </summary>
     [JsonProperty("changes")]
-    public IEnumerable<TfvcChange> Changes { get; set; }
+    public List<TfvcChange>? Changes { get; set; }
 
     /// <summary>
     /// Checkin Notes for the changeset.
     /// </summary>
     [JsonProperty("checkinNotes")]
-    public IEnumerable<CheckinNote> CheckinNotes { get; set; }
+    public List<CheckinNote>? CheckinNotes { get; set; }
 
     /// <summary>
     /// Collection Id of the changeset.
     /// </summary>
     [JsonProperty("collectionId")]
-    public string CollectionId { get; set; }
+    public string CollectionId { get; set; } = string.Empty;
 
     /// <summary>
     /// Are more changes available.
@@ -43,18 +43,18 @@ public class TfvcChangeset
     /// Policy Override for the changeset.
     /// </summary>
     [JsonProperty("policyOverride")]
-    public TfvcPolicyOverrideInfo PolicyOverride { get; set; }
-    
+    public TfvcPolicyOverrideInfo? PolicyOverride { get; set; }
+
     /// <summary>
     /// Team Project Ids for the changeset.
     /// </summary>
     [JsonProperty("teamProjectIds")]
-    public string[] TeamProjectIds { get; set; }
+    public List<string>? TeamProjectIds { get; set; }
 
     /// <summary>
     /// List of work items associated with the changeset.
     /// </summary>
     [JsonProperty("workItems")]
-    public IEnumerable<AssociatedWorkItem> WorkItems { get; set; }
+    public List<AssociatedWorkItem>? WorkItems { get; set; }
 
 }

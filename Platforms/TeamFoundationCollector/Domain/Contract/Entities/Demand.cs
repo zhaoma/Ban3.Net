@@ -12,11 +12,11 @@ public class Demand
     /// The name of the capability referenced by the demand.
     /// </summary>
     [JsonProperty("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// The demanded value.
     /// </summary>
     [JsonProperty("value")]
-    public string Value { get; set; }
+    public string Value { get; set; } = string.Empty;
 }

@@ -9,7 +9,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
     public class PreviewRun
 	{
         [JsonProperty("finalYaml")]
-        public string FinalYaml { get; set; }
+        public string FinalYaml { get; set; } = string.Empty;
 
 
     }

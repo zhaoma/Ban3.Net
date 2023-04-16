@@ -13,7 +13,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The class to represent a collection of REST reference links.
         /// </summary>
         [JsonProperty("_links")]
-        public ReferenceLinks Links { get; set; }
+        public ReferenceLinks? Links { get; set; }
 
         /// <summary>
         /// The ID of the queue.
@@ -25,18 +25,18 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The name of the queue.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// The pool used by this queue.
         /// </summary>
         [JsonProperty("pool")]
-        public TaskAgentPoolReference Pool { get; set; }
+        public TaskAgentPoolReference? Pool { get; set; }
 
         /// <summary>
         /// The full http link to the resource.
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
     }
 }

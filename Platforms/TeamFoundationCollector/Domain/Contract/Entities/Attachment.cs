@@ -13,13 +13,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The class to represent a collection of REST reference links.
         /// </summary>
         [JsonProperty("_links")]
-        public ReferenceLinks Links { get; set; }
+        public ReferenceLinks? Links { get; set; }
 
         /// <summary>
         /// The name of the attachment.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
     }
 }

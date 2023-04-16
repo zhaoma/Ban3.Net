@@ -8,10 +8,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 public class WebApiTeam
 {
     [JsonProperty("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     [JsonProperty("id")]
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 
 
 }

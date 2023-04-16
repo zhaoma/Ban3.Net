@@ -14,28 +14,28 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The class to represent a collection of REST reference links.
         /// </summary>
         [JsonProperty("_links")]
-        public ReferenceLinks Links { get; set; }
+        public ReferenceLinks? Links { get; set; }
 
         [JsonProperty("createdDate")]
-        public string CreatedDate { get; set; }
+        public string CreatedDate { get; set; } = string.Empty;
 
         [JsonProperty("finishedDate")]
-        public string FinishedDate { get; set; }
+        public string FinishedDate { get; set; } = string.Empty;
 
         [JsonProperty("id")]
         public int Id { get; set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// A reference to a Pipeline.
         /// </summary>
         [JsonProperty("pipeline")]
-        public PipelineReference Pipeline { get; set; }
+        public PipelineReference? Pipeline { get; set; }
 
         [JsonProperty("resources")]
-        public RunResources Resources { get; set; }
+        public RunResources? Resources { get; set; }
 
 
         [JsonProperty("result")]
@@ -47,10 +47,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 
 
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
 
         [JsonProperty("variables")]
-        public Dictionary<string, Variable> Variables { get; set; }
+        public Dictionary<string, Variable>? Variables { get; set; }
 
     }
 }

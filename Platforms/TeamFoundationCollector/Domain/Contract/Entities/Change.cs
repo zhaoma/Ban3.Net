@@ -12,33 +12,33 @@ public class Change
     /// The author of the change.
     /// </summary>
     [JsonProperty("author")]
-    public IdentityRef Author { get; set; }
+    public IdentityRef? Author { get; set; }
 
     /// <summary>
     /// The location of a user-friendly representation of the resource.
     /// </summary>
     [JsonProperty("displayUri")]
-    public string DisplayUri { get; set; }
+    public string DisplayUri { get; set; } = string.Empty;
 
     /// <summary>
     /// The identifier for the change. For a commit, this would be the SHA1.
     /// For a TFVC changeset, this would be the changeset ID.
     /// </summary>
     [JsonProperty("id")]
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 
     /// <summary>
     /// The location of the full representation of the resource.
     /// </summary>
     [JsonProperty("location")]
-    public string Location { get; set; }
+    public string Location { get; set; } = string.Empty;
 
     /// <summary>
     /// The description of the change.
     /// This might be a commit message or changeset description.
     /// </summary>
     [JsonProperty("message")]
-    public string Message { get; set; }
+    public string Message { get; set; } = string.Empty;
 
     /// <summary>
     /// Indicates whether the message was truncated.
@@ -50,18 +50,18 @@ public class Change
     /// The person or process that pushed the change.
     /// </summary>
     [JsonProperty("pusher")]
-    public string Pusher { get; set; }
+    public string Pusher { get; set; } = string.Empty;
 
     /// <summary>
     /// The timestamp for the change.
     /// </summary>
     [JsonProperty("timestamp")]
-    public string Timestamp { get; set; }
+    public string Timestamp { get; set; } = string.Empty;
 
     /// <summary>
     /// The type of change. "commit", "changeset", etc.
     /// </summary>
     [JsonProperty("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = string.Empty;
 
 }

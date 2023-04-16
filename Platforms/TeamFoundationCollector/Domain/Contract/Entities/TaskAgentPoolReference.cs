@@ -20,6 +20,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         public bool IsHosted { get; set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }

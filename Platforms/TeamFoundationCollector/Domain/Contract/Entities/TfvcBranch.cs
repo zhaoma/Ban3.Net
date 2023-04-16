@@ -13,24 +13,24 @@ public class TfvcBranch
     /// List of children for the branch.
     /// </summary>
     [JsonProperty("children")]
-    public TfvcBranch[] Children { get; set; }
+    public List<TfvcBranch>? Children { get; set; }
 
     /// <summary>
     /// List of branch mappings.
     /// </summary>
     [JsonProperty("mappings")]
-    public TfvcBranchMapping[] Mappings { get; set; }
+    public List<TfvcBranchMapping>? Mappings { get; set; }
 
     /// <summary>
     /// Path of the branch's parent.
     /// </summary>
     [JsonProperty("parent")]
-    public TfvcShallowBranchRef Parent { get; set; }
+    public TfvcShallowBranchRef? Parent { get; set; }
 
     /// <summary>
     /// List of paths of the related branches.
     /// </summary>
     [JsonProperty("relatedBranches")]
-    public TfvcShallowBranchRef[] RelatedBranches { get; set; }
+    public List<TfvcShallowBranchRef>? RelatedBranches { get; set; }
 
 }

@@ -12,17 +12,17 @@ public class TfvcBranchMapping
     /// Depth of the branch.
     /// </summary>
     [JsonProperty("depth")]
-    public string Depth { get; set; }
+    public string Depth { get; set; } = string.Empty;
 
     /// <summary>
     /// Server item for the branch.
     /// </summary>
     [JsonProperty("serverItem")]
-    public string ServerItem { get; set; }
+    public string ServerItem { get; set; } = string.Empty;
 
     /// <summary>
     /// Type of the branch.
     /// </summary>
     [JsonProperty("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = string.Empty;
 }

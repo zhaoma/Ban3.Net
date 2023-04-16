@@ -13,19 +13,19 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The list of logs.
         /// </summary>
         [JsonProperty("logs")]
-        public List<Log> Logs { get; set; }
+        public List<Log>? Logs { get; set; }
 
         /// <summary>
         /// A signed url allowing limited-time anonymous access to private resources.
         /// </summary>
         [JsonProperty("signedContent")]
-        public SignedUrl SignedContent { get; set; }
+        public SignedUrl? SignedContent { get; set; }
 
         /// <summary>
         /// URL of the log.
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
     }
 }
 

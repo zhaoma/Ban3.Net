@@ -12,11 +12,11 @@ public class TfvcPolicyOverrideInfo
     /// Overidden policy comment.
     /// </summary>
     [JsonProperty("comment")]
-    public string Comment { get; set; }
+    public string Comment { get; set; } = string.Empty;
 
     /// <summary>
     /// Information on the failed policy that was overridden.
     /// </summary>
     [JsonProperty("policyFailures")]
-    public IEnumerable<TfvcPolicyFailureInfo> PolicyFailures { get; set; } 
+    public List<TfvcPolicyFailureInfo>? PolicyFailures { get; set; } 
 }

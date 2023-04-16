@@ -12,13 +12,13 @@ public class TfvcLabelRef
     /// Collection of reference links.
     /// </summary>
     [JsonProperty("_links")]
-    public ReferenceLinks Links { get; set; }
+    public ReferenceLinks? Links { get; set; }
 
     /// <summary>
     /// Label description.
     /// </summary>
     [JsonProperty("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     /// <summary>
     /// Label Id.
@@ -30,29 +30,29 @@ public class TfvcLabelRef
     /// Label scope.
     /// </summary>
     [JsonProperty("labelScope")]
-    public string LabelScope { get; set; }
+    public string LabelScope { get; set; } = string.Empty;
 
     /// <summary>
     /// Last modified datetime for the label.
     /// </summary>
     [JsonProperty("modifiedDate")]
-    public string ModifiedDate { get; set; }
+    public string ModifiedDate { get; set; } = string.Empty;
 
     /// <summary>
     /// Label name.
     /// </summary>
     [JsonProperty("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// Label owner.
     /// </summary>
     [JsonProperty("owner")]
-    public IdentityRef Owner { get; set; }
+    public IdentityRef? Owner { get; set; }
 
     /// <summary>
     /// Label Url.
     /// </summary>
     [JsonProperty("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
 }

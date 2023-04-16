@@ -13,19 +13,19 @@ public class TfvcBranchRef
     /// A collection of REST reference links.
     /// </summary>
     [JsonProperty("_links")]
-    public ReferenceLinks Links { get; set; }
+    public ReferenceLinks? Links { get; set; }
 
     /// <summary>
     /// Creation date of the branch.
     /// </summary>
     [JsonProperty("createdDate")]
-    public string CreatedDate { get; set; }
+    public string CreatedDate { get; set; } = string.Empty;
 
     /// <summary>
     /// Branch description.
     /// </summary>
     [JsonProperty("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     /// <summary>
     /// Is the branch deleted?
@@ -37,18 +37,18 @@ public class TfvcBranchRef
     /// Alias or display name of user
     /// </summary>
     [JsonProperty("owner")]
-    public IdentityRef Owner { get; set; }
+    public IdentityRef? Owner { get; set; }
 
     /// <summary>
     /// Path for the branch.
     /// </summary>
     [JsonProperty("path")]
-    public string Path { get; set; }
+    public string Path { get; set; } = string.Empty;
 
     /// <summary>
     /// URL to retrieve the item.
     /// </summary>
     [JsonProperty("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
 
 }

@@ -12,13 +12,13 @@ public class TfvcChangesetRef
     /// A collection of REST reference links.
     /// </summary>
     [JsonProperty("_links")]
-    public ReferenceLinks Links { get; set; }
+    public ReferenceLinks? Links { get; set; }
     
     /// <summary>
     /// Alias or display name of user
     /// </summary>
     [JsonProperty("author")]
-    public IdentityRef Author { get; set; }
+    public IdentityRef? Author { get; set; }
 
     /// <summary>
     /// Id of the changeset.
@@ -30,13 +30,13 @@ public class TfvcChangesetRef
     /// Alias or display name of user
     /// </summary>
     [JsonProperty("checkedInBy")]
-    public IdentityRef CheckedInBy { get; set; }
+    public IdentityRef? CheckedInBy { get; set; }
     
     /// <summary>
     /// Comment for the changeset.
     /// </summary>
     [JsonProperty("comment")]
-    public string Comment { get; set; }
+    public string Comment { get; set; } = string.Empty;
 
     /// <summary>
     /// Was the Comment result truncated?
@@ -48,11 +48,11 @@ public class TfvcChangesetRef
     /// Creation date of the changeset.
     /// </summary>
     [JsonProperty("createdDate")]
-    public string CreatedDate { get; set; }
+    public string CreatedDate { get; set; } = string.Empty;
 
     /// <summary>
     /// URL to retrieve the item.
     /// </summary>
     [JsonProperty("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
 }

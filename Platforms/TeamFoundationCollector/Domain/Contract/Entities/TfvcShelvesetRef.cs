@@ -12,13 +12,13 @@ public class TfvcShelvesetRef
     /// List of reference links for the shelveset.
     /// </summary>
     [JsonProperty("_links")]
-    public ReferenceLinks Links { get; set; }
+    public ReferenceLinks? Links { get; set; }
 
     /// <summary>
     /// Shelveset comment.
     /// </summary>
     [JsonProperty("comment")]
-    public string Comment { get; set; }
+    public string Comment { get; set; } = string.Empty;
 
     /// <summary>
     /// Shelveset comment truncated as applicable.
@@ -30,29 +30,29 @@ public class TfvcShelvesetRef
     /// Shelveset create date.
     /// </summary>
     [JsonProperty("createdDate")]
-    public string CreatedDate { get; set; }
+    public string CreatedDate { get; set; } = string.Empty;
 
     /// <summary>
     /// Shelveset Id.
     /// </summary>
     [JsonProperty("id")]
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 
     /// <summary>
     /// Shelveset name.
     /// </summary>
     [JsonProperty("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// Shelveset Owner.
     /// </summary>
     [JsonProperty("owner")]
-    public IdentityRef Owner { get; set; }
+    public IdentityRef? Owner { get; set; }
 
     /// <summary>
     /// Shelveset Url.
     /// </summary>
     [JsonProperty("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
 }

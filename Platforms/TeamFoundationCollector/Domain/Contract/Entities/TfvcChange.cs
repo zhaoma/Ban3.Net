@@ -20,19 +20,19 @@ public class TfvcChange
     /// Current version.
     /// </summary>
     [JsonProperty("item")]
-    public string Item { get; set; }
+    public string Item { get; set; } = string.Empty;
 
     /// <summary>
     /// List of merge sources in case of rename or branch creation.
     /// </summary>
     [JsonProperty("mergeSources")]
-    public TfvcMergeSource[] MergeSources { get; set; }
+    public List<TfvcMergeSource>? MergeSources { get; set; }
 
     /// <summary>
     /// Content of the item after the change.
     /// </summary>
     [JsonProperty("newContent")]
-    public ItemContent NewContent { get; set; }
+    public ItemContent? NewContent { get; set; }
 
     /// <summary>
     /// Version at which a (shelved) change was pended against
@@ -44,11 +44,11 @@ public class TfvcChange
     /// Path of the item on the server.
     /// </summary>
     [JsonProperty("sourceServerItem")]
-    public string SourceServerItem { get; set; }
+    public string SourceServerItem { get; set; } = string.Empty;
 
     /// <summary>
     /// URL to retrieve the item.
     /// </summary>
     [JsonProperty("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
 }

@@ -9,7 +9,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 		public bool IsSecret { get; set; }
 
         [JsonProperty("value")]
-        public string Value { get; set; }
+        public string Value { get; set; } = string.Empty;
     }
 }
 

@@ -10,7 +10,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 public class TfvcItemDescriptor
 {
     [JsonProperty("path")]
-    public string Path { get; set; }
+    public string Path { get; set; } = string.Empty;
 
     /// <summary>
     /// Enums.VersionControlRecursionType
@@ -23,7 +23,7 @@ public class TfvcItemDescriptor
     /// Specify the desired version, can be null or empty string only if VersionType is latest or tip.
     /// </summary>
     [JsonProperty("version")]
-    public string Version { get; set; }
+    public string Version { get; set; } = string.Empty;
 
     /// <summary>
     /// Enums.TfvcVersionOption

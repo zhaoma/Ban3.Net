@@ -24,5 +24,5 @@ public class BuildLogReference
     /// A full link to the log resource.
     /// </summary>
     [JsonProperty("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
 }

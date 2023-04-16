@@ -9,7 +9,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 public class ItemContent
 {
     [JsonProperty("content")]
-    public string Content { get; set; }
+    public string Content { get; set; } = string.Empty;
 
     [JsonProperty("contentType")]
     public ItemContentType ContentType { get; set; }

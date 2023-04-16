@@ -11,7 +11,7 @@ public class BuildRequestValidationResult
     /// <summary>
     /// The message associated with the result.
     /// </summary>
-    public string Message { get; set; }
+    public string Message { get; set; } = string.Empty;
 
     /// <summary>
     /// The result.

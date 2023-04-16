@@ -13,6 +13,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Agent specification unique identifier.
         /// </summary>
         [JsonProperty("identifier")]
-        public string Identifier { get; set; }
+        public string Identifier { get; set; } = string.Empty;
     }
 }

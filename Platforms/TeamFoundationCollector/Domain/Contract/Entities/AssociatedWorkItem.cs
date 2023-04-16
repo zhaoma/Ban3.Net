@@ -8,7 +8,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 public class AssociatedWorkItem
 {
     [JsonProperty("assignedTo")]
-    public string AssignedTo { get; set; }
+    public string AssignedTo { get; set; } = string.Empty;
 
     /// <summary>
     /// Id of associated the work item.
@@ -17,20 +17,20 @@ public class AssociatedWorkItem
     public int Id { get; set; }
 
     [JsonProperty("state")]
-    public string State { get; set; }
+    public string State { get; set; } = string.Empty;
 
     [JsonProperty("title")]
-    public string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
 
     /// <summary>
     /// REST Url of the work item.
     /// </summary>
     [JsonProperty("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
 
     [JsonProperty("webUrl")]
-    public string WebUrl { get; set; }
+    public string WebUrl { get; set; } = string.Empty;
 
     [JsonProperty("workItemType")]
-    public string WorkItemType { get; set; }
+    public string WorkItemType { get; set; } = string.Empty;
 }

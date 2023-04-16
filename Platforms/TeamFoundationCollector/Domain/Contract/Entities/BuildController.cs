@@ -12,19 +12,19 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The class to represent a collection of REST reference links.
         /// </summary>
         [JsonProperty("_links")]
-        public ReferenceLinks Links { get; set; }
+        public ReferenceLinks? Links { get; set; }
 
         /// <summary>
         /// The date the controller was created.
         /// </summary>
         [JsonProperty("createdDate")]
-        public string CreateDate { get; set; }
+        public string CreateDate { get; set; } = string.Empty;
 
         /// <summary>
         /// The description of the controller.
         /// </summary>
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         /// <summary>
         /// Indicates whether the controller is enabled.
@@ -42,7 +42,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Name of the linked resource (definition name, controller name, etc.)
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// The status of the controller.
@@ -54,18 +54,18 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The date the controller was last updated.
         /// </summary>
         [JsonProperty("updatedDate")]
-        public string UpdatedDate { get; set; }
+        public string UpdatedDate { get; set; } = string.Empty;
 
         /// <summary>
         /// The controller's URI.
         /// </summary>
         [JsonProperty("uri")]
-        public string Uri { get; set; }
+        public string Uri { get; set; } = string.Empty;
 
         /// <summary>
         /// Full http link to the resource
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
     }
 }

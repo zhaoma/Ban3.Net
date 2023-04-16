@@ -9,13 +9,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 	public class RepositoryResource
     {
         [JsonProperty("refName")]
-        public string RefName { get; set; }
+        public string RefName { get; set; } = string.Empty;
 
         [JsonProperty("repository")]
-        public Repository Repository { get; set; }
+        public Repository? Repository { get; set; }
 
         [JsonProperty("version")]
-        public string Version { get; set; }
+        public string Version { get; set; } = string.Empty;
     }
 }
 

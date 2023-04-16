@@ -13,13 +13,13 @@ public class BuildLog
     /// The date and time the log was created.
     /// </summary>
     [JsonProperty("createdOn")]
-    public string CreatedOn { get; set; }
+    public string CreatedOn { get; set; } = string.Empty;
 
     /// <summary>
     /// The date and time the log was last changed.
     /// </summary>
     [JsonProperty("lastChangedOn")]
-    public string LastChangedOn { get; set; }
+    public string LastChangedOn { get; set; } = string.Empty;
 
     /// <summary>
     /// The number of lines in the log.

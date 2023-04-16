@@ -18,19 +18,19 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Project abbreviation.
         /// </summary>
         [JsonProperty("abbreviation")]
-        public string Abbreviation { get; set; }
+        public string Abbreviation { get; set; } = string.Empty;
 
         /// <summary>
         /// Url to default team identity image.
         /// </summary>
         [JsonProperty("defaultTeamImageUrl")]
-        public string DefaultTeamImageUrl { get; set; }
+        public string DefaultTeamImageUrl { get; set; } = string.Empty;
 
         /// <summary>
         /// The project's description (if any).
         /// </summary>
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         /// <summary>
         /// Project identifier.
@@ -42,13 +42,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Project last update time.
         /// </summary>
         [JsonProperty("lastUpdateTime")]
-        public string LastUpdateTime { get; set; }
+        public string LastUpdateTime { get; set; } = string.Empty;
 
         /// <summary>
         /// Project name.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Project revision.
@@ -66,7 +66,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Url to the full version of the object.
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
 
         /// <summary>
         /// Project visibility.

@@ -18,6 +18,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Because Reference links are readonly, we only want to expose them as read only.
         /// </summary>
         [JsonProperty("links")]
-        public object Links { get; set; }
+        public object? Links { get; set; }
     }
 }

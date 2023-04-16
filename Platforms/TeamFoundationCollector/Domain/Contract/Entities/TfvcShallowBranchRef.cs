@@ -12,5 +12,5 @@ public class TfvcShallowBranchRef
     /// Path for the branch.
     /// </summary>
     [JsonProperty("path")]
-    public string Path { get; set; }
+    public string Path { get; set; } = string.Empty;
 }

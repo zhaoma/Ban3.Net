@@ -13,19 +13,19 @@ public class TfvcItem
     /// The class to represent a collection of REST reference links.
     /// </summary>
     [JsonProperty("_links")]
-    public ReferenceLinks Links { get; set; }
+    public ReferenceLinks? Links { get; set; }
 
     /// <summary>
     /// Item changed datetime.
     /// </summary>
     [JsonProperty("changeDate")]
-    public string ChangeDate { get; set; }
+    public string ChangeDate { get; set; } = string.Empty;
 
     [JsonProperty("content")]
-    public string Content { get; set; }
+    public string Content { get; set; } = string.Empty;
 
     [JsonProperty("contentMetadata")]
-    public FileContentMetadata ContentMetadata { get; set; }
+    public FileContentMetadata? ContentMetadata { get; set; }
 
     /// <summary>
     /// Greater than 0 if item is deleted.
@@ -40,7 +40,7 @@ public class TfvcItem
     /// MD5 hash as a base 64 string, applies to files only.
     /// </summary>
     [JsonProperty("hashValue")]
-    public string HashValue { get; set; }
+    public string HashValue { get; set; } = string.Empty;
 
     /// <summary>
     /// True if item is a branch.
@@ -61,7 +61,7 @@ public class TfvcItem
     public bool IsSymLink { get; set; }
 
     [JsonProperty("path")]
-    public string Path { get; set; }
+    public string Path { get; set; } = string.Empty;
 
     /// <summary>
     /// The size of the file, if applicable.
@@ -73,7 +73,7 @@ public class TfvcItem
     /// 
     /// </summary>
     [JsonProperty("url")]
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
 
     /// <summary>
     /// Changeset version Id.

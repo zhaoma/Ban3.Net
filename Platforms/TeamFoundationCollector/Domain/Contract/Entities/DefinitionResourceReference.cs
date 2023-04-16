@@ -14,16 +14,16 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// <summary>
         /// The id of the resource.
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; set; } = string.Empty;
 
         /// <summary>
         /// A friendly name for the resource.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// The type of the resource.
         /// </summary>
-        public string Type { get; set; }
+        public string Type { get; set; } = string.Empty;
     }
 }

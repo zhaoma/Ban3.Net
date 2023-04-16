@@ -13,13 +13,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// Timestamp when access expires.
         /// </summary>
         [JsonProperty("signatureExpires")]
-		public string signatureExpires{ get; set; }
+		public string SignatureExpires{ get; set; } = string.Empty;
 
         /// <summary>
         /// The URL to allow access to.
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; set; } = string.Empty;
 	}
 }
 
