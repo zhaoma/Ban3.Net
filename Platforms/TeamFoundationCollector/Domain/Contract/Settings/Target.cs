@@ -4,9 +4,9 @@ public class Target
 {
     public string Instance { get; set; }
 
-    public string Collection { get; set; } = "CT";
+    public string Collection { get; set; } 
 
-    public string Project { get; set; } = "CTS";
+    public string Project { get; set; }
 
     public string UserName { get; set; }
 

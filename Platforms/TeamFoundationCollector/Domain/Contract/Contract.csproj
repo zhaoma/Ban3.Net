@@ -14,6 +14,7 @@
     <Folder Include="Request\Build\" />
     <Folder Include="Request\Dashboard\" />
     <Folder Include="Request\SubCondition\" />
+    <Folder Include="Request\Pipelines\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,4 +25,7 @@
     <ProjectReference Include="..\..\..\..\Libs\NetHttp\NetHttp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Request\Pipelines\" />
+  </ItemGroup>
 </Project>
