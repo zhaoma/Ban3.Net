@@ -15,6 +15,7 @@
     <Folder Include="Request\Dashboard\" />
     <Folder Include="Request\SubCondition\" />
     <Folder Include="Request\Pipelines\" />
+    <Folder Include="Interfaces\Functions\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +28,6 @@
 
   <ItemGroup>
     <None Remove="Request\Pipelines\" />
+    <None Remove="Interfaces\Functions\" />
   </ItemGroup>
 </Project>
