@@ -2,13 +2,8 @@
 
 public class CountedResult<T>
 {
-    public CountedResult()
-    {
-    }
-
-    
     public int Count { get; set; }
 
     
-    public List<T> Value { get; set; }
+    public List<T>? Value { get; set; }
 }

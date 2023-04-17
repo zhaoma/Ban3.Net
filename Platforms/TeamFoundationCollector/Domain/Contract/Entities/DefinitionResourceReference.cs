@@ -1,5 +1,4 @@
-﻿
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
+﻿namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
     /// <summary>
     /// https://learn.microsoft.com/en-us/rest/api/azure/devops/build/authorizedresources/authorize-project-resources?view=azure-devops-server-rest-6.0

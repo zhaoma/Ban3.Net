@@ -1,17 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces
 {
     public interface IRequest
     {
-        //string Path();
+        /// <summary>
+        /// HttpMethod Code
+        /// </summary>
+        string Method { get; set; }
 
-        //string Query();
+        /// <summary>
+        /// Azure api version
+        /// </summary>
+        string ApiVersion { get; set; }
 
-        //string Body();
+        /// <summary>
+        /// Request Path (parameters parsed)
+        /// </summary>
+        /// <returns></returns>
+        string RequestPath();
+
+        /// <summary>
+        /// Request Query String
+        /// </summary>
+        /// <returns></returns>
+        string RequestQuery();
+
+        /// <summary>
+        /// Request Body Data
+        /// </summary>
+        /// <returns></returns>
+        string RequestBody();
     }
 }

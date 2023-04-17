@@ -1,5 +1,4 @@
-﻿
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
+﻿namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
     /// <summary>
     /// Represents an artifact produced by a build.

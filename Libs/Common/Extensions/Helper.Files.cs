@@ -13,7 +13,6 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using Ban3.Infrastructures.Common.Requests;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Common.Extensions
@@ -187,22 +186,6 @@ namespace Ban3.Infrastructures.Common.Extensions
             if (filePath.FileNeedUpdate(minutes))
             {
                 var result= func();
-
-                if (filePath.FileNeedUpdate(result!.ObjToJson()))
-                    filePath.WriteFile(result!.ObjToJson());
-
-                return result;
-            }
-
-            return filePath.ReadFile().JsonToObj<T>();
-        }
-
-        /// 
-        public static T WriteFileAfterMinutes<T>(this string filePath, int minutes, Func<NormalRequest,T> func,NormalRequest request)
-        {
-            if (filePath.FileNeedUpdate(minutes))
-            {
-                var result= func(request);
 
                 if (filePath.FileNeedUpdate(result!.ObjToJson()))
                     filePath.WriteFile(result!.ObjToJson());

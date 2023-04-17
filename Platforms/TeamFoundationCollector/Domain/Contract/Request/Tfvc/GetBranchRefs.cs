@@ -1,0 +1,39 @@
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
+
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
+
+public class GetBranchRefs
+    : PresetRequest, IRequest
+{
+    public string Method { get; set; } = "Get";
+
+    /// <summary>
+    /// Version of the API to use. This should be set to '7.0' to use this version of the api.
+    /// </summary>
+    public string ApiVersion { get; set; } = "7.0";
+
+    /// <summary>
+    /// Full path to the branch.
+    /// Default: $/
+    /// Examples: $/, $/MyProject, $/MyProject/SomeFolder.
+    /// </summary>
+    public string ScopePath { get; set; } = "$/";
+
+    /// <summary>
+    /// Return deleted branches.
+    /// Default: False
+    /// </summary>
+    public bool IncludeDeleted { get; set; } = false;
+
+    /// <summary>
+    /// Return links.
+    /// Default: False
+    /// </summary>
+    public bool IncludeLinks { get; set; } = false;
+    
+    public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/branches";
+
+    public string RequestQuery() => $"?scopePath={ScopePath}&includeDeleted={IncludeDeleted}&includeLinks={IncludeLinks}&api-version={ApiVersion}";
+
+    public string RequestBody() => string.Empty;
+}

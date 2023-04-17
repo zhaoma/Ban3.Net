@@ -1,5 +1,4 @@
-﻿
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities

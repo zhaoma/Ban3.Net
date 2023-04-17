@@ -1,5 +1,4 @@
-﻿using System;
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
+﻿namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
 {
     /// <summary>
     /// Expand options. Default is None.

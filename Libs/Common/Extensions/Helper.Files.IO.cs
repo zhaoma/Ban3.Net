@@ -52,7 +52,7 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// 
         public static string DataPath(this string resource)
         {
-            var rootPath = Config.CurrrentEnvironment.FileStorage?.RootPath;
+            var rootPath = Config.FilesStorageRootPath;
 
             if (string.IsNullOrEmpty(rootPath))
                 rootPath = Environment.CurrentDirectory;

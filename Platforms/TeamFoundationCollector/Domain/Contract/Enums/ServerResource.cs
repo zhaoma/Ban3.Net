@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributes;
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributes;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
 {
@@ -85,6 +80,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         BuildAttachmentsList,
 
         BuildAuthorizedresources,
+
+        [ResourceDeclare("Delete", "_apis/build/builds/{buildId}?api-version=7.0")]
+        BuildsGet,
+
+
         
         CoreProjectsCreate,
         CoreProjectsDelete,

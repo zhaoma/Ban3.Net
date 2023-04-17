@@ -1,4 +1,4 @@
-﻿using Ban3.Platforms.TeamFoundationCollector.Infrastructrue.Common.Enums;
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 

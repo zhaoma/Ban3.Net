@@ -31,8 +31,8 @@ namespace Ban3.Infrastructures.Common
         static Config()
         {
             Configuration = new ConfigurationBuilder()
-                    .AddJsonFile("appSettings.json", false, true)
-                    .Build();
+                .AddJsonFile("appSettings.json", false, true)
+                .Build();
         }
 
         /// <summary>
@@ -40,10 +40,20 @@ namespace Ban3.Infrastructures.Common
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static IConfiguration GetSection( string key )
+        public static IConfiguration GetSection(string key)
         {
-            return Configuration.GetSection( key );
+            return Configuration.GetSection(key);
         }
+
+        /// <summary>
+        /// 默认配置(文件保存用)
+        /// </summary>
+        public static string FilesStorageRootPath => GetSection(" FilesStorage")["RootPath"]+"";
+
+        /// <summary>
+        /// web访问根目录
+        /// </summary>
+        public static string FilesStorageRootUrl => GetSection(" FilesStorage")["RootUrl"] + "";
     }
 
 
