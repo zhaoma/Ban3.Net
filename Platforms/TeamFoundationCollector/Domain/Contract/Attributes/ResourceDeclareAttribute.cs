@@ -14,25 +14,16 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributes
         : Attribute
     {
         public ResourceDeclareAttribute(
-            string method,
-            string path,
-            bool pathNeedId=false,
-            bool pathNeedAddition=false
-            
+            Type request,
+            Type response
             )
         {
-            Method =method;
-            Path = path;
+            Request =request;
+            Response = response;
         }
 
-        public string Method { get; set; }
+        public Type Request { get; set; }
 
-        public string Path { get; set; }
-
-        public bool PathNeedId { get; set; }
-
-        public bool PathNeedAddition { get; set; }
-
-        public bool PathIncludeProjectId { get; set; }
+        public Type Response { get; set; }
     }
 }

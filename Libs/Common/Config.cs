@@ -23,37 +23,27 @@ namespace Ban3.Infrastructures.Common
         /// <summary>
         /// 
         /// </summary>
-        public static readonly IConfiguration Configuration;
+        public static readonly IConfiguration AppConfiguration;
 
         /// <summary>
         /// 静态构造
         /// </summary>
         static Config()
         {
-            Configuration = new ConfigurationBuilder()
+            AppConfiguration = new ConfigurationBuilder()
                 .AddJsonFile("appSettings.json", false, true)
                 .Build();
         }
-
-        /// <summary>
-        /// 获取配置节
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public static IConfiguration GetSection(string key)
-        {
-            return Configuration.GetSection(key);
-        }
-
+        
         /// <summary>
         /// 默认配置(文件保存用)
         /// </summary>
-        public static string FilesStorageRootPath => GetSection(" FilesStorage")["RootPath"]+"";
+        public static string FilesStorageRootPath => AppConfiguration["FilesStorage:RootPath"]+"";
 
         /// <summary>
         /// web访问根目录
         /// </summary>
-        public static string FilesStorageRootUrl => GetSection(" FilesStorage")["RootUrl"] + "";
+        public static string FilesStorageRootUrl => AppConfiguration["FilesStorage:RootUrl"]+""; 
     }
 
 

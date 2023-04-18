@@ -8,7 +8,7 @@ public class SearchCriteria
     /// Alias or display name of user who made the changes
     /// </summary>
     [JsonProperty("author")]
-    public string Author { get; set; }
+    public string Author { get; set; } = string.Empty;
 
     /// <summary>
     /// Whether or not to follow renames for the given item being queried
@@ -20,7 +20,7 @@ public class SearchCriteria
     /// If provided, only include changesets created after this date (string) Think of a better name for this.
     /// </summary>
     [JsonProperty("fromDate")]
-    public string FromDate { get; set; }
+    public string FromDate { get; set; } = string.Empty;
 
     /// <summary>
     /// If provided, only include changesets after this changesetID
@@ -38,13 +38,13 @@ public class SearchCriteria
     /// Path of item to search under
     /// </summary>
     [JsonProperty("itemPath")]
-    public string ItemPath { get; set; }
+    public string ItemPath { get; set; } = string.Empty;
 
     /// <summary>
     /// If provided, only include changesets created before this date (string) Think of a better name for this.
     /// </summary>
     [JsonProperty("toDate")]
-    public string ToDate { get; set; }
+    public string ToDate { get; set; } = string.Empty;
 
     /// <summary>
     /// If provided, a version descriptor for the latest change list to include

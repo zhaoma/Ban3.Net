@@ -12,12 +12,7 @@ public class CreateChangeset
     : PresetRequest, IRequest
 {
     public string Method { get; set; } = "Post";
-
-    /// <summary>
-    /// Version of the API to use. This should be set to '7.0' to use this version of the api.
-    /// </summary>
-    public string ApiVersion { get; set; } = "7.0";
-
+    
     public CreateChangesetBody? Body { get; set; }
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/changesets";

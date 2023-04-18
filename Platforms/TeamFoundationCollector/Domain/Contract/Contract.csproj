@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="Settings\" />
     <Folder Include="Request\Core\" />
-    <Folder Include="Request\Build\" />
     <Folder Include="Request\Dashboard\" />
     <Folder Include="Request\SubCondition\" />
     <Folder Include="Request\Pipelines\" />
@@ -23,6 +23,7 @@
     <PackageReference Include="log4net" Version="2.0.15" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Libs\Common\Common.csproj" />
     <ProjectReference Include="..\..\..\..\Libs\NetHttp\NetHttp.csproj" />
   </ItemGroup>
 

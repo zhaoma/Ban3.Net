@@ -8,7 +8,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appSettings.json">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>appSettings.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Libs\Common\Common.csproj" />
     <ProjectReference Include="..\..\..\Libs\NetHttp\NetHttp.csproj" />
+    <ProjectReference Include="..\..\..\Platforms\TeamFoundationCollector\Domain\Contract\Contract.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="appSettings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>appSettings.json</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

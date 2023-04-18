@@ -2,13 +2,20 @@
 
 public class Target
 {
-    public string Instance { get; set; }
+    public string HostBaseUrl { get; set; } = string.Empty;
 
-    public string Collection { get; set; } 
+    /// <summary>
+    /// DevOps 地址
+    /// </summary>
+    public string Instance { get; set; } = string.Empty;
 
-    public string Project { get; set; }
+    public string Organization { get; set; } = string.Empty;
 
-    public string UserName { get; set; }
+    public string Project { get; set; } = string.Empty;
 
-    public string Password { get; set; }
+    public string UserName { get; set; } = string.Empty;
+
+    public string Password { get; set; } = string.Empty;
+    
+    public string ApiVersion { get; set; } = string.Empty;
 }

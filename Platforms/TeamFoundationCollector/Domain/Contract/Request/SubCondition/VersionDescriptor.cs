@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCond
 
 public class VersionDescriptor
 {
-    public string Version { get; set; }
+    public string Version { get; set; } = string.Empty;
 
     public TfvcVersionOption VersionOption { get; set; }
 

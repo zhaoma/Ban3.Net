@@ -14,13 +14,7 @@ public class GetChangesets
     : PresetRequest, IRequest
 {
     public string Method { get; set; } = "Get";
-
-    /// <summary>
-    /// Version of the API to use. This should be set to '7.0' to use this version of the api.
-    /// </summary>
-    public string ApiVersion { get; set; } = "7.0";
-
-
+    
     /// <summary>
     /// Results are sorted by ID in descending order by default.
     /// Use id asc to sort by ID in ascending order.

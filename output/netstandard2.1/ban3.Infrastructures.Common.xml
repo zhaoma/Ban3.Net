@@ -135,7 +135,7 @@
             配置获取
             </summary>
         </member>
-        <member name="F:Ban3.Infrastructures.Common.Config.Configuration">
+        <member name="F:Ban3.Infrastructures.Common.Config.AppConfiguration">
             <summary>
             
             </summary>
@@ -144,13 +144,6 @@
             <summary>
             静态构造
             </summary>
-        </member>
-        <member name="M:Ban3.Infrastructures.Common.Config.GetSection(System.String)">
-            <summary>
-            获取配置节
-            </summary>
-            <param name="key"></param>
-            <returns></returns>
         </member>
         <member name="P:Ban3.Infrastructures.Common.Config.FilesStorageRootPath">
             <summary>

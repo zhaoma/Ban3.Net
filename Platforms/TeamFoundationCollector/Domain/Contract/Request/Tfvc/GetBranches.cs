@@ -10,12 +10,7 @@ public class GetBranches
     : PresetRequest, IRequest
 {
     public string Method { get; set; } = "Get";
-
-    /// <summary>
-    /// Version of the API to use. This should be set to '7.0' to use this version of the api.
-    /// </summary>
-    public string ApiVersion { get; set; } = "7.0";
-
+    
     /// <summary>
     /// Return child branches, if there are any.
     /// Default: False

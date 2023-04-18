@@ -46,7 +46,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         /// https://learn.microsoft.com/en-us/rest/api/azure/devops/build/artifacts/create?view=azure-devops-server-rest-6.0
         /// Response BuildArtifact ; Media Types: "application/zip", "application/json"
         /// </summary>
-        [ResourceDeclare("POST", "_apis/build/builds/{buildId}/artifacts?api-version=6.0")]
         BuildArtifactsCreate,
 
         /// <summary>
@@ -54,7 +53,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         /// https://learn.microsoft.com/en-us/rest/api/azure/devops/build/artifacts/get-artifact?view=azure-devops-server-rest-6.0
         /// Response BuildArtifact ; Media Types: "application/zip", "application/json"
         /// </summary>
-        [ResourceDeclare("GET", "_apis/build/builds/{buildId}/artifacts?artifactName={artifactName}&api-version=6.0")]
         BuildArtifactsGetArtifact,
 
         /// <summary>
@@ -62,7 +60,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         /// https://learn.microsoft.com/en-us/rest/api/azure/devops/build/artifacts/get-file?view=azure-devops-server-rest-6.0
         /// Response string Media Types: "application/octet-stream"
         /// </summary>
-        [ResourceDeclare("GET", "_apis/build/builds/{buildId}/artifacts?artifactName={artifactName}&fileId={fileId}&fileName={fileName}&api-version=6.0")]
         BuildArtifactsGetFile,
 
         /// <summary>
@@ -70,7 +67,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         /// https://learn.microsoft.com/en-us/rest/api/azure/devops/build/artifacts/list?view=azure-devops-server-rest-6.0
         /// Response BuildArtifact[]
         /// </summary>
-        [ResourceDeclare("GET", "_apis/build/builds/{buildId}/artifacts?api-version=6.0")]
         BuildArtifactsList,
 
 
@@ -80,8 +76,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         BuildAttachmentsList,
 
         BuildAuthorizedresources,
-
-        [ResourceDeclare("Delete", "_apis/build/builds/{buildId}?api-version=7.0")]
+        
         BuildsGet,
 
 
@@ -91,8 +86,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         CoreProjectsGet,
 
         CoreProjectsGetProperties,
-
-        [ResourceDeclare("Get","_apis/projects")]
+        
         CoreProjectsList,
 
         CoreProjectsSetProperties,
@@ -115,48 +109,47 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         /// GET https://{instance}/{collection}/{project}/_apis/tfvc/branches?api-version=6.0
         /// GET https://{instance}/{collection}/{project}/_apis/tfvc/branches?includeParent={includeParent}&includeChildren={includeChildren}&includeDeleted={includeDeleted}&includeLinks={includeLinks}&api-version=6.0
         /// </summary>
-        [ResourceDeclare("Get", "_apis/tfvc/branches?api-version=6.0")]
-        TfvcBranchesGet,
 
-        TfvcChangesetsCreate,
+        [ResourceDeclare(typeof(Request.Tfvc.CreateChangeset), typeof(Response.Tfvc.CreateChangesetResult))]
+        TfvcCreateChangeset,
 
-        /// GET https://{instance}/{collection}/{project}/_apis/tfvc/changesets/{id}?api-version=6.0
-        /// GET https://{instance}/{collection}/{project}/_apis/tfvc/changesets/{id}?maxChangeCount={maxChangeCount}&includeDetails={includeDetails}&includeWorkItems={includeWorkItems}&maxCommentLength={maxCommentLength}&includeSourceRename={includeSourceRename}&$skip={$skip}&$top={$top}&$orderby={$orderby}&searchCriteria.author={searchCriteria.author}&searchCriteria.followRenames={searchCriteria.followRenames}&searchCriteria.fromDate={searchCriteria.fromDate}&searchCriteria.fromId={searchCriteria.fromId}&searchCriteria.includeLinks={searchCriteria.includeLinks}&searchCriteria.itemPath={searchCriteria.itemPath}&searchCriteria.toDate={searchCriteria.toDate}&searchCriteria.toId={searchCriteria.toId}&api-version=6.0
-        TfvcChangesetsGet,
+        [ResourceDeclare(typeof(Request.Tfvc.GetBatchedChangesets), typeof(Response.Tfvc.GetBatchedChangesetsResult))]
+        TfvcGetBatchedChangesets,
+        
+        TfvcGetBatchedItems,
 
-        /// <summary>
-        /// POST https://{instance}/{collection}/_apis/tfvc/changesetsbatch?api-version=6.0
-        /// 
-        /// </summary>
-        TfvcChangesetsGetBatched,
-        /// <summary>
-        /// GET https://{instance}/{collection}/_apis/tfvc/changesets/{id}/changes?api-version=6.0
-        /// GET https://{instance}/{collection}/_apis/tfvc/changesets/{id}/changes?$skip={$skip}&$top={$top}&continuationToken={continuationToken}&api-version=6.0
-        /// </summary>
-        TfvcChangesetsGetChanges,
-        /// <summary>
-        /// GET https://{instance}/{collection}/_apis/tfvc/changesets/{id}/workItems?api-version=6.0
-        /// </summary>
-        TfvcChangesetsGetWorkItems,
+        TfvcGetBranch,
 
-        /// <summary>
-        /// GET https://{instance}/{collection}/{project}/_apis/tfvc/changesets?api-version=6.0
-        /// GET https://{instance}/{collection}/{project}/_apis/tfvc/changesets?maxCommentLength={maxCommentLength}&$skip={$skip}&$top={$top}&$orderby={$orderby}&searchCriteria.author={searchCriteria.author}&searchCriteria.followRenames={searchCriteria.followRenames}&searchCriteria.fromDate={searchCriteria.fromDate}&searchCriteria.fromId={searchCriteria.fromId}&searchCriteria.includeLinks={searchCriteria.includeLinks}&searchCriteria.itemPath={searchCriteria.itemPath}&searchCriteria.toDate={searchCriteria.toDate}&searchCriteria.toId={searchCriteria.toId}&api-version=6.0
-        /// </summary>
-        TfvcChangesetsList,
+        TfvcGetBranches,
 
-        TfvcItemsGet,
-        TfvcItemsGetBatched,
-        TfvcItemsList,
+        TfvcGetBranchRefs,
 
-        TfvcLabelsGet,
-        TfvcLabelsGetItems,
-        TfvcLabelsList,
+        [ResourceDeclare(typeof(Request.Tfvc.GetChangeset), typeof(Response.Tfvc.GetChangesetResult))]
+        TfvcGetChangeset,
 
-        TfvcShelvesetsGet,
-        TfvcShelvesetsGetChanges,
-        TfvcShelvesetsGetWorkItems,
-        TfvcShelvesetsList,
+        TfvcGetChangesetsChanges,
+
+        TfvcGetChangesets,
+
+        TfvcGetChangesetsWorkItems,
+        
+        TfvcGetItem,
+
+        TfvcGetItems,
+
+        TfvcGetLabel,
+
+        TfvcGetLabelsItems,
+
+        TfvcGetLabels,
+
+        TfvcGetShelveset,
+
+        TfvcGetShelvesetsChanges,
+        
+        TfvcGetShelvesets,
+
+        TfvcGetShelvesetsWorkItems,
 
         WIQL,
         ChangesetDiscussion,
