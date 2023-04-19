@@ -64,6 +64,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
         public string RequestQuery()
         {
+            /*TODO :  need check*/
             var sb = new StringBuilder();
 
             sb.Append($"?");

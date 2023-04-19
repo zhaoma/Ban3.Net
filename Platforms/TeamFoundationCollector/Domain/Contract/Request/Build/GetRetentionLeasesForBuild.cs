@@ -19,7 +19,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
         
         public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/builds/{BuildId}/leases";
 
-        public string RequestQuery() => $"api-version={ApiVersion}";
+        public string RequestQuery() => $"?api-version={ApiVersion}";
 
         public string RequestBody() => string.Empty;
     }

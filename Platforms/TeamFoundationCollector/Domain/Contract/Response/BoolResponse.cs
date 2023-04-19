@@ -2,7 +2,7 @@
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response;
 
-public class BaseResponse
+public class BoolResponse
     : IResponse
 {
     public bool Success { get; set; }

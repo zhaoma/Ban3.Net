@@ -1,7 +1,7 @@
 ﻿namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response;
 
 public class CountedResult<T>
-    : BaseResponse
+    : BoolResponse
 {
     public int Count { get; set; }
 
