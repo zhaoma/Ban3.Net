@@ -2,7 +2,7 @@
 
 /// <summary>
 /// Defaults to OneLevel.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get?view=azure-devops-server-rest-6.0&tabs=HTTP#versioncontrolrecursiontype
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get?view=azure-devops-server-rest-6.0#versioncontrolrecursiontype
 /// </summary>
 public enum VersionControlRecursionType
 {

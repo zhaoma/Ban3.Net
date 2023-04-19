@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
 /// Metadata for a shallow shelveset.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/shelvesets/list?view=azure-devops-rest-7.0&tabs=HTTP#tfvcshelvesetref
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/shelvesets/list?view=azure-devops-rest-7.0#tfvcshelvesetref
 /// </summary>
 public class TfvcShelvesetRef
 {

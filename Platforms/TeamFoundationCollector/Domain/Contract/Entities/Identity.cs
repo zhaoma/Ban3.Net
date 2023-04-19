@@ -3,7 +3,7 @@
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/ims/identities/read-identities?view=azure-devops-rest-7.0&tabs=HTTP#identity
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/ims/identities/read-identities?view=azure-devops-rest-7.0#identity
 /// </summary>
 public class Identity
 {

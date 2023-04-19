@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
 /// This is the shallow branchref class.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/branches/get?view=azure-devops-server-rest-6.0&tabs=HTTP#tfvcshallowbranchref
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/branches/get?view=azure-devops-server-rest-6.0#tfvcshallowbranchref
 /// </summary>
 public class TfvcShallowBranchRef
 {

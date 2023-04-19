@@ -2,7 +2,7 @@
 
 /// <summary>
 /// Defaults to None.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get?view=azure-devops-server-rest-6.0&tabs=HTTP#tfvcversionoption
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get?view=azure-devops-server-rest-6.0#tfvcversionoption
 /// </summary>
 public enum TfvcVersionOption
 {

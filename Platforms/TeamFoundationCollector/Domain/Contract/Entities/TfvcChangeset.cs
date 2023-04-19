@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
 /// A collection of changes.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/get?view=azure-devops-rest-7.0&tabs=HTTP#tfvcchangeset
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/get?view=azure-devops-rest-7.0#tfvcchangeset
 /// </summary>
 public class TfvcChangeset
     : TfvcChangesetRef

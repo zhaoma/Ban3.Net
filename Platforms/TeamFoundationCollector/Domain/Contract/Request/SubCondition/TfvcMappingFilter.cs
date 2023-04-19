@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCond
 
 /// <summary>
 /// MappingFilter can be used to include or exclude specific paths.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/get?view=azure-devops-rest-7.0&tabs=HTTP#tfvcmappingfilter
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/get?view=azure-devops-rest-7.0#tfvcmappingfilter
 /// </summary>
 public class TfvcMappingFilter
 {

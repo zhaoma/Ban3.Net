@@ -6,7 +6,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 
 /// <summary>
 /// Get changes included in a shelveset.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/shelvesets/get-shelveset-changes?view=azure-devops-rest-7.0&tabs=HTTP
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/shelvesets/get-shelveset-changes?view=azure-devops-rest-7.0
 /// </summary>
 public class GetShelvesetChanges
     : PresetRequest, IRequest

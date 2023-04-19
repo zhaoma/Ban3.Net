@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
 {
     /// <summary>
     /// Get a single branch hierarchy at the given path with parents or children as specified.
-    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/branches/get?view=azure-devops-rest-7.0&tabs=HTTP
+    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/branches/get?view=azure-devops-rest-7.0
     /// </summary>
     public class GetBranch
         : PresetRequest,IRequest

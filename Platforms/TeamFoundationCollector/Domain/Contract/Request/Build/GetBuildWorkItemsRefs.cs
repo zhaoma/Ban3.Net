@@ -1,6 +1,5 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Newtonsoft.Json;
-using System;
 using System.Text;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build

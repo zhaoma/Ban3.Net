@@ -6,7 +6,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
 {
     /// <summary>
     /// Get a list of all teams.
-    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/get-all-teams?view=azure-devops-rest-7.0&tabs=HTTP
+    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/get-all-teams?view=azure-devops-rest-7.0
     /// </summary>
     public class GetTeams
         : PresetRequest, IRequest
@@ -38,7 +38,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
         {
             var sb = new StringBuilder();
 
-            sb.Append($"?");
+            sb.Append("?");
 
             if (Skip != null)
                 sb.Append($"$skip={Skip}&");

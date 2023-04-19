@@ -10,7 +10,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
     /// Get Item Metadata and/or Content for a single item.
     /// The download parameter is to indicate whether the content should be available as a download or just sent as a stream in the response.
     /// Doesn't apply to zipped content which is always returned as a download.
-    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get?view=azure-devops-rest-7.0&tabs=HTTP
+    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get?view=azure-devops-rest-7.0
     /// </summary>
     public class GetItem
         : PresetRequest, IRequest

@@ -39,5 +39,5 @@ public class VariableGroup
     public string Type { get; set; } = string.Empty;
     
     [JsonProperty("variables")]
-    public Dictionary<string,BuildDefinitionVariable> Variables { get; set; }
+    public Dictionary<string,BuildDefinitionVariable>? Variables { get; set; }
 }

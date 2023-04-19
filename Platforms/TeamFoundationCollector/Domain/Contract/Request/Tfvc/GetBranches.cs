@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 
 /// <summary>
 /// Get a collection of branch roots -- first-level children, branches with no parents.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/branches/get-branches?view=azure-devops-rest-7.0&tabs=HTTP
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/branches/get-branches?view=azure-devops-rest-7.0
 /// </summary>
 public class GetBranches
     : PresetRequest, IRequest

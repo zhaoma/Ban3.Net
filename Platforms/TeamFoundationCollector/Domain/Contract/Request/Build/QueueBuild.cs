@@ -34,7 +34,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
         {
             var sb = new StringBuilder();
 
-            sb.Append($"?");
+            sb.Append("?");
 
             if(!string.IsNullOrEmpty(CheckInTicket))
                 sb.Append($"checkInTicket={CheckInTicket}&");

@@ -5,7 +5,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
 /// Item path and Version descriptor properties
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get-items-batch?view=azure-devops-rest-7.0&tabs=HTTP#tfvcitemdescriptor
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/get-items-batch?view=azure-devops-rest-7.0#tfvcitemdescriptor
 /// </summary>
 public class TfvcItemDescriptor
 {

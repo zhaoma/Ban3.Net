@@ -15,15 +15,15 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract
 
         static Config()
         {
-            Console.WriteLine("load config");
-
             var cfg = Infrastructures.Common.Config.AppConfiguration;
+
             Target = new Target
             {
                 HostBaseUrl= cfg["Target:HostBaseUrl"] + "",
                 Instance =cfg["Target:Instance"]+"",
                 Organization = cfg["Target:Organization"] + "",
                 Project = cfg["Target:Project"] + "",
+                AuthenticationType = cfg["Target:AuthenticationType"] + "",
                 UserName = cfg["Target:UserName"] + "",
                 Password = cfg["Target:Password"] + "",
                 ApiVersion = cfg["Target:ApiVersion"] + ""
@@ -31,7 +31,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract
 
             Host = new TargetHost
             {
-                AuthenticationType = "NTLM",
+                AuthenticationType = Target.AuthenticationType,
                 BaseUrl = Target.HostBaseUrl,
                 UserName = Target.UserName,
                 Password = Target.Password,

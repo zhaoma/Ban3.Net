@@ -3,7 +3,7 @@
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/get?view=azure-devops-rest-7.0&tabs=HTTP#webapiteam
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/get?view=azure-devops-rest-7.0#webapiteam
 /// </summary>
 public class WebApiTeam
 {

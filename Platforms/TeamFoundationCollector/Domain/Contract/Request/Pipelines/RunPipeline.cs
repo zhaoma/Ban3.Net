@@ -1,7 +1,6 @@
-﻿using Ban3.Infrastructures.NetHttp.Request;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Newtonsoft.Json;
-using System;
+
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelines
 {
     /// <summary>

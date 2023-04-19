@@ -24,7 +24,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
             var sb = new StringBuilder();
 
-            sb.Append($"?");
+            sb.Append("?");
 
             if (Top != null)
                 sb.Append($"$top={Top}&");

@@ -1,6 +1,5 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Newtonsoft.Json;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
 {
@@ -11,7 +10,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
     /// Invalid team name or description                                    400
     /// Team already exists                                                                  400
     /// Insufficient privileges                                                             400
-    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/create?view=azure-devops-rest-7.0&tabs=HTTP
+    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/create?view=azure-devops-rest-7.0
     /// </summary>
     public class CreateTeam
         : PresetRequest, IRequest

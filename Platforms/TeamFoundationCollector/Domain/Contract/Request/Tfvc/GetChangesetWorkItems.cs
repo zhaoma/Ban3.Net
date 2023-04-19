@@ -5,7 +5,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 
 /// <summary>
 /// Retrieves the work items associated with a particular changeset.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/get-changeset-work-items?view=azure-devops-rest-7.0&tabs=HTTP
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/get-changeset-work-items?view=azure-devops-rest-7.0
 /// </summary>
 public class GetChangesetWorkItems
     : PresetRequest, IRequest

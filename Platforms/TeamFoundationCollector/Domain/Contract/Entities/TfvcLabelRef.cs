@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
 /// Metadata for a Label.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/labels/list?view=azure-devops-rest-7.0&tabs=HTTP#tfvclabelref
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/labels/list?view=azure-devops-rest-7.0#tfvclabelref
 /// </summary>
 public class TfvcLabelRef
 {

@@ -7,12 +7,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Artifac
         : PresetRequest, IRequest
     {
         public string Method { get; set; } = "Delete";
-
-        /// <summary>
-        /// Version of the API to use. This should be set to '7.0' to use this version of the api.
-        /// </summary>
-        public string ApiVersion { get; set; } = "7.0-preview.1";
-
+        
         [JsonProperty("artifactId")] 
         public string ArtifactId { get; set; } = string.Empty;
 

@@ -8,7 +8,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 /// <summary>
 /// Retrieve Tfvc Changesets
 /// Note: This is a new version of the GetChangesets API that doesn't expose the unneeded queryParams present in the 1.0 version of the API.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/get-changesets?view=azure-devops-rest-7.0&tabs=HTTP
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/get-changesets?view=azure-devops-rest-7.0
 /// </summary>
 public class GetChangesets
     : PresetRequest, IRequest

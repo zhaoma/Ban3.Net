@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
 /// Metadata for a branchref.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/branches/get-branch-refs?view=azure-devops-rest-7.0&tabs=HTTP#tfvcbranchref
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/branches/get-branch-refs?view=azure-devops-rest-7.0#tfvcbranchref
 /// </summary>
 public class TfvcBranchRef
 {

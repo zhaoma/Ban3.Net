@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
 /// <summary>
 /// Metadata for an item.
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/list?view=azure-devops-rest-7.0&tabs=HTTP#tfvcitem
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/items/list?view=azure-devops-rest-7.0#tfvcitem
 /// </summary>
 public class TfvcItem
 {

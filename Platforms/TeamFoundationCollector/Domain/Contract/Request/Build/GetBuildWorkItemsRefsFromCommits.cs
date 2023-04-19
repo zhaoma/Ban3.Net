@@ -1,8 +1,6 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Newtonsoft.Json;
-using System;
 using System.Text;
-using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 {
@@ -22,7 +20,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
         public int? Top { get; set; }
 
         [JsonProperty("body")]
-        public List<string> Body { get; set; }
+        public List<string>? Body { get; set; }
 
         public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/builds/{BuildId}/workitems";
 
@@ -37,7 +35,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             return sb.ToString();
         }
 
-        public string RequestBody() => Body.ObjToJson();
+        public string RequestBody() => JsonConvert.SerializeObject(Body);
     }
 }
 

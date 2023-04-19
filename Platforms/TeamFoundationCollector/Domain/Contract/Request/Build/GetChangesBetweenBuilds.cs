@@ -37,7 +37,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
         {
             var sb = new StringBuilder();
 
-            sb.Append($"?");
+            sb.Append("?");
 
             if (FromBuildId != null)
                 sb.Append($"fromBuildId={FromBuildId}&");

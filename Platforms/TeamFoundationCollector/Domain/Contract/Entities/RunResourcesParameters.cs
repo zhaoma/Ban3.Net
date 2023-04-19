@@ -5,19 +5,19 @@
 /// </summary>
 public class RunResourcesParameters
 {
-    public Dictionary<string, BuildResourceParameters> Builds { get; set; }
+    public Dictionary<string, BuildResourceParameters>? Builds { get; set; }
 
 
-    public Dictionary<string, ContainerResourceParameters> Containers { get; set; }
+    public Dictionary<string, ContainerResourceParameters>? Containers { get; set; }
 
 
-    public Dictionary<string, PackageResourceParameters> Packages { get; set; }
+    public Dictionary<string, PackageResourceParameters>? Packages { get; set; }
 
 
-    public Dictionary<string, PipelineResourceParameters> Pipelines { get; set; }
+    public Dictionary<string, PipelineResourceParameters>? Pipelines { get; set; }
 
 
-    public Dictionary<string, RepositoryResourceParameters> Repositories { get; set; }
+    public Dictionary<string, RepositoryResourceParameters>? Repositories { get; set; }
 
 
 }

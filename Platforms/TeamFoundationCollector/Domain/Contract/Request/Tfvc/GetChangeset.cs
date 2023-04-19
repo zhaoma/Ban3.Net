@@ -82,8 +82,7 @@ public class GetChangeset
     public SearchCriteria? SearchCriteria { get; set; }
 
     public TfvcMappingFilter? MappingFilter { get; set; }
-
-
+    
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/changesets/{Id}";
 
     public string RequestQuery()

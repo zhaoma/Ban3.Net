@@ -6,7 +6,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 /// <summary>
 /// Create a new changeset.
 /// Accepts TfvcChangeset as JSON body
-/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/create?view=azure-devops-rest-7.0&tabs=HTTP
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/tfvc/changesets/create?view=azure-devops-rest-7.0
 /// </summary>
 public class CreateChangeset
     : PresetRequest, IRequest

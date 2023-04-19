@@ -40,11 +40,11 @@ public class GetShelvesetRequestData
     /// Shelveset name
     /// </summary>
     [JsonProperty("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// Owner's ID. Could be a name or a guid.
     /// </summary>
     [JsonProperty("owner")]
-    public string Owner { get; set; }
+    public string Owner { get; set; } = string.Empty;
 }

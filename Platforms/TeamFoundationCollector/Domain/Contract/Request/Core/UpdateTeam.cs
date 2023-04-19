@@ -5,7 +5,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
 {
     /// <summary>
     /// Update a team's name and/or description.
-    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/update?view=azure-devops-rest-7.0&tabs=HTTP
+    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/update?view=azure-devops-rest-7.0
     /// </summary>
     public class UpdateTeam
         : PresetRequest, IRequest

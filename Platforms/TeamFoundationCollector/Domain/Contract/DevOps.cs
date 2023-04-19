@@ -1,12 +1,24 @@
-﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
 
-public static class DevOps
+public class DevOps
 {
-    public static IBuilds Builds;
-    
+    static DevOps()
+    {
+        //check server status
+        if (string.IsNullOrEmpty(Config.Host.BaseUrl))
+            throw new Exception("plz init appSettings.json first.");
+    }
+
+    public static IReportService Report;
+
+    public static IBuild Build;
+
+    public static ICore Core;
+
     public static IPipelines Pipelines;
 
-
+    public static ITfvc Tfvc;
 }

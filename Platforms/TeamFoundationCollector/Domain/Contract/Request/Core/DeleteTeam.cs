@@ -5,7 +5,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
 {
     /// <summary>
     /// Delete a team.
-    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/delete?view=azure-devops-rest-7.0&tabs=HTTP
+    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/core/teams/delete?view=azure-devops-rest-7.0
     /// </summary>
     public class DeleteTeam
         : PresetRequest, IRequest

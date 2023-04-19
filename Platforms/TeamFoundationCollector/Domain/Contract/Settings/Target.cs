@@ -13,6 +13,8 @@ public class Target
 
     public string Project { get; set; } = string.Empty;
 
+    public string AuthenticationType { get; set; } = string.Empty;
+
     public string UserName { get; set; } = string.Empty;
 
     public string Password { get; set; } = string.Empty;

@@ -10,7 +10,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class ListControllers
         : PresetRequest, IRequest
     {
-
         public string Method { get; set; } = "Get";
 
         [JsonProperty("name")] 
