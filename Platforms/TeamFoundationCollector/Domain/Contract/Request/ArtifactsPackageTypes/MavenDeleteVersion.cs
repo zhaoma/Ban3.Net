@@ -1,7 +1,7 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Newtonsoft.Json;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.ArtifactsPackage
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.ArtifactsPackageTypes
 {
     public class MavenDeleteVersion
         : PresetRequest, IRequest
