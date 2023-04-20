@@ -17,6 +17,8 @@
     <Folder Include="Request\Dashboard\" />
     <Folder Include="Request\SubCondition\" />
     <Folder Include="Request\Pipelines\" />
+    <Folder Include="Request\WorkItemTracking\" />
+    <Folder Include="Request\WorkItemTrackingProcess\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,5 +33,7 @@
   <ItemGroup>
     <None Remove="Request\Pipelines\" />
     <None Remove="Interfaces\Functions\" />
+    <None Remove="Request\WorkItemTracking\" />
+    <None Remove="Request\WorkItemTrackingProcess\" />
   </ItemGroup>
 </Project>

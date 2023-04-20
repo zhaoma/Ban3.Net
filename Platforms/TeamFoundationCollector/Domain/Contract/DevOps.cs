@@ -22,3 +22,7 @@ public class DevOps
 
     public static ITfvc Tfvc;
 }
+
+public record Types { 
+Dictionary<string,Dictionary<string,int>> Dics { get; set; }
+}
