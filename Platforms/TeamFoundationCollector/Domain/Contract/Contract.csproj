@@ -19,6 +19,9 @@
     <Folder Include="Request\Pipelines\" />
     <Folder Include="Request\WorkItemTracking\" />
     <Folder Include="Request\WorkItemTrackingProcess\" />
+    <Folder Include="Request\Discussion\" />
+    <Folder Include="Response\Discussion\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,5 +38,8 @@
     <None Remove="Interfaces\Functions\" />
     <None Remove="Request\WorkItemTracking\" />
     <None Remove="Request\WorkItemTrackingProcess\" />
+    <None Remove="Request\Discussion\" />
+    <None Remove="Response\Discussion\" />
+    <None Remove="Models\" />
   </ItemGroup>
 </Project>

@@ -1563,12 +1563,11 @@
       ]
     },
     "runtime.native.System.Net.Http/4.3.0": {
-      "sha512": "ZVuZJqnnegJhd2k/PtAbbIcZ3aZeITq3sj06oKfMBSfphW3HDmk/t4ObvbOk/JA/swGR0LNqMksAh/f7gpTROg==",
+      "sha512": "guqHgQOK2eUgtJae2VKjNawBn1xjC0hfOt5wASHa60XHbIdCsQlqtvMsFG+3hy7yp88V+gi9fZCjubuDkeakcQ==",
       "type": "package",
       "path": "runtime.native.system.net.http/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -1633,12 +1632,11 @@
       ]
     },
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {
-      "sha512": "kVXCuMTrTlxq4XOOMAysuNwsXWpYeboGddNGpIgNSZmv1b6r/s/DPk0fYMB7Q5Qo4bY68o48jt4T4y5BVecbCQ==",
+      "sha512": "Kh9W4agE0r/hK8AX1LvyQI2NrKHBL8pO0gRoDTdDb0LL6Ta1Z2OtFx3lOaAE0ZpCUc/dt9Wzs3rA7a3IsKdOVA==",
       "type": "package",
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512",
@@ -3852,40 +3850,37 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/zhaoma/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Application\\CollectAndReport\\CollectAndReport.csproj",
+      "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Application/CollectAndReport/CollectAndReport.csproj",
       "projectName": "CollectAndReport",
-      "projectPath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Application\\CollectAndReport\\CollectAndReport.csproj",
-      "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-      "outputPath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Application\\CollectAndReport\\obj\\",
+      "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Application/CollectAndReport/CollectAndReport.csproj",
+      "packagesPath": "/Users/zhaoma/.nuget/packages/",
+      "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Application/CollectAndReport/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
+        "/usr/local/share/dotnet/library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\Contract.csproj": {
-              "projectPath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\Contract.csproj"
+            "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Domain/Contract/Contract.csproj": {
+              "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Domain/Contract/Contract.csproj"
             }
           }
         }
@@ -3915,7 +3910,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
       }
     }
   }

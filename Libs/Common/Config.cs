@@ -33,17 +33,15 @@ namespace Ban3.Infrastructures.Common
             AppConfiguration = new ConfigurationBuilder()
                 .AddJsonFile("appSettings.json", false, true)
                 .Build();
-        }
-        
-        /// <summary>
-        /// 默认配置(文件保存用)
-        /// </summary>
-        public static string FilesStorageRootPath => AppConfiguration["FilesStorage:RootPath"]+"";
 
-        /// <summary>
-        /// web访问根目录
-        /// </summary>
-        public static string FilesStorageRootUrl => AppConfiguration["FilesStorage:RootUrl"]+""; 
+            LocalStorage = new Models.LocalStorage
+            {
+                RootPath = AppConfiguration["FilesStorage:RootPath"] + "",
+                RootUrl = AppConfiguration["FilesStorage:RootUrl"] + ""
+            };
+        }
+
+        public static Models.LocalStorage LocalStorage { get; set; }
     }
 
 
