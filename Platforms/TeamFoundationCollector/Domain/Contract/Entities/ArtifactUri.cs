@@ -1,11 +1,15 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
 	public class ArtifactUri
     {
+        public ArtifactUri()
+        {
+            NeedUrlEncode = true;
+        }
+
 		public ArtifactUri(int changesetId)
 		{
 			Type = ArtifactType.Changeset;

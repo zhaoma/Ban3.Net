@@ -145,16 +145,6 @@
             静态构造
             </summary>
         </member>
-        <member name="P:Ban3.Infrastructures.Common.Config.FilesStorageRootPath">
-            <summary>
-            默认配置(文件保存用)
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Config.FilesStorageRootUrl">
-            <summary>
-            web访问根目录
-            </summary>
-        </member>
         <member name="T:Ban3.Infrastructures.Common.DataHandle`1">
             <summary>
             

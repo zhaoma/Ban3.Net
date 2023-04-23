@@ -9,11 +9,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
     {
         public string Method { get; set; } = "Get";
 
-        public string Id { get; set; } = string.Empty;
+        public string Descriptor { get; set; } = string.Empty;
 
-        public string RequestPath() => $"{Instance}/{Organization}/{Project}/_api/_common/identityImage";
+        public string RequestPath() => $"{Instance}/{Organization}/_apis/GraphProfile/MemberAvatars/{Descriptor}";
 
-        public string RequestQuery() => $"?id={Id}&api-version={ApiVersion}";
+        public string RequestQuery() => string.Empty; //$"?id={Id}&api-version={ApiVersion}";
 
         public string RequestBody() => string.Empty;
     }

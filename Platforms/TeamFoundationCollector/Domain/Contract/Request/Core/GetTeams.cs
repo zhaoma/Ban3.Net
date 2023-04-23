@@ -30,8 +30,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
 
         public string RequestPath() =>
             string.IsNullOrEmpty(ProjectId)
-                ? $"{Instance}/{Organization}/_apis/projects/{ProjectId}/teams"
-                : $"{Instance}/{Organization}/_apis/teams";
+                ? $"{Instance}/{Organization}/_apis/teams"
+                : $"{Instance}/{Organization}/_apis/projects/{ProjectId}/teams";
 
 
         public string RequestQuery()
@@ -50,7 +50,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
             if (Mine != null)
                 sb.Append($"$mine={Mine}&");
 
-            sb.Append($"api-version={ApiVersion}");
+            //sb.Append($"api-version={ApiVersion}");
             return sb.ToString();
         }
 

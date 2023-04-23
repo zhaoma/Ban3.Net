@@ -50,15 +50,22 @@ namespace Ban3.Infrastructures.Common.Extensions
                 Task.WaitAll(tasks.ToArray());
             }
         }
-
-
-
-        public static void Times(this int count, Action action)
+        
+        public static void TimesParallel(this int count, Action action)
         {
             Enumerable.Range(1, count)
                 .AsParallel()
                 .ForAll(
                  _=>   action());
+        }
+
+
+        public static void Times(this int count, Action action)
+        {
+            Enumerable.Range(1, count)
+                .ToList()
+                .ForEach(
+                    _ => action());
         }
     }
 }

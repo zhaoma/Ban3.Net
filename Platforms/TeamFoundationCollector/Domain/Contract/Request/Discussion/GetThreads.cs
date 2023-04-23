@@ -11,7 +11,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Discuss
 
         public ArtifactUri? Uri { get; set; }
 
-        public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/discussion/threads";
+        public string RequestPath() => $"{Instance}/{Organization}/_apis/discussion/threads";
 
         public string RequestQuery() => $"?artifactUri={Uri?.ToString()}&api-version={ApiVersion}";
 

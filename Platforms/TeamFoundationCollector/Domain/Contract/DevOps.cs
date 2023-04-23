@@ -18,11 +18,9 @@ public class DevOps
 
     public static ICore Core;
 
+    public static IDiscussion Discussion;
+
     public static IPipelines Pipelines;
 
     public static ITfvc Tfvc;
-}
-
-public record Types { 
-Dictionary<string,Dictionary<string,int>> Dics { get; set; }
 }

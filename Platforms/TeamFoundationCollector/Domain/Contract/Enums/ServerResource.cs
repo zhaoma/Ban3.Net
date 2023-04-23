@@ -93,13 +93,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
 
         CoreProjectsUpdate,
 
-        CoreTeamsCreate,
-        CoreTeamsDelete,
-        CoreTeamsGet,
-        CoreTeamsList,
-        CoreTeamsGetMembers,
-
-        Portrait,
+        CoreCreateTeam,
+        CoreDeleteTeam,
+        CoreGetPortrait,
+        CoreGetTeam,
+        CoreGetTeamMembers,
+        CoreGetTeams,
+        CoreUpdateTeam,
 
         /// <summary>
         /// GET https://{instance}/{collection}/{project}/_apis/tfvc/branches?path={path}&api-version=6.0
@@ -127,11 +127,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         [ResourceDeclare(typeof(Request.Tfvc.GetChangeset), typeof(Response.Tfvc.GetChangesetResult))]
         TfvcGetChangeset,
 
-        TfvcGetChangesetsChanges,
+        TfvcGetChangesetChanges,
 
         TfvcGetChangesets,
 
-        TfvcGetChangesetsWorkItems,
+        TfvcGetChangesetWorkItems,
         
         TfvcGetItem,
 

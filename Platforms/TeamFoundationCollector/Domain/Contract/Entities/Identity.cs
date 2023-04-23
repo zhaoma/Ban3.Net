@@ -38,7 +38,7 @@ public class Identity
     [JsonProperty("isContainer")]
     public bool IsContainer { get; set; }
 
-    [JsonProperty("descriptor")]
+    [JsonProperty("masterId")]
     public string MasterId { get; set; } = string.Empty;
 
     /// <summary>

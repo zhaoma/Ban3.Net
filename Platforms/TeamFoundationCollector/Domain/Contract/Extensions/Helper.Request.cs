@@ -22,12 +22,12 @@ public static partial class Helper
         };
     }
 
-    public static T Execute<T>(this Enums.ServerResource resource, IRequest request)
+    public static async Task<T> Execute<T>(this Enums.ServerResource resource, IRequest request)
         where T : IResponse
     {
         var responseMessage = Config.Host.Request(request.Resource());
-        var content = responseMessage.Content.ReadAsStringAsync().Result;
-
+        var content =await responseMessage.Content.ReadAsStringAsync();
+        
         var result = content.JsonToObj<T>();
         result.Success = new[]
         {
@@ -36,6 +36,25 @@ public static partial class Helper
         }.Contains(responseMessage.StatusCode);
 
         return result;
+    }
+
+    public static async Task<string> Download(this Enums.ServerResource resource, IRequest request, string savePath)
+    {
+        var responseMessage = Config.Host.Request(request.Resource());
+
+        if (!new[]
+            {
+                HttpStatusCode.Accepted,
+                HttpStatusCode.OK
+            }.Contains(responseMessage.StatusCode))
+            return string.Empty;
+
+        var iputStream =await responseMessage.Content.ReadAsStreamAsync();
+
+        await using var fileStream = File.Create(savePath);
+        await iputStream.CopyToAsync(fileStream);
+
+        return savePath;
     }
 
     /*

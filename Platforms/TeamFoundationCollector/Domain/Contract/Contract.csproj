@@ -31,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Libs\Common\Common.csproj" />
     <ProjectReference Include="..\..\..\..\Libs\NetHttp\NetHttp.csproj" />
+    <ProjectReference Include="..\..\..\..\Libs\RuntimeCaching\RuntimeCaching.csproj" />
   </ItemGroup>
 
   <ItemGroup>

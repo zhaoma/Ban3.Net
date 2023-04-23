@@ -52,19 +52,19 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// 
         public static string DataPath(this string resource)
         {
-            var rootPath = Config.FilesStorageRootPath;
+            var rootPath = Config.LocalStorage.RootPath;
 
             if (string.IsNullOrEmpty(rootPath))
                 rootPath = Environment.CurrentDirectory;
 
             var fullPath = Path.Combine(rootPath, resource);
 
-            if (Directory.Exists(rootPath))
+            if (Directory.Exists(fullPath))
                 return fullPath;
 
             var fullPathSplit = resource.Split('\\');
 
-            var temp = "";
+            var temp = rootPath;
             foreach (var s in fullPathSplit)
             {
                 temp = string.IsNullOrEmpty(temp)

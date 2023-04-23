@@ -7,6 +7,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 /// </summary>
 public class IdentityRef
 {
+    [JsonProperty("portrait")]
+    public string Portrait { get; set; } = string.Empty;
 
     [JsonProperty("_links")] 
     public ReferenceLinks? Links { get; set; }

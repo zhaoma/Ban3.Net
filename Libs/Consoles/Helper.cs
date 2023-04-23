@@ -5,12 +5,7 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using Ban3.Infrastructures.Consoles.Entries;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Ban3.Infrastructures.Consoles.Enums;
 
 namespace Ban3.Infrastructures.Consoles
 {

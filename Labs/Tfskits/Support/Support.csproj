@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Common\Common.csproj" />
+    <ProjectReference Include="..\..\..\Libs\Consoles\Consoles.csproj" />
     <ProjectReference Include="..\..\..\Libs\NetHttp\NetHttp.csproj" />
     <ProjectReference Include="..\..\..\Platforms\TeamFoundationCollector\Domain\Contract\Contract.csproj" />
   </ItemGroup>

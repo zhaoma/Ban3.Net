@@ -31,20 +31,14 @@ public static partial class Helper
      *  GetShelvesetWorkItems
      */
 
-    public static CreateChangesetResult CreateChangeset(
-        this ITfvc _, 
-        CreateChangesetBody data)
-    {
-        var request = new CreateChangeset { Body = data };
-        return ServerResource.TfvcCreateChangeset.Execute<CreateChangesetResult>(request);
-    }
+    public static CreateChangesetResult CreateChangeset(this ITfvc _, CreateChangeset request)
+        => ServerResource.TfvcCreateChangeset.Execute<CreateChangesetResult>(request).Result;
 
-    public static GetBatchedChangesetsResult GetBatchedChangesets(
-        this ITfvc _, 
-        GetBatchedChangesets request)
-    {
-        return ServerResource.TfvcCreateChangeset.Execute<GetBatchedChangesetsResult>(request);
-    }
+    public static CreateChangesetResult CreateChangeset(this ITfvc _, CreateChangesetBody data)
+        => _.CreateChangeset(new CreateChangeset { Body = data });
+
+    public static GetBatchedChangesetsResult GetBatchedChangesets(this ITfvc _, GetBatchedChangesets request)
+        => ServerResource.TfvcCreateChangeset.Execute<GetBatchedChangesetsResult>(request).Result;
 
     public static GetBatchedChangesetsResult GetBatchedChangesets(
         this ITfvc _, 
@@ -63,13 +57,35 @@ public static partial class Helper
         });
     }
 
+    public static GetBatchedItemsResult GetBatchedChangesets(this ITfvc _, GetBatchedItems request)
+        => ServerResource.TfvcGetBatchedItems.Execute<GetBatchedItemsResult>(request).Result;
 
+    public static GetBranchesResult GetBranches(this ITfvc _, GetBranches request)
+        => ServerResource.TfvcGetBranches.Execute<GetBranchesResult>(request).Result;
+    
+    public static GetBranchRefsResult GetBranchRefs(this ITfvc _, GetBranchRefs request)
+        => ServerResource.TfvcGetBranchRefs.Execute<GetBranchRefsResult>(request).Result;
 
-    public static GetBranchesResult GetBranches(
-        this ITfvc _, 
-        GetBranches request)
-    {
-        return ServerResource.TfvcGetBranches.Execute<GetBranchesResult>(request);
-    }
+    public static GetBranchResult GetBranch(this ITfvc _, GetBranch request)
+        => ServerResource.TfvcGetBranch.Execute<GetBranchResult>(request).Result;
+
+    public static GetChangesetChangesResult GetChangesetChanges(this ITfvc _, GetChangesetChanges request)
+        => ServerResource.TfvcGetChangesetChanges.Execute<GetChangesetChangesResult>(request).Result;
+
+    public static GetChangesetResult GetChangeset(this ITfvc _, GetChangeset request)
+        => ServerResource.TfvcGetBranchRefs.Execute<GetChangesetResult>(request).Result;
+
+    public static GetChangesetsResult GetChangesets(this ITfvc _, GetChangesets request)
+        => ServerResource.TfvcGetChangesets.Execute<GetChangesetsResult>(request).Result;
+
+    public static GetChangesetWorkItemsResult GetChangesetWorkItems(this ITfvc _, GetChangesetWorkItems request)
+        => ServerResource.TfvcGetChangesetWorkItems.Execute<GetChangesetWorkItemsResult>(request).Result;
+    
+    public static GetItemResult GetItem(this ITfvc _, GetItem request)
+        => ServerResource.TfvcGetItem.Execute<GetItemResult>(request).Result;
+
+    public static GetItemsResult GetItems(this ITfvc _, GetItems request)
+        => ServerResource.TfvcGetItems.Execute<GetItemsResult>(request).Result;
+
 
 }
