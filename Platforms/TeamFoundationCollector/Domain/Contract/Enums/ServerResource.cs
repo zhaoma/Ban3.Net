@@ -77,20 +77,36 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
 
         BuildAuthorizedresources,
         
-        BuildsGet,
+        BuildCreateDefinition,
+        BuildDeleteBuild,
+        BuildDeleteDefinition,
+        BuildGetBuild,
+        BuildGetBuildChanges,
+        BuildGetBuildLog,
+        BuildGetBuildLogs,
+        BuildGetBuildWorkItemsRefsFromCommits,
+        BuildGetBuildWorkItemsRefs,
+        BuildGetChangesBetweenBuilds,
+        BuildGetController,
+        BuildGetDefinition,
+        BuildGetDefinitionRevisions,
+        BuildGetTimeline,
+        BuildGetWorkItemsBetweenBuilds,
+        BuildListBuilds,
+        BuildListControllers,
+        BuildListDefinitions,
+        BuildQueueBuild,
+        BuildRestoreDefinition,
+        BuildUpdateBuild,
+        BuildUpdateBuilds,
+        BuildUpdateDefinition,
 
-
-        
         CoreProjectsCreate,
         CoreProjectsDelete,
         CoreProjectsGet,
-
         CoreProjectsGetProperties,
-        
         CoreProjectsList,
-
         CoreProjectsSetProperties,
-
         CoreProjectsUpdate,
 
         CoreCreateTeam,
@@ -153,6 +169,17 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
 
         WIQL,
         ChangesetDiscussion,
-        ShelvesetDiscussion
+        ShelvesetDiscussion,
+
+        DiscussionGetThreads,
+
+        PipelinesCreatePipeline,
+        PipelinesGetLog,
+        PipelinesGetPipeline,
+        PipelinesGetRun,
+        PipelinesListLogs,
+        PipelinesListPipelines,
+        PipelinesListRuns,
+        PipelinesRunPipeline
     }
 }

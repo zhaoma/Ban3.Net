@@ -2,7 +2,7 @@
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Build;
 
-public class GetBuild
+public class GetBuildResult
 :Entities.Build,IResponse
 {
     public bool Success { get; set; }

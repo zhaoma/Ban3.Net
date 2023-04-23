@@ -42,5 +42,9 @@
     <None Remove="Request\Discussion\" />
     <None Remove="Response\Discussion\" />
     <None Remove="Models\" />
+    <None Remove="Extensions\Helper.Build" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\Helper.Build.cs" />
   </ItemGroup>
 </Project>

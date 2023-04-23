@@ -87,5 +87,24 @@ public static partial class Helper
     public static GetItemsResult GetItems(this ITfvc _, GetItems request)
         => ServerResource.TfvcGetItems.Execute<GetItemsResult>(request).Result;
 
+    public static GetLabelItemsResult  GetLabelItems(this ITfvc _, GetLabelItems request)
+        => ServerResource.TfvcGetItems.Execute<GetLabelItemsResult>(request).Result;
+    
+    public static GetLabelResult GetLabel(this ITfvc _, GetLabel request)
+        => ServerResource.TfvcGetItems.Execute<GetLabelResult>(request).Result;
+    
+    public static GetLabelsResult GetLabels(this ITfvc _, GetLabels request)
+        => ServerResource.TfvcGetItems.Execute<GetLabelsResult>(request).Result;
 
+    public static GetShelvesetChangesResult GetShelvesetChanges(this ITfvc _, GetShelvesetChanges request)
+        => ServerResource.TfvcGetItems.Execute<GetShelvesetChangesResult>(request).Result;
+    
+    public static GetShelvesetResult GetShelveset(this ITfvc _, GetShelveset request)
+        => ServerResource.TfvcGetItems.Execute<GetShelvesetResult>(request).Result;
+    
+    public static GetShelvesetsResult GetShelvesets(this ITfvc _, GetShelvesets request)
+        => ServerResource.TfvcGetItems.Execute<GetShelvesetsResult>(request).Result;
+    
+    public static GetShelvesetWorkItemsResult GetShelvesetWorkItems(this ITfvc _, GetShelvesetWorkItems request)
+        => ServerResource.TfvcGetItems.Execute<GetShelvesetWorkItemsResult>(request).Result;
 }
