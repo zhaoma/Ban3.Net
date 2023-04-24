@@ -1,7 +1,6 @@
-﻿
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces
+﻿namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
+
+public interface ICollectService
 {
-    public interface ICollectService
-    {
-    }
 }
+

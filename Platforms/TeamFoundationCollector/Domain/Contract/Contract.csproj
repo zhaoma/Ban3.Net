@@ -9,22 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Response\Core\" />
-    <Folder Include="Response\Pipelines\" />
-    <Folder Include="Settings\" />
-    <Folder Include="Request\Core\" />
-    <Folder Include="Request\Dashboard\" />
-    <Folder Include="Request\SubCondition\" />
-    <Folder Include="Request\Pipelines\" />
-    <Folder Include="Request\WorkItemTracking\" />
-    <Folder Include="Request\WorkItemTrackingProcess\" />
-    <Folder Include="Request\Discussion\" />
-    <Folder Include="Response\Discussion\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="log4net" Version="2.0.15" />
   </ItemGroup>
@@ -33,18 +17,8 @@
     <ProjectReference Include="..\..\..\..\Libs\NetHttp\NetHttp.csproj" />
     <ProjectReference Include="..\..\..\..\Libs\RuntimeCaching\RuntimeCaching.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Request\Pipelines\" />
-    <None Remove="Interfaces\Functions\" />
-    <None Remove="Request\WorkItemTracking\" />
-    <None Remove="Request\WorkItemTrackingProcess\" />
-    <None Remove="Request\Discussion\" />
-    <None Remove="Response\Discussion\" />
-    <None Remove="Models\" />
-    <None Remove="Extensions\Helper.Build" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Extensions\Helper.Build.cs" />
-  </ItemGroup>
 </Project>

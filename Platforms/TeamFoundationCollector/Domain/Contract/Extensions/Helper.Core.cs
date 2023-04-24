@@ -7,7 +7,6 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Core;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
-
 public static partial class Helper
 {
     public static CreateTeamResult CreateTeam(this ICore _, CreateTeam request)
@@ -34,7 +33,7 @@ public static partial class Helper
             Top = 1000
         });
 
-    public static GetPortraitResult GetPortrait(this ICore _,string id, GetPortrait request)
+    public static GetPortraitResult GetPortrait(this ICore _, string id, GetPortrait request)
     {
         var localStorage = Infrastructures.Common.Config.LocalStorage;
 
@@ -42,7 +41,7 @@ public static partial class Helper
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
 
-        var fileSaved=ServerResource.CoreGetPortrait.Download(request, Path.Combine(path, id+".png"));
+        var fileSaved = ServerResource.CoreGetPortrait.Download(request, Path.Combine(path, id + ".png"));
         var result = new GetPortraitResult
         {
             Success = !string.IsNullOrEmpty(fileSaved.Result)
@@ -57,39 +56,50 @@ public static partial class Helper
     public static GetPortraitResult GetPortrait(this ICore _, IdentityRef identityRef)
         => _.GetPortrait(identityRef.Id, new GetPortrait { Descriptor = identityRef.Descriptor });
 
-    public static void PrepareTeams(this ICore _, bool refreshPortrait = false)
+    public static bool PrepareTeams(this ICore _, bool refreshPortrait = false)
     {
-        var r = 1;
-        var teams = _.GetTeams(new GetTeams
+        try
         {
-            ExpandIdentity = false,
-            Top = 10000
-        });
+            var r = 1;
+            var teams = _.GetTeams(new GetTeams
+            {
+                ExpandIdentity = false,
+                Top = 10000
+            });
 
-        if (teams is { Success: true, Value: { } })
-        {
-            teams.Value
-                .AsParallel()
-                .WithDegreeOfParallelism(Environment.ProcessorCount / 2)
-                .ForAll(o =>
-                {
-                    Logger.Debug( $"parse {r}/{teams.Value.Count} : {o.Name}");
-                    var members = _.GetTeamMembers(o);
-                    if (!members.Success || members.Value == null) return;
+            if (teams is { Success: true, Value: { } })
+            {
+                teams.Value
+                    .AsParallel()
+                    .WithDegreeOfParallelism(Environment.ProcessorCount / 2)
+                    .ForAll(o =>
+                    {
+                        Logger.Debug($"parse {r}/{teams.Value.Count} : {o.Name}");
+                        var members = _.GetTeamMembers(o);
+                        if (!members.Success || members.Value == null) return;
 
-                    o.Members = members.Value;
-                    if(refreshPortrait)
-                        foreach (var teamMember in o.Members)
-                        {
-                            teamMember.Identity!.Portrait = _.GetPortrait(teamMember.Identity).SavedPath;
-                        }
+                        o.Members = members.Value;
+                        if (refreshPortrait)
+                            foreach (var teamMember in o.Members)
+                            {
+                                teamMember.Identity!.Portrait = _.GetPortrait(teamMember.Identity).SavedPath;
+                            }
 
-                    r++;
-                });
+                        r++;
+                    });
 
-            var file=teams.Value.SetsFile();
-            file.WriteFile(teams.Value.ObjToJson());
+                var file = teams.Value.SetsFile();
+                file.WriteFile(teams.Value.ObjToJson());
+            }
+
+            return true;
         }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+
+        return false;
     }
 
     public static List<WebApiTeam> LoadTeams(this ICore _)

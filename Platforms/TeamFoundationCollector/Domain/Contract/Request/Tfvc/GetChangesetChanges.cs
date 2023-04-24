@@ -40,7 +40,7 @@ public class GetChangesetChanges
     [JsonProperty("continuationToken")] 
     public string ContinuationToken { get; set; } = string.Empty;
     
-    public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/changesets/{Id}/changes";
+    public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/changesets/{Id}/changes";
 
     public string RequestQuery()
     {

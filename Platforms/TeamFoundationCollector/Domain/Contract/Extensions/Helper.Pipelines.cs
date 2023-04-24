@@ -1,5 +1,4 @@
-﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelines;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Pipelines;

@@ -1,5 +1,6 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
@@ -8,19 +9,19 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 /// </summary>
 public class TfvcChange
 {
-
     /// <summary>
     /// The type of change that was made to the item.
     /// Enums/VersionControlChangeType
     /// </summary>
     [JsonProperty("changeType")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public VersionControlChangeType ChangeType { get; set; }
 
     /// <summary>
     /// Current version.
     /// </summary>
     [JsonProperty("item")]
-    public string Item { get; set; } = string.Empty;
+    public TfvcChangeItem? Item { get; set; } 
 
     /// <summary>
     /// List of merge sources in case of rename or branch creation.

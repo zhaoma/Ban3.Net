@@ -18,7 +18,7 @@ public class GetChangesetWorkItems
     [JsonProperty("id")]
     public int Id { get; set; }
     
-    public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/changesets/{Id}/changes";
+    public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/changesets/{Id}/workItems";
 
     public string RequestQuery() => $"?api-version={ApiVersion}";
 

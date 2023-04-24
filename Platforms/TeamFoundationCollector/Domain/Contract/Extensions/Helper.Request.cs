@@ -27,7 +27,10 @@ public static partial class Helper
     {
         var responseMessage = Config.Host.Request(request.Resource());
         var content =await responseMessage.Content.ReadAsStringAsync();
-        
+
+        Logger.Debug(request.Resource().Url);
+        Logger.Debug(content);
+
         var result = content.JsonToObj<T>();
         result.Success = new[]
         {
@@ -38,9 +41,26 @@ public static partial class Helper
         return result;
     }
 
+    public static async Task<string> ReadHtml(this Enums.ServerResource resource, IRequest request)
+    {
+        var responseMessage = Config.Host.Request(request.Resource());
+        Logger.Debug(request.Resource().Url);
+
+        if (!new[]
+            {
+                HttpStatusCode.Accepted,
+                HttpStatusCode.OK
+            }.Contains(responseMessage.StatusCode))
+            return string.Empty;
+
+        return await responseMessage.Content.ReadAsStringAsync();
+    }
+
     public static async Task<string> Download(this Enums.ServerResource resource, IRequest request, string savePath)
     {
         var responseMessage = Config.Host.Request(request.Resource());
+        Logger.Debug(request.Resource().Url);
+        Logger.Debug(savePath);
 
         if (!new[]
             {

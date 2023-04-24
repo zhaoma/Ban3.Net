@@ -1,43 +1,39 @@
 ﻿using Ban3.Infrastructures.NetHttp.Entries;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
+
+/// <summary>
+/// load host config
+/// </summary>
+public class Config
 {
-    /// <summary>
-    /// load host config
-    /// </summary>
-    public class Config
+    public static Target Target { get; set; }
+
+    public static TargetHost Host { get; set; }
+
+    static Config()
     {
-        public static Target Target { get; set; }
+        var cfg = Infrastructures.Common.Config.AppConfiguration;
 
-        public static TargetHost Host { get; set; }
-
-        static Config()
+        Target = new Target
         {
-            var cfg = Infrastructures.Common.Config.AppConfiguration;
+            HostBaseUrl = cfg["Target:HostBaseUrl"] + "",
+            Instance = cfg["Target:Instance"] + "",
+            Organization = cfg["Target:Organization"] + "",
+            Project = cfg["Target:Project"] + "",
+            AuthenticationType = cfg["Target:AuthenticationType"] + "",
+            UserName = cfg["Target:UserName"] + "",
+            Password = cfg["Target:Password"] + "",
+            ApiVersion = cfg["Target:ApiVersion"] + ""
+        };
 
-            Target = new Target
-            {
-                HostBaseUrl= cfg["Target:HostBaseUrl"] + "",
-                Instance =cfg["Target:Instance"]+"",
-                Organization = cfg["Target:Organization"] + "",
-                Project = cfg["Target:Project"] + "",
-                AuthenticationType = cfg["Target:AuthenticationType"] + "",
-                UserName = cfg["Target:UserName"] + "",
-                Password = cfg["Target:Password"] + "",
-                ApiVersion = cfg["Target:ApiVersion"] + ""
-            };
-
-            Host = new TargetHost
-            {
-                AuthenticationType = Target.AuthenticationType,
-                BaseUrl = Target.HostBaseUrl,
-                UserName = Target.UserName,
-                Password = Target.Password,
-            };
-        }
-        
-
+        Host = new TargetHost
+        {
+            AuthenticationType = Target.AuthenticationType,
+            BaseUrl = Target.HostBaseUrl,
+            UserName = Target.UserName,
+            Password = Target.Password,
+        };
     }
 }

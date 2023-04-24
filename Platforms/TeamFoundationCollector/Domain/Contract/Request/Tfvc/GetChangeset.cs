@@ -46,34 +46,34 @@ public class GetChangeset
     /// Default: false
     /// </summary>
     [JsonProperty("includeDetails")]
-    public bool IncludeDetails { get; set; }
+    public bool IncludeDetails { get; set; } = true;
 
     /// <summary>
     /// Include renames.
     /// Default: false
     /// </summary>
     [JsonProperty("includeSourceRename")]
-    public bool IncludeSourceRename { get; set; }
+    public bool IncludeSourceRename { get; set; } = true;
 
     /// <summary>
     /// Include workitems.
     /// Default: false
     /// </summary>
     [JsonProperty("includeWorkItems")]
-    public bool IncludeWorkItems { get; set; }
+    public bool IncludeWorkItems { get; set; } = true;
 
     /// <summary>
     /// Number of changes to return (maximum 100 changes)
     /// Default: 0
     /// </summary>
     [JsonProperty("maxChangeCount")]
-    public int MaxChangeCount { get; set; }
+    public int MaxChangeCount { get; set; } = 100;
 
     /// <summary>
     /// Include details about associated work items in the response. Default: null
     /// </summary>
     [JsonProperty("maxCommentLength")]
-    public int? MaxCommentLength { get; set; }
+    public int? MaxCommentLength { get; set; } = 10000;
 
     /// <summary>
     /// 

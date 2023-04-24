@@ -1,8 +1,6 @@
-﻿
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces
-{
-    public interface IReportService
-    {
+﻿namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 
-    }
+public interface IReportService
+{
+
 }

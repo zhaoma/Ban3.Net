@@ -39,13 +39,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
         /// </summary>
         public bool IncludeContent { get; set; }
 
-        public VersionControlRecursionType RecursionLevel { get; set; }
+        public VersionControlRecursionType RecursionLevel { get; set; }= VersionControlRecursionType.None;
 
         public string ScopePath { get; set; } = string.Empty;
 
         public SubCondition.VersionDescriptor? VersionDescriptor { get; set; }
         
-        public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/items";
+        public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/items";
 
         public string RequestQuery()
         {

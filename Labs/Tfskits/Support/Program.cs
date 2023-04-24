@@ -10,10 +10,64 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
 
 var now = DateTime.Now;
+ DevOps.Tfvc.PrepareChangesets(710);
+
+
+
+//changesets.ObjToJson().WriteSuccessLine();
+
+
+//var wi = DevOps.Tfvc.GetChangesetWorkItems(new GetChangesetWorkItems { Id = changesetId });
+//wi.ObjToJson().WriteSuccessLine();
+
+//var cc = DevOps.Tfvc.GetChangesetChanges(new GetChangesetChanges { Id = changesetId });
+//cc.ObjToJson().WriteSuccessLine();
+
+/*
+var changesets = DevOps.Tfvc.GetChangesets(
+    new GetChangesets
+    {
+        MaxCommentLength = 10000,
+        SearchCriteria = new SearchCriteria
+        {
+            FromDate = now.AddDays(-1).ToString("yyyy-MM-dd"),
+            ToDate = now.AddDays(1).ToString("yyyy-MM-dd"),
+            IncludeLinks = true
+        }
+    }
+);
+
+changesets.ObjToJson().WriteSuccessLine();
+var changesetId = 411825;
+var c = DevOps.Tfvc.GetChangeset(changesetId);
+c.ObjToJson().WriteSuccessLine();
+
+Console.WriteLine();
+
+var item = c.Changes[0].Item;
+
+item.Path.WriteSuccessLine();
+
+var ti = DevOps.Tfvc.GetItem(new GetItem
+{
+    IncludeContent = false,
+    Path = item.Path
+});
+
+ti.ObjToJson().WriteSuccessLine();
+(DevOps.Tfvc.PrepareBranches() ? "Branches ready" : "Branches prepare failed.").WriteErrorLine();
+var branches = DevOps.Tfvc.GetBranches(new GetBranches());
+branches.ObjToJson().WriteSuccessLine();
+
+foreach (var branch in branches?.Value.OrderBy(o=>o.Path))
+{
+    $"{branch.Path}--{branch.Owner?.DisplayName}".WriteColorLine(ConsoleColor.DarkMagenta);
+}
 
 10.Times(
     () =>
@@ -25,8 +79,6 @@ var now = DateTime.Now;
         now = DateTime.Now;
     }
 );
-/*
-
 var teams=DevOps.Core.GetTeams(new GetTeams
 {
     ExpandIdentity = false,

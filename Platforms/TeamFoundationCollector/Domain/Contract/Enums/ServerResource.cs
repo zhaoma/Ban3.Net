@@ -155,17 +155,17 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
 
         TfvcGetLabel,
 
-        TfvcGetLabelsItems,
+        TfvcGetLabelItems,
 
         TfvcGetLabels,
 
         TfvcGetShelveset,
 
-        TfvcGetShelvesetsChanges,
+        TfvcGetShelvesetChanges,
         
         TfvcGetShelvesets,
 
-        TfvcGetShelvesetsWorkItems,
+        TfvcGetShelvesetWorkItems,
 
         WIQL,
         ChangesetDiscussion,
