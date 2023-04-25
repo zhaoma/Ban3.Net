@@ -21,6 +21,9 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         [JsonProperty("comments")]
         public List<DiscussionComment>? Comments { get; set; }
 
+        [JsonProperty("properties")]
+        public Dictionary<string,TypeAndValue>? Properties { get; set; }
+
         [JsonProperty("commentsCount")]
         public int CommentsCount { get; set; }
 

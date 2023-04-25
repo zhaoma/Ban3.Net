@@ -30,10 +30,8 @@ D:/GIT/Ban3.Net/Labs/Tfskits/Support/obj/Debug/net6.0/Support.AssemblyInfo.cs
 D:/GIT/Ban3.Net/Labs/Tfskits/Support/obj/Debug/net6.0/Support.csproj.CoreCompileInputs.cache
 D:/GIT/Ban3.Net/Labs/Tfskits/Support/obj/Debug/net6.0/Support.csproj.CopyComplete
 D:/GIT/Ban3.Net/Labs/Tfskits/Support/obj/Debug/net6.0/Support.dll
-D:/GIT/Ban3.Net/Labs/Tfskits/Support/obj/Debug/net6.0/refint/Support.dll
 D:/GIT/Ban3.Net/Labs/Tfskits/Support/obj/Debug/net6.0/Support.pdb
 D:/GIT/Ban3.Net/Labs/Tfskits/Support/obj/Debug/net6.0/Support.genruntimeconfig.cache
-D:/GIT/Ban3.Net/Labs/Tfskits/Support/obj/Debug/net6.0/ref/Support.dll
 /Users/zhaoma/Projects/Ban3.Net/Labs/Tfskits/Support/bin/Debug/net6.0/Support
 /Users/zhaoma/Projects/Ban3.Net/Labs/Tfskits/Support/bin/Debug/net6.0/Support.deps.json
 /Users/zhaoma/Projects/Ban3.Net/Labs/Tfskits/Support/bin/Debug/net6.0/Support.runtimeconfig.json
@@ -58,7 +56,6 @@ D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\Support.AssemblyInfoInputs
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\Support.AssemblyInfo.cs
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\Support.csproj.CoreCompileInputs.cache
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\Support.dll
-D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\refint\Support.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\Support.pdb
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Support.exe
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Support.deps.json
@@ -90,7 +87,6 @@ D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Infrastructures.NetHt
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Platforms.TeamFoundationCollector.Domain.Contract.pdb
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\Support.csproj.CopyComplete
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\Support.genruntimeconfig.cache
-D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\ref\Support.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\appSettings.json
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Infrastructures.Consoles.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Infrastructures.Consoles.pdb
@@ -105,3 +101,5 @@ D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\runtimes\win\lib\net6.0\Sy
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Libs.RuntimeCaching.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Libs.RuntimeCaching.pdb
+D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\refint\Support.dll
+D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\ref\Support.dll

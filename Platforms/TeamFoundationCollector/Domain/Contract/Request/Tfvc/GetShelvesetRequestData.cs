@@ -8,7 +8,7 @@ public class GetShelvesetRequestData
     /// Whether to include policyOverride and notes Only applies when requesting a single deep shelveset
     /// </summary>
     [JsonProperty("includeDetails")]
-    public bool IncludeDetails { get; set; }
+    public bool IncludeDetails { get; set; } = true;
 
     /// <summary>
     /// Whether to include the _links field on the shallow references.
@@ -16,25 +16,25 @@ public class GetShelvesetRequestData
     /// Links will always be included in the deep shelveset.
     /// </summary>
     [JsonProperty("includeLinks")]
-    public bool IncludeLinks { get; set; }
+    public bool IncludeLinks { get; set; } = true;
 
     /// <summary>
     /// Whether to include workItems
     /// </summary>
     [JsonProperty("includeWorkItems")]
-    public bool IncludeWorkItems { get; set; }
+    public bool IncludeWorkItems { get; set; } = true;
 
     /// <summary>
     /// Max number of changes to include
     /// </summary>
     [JsonProperty("maxChangeCount")]
-    public int MaxChangeCount { get; set; }
+    public int MaxChangeCount { get; set; } = 100;
 
     /// <summary>
     /// Max length of comment
     /// </summary>
     [JsonProperty("maxCommentLength")]
-    public int MaxCommentLength { get; set; }
+    public int MaxCommentLength { get; set; } = 10000;
 
     /// <summary>
     /// Shelveset name

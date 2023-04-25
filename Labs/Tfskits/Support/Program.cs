@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics.Contracts;
 using System.Diagnostics.Metrics;
+using System.Drawing.Text;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text.Json.Serialization;
+using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.NetHttp;
@@ -14,10 +16,31 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubConditio
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
 
-var now = DateTime.Now;
- DevOps.Tfvc.PrepareChangesets(710);
+
+var id = "be8e66c2-1a5d-42b2-b5ac-3db32fe25b84";
+
+var cs = DevOps.Tfvc.GetChangesets(id, 1, 1);
+cs.ObjToJson().WriteSuccessLine();
+
+var cd = DevOps.Discussion.GetThreads(cs.Value.FirstOrDefault().ChangesetId);
+cd.ObjToJson().WriteColorLine(ConsoleColor.Yellow);
+
+var ss = DevOps.Tfvc.GetShelvesets(id, 1, 2);
+ss.ObjToJson().WriteColorLine(ConsoleColor.DarkMagenta);
+
+var ssss = ss.Value.Last();
+
+var shelvesetId =ssss.Id;
+shelvesetId.WriteColorLine(ConsoleColor.Red);
+var shelvesetName = ssss.Name;
+shelvesetName.WriteColorLine(ConsoleColor.Green);
 
 
+var s = DevOps.Tfvc.GetShelveset(shelvesetId);
+s.ObjToJson().WriteSuccessLine();
+
+var sd = DevOps.Discussion.GetThreads(shelvesetName, id);
+sd.ObjToJson().WriteColorLine(ConsoleColor.DarkGreen);
 
 //changesets.ObjToJson().WriteSuccessLine();
 

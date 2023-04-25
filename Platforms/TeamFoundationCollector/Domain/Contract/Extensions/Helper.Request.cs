@@ -25,25 +25,26 @@ public static partial class Helper
     public static async Task<T> Execute<T>(this Enums.ServerResource resource, IRequest request)
         where T : IResponse
     {
-        var responseMessage = Config.Host.Request(request.Resource());
-        var content =await responseMessage.Content.ReadAsStringAsync();
-
+        var responseMessage =await Config.Host.Request(request.Resource());
+        var content = responseMessage.Content.ReadAsStringAsync();
+        Console.WriteLine(request.Resource().Url);
         Logger.Debug(request.Resource().Url);
         Logger.Debug(content);
 
-        var result = content.JsonToObj<T>();
+        var result = content.Result.JsonToObj<T>();
         result.Success = new[]
         {
             HttpStatusCode.Accepted,
             HttpStatusCode.OK
         }.Contains(responseMessage.StatusCode);
 
+        responseMessage.Dispose();
         return result;
     }
 
     public static async Task<string> ReadHtml(this Enums.ServerResource resource, IRequest request)
     {
-        var responseMessage = Config.Host.Request(request.Resource());
+        var responseMessage =await Config.Host.Request(request.Resource());
         Logger.Debug(request.Resource().Url);
 
         if (!new[]
@@ -53,12 +54,14 @@ public static partial class Helper
             }.Contains(responseMessage.StatusCode))
             return string.Empty;
 
-        return await responseMessage.Content.ReadAsStringAsync();
+        var result=await responseMessage.Content.ReadAsStringAsync();
+        responseMessage.Dispose();
+        return result;
     }
 
     public static async Task<string> Download(this Enums.ServerResource resource, IRequest request, string savePath)
     {
-        var responseMessage = Config.Host.Request(request.Resource());
+        var responseMessage =await Config.Host.Request(request.Resource());
         Logger.Debug(request.Resource().Url);
         Logger.Debug(savePath);
 
@@ -74,6 +77,7 @@ public static partial class Helper
         await using var fileStream = File.Create(savePath);
         await iputStream.CopyToAsync(fileStream);
 
+        responseMessage.Dispose();
         return savePath;
     }
 

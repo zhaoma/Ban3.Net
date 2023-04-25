@@ -7,16 +7,16 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 
 public static partial class Helper
 {
-    public static GetThreadsResult GetThreads(this IPipelines _, GetThreads request)
+    public static GetThreadsResult GetThreads(this IDiscussion _, GetThreads request)
         => ServerResource.DiscussionGetThreads.Execute<GetThreadsResult>(request).Result;
 
-    public static GetThreadsResult GetThreads(this IPipelines _, int changesetId)
+    public static GetThreadsResult GetThreads(this IDiscussion _, int changesetId)
         => _.GetThreads(new GetThreads
         {
             Uri = new Entities.ArtifactUri(changesetId)
         });
 
-    public static GetThreadsResult GetThreads(this IPipelines _, string shelvesetId, string shelvesetOwner)
+    public static GetThreadsResult GetThreads(this IDiscussion _, string shelvesetId, string shelvesetOwner)
         => _.GetThreads(new GetThreads
         {
             Uri = new Entities.ArtifactUri(shelvesetId, shelvesetOwner)

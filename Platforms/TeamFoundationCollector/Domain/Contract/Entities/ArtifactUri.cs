@@ -33,15 +33,17 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 		public bool NeedUrlEncode { get; set; }
 
 		public override string ToString()
-		{
-			var uri = $"vstfs:///VersionControl/{Type}/{Id}";
+        {
+            var query = Id;
 			if (!string.IsNullOrEmpty(Query))
-				uri += $"&{Query}";
+                query += $"&{Query}";
 
-			return NeedUrlEncode
-				? WebUtility.UrlEncode(uri)
-				: uri;
-		}
+            query = NeedUrlEncode
+                ? WebUtility.UrlEncode(query)
+                : query;
+			
+            return $"vstfs:///VersionControl/{Type}/{query}";
+        }
 	}
 }
 

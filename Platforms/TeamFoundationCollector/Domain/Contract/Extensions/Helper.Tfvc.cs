@@ -1,8 +1,8 @@
-﻿using Ban3.Infrastructures.Common.Extensions;
+﻿using Ban3.Infrastructures.Common.Attributes;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Libs.RuntimeCaching;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
@@ -112,12 +112,11 @@ public static partial class Helper
 
     public static GetChangesetResult GetChangeset(this ITfvc _, int changesetId)
         => _.GetChangeset(new GetChangeset { Id = changesetId });
-
+    
     public static bool GetChangesetAndSave(this ITfvc _, TfvcChangesetRef changesetRef)
     {
         try
         {
-            Logger.Debug($"SAVE Changeset {changesetRef.ChangesetId}");
             var now= DateTime.Now;
             var changeset = _.GetChangeset(changesetRef.ChangesetId);
             var t1 = DateTime.Now.Subtract(now).TotalMilliseconds;
@@ -163,7 +162,15 @@ public static partial class Helper
             }
         });
 
-    public static GetChangesetsResult GetChangesets(this ITfvc _,int pageNo, int pageSize)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="id">authorId(GUID)</param>
+    /// <param name="pageNo"></param>
+    /// <param name="pageSize"></param>
+    /// <returns></returns>
+    public static GetChangesetsResult GetChangesets(this ITfvc _,string id,int pageNo, int pageSize)
     {
         var request = new GetChangesets
         {
@@ -171,28 +178,28 @@ public static partial class Helper
             Top = pageSize,
             Skip = (pageNo - 1) * pageSize
         };
+        if (!string.IsNullOrEmpty(id))
+            request.SearchCriteria = new SearchCriteria { Author = id };
+
         return _.GetChangesets(request);
     }
 
-    public static void PrepareChangesets(this ITfvc _,int start=1)
+    public static void PrepareChangesets(this ITfvc _, string id, int start = 1)
     {
         var pageSize = 20;
-        var pageNo =Math.Max(1, start);
+        var pageNo = Math.Max(1, start);
 
-        var changesets = _.GetChangesets(pageNo, pageSize);
+        var changesets = _.GetChangesets(id, pageNo, pageSize);
         while (changesets is { Success: true, Value: { } })
         {
             Console.WriteLine($"{DateTime.Now}:parse page {pageNo}");
             changesets.Value
                 .AsParallel()
-                .WithDegreeOfParallelism(Environment.ProcessorCount / 2)
-                .ForAll(o =>
-                {
-                    _.GetChangesetAndSave(o);
-                });
+                //.WithDegreeOfParallelism(Environment.ProcessorCount / 2)
+                .ForAll(o => { _.GetChangesetAndSave(o); });
 
             pageNo++;
-            changesets = _.GetChangesets(pageNo, pageSize);
+            changesets = _.GetChangesets(id, pageNo, pageSize);
         }
     }
 
@@ -231,9 +238,71 @@ public static partial class Helper
     
     public static GetShelvesetResult GetShelveset(this ITfvc _, GetShelveset request)
         => ServerResource.TfvcGetShelveset.Execute<GetShelvesetResult>(request).Result;
+
+    public static GetShelvesetResult GetShelveset(this ITfvc _, string shelvesetId)
+        => _.GetShelveset(new GetShelveset
+        {
+            ShelvesetId = shelvesetId,
+            RequestData=new GetShelvesetRequestData()
+        });
     
+    public static bool GetShelvesetAndSave(this ITfvc _, TfvcShelvesetRef shelvesetRef)
+    {
+        try
+        {
+            var shelveset = _.GetShelveset(shelvesetRef.Id);
+
+            if (shelveset.Success)
+            {
+                shelveset.Id.MD5String().DataFile<TfvcShelveset>()
+                    .WriteFile(shelveset.ObjToJson());
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+
+        return false;
+    }
+
+
     public static GetShelvesetsResult GetShelvesets(this ITfvc _, GetShelvesets request)
         => ServerResource.TfvcGetShelvesets.Execute<GetShelvesetsResult>(request).Result;
+
+    public static GetShelvesetsResult GetShelvesets(this ITfvc _, string id, int pageNo, int pageSize)
+    {
+        var request = new GetShelvesets
+        {
+            Top = pageSize,
+            Skip = (pageNo - 1) * pageSize
+        };
+        if (!string.IsNullOrEmpty(id))
+            request.RequestData = new GetShelvesetRequestData { Owner = id };
+
+        return _.GetShelvesets(request);
+    }
+
+    public static void PrepareShelvesets(this ITfvc _, string id, int start = 1)
+    {
+        var pageSize = 20;
+        var pageNo = Math.Max(1, start);
+
+        var shelvesets = _.GetShelvesets(id, pageNo, pageSize);
+        while (shelvesets is { Success: true, Value: { } })
+        {
+            Console.WriteLine($"{DateTime.Now}:parse page {pageNo}");
+            shelvesets.Value
+                .AsParallel()
+                //.WithDegreeOfParallelism(Environment.ProcessorCount / 2)
+                .ForAll(o => { _.GetShelvesetAndSave(o); });
+
+            pageNo++;
+            shelvesets = _.GetShelvesets(id, pageNo, pageSize);
+        }
+    }
     
     public static GetShelvesetWorkItemsResult GetShelvesetWorkItems(this ITfvc _, GetShelvesetWorkItems request)
         => ServerResource.TfvcGetShelvesetWorkItems.Execute<GetShelvesetWorkItemsResult>(request).Result;

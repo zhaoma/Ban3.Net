@@ -17,7 +17,7 @@ namespace Ban3.Infrastructures.NetHttp.Request
 
         public string ContentEncoding { get; set; } = "utf-8";
 
-        public HttpContent Content()
+        public HttpContent? Content()
         {
             if (Bytes != null)
                 return new ByteArrayContent(Bytes);

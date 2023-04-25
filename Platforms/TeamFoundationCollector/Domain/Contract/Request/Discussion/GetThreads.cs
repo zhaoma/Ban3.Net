@@ -13,7 +13,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Discuss
 
         public string RequestPath() => $"{Instance}/{Organization}/_apis/discussion/threads";
 
-        public string RequestQuery() => $"?artifactUri={Uri?.ToString()}&api-version={ApiVersion}";
+        public string RequestQuery() => $"?artifactUri={Uri}";
 
         public string RequestBody() => string.Empty;
     }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WCx+qt+ydtBfA9PqwUqxesMfKwNS0XG2a+8rxSEgUpKkiXuV0WbNiUeBEa5VUZC4t6reDDw8GFO7GFzlFO0KWQ==",
+  "dgSpecHash": "tRp/A4qjGHm4PuVCG1tbVMUIknQ1+gRhhQ6Xwd5vGmvD8sG4z6dwBdskEea52mYkPV5V1Mc5oQbWJwfydVSexw==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\Contract.csproj",
   "expectedPackageFiles": [
@@ -72,7 +72,10 @@
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.16\\microsoft.windowsdesktop.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.16\\microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.16\\microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512"
   ],
   "logs": []
 }

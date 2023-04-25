@@ -1,4 +1,5 @@
-﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
+﻿using Ban3.Infrastructures.Common.Attributes;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract;

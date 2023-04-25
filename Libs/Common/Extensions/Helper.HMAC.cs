@@ -22,9 +22,12 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="plainText"></param>
         /// <returns></returns>
-        public static string MD5String( this string plainText )
+        public static string MD5String(this string plainText)
         {
-            return Encoding.UTF8.GetString( HashType.MD5.GetHashedBytes( plainText ) );
+            using var md5 = MD5.Create();
+            var bytes = md5.ComputeHash(Encoding.UTF8.GetBytes(plainText));
+
+            return BitConverter.ToString(bytes).Replace("-", "");
         }
 
         /// <summary>
