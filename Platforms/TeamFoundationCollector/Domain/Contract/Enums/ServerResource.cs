@@ -168,9 +168,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         TfvcGetShelvesetWorkItems,
 
         WIQL,
-        ChangesetDiscussion,
-        ShelvesetDiscussion,
 
+        DiscussionGetThread,
         DiscussionGetThreads,
 
         PipelinesCreatePipeline,

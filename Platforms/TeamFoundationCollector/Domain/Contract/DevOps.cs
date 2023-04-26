@@ -1,4 +1,5 @@
 ﻿using Ban3.Infrastructures.Common.Attributes;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
 
@@ -24,4 +25,16 @@ public class DevOps
     public static IPipelines Pipelines;
 
     public static ITfvc Tfvc;
+
+    public static void PrepareForce()
+    {
+        Core.PrepareTeams(true);
+        Discussion.PrepareThreads();
+
+    }
+
+    public static void Sync()
+    {
+
+    }
 }

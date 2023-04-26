@@ -12,11 +12,38 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelines;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
 
+//DevOps.Discussion
+//    .PrepareThreads(39332);
+    //.GetThread(39332);
 
+var ps=DevOps.Pipelines.ListPipelines(new ListPipelines());
+//ps.ObjToJson().WriteSuccessLine();
+
+(ps.Value.Count+" pipelines found").WriteColorLine(ConsoleColor.Red);
+
+var p=ps.Value.Where(o=>o.Name.Contains("SHA.SERV"));
+p.ObjToJson().WriteSuccessLine();
+
+var pid = 1775;
+//var pipelinInfo = DevOps.Pipelines.GetPipeline(new GetPipeline { PipelineId = pid });
+//pipelinInfo.ObjToJson().WriteColorLine(ConsoleColor.Yellow);
+
+var runs = DevOps.Pipelines.ListRuns(pid);
+runs.ObjToJson().WriteColorLine(ConsoleColor.Yellow);
+
+var runId = 926202;
+var r = DevOps.Pipelines.GetRun(pid, runId);
+r.ObjToJson().WriteSuccessLine();
+
+var ls = DevOps.Pipelines.ListLogs(pid, runId);
+ls.ObjToJson().WriteColorLine(ConsoleColor.Blue);
+
+/*
 var id = "be8e66c2-1a5d-42b2-b5ac-3db32fe25b84";
 
 var cs = DevOps.Tfvc.GetChangesets(id, 1, 1);
@@ -41,6 +68,8 @@ s.ObjToJson().WriteSuccessLine();
 
 var sd = DevOps.Discussion.GetThreads(shelvesetName, id);
 sd.ObjToJson().WriteColorLine(ConsoleColor.DarkGreen);
+
+*/
 
 //changesets.ObjToJson().WriteSuccessLine();
 

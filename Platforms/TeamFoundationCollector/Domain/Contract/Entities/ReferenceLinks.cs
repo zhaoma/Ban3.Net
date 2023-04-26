@@ -1,17 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
+/// <summary>
+/// The class to represent a collection of REST reference links.
+/// </summary>
+public class ReferenceLinks
+    : Dictionary<string, Dictionary<string, string>>
 {
-    /// <summary>
-    /// The class to represent a collection of REST reference links.
-    /// </summary>
-    public class ReferenceLinks
-    {
-        /// <summary>
-        /// The readonly view of the links.
-        /// Because Reference links are readonly, we only want to expose them as read only.
-        /// </summary>
-        [JsonProperty("links")]
-        public object? Links { get; set; }
-    }
+
 }

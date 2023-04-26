@@ -23,17 +23,19 @@ public static partial class Helper
     }
 
     public static async Task<T> Execute<T>(this Enums.ServerResource resource, IRequest request)
-        where T : IResponse
+        where T : IResponse,new()
     {
         var responseMessage =await Config.Host.Request(request.Resource());
         var content = responseMessage.Content.ReadAsStringAsync();
         Console.WriteLine(request.Resource().Url);
         Logger.Debug(request.Resource().Url);
         Logger.Debug(content);
-
-        var result = content.Result.JsonToObj<T>();
+        Console.WriteLine($"responseMessage.StatusCode={responseMessage.StatusCode}");
+        Console.WriteLine(content.Result);
+        var result = content.Result.JsonToObj<T>()??new T();
         result.Success = new[]
         {
+            HttpStatusCode.InternalServerError,
             HttpStatusCode.Accepted,
             HttpStatusCode.OK
         }.Contains(responseMessage.StatusCode);

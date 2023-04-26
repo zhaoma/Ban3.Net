@@ -2,20 +2,21 @@
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Newtonsoft.Json;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Discussion
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Discussion;
+
+public class GetThreads
+    : PresetRequest, IRequest
 {
-	public class GetThreads
-		:PresetRequest,IRequest
-    {
-        public string Method { get; set; } = "Get";
+    [JsonProperty("method")]
+    public string Method { get; set; } = "Get";
 
-        public ArtifactUri? Uri { get; set; }
 
-        public string RequestPath() => $"{Instance}/{Organization}/_apis/discussion/threads";
+    [JsonProperty("uri")]
+    public ArtifactUri? Uri { get; set; }
 
-        public string RequestQuery() => $"?artifactUri={Uri}";
+    public string RequestPath() =>$"{Instance}/{Organization}/_apis/discussion/threads";
 
-        public string RequestBody() => string.Empty;
-    }
+    public string RequestQuery() =>$"?artifactUri={Uri}";
+
+    public string RequestBody() => string.Empty;
 }
-

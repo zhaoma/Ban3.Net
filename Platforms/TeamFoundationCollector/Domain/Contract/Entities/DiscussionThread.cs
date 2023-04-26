@@ -1,6 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-using System.Xml.Linq;
+﻿using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
@@ -23,6 +21,9 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 
         [JsonProperty("properties")]
         public Dictionary<string,TypeAndValue>? Properties { get; set; }
+
+        [JsonProperty("convertedProperties")]
+        public DiscussionProperties ConvertedProperties => new (Properties);
 
         [JsonProperty("commentsCount")]
         public int CommentsCount { get; set; }

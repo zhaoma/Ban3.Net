@@ -37,7 +37,7 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static T JsonToObj<T>( this string str )
+        public static T? JsonToObj<T>( this string str )
         {
             return JsonConvert.DeserializeObject<T>( str );
         }

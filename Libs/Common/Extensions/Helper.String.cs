@@ -23,9 +23,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static string ToCamel( this string s )
+        public static string ToCamel(this string s)
         {
-            return string.IsNullOrEmpty( s ) ? s : s[ 0 ].ToString().ToLower() + s.Substring( 1 );
+            return string.IsNullOrEmpty(s) ? s : s[0].ToString().ToLower() + s.Substring(1);
         }
 
         /// <summary>
@@ -33,9 +33,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static string ToPascal( this string s )
+        public static string ToPascal(this string s)
         {
-            return string.IsNullOrEmpty( s ) ? s : s[ 0 ].ToString().ToUpper() + s.Substring( 1 );
+            return string.IsNullOrEmpty(s) ? s : s[0].ToString().ToUpper() + s.Substring(1);
         }
 
         /// <summary>
@@ -45,22 +45,22 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <returns>
         /// 全角字符串
         /// </returns>
-        public static string ToSBC( this string input )
+        public static string ToSBC(this string input)
         {
             char[] c = input.ToCharArray();
-            for( int i = 0; i < c.Length; i++ )
+            for (int i = 0; i < c.Length; i++)
             {
-                if( c[ i ] == 32 )
+                if (c[i] == 32)
                 {
-                    c[ i ] = (char)12288;
+                    c[i] = (char)12288;
                     continue;
                 }
 
-                if( c[ i ] < 127 )
-                    c[ i ] = (char)(c[ i ] + 65248);
+                if (c[i] < 127)
+                    c[i] = (char)(c[i] + 65248);
             }
 
-            return new string( c );
+            return new string(c);
         }
 
         /// <summary>
@@ -70,22 +70,22 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <returns>
         /// 半角字符串
         /// </returns>
-        public static string ToDBC( this string input )
+        public static string ToDBC(this string input)
         {
             char[] c = input.ToCharArray();
-            for( int i = 0; i < c.Length; i++ )
+            for (int i = 0; i < c.Length; i++)
             {
-                if( c[ i ] == 12288 )
+                if (c[i] == 12288)
                 {
-                    c[ i ] = (char)32;
+                    c[i] = (char)32;
                     continue;
                 }
 
-                if( c[ i ] > 65280 && c[ i ] < 65375 )
-                    c[ i ] = (char)(c[ i ] - 65248);
+                if (c[i] > 65280 && c[i] < 65375)
+                    c[i] = (char)(c[i] - 65248);
             }
 
-            return new string( c );
+            return new string(c);
         }
 
         /// <summary>
@@ -110,10 +110,10 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <param name="s">The s.</param>
         /// <param name="pattern">The pattern.</param>
         /// <returns></returns>
-        public static string Match( this string s, string pattern )
+        public static string Match(this string s, string pattern)
         {
-            if( s == null ) return "";
-            return Regex.Match( s, pattern ).Value;
+            if (s == null) return "";
+            return Regex.Match(s, pattern).Value;
         }
 
         /// <summary>
@@ -121,9 +121,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns></returns>
-        public static string ToBase64String( byte[] bytes )
+        public static string ToBase64String(byte[] bytes)
         {
-            return Convert.ToBase64String( bytes );
+            return Convert.ToBase64String(bytes);
         }
 
         #region SQL/HTML/TEXT
@@ -133,9 +133,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static bool IsEmail( string source )
+        public static bool IsEmail(string source)
         {
-            return Regex.IsMatch( source, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", RegexOptions.IgnoreCase );
+            return Regex.IsMatch(source, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", RegexOptions.IgnoreCase);
         }
 
         /// <summary>
@@ -143,9 +143,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static bool HasChinese( string str )
+        public static bool HasChinese(string str)
         {
-            return Regex.IsMatch( str, @"[\u4e00-\u9fa5]" );
+            return Regex.IsMatch(str, @"[\u4e00-\u9fa5]");
         }
 
         /// <summary>
@@ -153,14 +153,14 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="inVal"></param>
         /// <returns></returns>
-        public static string ConvertJapan( string inVal )
+        public static string ConvertJapan(string inVal)
         {
-            var jis = Encoding.GetEncoding( "Shift_JIS" );
-            var gb2312 = Encoding.GetEncoding( "GB2312" );
+            var jis = Encoding.GetEncoding("Shift_JIS");
+            var gb2312 = Encoding.GetEncoding("GB2312");
 
-            var buff = gb2312.GetBytes( inVal );
-            buff = Encoding.Convert( jis, gb2312, buff );
-            return gb2312.GetString( buff );
+            var buff = gb2312.GetBytes(inVal);
+            buff = Encoding.Convert(jis, gb2312, buff);
+            return gb2312.GetString(buff);
         }
 
         /// <summary>
@@ -168,11 +168,13 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="text">The text.</param>
         /// <returns></returns>
-        public static string SQLParse( this string text )
+        public static string SQLParse(this string text)
         {
-            var sqlExp = new Regex( @"\s*\'\s+|\s(and|exec|insert|select|delete|update|count|drop|table|\*|\%|chr|mid|master|truncate|char|declare)\s" );
+            var sqlExp =
+                new Regex(
+                    @"\s*\'\s+|\s(and|exec|insert|select|delete|update|count|drop|table|\*|\%|chr|mid|master|truncate|char|declare)\s");
 
-            return sqlExp.Replace( text + "", "" );
+            return sqlExp.Replace(text + "", "");
         }
 
         /// <summary>
@@ -181,10 +183,10 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <param name="content">The content.</param>
         /// <param name="denyWords">The deny words.</param>
         /// <returns></returns>
-        public static string StripDenyWord(this string content, string denyWords )
+        public static string StripDenyWord(this string content, string denyWords)
         {
-            var sqlExp = new Regex( string.Format( ".*({0}).*", denyWords ) );
-            return sqlExp.Replace( content, "" );
+            var sqlExp = new Regex(string.Format(".*({0}).*", denyWords));
+            return sqlExp.Replace(content, "");
         }
 
         /// <summary>
@@ -194,10 +196,10 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <param name="badWords">The bad words.</param>
         /// <param name="fixWord">The fix word.</param>
         /// <returns></returns>
-        public static string StripBadWord(this string content, string badWords, string fixWord )
+        public static string StripBadWord(this string content, string badWords, string fixWord)
         {
-            var sqlExp = new Regex( string.Format( "({0})", badWords ) );
-            return sqlExp.Replace( content, fixWord );
+            var sqlExp = new Regex(string.Format("({0})", badWords));
+            return sqlExp.Replace(content, fixWord);
         }
 
         /// <summary>
@@ -205,26 +207,31 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="html">The HTML.</param>
         /// <returns></returns>
-        public static string StripHTML(this string html )
+        public static string StripHTML(this string html)
         {
             string strOutput = html;
 
-            var scriptRegExp = new Regex( "<scr" + "ipt[^>.]*>[\\s\\S]*?</sc" + "ript>", RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline & RegexOptions.ExplicitCapture );
-            strOutput = scriptRegExp.Replace( strOutput, "" );
+            var scriptRegExp = new Regex("<scr" + "ipt[^>.]*>[\\s\\S]*?</sc" + "ript>",
+                RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline &
+                RegexOptions.ExplicitCapture);
+            strOutput = scriptRegExp.Replace(strOutput, "");
 
-            var styleRegex = new Regex( "<style[^>.]*>[\\s\\S]*?</style>", RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline & RegexOptions.ExplicitCapture );
-            strOutput = styleRegex.Replace( strOutput, "" );
+            var styleRegex = new Regex("<style[^>.]*>[\\s\\S]*?</style>",
+                RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline &
+                RegexOptions.ExplicitCapture);
+            strOutput = styleRegex.Replace(strOutput, "");
 
-            var objRegExp = new Regex( "<(.|\\n)+?>", RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline );
-            strOutput = objRegExp.Replace( strOutput, "" );
+            var objRegExp = new Regex("<(.|\\n)+?>",
+                RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline);
+            strOutput = objRegExp.Replace(strOutput, "");
 
-            objRegExp = new Regex( "<[^>]+>", RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline );
+            objRegExp = new Regex("<[^>]+>", RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline);
 
-            strOutput = objRegExp.Replace( strOutput, "" );
+            strOutput = objRegExp.Replace(strOutput, "");
 
-            strOutput = strOutput.Replace( "&lt;", "<" );
-            strOutput = strOutput.Replace( "&gt;", ">" );
-            strOutput = strOutput.Replace( "&nbsp;", " " );
+            strOutput = strOutput.Replace("&lt;", "<");
+            strOutput = strOutput.Replace("&gt;", ">");
+            strOutput = strOutput.Replace("&nbsp;", " ");
 
             return strOutput;
         }
@@ -234,17 +241,18 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="html">The HTML.</param>
         /// <returns></returns>
-        public static string StripHTMLButImage(this string html )
+        public static string StripHTMLButImage(this string html)
         {
             string strOutput = html;
 
-            Regex objRegExp = new Regex( "<[^img][^>]*>", RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline );
-            strOutput = objRegExp.Replace( strOutput, "" );
+            Regex objRegExp = new Regex("<[^img][^>]*>",
+                RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline);
+            strOutput = objRegExp.Replace(strOutput, "");
 
-            strOutput = strOutput.Replace( "&lt;", "<" );
-            strOutput = strOutput.Replace( "&gt;", ">" );
+            strOutput = strOutput.Replace("&lt;", "<");
+            strOutput = strOutput.Replace("&gt;", ">");
             //&nbsp; 
-            strOutput = strOutput.Replace( "&nbsp;", " " );
+            strOutput = strOutput.Replace("&nbsp;", " ");
 
             return strOutput;
         }
@@ -254,7 +262,7 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="o"></param>
         /// <returns></returns>
-        public static string ObjToString( this object o )
+        public static string ObjToString(this object o)
         {
             return o + "";
         }
@@ -271,10 +279,10 @@ namespace Ban3.Infrastructures.Common.Extensions
         {
             if (string.IsNullOrEmpty(input)) return false;
             return Regex.IsMatch(input, pattern,
-                                  RegexOptions.IgnoreCase |
-                                  RegexOptions.IgnorePatternWhitespace |
-                                  RegexOptions.Multiline
-                                ) || (input + "").ToUpper().Contains((pattern + "").ToUpper());
+                RegexOptions.IgnoreCase |
+                RegexOptions.IgnorePatternWhitespace |
+                RegexOptions.Multiline
+            ) || (input + "").ToUpper().Contains((pattern + "").ToUpper());
         }
 
         public static string FirstMatchValue(this string input, string pattern)
@@ -283,14 +291,14 @@ namespace Ban3.Infrastructures.Common.Extensions
                 input,
                 pattern,
                 RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline
-                );
+            );
 
             return match.Groups[1].Value;
         }
 
-        public static string FirstHtmlImage(this string input,string imgSymbol)
+        public static string FirstHtmlImage(this string input, string imgSymbol)
         {
-            var pattern =string.Format(@"<img.+{0}.+?src=[\""'](?<value>.+?)[\""'].*?>", imgSymbol);
+            var pattern = string.Format(@"<img.+{0}.+?src=[\""'](?<value>.+?)[\""'].*?>", imgSymbol);
             return input.FirstMatchValue(pattern);
         }
 
@@ -348,6 +356,7 @@ namespace Ban3.Infrastructures.Common.Extensions
             {
                 _logger.Error(ex);
             }
+
             return result;
         }
 
@@ -379,6 +388,38 @@ namespace Ban3.Infrastructures.Common.Extensions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static StringBuilder AppendQuery(this StringBuilder sb, string key, string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+                sb.Append($"key={value}&");
+
+            return sb;
+        }
+
+
+        public static StringBuilder AppendQuery(this StringBuilder sb, string key, Enum? value)
+        {
+            if (value != null)
+                sb.Append($"key={value}&");
+
+            return sb;
+        }
+
+        public static StringBuilder AppendQuery(this StringBuilder sb, string key, int? value)
+        {
+            if (value != null)
+                sb.Append($"key={value}&");
+
+            return sb;
         }
     }
 }

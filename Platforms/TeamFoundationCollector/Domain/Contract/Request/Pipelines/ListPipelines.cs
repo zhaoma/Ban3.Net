@@ -35,7 +35,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
             if (Top != null)
                 sb.Append($"$top={Top}&");
 
-            sb.Append($"api-version={ApiVersion}");
+            //sb.Append($"api-version={ApiVersion}");
             return sb.ToString();
         }
 

@@ -26,8 +26,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
 
         public string RequestQuery() =>
             Expand != null
-                ? $"?$expand={Expand}&api-version={ApiVersion}"
-                : $"?api-version={ApiVersion}";
+                ? $"?$expand={Expand}"
+                : string.Empty;//$"?api-version={ApiVersion}";
 
         public string RequestBody() => string.Empty;
     }

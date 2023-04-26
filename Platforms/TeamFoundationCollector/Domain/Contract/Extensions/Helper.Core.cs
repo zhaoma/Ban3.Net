@@ -105,8 +105,8 @@ public static partial class Helper
     public static List<WebApiTeam> LoadTeams(this ICore _)
     {
         var file = new List<WebApiTeam>().SetsFile();
-        return file.LoadOrSetDefault<List<WebApiTeam>>(
-            file.ReadFile().JsonToObj<List<WebApiTeam>>(),
+        return file.LoadOrSetDefault(
+            file.ReadFile().JsonToObj<List<WebApiTeam>>()!,
             file
         );
     }

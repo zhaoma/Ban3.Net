@@ -1,5 +1,6 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
@@ -38,10 +39,12 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 
 
         [JsonProperty("result")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public RunResult Result { get; set; }
 
 
         [JsonProperty("state")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public RunState State { get; set; }
 
 

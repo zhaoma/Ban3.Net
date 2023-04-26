@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using System.Text;
+using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 {
@@ -31,9 +32,9 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
         public string Definitions { get; set; } = string.Empty;
 
-        public QueryDeletedOption DeletedFilter { get; set; } 
+        public QueryDeletedOption? DeletedFilter { get; set; } 
 
-        public int MaxBuildsPerDefinition { get; set; } 
+        public int? MaxBuildsPerDefinition { get; set; } 
 
         public string MaxTime { get; set; } = string.Empty;
 
@@ -41,11 +42,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
         public string Properties { get; set; } = string.Empty;
 
-        public BuildQueryOrder QueryOrder { get; set; } 
+        public BuildQueryOrder? QueryOrder { get; set; } 
 
         public string Queues { get; set; } = string.Empty;
 
-        public BuildReason ReasonFilter { get; set; } 
+        public BuildReason? ReasonFilter { get; set; } 
 
         public string RepositoryId { get; set; } = string.Empty;
 
@@ -53,9 +54,9 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
         public string RequestedFor { get; set; } = string.Empty;
 
-        public BuildResult ResultFilter { get; set; } 
+        public BuildResult? ResultFilter { get; set; } 
 
-        public BuildStatus StatusFilter { get; set; } 
+        public BuildStatus? StatusFilter { get; set; } 
 
         public string TagFilters { get; set; } = string.Empty;
 
@@ -64,7 +65,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
         public string RequestQuery()
         {
-            /*TODO :  need check*/
             var sb = new StringBuilder();
 
             sb.Append("?");
@@ -72,7 +72,27 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             if (Top != null)
                 sb.Append($"$top={Top}&");
 
-            sb.Append($"api-version={ApiVersion}");
+            sb.AppendQuery("BranchName", BranchName);
+            sb.AppendQuery("BuildIds", BuildIds);
+            sb.AppendQuery("BuildNumber", BuildNumber);
+            sb.AppendQuery("ContinuationToken", ContinuationToken);
+            sb.AppendQuery("Definitions", Definitions);
+            sb.AppendQuery("DeletedFilter", DeletedFilter);
+            sb.AppendQuery("MaxBuildsPerDefinition", MaxBuildsPerDefinition);
+            sb.AppendQuery("MaxTime", MaxTime);
+            sb.AppendQuery("MinTime", MinTime);
+            sb.AppendQuery("Properties", Properties);
+            sb.AppendQuery("QueryOrder", QueryOrder);
+            sb.AppendQuery("Queues", Queues);
+            sb.AppendQuery("ReasonFilter", ReasonFilter);
+            sb.AppendQuery("RepositoryId", RepositoryId);
+            sb.AppendQuery("RepositoryType", RepositoryType);
+            sb.AppendQuery("RequestedFor", RequestedFor);
+            sb.AppendQuery("ResultFilter", ResultFilter);
+            sb.AppendQuery("StatusFilter", StatusFilter);
+            sb.AppendQuery("TagFilters", TagFilters);
+
+            //sb.Append($"api-version={ApiVersion}");
             return sb.ToString();
         }
 

@@ -20,9 +20,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <param name="strValue">The STR value.</param>
         /// <param name="defValue">The def value.</param>
         /// <returns></returns>
-        public static int ToInt( this object strValue, int defValue = 0 )
+        public static int ToInt( this object? strValue, int defValue = 0 )
         {
-            int.TryParse( strValue.ToString(), out var def );
+            int.TryParse( strValue+"", out var def );
             return def == 0 ? defValue : def;
         }
 

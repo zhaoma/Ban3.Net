@@ -19,7 +19,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
         public string RequestPath() =>
             $"{Instance}/{Organization}/{Project}/_apis/pipelines/{PipelineId}/runs/{RunId}";
 
-        public string RequestQuery() => $"?api-version={ApiVersion}";
+        public string RequestQuery() =>string.Empty;// $"?api-version={ApiVersion}";
 
         public string RequestBody() => string.Empty;
     }
