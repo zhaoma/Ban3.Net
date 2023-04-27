@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Diagnostics.Metrics;
 using System.Drawing.Text;
 using System.Runtime.InteropServices.ComTypes;
@@ -11,37 +12,110 @@ using Ban3.Infrastructures.NetHttp.Entries;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelines;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.WorkItemTracking;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
 
 //DevOps.Discussion
 //    .PrepareThreads(39332);
     //.GetThread(39332);
 
-var ps=DevOps.Pipelines.ListPipelines(new ListPipelines());
+//var ps=DevOps.Pipelines.ListPipelines(new ListPipelines());
 //ps.ObjToJson().WriteSuccessLine();
 
-(ps.Value.Count+" pipelines found").WriteColorLine(ConsoleColor.Red);
+//(ps.Value.Count+" pipelines found").WriteColorLine(ConsoleColor.Red);
 
-var p=ps.Value.Where(o=>o.Name.Contains("SHA.SERV"));
-p.ObjToJson().WriteSuccessLine();
+//var p=ps.Value.Where(o=>o.Name.Contains("SHA.SERV"));
+//p.ObjToJson().WriteSuccessLine();
+
+DevOps.SendMail(new SendMail
+{
+    Body=new SendMailBody
+    {
+        Body = new MailMessage
+        {
+            To=new EmailRecipients{EmailAddresses = new (){"zhifeng.zhao.ext@siemens-healthineers.com"}},
+            Body = "send from azure devops service",
+            Subject = "send from azure devops service"
+        }
+    }
+});
+
+Console.ReadKey();
 
 var pid = 1775;
 //var pipelinInfo = DevOps.Pipelines.GetPipeline(new GetPipeline { PipelineId = pid });
 //pipelinInfo.ObjToJson().WriteColorLine(ConsoleColor.Yellow);
 
-var runs = DevOps.Pipelines.ListRuns(pid);
-runs.ObjToJson().WriteColorLine(ConsoleColor.Yellow);
+//var runs = DevOps.Pipelines.ListRuns(pid);
+//runs.ObjToJson().WriteColorLine(ConsoleColor.Yellow);
 
 var runId = 926202;
-var r = DevOps.Pipelines.GetRun(pid, runId);
-r.ObjToJson().WriteSuccessLine();
+//var r = DevOps.Pipelines.GetRun(pid, runId);
+//r.ObjToJson().WriteSuccessLine();
 
-var ls = DevOps.Pipelines.ListLogs(pid, runId);
-ls.ObjToJson().WriteColorLine(ConsoleColor.Blue);
+//var ls = DevOps.Pipelines.ListLogs(pid, runId);
+//ls.ObjToJson().WriteColorLine(ConsoleColor.Blue);
+
+//var branches = DevOps.Tfvc.LoadBranches();
+//foreach (var tfvcBranch in branches)
+//{
+//    tfvcBranch.Path.WriteSuccessLine();
+//    tfvcBranch.ObjToJson().WriteColorLine(ConsoleColor.Red);
+//}
+
+var branchPath = @"$/CTS/Development/ICS/SHA.SERV";
+
+//var b = DevOps.Tfvc.GetBranch(new GetBranch { Path = branchPath });
+//b.ObjToJson().WriteSuccessLine();
+
+//var builds = DevOps.Build.ListBuilds(new ListBuilds
+//{
+//    Top = 1,
+//    BranchName = branchPath
+//});
+//builds.ObjToJson().WriteSuccessLine();
+
+var buildId = 926979;
+//var bb = DevOps.Build.GetBuild(buildId);
+//bb.ObjToJson().WriteColorLine(ConsoleColor.Red);
+
+//$"{buildId}:{bb.BuildNumber}->{bb.StartTime}-{bb.FinishTime}<-{bb.Status}".WriteColorLine(ConsoleColor.Red);
+
+//var buildObj = DevOps.Build.GetBuildLogs(buildId );
+////buildObj.ObjToJson().WriteSuccessLine();
+//Console.WriteLine(buildObj.Value!.Count);
+//foreach (var buildLog in buildObj.Value)
+//{
+//    $"{buildLog.Id}({buildLog.LineCount})@{buildLog.CreatedOn}-{buildLog.LastChangedOn}".WriteSuccessLine();
+//    Console.WriteLine();
+//}
+
+//var log=DevOps.Build.GetBuildLog(new GetBuildLog
+//{
+//    BuildId=buildId,
+//    LogId = 22
+//});
+
+//log.WriteSuccessLine();
+
+//DevOps.Build.GetBuildLog(buildId,22,5,10)
+//    .WriteColorLine(ConsoleColor.Red);
+
+//var definitions = DevOps.Build.ListDefinitions(new ListDefinitions{Top = 1});
+//definitions.ObjToJson().WriteErrorLine();
+
+//var definitions = DevOps.Build.ListDefinitions(new ListDefinitions());
+//definitions.Value!.ForEach(o =>
+//{
+//    o.ObjToJson().WriteSuccessLine();
+//    Console.WriteLine();
+//});
+
 
 /*
 var id = "be8e66c2-1a5d-42b2-b5ac-3db32fe25b84";

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -397,10 +398,17 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static StringBuilder AppendQuery(this StringBuilder sb, string key, string value)
+        public static StringBuilder AppendQuery(
+            this StringBuilder sb,
+            string key,
+            string value)
         {
             if (!string.IsNullOrEmpty(value))
-                sb.Append($"key={value}&");
+            {
+                if (sb.ToString() != "?")
+                    sb.Append("&");
+                sb.Append($"{key}={value}");
+            }
 
             return sb;
         }
@@ -409,7 +417,12 @@ namespace Ban3.Infrastructures.Common.Extensions
         public static StringBuilder AppendQuery(this StringBuilder sb, string key, Enum? value)
         {
             if (value != null)
-                sb.Append($"key={value}&");
+            {
+                if (sb.ToString() != "?")
+                    sb.Append("&");
+
+                sb.Append($"{key}={value}");
+            }
 
             return sb;
         }
@@ -417,7 +430,25 @@ namespace Ban3.Infrastructures.Common.Extensions
         public static StringBuilder AppendQuery(this StringBuilder sb, string key, int? value)
         {
             if (value != null)
-                sb.Append($"key={value}&");
+            {
+                if (sb.ToString() != "?")
+                    sb.Append("&");
+
+                sb.Append($"{key}={value}");
+            }
+
+            return sb;
+        }
+
+        public static StringBuilder AppendQuery(this StringBuilder sb, string key, bool? value)
+        {
+            if (value != null)
+            {
+                if (sb.ToString() != "?")
+                    sb.Append("&");
+
+                sb.Append($"{key}={value}");
+            }
 
             return sb;
         }

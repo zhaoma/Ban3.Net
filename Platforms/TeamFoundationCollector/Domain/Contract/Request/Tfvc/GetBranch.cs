@@ -22,13 +22,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
         /// Return child branches, if there are any.
         /// Default: False
         /// </summary>
-        public bool IncludeChildren { get; set; } = false;
+        public bool IncludeChildren { get; set; } = true;
 
         /// <summary>
         /// Return the parent branch, if there is one.
         /// Default: False
         /// </summary>
-        public bool IncludeParent { get; set; } = false;
+        public bool IncludeParent { get; set; } = true;
         
         public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/branches";
 

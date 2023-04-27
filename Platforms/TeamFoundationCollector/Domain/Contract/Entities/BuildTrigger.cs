@@ -1,5 +1,6 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
@@ -10,5 +11,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 public class BuildTrigger
 {
     [JsonProperty("triggerType")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public DefinitionTriggerType TriggerType { get; set; }
 }

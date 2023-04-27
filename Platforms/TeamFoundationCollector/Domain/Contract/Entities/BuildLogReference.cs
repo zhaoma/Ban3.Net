@@ -18,7 +18,7 @@ public class BuildLogReference
     /// The type of the log location.
     /// </summary>
     [JsonProperty("type")]
-    public int Type { get; set; }
+    public string Type { get; set; } = string.Empty;
 
     /// <summary>
     /// A full link to the log resource.

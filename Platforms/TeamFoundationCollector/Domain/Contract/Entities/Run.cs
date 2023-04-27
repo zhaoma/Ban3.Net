@@ -2,58 +2,49 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
+
+/// <summary>
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/runs/get?view=azure-devops-rest-7.0#run
+/// </summary>
+public class Run
+    : PreviewRun
 {
     /// <summary>
-    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/pipelines/runs/get?view=azure-devops-rest-7.0#run
+    /// The class to represent a collection of REST reference links.
     /// </summary>
-    public class Run
-        : PreviewRun
-    {
-        /// <summary>
-        /// The class to represent a collection of REST reference links.
-        /// </summary>
-        [JsonProperty("_links")]
-        public ReferenceLinks? Links { get; set; }
+    [JsonProperty("_links")]
+    public ReferenceLinks? Links { get; set; }
 
-        [JsonProperty("createdDate")]
-        public string CreatedDate { get; set; } = string.Empty;
+    [JsonProperty("createdDate")] public string CreatedDate { get; set; } = string.Empty;
 
-        [JsonProperty("finishedDate")]
-        public string FinishedDate { get; set; } = string.Empty;
+    [JsonProperty("finishedDate")] public string FinishedDate { get; set; } = string.Empty;
 
-        [JsonProperty("id")]
-        public int Id { get; set; }
+    [JsonProperty("id")] public int Id { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; } = string.Empty;
+    [JsonProperty("name")] public string Name { get; set; } = string.Empty;
 
-        /// <summary>
-        /// A reference to a Pipeline.
-        /// </summary>
-        [JsonProperty("pipeline")]
-        public PipelineReference? Pipeline { get; set; }
+    /// <summary>
+    /// A reference to a Pipeline.
+    /// </summary>
+    [JsonProperty("pipeline")]
+    public PipelineReference? Pipeline { get; set; }
 
-        [JsonProperty("resources")]
-        public RunResources? Resources { get; set; }
+    [JsonProperty("resources")] public RunResources? Resources { get; set; }
 
 
-        [JsonProperty("result")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public RunResult Result { get; set; }
+    [JsonProperty("result")]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public RunResult Result { get; set; }
 
 
-        [JsonProperty("state")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public RunState State { get; set; }
+    [JsonProperty("state")]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public RunState State { get; set; }
 
 
-        [JsonProperty("url")]
-        public string Url { get; set; } = string.Empty;
+    [JsonProperty("url")] public string Url { get; set; } = string.Empty;
 
-        [JsonProperty("variables")]
-        public Dictionary<string, Variable>? Variables { get; set; }
+    [JsonProperty("variables")] public Dictionary<string, Variable>? Variables { get; set; }
 
-    }
 }
-

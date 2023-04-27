@@ -1,7 +1,9 @@
 ﻿using Ban3.Infrastructures.Common.Attributes;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.WorkItemTracking;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
 
@@ -31,6 +33,12 @@ public class DevOps
         Core.PrepareTeams(true);
         Discussion.PrepareThreads();
 
+    }
+
+    public static async void SendMail(SendMail request)
+    {
+         await ServerResource.WorkItemTrackingSendMail
+            .ExecuteVoid(request);
     }
 
     public static void Sync()

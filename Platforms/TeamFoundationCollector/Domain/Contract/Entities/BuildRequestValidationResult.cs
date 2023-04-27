@@ -1,4 +1,6 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
@@ -11,10 +13,13 @@ public class BuildRequestValidationResult
     /// <summary>
     /// The message associated with the result.
     /// </summary>
+    [JsonProperty("message")]
     public string Message { get; set; } = string.Empty;
 
     /// <summary>
     /// The result.
     /// </summary>
+    [JsonProperty("result")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public ValidationResult Result { get; set; }
 }

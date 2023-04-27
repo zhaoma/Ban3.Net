@@ -8,7 +8,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 /// </summary>
 public class TfvcBranchRef
 {
-
     /// <summary>
     /// A collection of REST reference links.
     /// </summary>
@@ -50,5 +49,4 @@ public class TfvcBranchRef
     /// </summary>
     [JsonProperty("url")]
     public string Url { get; set; } = string.Empty;
-
 }

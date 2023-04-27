@@ -69,9 +69,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
             sb.Append("?");
             
-            if (Top != null)
-                sb.Append($"$top={Top}&");
-
+            sb.AppendQuery("$top", Top);
             sb.AppendQuery("BranchName", BranchName);
             sb.AppendQuery("BuildIds", BuildIds);
             sb.AppendQuery("BuildNumber", BuildNumber);

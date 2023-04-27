@@ -101,6 +101,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         BuildUpdateBuilds,
         BuildUpdateDefinition,
 
+        BuildGetReport,
+
         CoreProjectsCreate,
         CoreProjectsDelete,
         CoreProjectsGet,
@@ -166,9 +168,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         TfvcGetShelvesets,
 
         TfvcGetShelvesetWorkItems,
-
-        WIQL,
-
+        
         DiscussionGetThread,
         DiscussionGetThreads,
 
@@ -179,6 +179,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         PipelinesListLogs,
         PipelinesListPipelines,
         PipelinesListRuns,
-        PipelinesRunPipeline
+        PipelinesRunPipeline,
+
+        WorkItemTrackingSendMail
     }
 }

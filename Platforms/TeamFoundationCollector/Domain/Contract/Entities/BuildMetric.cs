@@ -17,6 +17,7 @@ public class BuildMetric
     /// <summary>
     /// The value.
     /// </summary>
+    [JsonProperty("intValue")]
     public int IntValue { get; set; }
 
     /// <summary>

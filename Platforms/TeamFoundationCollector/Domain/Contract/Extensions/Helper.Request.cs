@@ -22,6 +22,19 @@ public static partial class Helper
         };
     }
 
+    public static async Task ExecuteVoid(this Enums.ServerResource resource, IRequest request)
+    {
+        var responseMessage = await Config.Host.Request(request.Resource());
+        var content = responseMessage.Content.ReadAsStringAsync();
+        Console.WriteLine(request.Resource().Url);
+        Logger.Debug(request.Resource().Url);
+        Logger.Debug(content);
+        Console.WriteLine($"responseMessage.StatusCode={responseMessage.StatusCode}");
+        Console.WriteLine(content.Result);
+
+        responseMessage.Dispose();
+    }
+
     public static async Task<T> Execute<T>(this Enums.ServerResource resource, IRequest request)
         where T : IResponse,new()
     {

@@ -1,20 +1,16 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
+
+/// <summary>
+/// Represents a reference to an agent pool.
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/build/builds/get?view=azure-devops-rest-7.0#taskagentpoolreference
+/// </summary>
+public class TaskAgentPoolReference
 {
-    /// <summary>
-    /// Represents a reference to an agent pool.
-    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/build/builds/get?view=azure-devops-rest-7.0#taskagentpoolreference
-    /// </summary>
-    public class TaskAgentPoolReference
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
+    [JsonProperty("id")] public int Id { get; set; }
 
-        [JsonProperty("isHosted")]
-        public bool IsHosted { get; set; }
+    [JsonProperty("isHosted")] public bool IsHosted { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; } = string.Empty;
-    }
+    [JsonProperty("name")] public string Name { get; set; } = string.Empty;
 }

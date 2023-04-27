@@ -89,11 +89,11 @@ public static partial class Helper
         return false;
     }
 
-    public static List<TfvcBranch> LoadBranches(this ICore _)
+    public static List<TfvcBranch> LoadBranches(this ITfvc _)
     {
         var file = new List<TfvcBranch>().SetsFile();
         return file.LoadOrSetDefault(
-            file.ReadFile().JsonToObj<List<TfvcBranch>>(),
+            file.ReadFile().JsonToObj<List<TfvcBranch>>()!,
             file
         );
     }

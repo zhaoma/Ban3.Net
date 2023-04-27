@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
 {
@@ -49,19 +50,19 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// <summary>
         /// Indicates whether the build has been deleted.
         /// </summary>
-        [JsonProperty("definition")]
+        [JsonProperty("deleted")]
         public bool Deleted { get; set; }
 
         /// <summary>
         /// The identity of the process or person that deleted the build.
         /// </summary>
-        [JsonProperty("definition")]
+        [JsonProperty("deletedBy")]
         public IdentityRef? DeletedBy { get; set; }
 
         /// <summary>
         /// The date the build was deleted.
         /// </summary>
-        [JsonProperty("definition")]
+        [JsonProperty("deletedDate")]
         public string DeletedDate { get; set; } = string.Empty;
 
         /// <summary>
@@ -128,6 +129,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The build's priority.
         /// </summary>
         [JsonProperty("priority")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public QueuePriority Priority { get; set; }
 
         /// <summary>
@@ -164,6 +166,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// 
         /// </summary>
         [JsonProperty("queueOptions")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public QueueOptions QueueOptions { get; set; }
 
         /// <summary>
@@ -182,6 +185,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The reason that the build was created.
         /// </summary>
         [JsonProperty("reason")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public BuildReason Reason { get; set; }
 
         /// <summary>
@@ -206,6 +210,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The build result.
         /// </summary>
         [JsonProperty("result")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public BuildResult Result { get; set; }
 
         /// <summary>
@@ -236,6 +241,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
         /// The status of the build.
         /// </summary>
         [JsonProperty("status")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public BuildStatus Status { get; set; }
 
         /// <summary>

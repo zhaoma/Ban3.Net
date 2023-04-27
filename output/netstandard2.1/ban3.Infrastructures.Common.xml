@@ -1192,6 +1192,15 @@
             <param name="val"></param>
             <returns></returns>
         </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendQuery(System.Text.StringBuilder,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sb"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToInt(System.Object,System.Int32)">
             <summary>
             Toes the int.
