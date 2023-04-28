@@ -11,4 +11,7 @@ public static partial  class Helper
     static readonly ReaderWriterLockSlim LockSlim = new ReaderWriterLockSlim();
 
     const int LockSlimTimeout = 1000;
+
+    public static bool IsIgnored(this string str)
+        => Config.IgnoredKeys.Any(str.Contains);
 }

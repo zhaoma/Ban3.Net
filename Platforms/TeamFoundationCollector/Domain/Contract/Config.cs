@@ -36,4 +36,8 @@ public class Config
             Password = Target.Password,
         };
     }
+
+    public const int MaxParallelTasks = 20;
+
+    public static List<string> IgnoredKeys = new() { "Forward Integration", "Reverse Integration" };
 }

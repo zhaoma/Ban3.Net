@@ -39,7 +39,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <returns></returns>
         public static T? JsonToObj<T>( this string str )
         {
-            return JsonConvert.DeserializeObject<T>( str );
+            return string.IsNullOrEmpty(str) 
+                ? default(T)
+                : JsonConvert.DeserializeObject<T>( str );
         }
 
         /// <summary>

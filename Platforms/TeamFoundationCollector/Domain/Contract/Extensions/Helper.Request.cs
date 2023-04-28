@@ -24,76 +24,111 @@ public static partial class Helper
 
     public static async Task ExecuteVoid(this Enums.ServerResource resource, IRequest request)
     {
-        var responseMessage = await Config.Host.Request(request.Resource());
-        var content = responseMessage.Content.ReadAsStringAsync();
-        Console.WriteLine(request.Resource().Url);
-        Logger.Debug(request.Resource().Url);
-        Logger.Debug(content);
-        Console.WriteLine($"responseMessage.StatusCode={responseMessage.StatusCode}");
-        Console.WriteLine(content.Result);
+        try
+        {
+            var responseMessage = await Config.Host.Request(request.Resource());
+            var content = responseMessage.Content.ReadAsStringAsync();
 
-        responseMessage.Dispose();
+            Logger.Debug(request.Resource().Url);
+            Logger.Debug($"responseMessage.StatusCode={responseMessage.StatusCode}");
+
+            responseMessage.Dispose();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Source}:{ex.Message}");
+        }
     }
 
     public static async Task<T> Execute<T>(this Enums.ServerResource resource, IRequest request)
         where T : IResponse,new()
     {
-        var responseMessage =await Config.Host.Request(request.Resource());
-        var content = responseMessage.Content.ReadAsStringAsync();
-        Console.WriteLine(request.Resource().Url);
-        Logger.Debug(request.Resource().Url);
-        Logger.Debug(content);
-        Console.WriteLine($"responseMessage.StatusCode={responseMessage.StatusCode}");
-        Console.WriteLine(content.Result);
-        var result = content.Result.JsonToObj<T>()??new T();
-        result.Success = new[]
+        try
         {
-            HttpStatusCode.InternalServerError,
-            HttpStatusCode.Accepted,
-            HttpStatusCode.OK
-        }.Contains(responseMessage.StatusCode);
+            var responseMessage = await Config.Host.Request(request.Resource());
+            var content = responseMessage.Content.ReadAsStringAsync();
 
-        responseMessage.Dispose();
-        return result;
+            Logger.Debug(request.Resource().Url);
+            Logger.Debug($"responseMessage.StatusCode={responseMessage.StatusCode}");
+            Logger.Debug(content.Result);
+
+            var result = content.Result.JsonToObj<T>() ?? new T();
+            result.Success = new[]
+            {
+                HttpStatusCode.InternalServerError,
+                HttpStatusCode.Accepted,
+                HttpStatusCode.OK
+            }.Contains(responseMessage.StatusCode);
+
+            responseMessage.Dispose();
+            return result;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Source}:{ex.Message}");
+        }
+
+        return new T();
     }
 
     public static async Task<string> ReadHtml(this Enums.ServerResource resource, IRequest request)
     {
-        var responseMessage =await Config.Host.Request(request.Resource());
-        Logger.Debug(request.Resource().Url);
+        try
+        {
+            var responseMessage = await Config.Host.Request(request.Resource());
 
-        if (!new[]
-            {
-                HttpStatusCode.Accepted,
-                HttpStatusCode.OK
-            }.Contains(responseMessage.StatusCode))
-            return string.Empty;
+            Logger.Debug(request.Resource().Url);
+            Logger.Debug($"responseMessage.StatusCode={responseMessage.StatusCode}");
 
-        var result=await responseMessage.Content.ReadAsStringAsync();
-        responseMessage.Dispose();
-        return result;
+            if (!new[]
+                {
+                    HttpStatusCode.Accepted,
+                    HttpStatusCode.OK
+                }.Contains(responseMessage.StatusCode))
+                return string.Empty;
+
+            var result = await responseMessage.Content.ReadAsStringAsync();
+            responseMessage.Dispose();
+            return result;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Source}:{ex.Message}");
+        }
+
+        return string.Empty;
     }
 
     public static async Task<string> Download(this Enums.ServerResource resource, IRequest request, string savePath)
     {
-        var responseMessage =await Config.Host.Request(request.Resource());
-        Logger.Debug(request.Resource().Url);
-        Logger.Debug(savePath);
+        try
+        {
+            var responseMessage = await Config.Host.Request(request.Resource());
 
-        if (!new[]
-            {
-                HttpStatusCode.Accepted,
-                HttpStatusCode.OK
-            }.Contains(responseMessage.StatusCode))
-            return string.Empty;
+            Logger.Debug(request.Resource().Url);
+            Logger.Debug(savePath);
 
-        var iputStream =await responseMessage.Content.ReadAsStreamAsync();
+            if (!new[]
+                {
+                    HttpStatusCode.Accepted,
+                    HttpStatusCode.OK
+                }.Contains(responseMessage.StatusCode))
+                return string.Empty;
 
-        await using var fileStream = File.Create(savePath);
-        await iputStream.CopyToAsync(fileStream);
+            var iputStream = await responseMessage.Content.ReadAsStreamAsync();
 
-        responseMessage.Dispose();
-        return savePath;
+            await using var fileStream = File.Create(savePath);
+            await iputStream.CopyToAsync(fileStream);
+
+            responseMessage.Dispose();
+            return savePath;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Source}:{ex.Message}");
+        }
+
+        return string.Empty;
     }
 
     /*

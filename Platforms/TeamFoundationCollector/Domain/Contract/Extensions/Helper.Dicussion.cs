@@ -2,6 +2,7 @@
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Discussion;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Discussion;
 
@@ -35,7 +36,7 @@ public static partial class Helper
         }
     }
 
-    public static DiscussionThread LoadThread(this IDiscussion _, int threadId)
+    public static DiscussionThread? LoadThread(this IDiscussion _, int threadId)
     {
         var file = threadId.DataFile<DiscussionThread>();
         return file.ReadFile()
@@ -53,6 +54,13 @@ public static partial class Helper
         {
             Uri = new Entities.ArtifactUri(shelvesetId, shelvesetOwner)
         });
+    
+    public static List<CompositeThread>? GetCompositeThreads(this GetThreadsResult responseResult)
+    {
+        if (responseResult is { Success: true, Value: { } } && responseResult.Value.Any())
+            return responseResult.Value.Select(o => new CompositeThread(o)).ToList();
 
+        return null;
+    }
 
 }

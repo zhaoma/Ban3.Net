@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 
 namespace Ban3.Infrastructures.NetHttp.Entries
 {
@@ -22,7 +20,6 @@ namespace Ban3.Infrastructures.NetHttp.Entries
 
         public HttpClientHandler Handler()
         {
-            Console.WriteLine("prepare new client handler.");
             var defaultCredential = string.IsNullOrEmpty(Domain)
                 ? new NetworkCredential(UserName, Password)
                 : new NetworkCredential(UserName, Password, Domain);
@@ -42,11 +39,6 @@ namespace Ban3.Infrastructures.NetHttp.Entries
 
         public HttpClient Client()
         {
-            if (_client == null)
-            {
-                Console.WriteLine("prepare client");
-            }
-
             return _client ??= Anonymous
                 ? new HttpClient()
                 : new HttpClient(Handler());

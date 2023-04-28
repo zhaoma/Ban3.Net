@@ -28,9 +28,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="ts"></param>
         /// <param name="action"></param>
-        public static void Delay(this TimeSpan ts,Action action)
+        public static async void Delay(this TimeSpan ts,Action action)
         {
-            Task.Run(async () => { await Task.Delay(ts);action(); });
+            await Task.Run(async () => { await Task.Delay(ts);action(); });
         }
     }
 }

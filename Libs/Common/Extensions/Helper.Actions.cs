@@ -16,6 +16,15 @@ namespace Ban3.Infrastructures.Common.Extensions
     /// 
     public static partial class Helper
     {
+        public static void ExecuteAndTiming(this Action action, string message)
+        {
+            var now = DateTime.Now;
+
+            action();
+
+            Console.WriteLine($"{message},{DateTime.Now.Subtract(now).TotalMilliseconds} ms spent.");
+        }
+
         /// <summary>
         /// 并发运行
         /// </summary>

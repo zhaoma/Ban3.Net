@@ -4,6 +4,7 @@ using Ban3.Libs.RuntimeCaching;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
@@ -12,29 +13,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 
 public static partial class Helper
 {
-
-    /*
-     *  CreateChangeset
-     *  GetBatchedChangesets
-     *  GetBatchedItems
-     *  GetBranches
-     *  GetBranchRefs
-     *  GetBranch
-     *  GetChangesetChanges
-     *  GetChangeset
-     *  GetChangesets
-     *  GetChangesetWorkItems
-     *  GetItem
-     *  GetItems
-     *  GetLabelItems
-     *  GetLabel
-     *  GetLabels
-     *  GetShelvesetChanges
-     *  GetShelveset
-     *  GetShelvesets
-     *  GetShelvesetWorkItems
-     */
-
     public static CreateChangesetResult CreateChangeset(this ITfvc _, CreateChangeset request)
         => ServerResource.TfvcCreateChangeset.Execute<CreateChangesetResult>(request).Result;
 
@@ -117,21 +95,14 @@ public static partial class Helper
     {
         try
         {
-            var now= DateTime.Now;
             var changeset = _.GetChangeset(changesetRef.ChangesetId);
-            var t1 = DateTime.Now.Subtract(now).TotalMilliseconds;
-            now = DateTime.Now;
 
             if (changeset.Success)
             {
                 changeset.ChangesetId.DataFile<TfvcChangeset>()
                     .WriteFile(changeset.ObjToJson());
             }
-
-            var t2=DateTime.Now.Subtract(now).TotalMilliseconds;
-
-            Logger.Debug($"read:{t1} ms;save:{t2} ms");
-            Console.WriteLine($"read:{t1} ms;save:{t2} ms");
+            
             return true;
         }
         catch (Exception ex)
@@ -142,7 +113,7 @@ public static partial class Helper
         return false;
     }
 
-    public static TfvcChangeset LoadChangeset(this ITfvc _, int changesetId)
+    public static TfvcChangeset? LoadChangeset(this ITfvc _, int changesetId)
     {
         var file = changesetId.DataFile<TfvcChangeset>();
         return file.ReadFile()
@@ -174,7 +145,6 @@ public static partial class Helper
     {
         var request = new GetChangesets
         {
-            OrderBy = "id asc",
             Top = pageSize,
             Skip = (pageNo - 1) * pageSize
         };
@@ -184,23 +154,34 @@ public static partial class Helper
         return _.GetChangesets(request);
     }
 
-    public static void PrepareChangesets(this ITfvc _, string id, int start = 1)
+    public static List<CompositeChangeset> PrepareChangesets(this ITfvc _, string id, bool getDetail = false,
+        int start = 1)
     {
-        var pageSize = 20;
+        var result = new List<CompositeChangeset>();
+
+        var pageSize = Config.MaxParallelTasks;
         var pageNo = Math.Max(1, start);
 
         var changesets = _.GetChangesets(id, pageNo, pageSize);
-        while (changesets is { Success: true, Value: { } })
+        while (changesets is { Success: true, Value: { } } && changesets.Value.Any())
         {
-            Console.WriteLine($"{DateTime.Now}:parse page {pageNo}");
-            changesets.Value
-                .AsParallel()
-                //.WithDegreeOfParallelism(Environment.ProcessorCount / 2)
-                .ForAll(o => { _.GetChangesetAndSave(o); });
+            Logger.Debug($"{DateTime.Now}:parse page {pageNo}");
+
+            result.AddRange(changesets.Value
+                .Where(o=>!o.Comment.IsIgnored())
+                .Select(o => new CompositeChangeset(o)));
+
+            if (getDetail)
+                changesets.Value
+                    .AsParallel()
+                    //.WithDegreeOfParallelism(Environment.ProcessorCount / 2)
+                    .ForAll(o => { _.GetChangesetAndSave(o); });
 
             pageNo++;
             changesets = _.GetChangesets(id, pageNo, pageSize);
         }
+
+        return result;
     }
 
     public static GetChangesetWorkItemsResult GetChangesetWorkItems(this ITfvc _, GetChangesetWorkItems request)
@@ -285,25 +266,36 @@ public static partial class Helper
         return _.GetShelvesets(request);
     }
 
-    public static void PrepareShelvesets(this ITfvc _, string id, int start = 1)
+    public static List<CompositeShelveset> PrepareShelvesets(this ITfvc _, string id, bool getDetail = false,
+        int start = 1)
     {
-        var pageSize = 20;
+        var result = new List<CompositeShelveset>();
+
+        var pageSize = Config.MaxParallelTasks; ;
         var pageNo = Math.Max(1, start);
 
         var shelvesets = _.GetShelvesets(id, pageNo, pageSize);
-        while (shelvesets is { Success: true, Value: { } })
+        while (shelvesets is { Success: true, Value: { } } && shelvesets.Value.Any())
         {
-            Console.WriteLine($"{DateTime.Now}:parse page {pageNo}");
-            shelvesets.Value
-                .AsParallel()
-                //.WithDegreeOfParallelism(Environment.ProcessorCount / 2)
-                .ForAll(o => { _.GetShelvesetAndSave(o); });
+            Logger.Debug($"{DateTime.Now}:parse page {pageNo}");
+
+            result.AddRange(shelvesets.Value
+
+                .Where(o => !o.Comment.IsIgnored())
+                .Select(o => new CompositeShelveset(o)));
+            if (getDetail)
+                shelvesets.Value
+                    .AsParallel()
+                    //.WithDegreeOfParallelism(Environment.ProcessorCount / 2)
+                    .ForAll(o => { _.GetShelvesetAndSave(o); });
 
             pageNo++;
             shelvesets = _.GetShelvesets(id, pageNo, pageSize);
         }
+
+        return result;
     }
-    
+
     public static GetShelvesetWorkItemsResult GetShelvesetWorkItems(this ITfvc _, GetShelvesetWorkItems request)
         => ServerResource.TfvcGetShelvesetWorkItems.Execute<GetShelvesetWorkItemsResult>(request).Result;
 }
