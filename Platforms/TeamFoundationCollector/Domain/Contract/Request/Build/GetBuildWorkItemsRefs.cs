@@ -11,8 +11,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class GetBuildWorkItemsRefs
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-
         [JsonProperty("buildId")]
         public int BuildId { get; set; }
 
@@ -32,7 +30,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             return sb.ToString();
         }
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

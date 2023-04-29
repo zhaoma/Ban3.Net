@@ -10,19 +10,17 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
     public class DeleteTeam
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Delete";
+        public DeleteTeam() { Method = "Delete"; }
 
-        [JsonProperty("projectId")]
         public string ProjectId { get; set; } = string.Empty;
         
-        [JsonProperty("teamId")]
         public string TeamId { get; set; } = string.Empty;
         
         public string RequestPath() => $"{Instance}/{Organization}/_apis/projects/{ProjectId}/teams/{TeamId}";
 
         public string RequestQuery() => $"?api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

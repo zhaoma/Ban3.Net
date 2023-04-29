@@ -10,16 +10,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class GetController
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-        
-        [JsonProperty("controllerId")]
         public int ControllerId { get; set; }
         
         public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/controllers/{ControllerId}";
 
         public string RequestQuery() => $"?api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

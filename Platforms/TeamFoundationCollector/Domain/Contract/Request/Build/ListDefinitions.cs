@@ -13,9 +13,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
 public class ListDefinitions
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-
-    [JsonProperty("top")] public int? Top { get; set; }
+    [JsonProperty("$top")] public int? Top { get; set; }
     
     [JsonProperty("builtAfter")] public string BuiltAfter { get; set; } = string.Empty;
 
@@ -79,6 +77,6 @@ public class ListDefinitions
         return sb.ToString();
     }
 
-    public string RequestBody() => string.Empty;
+    
 }
 

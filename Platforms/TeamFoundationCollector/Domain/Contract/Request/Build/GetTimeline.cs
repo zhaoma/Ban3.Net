@@ -11,12 +11,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class GetTimeline
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-
-        [JsonProperty("buildId")]
         public int BuildId { get; set; }
 
-        [JsonProperty("timelineId")]
         public string TimelineId { get; set; } = string.Empty;
         
         [JsonProperty("changeId")]
@@ -42,7 +38,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             return sb.ToString();
         }
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

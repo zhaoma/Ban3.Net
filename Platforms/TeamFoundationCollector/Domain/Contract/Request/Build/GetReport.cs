@@ -10,12 +10,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
 public class GetReport
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-
-    /// <summary>
-    /// The ID of the definition.
-    /// </summary>
-    [JsonProperty("buildId")]
     public int BuildId { get; set; }
 
     [JsonProperty("type")]
@@ -27,5 +21,5 @@ public class GetReport
         ? string.Empty
         : $"?type={Type}";
 
-    public string RequestBody() => string.Empty;
+    
 }

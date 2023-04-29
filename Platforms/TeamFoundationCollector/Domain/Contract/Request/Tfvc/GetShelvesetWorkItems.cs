@@ -6,8 +6,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetShelvesetWorkItems
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-    
     /// <summary>
     /// Unique identifier of label
     /// </summary>
@@ -25,5 +23,5 @@ public class GetShelvesetWorkItems
         return sb.ToString();
     }
 
-    public string RequestBody() => string.Empty;
+    
 }

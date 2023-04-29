@@ -10,17 +10,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class GetDefinitionRevisions
         : PresetRequest, IRequest
     {
-
-        public string Method { get; set; } = "Get";
-
-        [JsonProperty("definitionId")]
         public int DefinitionId { get; set; }
 
         public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/definitions/{DefinitionId}/revisions";
 
         public string RequestQuery() => $"?api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

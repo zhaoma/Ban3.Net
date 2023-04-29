@@ -10,17 +10,14 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetChangesetWorkItems
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-    
     /// <summary>
     /// ID of the changeset. 
     /// </summary>
-    [JsonProperty("id")]
     public int Id { get; set; }
     
     public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/changesets/{Id}/workItems";
 
     public string RequestQuery() => $"?api-version={ApiVersion}";
 
-    public string RequestBody() => string.Empty;
+    
 }

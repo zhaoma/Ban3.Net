@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 
 public class GetLabelRequestData
 {

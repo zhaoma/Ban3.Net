@@ -10,8 +10,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class GetBuild
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-        
         /// <summary>
         /// The ID of the definition.
         /// </summary>
@@ -27,7 +25,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             ? $"?api-version={ApiVersion}"
             : $"?propertyFilters={PropertyFilters}&api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

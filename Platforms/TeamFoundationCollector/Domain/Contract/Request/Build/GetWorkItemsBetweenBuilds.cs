@@ -11,12 +11,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class GetWorkItemsBetweenBuilds
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-
         /// <summary>
         /// The maximum number of changes to return.
         /// </summary>
-        [JsonProperty("top")]
+        [JsonProperty("$top")]
         public int? Top { get; set; }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             return sb.ToString();
         }
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

@@ -11,24 +11,20 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
     public class GetTeamMembers
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-
         /// <summary>
         /// The name or ID (GUID) of the team project the team belongs to.
         /// </summary>
-        [JsonProperty("projectId")]
         public string ProjectId { get; set; } = string.Empty;
 
         /// <summary>
         /// The name or ID (GUID) of the team .
         /// </summary>
-        [JsonProperty("teamId")]
         public string TeamId { get; set; } = string.Empty;
 
-        [JsonProperty("skip")]
+        [JsonProperty("$skip")]
         public int? Skip { get; set; }
 
-        [JsonProperty("top")]
+        [JsonProperty("$top")]
         public int? Top { get; set; }
 
         public string RequestPath() => $"{Instance}/{Organization}/_apis/projects/{ProjectId}/teams/{TeamId}/members";
@@ -48,7 +44,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
             return sb.ToString();
         }
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

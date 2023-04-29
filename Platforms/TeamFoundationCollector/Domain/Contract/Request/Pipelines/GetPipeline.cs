@@ -10,9 +10,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
     public class GetPipeline
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-
-        [JsonProperty("pipelineId")] 
         public int PipelineId { get; set; }
 
         [JsonProperty("pipelineVersion")] 
@@ -26,7 +23,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
                 ? $"?pipelineVersion={PipelineVersion}"
                 : string.Empty;
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

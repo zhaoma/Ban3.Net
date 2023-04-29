@@ -5,8 +5,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetBranchRefs
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-    
     /// <summary>
     /// Full path to the branch.
     /// Default: $/
@@ -30,5 +28,5 @@ public class GetBranchRefs
 
     public string RequestQuery() => $"?scopePath={ScopePath}&includeDeleted={IncludeDeleted}&includeLinks={IncludeLinks}&api-version={ApiVersion}";
 
-    public string RequestBody() => string.Empty;
+    
 }

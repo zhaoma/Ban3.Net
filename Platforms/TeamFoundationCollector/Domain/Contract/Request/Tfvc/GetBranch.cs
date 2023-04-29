@@ -9,8 +9,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
     public class GetBranch
         : PresetRequest,IRequest
     {
-        public string Method { get; set; } = "Get";
-        
         /// <summary>
         /// Full path to the branch.
         /// Default: $/
@@ -34,7 +32,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
 
         public string RequestQuery() => $"?path={Path}&includeChildren={IncludeChildren}&includeParent={IncludeParent}&api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
 
     }
 }

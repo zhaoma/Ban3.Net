@@ -11,12 +11,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetChangesetChanges
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
     
     /// <summary>
     /// ID of the changeset. Default: null
     /// </summary>
-    [JsonProperty("id")]
     public int Id { get; set; }
 
     /// <summary>
@@ -60,5 +58,4 @@ public class GetChangesetChanges
         return sb.ToString();
     }
 
-    public string RequestBody() =>string.Empty;
 }

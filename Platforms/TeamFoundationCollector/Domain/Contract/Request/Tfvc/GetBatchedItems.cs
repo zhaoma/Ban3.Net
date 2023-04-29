@@ -11,13 +11,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetBatchedItems
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Post";
-    
+    public GetBatchedItems() { Method = "Post"; }
+        
     public GetBatchedItemsBody? Body { get; set; }
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/itembatch";
 
     public string RequestQuery() => $"?api-version={ApiVersion}";
 
-    public string RequestBody() => JsonConvert.SerializeObject(Body);
+    public override string RequestBody() => JsonConvert.SerializeObject(Body);
 }

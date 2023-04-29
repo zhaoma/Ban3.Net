@@ -10,12 +10,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class RestoreDefinition
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Patch";
+        public RestoreDefinition() { Method = "Patch"; }
 
         /// <summary>
         /// The identifier of the definition to restore.
         /// </summary>
-        [JsonProperty("definitionId")]
         public int DefinitionId { get; set; }
 
         /// <summary>
@@ -28,7 +27,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
         public string RequestQuery() => $"?api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

@@ -28,7 +28,7 @@ public class GetLabels
     public int? Top { get; set; }
 
     [JsonProperty("requestData")]
-    public GetLabelRequestData? RequestData { get; set; }
+    public SubCondition.GetLabelRequestData? RequestData { get; set; }
 
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/labels";
@@ -58,5 +58,5 @@ public class GetLabels
         return sb.ToString();
     }
 
-    public string RequestBody() => string.Empty;
+    
 }

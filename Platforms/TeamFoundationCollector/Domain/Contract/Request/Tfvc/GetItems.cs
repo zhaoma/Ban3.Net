@@ -8,8 +8,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetItems
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-    
     [JsonProperty("includeLinks")]
     public bool IncludeLinks { get; set; }
 
@@ -47,5 +45,5 @@ public class GetItems
         return sb.ToString();
     }
 
-    public string RequestBody() => string.Empty;
+    
 }

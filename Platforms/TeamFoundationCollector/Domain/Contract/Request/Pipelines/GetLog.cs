@@ -11,15 +11,14 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
     public class GetLog
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
+        public int LogId { get; set; }
 
-        [JsonProperty("logId")] public int LogId { get; set; }
+        public int PipelineId { get; set; }
 
-        [JsonProperty("pipelineId")] public int PipelineId { get; set; }
+        public int RunId { get; set; }
 
-        [JsonProperty("runId")] public int RunId { get; set; }
-
-        [JsonProperty("expand")] public GetLogExpandOptions? Expand { get; set; }
+        [JsonProperty("$expand")]
+        public GetLogExpandOptions? Expand { get; set; }
 
         public string RequestPath() =>
             $"{Instance}/{Organization}/{Project}/_apis/pipelines/{PipelineId}/runs/{RunId}/logs/{LogId}";
@@ -29,7 +28,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
                 ? $"?$expand={Expand}"
                 : string.Empty;//$"?api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

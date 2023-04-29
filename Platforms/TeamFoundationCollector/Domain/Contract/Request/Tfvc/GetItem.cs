@@ -15,8 +15,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
     public class GetItem
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-        
         /// <summary>
         /// Version control path of an individual item to return.
         /// </summary>
@@ -53,6 +51,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
 
             sb.Append("?");
 
+            sb.AppendQuery("path", Path);
+
             if (!string.IsNullOrEmpty(Path))
                 sb.Append($"path={Path}&");
 
@@ -77,6 +77,5 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc
             return sb.ToString();
         }
 
-        public string RequestBody() =>  string.Empty;
     }
 }

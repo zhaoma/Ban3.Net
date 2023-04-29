@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 
-public class GetShelvesetRequestData
+public class RequestData
 {
     /// <summary>
     /// Whether to include policyOverride and notes Only applies when requesting a single deep shelveset

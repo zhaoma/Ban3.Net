@@ -11,21 +11,18 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
     public class GetTeams
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-
-        [JsonProperty("projectId")] 
         public string ProjectId { get; set; } = string.Empty;
 
-        [JsonProperty("expandIdentity")] 
+        [JsonProperty("$expandIdentity")] 
         public bool? ExpandIdentity { get; set; }
 
-        [JsonProperty("mine")] 
+        [JsonProperty("$mine")] 
         public bool? Mine { get; set; }
 
-        [JsonProperty("skip")] 
+        [JsonProperty("$skip")] 
         public int? Skip { get; set; }
 
-        [JsonProperty("top")] 
+        [JsonProperty("$top")] 
         public int? Top { get; set; }
 
         public string RequestPath() =>
@@ -54,7 +51,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
             return sb.ToString();
         }
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

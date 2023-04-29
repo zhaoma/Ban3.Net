@@ -11,24 +11,22 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetShelvesets
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-    
     /// <summary>
     /// Number of results to skip.
     /// Default: null
     /// </summary>
-    [JsonProperty("skip")]
+    [JsonProperty("$skip")]
     public int? Skip { get; set; }
 
     /// <summary>
     /// The maximum number of results to return.
     /// Default: null
     /// </summary>
-    [JsonProperty("top")]
+    [JsonProperty("$top")]
     public int? Top { get; set; }
 
     [JsonProperty("requestData")]
-    public GetShelvesetRequestData? RequestData { get; set; }
+    public SubCondition.RequestData? RequestData { get; set; }
 
 
     public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/shelvesets";
@@ -59,7 +57,7 @@ public class GetShelvesets
         return sb.ToString();
     }
 
-    public string RequestBody() => string.Empty;
+    
 
 
 }

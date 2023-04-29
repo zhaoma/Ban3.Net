@@ -10,7 +10,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.WorkIte
 public class SendMail
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Post";
+    public SendMail() { Method = "Post"; }
 
     /// <summary>
     /// The ID of the definition.
@@ -25,5 +25,5 @@ public class SendMail
 
     public string RequestQuery() =>string.Empty;
 
-    public string RequestBody() => JsonConvert.SerializeObject(Body);
+    public override string RequestBody() => JsonConvert.SerializeObject(Body);
 }

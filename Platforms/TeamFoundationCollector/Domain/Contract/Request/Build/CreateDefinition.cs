@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributes;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Newtonsoft.Json;
 
@@ -11,7 +12,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
 public class CreateDefinition
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Post";
+    public CreateDefinition()
+    {
+        Method = "Post";
+    }
         
     [JsonProperty("definitionToCloneId")] 
     public int? DefinitionToCloneId { get; set; }
@@ -19,6 +23,7 @@ public class CreateDefinition
     [JsonProperty("definitionToCloneRevision")]
     public int? DefinitionToCloneRevision { get; set; }
 
+    [IsBody]
     public CreateDefinitionBody? Body { get; set; }
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/definitions";
@@ -38,6 +43,6 @@ public class CreateDefinition
         return sb.ToString();
     }
 
-    public string RequestBody() => JsonConvert.SerializeObject(Body);
+    public override string RequestBody() => JsonConvert.SerializeObject(Body);
 
 }

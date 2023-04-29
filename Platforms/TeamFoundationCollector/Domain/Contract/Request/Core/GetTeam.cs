@@ -10,18 +10,14 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
     public class GetTeam
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-
         /// <summary>
         /// The name or ID (GUID) of the team project containing the team.
         /// </summary>
-        [JsonProperty("projectId")]
         public string ProjectId { get; set; } = string.Empty;
 
         /// <summary>
         /// The name or ID (GUID) of the team.
         /// </summary>
-        [JsonProperty("teamId")]
         public string TeamId { get; set; } = string.Empty;
 
         /// <summary>
@@ -37,7 +33,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
                 ? $"?$expandIdentity={ExpandIdentity}&api-version={ApiVersion}"
                 : $"?api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

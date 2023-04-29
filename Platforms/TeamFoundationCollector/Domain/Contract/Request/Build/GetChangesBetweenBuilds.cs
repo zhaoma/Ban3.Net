@@ -11,8 +11,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class GetChangesBetweenBuilds
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-
         /// <summary>
         /// The maximum number of changes to return.
         /// </summary>
@@ -50,7 +48,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             return sb.ToString();
         }
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

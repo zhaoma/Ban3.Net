@@ -11,9 +11,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class UpdateBuild
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Patch";
+        public UpdateBuild() { Method = "Patch"; }
 
-        [JsonProperty("buildId")]
         public int BuildId { get; set; }
         
         [JsonProperty("retry")]
@@ -36,7 +35,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             return sb.ToString();
         }
 
-        public string RequestBody() => JsonConvert.SerializeObject(Body);
+        public override string RequestBody() => JsonConvert.SerializeObject(Body);
     }
 }
 

@@ -10,8 +10,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class DeleteBuild
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Delete";
-        
+        public DeleteBuild()
+        {
+            Method = "Delete";
+        }
+
         /// <summary>
         /// The ID of the build.
         /// </summary>
@@ -22,7 +25,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
         public string RequestQuery() => $"?api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

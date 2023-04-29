@@ -9,8 +9,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetBranches
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-    
     /// <summary>
     /// Return child branches, if there are any.
     /// Default: False
@@ -39,5 +37,5 @@ public class GetBranches
 
     public string RequestQuery() => $"?includeChildren={IncludeChildren}&includeParent={IncludeParent}&includeDeleted={IncludeDeleted}&includeLinks={IncludeLinks}&api-version={ApiVersion}";
 
-    public string RequestBody() => string.Empty;
+    
 }

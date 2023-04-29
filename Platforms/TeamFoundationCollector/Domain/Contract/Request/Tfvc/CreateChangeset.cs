@@ -11,7 +11,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class CreateChangeset
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Post";
+    public CreateChangeset() { Method = "Post"; }
     
     public CreateChangesetBody? Body { get; set; }
 
@@ -19,6 +19,6 @@ public class CreateChangeset
 
     public string RequestQuery() => $"?api-version={ApiVersion}";
 
-    public string RequestBody() => JsonConvert.SerializeObject(Body);
+    public override string RequestBody() => JsonConvert.SerializeObject(Body);
 
 }

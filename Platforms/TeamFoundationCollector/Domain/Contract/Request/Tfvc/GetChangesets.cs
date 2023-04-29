@@ -13,27 +13,25 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetChangesets
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-    
     /// <summary>
     /// Results are sorted by ID in descending order by default.
     /// Use id asc to sort by ID in ascending order.
     /// </summary>
-    [JsonProperty("orderby")]
+    [JsonProperty("$orderby")]
     public string OrderBy { get; set; } = string.Empty;
 
     /// <summary>
     /// Number of results to skip.
     /// Default: null
     /// </summary>
-    [JsonProperty("skip")]
+    [JsonProperty("$skip")]
     public int? Skip { get; set; }
 
     /// <summary>
     /// The maximum number of results to return.
     /// Default: null
     /// </summary>
-    [JsonProperty("top")]
+    [JsonProperty("$top")]
     public int? Top { get; set; }
 
     /// <summary>
@@ -86,7 +84,7 @@ public class GetChangesets
         return sb.ToString();
     }
 
-    public string RequestBody() => MappingFilter != null
+    public override string RequestBody() => MappingFilter != null
         ? JsonConvert.SerializeObject(MappingFilter)
         : string.Empty;
 }

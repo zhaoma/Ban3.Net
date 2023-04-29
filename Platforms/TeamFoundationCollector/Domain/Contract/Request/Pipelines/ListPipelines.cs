@@ -11,13 +11,12 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
     public class ListPipelines
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
 
-        [JsonProperty("top")] public int? Top { get; set; }
+        [JsonProperty("$top")] public int? Top { get; set; }
 
         [JsonProperty("continuationToken")] public string ContinuationToken { get; set; } = string.Empty;
 
-        [JsonProperty("orderby")] public string OrderBy { get; set; } = string.Empty;
+        [JsonProperty("$orderby")] public string OrderBy { get; set; } = string.Empty;
 
         public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/pipelines";
 
@@ -39,7 +38,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
             return sb.ToString();
         }
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

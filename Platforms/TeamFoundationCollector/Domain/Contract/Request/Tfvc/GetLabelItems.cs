@@ -11,9 +11,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetLabelItems
     : PresetRequest, IRequest
 {
-
-    public string Method { get; set; } = "Get";
-    
     /// <summary>
     /// Unique identifier of label
     /// </summary>
@@ -23,14 +20,14 @@ public class GetLabelItems
     /// Number of results to skip.
     /// Default: null
     /// </summary>
-    [JsonProperty("skip")]
+    [JsonProperty("$skip")]
     public int? Skip { get; set; }
 
     /// <summary>
     /// The maximum number of results to return.
     /// Default: null
     /// </summary>
-    [JsonProperty("top")]
+    [JsonProperty("$top")]
     public int? Top { get; set; }
 
 
@@ -50,6 +47,4 @@ public class GetLabelItems
         sb.Append($"api-version={ApiVersion}");
         return sb.ToString();
     }
-
-    public string RequestBody() =>  string.Empty;
 }

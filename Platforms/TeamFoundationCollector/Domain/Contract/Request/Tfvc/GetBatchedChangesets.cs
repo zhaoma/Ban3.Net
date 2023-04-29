@@ -6,7 +6,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetBatchedChangesets
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Post";
+    public GetBatchedChangesets() { Method = "Post"; }
     
     public GetBatchedChangesetsBody? Body { get; set; }
     
@@ -14,5 +14,5 @@ public class GetBatchedChangesets
 
     public string RequestQuery() => $"?api-version={ApiVersion}";
 
-    public string RequestBody() => JsonConvert.SerializeObject(Body);
+    public override string RequestBody() => JsonConvert.SerializeObject(Body);
 }

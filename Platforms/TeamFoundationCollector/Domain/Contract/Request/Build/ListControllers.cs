@@ -10,8 +10,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class ListControllers
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-
         [JsonProperty("name")] 
         public string Name { get; set; } = string.Empty;
 
@@ -21,7 +19,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             ?$"?api-version={ApiVersion}"
             : $"?name={Name}api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

@@ -15,12 +15,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
     public class CreateTeam
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Post";
+        public CreateTeam() { Method = "Post"; }
 
         /// <summary>
         /// The name or ID (GUID) of the team project in which to create the team.
         /// </summary>
-        [JsonProperty("projectId")]
         public string ProjectId { get; set; } = string.Empty;
 
         public CreateTeamBody? Body { get; set; }
@@ -29,7 +28,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
 
         public string RequestQuery() => $"?api-version={ApiVersion}";
         
-        public string RequestBody() => JsonConvert.SerializeObject(Body);
+        public override string RequestBody() => JsonConvert.SerializeObject(Body);
     }
 }
 

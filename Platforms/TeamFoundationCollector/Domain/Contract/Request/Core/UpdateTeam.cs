@@ -10,12 +10,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
     public class UpdateTeam
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Patch";
+        public UpdateTeam() { Method = "Patch"; }
         
-        [JsonProperty("projectId")]
         public string ProjectId { get; set; } = string.Empty;
 
-        [JsonProperty("teamId")]
         public string TeamId { get; set; } = string.Empty;
 
         public UpdateTeamBody? Body { get; set; }
@@ -24,7 +22,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Core
 
         public string RequestQuery() => $"?api-version={ApiVersion}";
 
-        public string RequestBody() => JsonConvert.SerializeObject(Body);
+        public override string RequestBody() => JsonConvert.SerializeObject(Body);
     }
 }
 

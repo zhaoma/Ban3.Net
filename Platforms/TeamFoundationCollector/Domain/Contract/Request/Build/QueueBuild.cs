@@ -13,6 +13,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
         : PresetRequest, IRequest
     {
         public string Method { get; set; } = "Post";
+        public QueueBuild()
+        {
+            Method = "Post";
+        }
 
         [JsonProperty("checkInTicket")] 
         public string CheckInTicket { get; set; } = string.Empty;
@@ -49,7 +53,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             return sb.ToString();
         }
 
-        public string RequestBody() => JsonConvert.SerializeObject(Body);
+        public override string RequestBody() => JsonConvert.SerializeObject(Body);
     }
 }
 

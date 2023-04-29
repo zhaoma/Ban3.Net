@@ -7,16 +7,12 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Discuss
 public class GetThreads
     : PresetRequest, IRequest
 {
-    [JsonProperty("method")]
-    public string Method { get; set; } = "Get";
-
-
-    [JsonProperty("uri")]
-    public ArtifactUri? Uri { get; set; }
+    [JsonProperty("artifactUri")]
+    public ArtifactUri? ArtifactUri { get; set; }
 
     public string RequestPath() =>$"{Instance}/{Organization}/_apis/discussion/threads";
 
-    public string RequestQuery() =>$"?artifactUri={Uri}";
+    public string RequestQuery() =>$"?artifactUri={ArtifactUri?.ToString()}";
 
-    public string RequestBody() => string.Empty;
+    
 }

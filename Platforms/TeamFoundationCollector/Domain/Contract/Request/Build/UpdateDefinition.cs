@@ -13,8 +13,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class UpdateDefinition
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Put";
-        
+        public UpdateDefinition() { Method = "Put"; }
+	 
         [JsonProperty("definitionId")]
         public int DefinitionId { get; set; }
         
@@ -42,7 +42,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             return sb.ToString();
         }
 
-        public string RequestBody() => JsonConvert.SerializeObject(Body);
+        public override string RequestBody() => JsonConvert.SerializeObject(Body);
     }
 }
 

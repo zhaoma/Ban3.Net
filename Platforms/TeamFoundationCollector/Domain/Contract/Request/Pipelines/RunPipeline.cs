@@ -10,9 +10,8 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
     public class RunPipeline
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Post";
+        public RunPipeline() { Method = "Post"; }
 
-        [JsonProperty("pipelineId")]
         public int PipelineId { get; set; }
 
         [JsonProperty("pipelineVersion")]
@@ -27,7 +26,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelin
                 ? $"?pipelineVersion={PipelineVersion}&api-version={ApiVersion}"
                 : $"?api-version={ApiVersion}";
 
-        public string RequestBody() => JsonConvert.SerializeObject(Body);
+        public override string RequestBody() => JsonConvert.SerializeObject(Body);
     }
 }
 

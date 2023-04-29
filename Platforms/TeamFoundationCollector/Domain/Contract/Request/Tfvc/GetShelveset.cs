@@ -11,13 +11,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetShelveset
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-    
     [JsonProperty("shelvesetId")]
     public string ShelvesetId { get; set; } = string.Empty;
 
     [JsonProperty("requestData")]
-    public GetShelvesetRequestData? RequestData { get; set; }
+    public SubCondition.RequestData? RequestData { get; set; }
     
     public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/shelvesets";
 
@@ -42,6 +40,6 @@ public class GetShelveset
         return sb.ToString();
     }
 
-    public string RequestBody() => string.Empty;
+    
 
 }

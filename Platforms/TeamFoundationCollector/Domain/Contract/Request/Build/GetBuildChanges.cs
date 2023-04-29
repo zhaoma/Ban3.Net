@@ -11,12 +11,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class GetBuildChanges
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Get";
-        
         [JsonProperty("buildId")]
         public int BuildId { get; set; }
 
-        [JsonProperty("top")]
+        [JsonProperty("$top")]
         public int? Top { get; set; }
 
         [JsonProperty("continuationToken")] 
@@ -42,7 +40,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
             return sb.ToString();
         }
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

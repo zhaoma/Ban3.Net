@@ -9,20 +9,17 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     /// </summary>
 	public class GetBuildLogs
         : PresetRequest, IRequest
-    {
-        public string Method { get; set; } = "Get";
-        
+    { 
         /// <summary>
         /// The ID of the build.
         /// </summary>
-        [JsonProperty("buildId")]
         public int BuildId { get; set; }
         
         public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/builds/{BuildId}/logs";
 
         public string RequestQuery() => $"?api-version={ApiVersion}";
 
-        public string RequestBody() => string.Empty;
+        
     }
 }
 

@@ -11,8 +11,6 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 public class GetLabel
     : PresetRequest, IRequest
 {
-    public string Method { get; set; } = "Get";
-    
     /// <summary>
     /// Unique identifier of label
     /// </summary>
@@ -44,5 +42,5 @@ public class GetLabel
         return sb.ToString();
     }
 
-    public string RequestBody() => string.Empty;
+    
 }

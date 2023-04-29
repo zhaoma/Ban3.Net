@@ -10,7 +10,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
     public class UpdateBuilds
         : PresetRequest, IRequest
     {
-        public string Method { get; set; } = "Patch";
+        public UpdateBuilds() { Method = "Patch"; }
 
         public List<UpdateBuildBody>? Body { get; set; }
         
@@ -18,7 +18,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
 
         public string RequestQuery() => $"?api-version={ApiVersion}";
 
-        public string RequestBody() => JsonConvert.SerializeObject(Body);
+        public override string RequestBody() => JsonConvert.SerializeObject(Body);
     }
 }
 
