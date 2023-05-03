@@ -14,38 +14,23 @@ public class GetShelvesetChanges
     /// <summary>
     /// Unique identifier of label
     /// </summary>
+    [JsonProperty("shelvesetId")]
     public string ShelvesetId { get; set; } = string.Empty;
 
     /// <summary>
     /// Number of results to skip.
     /// Default: null
     /// </summary>
-    [JsonProperty("skip")]
+    [JsonProperty("$skip")]
     public int? Skip { get; set; }
 
     /// <summary>
     /// The maximum number of results to return.
     /// Default: null
     /// </summary>
-    [JsonProperty("top")]
+    [JsonProperty("$top")]
     public int? Top { get; set; }
 
     public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/shelvesets/changes";
-
-    public string RequestQuery()
-    {
-        var sb = new StringBuilder();
-
-        sb.Append($"?shelvesetId={ShelvesetId}&");
-
-        if (Skip != null)
-            sb.Append($"$skip={Skip}&");
-        if (Top != null)
-            sb.Append($"$top={Top}&");
-
-        sb.Append($"api-version={ApiVersion}");
-        return sb.ToString();
-    }
-
     
 }

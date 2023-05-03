@@ -29,6 +29,4 @@ public interface IRequest
     /// </summary>
     /// <returns></returns>
     string RequestBody();
-
-    string QueryString();
 }

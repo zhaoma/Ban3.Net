@@ -13,13 +13,7 @@ public class GetReport
     public int BuildId { get; set; }
 
     [JsonProperty("type")]
-    public string Type { get; set; } = string.Empty;
+    public string? Type { get; set; } 
     
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/builds/{BuildId}/report";
-
-    public string RequestQuery() => string.IsNullOrEmpty(Type)
-        ? string.Empty
-        : $"?type={Type}";
-
-    
 }

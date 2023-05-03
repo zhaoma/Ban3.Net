@@ -15,15 +15,12 @@ public class SendMail
     /// <summary>
     /// The ID of the definition.
     /// </summary>
-    [JsonProperty("body")]
     public SendMailBody? Body { get; set; }
 
     [JsonProperty("propertyFilters")]
     public string PropertyFilters { get; set; } = string.Empty;
 
     public string RequestPath() => $"{Instance}/{Organization}/_apis/wit/sendmail";
-
-    public string RequestQuery() =>string.Empty;
 
     public override string RequestBody() => JsonConvert.SerializeObject(Body);
 }

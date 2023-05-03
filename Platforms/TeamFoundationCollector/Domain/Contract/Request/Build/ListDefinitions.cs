@@ -15,68 +15,38 @@ public class ListDefinitions
 {
     [JsonProperty("$top")] public int? Top { get; set; }
     
-    [JsonProperty("builtAfter")] public string BuiltAfter { get; set; } = string.Empty;
+    [JsonProperty("builtAfter")] public string? BuiltAfter { get; set; } 
 
-    [JsonProperty("continuationToken")] public string ContinuationToken { get; set; } = string.Empty;
+    [JsonProperty("continuationToken")] public string? ContinuationToken { get; set; } 
 
-    [JsonProperty("definitionIds")] public string DefinitionIds { get; set; } = string.Empty;
+    [JsonProperty("definitionIds")] public string? DefinitionIds { get; set; } 
 
     [JsonProperty("includeAllProperties")] public bool? IncludeAllProperties { get; set; }
 
     [JsonProperty("includeLatestBuilds")] public bool? IncludeLatestBuilds { get; set; }
 
-    [JsonProperty("minMetricsTime")] public string MinMetricsTime { get; set; } = string.Empty;
+    [JsonProperty("minMetricsTime")] public string? MinMetricsTime { get; set; } 
 
-    [JsonProperty("name")] public string Name { get; set; } = string.Empty;
+    [JsonProperty("name")] public string? Name { get; set; } 
 
-    [JsonProperty("notBuiltAfter")] public string NotBuiltAfter { get; set; } = string.Empty;
+    [JsonProperty("notBuiltAfter")] public string? NotBuiltAfter { get; set; } 
 
-    [JsonProperty("path")] public string Path { get; set; } = string.Empty;
+    [JsonProperty("path")] public string? Path { get; set; } 
 
     [JsonProperty("processType")] public int? ProcessType { get; set; }
 
     [JsonProperty("queryOrder")] public DefinitionQueryOrder? QueryOrder { get; set; }
 
-    [JsonProperty("repositoryId")] public string RepositoryId { get; set; } = string.Empty;
+    [JsonProperty("repositoryId")] public string? RepositoryId { get; set; } 
 
-    [JsonProperty("repositoryType")] public string RepositoryType { get; set; } = string.Empty;
+    [JsonProperty("repositoryType")] public string? RepositoryType { get; set; } 
 
-    [JsonProperty("taskIdFilter")] public string TaskIdFilter { get; set; } = string.Empty;
+    [JsonProperty("taskIdFilter")] public string? TaskIdFilter { get; set; } 
 
-    [JsonProperty("uuid")] public string Uuid { get; set; } = string.Empty;
+    [JsonProperty("uuid")] public string? Uuid { get; set; } 
 
-    [JsonProperty("yamlFilename")] public string YamlFilename { get; set; } = string.Empty;
+    [JsonProperty("yamlFilename")] public string? YamlFilename { get; set; } 
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/definitions";
-
-    public string RequestQuery()
-    {
-        var sb = new StringBuilder();
-
-        sb.Append("?");
-
-        sb.AppendQuery("$top", Top);
-        sb.AppendQuery("builtAfter", BuiltAfter);
-        sb.AppendQuery("continuationToken", ContinuationToken);
-        sb.AppendQuery("definitionIds", DefinitionIds);
-        sb.AppendQuery("includeAllProperties", IncludeAllProperties);
-        sb.AppendQuery("includeLatestBuilds", IncludeLatestBuilds);
-        sb.AppendQuery("minMetricsTime", MinMetricsTime);
-        sb.AppendQuery("name", Name);
-        sb.AppendQuery("notBuiltAfter", NotBuiltAfter);
-        sb.AppendQuery("path", Path);
-        sb.AppendQuery("processType", ProcessType);
-        sb.AppendQuery("queryOrder", QueryOrder);
-        sb.AppendQuery("repositoryId", RepositoryId);
-        sb.AppendQuery("repositoryType", RepositoryType);
-        sb.AppendQuery("taskIdFilter", TaskIdFilter);
-        sb.AppendQuery("uuid", Uuid);
-        sb.AppendQuery("yamlFilename", Top);
-
-        //sb.Append($"&api-version={ApiVersion}");
-        return sb.ToString();
-    }
-
-    
 }
 

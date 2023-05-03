@@ -18,7 +18,7 @@ public class GetChangesets
     /// Use id asc to sort by ID in ascending order.
     /// </summary>
     [JsonProperty("$orderby")]
-    public string OrderBy { get; set; } = string.Empty;
+    public string? OrderBy { get; set; }
 
     /// <summary>
     /// Number of results to skip.
@@ -48,41 +48,7 @@ public class GetChangesets
 
     public TfvcMappingFilter? MappingFilter { get; set; }
 
-
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/changesets";
-
-    public string RequestQuery()
-    {
-        var sb = new StringBuilder();
-
-        sb.Append("?");
-
-        if (!string.IsNullOrEmpty(OrderBy))
-            sb.Append($"$orderby={OrderBy}&");
-
-        if (Skip != null)
-            sb.Append($"$skip={Skip}&");
-        if (Top != null)
-            sb.Append($"$top={Top}&");
-
-        if (MaxCommentLength != null)
-            sb.Append($"maxCommentLength={MaxCommentLength}&");
-
-        if (SearchCriteria != null)
-        {
-            sb.Append($"searchCriteria.author={SearchCriteria.Author}&");
-            sb.Append($"searchCriteria.followRenames={SearchCriteria.FollowRenames}&");
-            sb.Append($"searchCriteria.fromDate={SearchCriteria.FromDate}&");
-            sb.Append($"searchCriteria.fromId={SearchCriteria.FromId}&");
-            sb.Append($"searchCriteria.includeLinks={SearchCriteria.IncludeLinks}&");
-            sb.Append($"searchCriteria.itemPath={SearchCriteria.ItemPath}&");
-            sb.Append($"searchCriteria.toDate={SearchCriteria.ToDate}&");
-            sb.Append($"searchCriteria.toId={SearchCriteria.ToId}&");
-        }
-
-        sb.Append($"api-version={ApiVersion}");
-        return sb.ToString();
-    }
 
     public override string RequestBody() => MappingFilter != null
         ? JsonConvert.SerializeObject(MappingFilter)

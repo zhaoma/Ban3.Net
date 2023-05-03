@@ -16,3 +16,7 @@ D:/GIT/Ban3.Net/Libs/Common/obj/Debug/netstandard2.1/ban3.Infrastructures.Common
 /Users/zhaoma/Projects/Ban3.Net/Libs/Common/obj/Debug/netstandard2.1/Common.csproj.CoreCompileInputs.cache
 /Users/zhaoma/Projects/Ban3.Net/Libs/Common/obj/Debug/netstandard2.1/ban3.Infrastructures.Common.dll
 /Users/zhaoma/Projects/Ban3.Net/Libs/Common/obj/Debug/netstandard2.1/ban3.Infrastructures.Common.pdb
+/Users/zhaoma/Projects/Ban3.Net/output/netstandard2.1/ban3.Infrastructures.Common.deps.json
+/Users/zhaoma/Projects/Ban3.Net/output/netstandard2.1/ban3.Infrastructures.Common.dll
+/Users/zhaoma/Projects/Ban3.Net/output/netstandard2.1/ban3.Infrastructures.Common.pdb
+/Users/zhaoma/Projects/Ban3.Net/output/netstandard2.1/ban3.Infrastructures.Common.xml

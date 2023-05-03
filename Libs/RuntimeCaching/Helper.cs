@@ -6,7 +6,7 @@ using System.Threading;
 using log4net;
 using Newtonsoft.Json;
 
-namespace Ban3.Libs.RuntimeCaching
+namespace Ban3.Infrastructures.RuntimeCaching
 {
     public static class Helper
     {

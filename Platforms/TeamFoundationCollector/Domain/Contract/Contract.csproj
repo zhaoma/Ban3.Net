@@ -21,4 +21,10 @@
     <Folder Include="Request\WorkItemTracking\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Extensions\Helper.CollectService" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\Helper.CollectService.cs" />
+  </ItemGroup>
 </Project>

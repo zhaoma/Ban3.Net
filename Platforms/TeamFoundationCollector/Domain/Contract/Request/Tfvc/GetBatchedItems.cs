@@ -17,7 +17,5 @@ public class GetBatchedItems
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/itembatch";
 
-    public string RequestQuery() => $"?api-version={ApiVersion}";
-
     public override string RequestBody() => JsonConvert.SerializeObject(Body);
 }

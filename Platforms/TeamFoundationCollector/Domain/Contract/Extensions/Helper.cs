@@ -2,6 +2,7 @@
 using System.Text;
 using Ban3.Infrastructures.Common.Extensions;
 using log4net;
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 
@@ -26,7 +27,7 @@ public static partial  class Helper
 
         foreach (var item in dic)
         {
-            sb.AppendQuery(item.Key, item.Value);
+            sb.AppendQuery(item.Key, item.Value.ToString());
         }
 
         return sb.ToString();
@@ -41,7 +42,7 @@ public static partial  class Helper
         return result;
     }
 
-    private static void Parse(
+    public static void Parse(
             this object obj,
             Dictionary<string, object> keyValuePairs,
             string prefix = "")
@@ -59,7 +60,7 @@ public static partial  class Helper
                 var val = prop?.GetValue(obj);
                 var type = prop?.PropertyType;
 
-                var isPrimitive = type != null && (type.IsPrimitive || type == typeof(string));
+                var isPrimitive = type != null && (type.IsValueType || type == typeof(string));
 
                 if (!isPrimitive)
                 {

@@ -12,11 +12,11 @@ public class TfvcMappingFilter
     /// True if ServerPath should be excluded.
     /// </summary>
     [JsonProperty("exclude")]
-    public bool Exclude { get; set; }
+    public bool? Exclude { get; set; }
 
     /// <summary>
     /// Path to be included or excluded.
     /// </summary>
     [JsonProperty("serverPath")] 
-    public string ServerPath { get; set; } = string.Empty;
+    public string? ServerPath { get; set; } 
 }

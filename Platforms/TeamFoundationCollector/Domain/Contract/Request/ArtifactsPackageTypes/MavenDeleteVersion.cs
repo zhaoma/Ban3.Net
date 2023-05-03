@@ -1,4 +1,6 @@
-﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributes;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.ArtifactsPackageTypes;
@@ -29,7 +31,4 @@ public class MavenDeleteVersion
 
     public string RequestPath() => $"{Instance}/{Organization}/_apis/packaging/feeds/{Feed}/maven/groups/{GroupId}/artifacts/{ArtifactId}/versions/{Version}";
 
-    public string RequestQuery()=> $"?api-version={ApiVersion}";
-
-    
 }

@@ -1,24 +1,21 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Newtonsoft.Json;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
+
+/// <summary>
+/// Updates multiple builds.
+/// https://learn.microsoft.com/en-us/rest/api/azure/devops/build/builds/update-builds?view=azure-devops-rest-7.0
+/// </summary>
+public class UpdateBuilds
+    : PresetRequest, IRequest
 {
-    /// <summary>
-    /// Updates multiple builds.
-    /// https://learn.microsoft.com/en-us/rest/api/azure/devops/build/builds/update-builds?view=azure-devops-rest-7.0
-    /// </summary>
-    public class UpdateBuilds
-        : PresetRequest, IRequest
-    {
-        public UpdateBuilds() { Method = "Patch"; }
+    public UpdateBuilds() { Method = "Patch"; }
 
-        public List<UpdateBuildBody>? Body { get; set; }
-        
-        public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/builds";
+    public List<UpdateBuildBody>? Body { get; set; }
+    
+    public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/build/builds";
 
-        public string RequestQuery() => $"?api-version={ApiVersion}";
-
-        public override string RequestBody() => JsonConvert.SerializeObject(Body);
-    }
+    public override string RequestBody() => JsonConvert.SerializeObject(Body);
 }
 

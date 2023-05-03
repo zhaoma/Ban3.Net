@@ -9,7 +9,7 @@
     <dependencies>
       <group targetFramework=".NETStandard2.1">
         <dependency id="Microsoft.Extensions.Configuration.Json" version="7.0.0" exclude="Build,Analyzers" />
-        <dependency id="Newtonsoft.Json" version="13.0.2" exclude="Build,Analyzers" />
+        <dependency id="Newtonsoft.Json" version="13.0.3" exclude="Build,Analyzers" />
         <dependency id="System.IO" version="4.3.0" exclude="Build,Analyzers" />
         <dependency id="System.Threading.Tasks" version="4.3.0" exclude="Build,Analyzers" />
         <dependency id="log4net" version="2.0.15" exclude="Build,Analyzers" />
@@ -17,7 +17,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="D:\GIT\Ban3.Net\output\netstandard2.1\ban3.Infrastructures.Common.dll" target="lib\netstandard2.1\ban3.Infrastructures.Common.dll" />
-    <file src="D:\GIT\Ban3.Net\output\netstandard2.1\ban3.Infrastructures.Common.xml" target="lib\netstandard2.1\ban3.Infrastructures.Common.xml" />
+    <file src="/Users/zhaoma/Projects/Ban3.Net/output/netstandard2.1/ban3.Infrastructures.Common.dll" target="lib/netstandard2.1/ban3.Infrastructures.Common.dll" />
+    <file src="/Users/zhaoma/Projects/Ban3.Net/output/netstandard2.1/ban3.Infrastructures.Common.xml" target="lib/netstandard2.1/ban3.Infrastructures.Common.xml" />
   </files>
 </package>

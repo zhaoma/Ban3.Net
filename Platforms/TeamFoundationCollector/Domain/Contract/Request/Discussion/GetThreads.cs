@@ -10,9 +10,9 @@ public class GetThreads
     [JsonProperty("artifactUri")]
     public ArtifactUri? ArtifactUri { get; set; }
 
-    public string RequestPath() =>$"{Instance}/{Organization}/_apis/discussion/threads";
+    public string RequestPath() => $"{Instance}/{Organization}/_apis/discussion/threads";
 
-    public string RequestQuery() =>$"?artifactUri={ArtifactUri?.ToString()}";
 
-    
+    public override string RequestQuery()
+    => $"?artifactUri={ArtifactUri?.ToString()}";
 }

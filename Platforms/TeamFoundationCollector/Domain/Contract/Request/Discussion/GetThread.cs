@@ -10,7 +10,5 @@ public class GetThread
 
     public string RequestPath() => $"{Instance}/{Organization}/_apis/discussion/threads/{Id}";
 
-    public string RequestQuery() =>string.Empty;
-
     
 }

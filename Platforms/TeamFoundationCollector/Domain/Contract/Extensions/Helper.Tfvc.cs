@@ -1,6 +1,6 @@
 ﻿using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Libs.RuntimeCaching;
+using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
@@ -196,10 +196,11 @@ public static partial class Helper
         };
     }
 
-    public static string GetItem(this ITfvc _, string path)
+    public static string GetItem(this ITfvc _, string path,string? version=null)
         => ServerResource.TfvcGetItem.ReadHtml(new GetItem
         {
-            Path = path
+            Path = path,
+            VersionDescriptor=new VersionDescriptor { Version=version}
         }).Result;
 
     public static GetItemsResult GetItems(this ITfvc _, GetItems request)
@@ -224,7 +225,7 @@ public static partial class Helper
         => _.GetShelveset(new GetShelveset
         {
             ShelvesetId = shelvesetId,
-            RequestData=new GetShelvesetRequestData()
+            RequestData=new Request.SubCondition.RequestData()
         });
     
     public static bool GetShelvesetAndSave(this ITfvc _, TfvcShelvesetRef shelvesetRef)
@@ -261,7 +262,7 @@ public static partial class Helper
             Skip = (pageNo - 1) * pageSize
         };
         if (!string.IsNullOrEmpty(id))
-            request.RequestData = new GetShelvesetRequestData { Owner = id };
+            request.RequestData = new RequestData { Owner = id };
 
         return _.GetShelvesets(request);
     }

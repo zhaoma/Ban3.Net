@@ -32,19 +32,4 @@ public class GetLabelItems
 
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/labels/{LabelId}/items";
-
-    public string RequestQuery()
-    {
-        var sb = new StringBuilder();
-
-        sb.Append("?");
-        
-        if (Skip != null)
-            sb.Append($"$skip={Skip}&");
-        if (Top != null)
-            sb.Append($"$top={Top}&");
-        
-        sb.Append($"api-version={ApiVersion}");
-        return sb.ToString();
-    }
 }

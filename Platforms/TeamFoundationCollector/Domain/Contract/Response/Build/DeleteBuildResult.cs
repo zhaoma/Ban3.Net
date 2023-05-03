@@ -2,8 +2,7 @@
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Build;
 
-public class DeleteBuildResult:IResponse
+public class DeleteBuildResult:BoolResponse
 {
-    public bool Success { get; set; }
 
 }

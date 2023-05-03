@@ -17,7 +17,7 @@ public class GetLabel
     public string LabelId { get; set; } = string.Empty;
 
     [JsonProperty("requestData")]
-    public GetLabelRequestData? RequestData { get; set; }
+    public SubCondition.GetLabelRequestData? RequestData { get; set; }
 
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/labels/{LabelId}";

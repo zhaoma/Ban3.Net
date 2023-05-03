@@ -3,7 +3,5 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Func
 
 public interface ITfvc
 {
-    IChangesets Changesets { get; set; }
-}
 
-public interface  IChangesets{}
+}

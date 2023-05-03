@@ -2,8 +2,6 @@
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Build;
 
-public class DeleteDefinitionResult:IResponse
+public class DeleteDefinitionResult:BoolResponse
 {
-    public bool Success { get; set; }
-
 }

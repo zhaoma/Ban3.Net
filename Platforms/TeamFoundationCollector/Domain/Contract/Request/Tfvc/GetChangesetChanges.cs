@@ -21,14 +21,14 @@ public class GetChangesetChanges
     /// Number of results to skip.
     /// Default: null
     /// </summary>
-    [JsonProperty("skip")]
+    [JsonProperty("$skip")]
     public int? Skip { get; set; }
 
     /// <summary>
     /// The maximum number of results to return.
     /// Default: null
     /// </summary>
-    [JsonProperty("top")]
+    [JsonProperty("$top")]
     public int? Top { get; set; }
 
     /// <summary>
@@ -39,23 +39,5 @@ public class GetChangesetChanges
     public string ContinuationToken { get; set; } = string.Empty;
     
     public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/changesets/{Id}/changes";
-
-    public string RequestQuery()
-    {
-        var sb = new StringBuilder();
-
-        sb.Append("?");
-
-        if (Skip != null)
-            sb.Append($"$skip={Skip}&");
-        if (Top != null)
-            sb.Append($"$top={Top}&");
-
-        if (!string.IsNullOrEmpty(ContinuationToken))
-            sb.Append($"continuationToken={ContinuationToken}&");
-
-        sb.Append($"api-version={ApiVersion}");
-        return sb.ToString();
-    }
 
 }

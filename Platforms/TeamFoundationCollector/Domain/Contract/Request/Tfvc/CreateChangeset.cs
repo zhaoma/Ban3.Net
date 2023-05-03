@@ -17,8 +17,6 @@ public class CreateChangeset
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/changesets";
 
-    public string RequestQuery() => $"?api-version={ApiVersion}";
-
     public override string RequestBody() => JsonConvert.SerializeObject(Body);
 
 }

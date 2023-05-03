@@ -46,13 +46,13 @@ public static partial class Helper
     public static GetThreadsResult GetThreads(this IDiscussion _, int changesetId)
         => _.GetThreads(new GetThreads
         {
-            Uri = new Entities.ArtifactUri(changesetId)
+            ArtifactUri = new Entities.ArtifactUri(changesetId)
         });
 
     public static GetThreadsResult GetThreads(this IDiscussion _, string shelvesetId, string shelvesetOwner)
         => _.GetThreads(new GetThreads
         {
-            Uri = new Entities.ArtifactUri(shelvesetId, shelvesetOwner)
+            ArtifactUri = new Entities.ArtifactUri(shelvesetId, shelvesetOwner)
         });
     
     public static List<CompositeThread>? GetCompositeThreads(this GetThreadsResult responseResult)
@@ -62,5 +62,6 @@ public static partial class Helper
 
         return null;
     }
+
 
 }

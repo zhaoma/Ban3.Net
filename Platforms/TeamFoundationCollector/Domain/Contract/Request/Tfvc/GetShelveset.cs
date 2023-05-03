@@ -19,27 +19,4 @@ public class GetShelveset
     
     public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/shelvesets";
 
-    public string RequestQuery()
-    {
-        var sb = new StringBuilder();
-
-        sb.Append($"?shelvesetId={ShelvesetId}&");
-        
-        if (RequestData != null)
-        {
-            sb.Append($"requestData.includeDetails={RequestData.IncludeDetails}&");
-            sb.Append($"requestData.includeLinks={RequestData.IncludeLinks}&");
-            sb.Append($"requestData.includeWorkItems={RequestData.IncludeWorkItems}&");
-            sb.Append($"requestData.maxChangeCount={RequestData.MaxChangeCount}&");
-            sb.Append($"requestData.maxCommentLength={RequestData.MaxCommentLength}&");
-            sb.Append($"requestData.name={RequestData.Name}&");
-            sb.Append($"requestData.owner={RequestData.Owner}&");
-        }
-
-        sb.Append($"api-version={ApiVersion}");
-        return sb.ToString();
-    }
-
-    
-
 }

@@ -16,8 +16,4 @@ public class GetChangesetWorkItems
     public int Id { get; set; }
     
     public string RequestPath() => $"{Instance}/{Organization}/_apis/tfvc/changesets/{Id}/workItems";
-
-    public string RequestQuery() => $"?api-version={ApiVersion}";
-
-    
 }

@@ -3,54 +3,53 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
+
+public class ArtifactUri
 {
-	public class ArtifactUri
+    public ArtifactUri()
     {
-        public ArtifactUri()
-        {
-            NeedUrlEncode = true;
-        }
+        NeedUrlEncode = true;
+    }
 
-		public ArtifactUri(int changesetId)
-		{
-			Type = ArtifactType.Changeset;
-			Id = changesetId + "";
-		}
+    public ArtifactUri(int changesetId)
+    {
+        Type = ArtifactType.Changeset;
+        Id = changesetId + "";
+    }
 
-		public ArtifactUri(string shelvesetId, string shelvesetOwner)
-		{
-			Type = ArtifactType.Shelveset;
-			Id = shelvesetId;
-			Query = $"shelvesetOwner={shelvesetOwner}";
-			NeedUrlEncode = true;
-		}
+    public ArtifactUri(string shelvesetId, string shelvesetOwner)
+    {
+        Type = ArtifactType.Shelveset;
+        Id = shelvesetId;
+        Query = $"shelvesetOwner={shelvesetOwner}";
+        NeedUrlEncode = true;
+    }
 
-		[JsonProperty("type")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ArtifactType Type { get; set; }
+    [JsonProperty("type")]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public ArtifactType Type { get; set; }
 
-        [JsonProperty("query")]
-        public string Query { get; set; } = string.Empty;
+    [JsonProperty("query")]
+    public string Query { get; set; } = string.Empty;
 
-        [JsonProperty("id")]
-        public string Id { get; set; } = string.Empty;
+    [JsonProperty("id")]
+    public string Id { get; set; } = string.Empty;
 
-        [JsonProperty("needUrlEncode")]
-        public bool NeedUrlEncode { get; set; }
+    [JsonProperty("needUrlEncode")]
+    public bool NeedUrlEncode { get; set; }
 
-		public override string ToString()
-        {
-            var query = Id;
-			if (!string.IsNullOrEmpty(Query))
-                query += $"&{Query}";
+    public override string ToString()
+    {
+        var query = Id;
+        if (!string.IsNullOrEmpty(Query))
+            query += $"&{Query}";
 
-            query = NeedUrlEncode
-                ? WebUtility.UrlEncode(query)
-                : query;
-			
-            return $"vstfs:///VersionControl/{Type}/{query}";
-        }
-	}
+        query = NeedUrlEncode
+            ? WebUtility.UrlEncode(query)
+            : query;
+
+        return $"vstfs:///VersionControl/{Type}/{query}";
+    }
 }
 

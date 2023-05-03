@@ -5,7 +5,7 @@ public class Target
     public string HostBaseUrl { get; set; } = string.Empty;
 
     /// <summary>
-    /// DevOps 地址
+    /// DevOps Server Api Instance
     /// </summary>
     public string Instance { get; set; } = string.Empty;
 

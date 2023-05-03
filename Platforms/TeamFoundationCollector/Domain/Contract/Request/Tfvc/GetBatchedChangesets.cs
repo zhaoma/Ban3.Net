@@ -12,7 +12,5 @@ public class GetBatchedChangesets
     
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/changesetsbatch";
 
-    public string RequestQuery() => $"?api-version={ApiVersion}";
-
     public override string RequestBody() => JsonConvert.SerializeObject(Body);
 }

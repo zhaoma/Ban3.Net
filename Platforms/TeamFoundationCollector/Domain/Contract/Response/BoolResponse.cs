@@ -3,8 +3,7 @@
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response;
 
 public class BoolResponse
-    : IResponse
+    : IResponse 
 {
     public bool Success { get; set; }
-
 }
