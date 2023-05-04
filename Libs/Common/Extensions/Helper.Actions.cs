@@ -16,7 +16,14 @@ namespace Ban3.Infrastructures.Common.Extensions
     /// 
     public static partial class Helper
     {
-        public static void ExecuteAndTiming(this Action action, string message)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="message"></param>
+        public static void ExecuteAndTiming(
+            this Action action, 
+            string message)
         {
             var now = DateTime.Now;
 

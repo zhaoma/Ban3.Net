@@ -22,5 +22,7 @@ public class SendMail
 
     public string RequestPath() => $"{Instance}/{Organization}/_apis/wit/sendmail";
 
+    public override string RequestQuery() => string.Empty;
+
     public override string RequestBody() => JsonConvert.SerializeObject(Body);
 }

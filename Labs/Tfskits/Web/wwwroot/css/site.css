@@ -1,0 +1,271 @@
+﻿
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    text-align: center;
+    white-space: normal;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+
+a { color: #0366d6; }
+
+.btn-primary {
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    color: #fff;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    color: #fff;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html { font-size: 14px; }
+
+@media (min-width: 768px) {
+    html { font-size: 16px; }
+}
+
+.border-top { border-top: 1px solid #e5e5e5; }
+
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    bottom: 0;
+    line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.author {
+    border: solid 1px #eeeeee;
+    border-right: solid 5px #eeeeee;
+    padding: 10px;
+}
+
+.selectedAuthor { border-right: solid 5px #17a2b8; }
+
+.author img { border-right: solid 3px #eeeeee; }
+
+.selectedAuthor img { border-right: solid 3px #17a2b8; }
+
+.highlightWords { background-color: goldenrod; }
+
+#tableContainer div {
+    overflow: hidden;
+    table-layout: fixed;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+video {
+    -webkit-filter: grayscale(20%);
+    height: auto;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+    z-index: -100;
+}
+
+#background_video {
+    height: 100%;
+    left: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: -100;
+}
+
+.theme-light input,.theme-light .form-control {
+    color: #666;
+}
+
+.text-right {
+    text-align:right;
+}
+@font-face {
+    font-family: "AzureDevOpsMDL2Assets";
+    src: url("../fonts/az.woff") format("woff")
+}
+
+.fabric-icon {
+    align-self: center;
+    display: inline-flex;
+    font-family: "AzureDevOpsMDL2Assets";
+    -webkit-font-smoothing: antialiased
+}
+
+.fabric-icon.small {
+    font-size: .75rem;
+    line-height: .75rem
+}
+
+.fabric-icon.medium {
+    font-size: 1rem;
+    line-height: 1rem
+}
+
+.fabric-icon.large {
+    font-size: 1.5rem;
+    line-height: 1.5rem
+}
+
+.ms-Icon--FabricFolder, .ms-Icon--FabricFolderFill {
+    transform: translateY(1px)
+}
+
+.ms-Icon--Tag {
+    transform: translateY(1px)
+}
+.BranchShelveset:before {
+    content: "\f298 "
+}
+.DocumentSet:before {
+    content: "\eed6 ";
+}
+.WorkItem:before {
+    content: "\f314 ";
+}
+.Build:before {
+    content: "\f28f ";
+}
+
+.teamName {
+    text-align: left;
+}
+
+.teamRow:hover .teamName, .teamRow:hover .identityName {
+    font-weight: bold;
+}
+
+.teamSummary {
+    text-align: left;
+}
+
+.teamRow:hover .memberCount {
+    color:firebrick;
+}
+
+.teamRow:hover .BranchShelveset {
+    color: darkorange;
+}
+
+.teamRow:hover .DocumentSet {
+    color: steelblue;
+}
+
+.noticeNumber {
+    font-family: verdana;
+    font-size: 12px;
+    padding-left: 5px;
+}
+
+.card-header .pagination {
+    height: 24px;
+    overflow: hidden;
+    margin-bottom: 0;
+    border-bottom: solid 2px #206bc4;
+    text-align: center;
+    padding-left: 40px;
+}
+
+    .card-header .pagination:before {
+        position: absolute;
+        top: 35px;
+        right: 40px;
+        content: "Pagination. ";
+        -webkit-transform: scaleY(.7);
+        transform: scaleY(.7);
+    }
+
+.dataRow:hover .rowIdentity, .dataRow:hover .rowDate {
+    font-weight: bold;
+}
+
+.datepicker-days { padding: 5px 15px;}
+
+#form .input-group-text{ height: 36px;overflow: hidden;}
+
+#form .form-check-input before {
+    content: "has comments"
+}
+
+.teamRow .followthem {
+    visibility: hidden;
+}
+.teamRow:hover .followthem {
+    visibility: visible;
+}
+
+.hiddenRow{display:none;}
+
+.icon-pulse {
+    display: block;
+    transition: all .15s ease 0s;
+    -webkit-animation: pulse-keyframes 2s ease infinite;
+    animation: pulse-keyframes 2s ease infinite;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.icon-tada {
+    display: block;
+    transition: all .15s ease 0s;
+    -webkit-animation: tada-keyframes 3s ease infinite;
+    animation: tada-keyframes 3s ease infinite;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.teamRow legend{
+    font-size:14px;
+    color:firebrick;
+}
+
+.teamRow ul{
+    list-style:square;
+}
+
+.teamRow .processDetail {
+    clear:both;
+    display: none;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+
+.teamRow:hover .processDetail {
+    display: block;
+}

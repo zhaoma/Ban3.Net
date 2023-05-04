@@ -1,0 +1,56 @@
+﻿@using Tfvckits.Domain.Platform
+@using System.Linq;
+@using Autofac.Features.ResolveAnything
+@using Tfvckits.Infrastructures.Common.Extensions
+@model IEnumerable<Tfvckits.Domain.Platform.Models.ReportTeam>
+@{
+    Layout = null;
+    var identities = Model.Select( o => o.Identities ).UnionAll()
+                          .Where(o =>o.ShelvesetCount > 0 || o.ChangesetCount > 0)
+                          .OrderBy(o => o.DisplayName)
+                          .ToList();
+
+    ViewData[ "Title" ] = string.Join( " ", Model.Select( o => o.Team.Name ) );
+}
+
+<div class="card-header">
+    <h3 class="card-title">
+        @string.Join( " ", Model.Select( o=>o.Team.Name )) <span class="badge badge-info">@identities.Count</span>
+    </h3>
+
+</div>
+
+<div class="card-body">
+    <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
+        @foreach (var identity in identities)
+        {
+            <label class="form-selectgroup-item flex-fill teamRow">
+                <input type="checkbox" name="limitIdentityIds" value="@identity.Id" class="form-selectgroup-input">
+                <div class="form-selectgroup-label d-flex align-items-center p-3">
+                    <div class="me-3">
+                        <span class="form-selectgroup-check"></span>
+                    </div>
+                    <div class="col form-selectgroup-label-content d-flex align-items-center">
+                        <span class="avatar me-3" style="background-image: url(@("/data/p/"+identity.Id+".png"))"></span>
+                        <div class="col">
+                            <div class="font-weight-medium identityName">@identity.DisplayName.ShowName()</div>
+                            <div class="text-muted">@identity.DisplayName.ShowTitle()</div>
+                            <div class="text-muted teamSummary col row">
+                                <div class="col-4"></div>
+                                    <div class="col-4"><span class="fabric-icon medium BranchShelveset"><span class="noticeNumber">@identity.ChangesetCount</span></span></div>
+                                    <div class="col-4"><span class="fabric-icon medium DocumentSet"><span class="noticeNumber">@identity.ShelvesetCount</span></span></div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </label>
+
+        }</div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('input[type=checkbox][name=limitIdentityIds]').change(function () {
+            requestTable();
+        });
+    });
+</script>

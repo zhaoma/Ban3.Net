@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <AssemblyName>Ban3.Platforms.TeamFoundationCollector.Domain.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>Ban3.Platforms.TeamFoundationCollector.Domain.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
@@ -16,15 +17,5 @@
     <ProjectReference Include="..\..\..\..\Libs\Common\Common.csproj" />
     <ProjectReference Include="..\..\..\..\Libs\NetHttp\NetHttp.csproj" />
     <ProjectReference Include="..\..\..\..\Libs\RuntimeCaching\RuntimeCaching.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Request\WorkItemTracking\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Extensions\Helper.CollectService" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Extensions\Helper.CollectService.cs" />
   </ItemGroup>
 </Project>

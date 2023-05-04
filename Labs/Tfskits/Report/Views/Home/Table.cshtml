@@ -1,0 +1,236 @@
+﻿@using System.Web
+@using Tfvckits.Domain.Platform
+@model Tfvckits.Domain.Platform.Response.Reports.DataReport
+@{
+    Layout = null;
+}
+<div class="card-header">
+
+    <div class="col-6"><h3 class="card-title">Results</h3></div>
+    <div class="col-6">
+        @if (Model.TotalPage > 1)
+        {
+            <ul class="pagination ">
+
+                @for (var p = Math.Max(1, Model.Filter.PageNo - 4); p <= Math.Min(Model.TotalPage, Model.Filter.PageNo + 5); p++)
+                {
+                    <li class='page-item @(p == Model.Filter.PageNo ? "active" : "")'>
+                        <a class="page-link" href="javascript:;" onclick="return turnPage(@p)">@p</a>
+                    </li>
+                }
+               
+            </ul> }
+        </div>
+
+</div>
+<div class="table-responsive">
+<table class="table table-hover">
+
+    <thead>
+    @if (Model.Filter.Ref == Tfvckits.Domain.Platform.Enums.ReportRef.Changeset)
+    {
+        <tr>
+
+            <th class="col-2">ID</th>
+            <th>Changesets (@Model.Changesets.Count found.)</th>
+        </tr>
+    }
+    else
+    {
+        <tr>
+            <th colspan="2">Shelveset(@Model.Shelvesets.Count found.)</th>
+        </tr>
+    }
+    </thead>
+    <tbody>
+    @if (Model.Changesets != null && Model.Changesets != null && Model.Changesets.Value.Any())
+    {
+        @foreach (var c in Model.Changesets.Value)
+        {
+            <tr class="dataRow">
+                <td class="card-body">
+                    <a href="https://tfs-cr.healthcare.siemens.com:8090/tfs/CT/CTS/_versionControl/changeset/@c.ChangesetId" target="_blank" class="text-reset d-block">
+                        <span class="fabric-icon medium DocumentSet"><span class="noticeNumber">@c.ChangesetId</span></span>
+                    </a>
+                </td>
+                <td class="card-body ">
+                    <div>
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-3 rowIdentity"><i class="bi bi-person"></i> @c.Author.Identity.DisplayName.ShowName()</div>
+                            <div class="col-3 rowDate"><i class="bi bi-clock"></i> @c.CreatedDate.ShowDate()</div>
+                        </div>
+                        <div class="row card-body">
+                            @Html.Raw(c.Comment)
+                        </div>
+                    </div>
+                    @if (c.WorkItems != null && c.WorkItems.Any())
+                    {
+                        <hr />
+                        @foreach (var t in c.WorkItems)
+                        {
+                <div class="dataRow">
+                    <div class="col row">
+                        <div class="col">
+                            <span class="badge bg-info">
+                                WorkItem
+                            </span>
+                            <span class="badge bg-info">
+                                @t.WorkItemType
+                            </span>
+                            <span class="badge bg-info">
+                                @t.State
+                            </span>
+                        </div>
+                        <div class="col-3 rowIdentity"><a href="https://tfs-cr.healthcare.siemens.com:8090/tfs/CT/CTS/_workitems/edit/@t.Id" target="_blank"><span class="fabric-icon medium WorkItem"></span> <span class="noticeNumber"> @t.Id</span></a></div>
+                        <div class="col-3 rowDate"><i class="bi bi-person"></i> @t.AssignedTo.ShowName()</div>
+                    </div>
+                    <div class="card-body">
+                        @Html.Raw(t.Title)
+                    </div>
+                </div>
+                        }
+                    }
+
+                    @if (c.Discussion != null && c.Discussion.Any())
+                    {
+                        <hr />
+                        @foreach (var t in c.Discussion)
+                        {
+                            @foreach (var tc in t.Comments)
+                            {
+                                <div class="dataRow">
+                                    <div class="col row ">
+                                        <div class="col">
+                                            <span class="badge bg-warning">
+                                                Comment
+                                            </span>
+                                            <span class="badge bg-warning">
+                                                @t.Status
+                                            </span>
+                                        </div>
+                                        <div class="col-3 rowIdentity"><i class="bi bi-person"></i> @tc.Author.DisplayName.ShowName()</div>
+                                        <div class="col-3 rowDate"><i class="bi bi-clock"></i> @tc.PublishedDate.ShowDate()</div>
+                                    </div>
+                                    <div class="card-body">
+                                        @Html.Raw(tc.Content)
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+
+                </td>
+            </tr>
+        }
+    }
+
+    @if (Model.Shelvesets != null && Model.Shelvesets != null && Model.Shelvesets.Value.Any())
+    {
+        foreach (var c in Model.Shelvesets.Value)
+        {
+            <tr>
+                <td colspan="2" class="card-body ">
+                    <div class="dataRow">
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col row">
+                                <div class="col">
+
+                                </div>
+                                <div class="col-3 rowIdentity"><i class="bi bi-person"></i> @c.Owner.Identity.DisplayName.ShowName()</div>
+                                <div class="col-3 rowDate"><i class="bi bi-clock"></i> @c.CreatedDate.ShowDate()</div>
+                            </div>
+                        </div>
+                        <div class="row card-body">
+                            <h3>
+                                <a href="https://tfs-cr.healthcare.siemens.com:8090/tfs/CT/CTS/_versionControl/shelveset?ss=@(HttpUtility.UrlEncode( $"{c.ShelvesetId};{c.Owner.Identity.UniqueName}" ))" target="_blank">
+                                    <span class="fabric-icon medium BranchShelveset"><span class="noticeNumber">@Html.Raw(c.ShelvesetId)</span></span>
+                                </a>
+                            </h3>
+                            @Html.Raw(c.Comment)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2"></div><div class="col">
+                            @if (c.WorkItems != null && c.WorkItems.Any())
+                            {
+                                <hr />
+                                @foreach (var t in c.WorkItems)
+                                {
+                                                 <div class="dataRow">
+                                                     <div class="col row">
+                                                         <div class="col">
+                                                             <span class="badge bg-info">
+                                                                 WorkItem
+                                                             </span>
+                                                             <span class="badge bg-info">
+                                                                 @t.WorkItemType
+                                                             </span>
+                                                             <span class="badge bg-info">
+                                                                 @t.State
+                                                             </span>
+                                                         </div>
+                                                         <div class="col-3 rowIdentity"><a href="https://tfs-cr.healthcare.siemens.com:8090/tfs/CT/CTS/_workitems/edit/@t.Id" target="_blank"><span class="fabric-icon medium WorkItem"></span> <span class="noticeNumber"> @t.Id</span></a></div>
+                                                         <div class="col-3 rowDate"><i class="bi bi-person"></i> @t.AssignedTo.ShowName()</div>
+                                                     </div>
+                                                     <div class="card-body">
+                                                         @Html.Raw(t.Title)
+                                                     </div>
+                                                 </div>
+                                }
+                            }
+
+
+                            @if (c.Discussion != null && c.Discussion.Any())
+                            {
+                                <hr />
+                                @foreach (var t in c.Discussion)
+                                {
+                                    @foreach (var tc in t.Comments)
+                                    {
+                                        <div class="dataRow">
+                                            <div class="col row">
+                                                <div class="col">
+                                                    <span class="badge bg-warning">
+                                                        Comment
+                                                    </span>
+                                                    <span class="badge bg-warning">
+                                                        @t.Status
+                                                    </span>
+                                                </div>
+                                                <div class="col-3 rowIdentity"><i class="bi bi-person"></i> @tc.Author.DisplayName.ShowName()</div>
+                                                <div class="col-3 rowDate"><i class="bi bi-clock"></i> @tc.PublishedDate.ShowDate()</div>
+                                            </div>
+                                            <div class="card-body">
+                                                @Html.Raw(tc.Content)
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
+<div class="col-12">
+    <div class="card-body">
+        <ul class="pagination ">
+            @if (Model.TotalPage > 1)
+            {
+
+                @for (var p = Math.Max(1, Model.Filter.PageNo - 4); p <= Math.Min(Model.TotalPage, Model.Filter.PageNo + 5); p++)
+                {
+                    <li class='page-item @(p == Model.Filter.PageNo ? "active" : "")'>
+                        <a class="page-link" href="javascript:;" onclick="return turnPage(@p)">@p</a>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+</div>

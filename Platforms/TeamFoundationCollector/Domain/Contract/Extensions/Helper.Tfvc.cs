@@ -8,6 +8,8 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
+using System.Xml.Linq;
+using System.Xml;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 
@@ -202,6 +204,27 @@ public static partial class Helper
             Path = path,
             VersionDescriptor=new VersionDescriptor { Version=version}
         }).Result;
+
+    public static List<BranchSpecDependency> GetBranchSpecDependencies(this ITfvc _, string path)
+    {
+        var result = new List<BranchSpecDependency>();
+
+        var content = _.GetItem(path);
+        
+        var xmlDoc = new XmlDocument();
+        xmlDoc.LoadXml(content);
+
+        var nodes = xmlDoc.SelectNodes("//Dependency");
+        if (nodes?.Count > 0)
+        {
+            foreach (XmlNode node in nodes)
+            {
+                result.Add(new BranchSpecDependency(node));
+            }
+        }
+        
+        return result;
+    }
 
     public static GetItemsResult GetItems(this ITfvc _, GetItems request)
         => ServerResource.TfvcGetItems.Execute<GetItemsResult>(request).Result;

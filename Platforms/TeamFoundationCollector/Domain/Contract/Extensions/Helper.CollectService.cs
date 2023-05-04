@@ -18,7 +18,7 @@ public static partial class Helper
 
     public static void SyncOneTeamSummary(this ICollectService _,string teamGuid, bool forceOverwrite = true)
     {
-        var team = DevOps.Core.LoadTeams().FirstOrDefault(o => o.Id == teamGuid);
+        var team = _.Core.LoadTeams().FirstOrDefault(o => o.Id == teamGuid);
 
         if (team != null)
         {

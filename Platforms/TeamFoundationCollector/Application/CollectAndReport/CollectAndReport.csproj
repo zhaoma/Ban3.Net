@@ -4,10 +4,16 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport</AssemblyName>
+    <RootNamespace>Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Contract\Contract.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Functions\" />
   </ItemGroup>
 
 </Project>

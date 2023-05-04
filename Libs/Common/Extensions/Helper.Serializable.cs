@@ -111,6 +111,33 @@ namespace Ban3.Infrastructures.Common.Extensions
                 o = serializer.Deserialize( textReader );
             return o;
         }
+
+        /// <summary>
+        /// 尝试读取属性值
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="attributeName"></param>
+        /// <returns></returns>
+        public static string TryGetAttribute(this XmlNode node, string attributeName)
+        {
+            try
+            {
+                if (node.Attributes is { Count: > 0 })
+                    foreach (XmlAttribute nodeAttribbutes in node.Attributes)
+                    {
+                        if (nodeAttribbutes.Name == attributeName)
+                        {
+                            return node.Attributes[attributeName].Value;
+                        }
+                    }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+
+            return string.Empty;
+        }
     }
 }
 

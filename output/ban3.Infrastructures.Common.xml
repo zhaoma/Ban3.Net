@@ -391,6 +391,13 @@
             变量相关
             </summary>
         </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ExecuteAndTiming(System.Action,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="message"></param>
+        </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ParallelExecute``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0},System.Int32)">
             <summary>
             并发运行
@@ -1053,6 +1060,14 @@
             </summary>
             <param name="xml">The XML.</param>
             <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.TryGetAttribute(System.Xml.XmlNode,System.String)">
+            <summary>
+            尝试读取属性值
+            </summary>
+            <param name="node"></param>
+            <param name="attributeName"></param>
             <returns></returns>
         </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToCamel(System.String)">
