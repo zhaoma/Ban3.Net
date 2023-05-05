@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 

@@ -1,4 +1,8 @@
-﻿using Ban3.Infrastructures.Common.Extensions;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
@@ -76,7 +80,7 @@ public static partial class Helper
                     {
                         Logger.Debug($"parse {r}/{teams.Value.Count} : {o.Name}");
                         var members = _.GetTeamMembers(o);
-                        if (!members.Success || members.Value == null) return;
+                        if (!members.Success || members.Value == null) return ;
 
                         o.Members = members.Value;
                         if (refreshPortrait)
@@ -109,5 +113,11 @@ public static partial class Helper
             file.ReadFile().JsonToObj<List<WebApiTeam>>()!,
             file
         );
+    }
+
+    public static WebApiTeam? LoadTeamByName(this ICore _, string name)
+    {
+        return _.LoadTeams()
+            .FindLast(o => o.Name == name);
     }
 }

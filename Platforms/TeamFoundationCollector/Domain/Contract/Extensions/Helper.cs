@@ -1,5 +1,9 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using Ban3.Infrastructures.Common.Extensions;
 using log4net;
 using Newtonsoft.Json;
@@ -15,6 +19,32 @@ public static partial  class Helper
     static readonly ReaderWriterLockSlim LockSlim = new ReaderWriterLockSlim();
 
     const int LockSlimTimeout = 1000;
+    public static string ShowName(this string displayName)
+    {
+        if (string.IsNullOrEmpty(displayName)) return "-";
+
+        try
+        {
+            return displayName.Substring(0, (displayName + "").IndexOf("("));
+        }
+        catch (Exception) { }
+
+        return displayName;
+    }
+
+    public static string ShowTitle(this string displayName)
+    {
+        if (string.IsNullOrEmpty(displayName)) return "-";
+
+        try
+        {
+            var start = (displayName + "").IndexOf("(") + 1;
+            return displayName.Substring(start, (displayName + "").IndexOf(")") - start);
+        }
+        catch (Exception) { }
+
+        return displayName;
+    }
 
     public static bool IsIgnored(this string str)
         => Config.IgnoredKeys.Any(str.Contains);

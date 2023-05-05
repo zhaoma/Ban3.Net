@@ -27,12 +27,13 @@ namespace Ban3.Infrastructures.RuntimeCaching
                 {
                     Encoding encoding = Encoding.GetEncoding(charset);
 
-                    using var stream = new StreamWriter(path, false, encoding);
+                    using (var stream = new StreamWriter(path, false, encoding))
+                    {
+                        stream.Write(content);
+                        stream.Close();
 
-                    stream.Write(content);
-                    stream.Close();
-
-                    result = path;
+                        result = path;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -88,7 +89,7 @@ namespace Ban3.Infrastructures.RuntimeCaching
                 return defaultValue;
             }
 
-            return cached!;
+            return cached;
         }
 
         /// <summary>

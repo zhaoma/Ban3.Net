@@ -7,9 +7,9 @@ namespace Ban3.Infrastructures.NetHttp.Request
 {
     public class Body
     {
-        public byte[]? Bytes { get; set; }
+        public byte[] Bytes { get; set; }
 
-        public Stream? StreamContent { get; set; }
+        public Stream StreamContent { get; set; }
 
         public string StringContent { get; set; } = string.Empty;
 
@@ -17,7 +17,7 @@ namespace Ban3.Infrastructures.NetHttp.Request
 
         public string ContentEncoding { get; set; } = "utf-8";
 
-        public HttpContent? Content()
+        public HttpContent Content()
         {
             if (Bytes != null)
                 return new ByteArrayContent(Bytes);

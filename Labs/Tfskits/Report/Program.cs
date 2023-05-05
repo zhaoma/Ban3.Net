@@ -1,4 +1,4 @@
-namespace Report
+namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report
 {
     public class Program
     {

@@ -1,4 +1,7 @@
-﻿using Ban3.Infrastructures.Common.Attributes;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
@@ -8,8 +11,8 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
-using System.Xml.Linq;
 using System.Xml;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BranchSpec;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 
@@ -205,9 +208,9 @@ public static partial class Helper
             VersionDescriptor=new VersionDescriptor { Version=version}
         }).Result;
 
-    public static List<BranchSpecDependency> GetBranchSpecDependencies(this ITfvc _, string path)
+    public static List<Dependency> GetBranchSpecDependencies(this ITfvc _, string path)
     {
-        var result = new List<BranchSpecDependency>();
+        var result = new List<Dependency>();
 
         var content = _.GetItem(path);
         
@@ -219,11 +222,53 @@ public static partial class Helper
         {
             foreach (XmlNode node in nodes)
             {
-                result.Add(new BranchSpecDependency(node));
+                result.Add(new Dependency(node));
             }
         }
         
         return result;
+    }
+
+    public static List<MonitorRecord> GetBranchSpecMonitorRecords(this ITfvc _, MonitorSection jobSection)
+    {
+        var records = _.GetBranchSpecDependencies(jobSection.Target.Value)
+            .Select(o=>new MonitorRecord
+            {
+                Name=o.Name,
+                Version = o.Version,
+                GuidelineVersions = new ()
+            }).ToList();
+
+        foreach (var jobGuideline in jobSection.Guidelines)
+        {
+            _.FulfilMonitorRecords(records,jobGuideline.Key,jobGuideline.Value);
+        }
+
+        return records;
+    }
+
+    static void FulfilMonitorRecords(this ITfvc _, List<MonitorRecord> records, string guidelineId,
+        string guidelinePath)
+    {
+        var dependencies = _.GetBranchSpecDependencies(guidelinePath);
+        if (dependencies.Any())
+        {
+            foreach (var monitorRecord in records)
+            {
+                var g = dependencies.FindLast(o => o.Name == monitorRecord.Name);
+                if (g != null)
+                {
+                    if (monitorRecord.GuidelineVersions.ContainsKey(guidelineId))
+                    {
+                        monitorRecord.GuidelineVersions[guidelineId] = g.Version;
+                    }
+                    else
+                    {
+                        monitorRecord.GuidelineVersions.Add(guidelineId, g.Version);
+                    }
+                }
+            }
+        }
     }
 
     public static GetItemsResult GetItems(this ITfvc _, GetItems request)

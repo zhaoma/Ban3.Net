@@ -35,13 +35,13 @@ namespace Ban3.Infrastructures.NetHttp.Entries
             };
         }
 
-        private HttpClient? _client ;
+        private HttpClient _client ;
 
         public HttpClient Client()
         {
-            return _client ??= Anonymous
+            return _client = _client ?? (Anonymous
                 ? new HttpClient()
-                : new HttpClient(Handler());
+                : new HttpClient(Handler()));
         }
     }
 }

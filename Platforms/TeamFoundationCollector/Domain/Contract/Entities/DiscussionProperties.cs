@@ -1,4 +1,5 @@
-﻿using Ban3.Infrastructures.Common.Extensions;
+﻿using System.Collections.Generic;
+using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 

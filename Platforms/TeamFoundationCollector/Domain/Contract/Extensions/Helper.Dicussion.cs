@@ -1,4 +1,7 @@
-﻿using Ban3.Infrastructures.Common.Extensions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;

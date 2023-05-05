@@ -126,7 +126,7 @@ namespace Ban3.Infrastructures.Consoles.Entries
                     // 得到每一列最大的宽度
                     List<int> _columnWides = Columns.GetColumnWides(Rows);
                     // 替换用户输入长度
-                    ColumnWides ??= new List<int>();
+                    ColumnWides = ColumnWides ?? new List<int>();
                     for (int i = 0; i < ColumnWides.Count; i++) _columnWides[i] = ColumnWides[i];
                     _finalColumnWides = _columnWides;
                 }

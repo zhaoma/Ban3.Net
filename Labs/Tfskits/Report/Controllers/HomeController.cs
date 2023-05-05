@@ -1,43 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Reports;
 using Microsoft.AspNetCore.Mvc;
 
-using Tfvckits.Domain.Platform.Interfaces;
-using Tfvckits.Domain.Platform.Request.Reports;
-using log4net;
-using Tfvckits.Domain.LocalAgent.Request;
-
-namespace Tfvckits.Presentation.WebReport.Controllers
+namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILog _logger= LogManager.GetLogger(typeof(HomeController));
-
-        private readonly IExportService _exportService;
-
-        public HomeController(
-            IExportService exportService
-            )
-        {
-            _exportService = exportService;
-        }
-
         #region tfvc
 
         public IActionResult Index( string id )
         {
-            var now = DateTime.Now;
-            var allTeams = _exportService.AllTeams();
-
-            if( string.IsNullOrEmpty( id ) )
-                id = Domain.Platform.Config.CurrrentEnvironment.DefaultTeamName;
-
-            var team = allTeams.FindLast( o => o.Team.Name == id );
-
-            var filter = new DataFilter
+            if (string.IsNullOrEmpty(id))
+                id = Platforms.TeamFoundationCollector.Domain.Contract.Config.DefaultTeam;
+            
+            var filter = new TfvcFilter
             {
-                    LimitTeamIds = new List<string> { team.Team.Id },
+                    LimitTeamNames = new List<string> { id },
                     //FromDate = new DateTime( now.Year, now.Month, 1 ).ToString( "yyyy-MM-dd" ),
                     //ToDate = now.ToString( "yyyy-MM-dd" )
             };
@@ -52,29 +31,19 @@ namespace Tfvckits.Presentation.WebReport.Controllers
         /// <returns></returns>
         public IActionResult Teams( string id )
         {
-            var allTeams = _exportService.AllTeams();
+            var allTeams = DevOps.Reportor.Core.LoadTeams();
 
             return string.IsNullOrEmpty( id )
                            ? View( allTeams )
                            : View( id, allTeams );
         }
-
-        /// <summary>
-        /// 关注团队/取消关注
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IActionResult Follow( string id )
-        {
-            return Ok( _exportService.Follow( id ) );
-        }
-
+        
         /// <summary>
         /// 显示组员列表
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public IActionResult Identities( DataFilter filter )
+        public IActionResult Identities( TfvcFilter filter )
         {
             var allTeam = _exportService.AllTeams();
 
@@ -95,7 +64,7 @@ namespace Tfvckits.Presentation.WebReport.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public IActionResult Table( DataFilter filter )
+        public IActionResult Table( TfvcFilter filter )
         {
             var report = _exportService.GenerateReport( filter );
 
@@ -107,7 +76,7 @@ namespace Tfvckits.Presentation.WebReport.Controllers
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public IActionResult Excel( DataFilter filter )
+        public IActionResult Excel( TfvcFilter filter )
         {
             var excel = _exportService.GenerateExcel( filter );
 
@@ -115,10 +84,5 @@ namespace Tfvckits.Presentation.WebReport.Controllers
         }
 
         #endregion
-
-        public IActionResult WhatIs(QueryAnything request)
-        {
-            return View(request);
-        }
     }
 }

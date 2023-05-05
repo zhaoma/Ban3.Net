@@ -122,14 +122,19 @@ namespace Ban3.Infrastructures.Consoles.Utils
         /// <returns></returns>
         public static StyleInfo GetFormatInfo(this TableStyle format)
         {
-            return format switch
+            switch (format)
             {
-                TableStyle.Default => new StyleInfo("|", true, "-"),
-                TableStyle.MarkDown => new StyleInfo("|", false, "|"),
-                TableStyle.Alternative => new StyleInfo("|", true, "+"),
-                TableStyle.Minimal => new StyleInfo("", false, "-"),
-                _ => new StyleInfo(),
-            };
+                case TableStyle.Default:
+                    return new StyleInfo("|", true, "-");
+                case TableStyle.MarkDown:
+                    return new StyleInfo("|", false, "|");
+                case TableStyle.Alternative:
+                    return new StyleInfo("|", true, "+");
+                case TableStyle.Minimal:
+                    return new StyleInfo("", false, "-");
+                default:
+                    return new StyleInfo();
+            }
         }
 
         /// <summary>

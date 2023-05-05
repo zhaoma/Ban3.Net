@@ -177,10 +177,13 @@ D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\Support.genruntimeconfig.c
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\obj\Debug\net6.0\ref\Support.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.pdb
-D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\NetMail.dll
-D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\NetMail.pdb
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\MailKit.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\MimeKit.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
 D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\MailKit.Security.SaslMechanismNtlmIntegrated.dll
+D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\NSspi.dll
+D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Microsoft.Office.Interop.Outlook.dll
+D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Infrastructures.NetMail.dll
+D:\GIT\Ban3.Net\Labs\Tfskits\Support\bin\Debug\net6.0\Ban3.Infrastructures.NetMail.pdb

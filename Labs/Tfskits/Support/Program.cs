@@ -10,42 +10,91 @@ using System;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.WorkItemTracking;
 
+//var monitorJobs = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings.MonitorBranchSpec.Jobs;
+
+//monitorJobs.ForEach(
+//    o=>
+//    {
+//        o.Subject.WriteColorLine(ConsoleColor.Red);
+//        var success= DevOps.Reportor.Parse(o);
+//        if (success)
+//        {
+//            "...success".WriteSuccessLine();
+//        }
+//        else
+//        {
+//            "...failed".WriteColorLine(ConsoleColor.DarkYellow);
+//        }
+//    });
+
+
+var monitorJobs = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings.MonitorBranchSpec.Jobs;
+
+monitorJobs.ForEach(
+    o =>
+    {
+        o.Subject.WriteColorLine(ConsoleColor.Red);
+        var success = DevOps.Reportor.Parse(o);
+        if (success)
+        {
+            "...success".WriteSuccessLine();
+        }
+        else
+        {
+            "...failed".WriteColorLine(ConsoleColor.DarkYellow);
+        }
+    });
+
 /*
+
+
+static bool sendEmailViaOutlook(string sendusermail, string mailtitle, string mailcontent)
+{
+    try
+    {
+        Microsoft.Office.Interop.Outlook.Application olApp = new Microsoft.Office.Interop.Outlook.Application();
+        Microsoft.Office.Interop.Outlook.MailItem mailItem = (Microsoft.Office.Interop.Outlook.MailItem)olApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+        mailItem.To = sendusermail;
+        mailItem.Subject = mailtitle;
+        mailItem.BodyFormat = Microsoft.Office.Interop.Outlook.OlBodyFormat.olFormatHTML;
+        mailItem.HTMLBody = mailcontent;
+        ((Microsoft.Office.Interop.Outlook._MailItem)mailItem).Send();
+        mailItem = null;
+        olApp = null;
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e);
+        return false;
+    }
+    return true;
+}
+
 var m = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings.MonitorBranchSpec.Jobs;
 
 Console.WriteLine(m.ObjToJson());
 
-m.ForEach(job =>
+foreach (var monitorJob in m)
 {
-    var targets = DevOps.Collector.Tfvc.GetBranchSpecDependencies(job.TargetPath);
-    var guidelines= DevOps.Collector.Tfvc.GetBranchSpecDependencies(job.GuidelinePath);
+    var records = DevOps.Reportor.Tfvc.GetBranchSpecMonitorRecords(monitorJob);
+    records.ObjToJson().WriteColorLine(ConsoleColor.Red);
+}
 
-    targets.ObjToJson().WriteColorLine(ConsoleColor.Green);
-    guidelines.ObjToJson().WriteColorLine(ConsoleColor.Blue);
 
-    var ns = targets.Where(x => guidelines.Any(y => y.Name == x.Name && y.Version != x.Version));
-    if (ns.Any())
-    {
-        $"SEND warning".WriteColorLine(ConsoleColor.Red);
-        ns.ObjToJson().WriteColorLine(ConsoleColor.Red);
-    }
-    else
-    {
-        $"All Match".WriteColorLine(ConsoleColor.Yellow);
-    }
-});
-*/
 var mailServer = new Ban3.Infrastructures.NetMail.Entries.TargetServer
 {
     ServerEndpoint = "smtp.office365.com",
     ServerPort = 587,
     EnableSsl = true,
     UserName = "zhifeng.zhao.ext@siemens-healthineers.com",
-    Password = "100Pi=314.15926!!!"
-};
-(mailServer.SendByMailKit(new List<string> { "zhifeng.zhao.ext@siemens-healthineers.com" }, null, "SSME SMS monitor", "HEllo") ? "ok" : "failured")
-    .WriteWarningLine();
+    Password = "100Pi=314.15926!!!",
 
+    TagName= "STARTTLS/smtp.office365.com"
+};
+ mailServer.SendByMailKit(new List<string> { "zhifeng.zhao.ext@siemens-healthineers.com" }, null, "SSME SMS monitor", "HEllo") ;
+Console.ReadKey();
+
+*/
 /*
 
 await Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums.ServerResource

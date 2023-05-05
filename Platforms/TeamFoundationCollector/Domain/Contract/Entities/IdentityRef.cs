@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
+using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
@@ -45,4 +46,8 @@ public class IdentityRef
 
     [JsonProperty("imageUrl")]
     public string ImageUrl { get; set; } = string.Empty;
+
+    public string ShowName() => DisplayName.ShowName();
+    
+    public string ShowTitle() => DisplayName.ShowTitle();
 }

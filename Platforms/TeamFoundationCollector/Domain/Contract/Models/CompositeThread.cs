@@ -1,4 +1,6 @@
-﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;

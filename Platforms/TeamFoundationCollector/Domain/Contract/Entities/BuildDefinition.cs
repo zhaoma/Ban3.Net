@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Newtonsoft.Json.Converters;
 

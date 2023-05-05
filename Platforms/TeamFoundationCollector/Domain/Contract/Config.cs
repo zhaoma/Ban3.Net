@@ -1,4 +1,5 @@
-﻿using Ban3.Infrastructures.NetHttp.Entries;
+﻿using System.Collections.Generic;
+using Ban3.Infrastructures.NetHttp.Entries;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
@@ -11,6 +12,8 @@ public class Config
     public static Target Target { get; set; }
 
     public static TargetHost Host { get; set; }
+
+    public static string DefaultTeam { get; set; }
 
     static Config()
     {
@@ -35,6 +38,8 @@ public class Config
             UserName = Target.UserName,
             Password = Target.Password,
         };
+
+        DefaultTeam = cfg["Focus:DefaultTeam"] + "";
     }
 
     public const int MaxParallelTasks = 20;

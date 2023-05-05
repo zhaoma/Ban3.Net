@@ -1,4 +1,5 @@
-﻿using Ban3.Infrastructures.Common.Extensions;
+﻿using System.Collections.Generic;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
@@ -27,7 +28,7 @@ public static partial class Helper
     public static void AppendShelvesets(this IdentitySummary identitySummary,
         List<CompositeShelveset> shelvesets)
     {
-        identitySummary.Shelvesets ??= new Dictionary<string, CompositeShelveset>();
+        identitySummary.Shelvesets = identitySummary.Shelvesets ?? new Dictionary<string, CompositeShelveset>();
 
         shelvesets.ForEach(o =>
         {

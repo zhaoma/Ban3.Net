@@ -14,4 +14,6 @@ namespace Ban3.Infrastructures.NetMail.Entries;
 
 
     public string Password { get; set; } = string.Empty;
-}
+
+    public string TagName { get; set; } = string.Empty;
+    }

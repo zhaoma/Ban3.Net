@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Support {
+namespace Ban3.Labs.TeamFoundationCollector.Presentation.Support {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

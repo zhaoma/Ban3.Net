@@ -1,4 +1,5 @@
-﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
+﻿using System.Collections.Generic;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Newtonsoft.Json;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.WorkItemTracking;

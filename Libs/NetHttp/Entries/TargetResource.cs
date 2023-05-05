@@ -12,9 +12,9 @@ namespace Ban3.Infrastructures.NetHttp.Entries
 
         public string Method { get; set; } = "Get";
 
-        public Dictionary<string, string>? Headers { get; set; } = null;
+        public Dictionary<string, string> Headers { get; set; } = null;
 
-        public Body? Body { get; set; } = null;
+        public Body Body { get; set; } = null;
         
         public HttpRequestMessage Request()
         {

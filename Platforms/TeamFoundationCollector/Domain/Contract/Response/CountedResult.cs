@@ -1,4 +1,6 @@
-﻿namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response;
+﻿using System.Collections.Generic;
+
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response;
 
 public class CountedResult<T>
     : BoolResponse

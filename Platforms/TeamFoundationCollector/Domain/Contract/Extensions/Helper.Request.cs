@@ -1,9 +1,13 @@
-﻿using System.Net;
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
 using Ban3.Infrastructures.NetHttp;
 using Ban3.Infrastructures.NetHttp.Entries;
 using Ban3.Infrastructures.NetHttp.Request;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Ban3.Infrastructures.Common.Extensions;
+using System.Linq;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 
@@ -117,7 +121,7 @@ public static partial class Helper
 
             var iputStream = await responseMessage.Content.ReadAsStreamAsync();
 
-            await using var fileStream = File.Create(savePath);
+             using FileStream fileStream = File.Create(savePath);
             await iputStream.CopyToAsync(fileStream);
 
             responseMessage.Dispose();
