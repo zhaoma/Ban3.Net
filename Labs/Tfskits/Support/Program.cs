@@ -15,15 +15,19 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.WorkItemTra
 var allTeams = DevOps.Collector.Core.LoadTeams();
 
 allTeams
-    .Where(o => o.Name.Contains("SSME"))
+    //.Where(o => o.Name.Contains("SSME"))
     .ToList()
     .ForEach(
-    o=>
+    o =>
     {
-        new Action(() => {
-        DevOps.Collector.SyncOneTeamSummary(o.Id,true);
+        new Action(() =>
+        {
+            DevOps.Collector.SyncOneTeamSummary(o.Id, true);
         }).ExecuteAndTiming($"{o.Name}[{o.Id}]");
     });
+
+//var id = "be8e66c2-1a5d-42b2-b5ac-3db32fe25b84";
+//DevOps.Collector.SyncOneMemberSummary(id,true);
 
 /*
 

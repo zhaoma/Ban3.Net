@@ -13,7 +13,7 @@ public class CompositeShelveset
 
     public CompositeShelveset(TfvcShelvesetRef shelvesetRef)
     {
-        Id = shelvesetRef.Id;
+        Id = shelvesetRef.Name;
         CreatedDate = shelvesetRef.CreatedDate;
         Comment = shelvesetRef.Comment;
         if (shelvesetRef.Owner != null)

@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.NetHttp.Entries;
 
@@ -9,7 +10,7 @@ namespace Ban3.Infrastructures.NetHttp
         public static async Task<HttpResponseMessage> Request(this TargetHost host, TargetResource resource)
         {
             var client = host.Client();
-            
+            Console.WriteLine(resource.Url);
             return await client.SendAsync(resource.Request());
         }
     }
