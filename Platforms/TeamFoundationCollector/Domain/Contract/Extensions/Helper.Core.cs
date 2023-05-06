@@ -120,4 +120,24 @@ public static partial class Helper
         return _.LoadTeams()
             .FindLast(o => o.Name == name);
     }
+
+    public static List<IdentityRef> GetIdentitiesFromTeams(this List<WebApiTeam> teams)
+    {
+        var result=new List<IdentityRef>();
+
+        foreach (var webApiTeam in teams)
+        {
+            if (webApiTeam.Members != null && webApiTeam.Members.Any())
+            {
+                result = result.Union(
+                        webApiTeam.Members
+                            .Where(o => o.Identity != null)
+                            .Select(o => o.Identity!)
+                        )
+                    .ToList();
+            }
+        }
+
+        return result;
+    }
 }

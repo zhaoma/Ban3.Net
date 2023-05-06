@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "D:\\GIT\\Ban3.Net\\Labs\\Tfskits\\Support\\Support.csproj",
-        "projectName": "Support",
+        "projectName": "support",
         "projectPath": "D:\\GIT\\Ban3.Net\\Labs\\Tfskits\\Support\\Support.csproj",
         "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
         "outputPath": "D:\\GIT\\Ban3.Net\\Labs\\Tfskits\\Support\\obj\\",
@@ -591,6 +591,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.6.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

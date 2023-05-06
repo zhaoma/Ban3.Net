@@ -9,22 +9,17 @@ public class TfvcFilter
     /// <summary>
     /// 限定组
     /// </summary>
-    public List<string> LimitTeamNames { get; set; }
+    public List<string>? LimitTeamNames { get; set; }
 
     /// <summary>
     /// 限定创建者
     /// </summary>
-    public List<string> LimitIdentityIds { get; set; }
+    public List<string>? LimitIdentityIds { get; set; }
 
     /// <summary>
     /// 包含关键字
     /// </summary>
     public string Keyword { get; set; }
-
-    /// <summary>
-    /// 不包含关键字
-    /// </summary>
-    public string Exclude { get; set; }
 
     /// <summary>
     /// 起始日期
@@ -54,7 +49,7 @@ public class TfvcFilter
     /// <summary>
     /// 报告目标，all/changeset/shelveset
     /// </summary>
-    public ReportRef Ref { get; set; } = ReportRef.Shelveset;
+    public ReportRef Ref { get; set; } = ReportRef.All;
 
     public bool HasComments { get; set; }
 }

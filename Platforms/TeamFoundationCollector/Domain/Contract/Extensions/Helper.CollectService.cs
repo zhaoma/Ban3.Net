@@ -5,7 +5,7 @@ using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 
@@ -49,22 +49,14 @@ public static partial class Helper
             Id = identityGuid
         };
 
-        result.AppendChangesets(_.FulfilDiscussion(_.Tfvc.PrepareChangesets(identityGuid)));
-        result.AppendShelvesets(_.FulfilDiscussion(_.Tfvc.PrepareShelvesets(identityGuid),identityGuid));
+        result.AppendChangesets(_.FulfillDiscussion(_.Tfvc.PrepareChangesets(identityGuid)));
+        result.AppendShelvesets(_.FulfillDiscussion(_.Tfvc.PrepareShelvesets(identityGuid),identityGuid));
 
         file
             .WriteFile(result.ObjToJson());
     }
 
-    public static IdentitySummary? LoadOneAuthorSummary(string identityGuid)
-    {
-        return identityGuid
-            .DataFile<IdentitySummary>()
-            .ReadFile()
-            .JsonToObj<IdentitySummary>();
-    }
-
-    private static List<CompositeChangeset> FulfilDiscussion(this ICollectService _, List<CompositeChangeset> changesets)
+    private static List<CompositeChangeset> FulfillDiscussion(this ICollectService _, List<CompositeChangeset> changesets)
     {
         var pageSize = Config.MaxParallelTasks;
         var p = changesets.Count % pageSize > 0 ? changesets.Count / pageSize + 1 : changesets.Count / pageSize;
@@ -86,7 +78,7 @@ public static partial class Helper
         return changesets;
     }
 
-    private static List<CompositeShelveset> FulfilDiscussion(this ICollectService _, List<CompositeShelveset> shelvesets,
+    private static List<CompositeShelveset> FulfillDiscussion(this ICollectService _, List<CompositeShelveset> shelvesets,
         string authorGuid)
     {
         var pageSize = Config.MaxParallelTasks;

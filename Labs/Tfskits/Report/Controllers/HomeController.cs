@@ -45,18 +45,9 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
         /// <returns></returns>
         public IActionResult Identities( TfvcFilter filter )
         {
-            var allTeam = _exportService.AllTeams();
+            var identities = DevOps.Reportor.GetIdentities(filter);
 
-            if( filter.LimitTeamIds != null && filter.LimitTeamIds.Any() )
-            {
-                allTeam = allTeam.FindAll( o => filter.LimitTeamIds.Any( x => x == o.Team.Id ) );
-            }
-            else
-            {
-                allTeam = allTeam.FindAll( o => o.Team.Name == Domain.Platform.Config.CurrrentEnvironment.DefaultTeamName );
-            }
-
-            return View( allTeam );
+            return View(identities);
         }
 
         /// <summary>
@@ -66,7 +57,7 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
         /// <returns></returns>
         public IActionResult Table( TfvcFilter filter )
         {
-            var report = _exportService.GenerateReport( filter );
+            var report = DevOps.Reportor.GetTfvcReport( filter );
 
             return View( report );
         }
@@ -78,7 +69,7 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
         /// <returns></returns>
         public IActionResult Excel( TfvcFilter filter )
         {
-            var excel = _exportService.GenerateExcel( filter );
+            var excel = DevOps.Reportor.GetTfvcExcel( filter );
 
             return new FileStreamResult( excel, "application/vnd.ms-excel" );
         }

@@ -447,6 +447,10 @@
               "version": "[2.0.3, )",
               "autoReferenced": true
             },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.6.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"

@@ -452,5 +452,33 @@ namespace Ban3.Infrastructures.Common.Extensions
 
             return sb;
         }
+
+        public static bool DateGE(this string dateString, string dateVal)
+        {
+            if (string.IsNullOrEmpty(dateVal)) return true;
+
+            return dateString.ToDateTime()
+                       .Subtract(dateVal.ToDateTime())
+                       .Seconds
+                   >= 0;
+        }
+
+        public static bool DateLE(this string dateString, string dateVal)
+        {
+            if (string.IsNullOrEmpty(dateVal)) return true;
+
+            return dateVal.ToDateTime()
+                       .Subtract(dateString.ToDateTime())
+                       .Seconds
+                   >= 0;
+        }
+
+        public static bool StringExists(this string content, string key)
+        {
+            if (string.IsNullOrEmpty(key)) return true;
+
+            var keys = key.Split(' ');
+            return keys.Any(o => content.Contains(o.Trim()));
+        }
     }
 }

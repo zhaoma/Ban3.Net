@@ -1,21 +1,34 @@
 ﻿using System.Collections.Generic;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Newtonsoft.Json;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 
 public class CompositeShelveset
 {
-    public CompositeShelveset() { }
+    public CompositeShelveset()
+    {
+    }
 
     public CompositeShelveset(TfvcShelvesetRef shelvesetRef)
     {
         Id = shelvesetRef.Id;
         CreatedDate = shelvesetRef.CreatedDate;
         Comment = shelvesetRef.Comment;
+        if (shelvesetRef.Owner != null)
+        {
+            AuthorGuid = shelvesetRef.Owner.Id;
+            AuthorName = shelvesetRef.Owner.DisplayName.ShowName();
+        }
     }
 
     [JsonProperty("id")] public string Id { get; set; } = string.Empty;
+
+    [JsonProperty("authorGuid")]
+    public string AuthorGuid { get; set; } = string.Empty;
+
+    [JsonProperty("authorName")] public string AuthorName { get; set; } = string.Empty;
 
     [JsonProperty("createdDate")] public string CreatedDate { get; set; } = string.Empty;
 

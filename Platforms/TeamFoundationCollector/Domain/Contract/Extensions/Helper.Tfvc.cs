@@ -7,12 +7,12 @@ using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
 using System.Xml;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BranchSpec;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 

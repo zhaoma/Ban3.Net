@@ -1,4 +1,4 @@
-﻿@model DataFilter
+﻿@model Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Reports.TfvcFilter
 @{
     ViewData["Title"] = "Home";
 }
@@ -41,8 +41,9 @@
                                         </svg>
                                     </span>
                                     <select id="ref" class="form-control">
-                                        <option value="0">Changeset</option>
-                                        <option value="1" selected="selected">Shelveset</option>
+                                        <option value="0" selected="selected">All</option>
+                                        <option value="1">Changeset</option>
+                                        <option value="2">Shelveset</option>
                                     </select>
                                 </div>
                             </div>

@@ -5,7 +5,7 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Discussion;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Discussion;
 

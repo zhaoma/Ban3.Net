@@ -8,6 +8,10 @@
     $("#ref").change(function () {
         requestTable();
     });
+    $("#HasComments").change(function () {
+        requestTable();
+    });
+    /*
 
     if ($(".followButton").length > 0) {
         $(".followButton").each(function () {
@@ -43,8 +47,6 @@
 
         return false;
     }
-
-    /*
      $(".author").each(function() {
         $(this).click(function() {
             if ($(this).hasClass("selectedAuthor")) {
@@ -63,9 +65,9 @@
     });
 
     requestTable();
+    startSignalR();
     
     */
-    startSignalR();
 });
 
 function focusNav(id) {
@@ -73,12 +75,12 @@ function focusNav(id) {
 }
 
 function requestIdentities() {
-    var limitTeamIds = [];
+    var limitTeamNames = [];
 
-    limitTeamIds.push($("#LimitTeamIds").val());
+    limitTeamNames.push($("#LimitTeamNames").val());
 
     var request = {
-        limitTeamIds: limitTeamIds
+        limitTeamNames: limitTeamNames
     };
 
     $.ajax({
@@ -96,7 +98,7 @@ function requestIdentities() {
 }
 
 function requestTable() {
-    var limitTeamIds = [];
+    var limitTeamNames = [];
     var limitIdentityIds = [];
     var fromDate = $("#fromDate").val();
     var toDate = $("#toDate").val();
@@ -104,14 +106,14 @@ function requestTable() {
     var exclude = $("#exclude").val();
 
 
-    limitTeamIds.push($("#LimitTeamIds").val());
+    limitTeamNames.push($("#LimitTeamNames").val());
 
     $("input[name='limitIdentityIds']:checked").each(function () {
         limitIdentityIds.push($(this).val());
     });
 
     var request = {
-        limitTeamIds: limitTeamIds,
+        limitTeamNames: limitTeamNames,
         limitIdentityIds: limitIdentityIds,
         fromDate: fromDate,
         toDate: toDate,
@@ -147,7 +149,7 @@ function downloadFileByForm() {
     var fileName = "webreport.xls";
     var form = $("<form></form>").attr("action", url).attr("method", "post");
 
-    form.append($("<input></input>").attr("type", "hidden").attr("name", "LimitTeamIds").attr("value", $("#LimitTeamIds").val()));
+    form.append($("<input></input>").attr("type", "hidden").attr("name", "LimitTeamNames").attr("value", $("#LimitTeamNames").val()));
     form.append($("<input></input>").attr("type", "hidden").attr("name", "HasComments").attr("value", $("#HasComments").prop("checked")));
     form.append($("<input></input>").attr("type", "hidden").attr("name", "fileName").attr("value", fileName));
     form.append(
