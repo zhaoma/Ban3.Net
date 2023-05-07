@@ -34,6 +34,8 @@ namespace Ban3.Infrastructures.Common
                 .AddJsonFile("appSettings.json", false, true)
                 .Build();
 
+            log4net.Config.XmlConfigurator.Configure();
+
             LocalStorage = new Models.LocalStorage
             {
                 RootPath = AppConfiguration["FilesStorage:RootPath"] + "",

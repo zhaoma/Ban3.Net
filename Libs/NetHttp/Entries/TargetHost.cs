@@ -6,7 +6,7 @@ namespace Ban3.Infrastructures.NetHttp.Entries
 {
     public class TargetHost
     {
-        public bool Anonymous = false;
+        public bool Anonymous { get; set; } = false;
 
         public string BaseUrl { get; set; } = string.Empty;
 
@@ -18,7 +18,16 @@ namespace Ban3.Infrastructures.NetHttp.Entries
 
         public string AuthenticationType { get; set; } = "Basic";
 
-        public HttpClientHandler Handler()
+        public HttpClient Client()
+        {
+            return _client = _client ?? (Anonymous
+                ? new HttpClient()
+                : new HttpClient(Handler()));
+        }
+
+        private HttpClient _client;
+
+        private HttpClientHandler Handler()
         {
             var defaultCredential = string.IsNullOrEmpty(Domain)
                 ? new NetworkCredential(UserName, Password)
@@ -35,13 +44,5 @@ namespace Ban3.Infrastructures.NetHttp.Entries
             };
         }
 
-        private HttpClient _client ;
-
-        public HttpClient Client()
-        {
-            return _client = _client ?? (Anonymous
-                ? new HttpClient()
-                : new HttpClient(Handler()));
-        }
     }
 }

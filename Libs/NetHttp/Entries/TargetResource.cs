@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using Ban3.Infrastructures.NetHttp.Interfaces;
 using Ban3.Infrastructures.NetHttp.Request;
 
 namespace Ban3.Infrastructures.NetHttp.Entries
 {
-    public class TargetResource
+    public class TargetResource:ITargetResource
     {
         public string Url { get; set; } = string.Empty;
 
         public string Method { get; set; } = "Get";
+
+        public bool ResourceIsJsonp { get; set; } = false;
+
+        public string JsonpPrefix { get; set; } = string.Empty;
 
         public Dictionary<string, string> Headers { get; set; } = null;
 

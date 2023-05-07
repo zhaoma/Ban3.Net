@@ -1,38 +1,194 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\ViaEastmoney.csproj": {}
+    "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaEastmoney/ViaEastmoney.csproj": {}
   },
   "projects": {
-    "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\ViaEastmoney.csproj": {
+    "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\ViaEastmoney.csproj",
-        "projectName": "Ban3.Sites.ViaEastmoney",
-        "projectPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\ViaEastmoney.csproj",
-        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-        "outputPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\obj\\",
+        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj",
+        "projectName": "ban3.Infrastructures.Common",
+        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj",
+        "packagesPath": "/Users/zhaoma/.nuget/packages/",
+        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.IO": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Threading.Tasks": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.15, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj",
+        "projectName": "Ban3.Infrastructures.NetHttp",
+        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj",
+        "packagesPath": "/Users/zhaoma/.nuget/packages/",
+        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Net.Http": {
+              "target": "Package",
+              "version": "[4.3.4, )"
+            },
+            "log4net": {
+              "target": "Package",
+              "version": "[2.0.15, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaEastmoney/ViaEastmoney.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaEastmoney/ViaEastmoney.csproj",
+        "projectName": "Ban3.Sites.ViaEastmoney",
+        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaEastmoney/ViaEastmoney.csproj",
+        "packagesPath": "/Users/zhaoma/.nuget/packages/",
+        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaEastmoney/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj": {
+                "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj"
+              },
+              "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj": {
+                "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -70,7 +226,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
         }
       }
     }

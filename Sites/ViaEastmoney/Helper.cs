@@ -5,6 +5,7 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
+using Ban3.Sites.ViaEastmoney.Entries;
 using Ban3.Sites.ViaEastmoney.Request;
 using Ban3.Sites.ViaEastmoney.Response;
 using log4net;
@@ -14,8 +15,7 @@ namespace Ban3.Sites.ViaEastmoney
     /// <summary>
     /// Eastmoney平台接口实现
     /// </summary>
-    public class Service
-        :Interfaces.Platforms.IEastmoney
+    public static class Helper
     {
         private readonly ILog _logger;
         private readonly IDataCollection _collector;
