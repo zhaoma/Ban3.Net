@@ -1,48 +1,47 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using Ban3.Infrastructures.NetHttp.Interfaces;
 
-namespace Ban3.Infrastructures.NetHttp.Entries
+namespace Ban3.Infrastructures.NetHttp.Entries;
+
+public class TargetHost : ITargetHost
 {
-    public class TargetHost
+    public bool Anonymous { get; set; } = false;
+
+    public string BaseUrl { get; set; } = string.Empty;
+
+    public string UserName { get; set; } = string.Empty;
+
+    public string Password { get; set; } = string.Empty;
+
+    public string Domain { get; set; } = string.Empty;
+
+    public string AuthenticationType { get; set; } = "Basic";
+
+    public HttpClient Client()
     {
-        public bool Anonymous { get; set; } = false;
+        return _client = _client ?? (Anonymous
+            ? new HttpClient()
+            : new HttpClient(Handler()));
+    }
 
-        public string BaseUrl { get; set; } = string.Empty;
+    private HttpClient _client;
 
-        public string UserName { get; set; } = string.Empty;
+    private HttpClientHandler Handler()
+    {
+        var defaultCredential = string.IsNullOrEmpty(Domain)
+            ? new NetworkCredential(UserName, Password)
+            : new NetworkCredential(UserName, Password, Domain);
 
-        public string Password { get; set; } = string.Empty;
-
-        public string Domain { get; set; } = string.Empty;
-
-        public string AuthenticationType { get; set; } = "Basic";
-
-        public HttpClient Client()
+        return new HttpClientHandler
         {
-            return _client = _client ?? (Anonymous
-                ? new HttpClient()
-                : new HttpClient(Handler()));
-        }
-
-        private HttpClient _client;
-
-        private HttpClientHandler Handler()
-        {
-            var defaultCredential = string.IsNullOrEmpty(Domain)
-                ? new NetworkCredential(UserName, Password)
-                : new NetworkCredential(UserName, Password, Domain);
-
-            return new HttpClientHandler
+            AllowAutoRedirect = true,
+            MaxConnectionsPerServer = 10,
+            Credentials = new CredentialCache
             {
-                AllowAutoRedirect = true,
-                MaxConnectionsPerServer = 10,
-                Credentials = new CredentialCache
-                {
-                    { new Uri(BaseUrl), AuthenticationType, defaultCredential }
-                }
-            };
-        }
-
+                { new Uri(BaseUrl), AuthenticationType, defaultCredential }
+            }
+        };
     }
 }

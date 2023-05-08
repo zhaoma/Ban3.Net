@@ -5,19 +5,19 @@ using System.Net.Http;
 
 namespace Ban3.Infrastructures.NetHttp.Interfaces;
 
-	public interface ITargetResource
-	{
-    string Url { get; set; } 
+public interface ITargetResource
+{
+    string Url { get; set; }
 
-     string Method { get; set; }
+    string Method { get; set; }
 
     bool ResourceIsJsonp { get; set; }
 
- string JsonpPrefix { get; set; } 
+    string JsonpPrefix { get; set; }
 
-    Dictionary<string, string> Headers { get; set; } 
+    Dictionary<string, string> Headers { get; set; }
 
-     Body Body { get; set; } 
+    Body Body { get; set; }
 
     HttpRequestMessage Request();
 

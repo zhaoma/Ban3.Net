@@ -1,5 +1,6 @@
 ﻿@using System.Web
 @using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
+@using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions
 @model Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Reports.TfvcFilterResult
 @{
     Layout = null;
@@ -15,25 +16,25 @@
             </ul>
         }
         </div>
-
 </div>
 <div class="table-responsive">
-<table class="table table-hover">
-
-    <thead>
+    <table class="table table-hover">
+        <thead>
         <tr>
-
-            <th class="col-2">ID</th>
-            <th>Changesets (@Model.Rows.Count found.)</th>
+            <th class="col-2">Type</th>
+            <th>
+                Changesets (@Model.Rows.Count(o => o.ReportRef == ReportRef.Changeset) found.);
+                Shelvesets (@Model.Rows.Count(o => o.ReportRef == ReportRef.Shelveset) found.)
+            </th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
 
         @foreach (var c in Model.PagedRows)
         {
             <tr class="dataRow">
                 <td class="card-body">
-                    <a href="@c.Url" target="_blank" class="text-reset d-block">
+                    <a href="@c.Url" target="_blank" class="text-reset d-block" title="jump to tfs server">
                         @if (c.ReportRef == ReportRef.Changeset)
                         {
                             <span class="badge bg-success">
@@ -42,11 +43,10 @@
                         }
                         @if (c.ReportRef == ReportRef.Shelveset)
                         {
-                            <span class="badge bg-warning">
-                                    Shelveset
+                                <span class="badge bg-info" title="jump to tfs server">
+                                Shelveset 
                             </span>
                         }
-                        <span class="fabric-icon medium DocumentSet"><span class="noticeNumber">@c.Id</span></span>
                     </a>
                 </td>
                 <td class="card-body ">
@@ -54,49 +54,60 @@
                         <div class="row">
                             <div class="col"></div>
                             <div class="col-3 rowIdentity"><i class="bi bi-person"></i> @c.AuthorName</div>
-                            <div class="col-3 rowDate"><i class="bi bi-clock"></i> @c.CreatedDate</div>
+                            <div class="col-3 rowDate"><i class="bi bi-clock"></i> @c.CreatedDate.ShowDate()</div>
                         </div>
-                        <div class="row card-body">
+                            <div class="row card-body">
+                                <h3>
+                                    @if (c.ReportRef == ReportRef.Changeset)
+                                    {
+                                        <span class="fabric-icon medium DocumentSet"><span class="noticeNumber">@c.Id</span></span>
+                                    }
+                                    @if (c.ReportRef == ReportRef.Shelveset)
+                                    {
+                                        <span class="fabric-icon medium BranchShelveset"><span class="noticeNumber">@c.Id</span></span>
+                                    }
+                                </h3>
                             @Html.Raw(c.Comment)
                         </div>
                     </div>
 
-                        @if ( c.Comments.Any())
+                    @if (c.Threads != null && c.Threads.Any())
                     {
                         <hr />
-                            @foreach (var t in c.Comments)
+                        @foreach (var tc in c.Threads.Where(o=>o.Comments!=null&&o.Comments.Any()))
                         {
+                            @foreach (var t in tc.Comments)
+                            {
                                 <div class="dataRow">
                                     <div class="col row ">
                                         <div class="col">
                                             <span class="badge bg-warning">
-                                                @t.Status
+                                                @tc.Status
                                             </span>
                                         </div>
                                         <div class="col-3 rowIdentity"><i class="bi bi-person"></i> @t.AuthorName</div>
-                                        <div class="col-3 rowDate"><i class="bi bi-clock"></i> @t.PublishedDate</div>
+                                        <div class="col-3 rowDate"><i class="bi bi-clock"></i> @t.PublishedDate.ShowDate()</div>
                                     </div>
                                     <div class="card-body">
                                         @Html.Raw(t.Content)
                                     </div>
                                 </div>
+                            }
                         }
                     }
-
                 </td>
             </tr>
         }
-
-    </tbody>
-</table>
-<div class="col-12">
-    <div class="card-body">
-        <ul class="pagination ">
-            @if (Model.TotalPage > 1)
-            {
-                @Html.Raw(Model.Pagination)
-            }
-        </ul>
+        </tbody>
+    </table>
+    <div class="col-12">
+        <div class="card-body">
+            <ul class="pagination ">
+                @if (Model.TotalPage > 1)
+                {
+                    @Html.Raw(Model.Pagination)
+                }
+            </ul>
+        </div>
     </div>
-</div>
 </div>

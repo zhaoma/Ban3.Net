@@ -18,7 +18,6 @@ public class Pipeline
 
     /// 
     [JsonProperty("configuration")]
-    [JsonConverter(typeof(StringEnumConverter))]
     public PipelineConfiguration? Configuration { get; set; }
 
 }

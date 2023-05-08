@@ -1707,7 +1707,9 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "System.Net.Http": "4.3.4"
+          "Newtonsoft.Json": "13.0.3",
+          "System.Net.Http": "4.3.4",
+          "log4net": "2.0.15"
         },
         "compile": {
           "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}

@@ -15,6 +15,7 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Reports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Reports;
 using NPOI.HSSF.UserModel;
+using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
@@ -31,6 +32,8 @@ public static partial class Helper
     }
 
     #endregion
+
+    #region Tfvc Report
 
     public static TfvcFilterResult GetTfvcReport(this IReportService _, TfvcFilter filter)
     {
@@ -53,8 +56,176 @@ public static partial class Helper
         result.Rows.AddRange(result.Changesets.ChangesetsToShowRows());
         result.Rows.AddRange(result.Shelvesets.ShelvesetsToShowRows());
 
+        result.Rows = result.Rows.OrderByDescending(o => o.CreatedDate).ToList();
+
+        result.PagedRows= result.Rows.Skip((filter.PageNo - 1) * filter.PageSize).Take(filter.PageSize).ToList();
+
+        result.PagedRows.ForEach(o=>
+        {
+            if (o.ReportRef == ReportRef.Changeset)
+            {
+                o.Changes = o.FileId.DataFile<TfvcChangeset>()
+                    .ReadFile()
+                    .JsonToObj<TfvcChangeset>()?
+                    .Changes;
+            }
+            
+            if (o.ReportRef == ReportRef.Shelveset)
+            {
+                o.Changes = o.FileId.DataFile<TfvcShelveset>()
+                    .ReadFile()
+                    .JsonToObj<TfvcShelveset>()?
+                    .Changes;
+            }
+        });
+
         return result;
     }
+
+    public static List<IdentityRef> GetIdentities(this IReportService _, TfvcFilter filter)
+    {
+        var teams = _.Core.LoadTeams()
+            .Where(o => filter.LimitTeamNames != null && filter.LimitTeamNames.Any(x => x == o.Name))
+            .ToList();
+
+        return  teams.GetIdentitiesFromTeams();
+    }
+
+    public static void FulfillTfvcFilterResult(
+        this IReportService _,
+        TfvcFilterResult result,
+        TfvcFilter filter,
+        IdentityRef identityRef)
+    {
+        bool found = false;
+        var identitySummary = _.LoadOneAuthorSummary(identityRef.Id);
+
+        var changesets =
+            filter.Ref == ReportRef.All || filter.Ref == ReportRef.Changeset
+                ? identitySummary?.GetCompositeChangesets(filter)
+                : new List<CompositeChangeset>();
+        var shelvesets =
+            filter.Ref == ReportRef.All || filter.Ref == ReportRef.Shelveset
+                ? identitySummary?.GetCompositeShelvesets(filter)
+                : new List<CompositeShelveset>();
+
+        if (changesets != null && changesets.Any())
+        {
+            found = true;
+            result.Changesets=result.Changesets.Union(changesets)
+                .ToList();
+        }
+
+        if (shelvesets != null && shelvesets.Any())
+        {
+            found = true;
+            result.Shelvesets = result.Shelvesets.Union(shelvesets)
+                .ToList();
+        }
+
+        if (found&&result.Identities.All(o=>o.Id!=identityRef.Id))
+        {
+            result.Identities.Add(identityRef);
+        }
+    }
+
+    private static List<ShowRow> ChangesetsToShowRows(this List<CompositeChangeset> changesets)
+    {
+        return changesets.Select(o => new ShowRow
+        {
+            ReportRef = ReportRef.Changeset,
+            Id = o.Id + "",
+            FileId = o.FileId,
+            AuthorGuid = o.AuthorGuid,
+            AuthorName = o.AuthorName,
+            CreatedDate = o.CreatedDate,
+            Comment = o.Comment,
+            Url = $"{Config.Target.Instance}/{Config.Target.Organization}/{Config.Target.Project}/_versionControl/changeset/{o.Id}",
+            Threads = o.Threads
+
+        }).ToList();
+    }
+
+    private static List<ShowRow> ShelvesetsToShowRows(this List<CompositeShelveset> shelvesets)
+    {
+        return shelvesets.Select(o => new ShowRow
+        {
+            ReportRef = ReportRef.Shelveset,
+            Id = o.Id + "",
+            FileId = o.FileId,
+            AuthorGuid = o.AuthorGuid,
+            AuthorName = o.AuthorName,
+            CreatedDate = o.CreatedDate,
+            Comment = o.Comment,
+            Url = $"{Config.Target.Instance}/{Config.Target.Organization}/{Config.Target.Project}/_versionControl/shelveset?ss={WebUtility.UrlEncode(o.Id+";"+o.AuthorGuid)}",
+            Threads = o.Threads
+
+        }).ToList();
+    }
+    
+    private static List<CompositeChangeset> GetCompositeChangesets(
+        this IdentitySummary identitySummary,
+        TfvcFilter filter)
+    {
+        if (identitySummary.Changesets == null || !identitySummary.Changesets.Any())
+            return new();
+
+        var changesets = new List<CompositeChangeset>();
+
+        changesets.AddRange(identitySummary.Changesets.Select(o => o.Value));
+
+        changesets = changesets.Where(o =>
+            (!filter.HasComments || (o.Threads != null && o.Threads.Any()))
+            && (string.IsNullOrEmpty(filter.CommentAuthor)||o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
+            && o.CreatedDate.DateGE(filter.FromDate)
+            && o.CreatedDate.DateLE(filter.ToDate)
+            && o.Comment.StringExists(filter.Keyword)
+        ).ToList();
+
+        return changesets;
+    }
+
+    private static List<CompositeShelveset> GetCompositeShelvesets(
+        this IdentitySummary identitySummary,
+        TfvcFilter filter)
+    {
+        if (identitySummary.Shelvesets == null || !identitySummary.Shelvesets.Any())
+            return new();
+
+        var shelvesets = new List<CompositeShelveset>();
+
+        shelvesets.AddRange(identitySummary.Shelvesets.Select(o => o.Value));
+
+        shelvesets = shelvesets.Where(o =>
+            (!filter.HasComments || (o.Threads != null && o.Threads.Any()))
+            && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
+            && o.CreatedDate.DateGE(filter.FromDate)
+            && o.CreatedDate.DateLE(filter.ToDate)
+            && o.Comment.StringExists(filter.Keyword)
+        ).ToList();
+
+        return shelvesets;
+    }
+
+    private static bool ThreadsHasAuthor(this List<CompositeThread>? threads, string commentAuthor)
+    {
+        if (string.IsNullOrEmpty(commentAuthor)) return true;
+        if (threads == null || threads.Any()) return false;
+
+        return threads.Any(o =>
+            o.Comments != null
+            && o.Comments.Any(x => x.AuthorName.Contains(commentAuthor)));
+    }
+
+    public static IdentitySummary? LoadOneAuthorSummary(this IReportService _, string identityGuid)
+    {
+        return identityGuid
+            .DataFile<IdentitySummary>()
+            .ReadFile()
+            .JsonToObj<IdentitySummary>();
+    }
+
+    #endregion
 
     #region Excel Export
 
@@ -173,172 +344,7 @@ public static partial class Helper
     }
 
     #endregion
-
-    public static List<IdentityRef> GetIdentities(this IReportService _, TfvcFilter filter)
-    {
-        var teams = _.Core.LoadTeams()
-            .Where(o => filter.LimitTeamNames != null && filter.LimitTeamNames.Any(x => x == o.Name))
-            .ToList();
-
-        return  teams.GetIdentitiesFromTeams();
-    }
-
-    public static void FulfillTfvcFilterResult(
-        this IReportService _,
-        TfvcFilterResult result,
-        TfvcFilter filter,
-        IdentityRef identityRef)
-    {
-        bool found = false;
-        var identitySummary = _.LoadOneAuthorSummary(identityRef.Id);
-
-        var changesets =
-            filter.Ref == ReportRef.All || filter.Ref == ReportRef.Changeset
-                ? identitySummary?.GetCompositeChangesets(filter)
-                : new List<CompositeChangeset>();
-        var shelvesets =
-            filter.Ref == ReportRef.All || filter.Ref == ReportRef.Shelveset
-                ? identitySummary?.GetCompositeShelvesets(filter)
-                : new List<CompositeShelveset>();
-
-        if (changesets != null && changesets.Any())
-        {
-            found = true;
-            result.Changesets=result.Changesets.Union(changesets)
-                .ToList();
-        }
-
-        if (shelvesets != null && shelvesets.Any())
-        {
-            found = true;
-            result.Shelvesets = result.Shelvesets.Union(shelvesets)
-                .ToList();
-        }
-
-        if (found&&result.Identities.All(o=>o.Id!=identityRef.Id))
-        {
-            result.Identities.Add(identityRef);
-        }
-    }
-
-    private static List<ShowRow> ChangesetsToShowRows(this List<CompositeChangeset> changesets)
-    {
-        return changesets.Select(o => new ShowRow
-        {
-            ReportRef = ReportRef.Changeset,
-            Id = o.Id + "",
-            AuthorGuid = o.AuthorGuid,
-            AuthorName = o.AuthorName,
-            CreatedDate = o.CreatedDate,
-            Comment = o.Comment,
-            Url = $"{Config.Target.Instance}/{Config.Target.Organization}/{Config.Target.Project}/_versionControl/changeset/{o.Id}",
-            Comments = o.Threads.ThreadsToShowComment()
-
-        }).ToList();
-    }
-
-    private static List<ShowRow> ShelvesetsToShowRows(this List<CompositeShelveset> shelvesets)
-    {
-        return shelvesets.Select(o => new ShowRow
-        {
-            ReportRef = ReportRef.Shelveset,
-            Id = o.Id + "",
-            AuthorGuid = o.AuthorGuid,
-            AuthorName = o.AuthorName,
-            CreatedDate = o.CreatedDate,
-            Comment = o.Comment,
-            Url = $"{Config.Target.Instance}/{Config.Target.Organization}/{Config.Target.Project}/_versionControl/shelveset?ss={WebUtility.UrlEncode(o.Id+";"+o.AuthorGuid)}",
-            Comments = o.Threads.ThreadsToShowComment()
-
-        }).ToList();
-    }
-
-    private static List<ShowComment> ThreadsToShowComment(this List<CompositeThread>? threads)
-    {
-        var result = new List<ShowComment>();
-
-        if (threads == null) return result;
-
-        foreach (var compositeThread in threads)
-        {
-            if (compositeThread.Comments == null) continue;
-
-            result.AddRange(compositeThread.Comments.Select(o => new ShowComment
-            {
-                AuthorGuid = o.AuthorGuid,
-                AuthorName = o.AuthorName,
-                Content = o.Content,
-                PublishedDate = o.PublishedDate,
-                Status = compositeThread.Status
-            }));
-        }
-
-        return result;
-    }
-
-    private static List<CompositeChangeset> GetCompositeChangesets(
-        this IdentitySummary identitySummary,
-        TfvcFilter filter)
-    {
-        if (identitySummary.Changesets == null || !identitySummary.Changesets.Any())
-            return new();
-
-        var changesets = new List<CompositeChangeset>();
-
-        changesets.AddRange(identitySummary.Changesets.Select(o => o.Value));
-
-        changesets = changesets.Where(o =>
-            (!filter.HasComments || (o.Threads != null && o.Threads.Any()))
-            && (string.IsNullOrEmpty(filter.CommentAuthor)||o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
-            && o.CreatedDate.DateGE(filter.FromDate)
-            && o.CreatedDate.DateLE(filter.ToDate)
-            && o.Comment.StringExists(filter.Keyword)
-        ).ToList();
-
-        return changesets;
-    }
-
-    private static List<CompositeShelveset> GetCompositeShelvesets(
-        this IdentitySummary identitySummary,
-        TfvcFilter filter)
-    {
-        if (identitySummary.Shelvesets == null || !identitySummary.Shelvesets.Any())
-            return new();
-
-        var shelvesets = new List<CompositeShelveset>();
-
-        shelvesets.AddRange(identitySummary.Shelvesets.Select(o => o.Value));
-
-        shelvesets = shelvesets.Where(o =>
-            (!filter.HasComments || (o.Threads != null && o.Threads.Any()))
-            && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
-            && o.CreatedDate.DateGE(filter.FromDate)
-            && o.CreatedDate.DateLE(filter.ToDate)
-            && o.Comment.StringExists(filter.Keyword)
-        ).ToList();
-
-        return shelvesets;
-    }
-
-    private static bool ThreadsHasAuthor(this List<CompositeThread>? threads, string commentAuthor)
-    {
-        if (string.IsNullOrEmpty(commentAuthor)) return true;
-        if (threads == null || threads.Any()) return false;
-
-        return threads.Any(o =>
-            o.Comments != null
-            && o.Comments.Any(x => x.AuthorName.Contains(commentAuthor)));
-    }
-
-    public static IdentitySummary? LoadOneAuthorSummary(this IReportService _, string identityGuid)
-    {
-        return identityGuid
-            .DataFile<IdentitySummary>()
-            .ReadFile()
-            .JsonToObj<IdentitySummary>();
-    }
-
-
+    
     #region ParseMonitorJobs
 
     public static void ParseMonitorJobs(this IReportService _)

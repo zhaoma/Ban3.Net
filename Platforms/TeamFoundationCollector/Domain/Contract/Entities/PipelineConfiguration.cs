@@ -1,5 +1,6 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
@@ -12,5 +13,6 @@ public class PipelineConfiguration
     /// 
     /// </summary>
     [JsonProperty("type")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public ConfigurationType Type { get; set; }
 }

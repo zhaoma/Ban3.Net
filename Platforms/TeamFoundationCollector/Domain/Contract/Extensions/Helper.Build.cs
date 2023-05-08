@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
@@ -27,6 +29,15 @@ public static partial class Helper
 
     public static GetBuildResult GetBuild(this IBuild _, int buildId)
         => _.GetBuild(new GetBuild { BuildId = buildId });
+
+    public static Build? GetLastBuildForDefinition(this IBuild _, int definitionId)
+    {
+        var result = _.ListBuilds(definitionId, 1);
+        if(result is { Success: true, Value: { } } && result.Value.Any())
+            return result.Value[0];
+
+        return null;
+    }
 
     public static GetBuildChangesResult GetBuildChanges(this IBuild _, GetBuildChanges request)
         => ServerResource.BuildGetBuildChanges.Execute<GetBuildChangesResult>(request).Result;
@@ -104,9 +115,48 @@ public static partial class Helper
     public static GetWorkItemsBetweenBuildsResult GetWorkItemsBetweenBuilds(this IBuild _,
         GetWorkItemsBetweenBuilds request)
         => ServerResource.BuildGetWorkItemsBetweenBuilds.Execute<GetWorkItemsBetweenBuildsResult>(request).Result;
+    
+    public static ListArtifactsResult ListArtifacts(this IBuild _,ListArtifacts request)
+        => ServerResource.BuildListArtifacts.Execute<ListArtifactsResult>(request).Result;
+
+    public static ListArtifactsResult ListArtifacts(this IBuild _, int buildId)
+        => _.ListArtifacts(new ListArtifacts { BuildId = buildId });
+
+    public static List<string>? ListArtifactsForBuild(this IBuild _, int buildId)
+    {
+        var result = _.ListArtifacts(buildId);
+        if (result is { Success: true, Value: { } } && result.Value.Any())
+        {
+            return result.Value
+                .Select(o => o.BuildArtifactContent())
+                .ToList();
+        }
+
+        return null;
+    }
+
+    private static string BuildArtifactContent(this BuildArtifact buildArtifact)
+    {
+        if (buildArtifact.Resource != null)
+        {
+            var file = Path.Combine(buildArtifact.Resource.Data, @"SiemensTestSummary.md");
+            if (File.Exists(file))
+            {
+                var content= file.ReadFile();
+                content = content.Replace("\\AnyCPU", "");
+
+                return content;
+            }
+        }
+
+        return string.Empty;
+    }
 
     public static ListBuildsResult ListBuilds(this IBuild _, ListBuilds request)
         => ServerResource.BuildListBuilds.Execute<ListBuildsResult>(request).Result;
+
+    public static ListBuildsResult ListBuilds(this IBuild _, int definitionId, int num=1)
+        => _.ListBuilds(new ListBuilds { Definitions = definitionId + "", Top = num });
 
     public static ListControllersResult ListControllers(this IBuild _, ListControllers request)
         => ServerResource.BuildListControllers.Execute<ListControllersResult>(request).Result;
@@ -166,11 +216,44 @@ public static partial class Helper
         return false;
     }
 
-    public static List<BuildDefinition> LoadDefinitions(this IBuild _)
+    public static List<BuildDefinitionReference> LoadDefinitionRefs(this IBuild _)
     {
-        var file = new List<BuildDefinition>().SetsFile();
+        var file = new List<BuildDefinitionReference>().SetsFile();
         return file.LoadOrSetDefault(
-            file.ReadFile().JsonToObj<List<BuildDefinition>>()!,
+            file.ReadFile().JsonToObj<List<BuildDefinitionReference>>()!,
+            file);
+    }
+
+    public static ListFoldersResult ListFolders(this IBuild _, ListFolders request)
+        => ServerResource.BuildListFolders.Execute<ListFoldersResult>(request).Result;
+
+    public static bool PrepareFolders(this IBuild _)
+    {
+        try
+        {
+            var folders = _.ListFolders(new ListFolders());
+
+            if (folders is { Success: true, Value: { } })
+            {
+                var file = folders.Value.SetsFile();
+                file.WriteFile(folders.Value.ObjToJson());
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+
+        return false;
+    }
+
+    public static List<Folder> LoadFolders(this IBuild _)
+    {
+        var file = new List<Folder>().SetsFile();
+        return file.LoadOrSetDefault(
+            file.ReadFile().JsonToObj<List<Folder>>()!,
             file);
     }
 

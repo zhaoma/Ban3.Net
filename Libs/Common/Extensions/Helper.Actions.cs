@@ -5,11 +5,12 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using log4net.Core;
+using log4net.Repository.Hierarchy;
 
 namespace Ban3.Infrastructures.Common.Extensions
 {
@@ -26,10 +27,9 @@ namespace Ban3.Infrastructures.Common.Extensions
             string message)
         {
             var now = DateTime.Now;
-
             action();
 
-            Console.WriteLine($"{message},{DateTime.Now.Subtract(now).TotalMilliseconds} ms spent.");
+            _logger.Debug($"{message},{DateTime.Now.Subtract(now).TotalMilliseconds} ms spent.");
         }
 
         /// <summary>

@@ -46,6 +46,18 @@ public static partial  class Helper
         return displayName;
     }
 
+    public static string ShowDate(this string dateString)
+    {
+        try
+        {
+            return dateString.ToDateTime()
+                .ToLocalTime().ToString("MM-dd HH:mm");
+        }
+        catch (Exception) { }
+
+        return dateString;
+    }
+
     public static bool IsIgnored(this string str)
         => Config.IgnoredKeys.Any(str.Contains);
 

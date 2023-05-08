@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
     <AssemblyName>Ban3.Infrastructures.NetHttp</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.NetHttp</RootNamespace>
   </PropertyGroup>

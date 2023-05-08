@@ -208,7 +208,7 @@ public static partial class Helper
             VersionDescriptor=new VersionDescriptor { Version=version}
         }).Result;
 
-    public static List<Dependency> GetBranchSpecDependencies(this ITfvc _, string path)
+    public static List<Dependency> GetBranchSpecDependencies(this ITfvc _, string path,string branchName)
     {
         var result = new List<Dependency>();
 
@@ -218,6 +218,13 @@ public static partial class Helper
         xmlDoc.LoadXml(content);
 
         var nodes = xmlDoc.SelectNodes("//Dependency");
+
+        if (!string.IsNullOrEmpty(branchName))
+        {
+            nodes = xmlDoc.FindBranchNode(branchName)
+                .SelectNodes("Dependencies/Dependency");
+        }
+
         if (nodes?.Count > 0)
         {
             foreach (XmlNode node in nodes)
@@ -229,9 +236,23 @@ public static partial class Helper
         return result;
     }
 
+    private static XmlNode FindBranchNode(this XmlDocument xmlDoc, string branchName)
+    {
+        var ns = xmlDoc.SelectNodes("//Branch");
+
+        if (ns == null) return null;
+        foreach (XmlNode n in ns)
+        {
+            if (n.TryGetAttribute("Name") == branchName)
+                return n;
+        }
+
+        return ns[ns.Count - 1];
+    }
+
     public static List<MonitorRecord> GetBranchSpecMonitorRecords(this ITfvc _, MonitorSection jobSection)
     {
-        var records = _.GetBranchSpecDependencies(jobSection.Target.Value)
+        var records = _.GetBranchSpecDependencies( jobSection.Target.Value, jobSection.SectionName)
             .Select(o=>new MonitorRecord
             {
                 Name=o.Name,
@@ -241,16 +262,16 @@ public static partial class Helper
 
         foreach (var jobGuideline in jobSection.Guidelines)
         {
-            _.FulfilMonitorRecords(records,jobGuideline.Key,jobGuideline.Value);
+            _.FulfillMonitorRecords(records,jobGuideline.Key,jobGuideline.Value);
         }
 
         return records;
     }
 
-    static void FulfilMonitorRecords(this ITfvc _, List<MonitorRecord> records, string guidelineId,
+    static void FulfillMonitorRecords(this ITfvc _, List<MonitorRecord> records, string guidelineId,
         string guidelinePath)
     {
-        var dependencies = _.GetBranchSpecDependencies(guidelinePath);
+        var dependencies = _.GetBranchSpecDependencies(guidelinePath,string.Empty);
         if (dependencies.Any())
         {
             foreach (var monitorRecord in records)

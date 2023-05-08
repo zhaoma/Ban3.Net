@@ -29,7 +29,7 @@ public class TfvcFilterResult
 
     public List<ShowRow> Rows { get; set; }
 
-    public List<ShowRow> PagedRows => Rows.Skip((Filter.PageNo - 1) * Filter.PageSize).Take(Filter.PageSize).ToList();
+    public List<ShowRow> PagedRows { get; set; }
 
     public int TotalPage
     {

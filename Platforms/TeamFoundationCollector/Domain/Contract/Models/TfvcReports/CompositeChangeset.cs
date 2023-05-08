@@ -14,6 +14,7 @@ public class CompositeChangeset
     public CompositeChangeset(TfvcChangesetRef changesetRef)
     {
         Id = changesetRef.ChangesetId;
+        FileId = changesetRef.ChangesetId + "";
         CreatedDate = changesetRef.CreatedDate;
         Comment = changesetRef.Comment;
         if (changesetRef.Author != null)
@@ -24,6 +25,9 @@ public class CompositeChangeset
     }
 
     [JsonProperty("Id")] public int Id { get; set; }
+
+    [JsonProperty("fileId")]
+    public string FileId { get; set; } = string.Empty;
 
     [JsonProperty("authorGuid")]
     public string AuthorGuid { get; set; } = string.Empty;

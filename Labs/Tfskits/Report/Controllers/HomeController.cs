@@ -75,5 +75,11 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
         }
 
         #endregion
+
+        public IActionResult Pipelines()
+        {
+            var pipelines = DevOps.Reportor.Pipelines.LoadPipelines();
+            return View(pipelines);
+        }
     }
 }
