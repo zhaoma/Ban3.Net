@@ -5,6 +5,7 @@ using System.IO;
 using System;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildReports;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings;
@@ -29,11 +30,31 @@ public class MonitorBuildReports
         {
             new()
             {
-                Id=1,
+                Id="1",
                 Subject = "Som10 Integration Summary_SHA.SERV",
-                FocusDefinitions = new()
+                Sections=new ()
                 {
-                    1455,1920,3288,1841,1775,2389,2388,1830,3287,3285
+                    new ReportSectionForWorkItems(1,"Pipeline Defect")
+                    {
+                        Sql=@"Select [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] From WorkItems 
+                                Where [System.WorkItemType] = 'Defect' 
+                                AND [State] <> 'Done' 
+                                AND [State] <> 'Implemented' 
+                                AND [State] <> 'Terminated'
+                                AND [System.AreaPath] = 'CTS\SERVICE\SMS_SSME' 
+                                AND [System.IterationPath] UNDER 'CTS\VB10A' 
+                                AND [Siemens.Defect.FoundInPhase] = 'Automated Test - Build Pipeline'"
+                    },
+                    new ReportSectionForDefinition(2,1455,"SHA.SERV_CI"),
+                    new ReportSectionForDefinition(3,1920,"SHA.SERV RB"),
+                    new ReportSectionForDefinition(4,3288,"SHA.SERV_CI_UnitTests"),
+                    new ReportSectionForDefinition(5,1841,"SHA.SERV NB"),
+                    new ReportSectionForDefinition(6,1775,"SHA.SERV_SYS_NB"),
+                    new ReportSectionForDefinition(7,2389,"SHA.IDT.MAIN_RB"),
+                    new ReportSectionForDefinition(8,2388,"SHA.IDT.MAIN_NB"),
+                    new ReportSectionForDefinition(9,1830,"IDT.MAIN_COV"),
+                    new ReportSectionForDefinition(10,3287,"SHA.ISA3_CI_UnitTests"),
+                    new ReportSectionForDefinition(11,3285,"SHA.ISA4_CI_UnitTests"),
                 },
                 Subscribed = new List<string>
                 {
@@ -46,10 +67,10 @@ public class MonitorBuildReports
     static readonly string ConfigFile = Path.Combine(Environment.CurrentDirectory, $"{CacheKey}.json");
 
     public static List<ReportDefine> Jobs
-        => CacheKey.LoadOrSetDefault(DefaultJobs, ConfigFile);
+        => DefaultJobs;// CacheKey.LoadOrSetDefault(DefaultJobs, ConfigFile);
 
     public static bool Update(List<ReportDefine> jobs)
     {
-        return !string.IsNullOrEmpty(ConfigFile.WriteFile(JsonConvert.SerializeObject(jobs)));
+        return false;//!string.IsNullOrEmpty(ConfigFile.WriteFile(JsonConvert.SerializeObject(jobs)));
     }
 }

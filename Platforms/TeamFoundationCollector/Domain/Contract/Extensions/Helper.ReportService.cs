@@ -10,6 +10,7 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BranchSpec;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildReports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Reports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response;
@@ -24,7 +25,8 @@ public static partial class Helper
 {
     #region SendEmail
 
-    public static bool SendMail(this IReportService _,List<string>? to,List<string>? cc,string? subject , string? mailHtml)
+    public static bool SendMail(this IReportService _, List<string>? to, List<string>? cc, string? subject,
+        string? mailHtml)
     {
         new Ban3.Infrastructures.NetMail.Entries.TargetServer()
             .SendByOutlook(to, cc, subject, mailHtml);
@@ -58,9 +60,9 @@ public static partial class Helper
 
         result.Rows = result.Rows.OrderByDescending(o => o.CreatedDate).ToList();
 
-        result.PagedRows= result.Rows.Skip((filter.PageNo - 1) * filter.PageSize).Take(filter.PageSize).ToList();
+        result.PagedRows = result.Rows.Skip((filter.PageNo - 1) * filter.PageSize).Take(filter.PageSize).ToList();
 
-        result.PagedRows.ForEach(o=>
+        result.PagedRows.ForEach(o =>
         {
             if (o.ReportRef == ReportRef.Changeset)
             {
@@ -69,7 +71,7 @@ public static partial class Helper
                     .JsonToObj<TfvcChangeset>()?
                     .Changes;
             }
-            
+
             if (o.ReportRef == ReportRef.Shelveset)
             {
                 o.Changes = o.FileId.DataFile<TfvcShelveset>()
@@ -88,7 +90,7 @@ public static partial class Helper
             .Where(o => filter.LimitTeamNames != null && filter.LimitTeamNames.Any(x => x == o.Name))
             .ToList();
 
-        return  teams.GetIdentitiesFromTeams();
+        return teams.GetIdentitiesFromTeams();
     }
 
     public static void FulfillTfvcFilterResult(
@@ -112,7 +114,7 @@ public static partial class Helper
         if (changesets != null && changesets.Any())
         {
             found = true;
-            result.Changesets=result.Changesets.Union(changesets)
+            result.Changesets = result.Changesets.Union(changesets)
                 .ToList();
         }
 
@@ -123,7 +125,7 @@ public static partial class Helper
                 .ToList();
         }
 
-        if (found&&result.Identities.All(o=>o.Id!=identityRef.Id))
+        if (found && result.Identities.All(o => o.Id != identityRef.Id))
         {
             result.Identities.Add(identityRef);
         }
@@ -140,7 +142,8 @@ public static partial class Helper
             AuthorName = o.AuthorName,
             CreatedDate = o.CreatedDate,
             Comment = o.Comment,
-            Url = $"{Config.Target.Instance}/{Config.Target.Organization}/{Config.Target.Project}/_versionControl/changeset/{o.Id}",
+            Url =
+                $"{Config.Target.Instance}/{Config.Target.Organization}/{Config.Target.Project}/_versionControl/changeset/{o.Id}",
             Threads = o.Threads
 
         }).ToList();
@@ -157,12 +160,13 @@ public static partial class Helper
             AuthorName = o.AuthorName,
             CreatedDate = o.CreatedDate,
             Comment = o.Comment,
-            Url = $"{Config.Target.Instance}/{Config.Target.Organization}/{Config.Target.Project}/_versionControl/shelveset?ss={WebUtility.UrlEncode(o.Id+";"+o.AuthorGuid)}",
+            Url =
+                $"{Config.Target.Instance}/{Config.Target.Organization}/{Config.Target.Project}/_versionControl/shelveset?ss={WebUtility.UrlEncode(o.Id + ";" + o.AuthorGuid)}",
             Threads = o.Threads
 
         }).ToList();
     }
-    
+
     private static List<CompositeChangeset> GetCompositeChangesets(
         this IdentitySummary identitySummary,
         TfvcFilter filter)
@@ -176,7 +180,7 @@ public static partial class Helper
 
         changesets = changesets.Where(o =>
             (!filter.HasComments || (o.Threads != null && o.Threads.Any()))
-            && (string.IsNullOrEmpty(filter.CommentAuthor)||o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
+            && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
             && o.CreatedDate.DateGE(filter.FromDate)
             && o.CreatedDate.DateLE(filter.ToDate)
             && o.Comment.StringExists(filter.Keyword)
@@ -344,26 +348,20 @@ public static partial class Helper
     }
 
     #endregion
-    
+
     #region ParseMonitorJobs
 
     public static void ParseMonitorJobs(this IReportService _)
     {
         var monitorJobs = Settings.MonitorBranchSpec.Jobs;
         monitorJobs.ForEach(
-            o =>
-            {
-                Console.WriteLine($"{o.Subject} ... success:{_.ParseMonitorJob(o)}");
-            });
+            o => { Console.WriteLine($"{o.Subject} ... success:{_.ParseMonitorJob(o)}"); });
     }
 
     public static bool ParseMonitorJob(this IReportService _, MonitorJob job)
     {
         var html = new StringBuilder();
-        job.Sections.ForEach(o =>
-        {
-            html.AppendLine(_.RenderMonitorSection(o));
-        });
+        job.Sections.ForEach(o => { html.AppendLine(_.RenderMonitorSection(o)); });
 
         return _.SendMail(job.Subscribed, null, job.Subject, html.ToString());
     }
@@ -378,7 +376,8 @@ public static partial class Helper
     {
         var sb = new StringBuilder();
         sb.Append($"<h3>{section.SectionName}</h3>");
-        sb.AppendLine("<table  align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"background-color: #666; width: 600px; font-size: 14px; font-family: 'Microsoft YaHei'; \">");
+        sb.AppendLine(
+            "<table  align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"background-color: #666; width: 600px; font-size: 14px; font-family: 'Microsoft YaHei'; \">");
 
         sb.AppendLine(
             $"<tr><td style='width:30%;padding:5px;background-color:#FFF;font-weight:bold;'>Dependency</td><td style='width:30%;padding:5px;background-color:#FFF;font-weight:bold;'>{section.Target.Key}</td>");
@@ -395,13 +394,15 @@ public static partial class Helper
             .ForEach(
                 o =>
                 {
-                    sb.Append($"<tr><td style='padding:5px;background-color:#FFF;font-weight:bold'>{o.Name}</td><td style='padding:5px;background-color:#FFF'>{o.Version}</td>");
+                    sb.Append(
+                        $"<tr><td style='padding:5px;background-color:#FFF;font-weight:bold'>{o.Name}</td><td style='padding:5px;background-color:#FFF'>{o.Version}</td>");
 
                     foreach (var jobGuideline in section.Guidelines)
                     {
                         if (o.GuidelineVersions.ContainsKey(jobGuideline.Key))
                         {
-                            sb.Append($"<td style='padding:5px;background-color:#FFF'>{o.GuidelineVersions[jobGuideline.Key]}</td>");
+                            sb.Append(
+                                $"<td style='padding:5px;background-color:#FFF'>{o.GuidelineVersions[jobGuideline.Key]}</td>");
                         }
                         else
                         {
@@ -420,13 +421,44 @@ public static partial class Helper
             $" <a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_versionControl?path={section.Target.Value}' target='_blank' style='color:#AAA;'>{section.Target.Key} ; {section.Target.Value}</a><br/>");
         foreach (var jobGuideline in section.Guidelines)
         {
-            sb.AppendLine($" <a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_versionControl?path={jobGuideline.Value}' target='_blank' target='_blank' style='color:#AAA;text-decoration:none;'>{jobGuideline.Key} ; {jobGuideline.Value}</a><br/>");
+            sb.AppendLine(
+                $" <a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_versionControl?path={jobGuideline.Value}' target='_blank' target='_blank' style='color:#AAA;text-decoration:none;'>{jobGuideline.Key} ; {jobGuideline.Value}</a><br/>");
         }
+
         sb.AppendLine("</div>");
 
         return sb.ToString();
     }
 
     #endregion
+
+    public static bool ParseBuildReport(this IReportService _, ReportDefine reportDefine)
+    {
+        return _.SendMail(reportDefine.Subscribed, reportDefine.CC, reportDefine.Subject,
+            _.RenderBuildReportHtml(reportDefine));
+    }
+
+    public static string RenderBuildReportHtml(this IReportService _, ReportDefine reportDefine)
+    {
+        var sb = new StringBuilder();        
+        sb.AppendLine(@"<style>
+            .Succeeded {
+                color: #22B14C;
+            }
+            .PartiallySucceeded {
+                color: #FFC90E;
+            }
+            .Failed {
+                color: #ED1C24;
+            }
+        </style>");
+        reportDefine.Sections
+            .AsParallel()
+            .ForAll(o => { o.GenerateHtml(_); });
+
+        reportDefine.Sections.ForEach(o => { sb.AppendLine(o.Html); });
+        
+        return sb.ToString();
+    }
 }
 

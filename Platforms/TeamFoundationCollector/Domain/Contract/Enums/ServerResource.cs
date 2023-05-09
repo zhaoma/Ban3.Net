@@ -184,6 +184,9 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
         PipelinesListRuns,
         PipelinesRunPipeline,
 
-        WorkItemTrackingSendMail
+        WorkItemTrackingSendMail,
+        WorkItemTrackingListWorkItems,
+        WorkItemTrackingWiqlQuery
+
     }
 }

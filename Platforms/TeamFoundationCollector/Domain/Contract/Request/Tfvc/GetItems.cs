@@ -17,33 +17,10 @@ public class GetItems
     [JsonProperty("scopePath")]
     public string ScopePath { get; set; } = string.Empty;
 
+    [JsonProperty("versionDescriptor")]
     public SubCondition.VersionDescriptor? VersionDescriptor { get; set; }
-
-
+    
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/items";
-
-    public string RequestQuery()
-    {
-        var sb = new StringBuilder();
-
-        sb.Append("?");
-        
-        sb.Append($"includeLinks={IncludeLinks}&");
-        sb.Append($"recursionLevel={RecursionLevel}&");
-
-        if (!string.IsNullOrEmpty(ScopePath))
-            sb.Append($"scopePath={ScopePath}&");
-
-        if (VersionDescriptor != null)
-        {
-            sb.Append($"versionDescriptor.version={VersionDescriptor.Version}&");
-            sb.Append($"versionDescriptor.versionOption={VersionDescriptor.VersionOption}&");
-            sb.Append($"versionDescriptor.versionType={VersionDescriptor.VersionType}&");
-        }
-
-        sb.Append($"api-version={ApiVersion}");
-        return sb.ToString();
-    }
-
+    
     
 }

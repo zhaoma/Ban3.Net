@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
@@ -221,6 +220,7 @@ public static partial class Helper
 
         if (!string.IsNullOrEmpty(branchName))
         {
+
             nodes = xmlDoc.FindBranchNode(branchName)
                 .SelectNodes("Dependencies/Dependency");
         }

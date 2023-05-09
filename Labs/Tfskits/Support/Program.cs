@@ -7,6 +7,7 @@ using System.Xml;
 using Ban3.Infrastructures.NetMail;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models;
 using System;
+using System.Text;
 using Ban3.Infrastructures.Consoles.Entries;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
@@ -15,142 +16,33 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.WorkItemTra
 using Config= Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Config;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelines;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
+using Newtonsoft.Json;
 
 //DevOps.Reportor.ParseMonitorJobs();
 
-//var allTeams = DevOps.Collector.Core.LoadTeams();
+//var job = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings.MonitorBuildReports.Jobs
+//    .FindLast(o => o.Id == "1");
+//job.Subject.WriteColorLine(ConsoleColor.Red);
+//Console.WriteLine(DevOps.Reportor.ParseBuildReport(job));
 
-//allTeams
-//    //.Where(o => o.Name.Contains(Config.DefaultTeam))
-//    .ToList()
-//    .ForEach(
-//    o =>
+//var latestRi = DevOps.Reportor.Tfvc.GetChangesets(new GetChangesets
+//{
+//    SearchCriteria = new SearchCriteria
 //    {
-//        new Action(() =>
-//        {
-//            DevOps.Collector.SyncOneTeamSummary(o.Id, true);
-//        }).ExecuteAndTiming($"{o.Name}[{o.Id}]");
-//    });
+//        ItemPath = @"$/CTS/Development/ICS/ICS.INT",
+//        FromDate = DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd"),
+//        ToDate = DateTime.Now.AddDays(2).ToString("yyyy-MM-dd")
+//    }
+//});
 
-//var id = "be8e66c2-1a5d-42b2-b5ac-3db32fe25b84";
-//var r=DevOps.Collector.Tfvc.GetChangesets(id,1,1);
-//r.ObjToJson().WriteColorLine(ConsoleColor.Red);
+//latestRi
+//    .Value.FirstOrDefault(o=>o.Comment.Contains(@"Reverse Integration: SHA.SERV"))
+//    .ObjToJson().WriteSuccessLine();
 
-var definitionRefs = DevOps.Reportor.Build.LoadDefinitionRefs();
+var teams = DevOps.Reportor.Core.LoadTeams();
 
-//.ListDefinitions(new ListDefinitions());
+var team = teams.FindLast(o => o.Name == Config.DefaultTeam);
 
-var tb = new ConsoleTable
-{
-    Columns = new List<string> { "Id", "Name","Path","CreatedDate" },
-    Rows = definitionRefs
-        .Where(o=>o.QueueStatus== DefinitionQueueStatus.Enabled)
-        .Select(
-        o=>new []
-        {
-            o.Id+"",o.Name,o.Path,o.CreatedDate
-        }
-        ).ToList()
-};
-
-tb.Writer(ConsoleColor.Blue);
-
-var r = definitionRefs.FindLast(o => o.Id == 1455);
-r.ObjToJson().WriteSuccessLine();
-
-var ar = DevOps.Reportor.Build.PrepareFolders();
-if (ar)
-{
-    var fs = DevOps.Reportor.Build.LoadFolders();
-    Console.WriteLine(fs.Count);
-    new ConsoleTable
-    {
-        Columns = new List<string> { "Path", "CreatedDate" },
-        Rows = fs.Select(o => new[]
-        {
-            o.Path, o.CreatedOn
-        }).ToList()
-    }.Writer(ConsoleColor.DarkMagenta);
-
-}
-
-var build = DevOps.Reportor.Build.GetLastBuildForDefinition(1922);
-$"Id={build?.Id}".ToString().WriteColorLine(ConsoleColor.Red);
-$"Result={build?.Result}".ToString().WriteColorLine(ConsoleColor.Red);
-
-$"Status={build?.Status}".ToString().WriteColorLine(ConsoleColor.Red);
-
-$"BuildNumber={build?.BuildNumber}".ToString().WriteColorLine(ConsoleColor.Red);
-$"QueueTime={build?.QueueTime}".ToString().WriteColorLine(ConsoleColor.Red);
-$"StartTime={build?.StartTime}".ToString().WriteColorLine(ConsoleColor.Red);
-$"FinishTime={build?.FinishTime}".ToString().WriteColorLine(ConsoleColor.Red);
-DevOps.Reportor.Pipelines.PreparePipelines();
-var pipelines = DevOps.Reportor.Pipelines.LoadPipelines();
-(pipelines.Count+". pps").WriteColorLine(ConsoleColor.Yellow);
-
-pipelines[0].ObjToJson().WriteSuccessLine();
-
-new ConsoleTable
-{
-    Columns = new List<string>{"Id","Name","Folder"},
-    Rows = pipelines.Select(o=>new []
-    {
-        o.Id, o.Name,o.Folder
-    }).ToList()}.Writer();
-
-var aaaas = DevOps.Reportor.Build.ListArtifacts(build!.Id);
-aaaas.ObjToJson().WriteColorLine(ConsoleColor.Red);
-
-foreach (var buildArtifact in aaaas.Value)
-{
-    var content=
-    Path.Combine(buildArtifact.Resource.Data, @"SiemensTestSummary.md")
-        .ReadFile();
-
-    content.WriteSuccessLine();
-}
-
-/*
-
-await Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums.ServerResource
-    .WorkItemTrackingSendMail
-    .ExecuteVoid(new SendMail
-    {
-        Body=new SendMailBody
-        {
-            Body=new MailMessage
-            {
-                Subject = "subject",
-                Body = "body",
-                To=new EmailRecipients{EmailAddresses = new List<string>(){"zhifeng.zhao.ext@siemens-healthineers.com"}},
-
-            }
-        }
-    });
-Console.ReadKey()
-
-
-*/
-
-/*
-
-
-
-DevOps.Collector.PrepareForce();
-var request = new Request.Tfvc.GetChangesets
-{
-    OrderBy="id asc",
-Skip=100,
-    SearchCriteria=new Request.SubCondition.SearchCriteria
-    {
-        IncludeLinks=true,
-        Author="author"
-    }
-};
-
-request.QueryString().WriteColorLine(ConsoleColor.Red);
-
-request.RequestQuery().WriteColorLine(ConsoleColor.DarkBlue);
-
-Console.ReadKey();
-*/
+DevOps.Collector.SyncOneTeamSummary(team.Id);

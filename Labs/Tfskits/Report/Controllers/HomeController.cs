@@ -2,6 +2,7 @@
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Reports;
 using Microsoft.AspNetCore.Mvc;
+using Settings=Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings;
 
 namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
 {
@@ -76,10 +77,36 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
 
         #endregion
 
+        public IActionResult Pages(string id)
+        {
+            return View(id);
+        }
+
+        public IActionResult Definitions()
+        {
+            var definitionRefs = DevOps.Reportor.Build.LoadDefinitionRefs();
+            return View(definitionRefs);
+        }
+
         public IActionResult Pipelines()
         {
             var pipelines = DevOps.Reportor.Pipelines.LoadPipelines();
             return View(pipelines);
+        }
+
+        public IActionResult Folders()
+        {
+            var folders = DevOps.Reportor.Build.LoadFolders();
+            return View(folders);
+        }
+
+        public IActionResult BuildReport(string id)
+        {
+            var reportDefine =
+                Settings.MonitorBuildReports.Jobs.FindLast(o => o.Id == id)
+                ?? Settings.MonitorBuildReports.Jobs.First();
+
+            return View(reportDefine);
         }
     }
 }

@@ -13,8 +13,4 @@
     <ProjectReference Include="..\..\Domain\Contract\Contract.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Functions\" />
-  </ItemGroup>
-
 </Project>

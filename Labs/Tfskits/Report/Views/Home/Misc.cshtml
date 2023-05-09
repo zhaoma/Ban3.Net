@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Misc";
+}
+
+@section PreTitle
+{
+    <div class="page-header d-print-none text-white" style="margin-top: 0; margin-bottom: 0; height: 60px; overflow: hidden;">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <div class="page-pretitle">
+                    some data.
+                </div>
+                <h2 class="page-title">
+                    Pipelines / Definitions ...
+                </h2>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row row-cards" data-masonry='{"percentPosition": true }'>
+    <div class="col-sm-3 col-lg-4 lazyLoad" r="/home/definitions"></div>
+    <div class="col-sm-3 col-lg-4 lazyLoad" r="/home/pipelines"></div>
+    <div class="col-sm-3 col-lg-4 lazyLoad" r="/home/folders"></div>
+</div>
+@section HtmlPlus
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" defer=""></script>
+
+    <div style="clear: both;"></div>
+}
+@section TailJs
+{
+    <script>$(document).ready(function () { 
+        focusNav("navC"); 
+            $(".lazyLoad").each(function(){
+                $(this).load($(this).attr("r"));
+            });
+    });</script>
+}

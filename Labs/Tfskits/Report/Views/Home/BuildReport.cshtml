@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport
+@using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions
+@model Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildReports.ReportDefine
+
+@section PreTitle
+{
+    <div class="page-header d-print-none text-white" style="margin-top: 0; margin-bottom: 0; height: 60px; overflow: hidden;">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <div class="page-pretitle">
+                    build report.
+                </div>
+                <h2 class="page-title">
+                    @Model.Id : @Model.Subject
+                </h2>
+            </div>
+        </div>
+    </div>
 }
+
+<div class="row row-deck row-cards">
+    <div class="col-md-6 col-lg-4">
+        <div class="card" id="membersContainer">
+            <div class="card-header">detail</div>
+            <div class="card-body">
+                @foreach (var s in Model.Sections)
+                {<label class="form-selectgroup-item flex-fill teamRow">
+                    <div class="row">
+                        <div class="col-2">@s.Rank</div>
+                        <div class="col-10">
+                            @s.Subject <span class="badge">@s.Type.ToString()</span>
+                        </div>
+                        </div></label>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-8">
+        <div class="card">
+            <div class="card-header">@Model.Subject</div>
+            <div class="card-body">
+                @Html.Raw(DevOps.Reportor.RenderBuildReportHtml(Model))
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities.Pipeline>
+@{
+    Layout = null;
+}
+<div class="card">
+    <div class="card-header">@Model.Count() Pipelines</div>
+    <div class="card-body">
+            @foreach (var pipeline in Model.OrderBy(o=>Convert.ToInt32(o.Id)))
+            {
+                <div class="row">
+                <div class="col-2">@pipeline.Id</div>
+                <div class="col-10">@pipeline.Name
+                
+                <span class="badge">@pipeline.Folder</span>
+                </div>
+                </div>
+            }
+    </div>
+</div>

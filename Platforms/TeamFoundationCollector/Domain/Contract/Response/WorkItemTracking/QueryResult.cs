@@ -1,10 +1,10 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.WorkItemTracking;
 
-public class GetItemResult
-    : TfvcItem,IResponse
+public class QueryResult
+    : WorkItemQueryResult, IResponse
 {
     public bool Success { get; set; }
 }

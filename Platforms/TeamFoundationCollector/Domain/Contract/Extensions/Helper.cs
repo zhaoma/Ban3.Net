@@ -58,6 +58,18 @@ public static partial  class Helper
         return dateString;
     }
 
+    public static string ShowYear(this string dateString)
+    {
+        try
+        {
+            return dateString.ToDateTime()
+                .ToLocalTime().ToString("yy-MM-dd");
+        }
+        catch (Exception) { }
+
+        return dateString;
+    }
+
     public static bool IsIgnored(this string str)
         => Config.IgnoredKeys.Any(str.Contains);
 

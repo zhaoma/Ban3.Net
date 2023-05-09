@@ -122,7 +122,7 @@ public static partial class Helper
     public static ListArtifactsResult ListArtifacts(this IBuild _, int buildId)
         => _.ListArtifacts(new ListArtifacts { BuildId = buildId });
 
-    public static List<string>? ListArtifactsForBuild(this IBuild _, int buildId)
+    public static List<BuildArtifactContent>? ListArtifactsForBuild(this IBuild _, int buildId)
     {
         var result = _.ListArtifacts(buildId);
         if (result is { Success: true, Value: { } } && result.Value.Any())
@@ -135,23 +135,36 @@ public static partial class Helper
         return null;
     }
 
-    private static string BuildArtifactContent(this BuildArtifact buildArtifact)
+    private static BuildArtifactContent BuildArtifactContent(this BuildArtifact buildArtifact)
     {
         if (buildArtifact.Resource != null)
         {
             var file = Path.Combine(buildArtifact.Resource.Data, @"SiemensTestSummary.md");
             if (File.Exists(file))
             {
+                var fileLocation = string.Empty;
                 var content= file.ReadFile();
+
                 content = content.Replace("\\AnyCPU", "");
 
-                return content;
+                if (!string.IsNullOrEmpty(content) && content.Contains(buildArtifact.Resource.Data))
+                {
+                    var fileStart = content.IndexOf(buildArtifact.Resource.Data);
+                    var temp = content.Substring(fileStart, content.Length - fileStart);
+                    fileLocation = temp.Substring(0, temp.IndexOf(")"));
+                }
+
+                return new BuildArtifactContent
+                {
+                    Content = content,
+                    FileLocation = fileLocation
+                };
             }
         }
 
-        return string.Empty;
+        return new BuildArtifactContent();
     }
-
+    
     public static ListBuildsResult ListBuilds(this IBuild _, ListBuilds request)
         => ServerResource.BuildListBuilds.Execute<ListBuildsResult>(request).Result;
 
