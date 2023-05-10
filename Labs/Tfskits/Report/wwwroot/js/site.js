@@ -71,7 +71,7 @@
 });
 
 function focusNav(id) {
-    $("#" + id).addClass("icon-pulse");
+    $("#" + id).addClass("rotate");
 }
 
 function requestIdentities() {

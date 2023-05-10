@@ -55,7 +55,7 @@ public class TfvcFilterResult
             {
                 var additionClass = p == Filter.PageNo ? "active" : "";
                 sb.AppendLine(
-                    $"<li class='page-item {additionClass})'><a class=\"page-link\" href=\"javascript:;\" onclick=\"return turnPage({p})\">{p}</a></li>");
+                    $"<li class='page-item)'><a class='page-link {additionClass}' href=\"javascript:;\" onclick=\"return turnPage({p})\">{p}</a></li>");
             }
 
             return sb.ToString();

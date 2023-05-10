@@ -14,10 +14,21 @@ public static partial class Helper
     public static void PrepareForce(this ICollectService _)
     {
         // refresh teams ; identities and download portraits
-        _.Core.PrepareTeams(true);
+        
 
     }
 
+    #region Tfvc
+
+    public static void SyncTfvc(this ICollectService _)
+    {
+        _.Core.PrepareTeams(true);
+        var teams = _.Core.LoadTeams();
+
+        teams.ParallelExecute(
+            (team) => { _.SyncOneTeamSummary(team.Id, true); }, Config.MaxParallelTasks
+        );
+    }
 
     public static void SyncOneTeamSummary(this ICollectService _,string teamGuid, bool forceOverwrite = true)
     {
@@ -102,4 +113,8 @@ public static partial class Helper
 
         return shelvesets;
     }
+
+    #endregion
+
+
 }

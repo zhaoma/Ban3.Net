@@ -11,7 +11,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildRep
 
         public string Subject { get; set; }
 
-        public List<IReportSection> Sections { get; set; }
+        public List<ReportSection> Sections { get; set; }
 
         public List<string> Subscribed { get; set; }
 

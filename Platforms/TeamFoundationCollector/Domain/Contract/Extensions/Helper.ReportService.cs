@@ -183,7 +183,7 @@ public static partial class Helper
             && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
             && o.CreatedDate.DateGE(filter.FromDate)
             && o.CreatedDate.DateLE(filter.ToDate)
-            && o.Comment.StringExists(filter.Keyword)
+            && (o.Comment.StringExists(filter.Keyword) || o.Threads.ThreadsHasKeywords(filter.Keyword))
         ).ToList();
 
         return changesets;
@@ -205,7 +205,7 @@ public static partial class Helper
             && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
             && o.CreatedDate.DateGE(filter.FromDate)
             && o.CreatedDate.DateLE(filter.ToDate)
-            && o.Comment.StringExists(filter.Keyword)
+            && (o.Comment.StringExists(filter.Keyword)||o.Threads.ThreadsHasKeywords(filter.Keyword))
         ).ToList();
 
         return shelvesets;
@@ -214,11 +214,21 @@ public static partial class Helper
     private static bool ThreadsHasAuthor(this List<CompositeThread>? threads, string commentAuthor)
     {
         if (string.IsNullOrEmpty(commentAuthor)) return true;
-        if (threads == null || threads.Any()) return false;
+        if (threads == null || !threads.Any()) return false;
 
         return threads.Any(o =>
             o.Comments != null
             && o.Comments.Any(x => x.AuthorName.Contains(commentAuthor)));
+    }
+
+    private static bool ThreadsHasKeywords(this List<CompositeThread>? threads, string keywords)
+    {
+        if (string.IsNullOrEmpty(keywords)) return true;
+        if (threads == null || !threads.Any()) return true;
+
+        return threads.Any(o =>
+            o.Comments != null
+            && o.Comments.Any(x => x.Content.StringExists(keywords)));
     }
 
     public static IdentitySummary? LoadOneAuthorSummary(this IReportService _, string identityGuid)
@@ -442,6 +452,7 @@ public static partial class Helper
     {
         var sb = new StringBuilder();        
         sb.AppendLine(@"<style>
+.issuesTable table tr td:first-child{width:80px;}
             .Succeeded {
                 color: #22B14C;
             }
@@ -454,7 +465,18 @@ public static partial class Helper
         </style>");
         reportDefine.Sections
             .AsParallel()
-            .ForAll(o => { o.GenerateHtml(_); });
+            .ForAll(o =>
+            {
+                switch (o.Type)
+                {
+                    case BuildReportType.Definition:
+                        o.Html=new ReportSectionForDefinition(o).GenerateHtml(_);
+                        break;
+                    case BuildReportType.WorkItems:
+                        o.Html = new ReportSectionForWorkItems(o).GenerateHtml(_);
+                        break;
+                }
+            });
 
         reportDefine.Sections.ForEach(o => { sb.AppendLine(o.Html); });
         

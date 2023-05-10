@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.NetHttp;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
@@ -37,6 +38,25 @@ public static partial class Helper
             return result.Value[0];
 
         return null;
+    }
+
+    public static string BuildDuration(this Build build)
+    {
+        var seconds = build.FinishTime.ToDateTime()
+            .Subtract(build.StartTime.ToDateTime())
+            .TotalSeconds;
+
+        var result = "";
+
+        var h = (int)seconds / (60 * 60);
+        var m = (int)seconds % (60 * 60) / 60;
+        var s = (int)seconds % 60;
+
+        if (h > 0) result += $" {h} h";
+        if (m > 0) result += $" {m} m";
+        if (s > 0) result += $" {s} s";
+
+        return result;
     }
 
     public static GetBuildChangesResult GetBuildChanges(this IBuild _, GetBuildChanges request)
@@ -98,12 +118,31 @@ public static partial class Helper
 
     public static GetReportResult GetReport(this IBuild _, GetReport request)
     {
-        var content = ServerResource.BuildGetReport.ReadHtml(request).Result;
+        var content = ServerResource.BuildGetReport.ReadHtml(request,"text/html").Result;
         return new GetReportResult
         {
             Success = !string.IsNullOrEmpty(content),
             Html = content
         };
+    }
+
+    public static string GetBuildIssues(this IBuild _, int buildId)
+    {
+        var issues = "";
+
+        var report = _.GetReport(buildId);
+        if (report.Success)
+        {
+            var symbol = "<h3>Issues</h3>";
+            if (report.Html.Contains(symbol))
+            {
+                var start = report.Html.IndexOf(symbol) + symbol.Length;
+                issues = report.Html.Substring(start, report.Html.Length - start);
+                issues = issues.Substring(0, issues.IndexOf("</div>") + 6);
+            }
+        }
+
+        return issues;
     }
 
     public static GetReportResult GetReport(this IBuild _, int buildId)
@@ -127,15 +166,23 @@ public static partial class Helper
         var result = _.ListArtifacts(buildId);
         if (result is { Success: true, Value: { } } && result.Value.Any())
         {
-            return result.Value
-                .Select(o => o.BuildArtifactContent())
-                .ToList();
+            var contents = new List<BuildArtifactContent>();
+
+            result.Value
+                .ForEach(o =>
+                {
+                    var temp = o.BuildArtifactContent();
+                    if (temp != null)
+                        contents.AddRange(temp);
+                });
+
+            return contents;
         }
 
         return null;
     }
 
-    private static BuildArtifactContent BuildArtifactContent(this BuildArtifact buildArtifact)
+    private static List<BuildArtifactContent>? BuildArtifactContent(this BuildArtifact buildArtifact)
     {
         if (buildArtifact.Resource != null)
         {
@@ -143,26 +190,29 @@ public static partial class Helper
             if (File.Exists(file))
             {
                 var fileLocation = string.Empty;
-                var content= file.ReadFile();
+                var lines = file.ReadFile2Rows();
 
-                content = content.Replace("\\AnyCPU", "");
-
-                if (!string.IsNullOrEmpty(content) && content.Contains(buildArtifact.Resource.Data))
+                return lines.Select(o =>
                 {
-                    var fileStart = content.IndexOf(buildArtifact.Resource.Data);
-                    var temp = content.Substring(fileStart, content.Length - fileStart);
-                    fileLocation = temp.Substring(0, temp.IndexOf(")"));
-                }
+                    var content = o.Replace("\\AnyCPU", "");
 
-                return new BuildArtifactContent
-                {
-                    Content = content,
-                    FileLocation = fileLocation
-                };
+                    if (!string.IsNullOrEmpty(content) && content.Contains(buildArtifact.Resource.Data))
+                    {
+                        var fileStart = content.IndexOf(buildArtifact.Resource.Data);
+                        var temp = content.Substring(fileStart, content.Length - fileStart);
+                        fileLocation = temp.Substring(0, temp.IndexOf(")"));
+                    }
+
+                    return new BuildArtifactContent
+                    {
+                        Content = content,
+                        FileLocation = fileLocation
+                    };
+                }).ToList();
             }
         }
 
-        return new BuildArtifactContent();
+        return null;
     }
     
     public static ListBuildsResult ListBuilds(this IBuild _, ListBuilds request)

@@ -102,12 +102,13 @@
     </table>
     <div class="col-12">
         <div class="card-body">
+        @if (Model.TotalPage > 1)
+        {
             <ul class="pagination ">
-                @if (Model.TotalPage > 1)
-                {
-                    @Html.Raw(Model.Pagination)
-                }
+                @Html.Raw(Model.Pagination)
+
             </ul>
+        }
         </div>
     </div>
 </div>

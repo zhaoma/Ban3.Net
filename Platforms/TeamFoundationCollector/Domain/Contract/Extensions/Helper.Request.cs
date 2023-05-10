@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -15,9 +16,12 @@ public static partial class Helper
 {
     public static TargetResource Resource(this IRequest request)
     {
+        var query = request.RequestQuery();
+        if (query == "?")
+            query = "";
         return new TargetResource
         {
-            Url = $"{request.RequestPath()}{request.RequestQuery()}",
+            Url = $"{request.RequestPath()}{query}",
             Method = request.Method,
             Body = new Body
             {
@@ -75,11 +79,11 @@ public static partial class Helper
         return new T();
     }
 
-    public static async Task<string> ReadHtml(this Enums.ServerResource resource, IRequest request)
+    public static async Task<string> ReadHtml(this Enums.ServerResource resource, IRequest request,string accept="")
     {
         try
         {
-            var responseMessage = await Config.Host.Request(request.Resource());
+            var responseMessage = await Config.Host.Request(request.Resource(), accept);
 
             Logger.Debug(request.Resource().Url);
             Logger.Debug($"responseMessage.StatusCode={responseMessage.StatusCode}");

@@ -12,5 +12,5 @@ public interface IReportSection
 
     string Html { get; set; }
 
-    void GenerateHtml(IReportService reportService);
+    string GenerateHtml(IReportService reportService);
 }

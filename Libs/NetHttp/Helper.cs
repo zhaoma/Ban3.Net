@@ -15,11 +15,14 @@ public static class Helper
     /// get resource response (void support too)
     public static async Task<HttpResponseMessage> Request(
         this ITargetHost host,
-        ITargetResource resource)
+        ITargetResource resource,
+        string accept="")
     {
         try
         {
             var client = host.Client();
+            if(!string.IsNullOrEmpty(accept))
+                client.DefaultRequestHeaders.Add("Accept", accept);
 
             return await client.SendAsync(resource.Request());
         }

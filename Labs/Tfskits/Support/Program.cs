@@ -19,30 +19,11 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Pipelines;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubCondition;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
-//DevOps.Reportor.ParseMonitorJobs();
+DevOps.Reportor.ParseMonitorJobs();
 
-//var job = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings.MonitorBuildReports.Jobs
-//    .FindLast(o => o.Id == "1");
-//job.Subject.WriteColorLine(ConsoleColor.Red);
-//Console.WriteLine(DevOps.Reportor.ParseBuildReport(job));
+var job = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings.MonitorBuildReports.Jobs
+    .FindLast(o => o.Id == "1");
 
-//var latestRi = DevOps.Reportor.Tfvc.GetChangesets(new GetChangesets
-//{
-//    SearchCriteria = new SearchCriteria
-//    {
-//        ItemPath = @"$/CTS/Development/ICS/ICS.INT",
-//        FromDate = DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd"),
-//        ToDate = DateTime.Now.AddDays(2).ToString("yyyy-MM-dd")
-//    }
-//});
-
-//latestRi
-//    .Value.FirstOrDefault(o=>o.Comment.Contains(@"Reverse Integration: SHA.SERV"))
-//    .ObjToJson().WriteSuccessLine();
-
-var teams = DevOps.Reportor.Core.LoadTeams();
-
-var team = teams.FindLast(o => o.Name == Config.DefaultTeam);
-
-DevOps.Collector.SyncOneTeamSummary(team.Id);
+Console.WriteLine(DevOps.Reportor.ParseBuildReport(job));

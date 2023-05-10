@@ -10,7 +10,7 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildReports;
 
 public class ReportSectionForWorkItems
-    : IReportSection
+    : ReportSection
 {
     public ReportSectionForWorkItems(int rank, string subject)
     {
@@ -19,16 +19,15 @@ public class ReportSectionForWorkItems
         Subject = subject;
     }
 
-    public int Rank { get; set; }
+    public ReportSectionForWorkItems(ReportSection reportSection)
+    {
+        Rank = reportSection.Rank;
+        Sql = reportSection.Sql;
+        Type = reportSection.Type;
+        Subject = reportSection.Subject;
+    }
 
-    public string Subject { get; set; }
-
-    public BuildReportType Type { get; set; }
-    public string Html { get; set; } = string.Empty;
-
-    public string Sql { get; set; } = string.Empty;
-
-    public void GenerateHtml(IReportService reportService)
+    public override string GenerateHtml(IReportService reportService)
     {
         var sb = new StringBuilder();
 
@@ -41,7 +40,7 @@ public class ReportSectionForWorkItems
             );
 
             var table = queryResult.GetWorkItemsDataTable(listWorkItemsResult);
-            if (table != null)
+            if (table is { Rows.Count: > 0 })
             {
                 sb.AppendLine("<table align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"width:100%;background-color: #666; font-size: 14px; font-family: 'Microsoft YaHei';\"><tr>");
                 foreach (DataColumn col in table.Columns)
@@ -74,6 +73,6 @@ public class ReportSectionForWorkItems
             }
         }
 
-        Html= sb.ToString();
+        return sb.ToString();
     }
 }
