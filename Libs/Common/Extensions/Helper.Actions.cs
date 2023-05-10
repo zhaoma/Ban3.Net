@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Timers;
 using log4net.Core;
 using log4net.Repository.Hierarchy;
 
@@ -66,7 +67,37 @@ namespace Ban3.Infrastructures.Common.Extensions
                 Task.WaitAll(tasks.ToArray());
             }
         }
-        
+
+        public static Timer? CreateTimer(this Action action,int inteval)
+        {
+            var timer = new Timer
+            {
+                AutoReset = true,
+                Interval = inteval,
+                Enabled = true
+            };
+
+            timer.Elapsed += new ElapsedEventHandler((s, e) =>
+            {
+                try
+                {
+                    timer.Enabled = false;
+                    action.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                }
+                finally
+                {
+                    timer.Enabled = true;
+                }
+            });
+            timer.Start();
+
+            return timer;
+        }
+
         public static void TimesParallel(this int count, Action action)
         {
             Enumerable.Range(1, count)
