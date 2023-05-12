@@ -21,12 +21,14 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 
+DevOps.Collector.SyncTfvc();
+
+/*
+
 var teams=DevOps.Collector.Core.LoadTeams();
 teams.Where(o=>o.Name.Contains("SSME"))
     .ToList()
     .ForEach(o=>DevOps.Collector.SyncOneTeamSummary(o.Id));
-/*
-
 new Action(() =>
 {
 DevOps.Collector.Tfvc.PrepareChangesets(string.Empty, 5);
