@@ -21,9 +21,28 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 
+var teams=DevOps.Collector.Core.LoadTeams();
+teams.Where(o=>o.Name.Contains("SSME"))
+    .ToList()
+    .ForEach(o=>DevOps.Collector.SyncOneTeamSummary(o.Id));
+/*
+
+new Action(() =>
+{
+DevOps.Collector.Tfvc.PrepareChangesets(string.Empty, 5);
+}).ExecuteAndTiming("PrepareChangesets");
+
+new Action(() =>
+{
+DevOps.Collector.Tfvc.PrepareShelvesets(string.Empty);
+}).ExecuteAndTiming("PrepareShelvesets");
+
+
+
 DevOps.Reportor.ParseMonitorJobs();
 
 var job = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings.MonitorBuildReports.Jobs
     .FindLast(o => o.Id == "1");
 
 Console.WriteLine(DevOps.Reportor.ParseBuildReport(job));
+*/

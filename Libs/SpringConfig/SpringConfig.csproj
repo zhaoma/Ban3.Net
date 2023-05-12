@@ -3,17 +3,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>10.0</LangVersion>
-    <RootNamespace>Ban3.Infrastructures.SignalRClient</RootNamespace>
-    <AssemblyName>Ban3.Infrastructures.SignalRClient</AssemblyName>
+    <AssemblyName>Ban3.Infrastructures.SpringConfig</AssemblyName>
+    <RootNamespace>Ban3.Infrastructures.SpringConfig</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="log4net" Version="2.0.15" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
+
 </Project>

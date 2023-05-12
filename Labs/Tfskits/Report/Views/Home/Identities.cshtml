@@ -13,7 +13,7 @@
 
 <div class="card-body">
     <div class="form-selectgroup form-selectgroup-boxes d-flex flex-column">
-        @foreach (var identity in Model)
+        @foreach (var identity in Model.OrderBy(o=>o.DisplayName))
         {
             <label class="form-selectgroup-item flex-fill teamRow">
                 <input type="checkbox" name="limitIdentityIds" value="@identity.Id" class="form-selectgroup-input">
@@ -22,16 +22,12 @@
                         <span class="form-selectgroup-check"></span>
                     </div>
                     <div class="col form-selectgroup-label-content d-flex align-items-center">
-                            <span class="avatar me-3" style="background-image: url(@("/data/Portraits/"+identity.Id+".png"))"></span>
+                            <span class="avatar me-3" style="background-image: url(@identity.Portrait)"></span>
                         <div class="col">
                             <div class="font-weight-medium identityName">@identity.DisplayName.ShowName()</div>
                             <div class="text-muted">@identity.DisplayName.ShowTitle()</div>
-                            <div class="text-muted teamSummary col row">
-                                <div class="col-4"></div>
-                                    <div class="col-4"><span class="fabric-icon medium BranchShelveset"><span class="noticeNumber" id="@(identity.Id+"_ChangesetCount")"></span></span></div>
-                                <div class="col-4"><span class="fabric-icon medium DocumentSet"><span class="noticeNumber" id="@(identity.Id+"_ShelvesetCount")"></span></span></div>
-                                </div>
-                            </div>
+                            <div class="text-muted">@identity.UniqueName</div>
+                        </div>
                     </div>
                 </div>
             </label>

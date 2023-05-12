@@ -1,0 +1,13 @@
+﻿@using System.Net
+@model Dictionary<int, string>?
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Any())
+{
+    foreach (var kv in Model)
+    {
+        @Html.Raw($"{kv.Key} : {WebUtility.HtmlEncode( kv.Value)}<br/>")
+    }
+}

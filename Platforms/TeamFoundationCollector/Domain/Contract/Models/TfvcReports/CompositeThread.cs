@@ -38,4 +38,7 @@ public class CompositeThread
 
     [JsonProperty("convertedProperties")]
     public DiscussionProperties? Properties { get; set; }
+
+    [JsonProperty("code")]
+    public Dictionary<int, string>? Code { get; set; }
 }

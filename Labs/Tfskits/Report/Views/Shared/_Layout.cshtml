@@ -14,9 +14,10 @@
     <link href="/dist/css/tabler-vendors.min.css" rel="stylesheet" />
     <link href="/dist/css/demo.min.css" rel="stylesheet" />
     <link href="/js/notify/styles/metro/notify-metro.css" rel="stylesheet" />
+    <link href="~/google-code-prettify/prettify.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css?v=23051002" />
 </head>
-<body class="theme-light">
+<body class="theme-light" οnlοad="prettyPrint();">
     <div class="page">
         <header class="navbar navbar-expand-md navbar-dark navbar-overlap d-print-none">
             <div class="container-xl">
@@ -139,6 +140,7 @@
     <script src="/js/notify/styles/metro/notify-metro.js"></script>
     <script src="/dist/js/demo.min.js" defer></script>
     <script src="/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/google-code-prettify/prettify.js"></script>
     <script src="/js/site.js?v=23051002"></script>
 
     @if (IsSectionDefined("TailJs"))

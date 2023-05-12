@@ -10,6 +10,8 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.SubConditio
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Tfvc;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Tfvc;
 using System.Xml;
+using Ban3.Infrastructures.NetHttp;
+using Ban3.Infrastructures.NetHttp.Entries;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BranchSpec;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 
@@ -145,20 +147,30 @@ public static partial class Helper
     /// <param name="pageNo"></param>
     /// <param name="pageSize"></param>
     /// <returns></returns>
-    public static GetChangesetsResult GetChangesets(this ITfvc _,string id,int pageNo, int pageSize)
+    public static GetChangesetsResult GetChangesets(this ITfvc _,string id,int days,int pageNo, int pageSize)
     {
         var request = new GetChangesets
         {
             Top = pageSize,
             Skip = (pageNo - 1) * pageSize
         };
+
+        if (days > 0)
+        {
+            request.SearchCriteria = new SearchCriteria
+            {
+                FromDate = DateTime.Now.AddDays(-days).ToString("yyyy-MM-dd"),
+                ToDate = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")
+            };
+        }
+
         if (!string.IsNullOrEmpty(id))
             request.SearchCriteria = new SearchCriteria { Author = id };
 
         return _.GetChangesets(request);
     }
 
-    public static List<CompositeChangeset> PrepareChangesets(this ITfvc _, string id, bool getDetail = false,
+    public static List<CompositeChangeset> PrepareChangesets(this ITfvc _, string id,int days=0, bool getDetail = false,
         int start = 1)
     {
         var result = new List<CompositeChangeset>();
@@ -166,7 +178,7 @@ public static partial class Helper
         var pageSize = Config.MaxParallelTasks;
         var pageNo = Math.Max(1, start);
 
-        var changesets = _.GetChangesets(id, pageNo, pageSize);
+        var changesets = _.GetChangesets(id,days, pageNo, pageSize);
         while (changesets is { Success: true, Value: { } } && changesets.Value.Any())
         {
             Logger.Debug($"{DateTime.Now}:parse page {pageNo}");
@@ -182,7 +194,7 @@ public static partial class Helper
                     .ForAll(o => { _.GetChangesetAndSave(o); });
 
             pageNo++;
-            changesets = _.GetChangesets(id, pageNo, pageSize);
+            changesets = _.GetChangesets(id, days,pageNo, pageSize);
         }
 
         return result;
@@ -206,6 +218,37 @@ public static partial class Helper
             Path = path,
             VersionDescriptor=new VersionDescriptor { Version=version}
         }).Result;
+
+    public static Dictionary<int, string>? GetItem(this ITfvc _, ReportRef reportRef, string fileId, DiscussionProperties? properties)
+    {
+        if (properties == null || string.IsNullOrEmpty(properties?.ItemPath)) return null;
+
+        var changes = reportRef == ReportRef.Changeset
+            ? fileId.DataFile<TfvcChangeset>().ReadFile().JsonToObj<TfvcChangeset>()?.Changes
+            : fileId.DataFile<TfvcShelveset>().ReadFile().JsonToObj<TfvcShelveset>()?.Changes;
+
+        if (changes == null) return null;
+
+        var change = changes.FindLast(o => o.Item?.Path == properties?.ItemPath);
+
+        if (change == null) return null;
+
+        var content = Config.Host.ReadContent(new TargetResource { Url = change.Item?.Url }).Result;
+
+        var lines = new Dictionary<int, string>();
+
+        var allLines = (content + "").Split(new[] { "\r\n" }, StringSplitOptions.None);
+
+        var fromRow = Math.Max(1, properties!.StartLine - 5);
+        var toRow = Math.Min(allLines.Length, properties!.EndLine + 5);
+
+        for (var i = fromRow - 1; i < toRow; i++)
+        {
+            lines.Add(i, allLines[i]);
+        }
+
+        return lines;
+    }
 
     public static List<Dependency> GetBranchSpecDependencies(this ITfvc _, string path,string branchName)
     {

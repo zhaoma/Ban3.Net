@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClient", "..\..\Libs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report", "Report\Report.csproj", "{6FF496EF-0255-4322-9CDE-6F4A304BA0C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgentSvr", "AgentSvr\AgentSvr.csproj", "{528A8475-2041-419D-A69C-FDE8B844FD86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentSvr", "AgentSvr\AgentSvr.csproj", "{528A8475-2041-419D-A69C-FDE8B844FD86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpringConfig", "..\..\Libs\SpringConfig\SpringConfig.csproj", "{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{528A8475-2041-419D-A69C-FDE8B844FD86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{528A8475-2041-419D-A69C-FDE8B844FD86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{528A8475-2041-419D-A69C-FDE8B844FD86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{475F0809-293E-4E1D-930F-591893527037} = {4ED05C33-683F-438B-B8C3-84E82E136551}
 		{6FF496EF-0255-4322-9CDE-6F4A304BA0C0} = {D3EFE6B4-BD75-4D2E-8185-6F0B724EB582}
 		{528A8475-2041-419D-A69C-FDE8B844FD86} = {D3EFE6B4-BD75-4D2E-8185-6F0B724EB582}
+		{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6} = {4ED05C33-683F-438B-B8C3-84E82E136551}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01EB0EEC-4EE4-4B8F-AD9A-0DD3DBA1A717}

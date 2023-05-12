@@ -82,7 +82,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj",
-        "projectName": "ban3.Infrastructures.Common",
+        "projectName": "Ban3.Infrastructures.Common",
         "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
         "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\obj\\",
@@ -390,7 +390,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj",
-        "projectName": "Ban3.Libs.RuntimeCaching",
+        "projectName": "Ban3.Infrastructures.RuntimeCaching",
         "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj",
         "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
         "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\obj\\",

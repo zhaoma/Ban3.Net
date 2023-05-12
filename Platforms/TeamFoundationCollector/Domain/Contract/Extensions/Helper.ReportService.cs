@@ -62,6 +62,7 @@ public static partial class Helper
 
         result.PagedRows = result.Rows.Skip((filter.PageNo - 1) * filter.PageSize).Take(filter.PageSize).ToList();
 
+            /*
         result.PagedRows.ForEach(o =>
         {
             if (o.ReportRef == ReportRef.Changeset)
@@ -79,7 +80,16 @@ public static partial class Helper
                     .JsonToObj<TfvcShelveset>()?
                     .Changes;
             }
+            if (o.Threads != null && o.Threads.Any())
+            {
+                o.Threads.ForEach(x =>
+                {
+                    x.Code = _.Tfvc.GetItem(o.ReportRef, o.FileId, x.Properties);
+                });
+            }
+
         });
+            */
 
         return result;
     }

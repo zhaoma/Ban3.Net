@@ -1,6 +1,10 @@
-﻿using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
+﻿using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Reports;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Settings=Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings;
 
@@ -73,6 +77,12 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
             var excel = DevOps.Reportor.GetTfvcExcel( filter );
 
             return new FileStreamResult( excel, "application/vnd.ms-excel" );
+        }
+
+        public IActionResult ShowCode(ReportRef reportRef, string fileId, string properties)
+        {
+            var result = DevOps.Collector.Tfvc.GetItem(reportRef, fileId, properties.JsonToObj<DiscussionProperties>());
+            return View( result );
         }
 
         #endregion

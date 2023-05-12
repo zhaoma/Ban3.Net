@@ -1,0 +1,84 @@
+﻿@using Ban3.Infrastructures.Common.Extensions
+@using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
+@using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions
+@model Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports.ShowRow
+@{
+    Layout = null;
+}
+
+<tr class="dataRow">
+    <td class="card-body">
+        <a href="@Model.Url" target="_blank" class="text-reset d-block" title="jump to tfs server">
+            @if (Model.ReportRef == ReportRef.Changeset)
+            {
+                <span class="badge bg-success">
+                    Changeset
+                </span>
+            }
+            @if (Model.ReportRef == ReportRef.Shelveset)
+            {
+                <span class="badge bg-info" title="jump to tfs server">
+                    Shelveset
+                </span>
+            }
+        </a>
+    </td>
+    <td class="card-body ">
+        <div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-3 rowIdentity"><i class="bi bi-person"></i> @Model.AuthorName</div>
+                <div class="col-3 rowDate"><i class="bi bi-clock"></i> @Model.CreatedDate.ShowDate()</div>
+            </div>
+            <div class="row card-body">
+                <h3>
+                    @if (Model.ReportRef == ReportRef.Changeset)
+                    {
+                        <span class="fabric-icon medium DocumentSet"><span class="noticeNumber">@Model.Id</span></span>
+                    }
+                    @if (Model.ReportRef == ReportRef.Shelveset)
+                    {
+                        <span class="fabric-icon medium BranchShelveset"><span class="noticeNumber">@Model.Id</span></span>
+                    }
+                </h3>
+                @Html.Raw(Model.Comment)
+            </div>
+        </div>
+
+        @if (Model.Threads != null && Model.Threads.Any())
+        {
+            @foreach (var tc in Model.Threads.Where(o => o.Comments != null && o.Comments.Any()))
+            {
+                var fileUrl = Model.ReportRef == ReportRef.Changeset
+                    ? Model.Url + "?path=" + tc.Properties?.ItemPath
+                    : Model.Url + "&path=" + tc.Properties?.ItemPath;
+                <hr/>
+                <div class="row">
+                    <div class="col">
+                        <h5>
+                            <a target="_blank" href="@fileUrl">@tc.Properties?.ItemPath</a> ( <a href="javascript:;" onclick="return showCode('@tc.Id','@Model.ReportRef','@Model.FileId','@tc.Properties?.ObjToJson()');">preview</a> )
+</h5>
+                        <pre id="threads_@tc.Id" style="display: none;" class="prettyprint "></pre>
+                        @foreach (var t in tc.Comments)
+                        {
+                            <div class="dataRow">
+                                <div class="col row ">
+                                    <div class="col">
+                                        <span class="badge bg-warning">
+                                            @tc.Status
+                                        </span>
+                                    </div>
+                                    <div class="col-3 rowIdentity"><i class="bi bi-person"></i> @t.AuthorName</div>
+                                    <div class="col-3 rowDate"><i class="bi bi-clock"></i> @t.PublishedDate.ShowDate()</div>
+                                </div>
+                                <div class="card-body">
+                                    @Html.Raw(t.Content)
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    </td>
+</tr>

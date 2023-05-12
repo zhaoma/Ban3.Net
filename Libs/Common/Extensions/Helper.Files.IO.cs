@@ -17,9 +17,13 @@ namespace Ban3.Infrastructures.Common.Extensions
     public static partial class Helper
     {
         /// 
-        public static string[] GetFiles(this string rootPath, string pattern)
+        public static string[] GetFiles(this string rootPath, string pattern, bool includeSubFolders = true)
         {
-            return Directory.GetFiles(rootPath, pattern, SearchOption.AllDirectories);
+            return Directory.GetFiles(
+                rootPath,
+                pattern,
+                includeSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly
+            );
         }
 
         /// 

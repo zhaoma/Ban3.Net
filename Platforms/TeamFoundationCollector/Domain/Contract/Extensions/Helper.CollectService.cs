@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
@@ -62,7 +63,7 @@ public static partial class Helper
 
         result.AppendChangesets(_.FulfillDiscussion(_.Tfvc.PrepareChangesets(identityGuid)));
         result.AppendShelvesets(_.FulfillDiscussion(_.Tfvc.PrepareShelvesets(identityGuid),identityGuid));
-
+        
         file
             .WriteFile(result.ObjToJson());
     }
@@ -83,9 +84,15 @@ public static partial class Helper
                         .Take(pageSize).ToList()
                         .AsParallel()
                         .ForAll(
-                            o => { o.Threads = _.Discussion.GetThreads(o.Id).GetCompositeThreads(); });
+                            o =>
+                            {
+                                o.Threads = _.Discussion.GetThreads(o.Id).GetCompositeThreads();
+                            });
+
+
                 }).ExecuteAndTiming($"parse page {pageNo} changesets discussion.");
             });
+
         return changesets;
     }
 
@@ -107,7 +114,10 @@ public static partial class Helper
                     .ToList()
                     .AsParallel()
                     .ForAll(
-                        o => { o.Threads = _.Discussion.GetThreads(o.Id, authorGuid).GetCompositeThreads(); });
+                        o =>
+                        {
+                            o.Threads = _.Discussion.GetThreads(o.Id, authorGuid).GetCompositeThreads();
+                        });
                 }).ExecuteAndTiming($"parse page {pageNo} shelvesets discussion.");
             });
 

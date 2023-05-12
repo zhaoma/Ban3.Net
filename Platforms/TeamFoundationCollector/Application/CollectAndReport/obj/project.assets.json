@@ -1686,7 +1686,7 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "ban3.Infrastructures.Common/1.0.0": {
+      "Ban3.Infrastructures.Common/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -1697,10 +1697,10 @@
           "log4net": "2.0.15"
         },
         "compile": {
-          "bin/placeholder/ban3.Infrastructures.Common.dll": {}
+          "bin/placeholder/Ban3.Infrastructures.Common.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ban3.Infrastructures.Common.dll": {}
+          "bin/placeholder/Ban3.Infrastructures.Common.dll": {}
         }
       },
       "Ban3.Infrastructures.NetHttp/1.0.0": {
@@ -1734,7 +1734,7 @@
           "bin/placeholder/Ban3.Infrastructures.NetMail.dll": {}
         }
       },
-      "Ban3.Libs.RuntimeCaching/1.0.0": {
+      "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -1743,25 +1743,25 @@
           "log4net": "2.0.15"
         },
         "compile": {
-          "bin/placeholder/Ban3.Libs.RuntimeCaching.dll": {}
+          "bin/placeholder/Ban3.Infrastructures.RuntimeCaching.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Ban3.Libs.RuntimeCaching.dll": {}
+          "bin/placeholder/Ban3.Infrastructures.RuntimeCaching.dll": {}
         }
       },
       "Ban3.Platforms.TeamFoundationCollector.Domain.Contract/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.0",
           "Ban3.Infrastructures.NetHttp": "1.0.0",
           "Ban3.Infrastructures.NetMail": "1.0.0",
-          "Ban3.Libs.RuntimeCaching": "1.0.0",
+          "Ban3.Infrastructures.RuntimeCaching": "1.0.0",
           "Microsoft.Extensions.Configuration": "7.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "NPOI": "2.6.0",
           "Newtonsoft.Json": "13.0.3",
-          "ban3.Infrastructures.Common": "1.0.0",
           "log4net": "2.0.15"
         },
         "compile": {
@@ -5660,7 +5660,7 @@
         "version.txt"
       ]
     },
-    "ban3.Infrastructures.Common/1.0.0": {
+    "Ban3.Infrastructures.Common/1.0.0": {
       "type": "project",
       "path": "../../../../Libs/Common/Common.csproj",
       "msbuildProject": "../../../../Libs/Common/Common.csproj"
@@ -5675,7 +5675,7 @@
       "path": "../../../../Libs/NetMail/NetMail.csproj",
       "msbuildProject": "../../../../Libs/NetMail/NetMail.csproj"
     },
-    "Ban3.Libs.RuntimeCaching/1.0.0": {
+    "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
       "type": "project",
       "path": "../../../../Libs/RuntimeCaching/RuntimeCaching.csproj",
       "msbuildProject": "../../../../Libs/RuntimeCaching/RuntimeCaching.csproj"

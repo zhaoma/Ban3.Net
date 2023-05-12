@@ -22,4 +22,12 @@
     <ProjectReference Include="..\..\..\Platforms\TeamFoundationCollector\Application\CollectAndReport\CollectAndReport.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\ShowRow.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Home\ShowRow.cshtml" />
+  </ItemGroup>
+
 </Project>

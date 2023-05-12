@@ -74,6 +74,27 @@ function focusNav(id) {
     $("#" + id).addClass("rotate");
 }
 
+function showCode(tid,reportRef, fileId, properties) {
+    var request = {
+        reportRef: reportRef,
+        fileId: fileId,
+        properties: properties
+    };
+
+    $.ajax({
+        url: "/home/showcode",
+        type: "post",
+        data: request,
+        dataType: "html",
+        success: function (response) {
+            $("#threads_" + tid).html(response);
+            $("#threads_" + tid).show(100);
+        }
+    });
+
+    return false;
+}
+
 function requestIdentities() {
     var limitTeamNames = [];
 

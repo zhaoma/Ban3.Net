@@ -172,6 +172,11 @@ video {
     text-align: left;
 }
 
+.teamRow{
+    clear: both;
+    width: 100%;
+}
+
 .teamRow:hover .teamName, .teamRow:hover .identityName {
     font-weight: bold;
 }
