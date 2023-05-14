@@ -22,6 +22,13 @@ namespace Ban3.Infrastructures.Common.Extensions
     /// </summary>
     public static partial class Helper
     {
+
+        public static T? ReadFileAs<T>(this string path, string charset = "utf-8")
+        {
+            return path.ReadFile()
+                .JsonToObj<T>();
+        }
+
         /// 
         public static string ReadFile(this string path, string charset = "utf-8")
         {
@@ -77,9 +84,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         }
 
         /// 
-        public static byte[] ReadBytes(this string path)
+        public static byte[]? ReadBytes(this string path)
         {
-            byte[] result=null;
+            byte[]? result=null;
 
             if (File.Exists(path) && LockSlim.TryEnterReadLock(LockSlimTimeout))
             {
@@ -165,7 +172,7 @@ namespace Ban3.Infrastructures.Common.Extensions
             if (!File.Exists(filePath)) return true;
 
             var fileInfo = new FileInfo(filePath);
-
+            
             return DateTime.Now.Subtract(fileInfo.LastWriteTime)
                  .TotalMinutes > minutes;
         }
@@ -181,7 +188,7 @@ namespace Ban3.Infrastructures.Common.Extensions
         }
 
         /// 
-        public static T WriteFileAfterMinutes<T>(this string filePath, int minutes, Func<T> func)
+        public static T? WriteFileAfterMinutes<T>(this string filePath, int minutes, Func<T> func)
         {
             if (filePath.FileNeedUpdate(minutes))
             {

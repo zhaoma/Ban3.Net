@@ -101,5 +101,39 @@ namespace Ban3.Infrastructures.Common.Extensions
             }
             return true;
         }
+
+
+        public static void AppendToList<T>(this List<T> all, T one)
+        {
+            try
+            {
+                LockSlim.EnterWriteLock();
+                if (!all.Contains(one))
+                    all.Add(one);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+            }
+            finally
+            {
+                LockSlim.ExitWriteLock();
+            }
+        }
+
+        /// <summary>
+        /// 递归记录hierarchy
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static string[] Redim(this string[] arr, int length)
+        {
+            var r = new string[length];
+
+            Array.Copy(arr, r, length - 1);
+
+            return r;
+        }
     }
 }

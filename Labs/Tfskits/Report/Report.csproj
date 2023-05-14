@@ -8,6 +8,7 @@
     <AssemblyName>report</AssemblyName>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Report' " />
   <ItemGroup>
     <Content Remove="log4net.config" />
   </ItemGroup>

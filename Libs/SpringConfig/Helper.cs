@@ -12,10 +12,10 @@ namespace Ban3.Infrastructures.SpringConfig
     public static class Helper
     {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
-        private static readonly string RootFolder 
+        private static readonly string RootFolder
             = Common.Config.AppConfiguration["FilesStorage:SpringXmlsRootFolder"];
 
-        private static readonly string FixMapping
+        private static readonly string FixMappingFile
             = Path.Combine(Config.LocalStorage.RootPath, "manualMapping.json");
 
         public static void PrepareData()
@@ -26,7 +26,7 @@ namespace Ban3.Infrastructures.SpringConfig
 
             var allAlias = new List<AliasObject>();
             var allDeclares = new List<Declare>();
-            var mappings = FixMapping.ReadFile().JsonToObj<Dictionary<string, string>>();
+            var mappings = FixMappingFile.ReadFileAs<Dictionary<string, string>>();
 
             foreach (var config in configs)
             {
@@ -41,7 +41,7 @@ namespace Ban3.Infrastructures.SpringConfig
                     FilePath = config,
                     Imports = xmlDoc.SelectNodes("/sn:objects/sn:import", nsmgr).Nodes2Imports(config),
                     AliasList = xmlDoc.SelectNodes("/sn:objects/sn:alias", nsmgr).Nodes2Alias(),
-                    Declares = Nodes2Declares(xmlDoc.SelectNodes("/sn:objects/sn:object", nsmgr))
+                    Declares = xmlDoc.SelectNodes("/sn:objects/sn:object", nsmgr).Nodes2Declares()
                 };
 
                 allAlias.AddRange(one.AliasList);
@@ -63,45 +63,20 @@ namespace Ban3.Infrastructures.SpringConfig
 
         }
 
+        public static List<SpringXml> LoadConfigData(string id = "")
+            => typeof(SpringXml)
+                .LocalFile()
+                .ReadFileAs<List<SpringXml>>();
 
-        public List<SpringXml> LoadConfigData(string id="")
-        {
-            var setting = Domain.LocalAgent.Config.CurrrentEnvironment.SpringConfigs
-                .FindLast(o => o.Id.TextEqual(id));
+        public static List<AliasObject> LoadAliasData(string id = "All")
+            => typeof(AliasObject)
+                .LocalFile()
+                .ReadFileAs<List<AliasObject>>();
 
-            if (setting == null) return null;
-
-            return setting
-                .OutputJsonFile
-                .ReadFile()
-                .JsonToObj<List<SpringConfig>>();
-        }
-
-        public List<AliasObject> LoadAliasData(string id = "All")
-        {
-            var setting = Domain.LocalAgent.Config.CurrrentEnvironment.SpringConfigs
-                .FindLast(o => o.Id.TextEqual(id));
-
-            if (setting == null) return null;
-
-            return setting
-                .OutputAliasJsonFile
-                .ReadFile()
-                .JsonToObj<List<AliasObject>>();
-        }
-
-        public List<Declare> LoadDeclareData(string id = "All")
-        {
-            var setting = Domain.LocalAgent.Config.CurrrentEnvironment.SpringConfigs
-                .FindLast(o => o.Id.TextEqual(id));
-
-            if (setting == null) return null;
-
-            return setting
-                .OutputDeclaresJsonFile
-                .ReadFile()
-                .JsonToObj<List<Declare>>();
-        }
+        public static List<Declare> LoadDeclareData(string id = "All")
+            => typeof(Declare)
+                .LocalFile()
+                .ReadFileAs<List<Declare>>();
 
         static List<AliasObject> Nodes2Alias(this XmlNodeList nodes)
         {
@@ -229,7 +204,7 @@ namespace Ban3.Infrastructures.SpringConfig
             Dictionary<string, string> mappings)
         {
             configs.AsParallel()
-                .ForAll(o => o.FixDeclares( alias, declares, mappings));
+                .ForAll(o => o.FixDeclares(alias, declares, mappings));
         }
 
         static void FixDeclares(
@@ -239,7 +214,7 @@ namespace Ban3.Infrastructures.SpringConfig
             Dictionary<string, string> mappings)
         {
             config.Declares.AsParallel()
-                .ForAll(o => o.FixDeclare( alias, declares, mappings));
+                .ForAll(o => o.FixDeclare(alias, declares, mappings));
         }
 
         static void FixDeclare(
@@ -252,21 +227,21 @@ namespace Ban3.Infrastructures.SpringConfig
 
             if (!string.IsNullOrEmpty(noAssemblyDeclare.Type))
             {
-                assemblyName = declares.FindAssemblyByObjectId( alias, mappings, noAssemblyDeclare.Type);
+                assemblyName = declares.FindAssemblyByObjectId(alias, mappings, noAssemblyDeclare.Type);
                 if (!string.IsNullOrEmpty(assemblyName))
                     noAssemblyDeclare.AssemblyName = assemblyName;
             }
 
             if (!string.IsNullOrEmpty(noAssemblyDeclare.Parent))
             {
-                assemblyName = declares.FindAssemblyByObjectId( alias, mappings, noAssemblyDeclare.Parent);
+                assemblyName = declares.FindAssemblyByObjectId(alias, mappings, noAssemblyDeclare.Parent);
                 if (!string.IsNullOrEmpty(assemblyName))
                     noAssemblyDeclare.AssemblyName = assemblyName;
             }
 
             if (!string.IsNullOrEmpty(noAssemblyDeclare.FactoryObject))
             {
-                assemblyName = declares. FindAssemblyByObjectId( alias, mappings, noAssemblyDeclare.FactoryObject);
+                assemblyName = declares.FindAssemblyByObjectId(alias, mappings, noAssemblyDeclare.FactoryObject);
                 if (!string.IsNullOrEmpty(assemblyName))
                     noAssemblyDeclare.AssemblyName = assemblyName;
             }
@@ -281,7 +256,7 @@ namespace Ban3.Infrastructures.SpringConfig
                     {
                         foreach (var r in arg.Refs)
                         {
-                            var tempName = declares.FindAssemblyByObjectId( alias, mappings, r);
+                            var tempName = declares.FindAssemblyByObjectId(alias, mappings, r);
                             if (!string.IsNullOrEmpty(tempName))
                             {
                                 assemblyName = tempName;
@@ -295,7 +270,7 @@ namespace Ban3.Infrastructures.SpringConfig
                     noAssemblyDeclare.AssemblyName = assemblyName;
             }
 
-            noAssemblyDeclare.GetAssemblies( alias, declares);
+            noAssemblyDeclare.GetAssemblies(alias, declares);
         }
 
 
@@ -338,7 +313,7 @@ namespace Ban3.Infrastructures.SpringConfig
 
 
         static List<string> GetAssemblies(
-            List<SpringXml> configs,
+            this List<SpringXml> configs,
             bool getDeclares = true,
             bool getArguments = true)
         {
@@ -364,8 +339,8 @@ namespace Ban3.Infrastructures.SpringConfig
             return result;
         }
 
-        List<string> GetAssemblies(
-            SpringXml config,
+        static List<string> GetAssemblies(
+            this SpringXml config,
             List<AliasObject> allAlias,
             List<Declare> allDeclares
             )
@@ -383,8 +358,8 @@ namespace Ban3.Infrastructures.SpringConfig
             return result;
         }
 
-        List<string> GetAssemblies(
-            Declare declare,
+        static List<string> GetAssemblies(
+            this Declare declare,
             List<AliasObject> allAlias,
             List<Declare> allDeclares
             )
@@ -398,7 +373,6 @@ namespace Ban3.Infrastructures.SpringConfig
                     arg.AssemblyNames = arg.IsEnumerable
                         ? arg.Refs.Select(o => GetAssemblies(o, allAlias, allDeclares)).Where(o => !string.IsNullOrEmpty(o)).ToList()
                         : new List<string> { GetAssemblies(arg.Ref, allAlias, allDeclares) };
-                    $"{arg.Name}={arg.AssemblyNames.ObjToJson()}".WriteWarningLine();
 
                     result = result.Union(result).ToList();
                 }
@@ -407,7 +381,7 @@ namespace Ban3.Infrastructures.SpringConfig
             return result;
         }
 
-        string GetAssemblies(
+        static string GetAssemblies(
             string refer,
             List<AliasObject> allAlias,
             List<Declare> allDeclares
@@ -420,5 +394,15 @@ namespace Ban3.Infrastructures.SpringConfig
             return declare != null ? declare.AssemblyName : string.Empty;
         }
 
+        static bool TextEqual(this string a, string b)
+        {
+            return a.ToUpper() == b.Trim().Replace(" ", "").ToUpper();
+        }
+
+        static bool AssemblyEqual(this string a, string b)
+        {
+            return a.TextEqual(b)
+                || $"{a}.dll".TextEqual(b);
+        }
     }
 }

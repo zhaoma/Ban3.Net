@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
 
@@ -6,12 +7,12 @@ namespace Ban3.Infrastructures.SignalRClient
 {
     public class Client
     {
-        HubConnection hubConnection;
+        static HubConnection hubConnection;
 
-        string SignalRUri = Infrastructures.Common.Config.AppConfiguration?
-           ["SignalR:Url"] + "";
+        static string SignalRUri = Infrastructures.Common.Config.AppConfiguration?
+           ["SignalR:Endpoint"] + "";
 
-        public Client()
+        static Client()
         {
             if (hubConnection == null)
             {
@@ -28,7 +29,7 @@ namespace Ban3.Infrastructures.SignalRClient
             }
         }
 
-        public async void Send(Notify notify)
+        public static async Task Send(Notify notify)
         {
             try
             {
@@ -43,7 +44,7 @@ namespace Ban3.Infrastructures.SignalRClient
             }
         }
 
-        public Action<Notify> ReceivedNotify;
+        public static Action<Notify> ReceivedNotify;
     }
 }
 

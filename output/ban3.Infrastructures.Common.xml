@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>ban3.Infrastructures.Common</name>
+        <name>Ban3.Infrastructures.Common</name>
     </assembly>
     <members>
         <member name="T:Ban3.Infrastructures.Common.Attributes.EnumAttachedAttribute">
@@ -593,6 +593,14 @@
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Matches(System.Type[],System.Type[])">
             
         </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Redim(System.String[],System.Int32)">
+            <summary>
+            递归记录hierarchy
+            </summary>
+            <param name="arr"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ReadFile(System.String,System.String)">
             
         </member>
@@ -620,10 +628,10 @@
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WriteFileAfterMinutes``1(System.String,System.Int32,System.Func{``0})">
             
         </member>
-        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetFiles(System.String,System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetFiles(System.String,System.String,System.Boolean)">
             
         </member>
-        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetDirectories(System.String,System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetDirectories(System.String,System.String,System.Boolean)">
             
         </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DataFile``1(System.Object)">

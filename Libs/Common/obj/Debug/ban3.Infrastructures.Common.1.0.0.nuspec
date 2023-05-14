@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>ban3.Infrastructures.Common</id>
+    <id>Ban3.Infrastructures.Common</id>
     <version>1.0.0</version>
     <title>Ban3.Infrastructures.Common</title>
     <authors>zhaoma@hotmail.com</authors>
@@ -17,7 +17,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="D:\GIT\Ban3.Net\output\netstandard2.0\ban3.Infrastructures.Common.dll" target="lib\netstandard2.0\ban3.Infrastructures.Common.dll" />
-    <file src="D:\GIT\Ban3.Net\output\netstandard2.0\ban3.Infrastructures.Common.xml" target="lib\netstandard2.0\ban3.Infrastructures.Common.xml" />
+    <file src="/Users/zhaoma/Projects/Ban3.Net/output/netstandard2.0/Ban3.Infrastructures.Common.dll" target="lib/netstandard2.0/Ban3.Infrastructures.Common.dll" />
+    <file src="/Users/zhaoma/Projects/Ban3.Net/output/netstandard2.0/ban3.Infrastructures.Common.xml" target="lib/netstandard2.0/ban3.Infrastructures.Common.xml" />
   </files>
 </package>

@@ -17,34 +17,36 @@ namespace Ban3.Infrastructures.Common.Extensions
     public static partial class Helper
     {
         /// 
-        public static string[] GetFiles(this string rootPath, string pattern, bool includeSubFolders = true)
-        {
-            return Directory.GetFiles(
-                rootPath,
-                pattern,
-                includeSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly
-            );
-        }
+        public static string[] GetFiles(
+	        this string rootPath, 
+	        string pattern, 
+	        bool includeSubFolders = true)
+            => Directory.GetFiles
+	            (
+                    rootPath,
+                    pattern,
+                    includeSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly
+                );
 
         /// 
-        public static string[] GetDirectories(this string rootPath, string pattern)
-        {
-            return Directory.GetDirectories(rootPath, pattern, SearchOption.AllDirectories);
-        }
+        public static string[] GetDirectories(
+	        this string rootPath, 
+	        string pattern,
+            bool includeSubFolders = true)
+            => Directory.GetDirectories
+	            (
+                    rootPath, 
+		            pattern,
+                    includeSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly
+                );
 
         /// 
         public static string DataFile<T>(this object id)
-        {
-            var path = typeof(T).Name.DataPath();
-            return Path.Combine(path, $"{id}.lr");
-        }
+            => typeof(T).LocalFile($"{id}");
 
         /// 
         public static string SetsFile<T>(this List<T> all, string func = "all")
-        {
-            var path = typeof(T).Name.DataPath();
-            return Path.Combine(path, $"{func}.lr");
-        }
+	        => typeof(T).LocalFile(func);
 
         /// 
 	    public static string LocalFile(this Type type,string func="all")
@@ -83,9 +85,7 @@ namespace Ban3.Infrastructures.Common.Extensions
 
         /// 
         public static string WorkPath(this string addition)
-        {
-            return Path.Combine(Environment.CurrentDirectory, addition);
-        }
+            => Path.Combine(Environment.CurrentDirectory, addition);
 
         /// 
         public static string Check(this string path)
