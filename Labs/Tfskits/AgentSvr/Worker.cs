@@ -1,5 +1,6 @@
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using log4net;
 

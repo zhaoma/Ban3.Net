@@ -10,6 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Libs\PlatformInvoke\PlatformInvoke.csproj" />
+    <ProjectReference Include="..\..\..\..\Libs\SpringConfig\SpringConfig.csproj" />
+    <ProjectReference Include="..\..\..\..\Libs\WxsConfig\WxsConfig.csproj" />
     <ProjectReference Include="..\..\Domain\Contract\Contract.csproj" />
   </ItemGroup>
 

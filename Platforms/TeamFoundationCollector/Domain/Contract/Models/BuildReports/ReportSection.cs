@@ -16,6 +16,4 @@ public class ReportSection:IReportSection
     public string Sql { get; set; } = string.Empty;
 
     public string Html { get; set; } = string.Empty;
-
-    public virtual string GenerateHtml(IReportService reportService) => string.Empty;
 }

@@ -11,6 +11,4 @@ public interface IReportSection
     BuildReportType Type { get; set; }
 
     string Html { get; set; }
-
-    string GenerateHtml(IReportService reportService);
 }

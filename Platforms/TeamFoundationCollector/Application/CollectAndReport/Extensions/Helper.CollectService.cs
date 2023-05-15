@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
+﻿using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Interfaces;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
+namespace Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
 
 public static partial class Helper
 {
@@ -61,8 +57,8 @@ public static partial class Helper
             Id = identityGuid
         };
 
-        result.AppendChangesets(_.FulfillDiscussion(_.Tfvc.PrepareChangesets(identityGuid)));
-        result.AppendShelvesets(_.FulfillDiscussion(_.Tfvc.PrepareShelvesets(identityGuid),identityGuid));
+        result.AppendChangesets(_.FulfillDiscussion(_.Tfvc.PrepareChangesets(identityGuid,0,true)));
+        result.AppendShelvesets(_.FulfillDiscussion(_.Tfvc.PrepareShelvesets(identityGuid,true),identityGuid));
         
         file
             .WriteFile(result.ObjToJson());

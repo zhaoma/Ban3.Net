@@ -1,5 +1,7 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Request;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
@@ -117,6 +119,22 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
                 ?? Settings.MonitorBuildReports.Jobs.First();
 
             return View(reportDefine);
+        }
+
+        public IActionResult Query(string id= "CT.Exam.Recon")
+        {
+            var response = DevOps.Reportor.QueryAnything(new QueryAnything
+            {
+                Keyword = id
+            });
+
+            return View(response);
+        }
+
+        public IActionResult Relations(GetRelations request)
+        {
+            var response = DevOps.Reportor.GetRelations(request);
+            return View(response);
         }
     }
 }

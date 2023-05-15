@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Libs\WxsConfig\WxsConfig.csproj" />
     <ProjectReference Include="..\..\..\Platforms\TeamFoundationCollector\Application\CollectAndReport\CollectAndReport.csproj" />
   </ItemGroup>
 

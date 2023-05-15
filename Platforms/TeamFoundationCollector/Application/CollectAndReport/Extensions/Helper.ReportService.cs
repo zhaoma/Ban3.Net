@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Data;
 using System.Net;
 using System.Text;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.NetMail;
+using Ban3.Infrastructures.SpringConfig;
+using Ban3.Infrastructures.SpringConfig.Entries;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Interfaces;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BranchSpec;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildReports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Reports;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Reports;
 using NPOI.HSSF.UserModel;
-using NPOI.SS.Formula.Functions;
-using NPOI.SS.UserModel;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
+namespace Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
 
 public static partial class Helper
 {
@@ -373,7 +371,7 @@ public static partial class Helper
 
     public static void ParseMonitorJobs(this IReportService _)
     {
-        var monitorJobs = Settings.MonitorBranchSpec.Jobs;
+        var monitorJobs = Domain.Contract.Settings.MonitorBranchSpec.Jobs;
         monitorJobs.ForEach(
             o => { Console.WriteLine($"{o.Subject} ... success:{_.ParseMonitorJob(o)}"); });
     }
@@ -452,6 +450,8 @@ public static partial class Helper
 
     #endregion
 
+    #region BuildReport
+
     public static bool ParseBuildReport(this IReportService _, ReportDefine reportDefine)
     {
         return _.SendMail(reportDefine.Subscribed, reportDefine.CC, reportDefine.Subject,
@@ -460,9 +460,9 @@ public static partial class Helper
 
     public static string RenderBuildReportHtml(this IReportService _, ReportDefine reportDefine)
     {
-        var sb = new StringBuilder();        
+        var sb = new StringBuilder();
         sb.AppendLine(@"<style>
-.issuesTable table tr td:first-child{width:80px;}
+            .issuesTable table tr td:first-child{width:80px;}
             .Succeeded {
                 color: #22B14C;
             }
@@ -480,17 +480,176 @@ public static partial class Helper
                 switch (o.Type)
                 {
                     case BuildReportType.Definition:
-                        o.Html=new ReportSectionForDefinition(o).GenerateHtml(_);
+                        o.Html = _.GenerateHtml(new ReportSectionForDefinition(o));
                         break;
                     case BuildReportType.WorkItems:
-                        o.Html = new ReportSectionForWorkItems(o).GenerateHtml(_);
+                        o.Html = _.GenerateHtml(new ReportSectionForWorkItems(o));
                         break;
                 }
             });
 
         reportDefine.Sections.ForEach(o => { sb.AppendLine(o.Html); });
-        
+
         return sb.ToString();
+    }
+    
+    public static string GenerateHtml(this IReportService reportService, ReportSectionForDefinition section)
+    {
+        var sb = new StringBuilder();
+        var build = reportService.Build.GetLastBuildForDefinition(section.DefinitionId);
+        var d = reportService.Build.LoadDefinitionRefs()
+            .FindLast(o => o.Id == section.DefinitionId);
+
+        if (build != null && d != null)
+        {
+            sb.AppendLine("<table align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"width:100%;font-size: 14px; font-family: 'Microsoft YaHei';\">");
+
+            sb.Append($"<tr><td style='width:50%;padding:5px;font-size:18px;font-weight:bold;'><a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_build/results?buildId={build.Id}&view=results' style='color:#000;text-decoration:none;' target='_blank'>{d.Name}</a></td>" +
+                      $"<td style=''width:20%;padding:5px;font-size:18px;font-weight:bold;'><a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_build/results?buildId={build.Id}&view=results' class='{build.Result}' target='_blank'>{build.Result}</a></td>" +
+                      $"<td style='width:15%;padding:5px;'>{build.StartTime.ShowDate()}</td>" +
+                      $"<td style='width:15%;padding:5px;'>{build.BuildDuration()}</td>" +
+                      $"</tr>");
+
+            if (build.Result != BuildResult.Succeeded)
+            {
+                var artifacts = reportService.Build.ListArtifactsForBuild(build!.Id);
+                if (artifacts != null)
+                {
+                    var index = 1;
+                    foreach (var buildArtifactContent in artifacts)
+                    {
+                        sb.AppendLine($"<tr><td colspan='4' style='padding:5px;'>");
+                        sb.AppendLine($"{index}:{buildArtifactContent.Content}");
+                        sb.AppendLine(
+                            $"<a href='file:{buildArtifactContent.FileLocation}' target='_top'>{buildArtifactContent.FileLocation}</a>");
+                        sb.AppendLine($"</td></tr>");
+
+                        index++;
+                    }
+                }
+
+                var issues = reportService.Build.GetBuildIssues(build.Id);
+                if (!string.IsNullOrEmpty(issues) && issues.Length <= 1024)
+                {
+                    sb.AppendLine($"<tr><td colspan='4' style='padding:5px;word-break: break-all;word-wrap: break-word;' class='issuesTable'>{issues}</td></tr>");
+                }
+            }
+            sb.Append("</table><br/><br/>");
+        }
+
+        return sb.ToString();
+    }
+    
+    public static string GenerateHtml(this IReportService reportService,ReportSectionForWorkItems section)
+    {
+        var sb = new StringBuilder();
+
+        var queryResult = reportService.WorkItemTracking.Query(section.Sql);
+        if (queryResult is { Success: true, WorkItems: { }, Columns: { } })
+        {
+            var listWorkItemsResult = reportService.WorkItemTracking.ListWorkItems(
+                queryResult.WorkItems?.Select(o => o.Id!.Value)!,
+                queryResult.Columns?.Select(o => o.ReferenceName)!
+            );
+
+            var table = queryResult.GetWorkItemsDataTable(listWorkItemsResult);
+            if (table is { Rows.Count: > 0 })
+            {
+                sb.AppendLine("<table align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"width:100%;background-color: #666; font-size: 14px; font-family: 'Microsoft YaHei';\"><tr>");
+                foreach (DataColumn col in table.Columns)
+                {
+                    sb.Append($"<th style='padding:5px;color: #FFF'>{col.ColumnName}</th>");
+                }
+                sb.Append("</tr>");
+
+                foreach (DataRow row in table.Rows)
+                {
+                    sb.Append("<tr>");
+                    var id = table.Columns.Contains("Id") ? Convert.ToInt32(row["Id"]) : 0;
+                    foreach (DataColumn col in table.Columns)
+                    {
+                        if (id > 0)
+                        {
+                            sb.Append(
+                                $"<td style='padding:5px;background-color: #FFF'><a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_workitems/edit/{id}/' style='color:#000;text-decoration:none;' target='_blank'>{row[col.ColumnName]}</a></td>");
+                        }
+                        else
+                        {
+                            sb.Append(
+                                $"<td style='padding:5px;background-color: #FFF'>{row[col.ColumnName]}</td>");
+                        }
+                    }
+                    sb.Append("</tr>");
+                }
+
+                sb.AppendLine("</table><br/><br/>");
+            }
+        }
+
+        return sb.ToString();
+    }
+
+    #endregion
+
+    public static void AppendDllRoads(this Dictionary<string, List<string>> dic, List<string[]> roads)
+    {
+        foreach (var road in roads)
+        {
+            var roadString = string.Join("->", road);
+
+            var dll = road.Last();
+            if (dic.ContainsKey(dll))
+            {
+                if (!dic[dll].Contains(roadString))
+                {
+                    dic[dll].Add(roadString);
+                }
+            }
+            else
+            {
+                dic.Add(dll,new List<string>{roadString});
+            }
+        }
+    }
+
+    public static void AppendXmlRoads(this Dictionary<string, List<string>> dic,
+        List<string[]> roads,
+        List<SpringXml> allXml,
+        List<AliasObject> alias,
+        List<Declare> declares)
+    {
+        foreach (var road in roads)
+        {
+            var roadString = string.Join("->", road);
+            var xml = allXml.FindLast(o => o.FilePath == road[road.Length - 1]);
+
+            var assemblies=xml.GetAssemblies(alias,declares);
+            if (assemblies != null)
+            {
+                foreach (var a in assemblies)
+                {
+                    if (string.IsNullOrEmpty(a)) continue;
+                    var dll = a.AssemblyName();
+
+                    if (dic.ContainsKey(dll))
+                    {
+                        if (!dic[dll].Contains(roadString))
+                        {
+                            dic[dll].Add(roadString);
+                        }
+                    }
+                    else
+                    {
+                        dic.Add(dll, new List<string> { roadString });
+                    }
+                }
+            }
+        }
+    }
+
+    static string AssemblyName(this string assembly)
+    {
+        return assembly.EndsWith(".dll") ? assembly : assembly + ".dll";
     }
 }
 

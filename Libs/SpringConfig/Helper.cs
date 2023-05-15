@@ -12,13 +12,14 @@ namespace Ban3.Infrastructures.SpringConfig
     public static class Helper
     {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
+
         private static readonly string RootFolder
-            = Common.Config.AppConfiguration["FilesStorage:SpringXmlsRootFolder"];
+            = Common.Config.AppConfiguration["SpringXmls:RootFolder"];
 
         private static readonly string FixMappingFile
             = Path.Combine(Config.LocalStorage.RootPath, "manualMapping.json");
 
-        public static void PrepareData()
+        public static void Prepare()
         {
             var configs = RootFolder.GetFiles("*SpringConfig.xml");
 
@@ -30,6 +31,7 @@ namespace Ban3.Infrastructures.SpringConfig
 
             foreach (var config in configs)
             {
+                Logger.Debug(config);
                 var xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(config.ReadFile());
                 XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
@@ -63,30 +65,76 @@ namespace Ban3.Infrastructures.SpringConfig
 
         }
 
-        public static List<SpringXml> LoadConfigData(string id = "")
+        public static List<SpringXml> LoadConfigs()
             => typeof(SpringXml)
                 .LocalFile()
                 .ReadFileAs<List<SpringXml>>();
 
-        public static List<AliasObject> LoadAliasData(string id = "All")
+        public static List<AliasObject> LoadAlias()
             => typeof(AliasObject)
                 .LocalFile()
                 .ReadFileAs<List<AliasObject>>();
 
-        public static List<Declare> LoadDeclareData(string id = "All")
+        public static List<Declare> LoadDeclares()
             => typeof(Declare)
                 .LocalFile()
                 .ReadFileAs<List<Declare>>();
+
+        #region ExpandWithImports
+
+        public static List<SpringXml> ExpandWithImports(this List<SpringXml> configs)
+        {
+            var all = LoadConfigs();
+
+            var result = new List<SpringXml>();
+
+            foreach (var config in configs)
+            {
+                result.AppendHierarchies( config.FilePath, all);
+            }
+
+            return result;
+        }
+
+        static void AppendHierarchies(
+            this List<SpringXml> result,
+            string currentFilePath,
+            List<SpringXml> all)
+        {
+            if (result.Any(o => o.FilePath == currentFilePath)) return;
+
+            var config = all.FindLast(o => o.FilePath == currentFilePath);
+            if (config != null)
+            {
+                if (result.All(o => o.FilePath != currentFilePath))
+                    result.Add(config);
+
+                var imports = config.Imports == null || !config.Imports.Any()
+                    ? null
+                    : config.Imports.FindAll(o => result.All(x => x.FilePath != o));
+
+                foreach (var import in config.Imports)
+                {
+                    result.AppendHierarchies( import, all);
+                }
+            }
+        }
+
+        #endregion
+
+        #region private
 
         static List<AliasObject> Nodes2Alias(this XmlNodeList nodes)
         {
             var result = new List<AliasObject>();
             foreach (XmlNode node in nodes)
             {
-                var oneAlias = new AliasObject { Name = node.TryGetAttribute("name"), Alias = node.TryGetAttribute("alias") };
+                var oneAlias = new AliasObject
+                    { Name = node.TryGetAttribute("name"), Alias = node.TryGetAttribute("alias") };
                 if (!string.IsNullOrEmpty(oneAlias.Name) && !string.IsNullOrEmpty(oneAlias.Alias))
                     result.Add(oneAlias);
             }
+
             return result;
         }
 
@@ -109,8 +157,7 @@ namespace Ban3.Infrastructures.SpringConfig
 
             return result;
         }
-
-
+        
         static List<Declare> Nodes2Declares(this XmlNodeList nodes)
         {
             var result = new List<Declare>();
@@ -121,7 +168,7 @@ namespace Ban3.Infrastructures.SpringConfig
 
                 if (node.Name == "object")
                 {
-                    foreach (XmlAttribute objectAttribbutes in node.Attributes)
+                    foreach (XmlAttribute objectAttributes in node.Attributes)
                     {
                         one.Type = node.TryGetAttribute("type");
                         one.Id = node.TryGetAttribute("id");
@@ -175,8 +222,7 @@ namespace Ban3.Infrastructures.SpringConfig
 
             return result;
         }
-
-
+        
         static List<string> TryGetArgumentList(this XmlNodeList nodeList)
         {
             var list = new List<string>();
@@ -246,7 +292,8 @@ namespace Ban3.Infrastructures.SpringConfig
                     noAssemblyDeclare.AssemblyName = assemblyName;
             }
 
-            if (string.IsNullOrEmpty(noAssemblyDeclare.AssemblyName) && noAssemblyDeclare.Args != null && noAssemblyDeclare.Args.Any())
+            if (string.IsNullOrEmpty(noAssemblyDeclare.AssemblyName) && noAssemblyDeclare.Args != null &&
+                noAssemblyDeclare.Args.Any())
             {
                 foreach (var arg in noAssemblyDeclare.Args)
                 {
@@ -272,8 +319,7 @@ namespace Ban3.Infrastructures.SpringConfig
 
             noAssemblyDeclare.GetAssemblies(alias, declares);
         }
-
-
+        
         static string FindAssemblyByObjectId(
             this List<Declare> list,
             List<AliasObject> alias,
@@ -310,40 +356,39 @@ namespace Ban3.Infrastructures.SpringConfig
 
             return string.Empty;
         }
-
-
-        static List<string> GetAssemblies(
+        
+        public static List<string> GetAssemblies(
             this List<SpringXml> configs,
             bool getDeclares = true,
             bool getArguments = true)
         {
             var result = new List<string>();
 
-            var allAlias = LoadAliasData();
-            var allDeclares = LoadDeclareData();
+            var allAlias = LoadAlias();
+            var allDeclares = LoadDeclares();
 
             foreach (var c in configs)
             {
                 var configAssemblies = c.Declares
                     .Where(o => !string.IsNullOrEmpty(o.AssemblyName))
                     .Select(o => o.AssemblyName)
-                .ToArray();
+                    .ToArray();
 
                 if (getDeclares)
                     result = result.Union(configAssemblies).ToList();
 
                 if (getArguments)
-                    result = result.Union(GetAssemblies(c, allAlias, allDeclares)).ToList();
+                    result = result.Union(c.GetAssemblies( allAlias, allDeclares)).ToList();
             }
 
             return result;
         }
 
-        static List<string> GetAssemblies(
+        public static List<string> GetAssemblies(
             this SpringXml config,
             List<AliasObject> allAlias,
             List<Declare> allDeclares
-            )
+        )
         {
             var result = new List<string>();
 
@@ -351,7 +396,7 @@ namespace Ban3.Infrastructures.SpringConfig
             {
                 foreach (var declare in config.Declares)
                 {
-                    result = result.Union(GetAssemblies(declare, allAlias, allDeclares)).ToList();
+                    result = result.Union(declare.GetAssemblies( allAlias, allDeclares)).ToList();
                 }
             }
 
@@ -362,19 +407,23 @@ namespace Ban3.Infrastructures.SpringConfig
             this Declare declare,
             List<AliasObject> allAlias,
             List<Declare> allDeclares
-            )
+        )
         {
             var result = new List<string>();
+
+            if (!string.IsNullOrEmpty(declare.AssemblyName))
+                result = result.Union(new List<string> { declare.AssemblyName }).ToList();
 
             if (declare.Args != null && declare.Args.Any())
             {
                 foreach (var arg in declare.Args)
                 {
                     arg.AssemblyNames = arg.IsEnumerable
-                        ? arg.Refs.Select(o => GetAssemblies(o, allAlias, allDeclares)).Where(o => !string.IsNullOrEmpty(o)).ToList()
+                        ? arg.Refs.Select(o => GetAssemblies(o, allAlias, allDeclares))
+                            .Where(o => !string.IsNullOrEmpty(o)).ToList()
                         : new List<string> { GetAssemblies(arg.Ref, allAlias, allDeclares) };
 
-                    result = result.Union(result).ToList();
+                    result = result.Union(arg.AssemblyNames).ToList();
                 }
             }
 
@@ -385,7 +434,7 @@ namespace Ban3.Infrastructures.SpringConfig
             string refer,
             List<AliasObject> allAlias,
             List<Declare> allDeclares
-            )
+        )
         {
             var alias = allAlias.FindLast(o => o.Alias.TextEqual(refer));
             var key = alias == null ? refer : alias.Name;
@@ -402,7 +451,179 @@ namespace Ban3.Infrastructures.SpringConfig
         static bool AssemblyEqual(this string a, string b)
         {
             return a.TextEqual(b)
-                || $"{a}.dll".TextEqual(b);
+                   || $"{a}.dll".TextEqual(b);
         }
+
+        #endregion
+        
+        #region AllHighLevel Roads
+
+        public static List<string[]> AllHighLevels(
+            string configFilePath, List<SpringXml> all = null)
+        {
+            var list = new List<string[]>();
+            all = all ?? LoadConfigs();
+
+            var a = all.FindLast(o => o.FilePath == configFilePath);
+            if (a == null)
+                return new List<string[]>();
+
+            var rds = HighLevels(all, a, list, new string[0]);
+            foreach (var r in rds)
+            {
+                var oneRoad = new string[0];
+
+                FetchHighLevels(oneRoad, r, all, list, 1);
+            }
+
+            return list;
+        }
+
+        static void FetchHighLevels(
+            string[] result,
+            string currentConfigFilePath,
+            List<SpringXml> all,
+            List<string[]> allRoads,
+            int depth)
+        {
+            var assemblyFile = all.FindLast(o => o.FilePath == currentConfigFilePath);
+            if (assemblyFile != null)
+            {
+                result = result.Redim(depth);
+                result[depth - 1] = currentConfigFilePath;
+
+                var rds = HighLevels(all, assemblyFile, allRoads, result);
+
+                if (rds != null && rds.Any())
+                {
+                    foreach (var r in rds)
+                    {
+                        FetchHighLevels(result, r, all, allRoads, depth + 1);
+                    }
+                }
+                else
+                {
+                    allRoads.AddRoad(result);
+                }
+            }
+        }
+
+        static List<string> HighLevels(
+            List<SpringXml> configs,
+            SpringXml configFile,
+            List<string[]> allRoads,
+            string[] result)
+        {
+            var masters = configs
+                .FindAll(o => o.Imports
+                        .Any(x => x.TextEqual(configFile.FilePath)))
+                .Where(o =>
+                    result.All(x => x != o.FilePath) &&
+                    allRoads.All(x => x.All(y => y != o.FilePath))
+                )
+                .Select(o => o.FilePath)
+                .ToList();
+
+            return masters;
+        }
+
+        #endregion
+
+        #region AllLowerLevels
+
+        public static List<string[]> AllLowerLevels(List<SpringXml> configs, List<SpringXml> all = null)
+        {
+            var list = new List<string[]>();
+            all = all ?? LoadConfigs();
+
+            return configs.Select(o => AllLowerLevels(o.FilePath, all))
+                 .UnionAll()
+                 .ToList();
+        }
+
+        public static List<string[]> AllLowerLevels(
+            string currentFilePath, List<SpringXml> all = null)
+        {
+            var list = new List<string[]>();
+
+            all = all ?? LoadConfigs();
+
+            var a = all.FindLast(o => o.FilePath == currentFilePath);
+            if (a == null)
+                return new List<string[]>();
+
+            var rds = a.Imports;
+            foreach (var r in rds)
+            {
+                var oneRoad = new string[0];
+
+                FetchLowerLevels(oneRoad, r, all, list, 1);
+            }
+
+            return list;
+        }
+
+        static void FetchLowerLevels(
+            string[] result,
+            string currentFilePath,
+            List<SpringXml> allConfigs,
+            List<string[]> allRoads,
+            int depth)
+        {
+            var config = allConfigs.FindLast(o => o.FilePath == currentFilePath);
+            if (config != null)
+            {
+                result = result.Redim(depth);
+                result[depth - 1] = currentFilePath;
+
+                var imports = config.Imports == null || !config.Imports.Any()
+                    ? null
+                    : LowerLevels(config, allRoads, result);
+
+                if (imports != null && imports.Any())
+                {
+                    foreach (var import in imports)
+                    {
+                        FetchLowerLevels(result, import, allConfigs, allRoads, depth + 1);
+                    }
+                }
+                else
+                {
+                    allRoads.AddRoad(result);
+                }
+
+            }
+        }
+
+        static List<string> LowerLevels(SpringXml configFile, List<string[]> allRoads, string[] result)
+        {
+            var importConfigs = configFile.Imports
+                .Where(o =>
+                    result.All(x => x != o) &&
+                    allRoads.All(x => x.All(y => y != o))
+                )
+                .ToList();
+
+            return importConfigs;
+        }
+
+        static void AddRoad(this List<string[]> allRoads, string[] road)
+        {
+            //if (!allRoads.Any(x => string.Join(",", x) == string.Join(",", road)))
+            allRoads.Add(road);
+        }
+
+        static IEnumerable<T> UnionAll<T>(this IEnumerable<IEnumerable<T>> values)
+        {
+            var result = new List<T>();
+            foreach (var item in values)
+            {
+                result = result.Union(item).ToList();
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }

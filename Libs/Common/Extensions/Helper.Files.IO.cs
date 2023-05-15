@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Ban3.Infrastructures.Common.Extensions
 {
@@ -21,12 +22,21 @@ namespace Ban3.Infrastructures.Common.Extensions
 	        this string rootPath, 
 	        string pattern, 
 	        bool includeSubFolders = true)
-            => Directory.GetFiles
-	            (
-                    rootPath,
-                    pattern,
-                    includeSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly
-                );
+            => rootPath.GetFilesByPattern(pattern,includeSubFolders);
+
+        public static string[] GetFilesByPattern(this string rootPath, string pattern, bool includeSubFolders = true)
+        {
+            var result = new List<string>();
+
+            var patterns = pattern.Split(';');
+            foreach (var p in patterns)
+            {
+                var temp = Directory.GetFiles(rootPath, p, includeSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly);
+                result = result.Union(temp).ToList();
+            }
+
+            return result.ToArray();
+        }
 
         /// 
         public static string[] GetDirectories(

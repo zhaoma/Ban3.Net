@@ -1,4 +1,5 @@
-﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
+﻿using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Interfaces;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
 

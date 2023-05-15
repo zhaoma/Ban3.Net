@@ -9,7 +9,7 @@ namespace Ban3.Infrastructures.SignalRClient
     {
         static HubConnection hubConnection;
 
-        static string SignalRUri = Infrastructures.Common.Config.AppConfiguration?
+        static string SignalRUri = Common.Config.AppConfiguration?
            ["SignalR:Endpoint"] + "";
 
         static Client()

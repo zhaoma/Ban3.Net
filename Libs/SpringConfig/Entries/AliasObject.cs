@@ -1,11 +1,13 @@
-﻿namespace Ban3.Infrastructures.SpringConfig.Entries
+﻿using Newtonsoft.Json;
+
+namespace Ban3.Infrastructures.SpringConfig.Entries;
+
+public class AliasObject
 {
-    public class AliasObject
-    {
+    [JsonProperty("name")]
+    public string Name { get; set; }
 
-        public string Name { get; set; }
+    [JsonProperty("alias")]
+    public string Alias { get; set; }
 
-        public string Alias { get; set; }
-
-    }
 }

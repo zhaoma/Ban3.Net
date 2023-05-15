@@ -276,6 +276,11 @@ video {
     word-wrap:break-word;
 }
 
+.fileName {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
 .teamRow:hover .processDetail {
     display: block;
 }

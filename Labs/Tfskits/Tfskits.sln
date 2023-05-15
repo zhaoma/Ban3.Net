@@ -35,9 +35,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Report", "Report\Report.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgentSvr", "AgentSvr\AgentSvr.csproj", "{528A8475-2041-419D-A69C-FDE8B844FD86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpringConfig", "..\..\Libs\SpringConfig\SpringConfig.csproj", "{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpringConfig", "..\..\Libs\SpringConfig\SpringConfig.csproj", "{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformInvoke", "..\..\Libs\PlatformInvoke\PlatformInvoke.csproj", "{379AE88D-A856-49F5-A7F1-2299ECA0F14D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformInvoke", "..\..\Libs\PlatformInvoke\PlatformInvoke.csproj", "{379AE88D-A856-49F5-A7F1-2299ECA0F14D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WxsConfig", "..\..\Libs\WxsConfig\WxsConfig.csproj", "{933D715B-BC55-4707-BC9A-CC3E23C5E875}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +99,10 @@ Global
 		{379AE88D-A856-49F5-A7F1-2299ECA0F14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{379AE88D-A856-49F5-A7F1-2299ECA0F14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{379AE88D-A856-49F5-A7F1-2299ECA0F14D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{933D715B-BC55-4707-BC9A-CC3E23C5E875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{933D715B-BC55-4707-BC9A-CC3E23C5E875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{933D715B-BC55-4707-BC9A-CC3E23C5E875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{933D715B-BC55-4707-BC9A-CC3E23C5E875}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +124,7 @@ Global
 		{528A8475-2041-419D-A69C-FDE8B844FD86} = {D3EFE6B4-BD75-4D2E-8185-6F0B724EB582}
 		{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6} = {4ED05C33-683F-438B-B8C3-84E82E136551}
 		{379AE88D-A856-49F5-A7F1-2299ECA0F14D} = {4ED05C33-683F-438B-B8C3-84E82E136551}
+		{933D715B-BC55-4707-BC9A-CC3E23C5E875} = {4ED05C33-683F-438B-B8C3-84E82E136551}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01EB0EEC-4EE4-4B8F-AD9A-0DD3DBA1A717}

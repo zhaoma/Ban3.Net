@@ -1,0 +1,79 @@
+﻿@model Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Response.GetRelationsResult
+@{
+    Layout = null;
+}
+<div class="card-header">
+
+    <div class="col-6"><h3 class="card-title">Results</h3></div>
+    <div class="col-6">
+
+        </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover">
+    <thead>
+    <tr>
+        <th colspan="2">
+            @Model.Incos.Count incos.
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var inco in Model.Incos)
+    {
+        var files = inco.Files.FindAll(o => Model.ObjectsAndReasons.ContainsKey(o.LongName));
+
+        <tr>
+            <td colspan="2">@inco.FileName</td>
+        </tr>
+        <tr>
+                    <td style="width: 20%;"></td>
+                    <td style="width: 80%;">
+                <ol>
+                @foreach (var f in files)
+                {
+                    <li> @f.LongName</li>
+                }
+                </ol>
+            </td>
+        </tr>
+    }
+    </tbody>
+    </table>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th colspan="2">
+                @Model.ObjectsAndReasons.Count relations, @Model.ObjectsAndReasons.Sum(o => o.Value.Count) reasons.
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach (var c in Model.ObjectsAndReasons.OrderBy(o => o.Key))
+        {
+            <tr>
+                <td colspan="2">@c.Key</td>
+            </tr>
+            <tr>
+                <td style="width: 20%;"></td>
+                    <td style="width: 80%;">
+                    <ol>
+                        @foreach (var r in c.Value)
+                        {
+                            <li class="fileName">@r</li>
+                        }
+                    </ol>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <div class="col-12">
+        <div class="card-body">
+
+            <button class="btn btn-warning">export current relations</button>
+
+        </div>
+    </div>
+</div>

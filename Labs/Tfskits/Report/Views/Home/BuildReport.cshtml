@@ -1,6 +1,5 @@
 ﻿@using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport
-@using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions
-@using NPOI.SS.Formula.Functions
+@using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions
 @model Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildReports.ReportDefine
 
 @section PreTitle
@@ -20,7 +19,7 @@
 }
 
 <div class="row row-deck row-cards">
-    <div class="col-md-6 col-lg-4">
+    <div class="col-md-4 col-lg-4">
         <div class="card">
             <div class="card-header">detail</div>
             <div class="card-body">
@@ -46,7 +45,7 @@
         </div>
 
     </div>
-    <div class="col-md-12 col-lg-8">
+    <div class="col-md-8 col-lg-8">
         <div class="card">
             <div class="card-header">@Model.Subject</div>
             <div class="card-body">

@@ -11,6 +11,9 @@
     $("#HasComments").change(function () {
         requestTable();
     });
+
+
+
     /*
 
     if ($(".followButton").length > 0) {
@@ -158,6 +161,37 @@ function requestTable() {
 
     return false;
 }
+
+
+function requestRelations() {
+    var specialDlls = [];
+    var springXmls = [];
+
+    $("input[name='SpecialDlls']:checked").each(function () {
+        specialDlls.push($(this).val());
+    });
+    $("input[name='SpringXmls']:checked").each(function () {
+        springXmls.push($(this).val());
+    }); 
+
+    var request = {
+        specialDlls: specialDlls,
+        springXmls: springXmls
+    };
+
+    $.ajax({
+        url: "/home/relations",
+        type: "post",
+        data: request,
+        dataType: "html",
+        success: function (response) {
+            $("#relationsContainer").html(response);
+        }
+    });
+
+    return false;
+}
+
 
 function turnPage(p) {
     $("#pageNo").val(p);
