@@ -83,7 +83,12 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report.Controllers
 
         public IActionResult ShowCode(ReportRef reportRef, string fileId, string properties)
         {
-            var result = DevOps.Collector.Tfvc.GetItem(reportRef, fileId, properties.JsonToObj<DiscussionProperties>());
+            var result = new Models.ShowCodes
+            {
+                Properties = properties.JsonToObj<DiscussionProperties>()
+            };
+
+            result.Lines = DevOps.Collector.Tfvc.GetItem(reportRef, fileId, result.Properties );
             return View( result );
         }
 

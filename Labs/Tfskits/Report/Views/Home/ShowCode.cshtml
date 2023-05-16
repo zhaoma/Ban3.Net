@@ -1,13 +1,21 @@
 ﻿@using System.Net
-@model Dictionary<int, string>?
+@using Ban3.Infrastructures.Common.Extensions
+@model Ban3.Labs.TeamFoundationCollector.Presentation.Report.Models.ShowCodes
 @{
     Layout = null;
 }
 
-@if (Model != null && Model.Any())
+@if (Model.Lines != null && Model.Lines.Any())
 {
-    foreach (var kv in Model)
+    foreach (var kv in Model.Lines)
     {
-        @Html.Raw($"{kv.Key} : {WebUtility.HtmlEncode( kv.Value)}<br/>")
+        if (Model.Properties != null && kv.Key >= Model.Properties?.StartLine && kv.Key <= Model.Properties?.EndLine)
+        {
+            @Html.Raw($"<font style='color:red'>{kv.Key} :</font> {WebUtility.HtmlEncode(kv.Value)}<br/>")
+        }
+        else
+        {
+            @Html.Raw($"{kv.Key} : {WebUtility.HtmlEncode(kv.Value)}<br/>")
+        }
     }
 }
