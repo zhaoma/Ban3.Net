@@ -1734,6 +1734,19 @@
           "bin/placeholder/Ban3.Infrastructures.NetMail.dll": {}
         }
       },
+      "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        }
+      },
       "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -1799,19 +1812,6 @@
         },
         "runtime": {
           "bin/placeholder/Ban3.Platforms.TeamFoundationCollector.Domain.Contract.dll": {}
-        }
-      },
-      "PlatformInvoke/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/PlatformInvoke.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/PlatformInvoke.dll": {}
         }
       }
     }
@@ -5718,6 +5718,11 @@
       "path": "../../../../Libs/NetMail/NetMail.csproj",
       "msbuildProject": "../../../../Libs/NetMail/NetMail.csproj"
     },
+    "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
+      "type": "project",
+      "path": "../../../../Libs/PlatformInvoke/PlatformInvoke.csproj",
+      "msbuildProject": "../../../../Libs/PlatformInvoke/PlatformInvoke.csproj"
+    },
     "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
       "type": "project",
       "path": "../../../../Libs/RuntimeCaching/RuntimeCaching.csproj",
@@ -5737,20 +5742,15 @@
       "type": "project",
       "path": "../../Domain/Contract/Contract.csproj",
       "msbuildProject": "../../Domain/Contract/Contract.csproj"
-    },
-    "PlatformInvoke/1.0.0": {
-      "type": "project",
-      "path": "../../../../Libs/PlatformInvoke/PlatformInvoke.csproj",
-      "msbuildProject": "../../../../Libs/PlatformInvoke/PlatformInvoke.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "Ban3.Infrastructures.PlatformInvoke >= 1.0.0",
       "Ban3.Infrastructures.SpringConfig >= 1.0.0",
       "Ban3.Infrastructures.WxsConfig >= 1.0.0",
       "Ban3.Platforms.TeamFoundationCollector.Domain.Contract >= 1.0.0",
-      "NETStandard.Library >= 2.0.3",
-      "PlatformInvoke >= 1.0.0"
+      "NETStandard.Library >= 2.0.3"
     ]
   },
   "packageFolders": {

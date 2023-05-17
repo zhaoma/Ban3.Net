@@ -24,18 +24,23 @@ using Ban3.Infrastructures.SpringConfig;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Request;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Ban3.Infrastructures.SpringConfig.Entries;
-
-Ban3.Infrastructures.WxsConfig.Helper.Prepare();
-
-var config = Ban3.Infrastructures.WxsConfig.Helper.Load();
-config.ObjToJson().WriteColorLine(ConsoleColor.DarkYellow);
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
 
 /*
+var teams = DevOps.Collector.Core.LoadTeams();
+teams.Where(o => o.Name == Config.DefaultTeam)
+    .ToList()
+    .ForEach(o => DevOps.Collector.SyncOneTeamSummary(o.Id,true));
+
 var dll = "CT.Exam.Recon.Impl.dll";
 var xml =
     //"D:\\CTS\\Development\\ICS\\SHA.SERV\\site\\config\\CT\\ServCommon\\CT.ServCommon.AppTemplate.SpringConfig.xml";
     "D:\\CTS\\Development\\ICS\\SHA.SERV\\site\\config\\SpringBootstrapper\\NP\\Standalone\\AppContainer\\Exam\\Extensions\\PacsReady\\21_CT.Exam.Recon.PacsReady.Standalone.sdk.Bootstrapper.SpringConfig.xml";
 
+Ban3.Infrastructures.WxsConfig.Helper.Prepare();
+
+var config = Ban3.Infrastructures.WxsConfig.Helper.Load();
+config.ObjToJson().WriteColorLine(ConsoleColor.DarkYellow);
 
 var getRelation = new GetRelations
 {
@@ -67,10 +72,11 @@ DevOps.Collector.Tfvc.PrepareShelvesets(string.Empty);
 
 
 
+
 DevOps.Reportor.ParseMonitorJobs();
 
+*/
 var job = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings.MonitorBuildReports.Jobs
     .FindLast(o => o.Id == "1");
 
 Console.WriteLine(DevOps.Reportor.ParseBuildReport(job));
-*/

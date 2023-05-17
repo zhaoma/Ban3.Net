@@ -3,5 +3,6 @@
 public enum BuildReportType
 {
     WorkItems,
-    Definition
+    Definition,
+    LastRI
 }

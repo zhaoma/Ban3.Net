@@ -13,6 +13,12 @@ public class ReportSection:IReportSection
 
     public int DefinitionId { get; set; }
 
+    public string Keyword { get; set; } = string.Empty;
+
+    public string ItemPath { get; set; } = string.Empty;
+
+    public int Days { get; set; } = 15;
+
     public string Sql { get; set; } = string.Empty;
 
     public string Html { get; set; } = string.Empty;

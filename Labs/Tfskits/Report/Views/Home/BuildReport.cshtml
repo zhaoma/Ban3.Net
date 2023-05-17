@@ -19,17 +19,17 @@
 }
 
 <div class="row row-deck row-cards">
-    <div class="col-md-4 col-lg-4">
+    <div class="col-md-3 col-lg-3">
         <div class="card">
             <div class="card-header">detail</div>
             <div class="card-body">
-                @foreach (var s in Model.Sections)
+                @foreach (var s in Model.Sections.OrderBy(o=>o.Rank))
                 {
                     <div class="jobList">
                         <div class="row">
                             <div class="col-2">@s.Rank</div>
                             <div class="col-10">
-                                @s.Subject <span class="badge">@s.Type.ToString()</span>
+                                @s.Subject <br/><span class="badge">@s.Type.ToString()</span>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
         </div>
 
     </div>
-    <div class="col-md-8 col-lg-8">
+    <div class="col-md-9 col-lg-9">
         <div class="card">
             <div class="card-header">@Model.Subject</div>
             <div class="card-body">

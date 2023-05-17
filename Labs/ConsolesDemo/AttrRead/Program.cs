@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -18,17 +19,34 @@ namespace AttrRead
         {
 
             var file = args != null&&args.Any() ? args[0] : @"D:\GIT\Ban3.Net\Labs\ConsolesDemo\AttrTest\bin\Debug\AttrTest.exe";
-            
 
+            P();
 
             
             Console.ReadKey();
+        }
+
+        static void P()
+        {
+            var method = new DynamicMethod("D", typeof(void), null);
+            var il=method.GetILGenerator();
+
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldstr,"ao");
+            il.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", new Type[] { typeof(string) }));
+            il.Emit(OpCodes.Ret);
+
+            Action a=(Action)method.CreateDelegate(typeof(Action));
+            a();
         }
 
         static void E()
         {
             var f1 = new DynamicMethod("F1", typeof(int), new []{typeof(int)});
             var il = f1.GetILGenerator();
+
+            Label gt1=il.DefineLabel();
+            Label next=il.DefineLabel();
 
             il.Emit(OpCodes.Nop);
             il.Emit(OpCodes.Ldarg_0);
@@ -38,7 +56,126 @@ namespace AttrRead
             il.Emit(OpCodes.Ceq);
             il.Emit(OpCodes.Stloc_0);
             il.Emit(OpCodes.Ldloc_0);
-            il.Emit(OpCodes.Brfalse_S);
+            il.Emit(OpCodes.Brfalse_S,gt1);     //label 0011
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Stloc_1);
+            il.Emit(OpCodes.Br_S,next);          //label 0025
+
+            il.MarkLabel(gt1);
+
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Ldc_I4_1);
+            il.Emit(OpCodes.Sub);
+            il.Emit(OpCodes.Call,f1);          //call f1
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Ldc_I4_2);
+            il.Emit(OpCodes.Sub);
+            il.Emit(OpCodes.Call,f1);          //call f1
+            il.Emit(OpCodes.Add);
+            il.Emit(OpCodes.Stloc_1);
+            il.Emit(OpCodes.Br_S,next);          //label 0025
+
+            il.MarkLabel(next);
+
+            il.Emit(OpCodes.Ldloc_1);
+            il.Emit(OpCodes.Ret);
+
+            f1.Invoke(null, BindingFlags.Public, null, new object[] { 11 }, CultureInfo.CurrentCulture);
+        }
+
+        static void F()
+        {
+            var f2 = new DynamicMethod("F2", typeof(int), new[] { typeof(int) });
+            var il = f2.GetILGenerator();
+
+            Label il_0013=il.DefineLabel();
+            Label il_000d = il.DefineLabel();
+            Label il_0018=il.DefineLabel();
+            Label il_001d = il.DefineLabel();
+            Label il_0028 = il.DefineLabel();
+            Label il_0038 = il.DefineLabel();
+            Label il_004b = il.DefineLabel();
+
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Stloc_S,4);
+            il.Emit(OpCodes.Ldloc_S,4);
+            il.Emit(OpCodes.Stloc_3);
+            il.Emit(OpCodes.Ldloc_3);
+            il.Emit(OpCodes.Ldloc_0);
+            il.Emit(OpCodes.Ldc_I4_1);
+            il.Emit(OpCodes.Beq_S, il_0013);
+            il.Emit(OpCodes.Br_S, il_000d);
+
+            il.MarkLabel(il_000d);
+
+            il.Emit(OpCodes.Ldloc_3);
+            il.Emit(OpCodes.Ldc_I4_2);
+            il.Emit(OpCodes.Beq_S,il_0018);             //IL_0018
+            il.Emit(OpCodes.Br_S, il_001d);              //IL_001d
+            
+            il.MarkLabel(il_0013);
+            
+            il.Emit(OpCodes.Ldc_I4_1);
+            il.Emit(OpCodes.Stloc_S, 5);
+            il.Emit(OpCodes.Br_S, il_004b);              //IL_004b
+
+            il.MarkLabel(il_0018);
+
+            il.Emit(OpCodes.Ldc_I4_1);
+            il.Emit(OpCodes.Stloc_S, 5);
+            il.Emit(OpCodes.Br_S, il_004b);              //IL_004b
+
+            il.MarkLabel(il_001d);
+
+            il.Emit(OpCodes.Ldc_I4_1);
+            il.Emit(OpCodes.Stloc_0);
+            il.Emit(OpCodes.Ldc_I4_1);
+            il.Emit(OpCodes.Stloc_1);
+            il.Emit(OpCodes.Ldc_I4_0);
+            il.Emit(OpCodes.Stloc_2);
+            il.Emit(OpCodes.Ldc_I4_3);
+            il.Emit(OpCodes.Stloc_S, 6);
+            il.Emit(OpCodes.Br_S, il_0038);              //IL_0038
+            il.Emit(OpCodes.Nop);
+
+            il.MarkLabel(il_0028);
+
+            il.Emit(OpCodes.Ldloc_0);
+            il.Emit(OpCodes.Ldloc_1);
+            il.Emit(OpCodes.Add);
+            il.Emit(OpCodes.Stloc_2);
+            il.Emit(OpCodes.Ldloc_1);
+            il.Emit(OpCodes.Stloc_0);
+            il.Emit(OpCodes.Ldloc_2);
+            il.Emit(OpCodes.Stloc_1);
+            il.Emit(OpCodes.Nop);
+            il.Emit(OpCodes.Ldloc_S, 6);
+            il.Emit(OpCodes.Ldc_I4_1);
+            il.Emit(OpCodes.Add);
+            il.Emit(OpCodes.Stloc_S, 6);
+
+            il.MarkLabel(il_0038);
+
+            il.Emit(OpCodes.Ldloc_S, 6);
+            il.Emit(OpCodes.Ldarg_0);
+            il.Emit(OpCodes.Cgt);
+            il.Emit(OpCodes.Ldc_I4_0);
+            il.Emit(OpCodes.Ceq);
+            il.Emit(OpCodes.Stloc_S, 7);
+            il.Emit(OpCodes.Ldloc_S, 7);
+            il.Emit(OpCodes.Brtrue_S,il_0028);          //IL_0028
+            il.Emit(OpCodes.Ldloc_2);
+            il.Emit(OpCodes.Stloc_S, 5);
+            il.Emit(OpCodes.Br_S, il_004b);                      //IL_004b
+
+            il.MarkLabel(il_004b);
+
+            il.Emit(OpCodes.Ldloc_S, 5);
+            il.Emit(OpCodes.Ret);
+
+            Func<int, int> func2 = (Func<int, int>)f2.CreateDelegate(typeof(Func<int, int>));
+            Console.WriteLine($"f1:10={func2(10)}");
         }
 
         static void Invoke(Assembly assembly)

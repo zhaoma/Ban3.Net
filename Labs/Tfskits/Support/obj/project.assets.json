@@ -1062,6 +1062,19 @@
           "bin/placeholder/Ban3.Infrastructures.NetMail.dll": {}
         }
       },
+      "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        }
+      },
       "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -1111,10 +1124,10 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Ban3.Infrastructures.PlatformInvoke": "1.0.0",
           "Ban3.Infrastructures.SpringConfig": "1.0.0",
           "Ban3.Infrastructures.WxsConfig": "1.0.0",
-          "Ban3.Platforms.TeamFoundationCollector.Domain.Contract": "1.0.0",
-          "PlatformInvoke": "1.0.0"
+          "Ban3.Platforms.TeamFoundationCollector.Domain.Contract": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.dll": {}
@@ -1143,19 +1156,6 @@
         },
         "runtime": {
           "bin/placeholder/Ban3.Platforms.TeamFoundationCollector.Domain.Contract.dll": {}
-        }
-      },
-      "PlatformInvoke/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/PlatformInvoke.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/PlatformInvoke.dll": {}
         }
       }
     },
@@ -2148,6 +2148,19 @@
           "bin/placeholder/Ban3.Infrastructures.NetMail.dll": {}
         }
       },
+      "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        }
+      },
       "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -2197,10 +2210,10 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Ban3.Infrastructures.PlatformInvoke": "1.0.0",
           "Ban3.Infrastructures.SpringConfig": "1.0.0",
           "Ban3.Infrastructures.WxsConfig": "1.0.0",
-          "Ban3.Platforms.TeamFoundationCollector.Domain.Contract": "1.0.0",
-          "PlatformInvoke": "1.0.0"
+          "Ban3.Platforms.TeamFoundationCollector.Domain.Contract": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.dll": {}
@@ -2229,19 +2242,6 @@
         },
         "runtime": {
           "bin/placeholder/Ban3.Platforms.TeamFoundationCollector.Domain.Contract.dll": {}
-        }
-      },
-      "PlatformInvoke/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/PlatformInvoke.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/PlatformInvoke.dll": {}
         }
       }
     }
@@ -4159,6 +4159,11 @@
       "path": "../../../Libs/NetMail/NetMail.csproj",
       "msbuildProject": "../../../Libs/NetMail/NetMail.csproj"
     },
+    "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
+      "type": "project",
+      "path": "../../../Libs/PlatformInvoke/PlatformInvoke.csproj",
+      "msbuildProject": "../../../Libs/PlatformInvoke/PlatformInvoke.csproj"
+    },
     "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
       "type": "project",
       "path": "../../../Libs/RuntimeCaching/RuntimeCaching.csproj",
@@ -4183,11 +4188,6 @@
       "type": "project",
       "path": "../../../Platforms/TeamFoundationCollector/Domain/Contract/Contract.csproj",
       "msbuildProject": "../../../Platforms/TeamFoundationCollector/Domain/Contract/Contract.csproj"
-    },
-    "PlatformInvoke/1.0.0": {
-      "type": "project",
-      "path": "../../../Libs/PlatformInvoke/PlatformInvoke.csproj",
-      "msbuildProject": "../../../Libs/PlatformInvoke/PlatformInvoke.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4196,12 +4196,12 @@
       "Ban3.Infrastructures.Consoles >= 1.0.0",
       "Ban3.Infrastructures.NetHttp >= 1.0.0",
       "Ban3.Infrastructures.NetMail >= 1.0.0",
+      "Ban3.Infrastructures.PlatformInvoke >= 1.0.0",
       "Ban3.Infrastructures.SpringConfig >= 1.0.0",
       "Ban3.Infrastructures.WxsConfig >= 1.0.0",
       "Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport >= 1.0.0",
       "Ban3.Platforms.TeamFoundationCollector.Domain.Contract >= 1.0.0",
-      "Microsoft.Office.Interop.Outlook >= 15.0.4797.1004",
-      "PlatformInvoke >= 1.0.0"
+      "Microsoft.Office.Interop.Outlook >= 15.0.4797.1004"
     ]
   },
   "packageFolders": {

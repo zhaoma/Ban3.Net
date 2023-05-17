@@ -485,14 +485,31 @@ public static partial class Helper
                     case BuildReportType.WorkItems:
                         o.Html = _.GenerateHtml(new ReportSectionForWorkItems(o));
                         break;
+                    case BuildReportType.LastRI:
+                        o.Html = _.GenerateHtml(new ReportSectionForLastRI(o));
+                        break;
                 }
             });
 
-        reportDefine.Sections.ForEach(o => { sb.AppendLine(o.Html); });
+        reportDefine.Sections
+            .OrderBy(o => o.Rank)
+            .ToList()
+            .ForEach(o => { sb.AppendLine(o.Html); });
 
         return sb.ToString();
     }
-    
+
+    public static string GenerateHtml(this IReportService reportService,ReportSectionForLastRI section)
+    {
+        var lc = reportService.Tfvc.GetLatestRIChangesetRef(section.Days,section.ItemPath,section.Keyword);
+        if (lc != null)
+        {
+            return $"<div style='width:50%;padding:5px;font-size:18px;font-weight:bold;'>Latest RI Time : <a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_versionControl/changeset/{lc.ChangesetId}/' style='color:#000;text-decoration:underline;' target='_blank'>{lc.CreatedDate}</a><br/><br/></div>";
+        }
+
+        return string.Empty;
+    }
+
     public static string GenerateHtml(this IReportService reportService, ReportSectionForDefinition section)
     {
         var sb = new StringBuilder();
@@ -555,12 +572,15 @@ public static partial class Helper
             var table = queryResult.GetWorkItemsDataTable(listWorkItemsResult);
             if (table is { Rows.Count: > 0 })
             {
-                sb.AppendLine("<table align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"width:100%;background-color: #666; font-size: 14px; font-family: 'Microsoft YaHei';\"><tr>");
+                var ws = new [] { "width:8%", "width:12%", "width:45%", "width:15%", "width:8%", "width:12%" };
+                sb.AppendLine("<div class=\"card\"><div class='table-responsive'><table class='table table-vcenter card-table table-striped' align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"width:100%;background-color: #666; font-size: 14px; font-family: 'Microsoft YaHei';\"><thead><tr>");
+                var colIndex = 0;
                 foreach (DataColumn col in table.Columns)
                 {
-                    sb.Append($"<th style='padding:5px;color: #FFF'>{col.ColumnName}</th>");
+                    sb.Append($"<th style='padding:5px;{ws[Math.Min(ws.Length-1, colIndex)]}'>{col.ColumnName}</th>");
+                    colIndex++;
                 }
-                sb.Append("</tr>");
+                sb.Append("</tr></thead><tbody>");
 
                 foreach (DataRow row in table.Rows)
                 {
@@ -571,7 +591,7 @@ public static partial class Helper
                         if (id > 0)
                         {
                             sb.Append(
-                                $"<td style='padding:5px;background-color: #FFF'><a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_workitems/edit/{id}/' style='color:#000;text-decoration:none;' target='_blank'>{row[col.ColumnName]}</a></td>");
+                                $"<td style='padding:5px;background-color: #FFF' class='fileName'><a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_workitems/edit/{id}/' style='color:#333;' target='_blank'>{row[col.ColumnName]}</a></td>");
                         }
                         else
                         {
@@ -582,7 +602,7 @@ public static partial class Helper
                     sb.Append("</tr>");
                 }
 
-                sb.AppendLine("</table><br/><br/>");
+                sb.AppendLine("</tbody></table></div></div><br/><br/>");
             }
         }
 

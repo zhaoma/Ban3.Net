@@ -245,7 +245,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\PlatformInvoke.csproj",
-        "projectName": "PlatformInvoke",
+        "projectName": "Ban3.Infrastructures.PlatformInvoke",
         "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\PlatformInvoke.csproj",
         "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
         "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\obj\\",

@@ -139,6 +139,25 @@ public static partial class Helper
             }
         });
 
+    public static TfvcChangesetRef? GetLatestRIChangesetRef(this ITfvc _,int days,string itemPath,string keyword)
+    {
+        var result = _.GetChangesets(new GetChangesets
+        {
+            SearchCriteria=new SearchCriteria
+            {
+                ItemPath=itemPath,
+                FromDate = DateTime.Now.AddDays(-days).ToString("yyyy-MM-dd"),
+                ToDate = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")
+            }
+        });
+        if (result is { Success: true, Value: { } } && result.Value.Any())
+        {
+            return result.Value.FirstOrDefault(o=>o.Comment.Contains(keyword));
+        }
+
+        return null;
+    }
+
     /// <summary>
     /// 
     /// </summary>
