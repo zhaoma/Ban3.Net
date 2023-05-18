@@ -8,16 +8,19 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.AgentSvr
 {
     public class Worker : BackgroundService
     {
-        static readonly ILog _logger = LogManager.GetLogger(typeof(Worker));
+        static readonly ILog Logger = LogManager.GetLogger(typeof(Worker));
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            new Action(() =>
+            {
+                Logger.Info($"start timer job : SyncTfvc");
+                DevOps.Collector.SyncTfvc();
+            }).CreateTimer(1000 * 60 * 60*);
+
+
             while (!stoppingToken.IsCancellationRequested)
             {
-                new Action(() =>
-                {
-                    _logger.Debug($"start timer job : SyncTfvc");
-                    DevOps.Collector.SyncTfvc();
-                }).CreateTimer(1000*60*30);
             }
         }
     }

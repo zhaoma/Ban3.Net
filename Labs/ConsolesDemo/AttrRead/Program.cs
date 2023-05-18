@@ -15,16 +15,31 @@ namespace AttrRead
 {
     internal class Program
     {
+        static Program()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += delegate (object sender, ResolveEventArgs e)
+            {
+                Console.WriteLine(e.Name);
+
+                return Assembly.LoadFile(@"D:\GIT\Ban3.Net\Labs\ConsolesDemo\Lost\bin\Debug\netstandard2.0\Lost.dll");
+            };
+        }
+
         static void Main(string[] args)
         {
-
-            var file = args != null&&args.Any() ? args[0] : @"D:\GIT\Ban3.Net\Labs\ConsolesDemo\AttrTest\bin\Debug\AttrTest.exe";
-
-            P();
-
+            
+            Lost.Deleted.Found();
             
             Console.ReadKey();
         }
+
+        /*
+         *
+            var file = args != null&&args.Any() ? args[0] : @"D:\GIT\Ban3.Net\Labs\ConsolesDemo\AttrTest\bin\Debug\AttrTest.exe";
+
+            P();
+         *
+         */
 
         static void P()
         {

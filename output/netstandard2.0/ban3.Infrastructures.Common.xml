@@ -581,7 +581,7 @@
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AggregateToString(System.Collections.Generic.IEnumerable{System.Object},System.String)">
             
         </member>
-        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.UnionAll(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{System.String}})">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.UnionAll``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
             
         </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AllFoundIn(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String[]})">

@@ -59,12 +59,14 @@ namespace Ban3.Infrastructures.Common.Extensions
         }
 
         /// 
-        public static IEnumerable<string> UnionAll(
-          this IEnumerable<IEnumerable<string>> source)
+        public static IEnumerable<T> UnionAll<T>(
+          this IEnumerable<IEnumerable<T>> source)
         {
-            List<string> result = new List<string>();
-            source.AsParallel<IEnumerable<string>>().ForAll<IEnumerable<string>>((Action<IEnumerable<string>>)(a => result = result.Union<string>(a).ToList<string>()));
-            return (IEnumerable<string>)result;
+            var result = new List<T>();
+            source
+                .AsParallel<IEnumerable<T>>()
+                .ForAll<IEnumerable<T>>((Action<IEnumerable<T>>)(a => result = result.Union<T>(a).ToList<T>()));
+            return (IEnumerable<T>)result;
         }
 
         /// 

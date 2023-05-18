@@ -27,7 +27,6 @@ public static partial class Helper
         var thread = _.GetThread(id);
         while (thread.Success)
         {
-            Console.WriteLine($"parse:{id}");
             if (thread.Id > 0)
             {
                 id.DataFile<DiscussionThread>()

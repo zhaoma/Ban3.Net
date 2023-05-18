@@ -198,7 +198,6 @@ public static class Helper
         List<string[]> allRoads,
         int depth)
     {
-        Console.WriteLine(currentAssemblyFileName);
         var assemblyFile = all.FindLast(o => o.Name == currentAssemblyFileName);
         if (assemblyFile != null)
         {

@@ -30,6 +30,7 @@ public class TargetHost : ITargetHost
 
     private HttpClientHandler Handler()
     {
+        Console.WriteLine("Create Client");
         var defaultCredential = string.IsNullOrEmpty(Domain)
             ? new NetworkCredential(UserName, Password)
             : new NetworkCredential(UserName, Password, Domain);

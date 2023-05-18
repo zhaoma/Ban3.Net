@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyLoader.cs" />
     <Compile Include="Instruction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,6 +55,10 @@
     <ProjectReference Include="..\..\..\Libs\Consoles\Consoles.csproj">
       <Project>{eaea6b94-ab5a-425c-afb4-90d769253fda}</Project>
       <Name>Consoles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lost\Lost.csproj">
+      <Project>{535ed973-4629-43e6-90cd-7e0c1fc40020}</Project>
+      <Name>Lost</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

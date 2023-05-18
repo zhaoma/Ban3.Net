@@ -24,7 +24,6 @@ namespace Ban3.Infrastructures.WxsConfig
                 var list = new List<WxsXml>();
                 foreach (var xml in xmls)
                 {
-                    Console.WriteLine(Path.GetFileName(xml));
                     list.Add(ParseWxsFile(xml));
                 }
 

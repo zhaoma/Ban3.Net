@@ -30,7 +30,7 @@ namespace Ban3.Infrastructures.Common.Extensions
             var now = DateTime.Now;
             action();
 
-            _logger.Debug($"{message},{DateTime.Now.Subtract(now).TotalMilliseconds} ms spent.");
+            _logger.Info($"{message},{DateTime.Now.Subtract(now).TotalMilliseconds} ms spent.");
         }
 
         /// <summary>
@@ -68,16 +68,16 @@ namespace Ban3.Infrastructures.Common.Extensions
             }
         }
 
-        public static Timer? CreateTimer(this Action action,int inteval)
+        public static Timer? CreateTimer(this Action action, DateTime dailyTime)
         {
             var timer = new Timer
             {
                 AutoReset = true,
-                Interval = inteval,
+                Interval =1000,
                 Enabled = true
             };
 
-            timer.Elapsed += new ElapsedEventHandler((s, e) =>
+            timer.Elapsed += (s, e) =>
             {
                 try
                 {
@@ -92,7 +92,37 @@ namespace Ban3.Infrastructures.Common.Extensions
                 {
                     timer.Enabled = true;
                 }
-            });
+            };
+            timer.Start();
+
+            return timer;
+        }
+
+        public static Timer? CreateTimer(this Action action, int interval)
+        {
+            var timer = new Timer
+            {
+                AutoReset = true,
+                Interval = interval,
+                Enabled = true
+            };
+
+            timer.Elapsed += (s, e) =>
+            {
+                try
+                {
+                    timer.Enabled = false;
+                    action.Invoke();
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                }
+                finally
+                {
+                    timer.Enabled = true;
+                }
+            };
             timer.Start();
 
             return timer;

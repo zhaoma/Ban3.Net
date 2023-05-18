@@ -22,7 +22,7 @@
 <div class="row row-cards" data-masonry='{"percentPosition": true }'>
     @for (var c = 'A'; c <= 'Z'; c++)
     {
-        var teams = Model.Where(o => o.Name.ToUpper().StartsWith(c + ""));
+        var teams = Model.Where(o =>o.Members!=null&&o.Members.Any()&& o.Name.ToUpper().StartsWith(c + "")).ToList();
         if (teams.Any())
         {
             <div class="col-sm-4 col-lg-3">
@@ -35,7 +35,7 @@
                                 <a href="/home/index/@team.Name" target="_blank">@team.Name</a>
                             </div>
                             <div class="avatar-list avatar-list-stacked mb-3">
-                                @foreach (var id in team.Members)
+                                @foreach (var id in team.Members!)
                                 {
                                     <span class="avatar avatar-sm avatar-rounded" style="background-image: url(@id.Identity?.Portrait)" title="@id.Identity?.ShowName()"></span>
                                 }

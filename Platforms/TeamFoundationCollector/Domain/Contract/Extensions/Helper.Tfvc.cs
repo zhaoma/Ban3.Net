@@ -387,7 +387,6 @@ public static partial class Helper
 
             if (shelveset.Success)
             {
-                Console.WriteLine($"{shelveset.Id} => {shelveset.Id.MD5String()}");
                 shelveset.Id.MD5String().DataFile<TfvcShelveset>()
                     .WriteFile(shelveset.ObjToJson());
             }

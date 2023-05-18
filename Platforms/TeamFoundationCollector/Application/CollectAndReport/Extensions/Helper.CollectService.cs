@@ -10,9 +10,8 @@ public static partial class Helper
 {
     public static void PrepareForce(this ICollectService _)
     {
-        // refresh teams ; identities and download portraits
-        
-
+        _.Core.PrepareTeams(true);
+        _.SyncTfvc();
     }
 
     #region Tfvc
@@ -23,7 +22,11 @@ public static partial class Helper
         var teams = _.Core.LoadTeams();
 
         teams.ParallelExecute(
-            (team) => { _.SyncOneTeamSummary(team.Id, true); }, Config.MaxParallelTasks
+            (team) =>
+            {
+                Logger.Info($"Team={team.Name}");
+                _.SyncOneTeamSummary(team.Id, true);
+            }, Config.MaxParallelTasks
         );
     }
 
@@ -35,13 +38,14 @@ public static partial class Helper
         {
             if (team.Members != null && team.Members.Any())
             {
-                team.Members?.AsParallel()
+                team.Members!
+                    .AsParallel()
                     .ForAll(o =>
                     {
                         var memberId = o.Identity?.Id + "";
 
                         new Action(() => { _.SyncOneMemberSummary(memberId, forceOverwrite); })
-                            .ExecuteAndTiming($" {o.Identity?.DisplayName}");
+                            .ExecuteAndTiming($"{o.Identity?.DisplayName}");
                     });
             }
         }
@@ -64,7 +68,9 @@ public static partial class Helper
             .WriteFile(result.ObjToJson());
     }
 
-    private static List<CompositeChangeset> FulfillDiscussion(this ICollectService _, List<CompositeChangeset> changesets)
+    private static List<CompositeChangeset> FulfillDiscussion(
+        this ICollectService _, 
+        List<CompositeChangeset> changesets)
     {
         var pageSize = Config.MaxParallelTasks;
         var p = changesets.Count % pageSize > 0 ? changesets.Count / pageSize + 1 : changesets.Count / pageSize;
@@ -92,7 +98,9 @@ public static partial class Helper
         return changesets;
     }
 
-    private static List<CompositeShelveset> FulfillDiscussion(this ICollectService _, List<CompositeShelveset> shelvesets,
+    private static List<CompositeShelveset> FulfillDiscussion(
+        this ICollectService _, 
+        List<CompositeShelveset> shelvesets,
         string authorGuid)
     {
         var pageSize = Config.MaxParallelTasks;

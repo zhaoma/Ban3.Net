@@ -25,12 +25,35 @@ using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Reques
 using Org.BouncyCastle.Asn1.Ocsp;
 using Ban3.Infrastructures.SpringConfig.Entries;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
+using log4net;
 
 /*
+
+
 var teams = DevOps.Collector.Core.LoadTeams();
-teams.Where(o => o.Name == Config.DefaultTeam)
-    .ToList()
-    .ForEach(o => DevOps.Collector.SyncOneTeamSummary(o.Id,true));
+var ids = teams
+    .Where(o=>o.Members!=null)
+    .Select(o => o.Members!).UnionAll()
+    .Where(o=>o.Identity!=null)
+    .Select(o=>o.Identity)
+    .ToList();
+
+ids.ParallelExecute(o =>
+{
+    var id=o!.Id;
+    Console.WriteLine(o.DisplayName);
+    DevOps.Collector.SyncOneMemberSummary(id);
+},Config.MaxParallelTasks );
+
+//teams
+//    .Where(o=>o.Name==Config.DefaultTeam)
+//    .ParallelExecute(
+//    (team) =>
+//    {
+//        Console.WriteLine(team.Name);
+//        DevOps.Collector.SyncOneTeamSummary(team.Id, true);
+//    }, Config.MaxParallelTasks
+//);
 
 var dll = "CT.Exam.Recon.Impl.dll";
 var xml =
@@ -73,9 +96,9 @@ DevOps.Collector.Tfvc.PrepareShelvesets(string.Empty);
 
 
 
+*/
 DevOps.Reportor.ParseMonitorJobs();
 
-*/
 var job = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Settings.MonitorBuildReports.Jobs
     .FindLast(o => o.Id == "1");
 

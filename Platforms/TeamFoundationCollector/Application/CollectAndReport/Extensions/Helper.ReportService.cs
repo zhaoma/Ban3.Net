@@ -15,20 +15,22 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildReports
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Reports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Reports;
+using log4net;
 using NPOI.HSSF.UserModel;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
 
 public static partial class Helper
 {
+    private static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
+
     #region SendEmail
 
     public static bool SendMail(this IReportService _, List<string>? to, List<string>? cc, string? subject,
         string? mailHtml)
     {
-        new Ban3.Infrastructures.NetMail.Entries.TargetServer()
+        return new Infrastructures.NetMail.Entries.TargetServer()
             .SendByOutlook(to, cc, subject, mailHtml);
-        return true;
     }
 
     #endregion
@@ -265,7 +267,6 @@ public static partial class Helper
         ms.Position = 0;
 
         workbook.Close();
-        workbook = null;
 
         return ms;
     }
@@ -373,7 +374,7 @@ public static partial class Helper
     {
         var monitorJobs = Domain.Contract.Settings.MonitorBranchSpec.Jobs;
         monitorJobs.ForEach(
-            o => { Console.WriteLine($"{o.Subject} ... success:{_.ParseMonitorJob(o)}"); });
+            o => { Logger.Info($"{o.Subject} ... success:{_.ParseMonitorJob(o)}"); });
     }
 
     public static bool ParseMonitorJob(this IReportService _, MonitorJob job)
@@ -454,8 +455,11 @@ public static partial class Helper
 
     public static bool ParseBuildReport(this IReportService _, ReportDefine reportDefine)
     {
-        return _.SendMail(reportDefine.Subscribed, reportDefine.CC, reportDefine.Subject,
-            _.RenderBuildReportHtml(reportDefine));
+        var mailBody = _.RenderBuildReportHtml(reportDefine);
+
+        mailBody = $"<div style='padding:20px;margin:0 auto;background-color:rgb(194, 189, 189);'><div style='width:900px;background: #fff; table-layout:fixed;'>{mailBody}</div></div>";
+
+        return _.SendMail(reportDefine.Subscribed, reportDefine.CC, reportDefine.Subject,mailBody);
     }
 
     public static string RenderBuildReportHtml(this IReportService _, ReportDefine reportDefine)
@@ -463,15 +467,10 @@ public static partial class Helper
         var sb = new StringBuilder();
         sb.AppendLine(@"<style>
             .issuesTable table tr td:first-child{width:80px;}
-            .Succeeded {
-                color: #22B14C;
-            }
-            .PartiallySucceeded {
-                color: #FFC90E;
-            }
-            .Failed {
-                color: #ED1C24;
-            }
+            .Succeeded {color: #22B14C;}
+            .PartiallySucceeded {color: #FFC90E;}
+            .Failed {color: #ED1C24; }
+            .fileName{word-break: break-all;word-wrap: break-word;}
         </style>");
         reportDefine.Sections
             .AsParallel()
@@ -529,7 +528,7 @@ public static partial class Helper
 
             if (build.Result != BuildResult.Succeeded)
             {
-                var artifacts = reportService.Build.ListArtifactsForBuild(build!.Id);
+                var artifacts = reportService.Build.ListArtifactsForBuild(build.Id);
                 if (artifacts != null)
                 {
                     var index = 1;
@@ -611,6 +610,8 @@ public static partial class Helper
 
     #endregion
 
+    #region dlls/xmls
+
     public static void AppendDllRoads(this Dictionary<string, List<string>> dic, List<string[]> roads)
     {
         foreach (var road in roads)
@@ -671,5 +672,7 @@ public static partial class Helper
     {
         return assembly.EndsWith(".dll") ? assembly : assembly + ".dll";
     }
+
+    #endregion
 }
 

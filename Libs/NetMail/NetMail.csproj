@@ -9,12 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Entries\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entries\" />
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="MailKit" Version="4.0.0" />
     <PackageReference Include="MailKit.Security.SaslMechanismNtlmIntegrated" Version="0.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

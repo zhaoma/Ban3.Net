@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -35,16 +34,13 @@ public static partial class Helper
         try
         {
             var responseMessage = await Config.Host.Request(request.Resource());
-            var content = responseMessage.Content.ReadAsStringAsync();
-
-            Logger.Debug(request.Resource().Url);
-            Logger.Debug($"responseMessage.StatusCode={responseMessage.StatusCode}");
 
             responseMessage.Dispose();
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"{ex.Source}:{ex.Message}");
+            Logger.Error(request.Resource().Url);
+            Logger.Error(ex);
         }
     }
 
@@ -54,12 +50,10 @@ public static partial class Helper
         try
         {
             var responseMessage = await Config.Host.Request(request.Resource());
+            if (responseMessage == null) return new T();
+
             var content = responseMessage.Content.ReadAsStringAsync();
-
-            Logger.Debug(request.Resource().Url);
-            Logger.Debug($"responseMessage.StatusCode={responseMessage.StatusCode}");
-            Logger.Debug(content.Result);
-
+            
             var result = content.Result.JsonToObj<T>() ?? new T();
             result.Success = new[]
             {
@@ -73,7 +67,8 @@ public static partial class Helper
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"{ex.Source}:{ex.Message}");
+            Logger.Error(request.Resource().Url);
+            Logger.Error(ex);
         }
 
         return new T();
@@ -84,10 +79,7 @@ public static partial class Helper
         try
         {
             var responseMessage = await Config.Host.Request(request.Resource(), accept);
-
-            Logger.Debug(request.Resource().Url);
-            Logger.Debug($"responseMessage.StatusCode={responseMessage.StatusCode}");
-
+            
             if (!new[]
                 {
                     HttpStatusCode.Accepted,
@@ -101,7 +93,8 @@ public static partial class Helper
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"{ex.Source}:{ex.Message}");
+            Logger.Error(request.Resource().Url);
+            Logger.Error(ex);
         }
 
         return string.Empty;
@@ -112,10 +105,7 @@ public static partial class Helper
         try
         {
             var responseMessage = await Config.Host.Request(request.Resource());
-
-            Logger.Debug(request.Resource().Url);
-            Logger.Debug(savePath);
-
+            
             if (!new[]
                 {
                     HttpStatusCode.Accepted,
@@ -123,17 +113,19 @@ public static partial class Helper
                 }.Contains(responseMessage.StatusCode))
                 return string.Empty;
 
-            var iputStream = await responseMessage.Content.ReadAsStreamAsync();
+            var inputStream = await responseMessage.Content.ReadAsStreamAsync();
 
              using FileStream fileStream = File.Create(savePath);
-            await iputStream.CopyToAsync(fileStream);
+            await inputStream.CopyToAsync(fileStream);
 
             responseMessage.Dispose();
             return savePath;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"{ex.Source}:{ex.Message}");
+            Logger.Error(request.Resource().Url); 
+            Logger.Error(savePath);
+            Logger.Error(ex);
         }
 
         return string.Empty;
