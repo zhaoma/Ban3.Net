@@ -22,8 +22,12 @@ public class TargetHost : ITargetHost
     public HttpClient Client()
     {
         return _client = _client ?? (Anonymous
-            ? new HttpClient()
-            : new HttpClient(Handler()));
+            ? new HttpClient { Timeout = TimeSpan.FromMinutes(1) }
+            : new HttpClient(Handler())
+            {
+                BaseAddress = new Uri(BaseUrl),
+                Timeout = TimeSpan.FromMinutes(1)
+            });
     }
 
     private HttpClient _client;
@@ -37,8 +41,9 @@ public class TargetHost : ITargetHost
 
         return new HttpClientHandler
         {
+            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
             AllowAutoRedirect = true,
-            MaxConnectionsPerServer = 10,
+            MaxConnectionsPerServer = 100,
             Credentials = new CredentialCache
             {
                 { new Uri(BaseUrl), AuthenticationType, defaultCredential }

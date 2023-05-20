@@ -3,18 +3,13 @@
 //  function:	DownloadDailyPricesResult.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using System;
-namespace Ban3.Infrastructures.Common.Contracts.Responses.Platforms.Netease
-{
-	/// <summary>
-	/// 下载日行情结果，获取byte[]
-	/// </summary>
-	public class DownloadDailyPricesResult
-		: GenericSingleCallback<byte[]>
-	{
-		public DownloadDailyPricesResult()
-		{
-		}
-	}
-}
 
+namespace Ban3.Sites.ViaNetease.Response;
+
+/// <summary>
+/// 下载日行情结果，获取byte[]
+/// </summary>
+public class DownloadDailyPricesResult
+{
+    public string Path { get; set; }
+}

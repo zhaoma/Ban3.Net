@@ -640,7 +640,7 @@
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SetsFile``1(System.Collections.Generic.List{``0},System.String)">
             
         </member>
-        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.LocalFile(System.Type,System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.LocalFile(System.Type,System.String,System.String)">
             
         </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DataPath(System.String)">

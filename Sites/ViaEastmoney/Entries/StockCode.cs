@@ -18,7 +18,7 @@ namespace Ban3.Sites.ViaEastmoney.Entries
         /// 编码
         /// </summary>
         [JsonProperty( "f12" )]
-        public string Symbal { get; set; }=string.Empty;
+        public string Code { get; set; }=string.Empty;
 
         /// <summary>
         /// 名称

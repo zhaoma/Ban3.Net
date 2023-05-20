@@ -20,6 +20,7 @@ public static class Helper
     {
         try
         {
+            Logger.Debug(resource.Url);
             var client = host.Client();
             if(!string.IsNullOrEmpty(accept))
                 client.DefaultRequestHeaders.Add("Accept", accept);
@@ -41,6 +42,7 @@ public static class Helper
     {
         try
         {
+
             using var responseMessage = await host.Request(resource);
 
             return await responseMessage.Content.ReadAsStringAsync();
@@ -62,6 +64,11 @@ public static class Helper
         {
             var content = await host.ReadContent(resource);
 
+            if (resource.ResourceIsJsonp)
+            {
+                content = content.RemoveJsonp(resource.JsonpPrefix);
+            }
+
             return JsonConvert.DeserializeObject<T>(content);
         }
         catch (Exception ex)
@@ -71,6 +78,25 @@ public static class Helper
 
         return default;
     }
+
+    #region private
+
+    private static string Substr(this string input, string prefix, string suffix)
+    {
+        if (!input.Contains(prefix)) return string.Empty;
+
+        var start = input.IndexOf(prefix) + prefix.Length;
+        var result = input.Substring(start);
+
+        if (!result.Contains(suffix)) return result;
+        return result.Substring(0, result.Length - suffix.Length);
+    }
+
+    private static string RemoveJsonp(this string input, string jsonp)
+        => input.Substr($"{jsonp}(", ");");
+
+
+    #endregion
 
     /// download resource and save to special path
     public static async Task<string> Download(

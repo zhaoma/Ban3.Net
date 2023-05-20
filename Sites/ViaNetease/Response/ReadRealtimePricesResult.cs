@@ -3,17 +3,15 @@
 //  function:	ReadRealtimePricesResult.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using Ban3.Infrastructures.Common.Contracts.Entities.Platforms.Netease;
-using System.Collections.Generic;
 
-namespace Ban3.Infrastructures.Common.Contracts.Responses.Platforms.Netease
+using System.Collections.Generic;
+using Ban3.Sites.ViaNetease.Entries;
+
+namespace Ban3.Sites.ViaNetease.Response
 {
 	public class ReadRealtimePricesResult
-		: GenericSingleCallback<Dictionary<string, StockRecord>>
 	{
-		public ReadRealtimePricesResult()
-		{
-		}
-	}
+		public Dictionary<string, StockRecord> Data { get; set; }
+    }
 }
 

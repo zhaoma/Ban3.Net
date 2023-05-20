@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Management;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices;
@@ -17,19 +18,28 @@ namespace AttrRead
     {
         static Program()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += delegate (object sender, ResolveEventArgs e)
-            {
-                Console.WriteLine(e.Name);
 
-                return Assembly.LoadFile(@"D:\GIT\Ban3.Net\Labs\ConsolesDemo\Lost\bin\Debug\netstandard2.0\Lost.dll");
+            AppDomain.CurrentDomain.AssemblyResolve += delegate(object sender, ResolveEventArgs e)
+            {
+
+            Console.WriteLine(e.Name);
+
+
+
+            return Assembly.LoadFile(@"D:\GIT\Ban3.Net\Labs\ConsolesDemo\Lost\bin\Debug\netstandard2.0\Lost.dll");
+      
             };
         }
-
+        
         static void Main(string[] args)
         {
-            
+
             Lost.Deleted.Found();
-            
+
+            //var x = Probe(@"root/CIMV2", "Win32_PerfFormattedData_Counters_ThermalZoneInformation", "Temperature");
+            //Console.WriteLine($"x={x}");
+            //Probe<double>(@"root/wmi", "MSAcpi_ThermalZoneTemperature", "CurrentTemperature");
+
             Console.ReadKey();
         }
 

@@ -11,7 +11,7 @@ namespace Ban3.Sites.ViaEastmoney.Response
     /// 
     /// </summary>
     public class DownloadAllCodesResult
-            : GenericSingleCallback<Entries.StockCodesPackage>
+            : Entries.StockCodesPackage
     {
 
     }

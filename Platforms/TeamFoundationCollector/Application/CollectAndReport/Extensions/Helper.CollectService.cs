@@ -24,7 +24,6 @@ public static partial class Helper
         teams.ParallelExecute(
             (team) =>
             {
-                Logger.Info($"Team={team.Name}");
                 _.SyncOneTeamSummary(team.Id, true);
             }, Config.MaxParallelTasks
         );

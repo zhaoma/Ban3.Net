@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Ban3.Infrastructures.Common.Contracts.Entities.Platforms.Netease
+namespace Ban3.Sites.ViaNetease.Entries
 {
     /// <summary>
     /// 1分钟价

@@ -2,36 +2,31 @@
 // zhaoma @ 2022 :
 // /Users/zhaoma/Projects/fintry/src/Ban3dotnet/Infrastructures/Common/Exchanges/Request/Platforms/Netease/GetRealTime.cs
 // ——————————————————————————————————————
-using System;
-using System.Collections.Generic;
 
-namespace Ban3.Infrastructures.Common.Contracts.Requests.Platforms.Netease
+using Ban3.Infrastructures.NetHttp.Entries;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Ban3.Sites.ViaNetease.Request
 {
 	public class ReadRealTime
-        :NormalRequest
-	{
-		public ReadRealTime(IEnumerable<string> codes)
+        : TargetResource
+    {
+		public ReadRealTime(List<(string, string)> prefixesAndCodes)
 		{
-            Codes = codes;
-		}
+            PrefixesAndCodes = prefixesAndCodes;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public IEnumerable<string> Codes { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override Servers.NetResource NetResource()
-        {
-            return new Servers.NetResource
-            {
-                Url = Servers.Netease.UrlForReadRealtime(Codes),
-
-            };
+            ResourceIsJsonp = true;
+            JsonpPrefix = "_ntes_quote_callback";
+            
+            var ss = prefixesAndCodes.Aggregate("", (current, pc) => current +$"{pc.Item1}{pc.Item2}"+ ",");
+            Url= $"http://api.money.126.net/data/feed/{ss}money.api";
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<(string,string)> PrefixesAndCodes { get; set; }
     }
 }
 

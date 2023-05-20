@@ -66,7 +66,7 @@ public class TfvcItem
     /// The size of the file, if applicable.
     /// </summary>
     [JsonProperty("size")]
-    public int Size { get; set; }
+    public long Size { get; set; }
 
     /// <summary>
     /// 

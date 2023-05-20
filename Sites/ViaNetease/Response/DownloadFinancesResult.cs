@@ -3,16 +3,14 @@
 //  function:	DownloadFinancesResult.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using Ban3.Infrastructures.Common.Contracts.Entities.Platforms.Netease;
 
-namespace Ban3.Infrastructures.Common.Contracts.Responses.Platforms.Netease
+using System.Collections.Generic;
+using Ban3.Sites.ViaNetease.Entries;
+
+namespace Ban3.Sites.ViaNetease.Response;
+
+public class DownloadFinancesResult
 {
-	public class DownloadFinancesResult
-		:GenericListCallback<StockFinance>
-	{
-		public DownloadFinancesResult()
-		{
-		}
-	}
+    public List<StockFinance> Data { get; set; }
 }
 

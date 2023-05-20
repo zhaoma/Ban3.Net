@@ -32,5 +32,17 @@ namespace Ban3.Infrastructures.Common.Extensions
         {
             await Task.Run(async () => { await Task.Delay(ts);action(); });
         }
+
+        public static async void RandomDelayAsync(this (int, int) range)
+        {
+            var seconds = new Random().Next(range.Item1, range.Item2);
+            await Task.Delay(seconds);
+        }
+
+        public static void RandomDelay(this (int, int) range)
+        {
+            var seconds = new Random().Next(range.Item1, range.Item2);
+            Thread.Sleep(TimeSpan.FromSeconds(seconds));
+        }
     }
 }

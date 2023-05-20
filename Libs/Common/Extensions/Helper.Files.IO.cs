@@ -59,10 +59,10 @@ namespace Ban3.Infrastructures.Common.Extensions
 	        => typeof(T).LocalFile(func);
 
         /// 
-	    public static string LocalFile(this Type type,string func="all")
+        public static string LocalFile(this Type type, string func = "all", string ext = ".lr")
         {
             var path = type.Name.DataPath();
-            return Path.Combine(path, $"{func}.lr");
+            return Path.Combine(path, $"{func}{ext}");
         }
 
         /// 

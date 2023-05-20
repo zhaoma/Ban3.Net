@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <AssemblyName>Ban3.Productions.Casino.CcaAndReport</AssemblyName>
+    <RootNamespace>Ban3.Productions.Casino.CcaAndReport</RootNamespace>
+  </PropertyGroup>
+
+</Project>

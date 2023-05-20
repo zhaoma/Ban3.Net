@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <AssemblyName>Ban3.Productions.Casino.Contracts</AssemblyName>
+    <RootNamespace>Ban3.Productions.Casino.Contracts</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Response\" />
+    <Folder Include="Request\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Libs\Common\Common.csproj" />
+    <ProjectReference Include="..\..\..\Sites\ViaTushare\ViaTushare.csproj" />
+  </ItemGroup>
+
+</Project>

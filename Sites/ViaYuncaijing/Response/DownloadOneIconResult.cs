@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ban3.Infrastructures.Common.Contracts.Responses.Platforms.Yuncaijing
+﻿namespace Ban3.Sites.ViaYuncaijing.Response
 {
     public class DownloadOneIconResult
-            : GenericSingleCallback<string>
-    { }
+    {
+        public string Path { get; set; }
+    }
 }

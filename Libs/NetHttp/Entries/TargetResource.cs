@@ -13,6 +13,8 @@ public class TargetResource : ITargetResource
 
     public string Method { get; set; } = "Get";
 
+    public string Charset { get; set; } 
+
     public bool ResourceIsJsonp { get; set; } = false;
 
     public string JsonpPrefix { get; set; } = string.Empty;
