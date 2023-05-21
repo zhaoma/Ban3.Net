@@ -6,13 +6,13 @@ namespace Ban3.Sites.ViaTushare.Request;
 
 public class GetStockPrice:GetBase
 {
-    public GetStockPrice(GetProBarParams getProBarParams)
+    public GetStockPrice(GetDailyParams getDailyParams)
     {
         ApiRequestBody = new ApiRequestBody
         {
-            ApiName = "pro_bar",
+            ApiName = "daily",
             FieldList=new StockPrice().RequestFields,
-            Params = getProBarParams.ToDictionary()
+            Params = getDailyParams.ToDictionary()
         };
         Body = new Body { StringContent = ApiRequestBody.ObjToJson() };
     }

@@ -9,7 +9,9 @@
     <RootNamespace>Ban3.Labs.TeamFoundationCollector.Presentation.AgentSvr</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'AgentSvr' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'AgentSvr' ">
+    <ExternalConsole>true</ExternalConsole>
+  </PropertyGroup>
   <ItemGroup>
     <Content Remove="log4net.config" />
   </ItemGroup>

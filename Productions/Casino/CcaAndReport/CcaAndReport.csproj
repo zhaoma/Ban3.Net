@@ -7,4 +7,13 @@
     <RootNamespace>Ban3.Productions.Casino.CcaAndReport</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Implements\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Implements\" />
+  </ItemGroup>
 </Project>

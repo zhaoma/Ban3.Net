@@ -1303,6 +1303,14 @@
             <param name="strValue"></param>
             <returns></returns>
         </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToDateTimeEx(System.Object,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="strValue"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DatetimeToTimestamp(System.DateTime)">
             <summary>
             

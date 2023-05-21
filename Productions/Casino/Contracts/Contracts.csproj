@@ -8,16 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Response\" />
-    <Folder Include="Request\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Common\Common.csproj" />
     <ProjectReference Include="..\..\..\Sites\ViaTushare\ViaTushare.csproj" />
+    <ProjectReference Include="..\..\..\Sites\ViaYuncaijing\ViaYuncaijing.csproj" />
+    <ProjectReference Include="..\..\..\Sites\ViaEastmoney\ViaEastmoney.csproj" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="System.IO" Version="4.3.0" />
+    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+  </ItemGroup>
 </Project>

@@ -9,4 +9,5 @@
     <RootNamespace>Ban3.Labs.Casino.Web</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Web' " />
 </Project>

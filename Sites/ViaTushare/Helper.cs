@@ -18,7 +18,7 @@ public static class Helper
             .RequestGeneric<GetBaseResult>(request);
     }
 
-    public static GetStockBasicResult GetStockBasic(GetStockBasic request)
+    public static GetStockBasicResult GetResult(this GetStockBasic request)
     {
         var result=new GetStockBasicResult();
 
@@ -32,7 +32,7 @@ public static class Helper
         return result;
     }
 
-    public static GetStockPriceResult GetStockPrice(GetStockPrice request)
+    public static GetStockPriceResult GetResult(this GetStockPrice request)
     {
         var result = new GetStockPriceResult();
 

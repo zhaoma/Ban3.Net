@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Globalization;
 
 namespace Ban3.Infrastructures.Common.Extensions
 {
@@ -152,6 +153,18 @@ namespace Ban3.Infrastructures.Common.Extensions
             return Convert.ToDateTime( null );
         }
 
+        public static DateTime ToDateTime(this object strValue, DateTime defValue, string format)
+        {
+            try
+            {
+                DateTime.TryParseExact(strValue.ToString(),format, CultureInfo.CurrentCulture, DateTimeStyles.None, out var def);
+                return def == Convert.ToDateTime(null) ? defValue : def;
+            }
+            catch (Exception) { }
+
+            return Convert.ToDateTime(null);
+        }
+
         /// <summary>
         /// 转日期
         /// </summary>
@@ -160,8 +173,19 @@ namespace Ban3.Infrastructures.Common.Extensions
         public static DateTime ToDateTime( this object strValue )
         {
             var defaultValue = DateTime.MinValue;
-
             return strValue.ToDateTime( defaultValue );
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="strValue"></param>
+        /// <param name="format"></param>
+        /// <returns></returns>
+        public static DateTime ToDateTimeEx(this object strValue,string format="yyyyMMdd")
+        {
+            var defaultValue = DateTime.MinValue;
+            return strValue.ToDateTime(defaultValue,format);
         }
 
         /// <summary>
@@ -231,5 +255,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <param name="val"></param>
         /// <returns></returns>
         public static int ToCapitalInt( this double val ) => Math.Round( val / 1000000.0, 0 ).ToInt();
+
+        public static string ToYmd(this DateTime val) => val.ToString("yyyyMMdd");
+
+        public static DateTime FromYmd(this string val) => val.ToDateTimeEx("yyyyMMdd");
     }
 }
