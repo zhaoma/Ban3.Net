@@ -1,30 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Domain/Contract/Contract.csproj": {}
+    "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\Contract.csproj": {}
   },
   "projects": {
-    "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj": {
+    "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj",
+        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj",
         "projectName": "Ban3.Infrastructures.Common",
-        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj",
-        "packagesPath": "/Users/zhaoma/.nuget/packages/",
-        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/obj/",
+        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -80,31 +83,34 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj": {
+    "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj",
+        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj",
         "projectName": "Ban3.Infrastructures.NetHttp",
-        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj",
-        "packagesPath": "/Users/zhaoma/.nuget/packages/",
-        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/obj/",
+        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj",
+        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -152,31 +158,34 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/zhaoma/Projects/Ban3.Net/Libs/NetMail/NetMail.csproj": {
+    "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetMail/NetMail.csproj",
+        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj",
         "projectName": "Ban3.Infrastructures.NetMail",
-        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetMail/NetMail.csproj",
-        "packagesPath": "/Users/zhaoma/.nuget/packages/",
-        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetMail/obj/",
+        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj",
+        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -232,31 +241,34 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/zhaoma/Projects/Ban3.Net/Libs/RuntimeCaching/RuntimeCaching.csproj": {
+    "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Libs/RuntimeCaching/RuntimeCaching.csproj",
+        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj",
         "projectName": "Ban3.Infrastructures.RuntimeCaching",
-        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/RuntimeCaching/RuntimeCaching.csproj",
-        "packagesPath": "/Users/zhaoma/.nuget/packages/",
-        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/RuntimeCaching/obj/",
+        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj",
+        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -304,47 +316,50 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Domain/Contract/Contract.csproj": {
+    "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\Contract.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Domain/Contract/Contract.csproj",
+        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\Contract.csproj",
         "projectName": "Ban3.Platforms.TeamFoundationCollector.Domain.Contract",
-        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Domain/Contract/Contract.csproj",
-        "packagesPath": "/Users/zhaoma/.nuget/packages/",
-        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Platforms/TeamFoundationCollector/Domain/Contract/obj/",
+        "projectPath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\Contract.csproj",
+        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
         },
         "frameworks": {
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj": {
-                "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Common/Common.csproj"
+              "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
+                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj"
               },
-              "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj": {
-                "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetHttp/NetHttp.csproj"
+              "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj": {
+                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj"
               },
-              "/Users/zhaoma/Projects/Ban3.Net/Libs/NetMail/NetMail.csproj": {
-                "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/NetMail/NetMail.csproj"
+              "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj": {
+                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj"
               },
-              "/Users/zhaoma/Projects/Ban3.Net/Libs/RuntimeCaching/RuntimeCaching.csproj": {
-                "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/RuntimeCaching/RuntimeCaching.csproj"
+              "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj": {
+                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj"
               }
             }
           }
@@ -401,7 +416,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

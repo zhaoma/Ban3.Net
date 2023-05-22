@@ -30,36 +30,34 @@ public class MonitorBuildReports
         {
             new()
             {
-                Id="1",
+                Id = "1",
                 Subject = "Som10 Integration Summary_SHA.SERV",
-                Sections=new ()
+                Sections = new()
                 {
-                    new ReportSectionForLastRI(1,"Latest RI",@"$/CTS/Development/ICS/ICS.INT",@"Reverse Integration: SHA.SERV",15),
-                    new ReportSectionForWorkItems(11,"Pipeline Defect")
+                    new ReportSectionForLastRI(1, "Latest RI", @"$/CTS/Development/ICS/ICS.INT",
+                        @"Reverse Integration: SHA.SERV", 15),
+                    new ReportSectionForWorkItems(11, "Pipeline Defect")
                     {
-                        Sql=@"Select [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] From WorkItems 
-                                Where [System.WorkItemType] = 'Defect' 
-                                AND [State] <> 'Done' 
-                                AND [State] <> 'Implemented' 
-                                AND [State] <> 'Terminated'
-                                AND [System.AreaPath] = 'CTS\SERVICE\SMS_SSME' 
-                                AND [System.IterationPath] UNDER 'CTS\VB10A' 
-                                AND [Siemens.Defect.FoundInPhase] = 'Automated Test - Build Pipeline'"
+                        Sql =
+                            @"Select [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] From WorkItems 
+                                Where [System.WorkItemType] = 'Defect' AND [State] NOT IN ('Done' ,'Implemented' , 'Terminated')
+                                AND ([System.AreaPath] = 'CTS\SERVICE\SMS_SSME' OR [System.AssignedTo] IN GROUP '[CTS]\SERVICE-SMS_SSME')
+                                AND [System.IterationPath] UNDER 'CTS\VB10A' AND [Siemens.Defect.FoundInPhase] = 'Automated Test - Build Pipeline'"
                     },
-                    new ReportSectionForDefinition(21,1455,"SHA.SERV_CI"),
-                    new ReportSectionForDefinition(22,1920,"SHA.SERV RB"),
-                    new ReportSectionForDefinition(23,3288,"SHA.SERV_CI_UnitTests"),
-                    new ReportSectionForDefinition(24,1841,"SHA.SERV NB"),
-                    new ReportSectionForDefinition(25,1775,"SHA.SERV_SYS_NB"),
-                    new ReportSectionForDefinition(26,2389,"SHA.IDT.MAIN_RB"),
-                    new ReportSectionForDefinition(27,2388,"SHA.IDT.MAIN_NB"),
-                    new ReportSectionForDefinition(28,1830,"IDT.MAIN_COV"),
-                    new ReportSectionForDefinition(29,3287,"SHA.ISA3_CI_UnitTests"),
-                    new ReportSectionForDefinition(30,3285,"SHA.ISA4_CI_UnitTests"),
+                    new ReportSectionForDefinition(21, 1455, "SHA.SERV_CI"),
+                    new ReportSectionForDefinition(22, 1920, "SHA.SERV RB"),
+                    new ReportSectionForDefinition(23, 3288, "SHA.SERV_CI_UnitTests"),
+                    new ReportSectionForDefinition(24, 1841, "SHA.SERV NB"),
+                    new ReportSectionForDefinition(25, 1775, "SHA.SERV_SYS_NB"),
+                    new ReportSectionForDefinition(26, 2389, "SHA.IDT.MAIN_RB"),
+                    new ReportSectionForDefinition(27, 2388, "SHA.IDT.MAIN_NB"),
+                    new ReportSectionForDefinition(28, 1830, "IDT.MAIN_COV"),
+                    new ReportSectionForDefinition(29, 3287, "SHA.ISA3_CI_UnitTests"),
+                    new ReportSectionForDefinition(30, 3285, "SHA.ISA4_CI_UnitTests"),
                 },
                 Subscribed = new List<string>
                 {
-                    "zhifeng.zhao.ext@siemens-healthineers.com" 
+                    "zhifeng.zhao.ext@siemens-healthineers.com"
                 }
             }
         };

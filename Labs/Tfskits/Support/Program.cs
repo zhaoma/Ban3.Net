@@ -4,18 +4,28 @@ using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
 using Config= Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Config;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
 
-var identities =
-    DevOps.Collector.Core.LoadTeams()
-        .Where(o => o.Name==Config.DefaultTeam)
-        .ToList()
-        .GetIdentitiesFromTeams();
+//var identities =
+//    DevOps.Collector.Core.LoadTeams()
+//        .Where(o => o.Name==Config.DefaultTeam)
+//        .ToList()
+//        .GetIdentitiesFromTeams();
 
-Console.WriteLine($"identity count={identities.Count}");
+//Console.WriteLine($"identity count={identities.Count}");
 
-identities.ParallelExecute((identity) =>
-{
-    DevOps.Collector.SyncOneMemberSummary(identity.Id,true);
-},Config.MaxParallelTasks);
+//identities.ParallelExecute((identity) =>
+//{
+//    DevOps.Collector.SyncOneMemberSummary(identity.Id,true);
+//},Config.MaxParallelTasks);
+
+var Sql =
+    @"Select [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] From WorkItems 
+                                Where [System.WorkItemType] = 'Defect' AND [State] NOT IN ('Done' ,'Implemented' , 'Terminated')
+                                AND ([System.AreaPath] = 'CTS\SERVICE\SMS_SSME' OR [System.AssignedTo] IN GROUP '[CTS]\SERVICE-SMS_SSME')
+                                AND [System.IterationPath] UNDER 'CTS\VB10A' AND [Siemens.Defect.FoundInPhase] = 'Automated Test - Build Pipeline'";
+
+var x = DevOps.Reportor.WorkItemTracking.Query(Sql);
+
+Console.WriteLine(x.ObjToJson());
 
 /*
 
