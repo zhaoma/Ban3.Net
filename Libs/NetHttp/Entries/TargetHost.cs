@@ -19,15 +19,23 @@ public class TargetHost : ITargetHost
 
     public string AuthenticationType { get; set; } = "Basic";
 
+    static readonly object ObjectLock = new object();
     public HttpClient Client()
     {
-        return _client = _client ?? (Anonymous
-            ? new HttpClient { Timeout = TimeSpan.FromMinutes(1) }
-            : new HttpClient(Handler())
-            {
-                BaseAddress = new Uri(BaseUrl),
-                Timeout = TimeSpan.FromMinutes(1)
-            });
+        if(_client!=null) return _client;
+
+        lock (ObjectLock)
+        {
+            _client = Anonymous
+                ? new HttpClient { Timeout = TimeSpan.FromMinutes(1) }
+                : new HttpClient(Handler())
+                {
+                    BaseAddress = new Uri(BaseUrl),
+                    Timeout = TimeSpan.FromMinutes(1)
+                };
+        }
+
+        return _client;
     }
 
     private HttpClient _client;

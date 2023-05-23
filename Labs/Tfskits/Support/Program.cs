@@ -1,21 +1,27 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Consoles;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
 using Config= Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Config;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
 
-//var identities =
-//    DevOps.Collector.Core.LoadTeams()
-//        .Where(o => o.Name==Config.DefaultTeam)
-//        .ToList()
-//        .GetIdentitiesFromTeams();
+var identities =
+    DevOps.Collector.Core.LoadTeams()
+        //.Where(o => o.Name == Config.DefaultTeam)
+        .ToList()
+        .GetIdentitiesFromTeams();
 
-//Console.WriteLine($"identity count={identities.Count}");
+Console.WriteLine($"identity count={identities.Count}");
 
-//identities.ParallelExecute((identity) =>
-//{
-//    DevOps.Collector.SyncOneMemberSummary(identity.Id,true);
-//},Config.MaxParallelTasks);
+identities.ParallelExecute((identity) =>
+{
+    DevOps.Collector.SyncOneMemberSummary(identity.Id, true);
+}, Config.MaxParallelTasks);
+
+
+/*
 
 var Sql =
     @"Select [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] From WorkItems 
@@ -26,8 +32,6 @@ var Sql =
 var x = DevOps.Reportor.WorkItemTracking.Query(Sql);
 
 Console.WriteLine(x.ObjToJson());
-
-/*
 
 DevOps.Reportor.ParseMonitorJobs();
 

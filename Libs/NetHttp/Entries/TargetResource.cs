@@ -40,6 +40,9 @@ public class TargetResource : ITargetResource
             }
         }
 
+        if(!string.IsNullOrEmpty(Charset))
+            request.Headers.Add("Accept-Charset",Charset);
+
         return request;
     }
 }

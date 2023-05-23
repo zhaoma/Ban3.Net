@@ -220,6 +220,10 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "log4net": {
               "target": "Package",
               "version": "[2.0.15, )"

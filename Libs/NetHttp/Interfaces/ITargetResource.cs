@@ -11,6 +11,8 @@ public interface ITargetResource
 
     string Method { get; set; }
 
+    string Charset { get; set; }
+
     bool ResourceIsJsonp { get; set; }
 
     string JsonpPrefix { get; set; }

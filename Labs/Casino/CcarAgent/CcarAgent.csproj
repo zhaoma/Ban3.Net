@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Libs\Consoles\Consoles.csproj" />
     <ProjectReference Include="..\..\..\Productions\Casino\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\..\..\Productions\Casino\CcaAndReport\CcaAndReport.csproj" />
   </ItemGroup>

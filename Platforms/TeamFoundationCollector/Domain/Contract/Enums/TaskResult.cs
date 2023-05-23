@@ -13,7 +13,7 @@ public enum TaskResult
 
     Skipped,
 
-    Successed,
+    Succeeded,
 
-    SuccessedWithIssues
+    SucceededWithIssues
 }

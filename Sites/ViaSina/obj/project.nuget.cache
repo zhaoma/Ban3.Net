@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MvePvQX/sfjTK5v8HjhHNxrQUA7cVP7e33uEjMHwS7Ll5Ym2zGA6nsqYIn1foyqDlzpvN8spo3Qo7542i0z2ug==",
+  "dgSpecHash": "jVc2K3NOOp7qQhFiytuDYOw/B/C1HwFM0BqH7i5CTHhag3CjEP5OFW883J3gUMqCoYbQtFRfyUrmvthNUrQ3vA==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Sites\\ViaSina\\ViaSina.csproj",
   "expectedPackageFiles": [
@@ -72,6 +72,7 @@
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.security.permissions\\4.5.0\\system.security.permissions.4.5.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.security.principal.windows\\4.5.0\\system.security.principal.windows.4.5.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\system.text.encoding.codepages\\7.0.0\\system.text.encoding.codepages.7.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",

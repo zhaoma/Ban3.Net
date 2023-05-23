@@ -3,33 +3,24 @@
 //  function:	DownloadLifts.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using System;
-namespace Ban3.Infrastructures.Common.Contracts.Requests.Platforms.Sina
+
+using Ban3.Infrastructures.NetHttp.Entries;
+
+namespace Ban3.Sites.ViaSina.Request;
+
+public class DownloadLifts
+    : TargetResource
 {
-	public class DownloadLifts
-        :NormalRequest
-	{
-		public DownloadLifts()
-		{
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Code { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override Servers.NetResource NetResource()
-        {
-            return new Servers.NetResource
-            {
-                Charset = "gb2312",
-                Url = Servers.Sina.UrlForLifts(Code)
-            };
-        }
+    public DownloadLifts(string code)
+    {
+        Code = code;
+        Url = $"http://vip.stock.finance.sina.com.cn/q/go.php/vInvestConsult/kind/xsjj/index.phtml?symbol={Code}";
+        Charset = "gb2312";
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string Code { get; set; }
 }
 

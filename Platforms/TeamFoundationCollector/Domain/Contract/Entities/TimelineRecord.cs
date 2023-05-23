@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 
@@ -102,7 +103,7 @@ public class TimelineRecord
     /// The current completion percentage.
     /// </summary>
     [JsonProperty("percentComplete")]
-    public int PercentComplete { get; set; }
+    public int? PercentComplete { get; set; }
 
     [JsonProperty("previousAttempts")]
     public List<TimelineAttempt>? PreviousAttempts { get; set; }
@@ -117,6 +118,7 @@ public class TimelineRecord
     /// The result.
     /// </summary>
     [JsonProperty("result")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public TaskResult Result { get; set; }
 
     /// <summary>
@@ -135,6 +137,7 @@ public class TimelineRecord
     /// The state of the record.
     /// </summary>
     [JsonProperty("state")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public TimelineRecordState State { get; set; }
 
     /// <summary>

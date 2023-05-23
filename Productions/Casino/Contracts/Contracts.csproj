@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Common\Common.csproj" />
+    <ProjectReference Include="..\..\..\Sites\ViaSina\ViaSina.csproj" />
     <ProjectReference Include="..\..\..\Sites\ViaTushare\ViaTushare.csproj" />
     <ProjectReference Include="..\..\..\Sites\ViaYuncaijing\ViaYuncaijing.csproj" />
     <ProjectReference Include="..\..\..\Sites\ViaEastmoney\ViaEastmoney.csproj" />

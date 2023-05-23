@@ -1,12 +1,25 @@
 ﻿using System;
+using Ban3.Productions.Casino.Contracts.Enums;
+using Ban3.Sites.ViaSina.Entries;
 
-namespace Ban3.Sites.ViaSina.Entries;
+namespace Ban3.Productions.Casino.Contracts.Entities;
 
-/// <summary>
-/// 
-/// </summary>
-public class ShareBonus
+public class StockEvent
 {
+    public StockEvent(ShareBonus o)
+    {
+        MarkTime=o.MarkTime;
+        EventType = (StockEventType)o.EventType;
+        EventSubject=o.EventSubject;
+        Sbonus = o.Sbonus;
+        Zbonus=o.Zbonus;
+        Xmoney=o.Xmoney;
+        Pbonus=o.Pbonus;
+        Pprice=o.Pprice;
+        Pcapital=o.Pcapital;
+        Lifted=o.Lifted;
+    }
+
     /// <summary>
     /// 除权日
     /// </summary>
@@ -15,7 +28,7 @@ public class ShareBonus
     /// <summary>
     /// 事件类型
     /// </summary>
-    public int EventType { get; set; }
+    public StockEventType EventType { get; set; }
 
     /// <summary>
     /// 事件主题

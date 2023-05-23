@@ -3,16 +3,13 @@
 //  function:	DownloadLiftsResult.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using Ban3.Infrastructures.Common.Contracts.Entities.Platforms.Sina;
 
-namespace Ban3.Infrastructures.Common.Contracts.Responses.Platforms.Sina
+using System.Collections.Generic;
+using Ban3.Sites.ViaSina.Entries;
+
+namespace Ban3.Sites.ViaSina.Response;
+
+public class DownloadLiftsResult
 {
-	public class DownloadLiftsResult
-        : GenericListCallback<ShareBonus>
-    {
-		public DownloadLiftsResult()
-		{
-		}
-	}
+    public List<ShareBonus> Data { get; set; }
 }
-

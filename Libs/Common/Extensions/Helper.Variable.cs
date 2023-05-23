@@ -69,9 +69,9 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <param name="strValue">The STR value.</param>
         /// <param name="defValue">The def value.</param>
         /// <returns></returns>
-        public static float ToFloat( this object strValue, float defValue = 0 )
+        public static float ToFloat( this object? strValue, float defValue = 0 )
         {
-            float.TryParse( strValue.ToString(), out var def );
+            float.TryParse( strValue+"", out var def );
             return def == 0 ? defValue : def;
         }
 

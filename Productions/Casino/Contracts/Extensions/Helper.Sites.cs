@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
+using Ban3.Sites.ViaSina;
+using Ban3.Sites.ViaSina.Request;
+using Ban3.Sites.ViaTushare;
+using Ban3.Sites.ViaTushare.Entries;
 using Ban3.Sites.ViaTushare.Request;
+using Ban3.Sites.ViaTushare.Response;
 using Ban3.Sites.ViaYuncaijing.Request;
 using Newtonsoft.Json.Bson;
 
@@ -95,7 +100,7 @@ public static partial class Helper
 
     public static bool PrepareAllCodesFromTushare(this ISites _)
     {
-        var result = Sites.ViaTushare.Helper.GetStockBasic(new GetStockBasic());
+        var result = new GetStockBasic().GetResult();
 
         var local = _.LoadAllCodes();
         if (local != null)
@@ -132,17 +137,171 @@ public static partial class Helper
 
     #endregion
 
-    public static bool GetDailyPrices(this ISites _,List<string> tsCodes,string startDate,string endDate)
+    #region daily prices
+
+    public static GetStockPriceResult GetDailyPrices(this ISites _,List<string> tsCodes,string startDate,string endDate)
     {
-        var getDailyParams = new GetDailyParams(tsCodes);
+        var getDailyParams = new GetDailyParams(tsCodes)
+        {
+            StartDate = startDate,
+            EndDate = endDate
+        };
 
-        getDailyParams.StartDate = startDate;
-        getDailyParams.EndDate = endDate;
-
-        var result=Sites.ViaTushare.Helper.GetStockPrice(new GetStockPrice(getDailyParams));
-
-        Console.WriteLine(result.ObjToJson());
-
-        return true;
+        Console.WriteLine(getDailyParams.ObjToJson());
+        
+        return new GetStockPrice(getDailyParams).GetResult();
     }
+    
+    public static GetStockPriceResult GetDailyPrices(this ISites _, List<string> tsCodes, DateRange dateRange)
+        => _.GetDailyPrices(tsCodes, dateRange.StartDate, dateRange.EndDate);
+
+    public static bool PrepareOnesDailyPrices(this ISites _, string code)
+    {
+        var result = false;
+        var prices=new List<StockPrice>();
+
+        var freq = 0;
+
+        var r = _.GetDailyPrices(new List<string> { code }, new DateRange(10, freq));
+        while (r != null && r.Data.Any())
+        {
+            prices=prices.Union(r.Data).ToList();
+
+            freq++;
+            r = _.GetDailyPrices(new List<string> { code }, new DateRange(10, freq));
+        }
+
+        if (prices.Any())
+        {
+            var savedPath = prices.SetsFile(code)
+                .WriteFile(prices.OrderBy(o=>o.TradeDate).ObjToJson());
+            result = !string.IsNullOrEmpty(savedPath);
+        }
+
+        return result;
+    }
+
+    public static bool PrepareAllDailyPrices(this ISites _)
+    {
+        var result = true;
+        var allCodes = _.LoadAllCodes();
+        allCodes.ForEach(stock => { result = result && _.PrepareOnesDailyPrices(stock.Code); });
+        return result;
+    }
+
+    public static bool FixAllDailyPrices(this ISites _)
+    {
+        var result = true;
+        var allCodes = _.LoadAllCodes();
+
+        var page = 1;
+        var codes = allCodes
+            .Take(Config.FixPageSize)
+            .Select(o => o.Code)
+            .ToList();
+
+        while (codes.Any())
+        {
+            result = result && _.FixAllDailyPrices(codes);
+
+            page++;
+            codes = allCodes
+                .Skip((page - 1) * Config.FixPageSize)
+                .Take(Config.FixPageSize)
+                .Select(o => o.Code)
+                .ToList();
+        }
+
+        return result;
+    }
+
+    public static bool FixAllDailyPrices(this ISites _, List<string> codes)
+    {
+        var result = true;
+        var ps = _.GetDailyPrices(codes, new DateRange(Config.FixDailyPrices));
+        if (ps != null && ps.Data.Any())
+        {
+            var gotCodes = ps.Data.Select(o => o.Code)
+                .GroupBy(o => o)
+                .Select(o => o.Key)
+                .ToList();
+
+            foreach (var code in gotCodes)
+            {
+                var exists = _.LoadOnesDailyPrices(code);
+                exists = exists.Union(ps.Data.FindAll(o => o.Code == code))
+                    .OrderBy(o => o.TradeDate)
+                    .ToList();
+
+                var savedPath=exists.SetsFile(code)
+                    .WriteFile(exists.OrderBy(o=>o.TradeDate).ObjToJson());
+
+                result = result&&!string.IsNullOrEmpty(savedPath);
+            }
+        }
+
+        return result;
+    }
+    
+    public static List<StockPrice> LoadOnesDailyPrices(this ISites _, string code)
+    {
+        return typeof(StockPrice)
+            .LocalFile(code)
+            .ReadFileAs<List<StockPrice>>();
+    }
+
+    #endregion
+
+    #region events
+
+    public static bool PrepareOnesEvents(this ISites _, string symbol)
+    {
+        var result = false;
+        var events = new List<StockEvent>();
+
+        var getEvents = new DownloadEvents(symbol).GetResult();
+        if (getEvents.Data.Any())
+        {
+            events = events.Union(getEvents.Data.Select(o => new StockEvent(o))).ToList();
+        }
+
+        var getLifts = new DownloadLifts(symbol).GetResult();
+        if (getLifts.Data.Any())
+        {
+            events = events.Union(getLifts.Data.Select(o => new StockEvent(o))).ToList();
+        }
+
+        if (events.Any())
+        {
+            var savedPath = events.SetsFile(symbol)
+                .WriteFile(events.OrderBy(o => o.MarkTime).ObjToJson());
+            result = !string.IsNullOrEmpty(savedPath);
+        }
+
+        return result;
+    }
+
+    public static bool PrepareAllEvents(this ISites _)
+    {
+        var result = true;
+        var allCodes = _.LoadAllCodes();
+
+        allCodes.ForEach(o =>
+        {
+            Console.WriteLine(o.Symbol);
+            result = result && _.PrepareOnesEvents(o.Symbol);
+            (3, 7).RandomDelay();
+        });
+
+        return result;
+    }
+
+    public static List<StockEvent> LoadOnesEvents(this ISites _, string symbol)
+    {
+        return typeof(StockEvent)
+            .LocalFile(symbol)
+            .ReadFileAs<List<StockEvent>>();
+    }
+
+    #endregion
 }

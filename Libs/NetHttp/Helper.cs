@@ -24,7 +24,7 @@ public static class Helper
             var client = host.Client();
             if(!string.IsNullOrEmpty(accept))
                 client.DefaultRequestHeaders.Add("Accept", accept);
-
+            
             return await client.SendAsync(resource.Request());
         }
         catch (Exception ex)
@@ -53,6 +53,25 @@ public static class Helper
         }
 
         return string.Empty;
+    }
+
+    public static async Task<byte[]> ReadBytes(
+        this ITargetHost host,
+        ITargetResource resource)
+    {
+        try
+        {
+
+            using var responseMessage = await host.Request(resource);
+
+            return await responseMessage.Content.ReadAsByteArrayAsync();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+
+        return null;
     }
 
     /// get resource content and deserialize to special type

@@ -129,7 +129,7 @@ public static partial class Helper
     public static string GetBuildIssues(this IBuild _, int buildId)
     {
         var issues = "";
-
+        /*
         var report = _.GetReport(buildId);
         if (report.Success)
         {
@@ -141,6 +141,26 @@ public static partial class Helper
                 issues = issues.Substring(0, issues.IndexOf("</div>") + 6);
             }
         }
+        */
+
+        var records = _.GetTimelineForBuildIssues(buildId);
+        if (records.Any())
+        {
+            records
+                .OrderBy(o => o.Order)
+                .ToList()
+                .ForEach(o =>
+                    {
+                        var url =
+                            $"https://demeter.healthcare.siemens.com/tfs/CT/CTS/_build/results?buildId={buildId}&view=logs&j={o.ParentId}&t={o.Id}";
+                        issues += $"<a href='{url}' target='_blank'><h4 style='color:#AAA'>timeline step {o.Order} : {o.Name}</h4></a>";
+                        o.Issues?.ForEach(x =>
+                        {
+                            issues += $"{x.Message}<br/>";
+                        });
+                    }
+                );
+        }
 
         return issues;
     }
@@ -150,6 +170,15 @@ public static partial class Helper
 
     public static GetTimelineResult GetTimeline(this IBuild _, GetTimeline request)
         => ServerResource.BuildGetTimeline.Execute<GetTimelineResult>(request).Result;
+
+    public static List<TimelineRecord> GetTimelineForBuildIssues(this IBuild _, int buildId)
+    {
+        var timeline = _.GetTimeline(new GetTimeline { BuildId = buildId });
+        if (timeline is { Success: true, Records: { } } && timeline.Records.Any())
+            return timeline.Records.FindAll(o => o.ErrorCount > 0).ToList();
+
+        return new List<TimelineRecord>();
+    }
 
     public static GetWorkItemsBetweenBuildsResult GetWorkItemsBetweenBuilds(this IBuild _,
         GetWorkItemsBetweenBuilds request)
