@@ -77,23 +77,31 @@ function focusNav(id) {
     $("#" + id).addClass("rotate");
 }
 
-function showCode(tid,reportRef, fileId, properties) {
-    var request = {
-        reportRef: reportRef,
-        fileId: fileId,
-        properties: properties
-    };
+function showCode(tid, reportRef, fileId, properties) {
+    if ($("#threads_" + tid).is(":visible")) {
+        $("#threads_" + tid).slideUp(600,'linear');
+    } else {
+        $("#threads_" + tid).slideDown(600,'linear');
+    }
 
-    $.ajax({
-        url: "/home/showcode",
-        type: "post",
-        data: request,
-        dataType: "html",
-        success: function (response) {
-            $("#threads_" + tid).html(response);
-            $("#threads_" + tid).show(100);
-        }
-    });
+    if ($("#threads_" + tid).html() == "") {
+        var request = {
+            reportRef: reportRef,
+            fileId: fileId,
+            properties: properties
+        };
+
+        $.ajax({
+            url: "/home/showcode",
+            type: "post",
+            data: request,
+            dataType: "html",
+            success: function (response) {
+                $("#threads_" + tid).html(response);
+                $("#threads_" + tid).removeClass("border0");
+            }
+        });
+    }
 
     return false;
 }

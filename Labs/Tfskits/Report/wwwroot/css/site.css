@@ -300,46 +300,54 @@ video {
     -webkit-animation: rotate 10s linear infinite;
 }
 
+.border0 { border: solid 1px #FFF;}
+
 @keyframes rotate {
     0% {
-        transform: rotate(0);
+        transform: scale(1);
     }
 
     25% {
-        transform: rotate(90deg);
+        transform: scale(0.8,1.2);
     }
 
     50% {
-        transform: rotate(180deg);
+        transform: scale(1.5);
     }
 
     75% {
-        transform: rotate(270deg);
+        transform: scale(1.2,0.8);
     }
 
     100% {
-        transform: rotate(360deg);
+        transform: scale(1);
     }
 }
 
 @-webkit-keyframes rotate {
     0% {
-        transform: rotate(0);
+        transform: scale(1);
     }
 
     25% {
-        transform: rotate(90deg);
+        transform: scale(0.8,1.2);
     }
 
     50% {
-        transform: rotate(180deg);
+        transform: scale(1.5);
     }
 
     75% {
-        transform: rotate(270deg);
+        transform: scale(1.2,0.8);
     }
 
     100% {
-        transform: rotate(360deg);
+        transform: scale(1);
     }
+}
+
+.prettyprint {
+    width: 95%;
+    transform: skew(-3deg);
+    box-shadow: 6px 3px 3px #888;
 }

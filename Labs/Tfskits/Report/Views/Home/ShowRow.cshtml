@@ -58,7 +58,7 @@
                         <h5>
                             <a target="_blank" href="@fileUrl">@tc.Properties?.ItemPath</a> ( <a href="javascript:;" onclick="return showCode('@tc.Id','@Model.ReportRef','@Model.FileId','@tc.Properties?.ObjToJson()');">preview</a> )
 </h5>
-                        <pre id="threads_@tc.Id" style="display: none;" class="prettyprint "></pre>
+                        <pre id="threads_@tc.Id" style="display: none;" class="prettyprint border0"></pre>
                         @foreach (var t in tc.Comments)
                         {
                             <div class="dataRow">

@@ -11,9 +11,9 @@ internal class Program
     static void Main(string[] args)
     {
         //Signalert.Collector.Sites.FixAllDailyPrices();
-        
-        Signalert.Collector.Sites.PrepareAllEvents();
 
+        var r=Signalert.Collector.PrepareAllCodes();
+        Console.WriteLine(r);
     }
 
     /*
