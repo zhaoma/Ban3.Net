@@ -17,6 +17,7 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Reports;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Response.Reports;
 using log4net;
 using NPOI.HSSF.UserModel;
+using NPOI.SS.Formula.Functions;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
 
@@ -60,6 +61,12 @@ public static partial class Helper
 
         result.Rows = result.Rows.OrderByDescending(o => o.CreatedDate).ToList();
 
+        if (result.Rows.Count < (filter.PageNo - 1) * filter.PageSize)
+        {
+            filter.PageNo = 1;
+            result.Filter.PageNo = 1;
+        }
+        
         result.PagedRows = result.Rows.Skip((filter.PageNo - 1) * filter.PageSize).Take(filter.PageSize).ToList();
 
             /*

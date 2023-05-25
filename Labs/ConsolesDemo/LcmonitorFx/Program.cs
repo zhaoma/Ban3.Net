@@ -15,11 +15,13 @@ namespace Lcmonitor
     {
         private const string SomarisBin = @"D:\CTS\Development\ICS\SHA.SERV\bin\Debug";
         private const string ExeFile = @"syngo.Common.LCMService.exe";
-        private static List<string> SupportedExts=new List<string>{".dll","exe"};
+        private static List<string> SupportedExts = new List<string> { ".dll", "exe" };
 
         private static Assembly RequestResolve(object sender, ResolveEventArgs e)
         {
-            var targetName = e.Name.Split(',')[0].Trim();
+                //e.RequestingAssembly.ManifestModule.Name;
+            var targetName =
+                e.Name.Split(',')[0].Trim();
             targetName.WriteColorLine(ConsoleColor.Red);
 
             var lib =
@@ -27,7 +29,7 @@ namespace Lcmonitor
                     .Select(o => Path.Combine(SomarisBin, targetName + o))
                     .First(o => File.Exists(o));
             $"{e.Name}->{lib}".WriteColorLine(ConsoleColor.DarkBlue);
-            if (File.Exists(lib ))
+            if (File.Exists(lib))
             {
                 return Assembly.LoadFile(lib);
             }
@@ -44,7 +46,7 @@ namespace Lcmonitor
         public static Assembly RequestResolveType(object sender, ResolveEventArgs e)
         {
             Console.WriteLine("RequestResolveType");
-            var targetName = e.Name.Split(',')[0].Trim() ;
+            var targetName = e.Name.Split(',')[0].Trim();
             targetName.WriteColorLine(ConsoleColor.DarkYellow);
 
             var lib =
@@ -72,7 +74,7 @@ namespace Lcmonitor
             AppDomain.CurrentDomain.TypeResolve += RequestResolveType;
             AppDomain.CurrentDomain.UnhandledException += OnException;
         }
-        
+
         static void Main(string[] args)
         {
             InvokeLcm();
@@ -84,7 +86,7 @@ namespace Lcmonitor
 
         static void InvokeSystemMonitor()
         {
-            var assembly= Assembly.LoadFile(Path.Combine(SomarisBin, @"CT.AppCommon.SystemMonitor.Application.exe"));
+            var assembly = Assembly.LoadFile(Path.Combine(SomarisBin, @"CT.AppCommon.SystemMonitor.Application.exe"));
             var entryType = assembly.GetType("CT.AppCommon.SystemMonitor.Application.App", true, true);
             var entryPoint = assembly.EntryPoint;
             if (entryPoint != null)
@@ -100,25 +102,24 @@ namespace Lcmonitor
 
         static void InvokeLcm()
         {
-            var assembly=Assembly.LoadFile(Path.Combine(SomarisBin, ExeFile));
+            var assembly = Assembly.LoadFile(Path.Combine(SomarisBin, ExeFile));
             var selectedType = assembly.GetType("syngo.Common.LCMService.Program", true, true);
-            var method = assembly.EntryPoint.Name;
+            var method = assembly.EntryPoint;
             //selectedType.GetMethod("Fibonacci", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
 
-            if (!string.IsNullOrEmpty(method))
+            if (method != null)
             {
-                /*
-                 *  Cannot bind to the target method because its signature or security transparency is not compatible with that of the delegate type
-                 *  Action a = (Action)method.CreateDelegate(typeof(Action));
-                 *  a();
-                 *
-                 */
+
+                //Action a = (Action)method.CreateDelegate(typeof(Action));
+                //a();
+
                 selectedType.InvokeMember(
                     "Main",
                     BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static,
                     null,
                     null,
                     null);
+
                 //method.Invoke()
 
             }
