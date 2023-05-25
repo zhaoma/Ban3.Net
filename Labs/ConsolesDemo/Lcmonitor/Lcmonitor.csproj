@@ -5,9 +5,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>mm</AssemblyName>
+    <RootNamespace>Lcmonitor</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Libs\Consoles\Consoles.csproj" />
     <ProjectReference Include="..\Lost\Lost.csproj" />
   </ItemGroup>
 

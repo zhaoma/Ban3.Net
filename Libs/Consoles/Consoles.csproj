@@ -5,6 +5,7 @@
     <LangVersion>10.0</LangVersion>
     <AssemblyName>Ban3.Infrastructures.Consoles</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.Consoles</RootNamespace>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,9 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
@@ -14,11 +16,19 @@ public static partial class Helper
         _.SyncTfvc();
     }
 
+    #region Build
+
+    public static Build? DefinitionsLastBuild(this ICollectService _, int definitionId)
+        => _.Build.GetLastBuildForDefinition(definitionId);
+
+
+
+    #endregion
+
     #region Tfvc
 
     public static void SyncTfvc(this ICollectService _)
     {
-        _.Core.PrepareTeams(true);
         var teams = _.Core.LoadTeams();
 
         teams.ParallelExecute(

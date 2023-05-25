@@ -228,7 +228,7 @@ public static partial class Helper
                     if (!string.IsNullOrEmpty(content) && content.Contains(buildArtifact.Resource.Data))
                     {
                         var fileStart = content.IndexOf(buildArtifact.Resource.Data);
-                        var temp = content.Substring(fileStart, content.Length - fileStart);
+                        var temp = content.Substring(fileStart, content.Length.ToInt() - fileStart);
                         fileLocation = temp.Substring(0, temp.IndexOf(")"));
                     }
 
