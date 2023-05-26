@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ban3.Infrastructures.Common.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Ban3.Infrastructures.Common.Extensions
 {
@@ -56,6 +57,36 @@ namespace Ban3.Infrastructures.Common.Extensions
         public static string AggregateToString(this IEnumerable<object> names, string seq = " ")
         {
             return string.Join(seq,names);
+        }
+
+        public static void AppendList(this Dictionary<string, List<string>> result, string key, List<string> values)
+        {
+            if (result.ContainsKey(key))
+            {
+                result[key] = result[key].Union(values).ToList();
+            }
+            else
+            {
+                result.Add(key, values);
+            }
+        }
+
+        public static void AppendList(this Dictionary<string, List<string>> result, List<string> keys, string value)
+        {
+            keys.ForEach(key =>
+            {
+                if (!string.IsNullOrEmpty(key))
+                {
+                    if (result.ContainsKey(key))
+                    {
+                        result[key] = result[key].Union(new List<string> { value }).ToList();
+                    }
+                    else
+                    {
+                        result.Add(key, new List<string> { value });
+                    }
+                }
+            });
         }
 
         /// 

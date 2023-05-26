@@ -4,8 +4,10 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
 using Config= Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Config;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Request;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
+
 
 var identities =
     DevOps.Collector.Core.LoadTeams()
@@ -15,7 +17,7 @@ var identities =
 
 Console.WriteLine($"identity count={identities.Count}");
 
-identities.ParallelExecute((identity) =>
+await identities.ParallelExecuteAsync((identity) =>
 {
     DevOps.Collector.SyncOneMemberSummary(identity.Id, true);
 }, Config.MaxParallelTasks);

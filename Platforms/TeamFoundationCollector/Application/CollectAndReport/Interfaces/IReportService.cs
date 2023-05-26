@@ -20,5 +20,7 @@ public interface IReportService
 
     QueryAnythingResult QueryAnything(QueryAnything request);
 
+
+
     GetRelationsResult GetRelations(GetRelations request);
 }

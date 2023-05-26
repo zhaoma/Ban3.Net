@@ -2,6 +2,10 @@
 @using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions
 @model Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildReports.ReportDefine
 
+@{
+    ViewData["Title"] = $"Build report {Model.Subject}";
+}
+
 @section PreTitle
 {
     <div class="page-header d-print-none text-white" style="margin-top: 0; margin-bottom: 0; height: 60px; overflow: hidden;">

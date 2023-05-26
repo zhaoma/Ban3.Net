@@ -3,9 +3,12 @@ using System.Net;
 using System.Text;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.NetMail;
+using Ban3.Infrastructures.PlatformInvoke.Entries;
 using Ban3.Infrastructures.SpringConfig;
 using Ban3.Infrastructures.SpringConfig.Entries;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Interfaces;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Request;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Response;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
@@ -66,37 +69,37 @@ public static partial class Helper
             filter.PageNo = 1;
             result.Filter.PageNo = 1;
         }
-        
+
         result.PagedRows = result.Rows.Skip((filter.PageNo - 1) * filter.PageSize).Take(filter.PageSize).ToList();
 
-            /*
-        result.PagedRows.ForEach(o =>
+        /*
+    result.PagedRows.ForEach(o =>
+    {
+        if (o.ReportRef == ReportRef.Changeset)
         {
-            if (o.ReportRef == ReportRef.Changeset)
-            {
-                o.Changes = o.FileId.DataFile<TfvcChangeset>()
-                    .ReadFile()
-                    .JsonToObj<TfvcChangeset>()?
-                    .Changes;
-            }
+            o.Changes = o.FileId.DataFile<TfvcChangeset>()
+                .ReadFile()
+                .JsonToObj<TfvcChangeset>()?
+                .Changes;
+        }
 
-            if (o.ReportRef == ReportRef.Shelveset)
+        if (o.ReportRef == ReportRef.Shelveset)
+        {
+            o.Changes = o.FileId.DataFile<TfvcShelveset>()
+                .ReadFile()
+                .JsonToObj<TfvcShelveset>()?
+                .Changes;
+        }
+        if (o.Threads != null && o.Threads.Any())
+        {
+            o.Threads.ForEach(x =>
             {
-                o.Changes = o.FileId.DataFile<TfvcShelveset>()
-                    .ReadFile()
-                    .JsonToObj<TfvcShelveset>()?
-                    .Changes;
-            }
-            if (o.Threads != null && o.Threads.Any())
-            {
-                o.Threads.ForEach(x =>
-                {
-                    x.Code = _.Tfvc.GetItem(o.ReportRef, o.FileId, x.Properties);
-                });
-            }
+                x.Code = _.Tfvc.GetItem(o.ReportRef, o.FileId, x.Properties);
+            });
+        }
 
-        });
-            */
+    });
+        */
 
         return result;
     }
@@ -222,7 +225,7 @@ public static partial class Helper
             && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
             && o.CreatedDate.DateGE(filter.FromDate)
             && o.CreatedDate.DateLE(filter.ToDate)
-            && (o.Comment.StringExists(filter.Keyword)||o.Threads.ThreadsHasKeywords(filter.Keyword))
+            && (o.Comment.StringExists(filter.Keyword) || o.Threads.ThreadsHasKeywords(filter.Keyword))
         ).ToList();
 
         return shelvesets;
@@ -464,9 +467,10 @@ public static partial class Helper
     {
         var mailBody = _.RenderBuildReportHtml(reportDefine);
 
-        mailBody = $"<div style='padding:20px;margin:0 auto;background-color:rgb(194, 189, 189);'><div style='width:900px;background: #fff; table-layout:fixed;'>{mailBody}</div></div>";
+        mailBody =
+            $"<div style='padding:20px;margin:0 auto;background-color:rgb(194, 189, 189);'><div style='width:900px;background: #fff; table-layout:fixed;'>{mailBody}</div></div>";
 
-        return _.SendMail(reportDefine.Subscribed, reportDefine.CC, reportDefine.Subject,mailBody);
+        return _.SendMail(reportDefine.Subscribed, reportDefine.CC, reportDefine.Subject, mailBody);
     }
 
     public static string RenderBuildReportHtml(this IReportService _, ReportDefine reportDefine)
@@ -505,12 +509,13 @@ public static partial class Helper
         return sb.ToString();
     }
 
-    public static string GenerateHtml(this IReportService reportService,ReportSectionForLastRI section)
+    public static string GenerateHtml(this IReportService reportService, ReportSectionForLastRI section)
     {
-        var lc = reportService.Tfvc.GetLatestRIChangesetRef(section.Days,section.ItemPath,section.Keyword);
+        var lc = reportService.Tfvc.GetLatestRIChangesetRef(section.Days, section.ItemPath, section.Keyword);
         if (lc != null)
         {
-            return $"<div style='width:50%;padding:5px;font-size:18px;font-weight:bold;'>Latest RI Time : <a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_versionControl/changeset/{lc.ChangesetId}/' style='color:#000;text-decoration:underline;' target='_blank'>{lc.CreatedDate}</a><br/><br/></div>";
+            return
+                $"<div style='width:50%;padding:5px;font-size:18px;font-weight:bold;'>Latest RI Time : <a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_versionControl/changeset/{lc.ChangesetId}/' style='color:#000;text-decoration:underline;' target='_blank'>{lc.CreatedDate}</a><br/><br/></div>";
         }
 
         return string.Empty;
@@ -525,13 +530,15 @@ public static partial class Helper
 
         if (build != null && d != null)
         {
-            sb.AppendLine("<table align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"width:100%;font-size: 14px; font-family: 'Microsoft YaHei';\">");
+            sb.AppendLine(
+                "<table align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"width:100%;font-size: 14px; font-family: 'Microsoft YaHei';\">");
 
-            sb.Append($"<tr><td style='width:50%;padding:5px;font-size:18px;font-weight:bold;'><a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_build/results?buildId={build.Id}&view=results' style='color:#000;text-decoration:none;' target='_blank'>{d.Name}</a></td>" +
-                      $"<td style=''width:20%;padding:5px;font-size:18px;font-weight:bold;'><a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_build/results?buildId={build.Id}&view=results' class='{build.Result}' target='_blank'>{build.Result}</a></td>" +
-                      $"<td style='width:15%;padding:5px;'>{build.StartTime.ShowDate()}</td>" +
-                      $"<td style='width:15%;padding:5px;'>{build.BuildDuration()}</td>" +
-                      $"</tr>");
+            sb.Append(
+                $"<tr><td style='width:50%;padding:5px;font-size:18px;font-weight:bold;'><a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_build/results?buildId={build.Id}&view=results' style='color:#000;text-decoration:none;' target='_blank'>{d.Name}</a></td>" +
+                $"<td style=''width:20%;padding:5px;font-size:18px;font-weight:bold;'><a href='https://demeter.healthcare.siemens.com/tfs/CT/CTS/_build/results?buildId={build.Id}&view=results' class='{build.Result}' target='_blank'>{build.Result}</a></td>" +
+                $"<td style='width:15%;padding:5px;'>{build.StartTime.ShowDate()}</td>" +
+                $"<td style='width:15%;padding:5px;'>{build.BuildDuration()}</td>" +
+                $"</tr>");
 
             if (build.Result != BuildResult.Succeeded)
             {
@@ -554,16 +561,18 @@ public static partial class Helper
                 var issues = reportService.Build.GetBuildIssues(build.Id);
                 if (!string.IsNullOrEmpty(issues) && issues.Length <= 1024)
                 {
-                    sb.AppendLine($"<tr><td colspan='4' style='padding:5px;word-break: break-all;word-wrap: break-word;' class='issuesTable'>{issues}</td></tr>");
+                    sb.AppendLine(
+                        $"<tr><td colspan='4' style='padding:5px;word-break: break-all;word-wrap: break-word;' class='issuesTable'>{issues}</td></tr>");
                 }
             }
+
             sb.Append("</table><br/><br/>");
         }
 
         return sb.ToString();
     }
-    
-    public static string GenerateHtml(this IReportService reportService,ReportSectionForWorkItems section)
+
+    public static string GenerateHtml(this IReportService reportService, ReportSectionForWorkItems section)
     {
         var sb = new StringBuilder();
 
@@ -578,14 +587,16 @@ public static partial class Helper
             var table = queryResult.GetWorkItemsDataTable(listWorkItemsResult);
             if (table is { Rows.Count: > 0 })
             {
-                var ws = new [] { "width:8%", "width:12%", "width:45%", "width:15%", "width:8%", "width:12%" };
-                sb.AppendLine("<div class=\"card\"><div class='table-responsive'><table class='table table-vcenter card-table table-striped' align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"width:100%;background-color: #666; font-size: 14px; font-family: 'Microsoft YaHei';\"><thead><tr>");
+                var ws = new[] { "width:8%", "width:12%", "width:45%", "width:15%", "width:8%", "width:12%" };
+                sb.AppendLine(
+                    "<div class=\"card\"><div class='table-responsive'><table class='table table-vcenter card-table table-striped' align=\"center\" cellpadding=\"0\" cellspacing=\"2\" style=\"width:100%;background-color: #666; font-size: 14px; font-family: 'Microsoft YaHei';\"><thead><tr>");
                 var colIndex = 0;
                 foreach (DataColumn col in table.Columns)
                 {
-                    sb.Append($"<th style='padding:5px;{ws[Math.Min(ws.Length-1, colIndex)]}'>{col.ColumnName}</th>");
+                    sb.Append($"<th style='padding:5px;{ws[Math.Min(ws.Length - 1, colIndex)]}'>{col.ColumnName}</th>");
                     colIndex++;
                 }
+
                 sb.Append("</tr></thead><tbody>");
 
                 foreach (DataRow row in table.Rows)
@@ -605,6 +616,7 @@ public static partial class Helper
                                 $"<td style='padding:5px;background-color: #FFF'>{row[col.ColumnName]}</td>");
                         }
                     }
+
                     sb.Append("</tr>");
                 }
 
@@ -635,7 +647,7 @@ public static partial class Helper
             }
             else
             {
-                dic.Add(dll,new List<string>{roadString});
+                dic.Add(dll, new List<string> { roadString });
             }
         }
     }
@@ -651,7 +663,7 @@ public static partial class Helper
             var roadString = string.Join("->", road);
             var xml = allXml.FindLast(o => o.FilePath == road[road.Length - 1]);
 
-            var assemblies=xml.GetAssemblies(alias,declares);
+            var assemblies = xml.GetAssemblies(alias, declares);
             if (assemblies != null)
             {
                 foreach (var a in assemblies)
@@ -675,9 +687,80 @@ public static partial class Helper
         }
     }
 
-    static string AssemblyName(this string assembly)
+    #endregion
+
+    #region Analyze
+
+    public static AnalyzeReferencesResult GetResult(this IReportService reportService, AnalyzeReferences? request)
     {
-        return assembly.EndsWith(".dll") ? assembly : assembly + ".dll";
+        var result = new AnalyzeReferencesResult
+        {
+            AssemblyFilesFromSpringConfigs = new Dictionary<string, List<string>>(),
+            AssemblyFilesFromDependencies = new Dictionary<string, List<string>>(),
+            Request = request!,
+            Proposals = new Dictionary<string, string>()
+        };
+
+        var assemblies = Infrastructures.PlatformInvoke.Helper.Load()
+            .Where(o => o.Name.StartsWith(result.Request.AssembliesStartWith))
+            .ToList();
+
+        if (assemblies.Any())
+        {
+            var allDlls = Infrastructures.PlatformInvoke.Helper.Load();
+            foreach (var dll in assemblies)
+            {
+                var roads = Infrastructures.PlatformInvoke.Helper.AllLowerLevels(dll.Name, allDlls);
+                result.AssemblyFilesFromDependencies.AppendList(roads.UnionAll().ToList(), dll.Name);
+            }
+        }
+
+        var springConfig = Infrastructures.SpringConfig.Helper.LoadConfigs()
+            .FindLast(o => o.FileName == result.Request.SpringConfigFile);
+
+        if (springConfig != null)
+        {
+            var configs = new List<SpringXml> { springConfig }
+                .ExpandWithImports();
+            
+            var allXmls = Infrastructures.SpringConfig.Helper.LoadConfigs();
+            var allDeclares = Infrastructures.SpringConfig.Helper.LoadDeclares();
+            var allAlias = Infrastructures.SpringConfig.Helper.LoadAlias();
+
+            var xmlRoads= Infrastructures.SpringConfig.Helper.AllLowerLevels(springConfig.FilePath, allXmls);
+
+            configs.ForEach(c =>
+            {
+                var dlls = c.GetAssemblies(allAlias, allDeclares)
+                    .Where(o=>!string.IsNullOrEmpty(o))
+                    .Select(o => o.AssemblyName()).ToList();
+                result.AssemblyFilesFromSpringConfigs.AppendList(dlls, c.FilePath
+                );
+
+                if (dlls.All(o => !result.AssemblyFilesFromDependencies.ContainsKey(o)))
+                {
+                    var level1 = springConfig.Imports.Any(o =>Path.GetFileName(o)==c.FileName) ? true : false;
+                    var desc = level1? $"at root imports":"in imports";
+
+                    if (!level1)
+                    {
+                        desc = "<ol>";
+                        var rs = xmlRoads.FindAll(o => o.Any(x=>Path.GetFileName(x)==c.FileName)).ToList();
+                        rs.ForEach(o =>
+                        {
+                            desc += $"<li>{string.Join("<br/>", o.Select(f=>Path.GetFileName(f)))}</li>";
+                        });
+                        desc += "</ol>";
+                    }
+
+                    result.Proposals.Add(c.FileName, desc);
+                }
+            });
+        }
+
+
+
+        return result;
     }
 
     #endregion

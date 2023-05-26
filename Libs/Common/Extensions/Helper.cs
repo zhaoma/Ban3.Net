@@ -44,5 +44,12 @@ namespace Ban3.Infrastructures.Common.Extensions
             var seconds = new Random().Next(range.Item1, range.Item2);
             Thread.Sleep(TimeSpan.FromSeconds(seconds));
         }
+
+
+        public static string AssemblyName(this string assembly)
+        {
+            return assembly.EndsWith(".dll") ? assembly : assembly + ".dll";
+        }
+
     }
 }

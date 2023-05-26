@@ -314,12 +314,7 @@ public static class Helper
 
         return result;
     }
-
-    static string AssemblyName(this string assembly)
-    {
-        return assembly.EndsWith(".dll") ? assembly : assembly + ".dll";
-    }
-
+    
     static void AddRoad(this List<string[]> allRoads, string[] road)
     {
         //if (!allRoads.Any(x => string.Join(",", x) == string.Join(",", road)))

@@ -8,10 +8,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using log4net.Core;
 using log4net.Repository.Hierarchy;
+using Timer = System.Timers.Timer;
 
 namespace Ban3.Infrastructures.Common.Extensions
 {
@@ -66,6 +67,36 @@ namespace Ban3.Infrastructures.Common.Extensions
 
                 Task.WaitAll(tasks.ToArray());
             }
+        }
+
+        //static SemaphoreSlim semaphore;
+
+        public static async Task ParallelExecuteAsync<T>(
+            this IEnumerable<T> all,
+            Action<T> action,
+            int taskCount)
+        {
+            var semaphore=new SemaphoreSlim(taskCount);
+            var tasks = new List<Task>();
+            
+            foreach (var t in all)
+            {
+                await semaphore.WaitAsync();
+                tasks.Add(Task.Run(() =>
+                {
+                    try
+                    {
+                        action(t);
+                        Console.WriteLine($"：：{semaphore.CurrentCount}");
+                    }
+                    finally
+                    {
+                        semaphore.Release();
+                    }
+                }));
+            }
+
+            await Task.WhenAll(tasks);
         }
 
         public static Timer? CreateTimer(this Action action, DateTime dailyTime)
