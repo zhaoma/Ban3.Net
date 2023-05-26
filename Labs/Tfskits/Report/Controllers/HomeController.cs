@@ -2,6 +2,7 @@
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Request;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Response;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
@@ -153,7 +154,14 @@ public class HomeController : Controller
                 SpringConfigFile = @"CT.Serv.Ctl.SpringConfig.xml"
             };
 
-        var result = DevOps.Reportor.GetResult(request);
+        var file = typeof(AnalyzeReferencesResult)
+            .LocalFile($"{request.AssembliesStartWith}:{request.SpringConfigFile}".MD5String());
+
+        var result =
+            System.IO.File.Exists(file)
+                ? file.ReadFileAs<AnalyzeReferencesResult>()
+                : DevOps.Reportor.GetResult(request);
+
         return View(result);
     }
 }

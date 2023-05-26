@@ -7,11 +7,12 @@ using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extens
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Request;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 
 var identities =
     DevOps.Collector.Core.LoadTeams()
-        //.Where(o => o.Name == Config.DefaultTeam)
+        .Where(o => o.Name == Config.DefaultTeam)
         .ToList()
         .GetIdentitiesFromTeams();
 
@@ -22,6 +23,16 @@ await identities.ParallelExecuteAsync((identity) =>
     DevOps.Collector.SyncOneMemberSummary(identity.Id, true);
 }, Config.MaxParallelTasks);
 
+//var request = new AnalyzeReferences
+//{
+//    AssembliesStartWith = @"CT.Serv.Ctl",
+//    SpringConfigFile = @"CT.Serv.Ctl.SpringConfig.xml"
+//};
+//var result = DevOps.Reportor.GetResult(request);
+
+//result.GetType()
+//    .LocalFile($"{request.AssembliesStartWith}:{request.SpringConfigFile}".MD5String())
+//    .WriteFile(result.ObjToJson());
 
 /*
 
