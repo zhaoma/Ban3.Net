@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
+using System.Reflection.PortableExecutable;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.PlatformInvoke.Entries;
 using Ban3.Infrastructures.PlatformInvoke.Handles;
-using Ban3.Infrastructures.PlatformInvoke.Request;
 using log4net;
 
 namespace Ban3.Infrastructures.PlatformInvoke;
@@ -16,18 +15,17 @@ public static class Helper
 {
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
 
-    private static readonly string _dumpbinPath = Common.Config.AppConfiguration?["Assemblies:DumpbinPath"] + "";
-
-    private static string _assembliesRootFolder = Common.Config.AppConfiguration?["Assemblies:RootFolder"] + "";
-    private static string _assembliesPattern = Common.Config.AppConfiguration?["Assemblies:Pattern"] + "";
+    private static readonly string DumpbinPath = Common.Config.AppConfiguration?["Assemblies:DumpbinPath"] + "";
+    private static readonly string AssembliesRootFolder = Common.Config.AppConfiguration?["Assemblies:RootFolder"] + "";
+    private static readonly string AssembliesPattern = Common.Config.AppConfiguration?["Assemblies:Pattern"] + "";
 
     public static bool Prepare()
     {
         try
         {
             var all = new List<AssemblyFile>();
-            var dllFiles = _assembliesRootFolder
-                .GetFiles(_assembliesPattern, false);
+            var dllFiles = AssembliesRootFolder
+                .GetFiles(AssembliesPattern, false);
 
             var total = dllFiles.Length;
             var i = 0;
@@ -44,7 +42,7 @@ public static class Helper
                 var request = new Request.ParseAssembly
                 {
                     DllPath = file,
-                    DumpbinPath = _dumpbinPath
+                    DumpbinPath = DumpbinPath
                 };
 
                 var onesReferences = request.GetAssemblyReferenced();
@@ -139,7 +137,7 @@ public static class Helper
                     && allRoads.All(x => x.All(y => y != o)))
                 .ToList();
 
-            if (rds != null && rds.Any())
+            if (rds.Any())
             {
                 foreach (var r in rds)
                 {
@@ -208,7 +206,7 @@ public static class Helper
                 .FindAll(o => allRoads.All(x => x.All(y => y != o)))
                 .ToList();
 
-            if (rds != null && rds.Any())
+            if (rds.Any())
             {
                 foreach (var r in rds)
                 {
@@ -237,6 +235,11 @@ public static class Helper
         try
         {
             byte[] assemblyBuffer = request.DllPath.ReadBytes();
+            /*
+            using var peReader = new PEReader(new MemoryStream(assemblyBuffer!));
+
+            if (!peReader.HasMetadata) return null;
+            */
             Assembly assembly = Assembly.Load(assemblyBuffer);
 
             return assembly.GetReferencedAssemblies();
@@ -271,7 +274,7 @@ public static class Helper
         }
         catch (Exception ex)
         {
-            //Logger.Error(ex);
+            Logger.Error(ex);
             Logger.Error($"{request.DllPath} CANNOT GetDependencies");
         }
 
@@ -331,7 +334,7 @@ public static class Helper
     public static bool InLimitedScope(this string checkNamespace)
     {
         var limitPrefixes = new List<string> { "H.", "CT.", "MI." };
-        return limitPrefixes.Any(x => checkNamespace.StartsWith(x));
+        return limitPrefixes.Any(checkNamespace.StartsWith);
     }
 }
 

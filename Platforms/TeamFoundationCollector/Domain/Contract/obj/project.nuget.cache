@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ZxtsyTeogcDPUBb3XTLkmz9f/XXHu4d3FKGy3yVWr1biuBCJoZNW88ltrNsFNG8zaUo731X+LSgEpu/zDG8X4w==",
+  "dgSpecHash": "+l3+xeFj4NQGvIaNJlEEvoVJrPnrMKZwexVYLZSZEJZvZ2jLep8L2S5kwkLgs+W2AGBiD/75p1aVbuxZs1QLwg==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\Contract.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "C:\\Users\\z004k7zb\\.nuget\\packages\\npoi\\2.6.0\\npoi.2.6.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\nsspi\\0.3.1\\nsspi.0.3.1.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\rougamo.fody\\1.4.1\\rougamo.fody.1.4.1.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.2\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",

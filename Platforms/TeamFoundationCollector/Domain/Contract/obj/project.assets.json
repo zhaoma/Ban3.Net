@@ -426,6 +426,26 @@
           }
         }
       },
+      "Rougamo.Fody/1.4.1": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.2.5",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/_._": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
         "type": "package",
         "runtimeTargets": {
@@ -1692,6 +1712,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
+          "Rougamo.Fody": "1.4.1",
           "System.IO": "4.3.0",
           "System.Threading.Tasks": "4.3.0",
           "log4net": "2.0.15"
@@ -2563,6 +2584,24 @@
         "lib/netstandard2.0/BouncyCastle.Crypto.xml",
         "portable.bouncycastle.1.9.0.nupkg.sha512",
         "portable.bouncycastle.nuspec"
+      ]
+    },
+    "Rougamo.Fody/1.4.1": {
+      "sha512": "tnt0FfWKsEB4UveC1c31v7Do5kOqCq4hez0yz1q2cMPSbXP294gr44ljflaSZp4SBcpWDcNW43/gf/lW8ePL0w==",
+      "type": "package",
+      "path": "rougamo.fody/1.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CHANGELOG.md",
+        "README_en.md",
+        "Rougamo.png",
+        "build/Rougamo.Fody.props",
+        "lib/netstandard2.0/Rougamo.dll",
+        "lib/netstandard2.0/Rougamo.xml",
+        "rougamo.fody.1.4.1.nupkg.sha512",
+        "rougamo.fody.nuspec",
+        "weaver/Rougamo.Fody.dll"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {

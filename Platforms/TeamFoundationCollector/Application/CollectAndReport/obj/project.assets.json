@@ -426,6 +426,26 @@
           }
         }
       },
+      "Rougamo.Fody/1.4.1": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.2.5",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/_._": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
         "type": "package",
         "runtimeTargets": {
@@ -700,6 +720,23 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Collections.Concurrent.dll": {}
+        }
+      },
+      "System.Collections.Immutable/7.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Collections.Immutable.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.ComponentModel.Annotations/4.6.0": {
@@ -1077,6 +1114,23 @@
         },
         "compile": {
           "ref/netstandard1.5/System.Reflection.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Reflection.Metadata/7.0.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections.Immutable": "7.0.0",
+          "System.Memory": "4.5.5"
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Reflection.Metadata.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Reflection.Metadata.dll": {
             "related": ".xml"
           }
         }
@@ -1692,6 +1746,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
+          "Rougamo.Fody": "1.4.1",
           "System.IO": "4.3.0",
           "System.Threading.Tasks": "4.3.0",
           "log4net": "2.0.15"
@@ -1739,7 +1794,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0"
+          "Ban3.Infrastructures.Common": "1.0.0",
+          "System.Reflection.Metadata": "7.0.1"
         },
         "compile": {
           "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
@@ -2630,6 +2686,24 @@
         "portable.bouncycastle.nuspec"
       ]
     },
+    "Rougamo.Fody/1.4.1": {
+      "sha512": "tnt0FfWKsEB4UveC1c31v7Do5kOqCq4hez0yz1q2cMPSbXP294gr44ljflaSZp4SBcpWDcNW43/gf/lW8ePL0w==",
+      "type": "package",
+      "path": "rougamo.fody/1.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CHANGELOG.md",
+        "README_en.md",
+        "Rougamo.png",
+        "build/Rougamo.Fody.props",
+        "lib/netstandard2.0/Rougamo.dll",
+        "lib/netstandard2.0/Rougamo.xml",
+        "rougamo.fody.1.4.1.nupkg.sha512",
+        "rougamo.fody.nuspec",
+        "weaver/Rougamo.Fody.dll"
+      ]
+    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
       "sha512": "7VSGO0URRKoMEAq0Sc9cRz8mb6zbyx/BZDEWhgPdzzpmFhkam3fJ1DAGWFXBI4nGlma+uPKpfuMQP5LXRnOH5g==",
       "type": "package",
@@ -3080,6 +3154,34 @@
         "ref/xamarinwatchos10/_._",
         "system.collections.concurrent.4.3.0.nupkg.sha512",
         "system.collections.concurrent.nuspec"
+      ]
+    },
+    "System.Collections.Immutable/7.0.0": {
+      "sha512": "dQPcs0U1IKnBdRDBkrCTi1FoajSTBzLcVTpjO4MBCMC7f4pDOIPzgBoX8JjG7X6uZRJ8EBxsi8+DR1JuwjnzOQ==",
+      "type": "package",
+      "path": "system.collections.immutable/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "README.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Collections.Immutable.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Collections.Immutable.targets",
+        "lib/net462/System.Collections.Immutable.dll",
+        "lib/net462/System.Collections.Immutable.xml",
+        "lib/net6.0/System.Collections.Immutable.dll",
+        "lib/net6.0/System.Collections.Immutable.xml",
+        "lib/net7.0/System.Collections.Immutable.dll",
+        "lib/net7.0/System.Collections.Immutable.xml",
+        "lib/netstandard2.0/System.Collections.Immutable.dll",
+        "lib/netstandard2.0/System.Collections.Immutable.xml",
+        "system.collections.immutable.7.0.0.nupkg.sha512",
+        "system.collections.immutable.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.ComponentModel.Annotations/4.6.0": {
@@ -4176,6 +4278,34 @@
         "ref/xamarinwatchos10/_._",
         "system.reflection.4.3.0.nupkg.sha512",
         "system.reflection.nuspec"
+      ]
+    },
+    "System.Reflection.Metadata/7.0.1": {
+      "sha512": "HwfDQmefTQlZpSipknpn0nPv1OcWQizt7rMAk6KBq4RDAZSJwD1s723p2LLdjyRI9HXf/5DXHM6dXQGeEnsOrg==",
+      "type": "package",
+      "path": "system.reflection.metadata/7.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "README.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Reflection.Metadata.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Reflection.Metadata.targets",
+        "lib/net462/System.Reflection.Metadata.dll",
+        "lib/net462/System.Reflection.Metadata.xml",
+        "lib/net6.0/System.Reflection.Metadata.dll",
+        "lib/net6.0/System.Reflection.Metadata.xml",
+        "lib/net7.0/System.Reflection.Metadata.dll",
+        "lib/net7.0/System.Reflection.Metadata.xml",
+        "lib/netstandard2.0/System.Reflection.Metadata.dll",
+        "lib/netstandard2.0/System.Reflection.Metadata.xml",
+        "system.reflection.metadata.7.0.1.nupkg.sha512",
+        "system.reflection.metadata.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.Reflection.Primitives/4.3.0": {

@@ -10,6 +10,7 @@
       <group targetFramework=".NETStandard2.0">
         <dependency id="Microsoft.Extensions.Configuration.Json" version="7.0.0" exclude="Build,Analyzers" />
         <dependency id="Newtonsoft.Json" version="13.0.3" exclude="Build,Analyzers" />
+        <dependency id="Rougamo.Fody" version="1.4.1" exclude="Build,Analyzers" />
         <dependency id="System.IO" version="4.3.0" exclude="Build,Analyzers" />
         <dependency id="System.Threading.Tasks" version="4.3.0" exclude="Build,Analyzers" />
         <dependency id="log4net" version="2.0.15" exclude="Build,Analyzers" />

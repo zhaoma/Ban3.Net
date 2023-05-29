@@ -130,6 +130,23 @@
             
             </summary>
         </member>
+        <member name="T:Ban3.Infrastructures.Common.Attributes.TracingItAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TracingItAttribute.OnEntry(Rougamo.Context.MethodContext)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TracingItAttribute.OnException(Rougamo.Context.MethodContext)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TracingItAttribute.OnExit(Rougamo.Context.MethodContext)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TracingItAttribute.OnSuccess(Rougamo.Context.MethodContext)">
+            
+        </member>
         <member name="T:Ban3.Infrastructures.Common.Config">
             <summary>
             配置获取

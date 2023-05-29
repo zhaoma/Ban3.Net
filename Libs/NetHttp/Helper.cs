@@ -16,15 +16,15 @@ public static class Helper
     public static async Task<HttpResponseMessage> Request(
         this ITargetHost host,
         ITargetResource resource,
-        string accept="")
+        string accept = "")
     {
         try
         {
             Logger.Debug(resource.Url);
             var client = host.Client();
-            if(!string.IsNullOrEmpty(accept))
+            if (!string.IsNullOrEmpty(accept))
                 client.DefaultRequestHeaders.Add("Accept", accept);
-            
+
             return await client.SendAsync(resource.Request());
         }
         catch (Exception ex)
@@ -38,12 +38,12 @@ public static class Helper
     /// get resource content
     public static async Task<string> ReadContent(
         this ITargetHost host,
-        ITargetResource resource)
+        ITargetResource resource,
+        string accept = "")
     {
         try
         {
-
-            using var responseMessage = await host.Request(resource);
+            using var responseMessage = await host.Request(resource, accept);
 
             return await responseMessage.Content.ReadAsStringAsync();
         }
@@ -61,7 +61,6 @@ public static class Helper
     {
         try
         {
-
             using var responseMessage = await host.Request(resource);
 
             return await responseMessage.Content.ReadAsByteArrayAsync();
@@ -102,7 +101,9 @@ public static class Helper
 
     private static string Substr(this string input, string prefix, string suffix)
     {
-        if (!input.Contains(prefix)) return string.Empty;
+        if (string.IsNullOrEmpty(input)
+            || string.IsNullOrEmpty(prefix)
+            || !input.Contains(prefix)) return string.Empty;
 
         var start = input.IndexOf(prefix) + prefix.Length;
         var result = input.Substring(start);

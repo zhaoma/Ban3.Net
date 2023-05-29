@@ -79,9 +79,19 @@
               "target": "Package",
               "version": "[5.7.0, )"
             },
+            "Fody": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.7.0, )"
+            },
             "Microsoft.Office.Interop.Outlook": {
               "target": "Package",
               "version": "[15.0.4797.1004, )"
+            },
+            "Rougamo.Fody": {
+              "target": "Package",
+              "version": "[1.4.1, )"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
@@ -134,6 +144,12 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "dependencies": {
+            "Fody": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.7.0, )"
+            },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -147,6 +163,10 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            },
+            "Rougamo.Fody": {
+              "target": "Package",
+              "version": "[1.4.1, )"
             },
             "System.IO": {
               "target": "Package",
@@ -455,6 +475,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "System.Reflection.Metadata": {
+              "target": "Package",
+              "version": "[7.0.1, )"
             }
           },
           "imports": [

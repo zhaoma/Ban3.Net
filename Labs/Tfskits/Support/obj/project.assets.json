@@ -55,7 +55,7 @@
           }
         }
       },
-      "Fody/6.5.5": {
+      "Fody/6.7.0": {
         "type": "package",
         "build": {
           "build/Fody.targets": {}
@@ -533,6 +533,26 @@
           }
         }
       },
+      "Rougamo.Fody/1.4.1": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.2.5",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/Rougamo.Fody.props": {}
+        }
+      },
       "SharpZipLib/1.3.3": {
         "type": "package",
         "compile": {
@@ -640,6 +660,26 @@
         },
         "runtime": {
           "lib/net45/_._": {}
+        }
+      },
+      "System.Collections.Immutable/7.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net462/System.Collections.Immutable.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net462/System.Collections.Immutable.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net462/_._": {}
         }
       },
       "System.Configuration.ConfigurationManager/7.0.0": {
@@ -972,6 +1012,26 @@
         },
         "runtime": {
           "lib/net45/_._": {}
+        }
+      },
+      "System.Reflection.Metadata/7.0.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections.Immutable": "7.0.0",
+          "System.Memory": "4.5.5"
+        },
+        "compile": {
+          "lib/net462/System.Reflection.Metadata.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net462/System.Reflection.Metadata.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net462/_._": {}
         }
       },
       "System.Reflection.Primitives/4.3.0": {
@@ -1491,6 +1551,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
+          "Rougamo.Fody": "1.4.1",
           "System.IO": "4.3.0",
           "System.Threading.Tasks": "4.3.0",
           "log4net": "2.0.15"
@@ -1552,7 +1613,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0"
+          "Ban3.Infrastructures.Common": "1.0.0",
+          "System.Reflection.Metadata": "7.0.1"
         },
         "compile": {
           "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
@@ -1699,7 +1761,7 @@
           }
         }
       },
-      "Fody/6.5.5": {
+      "Fody/6.7.0": {
         "type": "package",
         "build": {
           "build/Fody.targets": {}
@@ -2177,6 +2239,26 @@
           }
         }
       },
+      "Rougamo.Fody/1.4.1": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.2.5",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/Rougamo.Fody.props": {}
+        }
+      },
       "SharpZipLib/1.3.3": {
         "type": "package",
         "compile": {
@@ -2284,6 +2366,26 @@
         },
         "runtime": {
           "lib/net45/_._": {}
+        }
+      },
+      "System.Collections.Immutable/7.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/net462/System.Collections.Immutable.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net462/System.Collections.Immutable.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net462/_._": {}
         }
       },
       "System.Configuration.ConfigurationManager/7.0.0": {
@@ -2596,6 +2698,26 @@
         },
         "runtime": {
           "lib/net45/_._": {}
+        }
+      },
+      "System.Reflection.Metadata/7.0.1": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections.Immutable": "7.0.0",
+          "System.Memory": "4.5.5"
+        },
+        "compile": {
+          "lib/net462/System.Reflection.Metadata.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net462/System.Reflection.Metadata.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net462/_._": {}
         }
       },
       "System.Reflection.Primitives/4.3.0": {
@@ -3053,6 +3175,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
+          "Rougamo.Fody": "1.4.1",
           "System.IO": "4.3.0",
           "System.Threading.Tasks": "4.3.0",
           "log4net": "2.0.15"
@@ -3114,7 +3237,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0"
+          "Ban3.Infrastructures.Common": "1.0.0",
+          "System.Reflection.Metadata": "7.0.1"
         },
         "compile": {
           "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
@@ -3282,16 +3406,16 @@
         "lib/netstandard2.1/Enums.NET.xml"
       ]
     },
-    "Fody/6.5.5": {
-      "sha512": "Krca41L/PDva1VsmDec5n52cQZxQAQp/bsHdzsNi8iLLI0lqKL94fNIkNaC8tVolUkCyWsbzvxfxJCeD2789fA==",
+    "Fody/6.7.0": {
+      "sha512": "apsA8Hp9sAuOVmn9byPnCuqiQEjhAApqwNfEG+Gu0OyHUZfjHhLwvNQnAaONDdHWDXP/pBgpGXuscVwfEym8zQ==",
       "type": "package",
-      "path": "fody/6.5.5",
+      "path": "fody/6.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "License.txt",
         "build/Fody.targets",
-        "fody.6.5.5.nupkg.sha512",
+        "fody.6.7.0.nupkg.sha512",
         "fody.nuspec",
         "netclassictask/Fody.dll",
         "netclassictask/FodyCommon.dll",
@@ -3982,6 +4106,24 @@
         "portable.bouncycastle.nuspec"
       ]
     },
+    "Rougamo.Fody/1.4.1": {
+      "sha512": "tnt0FfWKsEB4UveC1c31v7Do5kOqCq4hez0yz1q2cMPSbXP294gr44ljflaSZp4SBcpWDcNW43/gf/lW8ePL0w==",
+      "type": "package",
+      "path": "rougamo.fody/1.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CHANGELOG.md",
+        "README_en.md",
+        "Rougamo.png",
+        "build/Rougamo.Fody.props",
+        "lib/netstandard2.0/Rougamo.dll",
+        "lib/netstandard2.0/Rougamo.xml",
+        "rougamo.fody.1.4.1.nupkg.sha512",
+        "rougamo.fody.nuspec",
+        "weaver/Rougamo.Fody.dll"
+      ]
+    },
     "SharpZipLib/1.3.3": {
       "sha512": "N8+hwhsKZm25tDJfWpBSW7EGhH/R7EMuiX+KJ4C4u+fCWVc1lJ5zg1u3S1RPPVYgTqhx/C3hxrqUpi6RwK5+Tg==",
       "type": "package",
@@ -4263,6 +4405,34 @@
         "ref/xamarinwatchos10/_._",
         "system.collections.concurrent.4.3.0.nupkg.sha512",
         "system.collections.concurrent.nuspec"
+      ]
+    },
+    "System.Collections.Immutable/7.0.0": {
+      "sha512": "dQPcs0U1IKnBdRDBkrCTi1FoajSTBzLcVTpjO4MBCMC7f4pDOIPzgBoX8JjG7X6uZRJ8EBxsi8+DR1JuwjnzOQ==",
+      "type": "package",
+      "path": "system.collections.immutable/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "README.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Collections.Immutable.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Collections.Immutable.targets",
+        "lib/net462/System.Collections.Immutable.dll",
+        "lib/net462/System.Collections.Immutable.xml",
+        "lib/net6.0/System.Collections.Immutable.dll",
+        "lib/net6.0/System.Collections.Immutable.xml",
+        "lib/net7.0/System.Collections.Immutable.dll",
+        "lib/net7.0/System.Collections.Immutable.xml",
+        "lib/netstandard2.0/System.Collections.Immutable.dll",
+        "lib/netstandard2.0/System.Collections.Immutable.xml",
+        "system.collections.immutable.7.0.0.nupkg.sha512",
+        "system.collections.immutable.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.Configuration.ConfigurationManager/7.0.0": {
@@ -5549,6 +5719,34 @@
         "ref/xamarinwatchos10/_._",
         "system.reflection.extensions.4.3.0.nupkg.sha512",
         "system.reflection.extensions.nuspec"
+      ]
+    },
+    "System.Reflection.Metadata/7.0.1": {
+      "sha512": "HwfDQmefTQlZpSipknpn0nPv1OcWQizt7rMAk6KBq4RDAZSJwD1s723p2LLdjyRI9HXf/5DXHM6dXQGeEnsOrg==",
+      "type": "package",
+      "path": "system.reflection.metadata/7.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "README.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Reflection.Metadata.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Reflection.Metadata.targets",
+        "lib/net462/System.Reflection.Metadata.dll",
+        "lib/net462/System.Reflection.Metadata.xml",
+        "lib/net6.0/System.Reflection.Metadata.dll",
+        "lib/net6.0/System.Reflection.Metadata.xml",
+        "lib/net7.0/System.Reflection.Metadata.dll",
+        "lib/net7.0/System.Reflection.Metadata.xml",
+        "lib/netstandard2.0/System.Reflection.Metadata.dll",
+        "lib/netstandard2.0/System.Reflection.Metadata.xml",
+        "system.reflection.metadata.7.0.1.nupkg.sha512",
+        "system.reflection.metadata.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.Reflection.Primitives/4.3.0": {
@@ -7298,7 +7496,9 @@
       "Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport >= 1.0.0",
       "Ban3.Platforms.TeamFoundationCollector.Domain.Contract >= 1.0.0",
       "Costura.Fody >= 5.7.0",
-      "Microsoft.Office.Interop.Outlook >= 15.0.4797.1004"
+      "Fody >= 6.7.0",
+      "Microsoft.Office.Interop.Outlook >= 15.0.4797.1004",
+      "Rougamo.Fody >= 1.4.1"
     ]
   },
   "packageFolders": {
@@ -7380,9 +7580,19 @@
             "target": "Package",
             "version": "[5.7.0, )"
           },
+          "Fody": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[6.7.0, )"
+          },
           "Microsoft.Office.Interop.Outlook": {
             "target": "Package",
             "version": "[15.0.4797.1004, )"
+          },
+          "Rougamo.Fody": {
+            "target": "Package",
+            "version": "[1.4.1, )"
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"

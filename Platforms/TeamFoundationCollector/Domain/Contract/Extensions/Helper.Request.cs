@@ -33,9 +33,7 @@ public static partial class Helper
     {
         try
         {
-            var responseMessage = await Config.Host.Request(request.Resource());
-
-            responseMessage.Dispose();
+            using var responseMessage = await Config.Host.Request(request.Resource());
         }
         catch (Exception ex)
         {
@@ -45,7 +43,7 @@ public static partial class Helper
     }
 
     public static async Task<T> Execute<T>(this Enums.ServerResource resource, IRequest request)
-        where T : IResponse,new()
+        where T : IResponse, new()
     {
         try
         {
@@ -53,7 +51,7 @@ public static partial class Helper
             if (responseMessage == null) return new T();
 
             var content = responseMessage.Content.ReadAsStringAsync();
-            
+
             var result = content.Result.JsonToObj<T>() ?? new T();
             result.Success = new[]
             {
@@ -74,62 +72,11 @@ public static partial class Helper
         return new T();
     }
 
-    public static async Task<string> ReadHtml(this Enums.ServerResource resource, IRequest request,string accept="")
-    {
-        try
-        {
-            var responseMessage = await Config.Host.Request(request.Resource(), accept);
-            
-            if (!new[]
-                {
-                    HttpStatusCode.Accepted,
-                    HttpStatusCode.OK
-                }.Contains(responseMessage.StatusCode))
-                return string.Empty;
-
-            var result = await responseMessage.Content.ReadAsStringAsync();
-            responseMessage.Dispose();
-            return result;
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(request.Resource().Url);
-            Logger.Error(ex);
-        }
-
-        return string.Empty;
-    }
+    public static async Task<string> ReadHtml(this Enums.ServerResource resource, IRequest request, string accept = "")
+        => await Config.Host.ReadContent(request.Resource(), accept);
 
     public static async Task<string> Download(this Enums.ServerResource resource, IRequest request, string savePath)
-    {
-        try
-        {
-            var responseMessage = await Config.Host.Request(request.Resource());
-            
-            if (!new[]
-                {
-                    HttpStatusCode.Accepted,
-                    HttpStatusCode.OK
-                }.Contains(responseMessage.StatusCode))
-                return string.Empty;
-
-            var inputStream = await responseMessage.Content.ReadAsStreamAsync();
-
-             using FileStream fileStream = File.Create(savePath);
-            await inputStream.CopyToAsync(fileStream);
-
-            responseMessage.Dispose();
-            return savePath;
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(request.Resource().Url); 
-            Logger.Error(savePath);
-            Logger.Error(ex);
-        }
-
-        return string.Empty;
-    }
+        => await Config.Host.Download(request.Resource(), savePath);
 
     /*
     var field = resource.GetType().GetField(resource.ToString())!;

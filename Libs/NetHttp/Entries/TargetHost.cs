@@ -19,7 +19,8 @@ public class TargetHost : ITargetHost
 
     public string AuthenticationType { get; set; } = "Basic";
 
-    static readonly object ObjectLock = new object();
+    static readonly object ObjectLock = new ();
+
     public HttpClient Client()
     {
         if(_client!=null) return _client;
