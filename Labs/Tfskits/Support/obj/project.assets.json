@@ -1545,7 +1545,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Ban3.Infrastructures.Common/1.0.0": {
+      "Ban3.Infrastructures.Common/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -1581,9 +1581,9 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Newtonsoft.Json": "13.0.3",
-          "System.Net.Http": "4.3.4",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.Common": "1.0.1",
+          "Rougamo.Fody": "1.4.1",
+          "System.Net.Http": "4.3.4"
         },
         "compile": {
           "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
@@ -1613,7 +1613,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
+          "Rougamo.Fody": "1.4.1",
           "System.Reflection.Metadata": "7.0.1"
         },
         "compile": {
@@ -1642,7 +1643,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
           "Newtonsoft.Json": "13.0.3",
           "log4net": "2.0.15"
         },
@@ -1657,7 +1658,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
           "Newtonsoft.Json": "13.0.3",
           "log4net": "2.0.15"
         },
@@ -1688,7 +1689,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
           "Ban3.Infrastructures.NetHttp": "1.0.0",
           "Ban3.Infrastructures.NetMail": "1.0.0",
           "Ban3.Infrastructures.RuntimeCaching": "1.0.0",
@@ -3169,7 +3170,7 @@
           "lib/net45/_._": {}
         }
       },
-      "Ban3.Infrastructures.Common/1.0.0": {
+      "Ban3.Infrastructures.Common/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -3205,9 +3206,9 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Newtonsoft.Json": "13.0.3",
-          "System.Net.Http": "4.3.4",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.Common": "1.0.1",
+          "Rougamo.Fody": "1.4.1",
+          "System.Net.Http": "4.3.4"
         },
         "compile": {
           "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
@@ -3237,7 +3238,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
+          "Rougamo.Fody": "1.4.1",
           "System.Reflection.Metadata": "7.0.1"
         },
         "compile": {
@@ -3266,7 +3268,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
           "Newtonsoft.Json": "13.0.3",
           "log4net": "2.0.15"
         },
@@ -3281,7 +3283,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
           "Newtonsoft.Json": "13.0.3",
           "log4net": "2.0.15"
         },
@@ -3312,7 +3314,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
           "Ban3.Infrastructures.NetHttp": "1.0.0",
           "Ban3.Infrastructures.NetMail": "1.0.0",
           "Ban3.Infrastructures.RuntimeCaching": "1.0.0",
@@ -7433,7 +7435,7 @@
         "system.xml.xdocument.nuspec"
       ]
     },
-    "Ban3.Infrastructures.Common/1.0.0": {
+    "Ban3.Infrastructures.Common/1.0.1": {
       "type": "project",
       "path": "../../../Libs/Common/Common.csproj",
       "msbuildProject": "../../../Libs/Common/Common.csproj"
@@ -7486,7 +7488,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
-      "Ban3.Infrastructures.Common >= 1.0.0",
+      "Ban3.Infrastructures.Common >= 1.0.1",
       "Ban3.Infrastructures.Consoles >= 1.0.0",
       "Ban3.Infrastructures.NetHttp >= 1.0.0",
       "Ban3.Infrastructures.NetMail >= 1.0.0",

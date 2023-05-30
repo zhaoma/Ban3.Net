@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.PortableExecutable;
+using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.PlatformInvoke.Entries;
 using Ban3.Infrastructures.PlatformInvoke.Handles;
@@ -11,6 +12,7 @@ using log4net;
 
 namespace Ban3.Infrastructures.PlatformInvoke;
 
+[TracingIt]
 public static class Helper
 {
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
@@ -110,7 +112,7 @@ public static class Helper
         var rds = HighLevels(all, a);
         foreach (var r in rds)
         {
-            var oneRoad = new string[0];
+            var oneRoad = Array.Empty<string>();
 
             FetchHighLevels(oneRoad, r, all, list, 1);
         }

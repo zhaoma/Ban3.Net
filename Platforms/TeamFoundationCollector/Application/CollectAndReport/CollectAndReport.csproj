@@ -7,7 +7,25 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport</AssemblyName>
     <RootNamespace>Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Ban3.TeamFoundationCollector.CollectAndReport</Title>
+    <Authors>zhaoma@hotmail.com</Authors>
+    <PackageIcon>number-3-clipart-png-17.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\z004k7zb\Downloads\number-3-clipart-png-17.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="5.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Libs\PlatformInvoke\PlatformInvoke.csproj" />

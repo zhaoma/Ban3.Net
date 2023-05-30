@@ -15,6 +15,27 @@
           }
         }
       },
+      "Costura.Fody/5.7.0": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.5.5",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.0/_._": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.0/Costura.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "build": {
+          "build/Costura.Fody.props": {},
+          "build/Costura.Fody.targets": {}
+        }
+      },
       "Enums.NET/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -30,6 +51,12 @@
           "lib/netstandard2.0/Enums.NET.dll": {
             "related": ".pdb;.xml"
           }
+        }
+      },
+      "Fody/6.5.5": {
+        "type": "package",
+        "build": {
+          "build/Fody.targets": {}
         }
       },
       "log4net/2.0.15": {
@@ -1740,7 +1767,7 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Ban3.Infrastructures.Common/1.0.0": {
+      "Ban3.Infrastructures.Common/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -1762,9 +1789,9 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Newtonsoft.Json": "13.0.3",
-          "System.Net.Http": "4.3.4",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.Common": "1.0.1",
+          "Rougamo.Fody": "1.4.1",
+          "System.Net.Http": "4.3.4"
         },
         "compile": {
           "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
@@ -1794,7 +1821,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
+          "Rougamo.Fody": "1.4.1",
           "System.Reflection.Metadata": "7.0.1"
         },
         "compile": {
@@ -1823,7 +1851,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
           "Newtonsoft.Json": "13.0.3",
           "log4net": "2.0.15"
         },
@@ -1838,7 +1866,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
           "Newtonsoft.Json": "13.0.3",
           "log4net": "2.0.15"
         },
@@ -1853,7 +1881,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.0",
+          "Ban3.Infrastructures.Common": "1.0.1",
           "Ban3.Infrastructures.NetHttp": "1.0.0",
           "Ban3.Infrastructures.NetMail": "1.0.0",
           "Ban3.Infrastructures.RuntimeCaching": "1.0.0",
@@ -1894,6 +1922,27 @@
         "packageIcon.png"
       ]
     },
+    "Costura.Fody/5.7.0": {
+      "sha512": "MmL28WOOnJEBWORXj6bfSxfWaZW8gWSXEJTdrjB9AQi4COX6RXr2xdGL9HsxpWwn6f5Io0NmNuwFJe94w1YmQA==",
+      "type": "package",
+      "path": "costura.fody/5.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Costura.Fody.props",
+        "build/Costura.Fody.targets",
+        "costura.fody.5.7.0.nupkg.sha512",
+        "costura.fody.nuspec",
+        "icon.png",
+        "lib/netstandard1.0/Costura.dll",
+        "lib/netstandard1.0/Costura.pdb",
+        "lib/netstandard1.0/Costura.xml",
+        "netclassicweaver/Costura.Fody.dll",
+        "netclassicweaver/Costura.Fody.xcf",
+        "netstandardweaver/Costura.Fody.dll",
+        "netstandardweaver/Costura.Fody.xcf"
+      ]
+    },
     "Enums.NET/4.0.0": {
       "sha512": "d47SgeuGxKpalKhYoHqFkDPmO9SoE3amSwVNDoUdy4d675/tX7bLyZFHdjfo3Tobth9Y80VnjfasQ/PD4LqUuA==",
       "type": "package",
@@ -1924,6 +1973,39 @@
         "lib/netstandard2.1/Enums.NET.dll",
         "lib/netstandard2.1/Enums.NET.pdb",
         "lib/netstandard2.1/Enums.NET.xml"
+      ]
+    },
+    "Fody/6.5.5": {
+      "sha512": "Krca41L/PDva1VsmDec5n52cQZxQAQp/bsHdzsNi8iLLI0lqKL94fNIkNaC8tVolUkCyWsbzvxfxJCeD2789fA==",
+      "type": "package",
+      "path": "fody/6.5.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "build/Fody.targets",
+        "fody.6.5.5.nupkg.sha512",
+        "fody.nuspec",
+        "netclassictask/Fody.dll",
+        "netclassictask/FodyCommon.dll",
+        "netclassictask/FodyHelpers.dll",
+        "netclassictask/FodyIsolated.dll",
+        "netclassictask/Mono.Cecil.Pdb.dll",
+        "netclassictask/Mono.Cecil.Pdb.pdb",
+        "netclassictask/Mono.Cecil.Rocks.dll",
+        "netclassictask/Mono.Cecil.Rocks.pdb",
+        "netclassictask/Mono.Cecil.dll",
+        "netclassictask/Mono.Cecil.pdb",
+        "netstandardtask/Fody.dll",
+        "netstandardtask/FodyCommon.dll",
+        "netstandardtask/FodyHelpers.dll",
+        "netstandardtask/FodyIsolated.dll",
+        "netstandardtask/Mono.Cecil.Pdb.dll",
+        "netstandardtask/Mono.Cecil.Pdb.pdb",
+        "netstandardtask/Mono.Cecil.Rocks.dll",
+        "netstandardtask/Mono.Cecil.Rocks.pdb",
+        "netstandardtask/Mono.Cecil.dll",
+        "netstandardtask/Mono.Cecil.pdb"
       ]
     },
     "log4net/2.0.15": {
@@ -5834,7 +5916,7 @@
         "version.txt"
       ]
     },
-    "Ban3.Infrastructures.Common/1.0.0": {
+    "Ban3.Infrastructures.Common/1.0.1": {
       "type": "project",
       "path": "../../../../Libs/Common/Common.csproj",
       "msbuildProject": "../../../../Libs/Common/Common.csproj"
@@ -5881,6 +5963,7 @@
       "Ban3.Infrastructures.SpringConfig >= 1.0.0",
       "Ban3.Infrastructures.WxsConfig >= 1.0.0",
       "Ban3.Platforms.TeamFoundationCollector.Domain.Contract >= 1.0.0",
+      "Costura.Fody >= 5.7.0",
       "NETStandard.Library >= 2.0.3"
     ]
   },
@@ -5942,6 +6025,12 @@
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
         "dependencies": {
+          "Costura.Fody": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[5.7.0, )"
+          },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",

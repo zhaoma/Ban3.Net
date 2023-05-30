@@ -10,9 +10,19 @@ using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Request.Build;
 using Org.BouncyCastle.Asn1.Ocsp;
 
-Console.WriteLine(new Daily().Fibonacci(10));
 
-Console.WriteLine(Daily.A());
+var identities =
+    DevOps.Collector.Core.LoadTeams()
+        .Where(o => o.Name == Config.DefaultTeam)
+        .ToList()
+        .GetIdentitiesFromTeams();
+
+Console.WriteLine($"identity count={identities.Count}");
+
+await identities.ParallelExecuteAsync((identity) =>
+{
+    DevOps.Collector.SyncOneMemberSummary(identity.Id, true);
+}, Config.MaxParallelTasks);
 /*
 
 Ban3.Infrastructures.PlatformInvoke.Helper.Prepare();

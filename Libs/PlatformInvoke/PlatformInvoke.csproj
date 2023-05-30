@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Rougamo.Fody" Version="1.4.1" />
     <PackageReference Include="System.Reflection.Metadata" Version="7.0.1" />
   </ItemGroup>
 

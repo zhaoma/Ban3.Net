@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "t8drrovmbNJYIfcPbgdMrOwbz6nyUzmYXN9WpCIWysTkwW4K7zJlKA0SufKFLXP/fwOmNNnuZTwmKowj5Ftdkw==",
+  "dgSpecHash": "J3PNO1ENH+xlcaEtl3oMwrzNycrE43OEJz5a6gJA0erFMUUz7Rx40S/HPDJqodmiFoYTM12FCOe0yxOXWWYg0g==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Application\\CollectAndReport\\CollectAndReport.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\z004k7zb\\.nuget\\packages\\bouncycastle.cryptography\\2.1.1\\bouncycastle.cryptography.2.1.1.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\costura.fody\\5.7.0\\costura.fody.5.7.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\enums.net\\4.0.0\\enums.net.4.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.5.5\\fody.6.5.5.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\mailkit\\4.0.0\\mailkit.4.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\mailkit.security.saslmechanismntlmintegrated\\0.2.0\\mailkit.security.saslmechanismntlmintegrated.0.2.0.nupkg.sha512",

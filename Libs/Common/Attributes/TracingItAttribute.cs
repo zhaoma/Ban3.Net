@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-using Rougamo;
+﻿using Rougamo;
 using Rougamo.Context;
-using System;
 using System.Diagnostics;
+using Ban3.Infrastructures.Common.Extensions;
 using log4net;
 
 namespace Ban3.Infrastructures.Common.Attributes;
@@ -12,35 +11,37 @@ namespace Ban3.Infrastructures.Common.Attributes;
 /// </summary>
 public class TracingItAttribute : MoAttribute
 {
+    /// <summary>
+    /// 记录所有方法
+    /// </summary>
     public override AccessFlags Flags { get; } = AccessFlags.All;
-
-    readonly Stopwatch _stopwatch = new Stopwatch();
+    static readonly ILog Logger = LogManager.GetLogger(typeof(TracingItAttribute));
+    readonly Stopwatch _stopwatch = new ();
 
     /// 
     public override void OnEntry(MethodContext context)
     {
-        _stopwatch?.Start();
-        Console.WriteLine($"执行方法 { context.Method.Name} () 开始, 参数：{ JsonConvert.SerializeObject(context.Arguments)}.");
+        _stopwatch.Start();
+        Logger.Debug($"{ context.Method.Name}:{ context.Arguments.ObjToJson()}.");
     }
     
     /// 
     public override void OnException(MethodContext context)
     {
-        Console.WriteLine($"执行方法 {context.Method.Name}() 异常, {context.Exception?.Message}.");
+        Logger.Error($"{context.Method.Name} exception.");
+        Logger.Error(context.Exception);
     }
     
     /// 
     public override void OnExit(MethodContext context)
     {
         _stopwatch.Stop();
-
-        
-        Console.WriteLine($"执行方法 {context.Method.Name}() 结束.用时{_stopwatch.ElapsedMilliseconds} ms");
+        Logger.Debug($"{context.Method.Name}:{_stopwatch.ElapsedMilliseconds} ms");
     }
 
     /// 
     public override void OnSuccess(MethodContext context)
     {
-        Console.WriteLine($"执行方法 {context.Method.Name}() 成功.");
+        Logger.Debug($"{context.Method.Name} success.");
     }
 }

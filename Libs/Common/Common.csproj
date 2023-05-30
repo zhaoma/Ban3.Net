@@ -9,10 +9,12 @@
     <AssemblyName>Ban3.Infrastructures.Common</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Ban3.Infrastructures.Common</Title>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>zhaoma@hotmail.com</Authors>
     <Company>Ban3</Company>
     <Description>Common,Extensions,Indicators and Echarts</Description>
+    <PackageIcon>number-3-clipart-png-17.png</PackageIcon>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -35,5 +37,12 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\z004k7zb\Downloads\number-3-clipart-png-17.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>

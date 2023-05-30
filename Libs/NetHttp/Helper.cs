@@ -1,38 +1,26 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Ban3.Infrastructures.Common.Attributes;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.NetHttp.Interfaces;
-using log4net;
-using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.NetHttp;
 
+[TracingIt]
 public static class Helper
 {
-    private static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
-
     /// get resource response (void support too)
     public static async Task<HttpResponseMessage> Request(
         this ITargetHost host,
         ITargetResource resource,
         string accept = "")
     {
-        try
-        {
-            Logger.Debug(resource.Url);
-            var client = host.Client();
-            if (!string.IsNullOrEmpty(accept))
-                client.DefaultRequestHeaders.Add("Accept", accept);
+        var client = host.Client();
+        if (!string.IsNullOrEmpty(accept))
+            client.DefaultRequestHeaders.Add("Accept", accept);
 
-            return await client.SendAsync(resource.Request());
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-
-        return null;
+        return await client.SendAsync(resource.Request());
     }
 
     /// get resource content
@@ -41,36 +29,19 @@ public static class Helper
         ITargetResource resource,
         string accept = "")
     {
-        try
-        {
-            using var responseMessage = await host.Request(resource, accept);
+        using var responseMessage = await host.Request(resource, accept);
 
-            return await responseMessage.Content.ReadAsStringAsync();
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-
-        return string.Empty;
+        return await responseMessage.Content.ReadAsStringAsync();
     }
 
+    /// 
     public static async Task<byte[]> ReadBytes(
         this ITargetHost host,
         ITargetResource resource)
     {
-        try
-        {
-            using var responseMessage = await host.Request(resource);
+        using var responseMessage = await host.Request(resource);
 
-            return await responseMessage.Content.ReadAsByteArrayAsync();
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-
-        return null;
+        return await responseMessage.Content.ReadAsByteArrayAsync();
     }
 
     /// get resource content and deserialize to special type
@@ -78,45 +49,15 @@ public static class Helper
         this ITargetHost host,
         ITargetResource resource)
     {
-        try
-        {
-            var content = await host.ReadContent(resource);
+        var content = await host.ReadContent(resource);
 
-            if (resource.ResourceIsJsonp)
-            {
-                content = content.RemoveJsonp(resource.JsonpPrefix);
-            }
-
-            return JsonConvert.DeserializeObject<T>(content);
-        }
-        catch (Exception ex)
+        if (resource.ResourceIsJsonp)
         {
-            Logger.Error(ex);
+            content = content.RemoveJsonp(resource.JsonpPrefix);
         }
 
-        return default;
+        return content.JsonToObj<T>();
     }
-
-    #region private
-
-    private static string Substr(this string input, string prefix, string suffix)
-    {
-        if (string.IsNullOrEmpty(input)
-            || string.IsNullOrEmpty(prefix)
-            || !input.Contains(prefix)) return string.Empty;
-
-        var start = input.IndexOf(prefix) + prefix.Length;
-        var result = input.Substring(start);
-
-        if (!result.Contains(suffix)) return result;
-        return result.Substring(0, result.Length - suffix.Length);
-    }
-
-    private static string RemoveJsonp(this string input, string jsonp)
-        => input.Substr($"{jsonp}(", ");");
-
-
-    #endregion
 
     /// download resource and save to special path
     public static async Task<string> Download(
@@ -124,23 +65,14 @@ public static class Helper
         ITargetResource resource,
         string savePath)
     {
-        try
-        {
-            using var responseMessage = await host.Request(resource);
+        using var responseMessage = await host.Request(resource);
 
-            using var inputStream = await responseMessage.Content.ReadAsStreamAsync();
+        using var inputStream = await responseMessage.Content.ReadAsStreamAsync();
 
-            using var fileStream = File.Create(savePath);
+        using var fileStream = File.Create(savePath);
 
-            await inputStream.CopyToAsync(fileStream);
+        await inputStream.CopyToAsync(fileStream);
 
-            return savePath;
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-
-        return string.Empty;
+        return savePath;
     }
 }
