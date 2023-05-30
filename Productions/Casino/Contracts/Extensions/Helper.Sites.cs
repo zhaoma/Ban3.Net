@@ -229,7 +229,12 @@ public static partial class Helper
             foreach (var code in gotCodes)
             {
                 var exists = _.LoadOnesDailyPrices(code);
-                exists = exists.Union(ps.Data.FindAll(o => o.Code == code))
+
+                var newList = ps.Data.FindAll(o => o.Code == code);
+
+                newList = newList.Where(x => exists.All(y => y.TradeDate == x.TradeDate)).ToList();
+
+                exists = exists.Union(newList)
                     .OrderBy(o => o.TradeDate)
                     .ToList();
 

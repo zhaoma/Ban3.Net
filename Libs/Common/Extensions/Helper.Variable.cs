@@ -259,5 +259,15 @@ namespace Ban3.Infrastructures.Common.Extensions
         public static string ToYmd(this DateTime val) => val.ToString("yyyyMMdd");
 
         public static DateTime FromYmd(this string val) => val.ToDateTimeEx("yyyyMMdd");
+
+
+        /// <summary>
+        /// 相同日期
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="inVal"></param>
+        /// <returns></returns>
+        public static bool DateEqual(this DateTime dt, DateTime inVal) => inVal.ToYmd() == dt.ToYmd();
+
     }
 }

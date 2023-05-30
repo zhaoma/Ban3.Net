@@ -30,7 +30,7 @@ public class StockPrice
     public float Vol { get; set; }
     
     public float Amount { get; set; }
-
+    
     public StockPrice(){}
 
     public StockPrice(List<string> row)
@@ -47,4 +47,5 @@ public class StockPrice
         Vol= row[9].ToFloat();
         Amount= row[10].ToFloat();
     }
+    
 }

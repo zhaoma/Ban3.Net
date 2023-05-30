@@ -7,69 +7,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ban3.Infrastructures.Common.Attributes;
 
 namespace Ban3.Infrastructures.Indicators
 {
+    [TracingIt]
     public static class Helper
     {
-        static readonly ILog _logger = LogManager.GetLogger(typeof(Helper));
-
-        public static decimal ToDecimal(this object strValue, decimal defValue = 0)
+        static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
+        
+        public static List<Latest> LatestList(this LineOfPoint line)
         {
-            decimal.TryParse(strValue.ToString(), out var def);
-            return def == 0 ? defValue : def;
-        }
-
-
-        /// <summary>
-        /// 相同日期
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <param name="inVal"></param>
-        /// <returns></returns>
-        public static bool DateEqual(this DateTime dt, DateTime inVal) => inVal.ToString("yyyyMMdd") == dt.ToString("yyyyMMdd");
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public static StockGroup GetStockGroup(this string code)
-        {
-            if (code.Length < 6)
-                return (StockGroup)0;
-            string str = code.Substring(0, 3);
-            if (str == "000")
-                return StockGroup.SZA;
-            if (str == "002" || str == "003")
-                return StockGroup.SZZ;
-            if (str == "300" || str == "301")
-                return StockGroup.SZC;
-            return str == "688" ? StockGroup.SHK : StockGroup.SHA;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public static string GetStockPrefix(this string code)
-        {
-            switch (code.GetStockGroup())
-            {
-                case StockGroup.SZA:
-                case StockGroup.SZZ:
-                case StockGroup.SZC:
-                    return "sz";
-                default:
-                    return "sh";
-            }
-        }
-
-        public static List<Latest> ConvertToLatestList(this LineOfPoint line)
-        {
-            List<Latest> list = line.EndPoints.Select((PointOfTime o) => new Latest
+            List<Latest> list = line.EndPoints.Select(o => new Latest
             {
                 Current = o
             }).ToList();
@@ -495,10 +444,7 @@ namespace Ban3.Infrastructures.Indicators
 
                         return result;
                     case ConditionParamType.EarningsRatio:
-                        if (stockInfo != null)
-                        {
-                            return stockInfo.EarningsRatio;
-                        }
+                        return stockInfo.EarningsRatio;
 
                         return result;
                     case ConditionParamType.DebtsRatio:
@@ -521,7 +467,7 @@ namespace Ban3.Infrastructures.Indicators
             }
             catch (Exception ex)
             {
-                _logger.Error(ex);
+                Logger.Error(ex);
                 return null;
             }
         }

@@ -1389,6 +1389,14 @@
             <param name="val"></param>
             <returns></returns>
         </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DateEqual(System.DateTime,System.DateTime)">
+            <summary>
+            相同日期
+            </summary>
+            <param name="dt"></param>
+            <param name="inVal"></param>
+            <returns></returns>
+        </member>
         <member name="T:Ban3.Infrastructures.Common.Extensions.Converter">
             <summary>
             排序

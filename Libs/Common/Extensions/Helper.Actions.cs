@@ -87,7 +87,6 @@ namespace Ban3.Infrastructures.Common.Extensions
                     try
                     {
                         action(t);
-                        Console.WriteLine($"：：{semaphore.CurrentCount}");
                     }
                     finally
                     {

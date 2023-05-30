@@ -13,4 +13,7 @@
     <SourceRoot Include="C:\Users\z004k7zb\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)rougamo.fody\1.4.1\build\Rougamo.Fody.props" Condition="Exists('$(NuGetPackageRoot)rougamo.fody\1.4.1\build\Rougamo.Fody.props')" />
+  </ImportGroup>
 </Project>

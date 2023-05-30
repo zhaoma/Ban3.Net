@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ban3.Sites.ViaSina.Entries;
+namespace Ban3.Productions.Casino.Contracts.Entities;
 
 /// <summary>
 /// 
@@ -15,5 +15,5 @@ public class StockSeed
     /// <summary>
     /// 
     /// </summary>
-    public decimal Seed { get; set; }
+    public float Seed { get; set; }
 }

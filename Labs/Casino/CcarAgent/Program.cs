@@ -1,24 +1,46 @@
-﻿using Ban3.Infrastructures.Common.Extensions;
+﻿using Ban3.Infrastructures.Common.Attributes;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Productions.Casino.CcaAndReport;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Extensions;
+using Ban3.Sites.ViaTushare.Entries;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
+[TracingIt]
 internal class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         //Signalert.Collector.Sites.FixAllDailyPrices();
 
-        var r=Signalert.Collector.PrepareAllCodes();
-        Console.WriteLine(r);
+        await Signalert.ReinstateAllPrices();
+
+
+
     }
 
     /*
+     *        var r=Signalert.Collector.PrepareAllCodes();
+        Console.WriteLine(r);
      *
-     *
+        allCodes.ParallelExecute((o) =>
+        {
+            o.Code.WriteColorLine(ConsoleColor.Blue);
+            var ps = Signalert.Collector.Sites.LoadOnesDailyPrices(o.Code);
+
+            var newList=new List<StockPrice>();
+
+            foreach (var stockPrice in ps)
+            {
+                if(newList.All(x => x.TradeDate != stockPrice.TradeDate))
+                    newList.Add(stockPrice);
+            }
+
+            newList.SetsFile(o.Code)
+                .WriteFile(newList.ObjToJson());
+        },50);
      *
         //Signalert.Collector.Sites.PrepareAllCodesFromTushare();
 
