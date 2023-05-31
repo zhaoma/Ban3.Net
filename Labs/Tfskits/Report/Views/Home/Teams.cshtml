@@ -1,6 +1,14 @@
-﻿@model IEnumerable<Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities.WebApiTeam>
+﻿@using Ban3.Infrastructures.Common.Extensions
+@using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions
+@model IEnumerable<Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities.WebApiTeam>
 @{
     ViewData["Title"] = "Teams";
+    var showTeams = Model
+        .Where(o => o.Members != null && o.Members.Any() && o.Members.Count <= 50)
+        .Where(o=>o.TeamHasChangesets())
+        .Where(o => o.Name.StartsWithIn(new List<string> { "COMMON-", "EXAM-", "SERVICE-", "Arch" }))
+        .OrderBy(o=>o.Name)
+        .ToList();
 }
 
 @section PreTitle
@@ -9,10 +17,10 @@
         <div class="row g-2 align-items-center">
             <div class="col">
                 <div class="page-pretitle">
-                    Followed Teams In Index Only.
+                    Followed Teams (had changesets).
                 </div>
                 <h2 class="page-title">
-                    All Teams @Model.Count() .
+                    Show Teams @showTeams.Count() .
                 </h2>
             </div>
         </div>
@@ -20,43 +28,33 @@
 }
 
 <div class="row row-cards" data-masonry='{"percentPosition": true }'>
-    @for (var c = 'A'; c <= 'Z'; c++)
+@foreach (var team in showTeams)
     {
-        var teams = Model.Where(o =>o.Members!=null&&o.Members.Any()&& o.Name.ToUpper().StartsWith(c + "")).ToList();
-        if (teams.Any())
-        {
-            <div class="col-sm-4 col-lg-3">
-                <div class="card">
-                    <div class="card-header">@(c+"")</div>
-                    @foreach (var team in teams)
+        <div class="col-sm-4 col-lg-3">
+        <div class="card">
+                <div class="card-header"> <a href="/home/index/@team.Name" target="_blank">@team.Name</a></div>
+            <div class="card-body teamRow">
+                <div class="avatar-list avatar-list-stacked mb-3">
+                    @foreach (var id in team.Members!)
                     {
-                        <div class="card-body teamRow">
-                            <div class="card-title">
-                                <a href="/home/index/@team.Name" target="_blank">@team.Name</a>
-                            </div>
-                            <div class="avatar-list avatar-list-stacked mb-3">
-                                @foreach (var id in team.Members!)
-                                {
-                                    <span class="avatar avatar-sm avatar-rounded" style="background-image: url(@id.Identity?.Portrait)" title="@id.Identity?.ShowName()"></span>
-                                }
-                            </div>
-                            <div class="row">
-                                <div class="col-4 memberCount">
-                                    <i>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <circle cx="12" cy="7" r="4"></circle>
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                        </svg>
-                                    </i> <span class="noticeNumber">@team.Members.Count</span>
-                                </div>
-                                <div class="col-6"></div>
-                            </div>
-                        </div>
+                        <span class="avatar avatar-sm avatar-rounded" style="background-image: url(@id.Identity?.Portrait)" title="@id.Identity?.ShowName()"></span>
                     }
                 </div>
+                <div class="row">
+                    <div class="col-4 memberCount">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                            </svg>
+                        </i> <span class="noticeNumber">@team.Members.Count</span>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
             </div>
-        }
+        </div>
+        </div>
     }
 </div>
 @section HtmlPlus

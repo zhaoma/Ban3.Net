@@ -61,18 +61,20 @@ public static partial class Helper
         var newPrices = prices.Select(seeds.ReinstateOnePrice)
             .ToList();
 
-        var saved = newPrices.SetsFile($"{code}.{StockAnalysisCycle.DAILY}")
+        var savedDaily = newPrices.SetsFile($"{code}.{StockAnalysisCycle.DAILY}")
             .WriteFile(newPrices.ObjToJson());
 
-        var weeklyPrices= newPrices.ConvertCycle(StockAnalysisCycle.WEEKLY);
-        weeklyPrices.SetsFile($"{code}.{StockAnalysisCycle.WEEKLY}")
+        var weeklyPrices = newPrices.ConvertCycle(StockAnalysisCycle.WEEKLY);
+        var savedWeekly = weeklyPrices.SetsFile($"{code}.{StockAnalysisCycle.WEEKLY}")
             .WriteFile(weeklyPrices.ObjToJson());
 
         var monthlyPrices = newPrices.ConvertCycle(StockAnalysisCycle.MONTHLY);
-        monthlyPrices.SetsFile($"{code}.{StockAnalysisCycle.MONTHLY}")
+        var savedMonthly = monthlyPrices.SetsFile($"{code}.{StockAnalysisCycle.MONTHLY}")
             .WriteFile(monthlyPrices.ObjToJson());
 
-        return !string.IsNullOrEmpty(saved);
+        return !string.IsNullOrEmpty(savedDaily)
+               && !string.IsNullOrEmpty(savedWeekly)
+               && !string.IsNullOrEmpty(savedMonthly);
     }
 
     static StockPrice ReinstateOnePrice(this List<StockSeed> seeds, StockPrice price)
@@ -113,6 +115,13 @@ public static partial class Helper
         => typeof(StockPrice)
             .LocalFile($"{code}.{cycle}")
             .ReadFileAs<List<StockPrice>>();
+
+    public static bool GenerateIndicatorLine(this ICalculator _, string code)
+    {
+        return _.GenerateIndicatorLine(code, StockAnalysisCycle.DAILY)
+               && _.GenerateIndicatorLine(code, StockAnalysisCycle.WEEKLY)
+               && _.GenerateIndicatorLine(code, StockAnalysisCycle.MONTHLY);
+    }
 
     public static bool GenerateIndicatorLine(this ICalculator _, string code, StockAnalysisCycle cycle)
     {

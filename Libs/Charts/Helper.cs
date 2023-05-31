@@ -6,17 +6,6 @@ namespace Ban3.Infrastructures.Charts
 {
 	public static partial class Helper
 	{
-		#region Series
-
-		///
-		public static ISeries CreateSeries(
-			this Enums.SeriesType seriesType)
-		{
-			return new Components.Series { Type = seriesType };
-		}
-
-        #endregion
-
         #region Diagram
 
         ///
@@ -43,5 +32,16 @@ namespace Ban3.Infrastructures.Charts
 		}
 
 		#endregion
+		#region Series
+
+		///
+		public static ISeries CreateSeries(
+			this Enums.SeriesType seriesType)
+		{
+			return new Components.Series { Type = seriesType };
+		}
+
+        #endregion
+
 	}
 }

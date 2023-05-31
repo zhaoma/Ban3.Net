@@ -18,25 +18,46 @@ public class TracingItAttribute : MoAttribute
     static readonly ILog Logger = LogManager.GetLogger(typeof(TracingItAttribute));
     readonly Stopwatch _stopwatch = new ();
 
+    public bool Timing { get; set; } = true;
+
+    public bool LoggingArguments { get; set; } = false;
+
+    public TracingItAttribute(){}
+
+    public TracingItAttribute(bool timing, bool loggingArguments)
+    {
+        Timing=timing; 
+        LoggingArguments=loggingArguments;
+    }
+
     /// 
     public override void OnEntry(MethodContext context)
     {
-        _stopwatch.Start();
-        Logger.Debug($"{ context.Method.Name}:{ context.Arguments.ObjToJson()}.");
+        if (Timing)
+            _stopwatch.Start();
+
+        var debugInfo =$"ENTRY:{context.Method.DeclaringType}.{context.Method.Name}";
+        if (LoggingArguments)
+            debugInfo += $"{context.Arguments.ObjToJson()}.";
+
+        Logger.Debug(debugInfo);
     }
-    
+
     /// 
     public override void OnException(MethodContext context)
     {
         Logger.Error($"{context.Method.Name} exception.");
         Logger.Error(context.Exception);
     }
-    
+
     /// 
     public override void OnExit(MethodContext context)
     {
-        _stopwatch.Stop();
-        Logger.Debug($"{context.Method.Name}:{_stopwatch.ElapsedMilliseconds} ms");
+        if (Timing)
+        {
+            _stopwatch.Stop();
+            Logger.Debug($"{context.Method.DeclaringType}.{context.Method.Name}:{_stopwatch.ElapsedMilliseconds} ms");
+        }
     }
 
     /// 

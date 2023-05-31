@@ -1,4 +1,4 @@
-namespace Web
+namespace Ban3.Labs.Casino.Web
 {
     public class Program
     {

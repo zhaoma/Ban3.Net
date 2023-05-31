@@ -483,5 +483,8 @@ namespace Ban3.Infrastructures.Common.Extensions
             var keys = key.Split(' ');
             return keys.Any(o => content.Contains(o.Trim()));
         }
+
+        public static bool StartsWithIn(this string content, IEnumerable<string> prefixes)
+            => prefixes.Any(o => content.ToUpper().StartsWith(o.ToUpper()));
     }
 }

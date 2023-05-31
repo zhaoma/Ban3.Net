@@ -258,6 +258,21 @@ public static partial class Helper
             .ReadFile()
             .JsonToObj<IdentitySummary>();
     }
+    
+    /// && !cs.All(x=>x.Value.Comment.IsIgnored()
+    public static bool TeamHasChangesets(this WebApiTeam team)
+    {
+        return team.Members != null
+               && team.Members
+                   .Any(o =>
+                   {
+                       var cs = o.Identity?.Id
+                           .DataFile<IdentitySummary>()
+                           .ReadFileAs<IdentitySummary>()?
+                           .Changesets;
+                       return cs != null && cs.Any();
+                   });
+    }
 
     #endregion
 

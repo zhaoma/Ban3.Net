@@ -56,4 +56,29 @@ public class Signalert
 
         return result;
     }
+
+    public static async Task ExecuteDailyJob()
+    {
+        Collector.PrepareAllCodes();
+        
+        Collector.FixDailyPrices();
+
+        var reinstate = await Signalert.ReinstateAllPrices();
+
+        if (reinstate)
+        {
+            var allCodes = Signalert.Collector.LoadAllCodes();
+
+            await allCodes.ParallelExecuteAsync((stock) =>
+            {
+                Calculator.GenerateIndicatorLine(stock.Code);
+            }, Config.MaxParallelTasks);
+
+        }
+    }
+
+    //public static async Task ExecuteRealtimeJob()
+    //{
+
+    //}
 }

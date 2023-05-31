@@ -3,6 +3,7 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Productions.Casino.CcaAndReport;
 using Ban3.Productions.Casino.Contracts;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Sites.ViaTushare.Entries;
 
@@ -13,12 +14,22 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
+        Signalert.Collector.Sites.DownloadAllIcons();
+
         //Signalert.Collector.Sites.FixAllDailyPrices();
+        //Signalert.Collector.ReadRealtime();
+        //var reinstate= await Signalert.ReinstateAllPrices();
 
-        await Signalert.ReinstateAllPrices();
+        //if (reinstate)
+        //{
+        //    var allCodes = Signalert.Collector.LoadAllCodes();
 
+        //    await allCodes.ParallelExecuteAsync((stock) =>
+        //    {
+        //        Signalert.Calculator.GenerateIndicatorLine(stock.Code);
+        //    }, Config.MaxParallelTasks);
 
-
+        //}
     }
 
     /*

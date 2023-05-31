@@ -64,15 +64,24 @@
                             <div class="dataRow">
                                 <div class="col row ">
                                     <div class="col">
-                                        <span class="badge bg-warning">
-                                            @tc.Status
-                                        </span>
+                                        @if (tc.Status == "fixed")
+                                        {
+                                            <span class="badge bg-secondary">
+                                                @tc.Status
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning">
+                                                @tc.Status
+                                            </span>
+                                        }
                                     </div>
                                     <div class="col-3 rowIdentity"><i class="bi bi-person"></i> @t.AuthorName</div>
                                     <div class="col-3 rowDate"><i class="bi bi-clock"></i> @t.PublishedDate.ShowDate()</div>
                                 </div>
                                 <div class="card-body">
-                                    @Html.Raw(t.Content)
+                                    @Html.Raw(Html.Encode(t.Content))
                                 </div>
                             </div>
                         }

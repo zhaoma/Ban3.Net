@@ -1,0 +1,16 @@
+﻿using System;
+
+namespace Ban3.Infrastructures.Charts.Entries;
+
+public class CandlestickRecord
+{
+    public DateTime TradeDate { get; set; }
+    
+    public float Open { get; set; }
+
+    public float Close { get; set; }
+
+    public float Low { get; set; }
+
+    public float High { get; set; }
+}

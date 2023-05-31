@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Policy;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
-using Ban3.Sites.ViaTushare.Entries;
+using StockPrice = Ban3.Sites.ViaTushare.Entries.StockPrice;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -24,4 +23,6 @@ public static partial class Helper
     public static bool PrepareOnesEvents(this ICollector _, string symbol) => _.Sites.PrepareOnesEvents(symbol);
 
     public static List<StockEvent> LoadOnesEvents(this ICollector _, string symbol) => _.Sites.LoadOnesEvents(symbol);
+
+    public static bool ReadRealtime(this ICollector _) => _.Sites.ReadRealtime().Result;
 }

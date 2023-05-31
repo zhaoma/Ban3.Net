@@ -348,6 +348,5 @@ video {
 
 .prettyprint {
     width: 95%;
-    transform: skew(-3deg);
     box-shadow: 6px 3px 3px #888;
 }

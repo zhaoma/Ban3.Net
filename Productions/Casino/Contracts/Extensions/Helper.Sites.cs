@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
+using Ban3.Sites.ViaNetease.Entries;
+using Ban3.Sites.ViaNetease.Request;
 using Ban3.Sites.ViaSina;
 using Ban3.Sites.ViaSina.Request;
 using Ban3.Sites.ViaTushare;
@@ -14,6 +16,7 @@ using Ban3.Sites.ViaTushare.Request;
 using Ban3.Sites.ViaTushare.Response;
 using Ban3.Sites.ViaYuncaijing.Request;
 using Newtonsoft.Json.Bson;
+using StockPrice = Ban3.Sites.ViaTushare.Entries.StockPrice;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -228,7 +231,7 @@ public static partial class Helper
 
             foreach (var code in gotCodes)
             {
-                var exists = _.LoadOnesDailyPrices(code);
+                var exists = _.LoadOnesDailyPrices(code)??new List<StockPrice>();
 
                 var newList = ps.Data.FindAll(o => o.Code == code);
 
@@ -306,6 +309,77 @@ public static partial class Helper
         return typeof(StockEvent)
             .LocalFile(symbol)
             .ReadFileAs<List<StockEvent>>();
+    }
+
+    #endregion
+
+    #region realtime prices
+
+    public static async Task<bool> ReadRealtime(this ISites _)
+    {
+        try
+        {
+            var allCodes = _.LoadAllCodes();
+
+            var p = 1;
+            var codes = allCodes.Take(Config.FixPageSize).ToList();
+
+            while (codes.Any())
+            {
+                var targets = codes.Select(o => (o.Symbol.GetStockNumPrefix(), o.Symbol)).ToList();
+
+                var rs = await Sites.ViaNetease.Helper.ReadRealtimePrices(new ReadRealTime(targets));
+
+                rs.Data.AsParallel()
+                    .ForAll(o =>
+                    {
+                        var c = codes.FindLast(x => x.Symbol == o.Value.Symbol);
+                        var prices = _.LoadOnesDailyPrices(c.Code);
+                        var existsPrice = prices.FindLast(x => x.TradeDate == o.Value.Time.ToYmd());
+                        if (existsPrice == null)
+                        {
+                            prices.Add(new StockPrice
+                            {
+                                Code = c.Code,
+                                TradeDate = o.Value.Time.ToYmd(),
+                                Open = (float)o.Value.Open,
+                                High = (float)o.Value.Open,
+                                Low = (float)o.Value.Open,
+                                Close = (float)o.Value.Open,
+                                PreClose = (float)o.Value.Open,
+                                Change = (float)o.Value.UpDown,
+                                ChangePercent = (float)o.Value.Percent * 100,
+                                Vol = (float)o.Value.Volume,
+                                Amount = (float)o.Value.TurnOver
+                            });
+                        }
+                        else
+                        {
+                            existsPrice.Open = (float)o.Value.Open;
+                            existsPrice.PreClose = (float)o.Value.YestClose;
+                            existsPrice.High = Math.Max(existsPrice.High, (float)o.Value.High);
+                            existsPrice.Low = Math.Min(existsPrice.Low, (float)o.Value.Low);
+                            existsPrice.Vol = (float)o.Value.Volume;
+                            existsPrice.Close = (float)o.Value.Price;
+                            existsPrice.Amount = (float)o.Value.TurnOver;
+                        }
+
+                        prices.SetsFile(c.Code)
+                            .WriteFile(prices.OrderBy(x => x.TradeDate).ObjToJson());
+                    });
+
+                p++;
+                codes = allCodes.Skip((p - 1) * Config.FixPageSize).Take(Config.FixPageSize).ToList();
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+
+        return false;
     }
 
     #endregion

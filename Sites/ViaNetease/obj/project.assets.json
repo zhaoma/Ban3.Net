@@ -217,6 +217,26 @@
           }
         }
       },
+      "Rougamo.Fody/1.4.1": {
+        "type": "package",
+        "dependencies": {
+          "Fody": "6.2.5",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Rougamo.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/_._": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
         "type": "package",
         "runtimeTargets": {
@@ -1211,12 +1231,13 @@
           }
         }
       },
-      "Ban3.Infrastructures.Common/1.0.0": {
+      "Ban3.Infrastructures.Common/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
+          "Rougamo.Fody": "1.4.1",
           "System.IO": "4.3.0",
           "System.Threading.Tasks": "4.3.0",
           "log4net": "2.0.15"
@@ -1232,9 +1253,9 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Newtonsoft.Json": "13.0.3",
-          "System.Net.Http": "4.3.4",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.Common": "1.0.1",
+          "Rougamo.Fody": "1.4.1",
+          "System.Net.Http": "4.3.4"
         },
         "compile": {
           "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
@@ -1700,6 +1721,24 @@
         "newtonsoft.json.13.0.3.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
+      ]
+    },
+    "Rougamo.Fody/1.4.1": {
+      "sha512": "tnt0FfWKsEB4UveC1c31v7Do5kOqCq4hez0yz1q2cMPSbXP294gr44ljflaSZp4SBcpWDcNW43/gf/lW8ePL0w==",
+      "type": "package",
+      "path": "rougamo.fody/1.4.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "CHANGELOG.md",
+        "README_en.md",
+        "Rougamo.png",
+        "build/Rougamo.Fody.props",
+        "lib/netstandard2.0/Rougamo.dll",
+        "lib/netstandard2.0/Rougamo.xml",
+        "rougamo.fody.1.4.1.nupkg.sha512",
+        "rougamo.fody.nuspec",
+        "weaver/Rougamo.Fody.dll"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
@@ -4164,7 +4203,7 @@
         "version.txt"
       ]
     },
-    "Ban3.Infrastructures.Common/1.0.0": {
+    "Ban3.Infrastructures.Common/1.0.1": {
       "type": "project",
       "path": "../../Libs/Common/Common.csproj",
       "msbuildProject": "../../Libs/Common/Common.csproj"
@@ -4177,7 +4216,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.0",
+      "Ban3.Infrastructures.Common >= 1.0.1",
       "Ban3.Infrastructures.NetHttp >= 1.0.0",
       "NETStandard.Library >= 2.0.3",
       "Newtonsoft.Json >= 13.0.3",

@@ -47,5 +47,4 @@ public class StockPrice
         Vol= row[9].ToFloat();
         Amount= row[10].ToFloat();
     }
-    
 }

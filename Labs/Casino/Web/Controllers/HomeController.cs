@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using Web.Models;
+﻿using System.Diagnostics;
+using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.Contracts.Extensions;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers
+namespace Ban3.Labs.Casino.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -18,15 +19,11 @@ namespace Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Stocks(string id)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var stock = Signalert.Collector.LoadAllCodes()
+                .FindLast(o => o.Code.ToUpper() == id.ToUpper());
+            return View(stock);
         }
     }
 }

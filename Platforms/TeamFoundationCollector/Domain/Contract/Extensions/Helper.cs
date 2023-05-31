@@ -51,7 +51,7 @@ public static partial  class Helper
         try
         {
             return dateString.ToDateTime()
-                .ToLocalTime().ToString("MM-dd HH:mm");
+                .ToLocalTime().ToString("yyyy-MM-dd HH:mm");
         }
         catch (Exception) { }
 
@@ -63,7 +63,7 @@ public static partial  class Helper
         try
         {
             return dateString.ToDateTime()
-                .ToLocalTime().ToString("yy-MM-dd");
+                .ToLocalTime().ToString("yyyy-MM-dd");
         }
         catch (Exception) { }
 

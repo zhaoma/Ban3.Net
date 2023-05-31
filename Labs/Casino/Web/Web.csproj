@@ -10,4 +10,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Web' " />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Productions\Casino\CcaAndReport\CcaAndReport.csproj" />
+  </ItemGroup>
 </Project>
