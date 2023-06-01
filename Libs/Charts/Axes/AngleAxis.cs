@@ -16,10 +16,6 @@ namespace  Ban3.Infrastructures.Charts.Axes
     public class AngleAxis
         : GeneralAxis
     {
-        public AngleAxis()
-        {
-        }
-
         /// <summary>
         /// 角度轴所在的极坐标系的索引，默认使用第一个极坐标系。
         /// </summary>

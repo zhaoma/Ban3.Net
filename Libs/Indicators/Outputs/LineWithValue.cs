@@ -4,10 +4,11 @@
  * reference:
  * —————————————————————————————————————————————————————————————————————————————
  */
+
 using System;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Indicators.Entries
+namespace  Ban3.Infrastructures.Indicators.Outputs
 {
     /// <summary>
     /// 带值输出线

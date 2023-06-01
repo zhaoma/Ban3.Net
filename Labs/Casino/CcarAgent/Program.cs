@@ -14,7 +14,14 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
-        Signalert.Collector.Sites.DownloadAllIcons();
+        //await Signalert.ExecuteDailyJob();
+        var allCodes = Signalert.Collector.LoadAllCodes();
+
+        var stock = allCodes.FindLast(o => o.Symbol == "688004");
+        var d=Signalert.PrepareDiagram(stock);
+        
+        d.ObjToJson().WriteColorLine(ConsoleColor.Red);
+
 
         //Signalert.Collector.Sites.FixAllDailyPrices();
         //Signalert.Collector.ReadRealtime();

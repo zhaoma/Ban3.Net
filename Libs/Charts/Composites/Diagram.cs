@@ -42,14 +42,14 @@ namespace  Ban3.Infrastructures.Charts.Composites
         /// 多于两个 x 轴需要通过配置 offset 属性防止同个位置多个 x 轴的重叠。
         /// </summary>
         [JsonProperty("xAxis", NullValueHandling = NullValueHandling.Ignore)]
-        public Elements.IAxis? XAxis { get; set; }
+        public Elements.IAxis[]? XAxis { get; set; }
 
         /// <summary>
         /// 直角坐标系 grid 中的 y 轴，一般情况下单个 grid 组件最多只能放左右两个 y 轴，
         /// 多于两个 y 轴需要通过配置 offset 属性防止同个位置多个 Y 轴的重叠。
         /// </summary>
         [JsonProperty("yAxis", NullValueHandling = NullValueHandling.Ignore)]
-        public Elements.IAxis? YAxis { get; set; }
+        public Elements.IAxis[]? YAxis { get; set; }
 
         /// <summary>
         /// 极坐标系，可以用于散点图和折线图。每个极坐标系拥有一个角度轴和一个半径轴。
@@ -80,7 +80,7 @@ namespace  Ban3.Infrastructures.Charts.Composites
         /// dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。
         /// </summary>
         [JsonProperty("dataZoom", NullValueHandling = NullValueHandling.Ignore)]
-        public Cogs.DataZoom? DataZoom { get; set; }
+        public Cogs.DataZoom[]? DataZoom { get; set; }
 
         /// <summary>
         /// visualMap 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）。
@@ -92,7 +92,7 @@ namespace  Ban3.Infrastructures.Charts.Composites
         /// 提示框组件
         /// </summary>
         [JsonProperty("tooltip", NullValueHandling = NullValueHandling.Ignore)]
-        public Cogs.Tooltip? Tooltip { get; set; }
+        public Cogs.Tooltip[]? Tooltip { get; set; }
 
         /// <summary>
         /// 这是坐标轴指示器（axisPointer）的全局公用设置。
@@ -161,7 +161,7 @@ namespace  Ban3.Infrastructures.Charts.Composites
         /// ECharts 4 开始支持了 数据集（dataset）组件用于单独的数据集声明，
         /// 从而数据可以单独管理，被多个组件复用，并且可以自由指定数据到视觉的映射。
         /// </summary>
-        [JsonProperty("graphic", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("dataset", NullValueHandling = NullValueHandling.Ignore)]
         public Components.Dataset[]? Dataset { get; set; }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace  Ban3.Infrastructures.Charts.Composites
         public bool? Animation { get; set; } = true;
 
         /// 
-        public int AnimationThreshold { get; set; } = 2000;
+        public int? AnimationThreshold { get; set; } = 2000;
 
         /// 
         public object? AnimationDuration { get; set; } = 1000;

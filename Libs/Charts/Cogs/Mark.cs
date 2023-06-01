@@ -89,7 +89,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
 
         public bool? Animation { get; set; } = true;
 
-        public int AnimationThreshold { get; set; } = 2000;
+        public int? AnimationThreshold { get; set; } = 2000;
 
         public object? AnimationDuration { get; set; } = 1000;
 

@@ -19,31 +19,34 @@ namespace  Ban3.Infrastructures.Charts.Components
     /// But in ECharts 3, there is no limitation.
     /// </summary>
     public class Grid
-        : IHasBorder, IHasShadow
+        : GeneralComponent,IHasBorder, IHasShadow
     {
 		public Grid()
-		{
-		}
+        {
+            Left = "10%";
+            Right = "10%";
+            Bottom = "15%";
+        }
 
         /// <summary>
         /// Set this to false to prevent the title from showing
         /// </summary>
         [JsonProperty("containLabel", NullValueHandling = NullValueHandling.Ignore)]
-        public bool ContainLabel { get; set; }
+        public bool? ContainLabel { get; set; }
 
         #region HasBorder
 
         /// 
-        public string? BackgroundColor { get; set; } = "transparent";
+        public string? BackgroundColor { get; set; }
 
         /// 
-        public string? BorderColor { get; set; } = "#ccc";
+        public string? BorderColor { get; set; }
 
         /// 
         public ECharts.BorderType? BorderType { get; set; }
 
         /// 
-        public int? BorderWidth { get; set; } = 1;
+        public int? BorderWidth { get; set; } 
 
         /// 
         public object? BorderRadius { get; set; }

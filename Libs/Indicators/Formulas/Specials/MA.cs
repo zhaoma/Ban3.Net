@@ -13,6 +13,7 @@ using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Formulas;
 using Ban3.Infrastructures.Indicators.Interfaces;
+using Ban3.Infrastructures.Indicators.Outputs;
 
 namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 {
@@ -26,7 +27,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         /// 
         /// </summary>
         [DataMember]
-        public List<Entries.Line> Details { get; set; }
+        public List<Line> Details { get; set; }
 
         /// <summary>
         /// 
@@ -34,13 +35,13 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         public MA()
         {
             this.Title = "MA(5,10,20,30)";
-            Details = new List<Entries.Line>
+            Details = new List<Line>
             {
                     //new MALine {ParamId=1,Days=3 },
-                    new Entries.Line { ParamId = 2, Days = 5 },
-                    new Entries.Line { ParamId = 3, Days = 10 },
-                    new Entries.Line { ParamId = 4, Days = 20 },
-                    new Entries.Line { ParamId = 5, Days = 30 },
+                    new Line { ParamId = 2, Days = 5 },
+                    new Line { ParamId = 3, Days = 10 },
+                    new Line { ParamId = 4, Days = 20 },
+                    new Line { ParamId = 5, Days = 30 },
                     //new MALine {ParamId=6,Days=60 },
                     //new MALine {ParamId=7,Days=120 },
                     //new MALine {ParamId=8,Days=250 }
@@ -50,13 +51,13 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         public MA( int d1 = 5, int d2 = 10, int d3 = 20, int d4 = 30 )
         {
             this.Title = $"MA({d1},{d2},{d3},{d4})";
-            Details = new List<Entries.Line>
+            Details = new List<Line>
             {
                     //new MALine {ParamId=1,Days=3 },
-                    new Entries.Line { ParamId = 2, Days = d1 },
-                    new Entries.Line { ParamId = 3, Days = d2 },
-                    new Entries.Line { ParamId = 4, Days = d3 },
-                    new Entries.Line { ParamId = 5, Days = d4 },
+                    new Line { ParamId = 2, Days = d1 },
+                    new Line { ParamId = 3, Days = d2 },
+                    new Line { ParamId = 4, Days = d3 },
+                    new Line { ParamId = 5, Days = d4 },
                     //new MALine {ParamId=6,Days=60 },
                     //new MALine {ParamId=7,Days=120 },
                     //new MALine {ParamId=8,Days=250 }
@@ -85,7 +86,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                         r = new Outputs.Values.MA
                         {
                                 MarkTime = pv.MarkTime,
-                                RefPrices = new List<Entries.LineWithValue>()
+                                RefPrices = new List<LineWithValue>()
                         };
                         Result.Add( r );
                     }
@@ -93,7 +94,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     var line = r.RefPrices.FindLast( o => o.ParamId == pv.ParamId );
                     if( line == null )
                     {
-                        r.RefPrices.Add( new Entries.LineWithValue
+                        r.RefPrices.Add( new LineWithValue
                         {
                                 ParamId = pv.ParamId,
                                 Ref = pv.Ref
@@ -175,7 +176,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = prices.Select( o => new Outputs.Values.MA
             {
                     MarkTime = o.MarkTime,
-                    RefPrices = new List<Entries.LineWithValue>()
+                    RefPrices = new List<LineWithValue>()
             } ).ToList();
 
             for( var i = 0; i < prices.Count; i++ )
@@ -189,7 +190,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                         if( Result[ i ].RefPrices.All( o => o.ParamId != detail.ParamId ) )
                         {
                             Result[ i ].RefPrices.Add(
-                                                      new Entries.LineWithValue
+                                                      new LineWithValue
                                                       {
                                                               ParamId = detail.ParamId,
                                                               Ref = Math.Round( ma, 2 ),

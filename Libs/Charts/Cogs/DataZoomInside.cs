@@ -15,43 +15,19 @@ namespace  Ban3.Infrastructures.Charts.Cogs
     /// <summary>
     /// 内置型数据区域缩放组件（dataZoomInside）
     /// </summary>
-    public class DataZoomInside
+    public class DataZoomInside:DataZoom
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Type { get; set; } = "inside";
-
-        /// <summary>
-        /// 组件 ID。默认不指定。指定则可用于在 option 或者 API 中引用组件。
-        /// </summary>
-        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Id { get; set; }
+        public DataZoomInside()
+        {
+            Type = ECharts.DataZoomType.Inside;
+        }
 
         /// <summary>
         /// 是否停止组件的功能。
         /// </summary>
         [JsonProperty("disabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Disabled { get; set; }
-
-        /// <summary>
-        /// 指定哪些 xAxis 被控制。如果缺省则控制所有的x轴。如果设置为 false 则不控制任何x轴。
-        /// 如果设置成 3 则控制 axisIndex 为 3 的x轴。
-        /// 如果设置为 [0, 3] 则控制 axisIndex 为 0 和 3 的x轴。
-        /// </summary>
-        [JsonProperty("xAxisIndex", NullValueHandling = NullValueHandling.Ignore)]
-        public object? XAxisIndex { get; set; }
-
-        /// <summary>
-        /// 指定哪些 yAxis 被控制。如果缺省则控制所有的y轴。如果设置为 false 则不控制任何y轴。
-        /// 如果设置成 3 则控制 axisIndex 为 3 的y轴。
-        /// 如果设置为 [0, 3] 则控制 axisIndex 为 0 和 3 的y轴。
-        /// </summary>
-        [JsonProperty("yAxisIndex", NullValueHandling = NullValueHandling.Ignore)]
-        public object? YAxisIndex { get; set; }
-
-
+        
         /// <summary>
         /// 指定哪些 xAxis 被控制。如果缺省则控制所有的x轴。如果设置为 false 则不控制任何x轴。
         /// 如果设置成 3 则控制 axisIndex 为 3 的x轴。
@@ -67,13 +43,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// </summary>
         [JsonProperty("angleAxisIndex", NullValueHandling = NullValueHandling.Ignore)]
         public object? AngleAxisIndex { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("filterMode", NullValueHandling = NullValueHandling.Ignore)]
-        public string FilterMode { get; set; } = "filter";
-
+        
         /// <summary>
         /// 数据窗口范围的起始百分比。范围是：0 ~ 100。表示 0% ~ 100%。
         /// dataZoom-inside.start 和 dataZoom-inside.end 共同用 百分比 的形式定义了数据窗口范围。
@@ -159,7 +129,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 且在数据量不大时，拖拽时画面感觉卡顿，可以把尝试把 throttle 设为 0 来改善。
         /// </summary>
         [JsonProperty("throttle", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Throttle { get; set; } = 100;
+        public int? Throttle { get; set; } 
 
         /// <summary>
         /// 形式为：[rangeModeForStart, rangeModeForEnd]。
@@ -214,6 +184,6 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 是否阻止 mousemove 事件的默认行为。
         /// </summary>
         [JsonProperty("preventDefaultMouseMove", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? preventDefaultMouseMove { get; set; } = true;
+        public bool? PreventDefaultMouseMove { get; set; } = true;
     }
 }

@@ -120,7 +120,7 @@ namespace  Ban3.Infrastructures.Charts.Enums
         /// 桑基图是一种特殊的流图（可以看作是有向无环图）。 
 	    /// 它主要用来表示原材料、能量等如何从最初形式经过中间过程的加工或转化达到最终状态。
         /// </summary>
-        [Description("桑基图"), EnumMember(Value = "effectScatter")]
+        [Description("桑基图"), EnumMember(Value = "sankey")]
         Sankey,
 
         /// <summary>

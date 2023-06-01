@@ -32,7 +32,7 @@ public class Full
                 {
                     MarkTime = o.MarkTime,
                     Close = o.CurrentClose.Value,
-                    Amount = new Outputs.Values.AMOUNT { RefAmounts = new List<Entries.LineWithValue>() },
+                    Amount = new Outputs.Values.AMOUNT { RefAmounts = new List<LineWithValue>() },
                     Bias = new Outputs.Values.BIAS(),
                     Cci = new Outputs.Values.CCI
                     {
@@ -51,7 +51,7 @@ public class Full
                         RefLLV = o.CurrentLow,
                         RefHHV = o.CurrentHigh
                     },
-                    Ma = new Outputs.Values.MA { RefPrices = new List<Entries.LineWithValue>() },
+                    Ma = new Outputs.Values.MA { RefPrices = new List<LineWithValue>() },
                     Macd = new Outputs.Values.MACD()
                 })
                 .ToList()
@@ -94,7 +94,7 @@ public class Full
                         if (Result.EndPoints[i].Amount.RefAmounts.All(o => o.ParamId != detail.ParamId))
                         {
                             Result.EndPoints[i].Amount.RefAmounts.Add(
-                                new Entries.LineWithValue
+                                new LineWithValue
                                 {
                                     ParamId = detail.ParamId,
                                     Ref = DescRangeAmountAverage(prices, i, detail.Days),
@@ -322,7 +322,7 @@ public class Full
                         if (Result.EndPoints[i].Ma.RefPrices.All(o => o.ParamId != detail.ParamId))
                         {
                             Result.EndPoints[i].Ma.RefPrices.Add(
-                                new Entries.LineWithValue
+                                new LineWithValue
                                 {
                                     ParamId = detail.ParamId,
                                     Ref = Math.Round(maMa, 2),

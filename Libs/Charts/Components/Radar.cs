@@ -118,7 +118,7 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// <summary>
         /// 坐标轴刻度标签的相关设置。
         /// </summary>
-        [JsonProperty("minorTick", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("axisLabel", NullValueHandling = NullValueHandling.Ignore)]
         public Labels.AxisLabel? AxisLabel { get; set; }
 
         /// <summary>

@@ -23,6 +23,11 @@ namespace  Ban3.Infrastructures.Charts.Components
         public Title()
         {
         }
+        public Title(string text)
+        {
+            Text = text;
+            Left = 0;
+        }
 
         /// <summary>
         /// The main title text, supporting for \n for newlines.

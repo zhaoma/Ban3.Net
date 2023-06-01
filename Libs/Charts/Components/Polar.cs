@@ -7,7 +7,7 @@
 using  Ban3.Infrastructures.Charts.Cogs;
 using  Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
-using System;
+
 namespace  Ban3.Infrastructures.Charts.Components
 {
     /// <summary>
@@ -42,7 +42,7 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// 本坐标系特定的 tooltip 设定。
         /// </summary>
         [JsonProperty("tooltip", NullValueHandling = NullValueHandling.Ignore)]
-        public Tooltip? Tooptip { get; set; }
+        public Tooltip? Tooltip { get; set; }
     }
 }
 

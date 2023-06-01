@@ -14,6 +14,7 @@ using System.Runtime.Serialization;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Interfaces;
+using Ban3.Infrastructures.Indicators.Outputs;
 
 
 namespace Ban3.Infrastructures.Indicators.Formulas.Specials
@@ -28,7 +29,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         /// 数据线条
         /// </summary>
         [DataMember]
-        public List<Entries.Line> Details { get; set; }
+        public List<Line> Details { get; set; }
 
         /// <summary>
         /// 默认参数选择 5日与10日 均量
@@ -36,10 +37,10 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         public AMOUNT()
         {
             Title = "AMOUNT(5,10)";
-            Details = new List<Entries.Line>
+            Details = new List<Line>
             {
-                    new Entries.Line { ParamId = 30, Days = 5 },
-                    new Entries.Line { ParamId = 31, Days = 10 }
+                    new Line { ParamId = 30, Days = 5 },
+                    new Line { ParamId = 31, Days = 10 }
             };
         }
 
@@ -51,10 +52,10 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         public AMOUNT( int s = 5, int l = 10 )
         {
             Title = $"AMOUNT({s},{l})";
-            Details = new List<Entries.Line>
+            Details = new List<Line>
             {
-                    new Entries.Line { ParamId = 30, Days = s },
-                    new Entries.Line { ParamId = 31, Days = l }
+                    new Line { ParamId = 30, Days = s },
+                    new Line { ParamId = 31, Days = l }
             };
         }
 
@@ -79,7 +80,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                         r = new Outputs.Values.AMOUNT
                         {
                                 MarkTime = pv.MarkTime,
-                                RefAmounts = new List<Entries.LineWithValue>()
+                                RefAmounts = new List<LineWithValue>()
                         };
                         Result.Add( r );
                     }
@@ -87,7 +88,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     var line = r.RefAmounts.FindLast( o => o.ParamId == pv.ParamId );
                     if( line == null )
                     {
-                        r.RefAmounts.Add( new Entries.LineWithValue
+                        r.RefAmounts.Add( new LineWithValue
                         {
                                 ParamId = pv.ParamId,
                                 Ref = pv.Ref
@@ -113,7 +114,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                 var oneDay = new Outputs.Values.AMOUNT
                 {
                         MarkTime = prices[ i ].MarkTime,
-                        RefAmounts = new List<Entries.LineWithValue>()
+                        RefAmounts = new List<LineWithValue>()
                 };
                 foreach( var detail in Details )
                 {
@@ -128,7 +129,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                         if( oneDay.RefAmounts.All( o => o.ParamId != detail.ParamId ) )
                         {
                             oneDay.RefAmounts.Add(
-                                                  new Entries.LineWithValue
+                                                  new LineWithValue
                                                   {
                                                           ParamId = detail.ParamId,
                                                           Ref = Math.Round( d / detail.Days, 0 ),
@@ -161,7 +162,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = prices.Select( o => new Outputs.Values.AMOUNT
             {
                     MarkTime = o.MarkTime,
-                    RefAmounts = new List<Entries.LineWithValue>()
+                    RefAmounts = new List<LineWithValue>()
             } ).ToList();
 
             for( var i = 0; i < prices.Count; i++ )
@@ -173,7 +174,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                         if( Result[ i ].RefAmounts.All( o => o.ParamId != detail.ParamId ) )
                         {
                             Result[ i ].RefAmounts.Add(
-                                                       new Entries.LineWithValue
+                                                       new LineWithValue
                                                        {
                                                                ParamId = detail.ParamId,
                                                                Ref = DescRangeAmountAverage( prices, i, detail.Days ),

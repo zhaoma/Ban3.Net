@@ -13,10 +13,6 @@ namespace  Ban3.Infrastructures.Charts.Cogs
     /// </summary>
     public class Aria
     {
-        public Aria()
-        {
-        }
-
         /// <summary>
         /// 是否开启无障碍访问
         /// </summary>

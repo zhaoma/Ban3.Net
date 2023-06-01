@@ -5,8 +5,10 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using System;
+using Ban3.Infrastructures.Charts.Elements;
 using  Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using ECharts =  Ban3.Infrastructures.Charts.Enums;
 
 namespace  Ban3.Infrastructures.Charts.Cogs
@@ -14,17 +16,15 @@ namespace  Ban3.Infrastructures.Charts.Cogs
     /// <summary>
     /// 数据区域缩放。目前只支持直角坐标系的缩放。
     /// </summary>
-    public class DataZoom
+    public class DataZoom:GeneralComponent
     {
         public DataZoom()
         {
         }
 
-        /// <summary>
-        /// Whether to show label.
-        /// </summary>
-        [JsonProperty("show", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Show { get; set; } = true;
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ECharts.DataZoomType? Type { get; set; }
 
         /// <summary>
         /// 缩放和还原的标题文本

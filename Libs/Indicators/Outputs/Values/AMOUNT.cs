@@ -17,7 +17,7 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
         /// 
         /// </summary>
         [DataMember]
-        public List<Entries.LineWithValue> RefAmounts { get; set; }
+        public List<LineWithValue> RefAmounts { get; set; }
 
         /// <summary>
         /// 

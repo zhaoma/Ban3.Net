@@ -22,25 +22,31 @@ namespace  Ban3.Infrastructures.Charts.Axes
         {
         }
 
+        public SingleAxis(ECharts.AxisType type, object? data)
+        {
+            Type=type;
+            Data=data;
+        }
+
         #region IHasPosition
 
         /// 
-        public object? Left { get; set; } = "auto";
+        public object? Left { get; set; } 
 
         /// 
-        public object? Top { get; set; } = "auto";
+        public object? Top { get; set; } 
 
         /// 
-        public object? Right { get; set; } = "auto";
+        public object? Right { get; set; } 
 
         /// 
-        public object? Bottom { get; set; } = "auto";
+        public object? Bottom { get; set; } 
 
         ///
-        public object? Width { get; set; } = "auto";
+        public object? Width { get; set; } 
 
         /// 
-        public object? Height { get; set; } = "auto";
+        public object? Height { get; set; } 
 
         #endregion
 

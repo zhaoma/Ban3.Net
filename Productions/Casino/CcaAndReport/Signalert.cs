@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
+using Ban3.Infrastructures.Charts.Composites;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 
@@ -81,4 +83,12 @@ public class Signalert
     //{
 
     //}
+
+    public static Diagram PrepareDiagram(Stock stock, StockAnalysisCycle cycle = StockAnalysisCycle.DAILY)
+    {
+        var prices = Calculator.LoadReinstatedPrices(stock.Code, cycle);
+        var indicatorValue=Calculator.LoadIndicatorLine(stock.Code, cycle);
+
+        return Reportor.CreateOnesDiagram(stock, prices, indicatorValue);
+    }
 }

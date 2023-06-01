@@ -16,10 +16,6 @@ namespace  Ban3.Infrastructures.Charts.Axes
     public class ParallelAxis
         : GeneralAxis
     {
-        public ParallelAxis()
-        {
-        }
-
         /// <summary>
         /// Dimension index of coordinate axis.
         /// dim defines which dimension (which row) of data would map to this axis.
