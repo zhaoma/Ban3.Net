@@ -1,4 +1,5 @@
-﻿using Ban3.Infrastructures.Common.Attributes;
+﻿using Ban3.Infrastructures.Charts.Composites;
+using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Productions.Casino.CcaAndReport;
@@ -21,6 +22,9 @@ internal class Program
         var d=Signalert.PrepareDiagram(stock);
         
         d.ObjToJson().WriteColorLine(ConsoleColor.Red);
+
+        stock.Code.DataFile<Diagram>()
+            .WriteFile(d.ObjToJson());
 
 
         //Signalert.Collector.Sites.FixAllDailyPrices();
