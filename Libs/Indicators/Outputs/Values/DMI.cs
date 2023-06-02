@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
 
@@ -67,5 +68,25 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
         /// 
         /// </summary>
         public DMI() {}
+
+        public List<string> Features(DMI? pre)
+        {
+            var result = new List<string>();
+
+            result.Add(RefPDI > RefMDI ? "DMI.PDI" : "DMI.MDI");
+            if(RefADX>=80)
+                result.Add("DMI.80");
+
+            if (pre != null)
+            {
+                if (pre.RefPDI < pre.RefMDI && RefPDI > RefMDI)
+                    result.Add("DMI.GC");
+
+                if (pre.RefPDI > pre.RefMDI && RefPDI < RefMDI)
+                    result.Add("DMI.DC");
+            }
+
+            return result;
+        }
     }
 }

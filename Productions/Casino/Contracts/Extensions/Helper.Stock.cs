@@ -65,6 +65,7 @@ public static partial class Helper
 
                 if (endDate.Subtract(price.TradeDate.ToDateTimeEx()).TotalDays >= 0)
                 {
+                    lastRecord.TradeDate = price.TradeDate;
                     lastRecord.High = Math.Max(lastRecord.High, price.High);
                     lastRecord.Low = Math.Min(lastRecord.Low, price.Low);
                     lastRecord.Vol += price.Vol;

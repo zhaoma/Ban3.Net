@@ -3,6 +3,7 @@ using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
@@ -15,17 +16,39 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
+
+        var dic = new Dictionary<string, object>
+        {
+            { "A", 100 },
+            { "B", "Hello" }
+        };
+
+        Console.WriteLine(dic.TryGetValue("C", out var x) ? $"x={x}" : $"C NOT FOUND:{x},{x is null}");
+
+        if (dic.TryGetValue("B", out var y))
+        {
+            Console.WriteLine($"y={y}");
+        }
+
         //await Signalert.ExecuteDailyJob();
-        var allCodes = Signalert.Collector.LoadAllCodes();
 
-        var stock = allCodes.FindLast(o => o.Symbol == "688004");
-        var d=Signalert.PrepareDiagram(stock);
-        
-        d.ObjToJson().WriteColorLine(ConsoleColor.Red);
+        //var allCodes = Signalert.Collector.LoadAllCodes();
 
-        stock.Code.DataFile<Diagram>()
-            .WriteFile(d.ObjToJson());
+        //await allCodes.ParallelExecuteAsync((stock) =>
+        //{
+        //    Signalert.Calculator.GenerateIndicatorLine(stock.Code);
+        //}, Config.MaxParallelTasks);
 
+        //var line= Signalert.Calculator.LoadIndicatorLine("688004.SH",StockAnalysisCycle.DAILY);
+        //var ll = Signalert.Analyzer.LatestList(line);
+
+        //foreach (var latest in ll)
+        //{
+        //    var ss = latest.Features();
+        //    Console.WriteLine(latest.Current.MarkTime);
+        //    ss.ObjToJson().WriteColorLine(ConsoleColor.Red);
+        //    Console.WriteLine();
+        //}
 
         //Signalert.Collector.Sites.FixAllDailyPrices();
         //Signalert.Collector.ReadRealtime();

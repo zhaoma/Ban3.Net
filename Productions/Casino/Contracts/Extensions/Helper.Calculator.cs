@@ -57,7 +57,12 @@ public static partial class Helper
         string symbol,
         List<StockPrice> prices)
     {
+        if (prices == null || !prices.Any()) return false;
+
         var seeds = _.LoadSeeds(symbol);
+
+        if (seeds == null || !seeds.Any()) return false;
+        
         var newPrices = prices.Select(seeds.ReinstateOnePrice)
             .ToList();
 
@@ -126,6 +131,7 @@ public static partial class Helper
     public static bool GenerateIndicatorLine(this ICalculator _, string code, StockAnalysisCycle cycle)
     {
         var prices = _.LoadReinstatedPrices(code, cycle);
+        if (prices == null || !prices.Any()) return false;
 
         var inputsPrices = prices.Select(o => new Infrastructures.Indicators.Inputs.Price
         {

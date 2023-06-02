@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
 
@@ -45,5 +46,30 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
         /// 
         /// </summary>
         public MACD() {}
+
+        public List<string> Features(MACD? pre)
+        {
+            var result = new List<string>();
+
+            result.Add(RefDIF > RefDEA ? "MACD.PDI" : "MACD.MDI");
+            result.Add(RefMACD >= 0 ? "MACD.P" : "MACD.N");
+
+            if (pre != null)
+            {
+                if(pre.RefDIF<pre.RefDEA&&RefDIF>RefDEA)
+                    result.Add("MACD.GC");
+
+                if (pre.RefDIF > pre.RefDEA && RefDIF < RefDEA)
+                    result.Add("MACD.DC");
+
+                if(pre.RefDIF<0&&RefDIF>0)
+                    result.Add("MACD.C0");
+                
+                if (pre.RefDIF > 0 && RefDIF < 0)
+                    result.Add("MACD.D0");
+            }
+
+            return result;
+        }
     }
 }

@@ -20,7 +20,9 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
         /// <summary>
         /// 标的代码
         /// </summary>
-        public string StockCode { get; set; }
+        public string Code { get; set; }
+
+        public string Symbol { get; set; }
 
         /// <summary>
         /// 标注日期
@@ -31,10 +33,5 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
         /// 收盘价
         /// </summary>
         public decimal Close { get; set; }
-
-        /// <summary>
-        /// 复权收盘价
-        /// </summary>
-        public decimal FixedClose { get; set; }
     }
 }

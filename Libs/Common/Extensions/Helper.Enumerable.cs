@@ -168,5 +168,18 @@ namespace Ban3.Infrastructures.Common.Extensions
 
             return r;
         }
+
+        public static bool IsAsc(this List<decimal> nums)
+        {
+            for (int i = 1; i < nums.Count; i++)
+            {
+                if (nums[i - 1] > nums[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

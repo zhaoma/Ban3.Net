@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Charts;
 using Ban3.Infrastructures.Charts.Axes;
@@ -15,6 +16,7 @@ using Ban3.Infrastructures.Indicators.Outputs.Values;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Sites.ViaTushare.Entries;
+using BIAS = Ban3.Infrastructures.Indicators.Outputs.Values.BIAS;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
