@@ -18,6 +18,14 @@ namespace  Ban3.Infrastructures.Charts.Axes
     public class CartesianAxis
         : GeneralAxis
     {
+        public CartesianAxis(ECharts.AxisType type, object? data,int? gridIndex,bool? show)
+        {
+            Type = type;
+            Data = data;
+            GridIndex = gridIndex;
+            Show = show;
+        }
+
         /// <summary>
         /// The index of grid which the x axis belongs to. 
         /// Defaults to be in the first grid.

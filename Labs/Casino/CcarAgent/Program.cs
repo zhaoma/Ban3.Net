@@ -1,5 +1,7 @@
 ﻿using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.Contracts.Enums;
+using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -10,7 +12,11 @@ internal class Program
     {
         
 
-        await Signalert.ExecuteDailyJob();
+        //await Signalert.ExecuteDailyJob();
 
+        var code = "688004.SH";
+        var s = Signalert.Collector.LoadAllCodes()
+            .FindLast(o => o.Code ==code);
+        Signalert.PrepareOnesDiagram(s);
     }
 }

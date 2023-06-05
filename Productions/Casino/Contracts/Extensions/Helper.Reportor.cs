@@ -64,18 +64,18 @@ public static partial class Helper
             .SetGrid(
                 new[]
                 {
-                    new Grid() { Height = "40%" },
-                    new Grid() { Height = "10%" },
-                    new Grid() { Height = "10%" },
-                    new Grid() { Height = "10%" },
-                    new Grid() { Height = "10%" },
-                    new Grid() { Height = "10%" },
-                    new Grid() { Height = "10%" }
+                    new Grid() { Height = "40%",Bottom = "60%"},
+                    new Grid() { Height = "10%" ,Bottom = "50%"},
+                    new Grid() { Height = "10%" ,Bottom = "40%"},
+                    new Grid() { Height = "10%" ,Bottom = "30%"},
+                    new Grid() { Height = "10%" ,Bottom = "20%"},
+                    new Grid() { Height = "10%" ,Bottom = "10%"},
+                    new Grid() { Height = "10%" ,Bottom = "0" }
                 })
             .SetXAxis(
                 new SingleAxis[]
                 {
-                    new SingleAxis(),
+                    new SingleAxis(AxisType.Category,candlestickData.CategoryData()){GridIndex=1},
                     new SingleAxis(),
                     new SingleAxis(),
                     new SingleAxis(),

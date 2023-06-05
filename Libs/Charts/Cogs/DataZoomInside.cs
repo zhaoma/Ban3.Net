@@ -156,7 +156,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 'alt'：表示按住 alt 和鼠标滚轮能触发缩放。
         /// </summary>
         [JsonProperty("zoomOnMouseWheel", NullValueHandling = NullValueHandling.Ignore)]
-        public object? ZoomOnMouseWheel { get; set; } = true;
+        public object? ZoomOnMouseWheel { get; set; } 
 
         /// <summary>
         /// 如何触发数据窗口平移。可选值为：
@@ -167,7 +167,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 'alt'：表示按住 alt 和鼠标移动能触发数据窗口平移。
         /// </summary>
         [JsonProperty("moveOnMouseMove", NullValueHandling = NullValueHandling.Ignore)]
-        public object? MoveOnMouseMove { get; set; } = true;
+        public object? MoveOnMouseMove { get; set; }
 
         /// <summary>
         /// 如何触发数据窗口平移。可选值为：
@@ -178,12 +178,12 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 'alt'：表示按住 alt 和鼠标滚轮能触发缩放。
         /// </summary>
         [JsonProperty("moveOnMouseWheel", NullValueHandling = NullValueHandling.Ignore)]
-        public object? MoveOnMouseWheel { get; set; } = true;
+        public object? MoveOnMouseWheel { get; set; } 
 
         /// <summary>
         /// 是否阻止 mousemove 事件的默认行为。
         /// </summary>
         [JsonProperty("preventDefaultMouseMove", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? PreventDefaultMouseMove { get; set; } = true;
+        public bool? PreventDefaultMouseMove { get; set; } 
     }
 }

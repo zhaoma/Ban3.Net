@@ -236,7 +236,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 且在数据量不大时，拖拽时画面感觉卡顿，可以把尝试把 throttle 设为 0 来改善。
         /// </summary>
         [JsonProperty("throttle", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Throttle { get; set; } = 100;
+        public int? Throttle { get; set; } 
 
         /// <summary>
         /// 形式为：[rangeModeForStart, rangeModeForEnd]。
@@ -258,6 +258,6 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 是否开启刷选功能
         /// </summary>
         [JsonProperty("brushSelect", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? BrushSelect { get; set; } = true;
+        public bool? BrushSelect { get; set; } 
     }
 }

@@ -42,7 +42,7 @@ namespace  Ban3.Infrastructures.Charts.Elements
         public ECharts.AxisType? Type { get; set; }
 
         /// 
-        public object? BoundaryGap { get; set; } = true;
+        public object? BoundaryGap { get; set; } 
 
         /// 
         public object? Min { get; set; }
@@ -54,7 +54,7 @@ namespace  Ban3.Infrastructures.Charts.Elements
         public bool? Scale { get; set; }
 
         /// 
-        public int? SplitNumber { get; set; } = 5;
+        public int? SplitNumber { get; set; } 
 
         /// 
         public int? MinInterval { get; set; }
@@ -66,7 +66,7 @@ namespace  Ban3.Infrastructures.Charts.Elements
         public object? Interval { get; set; }
 
         ///
-        public int? LogBase { get; set; } = 10;
+        public int? LogBase { get; set; } 
 
         ///
         public bool? Silent { get; set; }
@@ -109,7 +109,7 @@ namespace  Ban3.Infrastructures.Charts.Elements
         #region IHasAxisName
 
         ///
-        public string? Name { get; set; } = string.Empty;
+        public string? Name { get; set; } 
 
         /// 
         public ECharts.Position? NameLocation { get; set; }
@@ -118,7 +118,7 @@ namespace  Ban3.Infrastructures.Charts.Elements
         public TextStyle? NameTextStyle { get; set; }
 
         /// 
-        public int? NameGap { get; set; } = 15;
+        public int? NameGap { get; set; } 
 
         /// 
         public int? NameRotate { get; set; }

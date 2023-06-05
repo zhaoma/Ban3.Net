@@ -54,7 +54,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 
         /// </summary>
         [JsonProperty("filterMode", NullValueHandling = NullValueHandling.Ignore)]
-        public string? FilterMode { get; set; } = "filter";
+        public string? FilterMode { get; set; } 
 
         /// <summary>
         /// 指定哪些 xAxis 被控制。如果缺省则控制所有的x轴。如果设置为 false 则不控制任何x轴。

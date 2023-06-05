@@ -47,21 +47,21 @@ namespace  Ban3.Infrastructures.Charts.Components
 
         #region IHasAnimation
 
-        public bool? Animation { get; set; } = true;
+        public bool? Animation { get; set; } 
 
-        public int? AnimationThreshold { get; set; } = 2000;
+        public int? AnimationThreshold { get; set; }
 
-        public object? AnimationDuration { get; set; } = 1000;
+        public object? AnimationDuration { get; set; }
 
-        public ECharts.EasingEffect? AnimationEasing { get; set; } = ECharts.EasingEffect.CubicOut;
+        public ECharts.EasingEffect? AnimationEasing { get; set; } 
 
-        public object? AnimationDelay { get; set; } = 0;
+        public object? AnimationDelay { get; set; } 
 
-        public object? AnimationDurationUpdate { get; set; } = 300;
+        public object? AnimationDurationUpdate { get; set; } 
 
-        public ECharts.EasingEffect? AnimationEasingUpdate { get; set; } = ECharts.EasingEffect.CubicInOut;
+        public ECharts.EasingEffect? AnimationEasingUpdate { get; set; } 
 
-        public object? AnimationDelayUpdate { get; set; } = 0;
+        public object? AnimationDelayUpdate { get; set; } 
 
         #endregion
 
@@ -193,7 +193,7 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// 如果你觉得不想要裁剪的话，可以设置成 false 关闭。
         /// </summary>
         [JsonProperty("clip", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Clip { get; set; } = true;
+        public bool? Clip { get; set; } 
 
         /// <summary>
         /// 线条和区域面积是否触发事件

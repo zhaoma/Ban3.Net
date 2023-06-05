@@ -47,7 +47,7 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// 'blank' opening it in a new tab
         /// </summary>
         [JsonProperty("target", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Target { get; set; } = "blank";
+        public string? Target { get; set; } 
 
         /// <summary>
         /// 
@@ -59,13 +59,13 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// Subtitle text, supporting for \n for newlines.
         /// </summary>
         [JsonProperty("subtext", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Subtext { get; set; } = "";
+        public string? Subtext { get; set; } 
 
         /// <summary>
         /// The hyper link of subtitle text.
         /// </summary>
         [JsonProperty("sublink", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Sublink { get; set; } = "";
+        public string? Sublink { get; set; } 
 
         /// <summary>
         /// Open the hyper link of subtitle in specified tab, options:
@@ -73,7 +73,7 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// 'blank' opening it in a new tab
         /// </summary>
         [JsonProperty("subtarget", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Subtarget { get; set; } = "blank";
+        public string? Subtarget { get; set; }
 
         /// <summary>
         /// 子标题样式
@@ -86,14 +86,14 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// Optional values: 'auto', 'left', 'right', 'center'.
         /// </summary>
         [JsonProperty("textAlign", NullValueHandling = NullValueHandling.Ignore)]
-        public string? TextAlign { get; set; } = "auto";
+        public string? TextAlign { get; set; } 
 
         /// <summary>
         /// The vertical align of the component (including "text" and "subtext").
         /// Optional values: 'auto', 'top', 'bottom', 'middle'.
         /// </summary>
         [JsonProperty("textVerticalAlign", NullValueHandling = NullValueHandling.Ignore)]
-        public string? TextVerticalAlign { get; set; } = "auto";
+        public string? TextVerticalAlign { get; set; } 
 
         /// <summary>
         /// Set this to true to enable triggering events
@@ -105,21 +105,21 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// The gap between the main title and subtitle.
         /// </summary>
         [JsonProperty("itemGap", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ItemGap { get; set; } = 10;
+        public int? ItemGap { get; set; } 
 
         #region HasBorder
 
         /// 
-        public string? BackgroundColor { get; set; } = "transparent";
+        public string? BackgroundColor { get; set; } 
 
         /// 
-        public string? BorderColor { get; set; } = "#ccc";
+        public string? BorderColor { get; set; } 
 
         /// 
         public ECharts.BorderType? BorderType { get; set; }
 
         /// 
-        public int? BorderWidth { get; set; } = 1;
+        public int? BorderWidth { get; set; }
 
         /// 
         public object? BorderRadius { get; set; }
@@ -137,7 +137,7 @@ namespace  Ban3.Infrastructures.Charts.Components
         public int? BorderMiterLimit { get; set; }
 
         /// 
-        public object? Padding { get; set; } = 5;
+        public object? Padding { get; set; } 
 
         #endregion
 
