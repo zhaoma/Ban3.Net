@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charts", "..\..\Libs\Charts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaNetease", "..\..\Sites\ViaNetease\ViaNetease.csproj", "{0E2133BC-BA46-46F1-8D63-12203EA0DC8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompositeAgent", "..\WorkServices\CompositeAgent\CompositeAgent.csproj", "{5907AA0C-BA00-4C90-B7C6-71F46AE8F5A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{0E2133BC-BA46-46F1-8D63-12203EA0DC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E2133BC-BA46-46F1-8D63-12203EA0DC8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E2133BC-BA46-46F1-8D63-12203EA0DC8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5907AA0C-BA00-4C90-B7C6-71F46AE8F5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5907AA0C-BA00-4C90-B7C6-71F46AE8F5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5907AA0C-BA00-4C90-B7C6-71F46AE8F5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5907AA0C-BA00-4C90-B7C6-71F46AE8F5A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +134,7 @@ Global
 		{94F86738-6721-43B3-8758-02E1FC98EFB0} = {11A23C4B-6DAA-4EF6-A573-F44CA5EDC35A}
 		{CC9B8A2B-5086-4CC9-9AB6-CDAC9E205175} = {A4CF4C44-DA8E-4F5B-80CD-60BF57F19B1E}
 		{0E2133BC-BA46-46F1-8D63-12203EA0DC8F} = {11A23C4B-6DAA-4EF6-A573-F44CA5EDC35A}
+		{5907AA0C-BA00-4C90-B7C6-71F46AE8F5A6} = {C84FAEFA-D87B-4EB3-8D51-DC986595C3C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D58FE182-81D2-4531-BAE9-9EB54144082D}

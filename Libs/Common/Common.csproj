@@ -10,17 +10,22 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Ban3.Infrastructures.Common</Title>
     <Version>1.0.1</Version>
-    <Authors>zhaoma@hotmail.com</Authors>
-    <Company>Ban3</Company>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
     <Description>Common,Extensions,Indicators and Echarts</Description>
-    <PackageIcon>number-3-clipart-png-17.png</PackageIcon>
+    <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\..\output\</OutputPath>
-    <DocumentationFile>..\..\output\ban3.Infrastructures.Common.xml</DocumentationFile>
+    <DocumentationFile>..\..\output\Ban3.Infrastructures.Common.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Fody" Version="6.7.0">
@@ -40,7 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="C:\Users\z004k7zb\Downloads\number-3-clipart-png-17.png">
+    <None Include="..\..\icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

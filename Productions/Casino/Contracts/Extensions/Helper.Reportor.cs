@@ -73,7 +73,7 @@ public static partial class Helper
                     new Grid() { Height = "10%" }
                 })
             .SetXAxis(
-                new IAxis[]
+                new SingleAxis[]
                 {
                     new SingleAxis(),
                     new SingleAxis(),
@@ -84,7 +84,7 @@ public static partial class Helper
                     new SingleAxis(),
                 })
             .SetYAxis(
-                new IAxis[]
+                new SingleAxis[]
                 {
                     new SingleAxis(),
                     new SingleAxis(),
@@ -110,9 +110,9 @@ public static partial class Helper
         return diagram;
     }
 
-    static ISeries[] AMOUNT(this LineOfPoint indicatorValue, List<StockPrice> prices, int? index)
+    static Series[] AMOUNT(this LineOfPoint indicatorValue, List<StockPrice> prices, int? index)
     {
-        var result = new List<ISeries>
+        var result = new List<Series>
         {
             SeriesType.Bar.CreateSeries(
                 "AMOUNT",
@@ -136,7 +136,7 @@ public static partial class Helper
         return result.ToArray();
     }
 
-    static ISeries[] BIAS(this LineOfPoint indicatorValue, int? index)
+    static Series[] BIAS(this LineOfPoint indicatorValue, int? index)
     {
         return new[]
         {
@@ -153,7 +153,7 @@ public static partial class Helper
         };
     }
 
-    static ISeries CCI(this LineOfPoint indicatorValue, int? index)
+    static Series CCI(this LineOfPoint indicatorValue, int? index)
     {
         return SeriesType.Line.CreateSeries(
             "CCI",
@@ -162,7 +162,7 @@ public static partial class Helper
             index);
     }
 
-    static ISeries[] DMI(this LineOfPoint indicatorValue, int? index)
+    static Series[] DMI(this LineOfPoint indicatorValue, int? index)
     {
         return new[]
         {
@@ -189,7 +189,7 @@ public static partial class Helper
         };
     }
 
-    static ISeries[] ENE(this LineOfPoint indicatorValue, int? index)
+    static Series[] ENE(this LineOfPoint indicatorValue, int? index)
     {
         return new[]
         {
@@ -212,7 +212,7 @@ public static partial class Helper
     }
 
 
-    static ISeries[] KD(this LineOfPoint indicatorValue, int? index)
+    static Series[] KD(this LineOfPoint indicatorValue, int? index)
     {
         return new[]
         {
@@ -229,9 +229,9 @@ public static partial class Helper
         };
     }
 
-    static ISeries[] MA(this LineOfPoint indicatorValue, int? index)
+    static Series[] MA(this LineOfPoint indicatorValue, int? index)
     {
-        var result = new List<ISeries>();
+        var result = new List<Series>();
 
         var ma = new Infrastructures.Indicators.Formulas.Specials.MA();
         foreach (var line in ma.Details)
@@ -247,7 +247,7 @@ public static partial class Helper
         return result.ToArray();
     }
 
-    static ISeries[] MACD(this LineOfPoint indicatorValue, int? index)
+    static Series[] MACD(this LineOfPoint indicatorValue, int? index)
     {
         return new[]
         {

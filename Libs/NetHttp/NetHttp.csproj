@@ -5,6 +5,10 @@
     <LangVersion>10.0</LangVersion>
     <AssemblyName>Ban3.Infrastructures.NetHttp</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.NetHttp</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Ban3.Infrastructures.NetHttp</Title>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
   </PropertyGroup>
 
   <ItemGroup>

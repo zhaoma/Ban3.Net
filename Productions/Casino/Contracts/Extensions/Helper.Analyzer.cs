@@ -1,12 +1,10 @@
-﻿using Ban3.Infrastructures.Indicators.Enums;
-using Ban3.Infrastructures.Indicators.Inputs;
+﻿
 using Ban3.Infrastructures.Indicators.Outputs;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Sites.ViaTushare.Entries;
 

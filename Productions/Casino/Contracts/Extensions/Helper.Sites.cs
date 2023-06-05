@@ -29,11 +29,11 @@ public static partial class Helper
     /// <param name="_"></param>
     /// <returns></returns>
     [Obsolete("云财经有防火墙规则")]
-    public static bool DownloadAllIcons(this ISites _)
+    public static bool DownloadAllIcons(this ISites _, List<Stock> allCodes = null)
     {
         var result = true;
 
-        var local = _.LoadAllCodes();
+        var local = allCodes?? _.LoadAllCodes();
 
         /*
         local.ParallelExecute((stock) =>
@@ -73,11 +73,11 @@ public static partial class Helper
     #region codes
 
     [Obsolete("tushare 数据更有用些,use PrepareAllCodesFromTushare")]
-    public static bool PrepareAllCodesFromEastmoney(this ISites _)
+    public static bool PrepareAllCodesFromEastmoney(this ISites _, List<Stock> allCodes = null)
     {
         var codes = Sites.ViaEastmoney.Helper.DownloadAllCodes().Result.Data.Diff;
 
-        var local = _.LoadAllCodes();
+        var local =allCodes?? _.LoadAllCodes();
         if (local != null)
         {
             local.AddRange(codes.FindAll(x => local.All(y => y.Code != x.Code)).Select(o => new Stock
@@ -101,11 +101,11 @@ public static partial class Helper
                 .WriteFile(local.ObjToJson()));
     }
 
-    public static bool PrepareAllCodesFromTushare(this ISites _)
+    public static bool PrepareAllCodesFromTushare(this ISites _,List<Stock> allCodes= null)
     {
         var result = new GetStockBasic().GetResult();
 
-        var local = _.LoadAllCodes();
+        var local =allCodes?? _.LoadAllCodes();
         if (local != null)
         {
             local.AddRange(result.Data.FindAll(x => local.All(y => y.Code != x.Code)).Select(o => new Stock
@@ -184,18 +184,19 @@ public static partial class Helper
         return result;
     }
 
-    public static bool PrepareAllDailyPrices(this ISites _)
+    public static bool PrepareAllDailyPrices(this ISites _, List<Stock> allCodes = null)
     {
+        allCodes ??= _.LoadAllCodes();
         var result = true;
-        var allCodes = _.LoadAllCodes();
+        
         allCodes.ForEach(stock => { result = result && _.PrepareOnesDailyPrices(stock.Code); });
         return result;
     }
 
-    public static bool FixAllDailyPrices(this ISites _)
+    public static bool FixAllDailyPrices(this ISites _, List<Stock> allCodes = null)
     {
+        allCodes ??= _.LoadAllCodes();
         var result = true;
-        var allCodes = _.LoadAllCodes();
 
         var page = 1;
         var codes = allCodes
@@ -289,10 +290,10 @@ public static partial class Helper
         return result;
     }
 
-    public static bool PrepareAllEvents(this ISites _)
+    public static bool PrepareAllEvents(this ISites _, List<Stock> allCodes = null)
     {
+        allCodes ??= _.LoadAllCodes();
         var result = true;
-        var allCodes = _.LoadAllCodes();
 
         allCodes.ForEach(o =>
         {
@@ -315,11 +316,11 @@ public static partial class Helper
 
     #region realtime prices
 
-    public static async Task<bool> ReadRealtime(this ISites _)
+    public static async Task<bool> ReadRealtime(this ISites _, List<Stock> allCodes = null)
     {
         try
         {
-            var allCodes = _.LoadAllCodes();
+            allCodes ??= _.LoadAllCodes();
 
             var p = 1;
             var codes = allCodes.Take(Config.FixPageSize).ToList();

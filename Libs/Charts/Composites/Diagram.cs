@@ -5,6 +5,8 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
+using Ban3.Infrastructures.Charts.Axes;
+using Ban3.Infrastructures.Charts.Components;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using ECharts =  Ban3.Infrastructures.Charts.Enums;
@@ -42,14 +44,14 @@ namespace  Ban3.Infrastructures.Charts.Composites
         /// 多于两个 x 轴需要通过配置 offset 属性防止同个位置多个 x 轴的重叠。
         /// </summary>
         [JsonProperty("xAxis", NullValueHandling = NullValueHandling.Ignore)]
-        public Elements.IAxis[]? XAxis { get; set; }
+        public SingleAxis[]? XAxis { get; set; }
 
         /// <summary>
         /// 直角坐标系 grid 中的 y 轴，一般情况下单个 grid 组件最多只能放左右两个 y 轴，
         /// 多于两个 y 轴需要通过配置 offset 属性防止同个位置多个 Y 轴的重叠。
         /// </summary>
         [JsonProperty("yAxis", NullValueHandling = NullValueHandling.Ignore)]
-        public Elements.IAxis[]? YAxis { get; set; }
+        public SingleAxis[]? YAxis { get; set; }
 
         /// <summary>
         /// 极坐标系，可以用于散点图和折线图。每个极坐标系拥有一个角度轴和一个半径轴。
@@ -61,13 +63,13 @@ namespace  Ban3.Infrastructures.Charts.Composites
         /// 极坐标系的径向轴。
         /// </summary>
         [JsonProperty("radiusAxis", NullValueHandling = NullValueHandling.Ignore)]
-        public Elements.IAxis? RadiusAxis { get; set; }
+        public RadiusAxis? RadiusAxis { get; set; }
 
         /// <summary>
         /// 极坐标系的角度轴。
         /// </summary>
         [JsonProperty("angleAxis", NullValueHandling = NullValueHandling.Ignore)]
-        public Elements.IAxis? AngleAxis { get; set; }
+        public AngleAxis? AngleAxis { get; set; }
 
         /// <summary>
         /// 雷达图坐标系组件，只适用于雷达图。该组件等同 ECharts 2 中的 polar 组件。
@@ -129,7 +131,7 @@ namespace  Ban3.Infrastructures.Charts.Composites
         /// 平行坐标系（Parallel Coordinates） 是一种常用的可视化高维数据的图表。
         /// </summary>
         [JsonProperty("parallelAxis", NullValueHandling = NullValueHandling.Ignore)]
-        public Elements.IAxis? ParallelAxis { get; set; }
+        public ParallelAxis? ParallelAxis { get; set; }
 
         /// <summary>
         /// 单轴。可以被应用到散点图中展现一维数据
@@ -177,7 +179,7 @@ namespace  Ban3.Infrastructures.Charts.Composites
         /// 
         /// </summary>
         [JsonProperty("series", NullValueHandling = NullValueHandling.Ignore)]
-        public List<Elements.ISeries>? Series { get; set; }
+        public List<Series>? Series { get; set; }
 
         /// <summary>
         /// 是否是暗黑模式，默认会根据背景色 backgroundColor 的亮度自动设置。 

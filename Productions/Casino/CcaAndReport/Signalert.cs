@@ -37,20 +37,22 @@ public class Signalert
         return !string.IsNullOrEmpty(saved);
     }
 
-    public static async Task<bool> PrepareAllSeeds()
+    public static async Task<bool> PrepareAllSeeds(List<Stock> allCodes = null)
     {
+        allCodes ??= Signalert.Collector.LoadAllCodes();
         var result = true;
-        var allCodes = Signalert.Collector.Sites.LoadAllCodes();
+
         await allCodes.ParallelExecuteAsync((stock) => { result = result && PrepareSeeds(stock); },
             Config.MaxParallelTasks);
 
         return result;
     }
 
-    public static async Task<bool> ReinstateAllPrices()
+    public static async Task<bool> ReinstateAllPrices(List<Stock> allCodes = null)
     {
+        allCodes ??= Signalert.Collector.LoadAllCodes();
         var result = true;
-        var allCodes = Signalert.Collector.Sites.LoadAllCodes();
+
         await allCodes.ParallelExecuteAsync((stock) =>
             {
                 var ps = Collector.LoadDailyPrices(stock.Code);
@@ -65,30 +67,44 @@ public class Signalert
     public static async Task ExecuteDailyJob()
     {
         Collector.PrepareAllCodes();
-        
-        Collector.FixDailyPrices();
 
-        var reinstate = await Signalert.ReinstateAllPrices();
+        var allCodes = Signalert.Collector.LoadAllCodes();
+
+        Collector.FixDailyPrices(allCodes);
+
+        var reinstate = await Signalert.ReinstateAllPrices(allCodes);
 
         if (reinstate)
         {
-            var allCodes = Signalert.Collector.LoadAllCodes();
+            await allCodes.ParallelExecuteAsync((stock) => { Calculator.GenerateIndicatorLine(stock.Code); },
+                Config.MaxParallelTasks);
 
-            await allCodes.ParallelExecuteAsync((stock) =>
-            {
-                Calculator.GenerateIndicatorLine(stock.Code);
-            }, Config.MaxParallelTasks);
 
+            await PrepareAllDiagrams(allCodes);
+
+            await PrepareAllSets(allCodes);
         }
     }
 
-    //public static async Task ExecuteRealtimeJob()
-    //{
-
-    //}
-    public static async Task PrepareAllDiagrams()
+    public static async Task ExecuteRealtimeJob()
     {
         var allCodes = Signalert.Collector.LoadAllCodes();
+
+        await ExecuteRealtimeJob(allCodes);
+    }
+
+    public static async Task ExecuteRealtimeJob(List<Stock> stocks)
+    {
+        Collector.ReadRealtime(stocks);
+
+        await PrepareAllDiagrams(stocks);
+
+        await PrepareAllSets(stocks);
+    }
+
+    public static async Task PrepareAllDiagrams(List<Stock> allCodes=null)
+    {
+        allCodes ??= Signalert.Collector.LoadAllCodes();
 
         await allCodes.ParallelExecuteAsync((stock) =>
         {
@@ -100,6 +116,8 @@ public class Signalert
         => PrepareDiagram(stock)
            && PrepareDiagram(stock, StockAnalysisCycle.WEEKLY)
            && PrepareDiagram(stock, StockAnalysisCycle.MONTHLY);
+
+
 
     public static bool PrepareDiagram(Stock stock, StockAnalysisCycle cycle = StockAnalysisCycle.DAILY)
     {
@@ -118,9 +136,19 @@ public class Signalert
         return !string.IsNullOrEmpty(saved);
     }
 
-    public static List<StockSets> PrepareAllSets()
-    {
+    public static Diagram LoadDiagram(Stock stock, StockAnalysisCycle cycle = StockAnalysisCycle.DAILY)
+        => $"{stock.Code}.{cycle}"
+            .DataFile<Diagram>()
+            .ReadFileAs<Diagram>();
 
+    public static async  Task PrepareAllSets(List<Stock> allCodes = null)
+    {
+        allCodes ??= Signalert.Collector.LoadAllCodes();
+
+        await allCodes.ParallelExecuteAsync((stock) =>
+        {
+            PrepareOnesDiagram(stock);
+        }, Config.MaxParallelTasks);
     }
 
     public static List<StockSets> PrepareOnesSets(Stock stock)

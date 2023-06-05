@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ban3.Infrastructures.Charts.Axes;
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Components;
 using Ban3.Infrastructures.Charts.Composites;
@@ -36,13 +37,13 @@ namespace Ban3.Infrastructures.Charts
             return diagram;
         }
 
-        public static Diagram SetXAxis(this Diagram diagram, IAxis[] axis)
+        public static Diagram SetXAxis(this Diagram diagram, SingleAxis[] axis)
         {
             diagram.XAxis = axis;
             return diagram;
         }
 
-        public static Diagram SetYAxis(this Diagram diagram, IAxis[] axis)
+        public static Diagram SetYAxis(this Diagram diagram, SingleAxis[] axis)
         {
             diagram.YAxis = axis;
             return diagram;
@@ -57,7 +58,7 @@ namespace Ban3.Infrastructures.Charts
         ///
         public static Diagram AddSeries(
             this Diagram diagram,
-            ISeries series)
+            Series series)
         {
             diagram.AddSeries(new[] { series });
 
@@ -66,9 +67,9 @@ namespace Ban3.Infrastructures.Charts
 
         public static Diagram AddSeries(
             this Diagram diagram,
-            ISeries[] series)
+            Series[] series)
         {
-            diagram.Series = diagram.Series ?? new List<ISeries>();
+            diagram.Series = diagram.Series ?? new List<Series>();
 
             diagram.Series.AddRange(series);
 
@@ -80,7 +81,7 @@ namespace Ban3.Infrastructures.Charts
         #region Series
 
         ///
-        public static ISeries CreateSeries(
+        public static Series CreateSeries(
             this Enums.SeriesType seriesType, string name, object? data, int? index)
         {
             return new Series

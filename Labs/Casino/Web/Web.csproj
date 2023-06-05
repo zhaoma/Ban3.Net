@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="688004.SH.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Productions\Casino\CcaAndReport\CcaAndReport.csproj" />
   </ItemGroup>
 </Project>
