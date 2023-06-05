@@ -8,6 +8,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>support</AssemblyName>
     <RootNamespace>Ban3.Labs.TeamFoundationCollector.Presentation.Support</RootNamespace>
+    <UserSecretsId>6dfbc10b-b53b-4d7f-8776-d5a9e4946ef4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Costura.Fody" Version="5.7.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Fody" Version="6.7.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

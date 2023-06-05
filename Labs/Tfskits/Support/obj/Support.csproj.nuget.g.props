@@ -15,5 +15,6 @@
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)rougamo.fody\1.4.1\build\Rougamo.Fody.props" Condition="Exists('$(NuGetPackageRoot)rougamo.fody\1.4.1\build\Rougamo.Fody.props')" />
+    <Import Project="$(NuGetPackageRoot)costura.fody\5.7.0\build\Costura.Fody.props" Condition="Exists('$(NuGetPackageRoot)costura.fody\5.7.0\build\Costura.Fody.props')" />
   </ImportGroup>
 </Project>

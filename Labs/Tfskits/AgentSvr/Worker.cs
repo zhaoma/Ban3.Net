@@ -16,7 +16,7 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.AgentSvr
             {
                 Logger.Info($"start timer job : SyncTfvc");
                 DevOps.Collector.SyncTfvc();
-            }).CreateTimer(1000 * 60 * 60*);
+            }).CreateTimer(1000 * 60 * 60);
 
 
             while (!stoppingToken.IsCancellationRequested)
