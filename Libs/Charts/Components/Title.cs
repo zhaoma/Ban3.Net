@@ -26,7 +26,6 @@ namespace  Ban3.Infrastructures.Charts.Components
         public Title(string text)
         {
             Text = text;
-            Left = 0;
         }
 
         /// <summary>

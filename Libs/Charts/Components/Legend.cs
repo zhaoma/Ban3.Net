@@ -24,6 +24,15 @@ namespace  Ban3.Infrastructures.Charts.Components
     public class Legend
         : GeneralComponent, IHasBorder, IHasShadow
     {
+        public Legend() { }
+
+        public Legend(IEnumerable<string> data, object? left, object? top)
+        {
+            Data = data;
+            Left = left;
+            Top=top;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -51,19 +60,19 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// and vertical distance in vertical layout.
         /// </summary>
         [JsonProperty("itemGap", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ItemGap { get; set; } = 10;
+        public int? ItemGap { get; set; } 
 
         /// <summary>
         /// Image width of legend symbol.
         /// </summary>
         [JsonProperty("itemWidth", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ItemWidth { get; set; } = 25;
+        public int? ItemWidth { get; set; } 
 
         /// <summary>
         /// Image height of legend symbol.
         /// </summary>
         [JsonProperty("itemHeight", NullValueHandling = NullValueHandling.Ignore)]
-        public int? ItemHeight { get; set; } = 14;
+        public int? ItemHeight { get; set; }
 
         /// <summary>
         /// 
@@ -146,21 +155,22 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// <summary>
         /// 
         /// </summary>
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public IEnumerable<string>? Data { get; set; }
 
         #region IHasBorder
 
         /// 
-        public string? BackgroundColor { get; set; } = "transparent";
+        public string? BackgroundColor { get; set; } 
 
         /// 
-        public string? BorderColor { get; set; } = "#ccc";
+        public string? BorderColor { get; set; } 
 
         /// 
         public ECharts.BorderType? BorderType { get; set; }
 
         /// 
-        public int? BorderWidth { get; set; } = 1;
+        public int? BorderWidth { get; set; } 
 
         /// 
         public object? BorderRadius { get; set; }
@@ -178,7 +188,7 @@ namespace  Ban3.Infrastructures.Charts.Components
         public int? BorderMiterLimit { get; set; }
 
         ///
-        public object? Padding { get; set; } = 5;
+        public object? Padding { get; set; } 
 
         #endregion
 
@@ -328,12 +338,12 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// 
         /// </summary>
         [JsonProperty("selectorItemGap", NullValueHandling = NullValueHandling.Ignore)]
-        public int? SelectorItemGap { get; set; } = 7;
+        public int? SelectorItemGap { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("selectorButtonGap", NullValueHandling = NullValueHandling.Ignore)]
-        public int? SelectorButtonGap { get; set; } = 10;
+        public int? SelectorButtonGap { get; set; }
     }
 }

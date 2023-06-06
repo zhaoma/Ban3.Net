@@ -97,6 +97,19 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         [JsonProperty("handle", NullValueHandling = NullValueHandling.Ignore)]
         public Handle? Handle { get; set; }
 
+        /// <summary>
+        /// axisPointers can be linked to each other.
+        /// The term "link" represents that axes are synchronized and move together.
+        /// Axes are linked according to the value of axisPointer.
+        /// </summary>
+        [JsonProperty("link", NullValueHandling = NullValueHandling.Ignore)]
+        public object? Link { get; set; }
 
+        /// <summary>
+        /// Conditions to trigger tooltip.
+        /// </summary>
+        [JsonProperty("triggerOn", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ECharts.TriggerOn? TriggerOn { get; set; }
     }
 }

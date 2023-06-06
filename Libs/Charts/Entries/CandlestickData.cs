@@ -10,7 +10,7 @@ public class CandlestickData
 
     public object? ChartData()
         => Records?
-            .Select(o => new object[] { o.TradeDate.ToYmd(), o.Open, o.Close, o.Low, o.High})
+            .Select(o => new object[] { o.Open, o.Close, o.Low, o.High})
             .ToList();
 
     public object? CategoryData()

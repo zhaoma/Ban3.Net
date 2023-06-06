@@ -43,7 +43,8 @@ public static partial class Helper
         sets.ForEach(o =>
         {
             var ss = setsList.FindLast(x => x.MarkTime.Subtract(o.MarkTime).TotalDays >= 0);
-            o.SetKeys = o.SetKeys.Union(ss.Item2.Select(y => $"{y}.{cycle}"));
+            if (ss.Item2!=null&&ss.Item2.Any())
+                o.SetKeys = o.SetKeys.Union(ss.Item2.Select(y => $"{y}.{cycle}"));
         });
 
         return sets;

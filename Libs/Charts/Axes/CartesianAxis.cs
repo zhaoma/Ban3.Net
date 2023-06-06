@@ -5,6 +5,7 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
+using Ban3.Infrastructures.Charts.Cogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using  Ban3.Infrastructures.Charts.Elements;
@@ -18,6 +19,15 @@ namespace  Ban3.Infrastructures.Charts.Axes
     public class CartesianAxis
         : GeneralAxis
     {
+        public CartesianAxis(){}
+
+        public CartesianAxis(bool scale, bool showSplitArea, int? gridIndex=null)
+        {
+            Scale = scale;
+            SplitArea = new SplitArea() { Show = showSplitArea };
+            GridIndex = gridIndex;
+        }
+
         public CartesianAxis(ECharts.AxisType type, object? data,int? gridIndex,bool? show)
         {
             Type = type;

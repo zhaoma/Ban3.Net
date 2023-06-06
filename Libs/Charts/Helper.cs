@@ -31,19 +31,26 @@ namespace Ban3.Infrastructures.Charts
             return diagram;
         }
 
+
+        public static Diagram SetTooltip(this Diagram diagram, Tooltip[] tooltip)
+        {
+            diagram.Tooltip = tooltip;
+            return diagram;
+        }
+
         public static Diagram SetGrid(this Diagram diagram, Grid[] grid)
         {
             diagram.Grid = grid;
             return diagram;
         }
 
-        public static Diagram SetXAxis(this Diagram diagram, SingleAxis[] axis)
+        public static Diagram SetXAxis(this Diagram diagram, CartesianAxis[] axis)
         {
             diagram.XAxis = axis;
             return diagram;
         }
 
-        public static Diagram SetYAxis(this Diagram diagram, SingleAxis[] axis)
+        public static Diagram SetYAxis(this Diagram diagram, CartesianAxis[] axis)
         {
             diagram.YAxis = axis;
             return diagram;
@@ -91,6 +98,7 @@ namespace Ban3.Infrastructures.Charts
                 Data = data,
                 XAxisIndex = index,
                 YAxisIndex = index,
+                ShowSymbol = false,
                 Smooth=true,
                 LineStyle=new LineStyle{Opacity=0.3M}
             };

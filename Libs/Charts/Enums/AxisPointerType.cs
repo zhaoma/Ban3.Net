@@ -24,6 +24,9 @@ namespace  Ban3.Infrastructures.Charts.Enums
         /// 无指示器
         /// </summary>
         [Description("none"), EnumMember(Value = "none")]
-        None
+        None,
+
+        [Description("cross"), EnumMember(Value = "cross")]
+        Cross
     }
 }

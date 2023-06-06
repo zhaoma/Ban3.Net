@@ -44,14 +44,14 @@ namespace  Ban3.Infrastructures.Charts.Composites
         /// 多于两个 x 轴需要通过配置 offset 属性防止同个位置多个 x 轴的重叠。
         /// </summary>
         [JsonProperty("xAxis", NullValueHandling = NullValueHandling.Ignore)]
-        public SingleAxis[]? XAxis { get; set; }
+        public CartesianAxis[]? XAxis { get; set; }
 
         /// <summary>
         /// 直角坐标系 grid 中的 y 轴，一般情况下单个 grid 组件最多只能放左右两个 y 轴，
         /// 多于两个 y 轴需要通过配置 offset 属性防止同个位置多个 Y 轴的重叠。
         /// </summary>
         [JsonProperty("yAxis", NullValueHandling = NullValueHandling.Ignore)]
-        public SingleAxis[]? YAxis { get; set; }
+        public CartesianAxis[]? YAxis { get; set; }
 
         /// <summary>
         /// 极坐标系，可以用于散点图和折线图。每个极坐标系拥有一个角度轴和一个半径轴。
@@ -213,28 +213,28 @@ namespace  Ban3.Infrastructures.Charts.Composites
         #region IHasAnimation
 
         /// 
-        public bool? Animation { get; set; } = true;
+        public bool? Animation { get; set; }
 
         /// 
-        public int? AnimationThreshold { get; set; } = 2000;
+        public int? AnimationThreshold { get; set; }
 
         /// 
-        public object? AnimationDuration { get; set; } = 1000;
+        public object? AnimationDuration { get; set; }
 
         /// 
-        public ECharts.EasingEffect? AnimationEasing { get; set; } = ECharts.EasingEffect.CubicOut;
+        public ECharts.EasingEffect? AnimationEasing { get; set; }
 
         /// 
-        public object? AnimationDelay { get; set; } = 0;
+        public object? AnimationDelay { get; set; } 
 
         /// 
-        public object? AnimationDurationUpdate { get; set; } = 300;
+        public object? AnimationDurationUpdate { get; set; } 
 
         /// 
-        public ECharts.EasingEffect? AnimationEasingUpdate { get; set; } = ECharts.EasingEffect.CubicInOut;
+        public ECharts.EasingEffect? AnimationEasingUpdate { get; set; } 
 
         /// 
-        public object? AnimationDelayUpdate { get; set; } = 0;
+        public object? AnimationDelayUpdate { get; set; } 
 
         #endregion
 

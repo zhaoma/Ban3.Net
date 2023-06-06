@@ -26,12 +26,12 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// Whether to show label.
         /// </summary>
         [JsonProperty("show", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Show { get; set; } = true;
+        public bool? Show { get; set; } 
 
         /// <summary>
         /// 触发类型
         /// </summary>
-        [JsonProperty("triggr", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("trigger", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public ECharts.Trigger? Trigger { get; set; }
 
@@ -73,7 +73,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 浮层隐藏的延迟，单位为 ms，在 alwaysShowContent 为 true 的时候无效。
         /// </summary>
         [JsonProperty("hideDelay", NullValueHandling = NullValueHandling.Ignore)]
-        public int? HideDelay { get; set; } = 100;
+        public int? HideDelay { get; set; } 
 
         /// <summary>
         /// 鼠标是否可进入提示框浮层中，默认为false，如需详情内交互，如添加链接，按钮，可设置为 true。
@@ -115,7 +115,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// 提示框浮层的移动动画过渡时间，单位是 s，设置为 0 的时候会紧跟着鼠标移动。
         /// </summary>
         [JsonProperty("transitionDuration", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? TransitionDuration { get; set; } = 0.4M;
+        public decimal? TransitionDuration { get; set; } 
 
         /// <summary>
         /// 提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。
@@ -145,16 +145,16 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         #region IHasBorder
 
         /// 
-        public string? BackgroundColor { get; set; } = "transparent";
+        public string? BackgroundColor { get; set; } 
 
         /// 
-        public string? BorderColor { get; set; } = "#ccc";
+        public string? BorderColor { get; set; } 
 
         /// 
         public ECharts.BorderType? BorderType { get; set; }
 
         /// 
-        public int? BorderWidth { get; set; } = 1;
+        public int? BorderWidth { get; set; }
 
         /// 
         public object? BorderRadius { get; set; }
@@ -172,7 +172,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         public int? BorderMiterLimit { get; set; }
 
         /// 
-        public object? Padding { get; set; } = 5;
+        public object? Padding { get; set; } 
 
         #endregion
 
@@ -194,7 +194,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
         /// </summary>
         [JsonProperty("order", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public ECharts.Order? Order { get; set; } = ECharts.Order.SeriesAsc;
+        public ECharts.Order? Order { get; set; } 
     }
 }
 

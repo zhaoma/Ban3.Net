@@ -62,6 +62,7 @@ namespace  Ban3.Infrastructures.Charts.Components
         /// 'mousemove'：鼠标悬浮的时候 expand。
         /// </summary>
         [JsonProperty("axisExpandTriggerOn", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(StringEnumConverter))]
         public ECharts.TriggerOn? AxisExpandTriggerOn { get; set; }
 
         /// <summary>

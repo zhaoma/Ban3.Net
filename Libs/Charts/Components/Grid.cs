@@ -21,11 +21,12 @@ namespace  Ban3.Infrastructures.Charts.Components
     public class Grid
         : GeneralComponent,IHasBorder, IHasShadow
     {
-		public Grid()
+		public Grid(string? left,string? right,string?  height, string? top)
         {
-            Left = "10%";
-            Right = "10%";
-            Bottom = "15%";
+            Left = left;
+            Right = right;
+            Height = height;
+            Top = top;
         }
 
         /// <summary>

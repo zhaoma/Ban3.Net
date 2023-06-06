@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.Charts.Composites;
@@ -11,12 +12,16 @@ using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
+using log4net;
+using log4net.Repository.Hierarchy;
 
 namespace Ban3.Productions.Casino.CcaAndReport;
 
 [TracingIt]
 public class Signalert
 {
+    static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
+
     public static ICollector Collector  = new Collector();
 
     public static ICalculator Calculator = new Calculator();
@@ -78,62 +83,70 @@ public class Signalert
         {
             await allCodes.ParallelExecuteAsync((stock) => { Calculator.GenerateIndicatorLine(stock.Code); },
                 Config.MaxParallelTasks);
+            
+            PrepareAllDiagrams(allCodes);
 
-
-            await PrepareAllDiagrams(allCodes);
-
-            await PrepareAllSets(allCodes);
+            PrepareAllSets(allCodes);
         }
     }
 
-    public static async Task ExecuteRealtimeJob()
+    public static void ExecuteRealtimeJob()
     {
         var allCodes = Signalert.Collector.LoadAllCodes();
 
-        await ExecuteRealtimeJob(allCodes);
+        ExecuteRealtimeJob(allCodes);
     }
 
-    public static async Task ExecuteRealtimeJob(List<Stock> stocks)
+    public static void ExecuteRealtimeJob(List<Stock> stocks)
     {
         Collector.ReadRealtime(stocks);
 
-        await PrepareAllDiagrams(stocks);
+        PrepareAllDiagrams(stocks);
 
-        await PrepareAllSets(stocks);
+        PrepareAllSets(stocks);
     }
 
-    public static async Task PrepareAllDiagrams(List<Stock> allCodes=null)
+    public static void PrepareAllDiagrams(List<Stock> allCodes = null)
     {
         allCodes ??= Signalert.Collector.LoadAllCodes();
 
-        await allCodes.ParallelExecuteAsync((stock) =>
+        allCodes.ParallelExecute((stock) =>
         {
+            //Console.WriteLine($"{stock.Code} - {stock.Name}");
             PrepareOnesDiagram(stock);
         }, Config.MaxParallelTasks);
     }
-    
+
     public static bool PrepareOnesDiagram(Stock stock)
         => PrepareDiagram(stock)
            && PrepareDiagram(stock, StockAnalysisCycle.WEEKLY)
            && PrepareDiagram(stock, StockAnalysisCycle.MONTHLY);
-
-
-
+    
     public static bool PrepareDiagram(Stock stock, StockAnalysisCycle cycle = StockAnalysisCycle.DAILY)
     {
-        var prices = Calculator.LoadReinstatedPrices(stock.Code, cycle);
-        
-        if (prices == null || !prices.Any()) return false;
+        try
+        {
+            var prices = Calculator.LoadReinstatedPrices(stock.Code, cycle);
 
-        var indicatorValue=Calculator.LoadIndicatorLine(stock.Code, cycle);
+            if (prices == null || !prices.Any()) return false;
 
-        var diagram= Reportor.CreateOnesDiagram(stock, prices, indicatorValue);
+            var indicatorValue = Calculator.LoadIndicatorLine(stock.Code, cycle);
 
-        var saved =$"{stock.Code}.{cycle}" 
-            .DataFile<Diagram>()
-            .WriteFile(diagram.ObjToJson());
+            var diagram = Reportor.CreateOnesDiagram(stock, prices, indicatorValue);
 
-        return !string.IsNullOrEmpty(saved);
+            var saved = $"{stock.Code}.{cycle}"
+                .DataFile<Diagram>()
+                .WriteFile(diagram.ObjToJson());
+
+            return !string.IsNullOrEmpty(saved);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{stock.Code} - ERROR,{ex.Message }");
+            Logger.Error(ex);
+        }
+
+        return false;
     }
 
     public static Diagram LoadDiagram(Stock stock, StockAnalysisCycle cycle = StockAnalysisCycle.DAILY)
@@ -141,38 +154,59 @@ public class Signalert
             .DataFile<Diagram>()
             .ReadFileAs<Diagram>();
 
-    public static async  Task PrepareAllSets(List<Stock> allCodes = null)
+    public static void PrepareAllSets(List<Stock> allCodes = null)
     {
         allCodes ??= Signalert.Collector.LoadAllCodes();
 
-        await allCodes.ParallelExecuteAsync((stock) =>
+        var aggregated = new List<StockSets>();
+
+        allCodes.ParallelExecute((stock) =>
         {
-            PrepareOnesDiagram(stock);
+            //Console.WriteLine($"{stock.Code} - {stock.Name}");
+            var ones=PrepareOnesSets(stock);
+            if (ones != null&&ones.Any())
+            {
+                aggregated.AppendToList(ones.Last());
+            }
         }, Config.MaxParallelTasks);
+
+        $"latest"
+            .DataFile<StockSets>()
+            .WriteFile(aggregated.ObjToJson());
     }
 
     public static List<StockSets> PrepareOnesSets(Stock stock)
     {
-        var prices = Calculator.LoadReinstatedPrices(stock.Code, StockAnalysisCycle.DAILY);
+        try
+        {
+            var prices = Calculator.LoadReinstatedPrices(stock.Code, StockAnalysisCycle.DAILY);
 
-        var sets = Analyzer.PrepareSets(stock, prices);
+            var sets = Analyzer.PrepareSets(stock, prices);
 
-        sets.Merge(
-            Calculator.LoadIndicatorLine(stock.Code, StockAnalysisCycle.DAILY),
-            StockAnalysisCycle.DAILY);
-        
-        sets.Merge(
-            Calculator.LoadIndicatorLine(stock.Code, StockAnalysisCycle.WEEKLY),
-            StockAnalysisCycle.WEEKLY);
-        
-        sets.Merge(
-            Calculator.LoadIndicatorLine(stock.Code, StockAnalysisCycle.MONTHLY),
-            StockAnalysisCycle.MONTHLY);
+            sets.Merge(
+                Calculator.LoadIndicatorLine(stock.Code, StockAnalysisCycle.DAILY),
+                StockAnalysisCycle.DAILY);
 
-        $"{stock.Code}"
-            .DataFile<StockSets>()
-            .WriteFile(sets.ObjToJson());
+            sets.Merge(
+                Calculator.LoadIndicatorLine(stock.Code, StockAnalysisCycle.WEEKLY),
+                StockAnalysisCycle.WEEKLY);
 
-        return sets;
+            sets.Merge(
+                Calculator.LoadIndicatorLine(stock.Code, StockAnalysisCycle.MONTHLY),
+                StockAnalysisCycle.MONTHLY);
+
+            $"{stock.Code}"
+                .DataFile<StockSets>()
+                .WriteFile(sets.ObjToJson());
+
+            return sets;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{stock.Code} - ERROR,{ex.Message}");
+            Logger.Error(ex);
+        }
+
+        return new List<StockSets>();
     }
 }
