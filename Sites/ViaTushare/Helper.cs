@@ -23,6 +23,7 @@ public static class Helper
         var result=new GetStockBasicResult();
 
         var baseResult =GetBase(request).Result;
+        Console.WriteLine(baseResult.Message);
 
         if (baseResult is { Data: { } })
         {
