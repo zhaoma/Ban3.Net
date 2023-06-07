@@ -31,7 +31,7 @@ namespace Ban3.Infrastructures.Common.Extensions
             var now = DateTime.Now;
             action();
 
-            _logger.Info($"{message},{DateTime.Now.Subtract(now).TotalMilliseconds} ms spent.");
+            _logger.Debug($"{message},{DateTime.Now.Subtract(now).TotalMilliseconds} ms spent.");
         }
 
         /// <summary>

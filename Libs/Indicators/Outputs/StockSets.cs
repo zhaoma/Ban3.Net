@@ -15,12 +15,9 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
     public class StockSets
             : StockLog
     {
-        /// ctor
-        public StockSets() {}
-
         /// <summary>
         /// 特征
         /// </summary>
-        public IEnumerable<string> SetKeys { get; set; }
+        public IEnumerable<string>? SetKeys { get; set; }
     }
 }

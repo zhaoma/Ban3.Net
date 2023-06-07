@@ -129,11 +129,12 @@ public static partial class Helper
         {
             if (webApiTeam.Members != null && webApiTeam.Members.Any())
             {
-                result = result.Union(
-                        webApiTeam.Members
-                            .Where(o => o.Identity != null)
-                            .Select(o => o.Identity!)
-                        )
+                var newList = webApiTeam.Members
+                    .Where(o=>o.Identity!=null)
+                    .Select(o => o.Identity!)
+                    .Where(x => result.All(y => y.Id != x.Id));
+
+                result = result.Union(newList)
                     .ToList();
             }
         }

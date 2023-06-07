@@ -7,6 +7,8 @@ namespace Ban3.Infrastructures.NetHttp.Entries;
 
 public class TargetHost : ITargetHost
 {
+    //private TargetHost(){}
+
     public bool Anonymous { get; set; } = false;
 
     public string BaseUrl { get; set; } = string.Empty;
@@ -23,23 +25,23 @@ public class TargetHost : ITargetHost
 
     public HttpClient Client()
     {
-        if(_client!=null) return _client;
+        if (_client != null) return _client;
 
         lock (ObjectLock)
         {
-            _client = Anonymous
-                ? new HttpClient { Timeout = TimeSpan.FromMinutes(1) }
+            _client ??= Anonymous
+                ? new HttpClient { Timeout = TimeSpan.FromMinutes(5) }
                 : new HttpClient(Handler())
                 {
                     BaseAddress = new Uri(BaseUrl),
-                    Timeout = TimeSpan.FromMinutes(1)
+                    Timeout = TimeSpan.FromMinutes(5)
                 };
         }
 
         return _client;
     }
 
-    private HttpClient _client;
+    private static HttpClient _client;
 
     private HttpClientHandler Handler()
     {
@@ -47,12 +49,13 @@ public class TargetHost : ITargetHost
         var defaultCredential = string.IsNullOrEmpty(Domain)
             ? new NetworkCredential(UserName, Password)
             : new NetworkCredential(UserName, Password, Domain);
-
+        
         return new HttpClientHandler
         {
             AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
             AllowAutoRedirect = true,
             MaxConnectionsPerServer = 100,
+            
             Credentials = new CredentialCache
             {
                 { new Uri(BaseUrl), AuthenticationType, defaultCredential }

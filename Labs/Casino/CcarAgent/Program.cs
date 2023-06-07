@@ -14,7 +14,18 @@ internal class Program
     static async Task Main(string[] args)
     {
         var now = DateTime.Now;
-        await Signalert.ExecuteDailyJob();
+        
+        //Signalert.ExecuteDailyJob();
+
+
+        var r=Signalert.PrepareList();
+        Console.WriteLine(r);
+
+        var s = Signalert.LoadList();
+        s.ObjToJson().WriteColorLine(ConsoleColor.Red);
+
+        Console.WriteLine(s.Count);
+
         Console.WriteLine(DateTime.Now.Subtract(now).TotalMilliseconds + " ms");
         // var allCodes = Signalert.Collector.LoadAllCodes();
         // Console.WriteLine($"{allCodes.Count}");
@@ -25,9 +36,6 @@ internal class Program
 
         //Console.WriteLine(DateTime.Now.Subtract(now).TotalMilliseconds + " ms");
 
-        //var x=Signalert.Collector.Sites.Pre("688004.SH");
-        //var y = Signalert.Collector.Sites.LoadOnesDailyPrices("688004.SH");
-        //x.ObjToJson().WriteColorLine(ConsoleColor.Red);
-        //y.ObjToJson().WriteColorLine(ConsoleColor.Red);
+
     }
 }

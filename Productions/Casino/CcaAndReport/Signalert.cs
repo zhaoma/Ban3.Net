@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.Charts.Composites;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
@@ -53,41 +56,46 @@ public class Signalert
         return result;
     }
 
-    public static async Task<bool> ReinstateAllPrices(List<Stock> allCodes = null)
+    public static bool ReinstateAllPrices(List<Stock> allCodes = null)
     {
         allCodes ??= Signalert.Collector.LoadAllCodes();
         var result = true;
 
-        await allCodes.ParallelExecuteAsync((stock) =>
+        allCodes.ParallelExecute((stock) =>
             {
                 var ps = Collector.LoadDailyPrices(stock.Code);
-                
-                result = result && Calculator.ReinstatePrices(stock.Code, stock.Symbol, ps);
+
+                var reinstateOne=Calculator.ReinstatePrices(stock.Code, stock.Symbol, ps);
+
+                result = result && reinstateOne;
+
+                Console.WriteLine($"{stock.Code} -> {reinstateOne}");
             },
             Config.MaxParallelTasks);
 
         return result;
     }
 
-    public static async Task ExecuteDailyJob()
+    public static void ExecuteDailyJob()
     {
-        Collector.PrepareAllCodes();
+        //Collector.PrepareAllCodes();
 
         var allCodes = Signalert.Collector.LoadAllCodes();
 
-        Collector.FixDailyPrices(allCodes);
+        //Collector.FixDailyPrices(allCodes);
 
-        var reinstate = await Signalert.ReinstateAllPrices(allCodes);
+        //var reinstate = Signalert.ReinstateAllPrices(allCodes);
 
-        if (reinstate)
-        {
-            await allCodes.ParallelExecuteAsync((stock) => { Calculator.GenerateIndicatorLine(stock.Code); },
-                Config.MaxParallelTasks);
-            
-            PrepareAllDiagrams(allCodes);
+        //if (!reinstate)
+        //{
+        //    Console.WriteLine($"anyone is error");
+        //}
 
-            PrepareAllSets(allCodes);
-        }
+        allCodes.ParallelExecute((stock) => { Calculator.GenerateIndicatorLine(stock.Code); }, Config.MaxParallelTasks);
+
+        PrepareAllDiagrams(allCodes);
+
+        PrepareAllSets(allCodes);
     }
 
     public static void ExecuteRealtimeJob()
@@ -208,5 +216,56 @@ public class Signalert
         }
 
         return new List<StockSets>();
+    }
+
+    public static  List<StockSets> LoadAllSets()
+        => $"latest"
+            .DataFile<StockSets>()
+            .ReadFileAs<List<StockSets>>();
+
+    public static bool PrepareAllList()
+    {
+        var sets = LoadAllSets();
+
+        var result = sets
+            .Where(o=>o.SetKeys!=null&&o.SetKeys.Any())
+            .Select(o => new ListRecord(o)).OrderByDescending(o=>o.Value).ToList();
+
+        var rank = 1;
+        int? prev = null;
+        foreach (var r in result)
+        {
+            if (prev == null || r.Value == prev.Value)
+            {
+                r.Rank = rank;
+            }
+            else
+            {
+                rank++;
+            }
+
+            prev = r.Value;
+        }
+
+        var saved=DateTime.Now
+            .ToYmd()
+            .DataFile<ListRecord>()
+            .WriteFile(result.ObjToJson());
+
+        return !string.IsNullOrEmpty(saved);
+    }
+
+    public static List<ListRecord> LoadAllList(DateTime? day)
+    {
+        var saved =(day?? DateTime.Now)
+            .ToYmd()
+            .DataFile<ListRecord>();
+
+        if (!File.Exists(saved))
+        {
+            PrepareAllList();
+        }
+
+        return saved.ReadFileAs<List<ListRecord>>();
     }
 }

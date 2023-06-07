@@ -399,7 +399,7 @@ public static partial class Helper
     {
         var monitorJobs = Domain.Contract.Settings.MonitorBranchSpec.Jobs;
         monitorJobs.ForEach(
-            o => { Logger.Info($"{o.Subject} ... success:{_.ParseMonitorJob(o)}"); });
+            o => { Logger.Debug($"{o.Subject} ... success:{_.ParseMonitorJob(o)}"); });
     }
 
     public static bool ParseMonitorJob(this IReportService _, MonitorJob job)

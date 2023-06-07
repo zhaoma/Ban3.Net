@@ -236,7 +236,7 @@ public static partial class Helper
 
                 var newList = ps.Data.FindAll(o => o.Code == code);
 
-                newList = newList.Where(x => exists.All(y => y.TradeDate == x.TradeDate)).ToList();
+                newList = newList.Where(x => exists.All(y => y.TradeDate != x.TradeDate)).ToList();
 
                 exists = exists.Union(newList)
                     .OrderBy(o => o.TradeDate)

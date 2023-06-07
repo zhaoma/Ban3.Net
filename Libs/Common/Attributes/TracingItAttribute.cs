@@ -14,30 +14,19 @@ public class TracingItAttribute : MoAttribute
     /// <summary>
     /// 记录所有方法
     /// </summary>
-    public override AccessFlags Flags { get; } = AccessFlags.All;
+    public override AccessFlags Flags { get; } = Config.TraceSetting.BindFlags;
     static readonly ILog Logger = LogManager.GetLogger(typeof(TracingItAttribute));
     readonly Stopwatch _stopwatch = new ();
-
-    public bool Timing { get; set; } = true;
-
-    public bool LoggingArguments { get; set; } = false;
-
-    public TracingItAttribute(){}
-
-    public TracingItAttribute(bool timing, bool loggingArguments)
-    {
-        Timing=timing; 
-        LoggingArguments=loggingArguments;
-    }
-
+    
     /// 
     public override void OnEntry(MethodContext context)
     {
-        if (Timing)
+        if (Config.TraceSetting.Timing)
             _stopwatch.Start();
 
         var debugInfo =$"ENTRY:{context.Method.DeclaringType}.{context.Method.Name}";
-        if (LoggingArguments)
+
+        if (Config.TraceSetting.LoggingArguments)
             debugInfo += $"{context.Arguments.ObjToJson()}.";
 
         Logger.Debug(debugInfo);
@@ -53,16 +42,16 @@ public class TracingItAttribute : MoAttribute
     /// 
     public override void OnExit(MethodContext context)
     {
-        if (Timing)
+        if (Config.TraceSetting.Timing)
         {
             _stopwatch.Stop();
-            Logger.Debug($"{context.Method.DeclaringType}.{context.Method.Name}:{_stopwatch.ElapsedMilliseconds} ms");
+            Logger.Debug($"EXIT: {context.Method.DeclaringType}.{context.Method.Name}:{_stopwatch.ElapsedMilliseconds} ms");
         }
     }
 
     /// 
     public override void OnSuccess(MethodContext context)
     {
-        Logger.Debug($"{context.Method.Name} success.");
+        Logger.Debug($"{context.Method.DeclaringType}.{context.Method.Name} success.");
     }
 }

@@ -61,7 +61,7 @@ public static partial class Helper
 
         var seeds = _.LoadSeeds(symbol);
 
-        if (seeds == null || !seeds.Any()) return false;
+       // if (seeds == null || !seeds.Any()) return false;
         
         var newPrices = prices.Select(seeds.ReinstateOnePrice)
             .ToList();
@@ -91,20 +91,29 @@ public static partial class Helper
             Change = price.Change,
             ChangePercent = price.ChangePercent,
             Vol = price.Vol,
-            Amount = price.Amount
+            Amount = price.Amount,
+
+            Open = price.Open,
+            High=price.High,
+            Low = price.Low,
+            Close = price.Close,
+            PreClose = price.PreClose
         };
 
         try
         {
-            foreach (var s in seeds)
+            if (seeds != null && seeds.Any())
             {
-                if (s.MarkTime.Subtract(price.TradeDate.ToDateTimeEx()).TotalDays > 0)
+                foreach (var s in seeds)
                 {
-                    newPrice.Open = (float)Math.Round(price.Open / s.Seed, 2);
-                    newPrice.High = (float)Math.Round(price.High / s.Seed, 2);
-                    newPrice.Low = (float)Math.Round(price.Low / s.Seed, 2);
-                    newPrice.Close = (float)Math.Round(price.Close / s.Seed, 2);
-                    newPrice.PreClose = (float)Math.Round(price.PreClose / s.Seed, 2);
+                    if (s.MarkTime.Subtract(price.TradeDate.ToDateTimeEx()).TotalDays > 0)
+                    {
+                        newPrice.Open = (float)Math.Round(price.Open / s.Seed, 2);
+                        newPrice.High = (float)Math.Round(price.High / s.Seed, 2);
+                        newPrice.Low = (float)Math.Round(price.Low / s.Seed, 2);
+                        newPrice.Close = (float)Math.Round(price.Close / s.Seed, 2);
+                        newPrice.PreClose = (float)Math.Round(price.PreClose / s.Seed, 2);
+                    }
                 }
             }
         }

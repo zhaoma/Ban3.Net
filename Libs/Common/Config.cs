@@ -6,12 +6,14 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.IO;
 
 using Ban3.Infrastructures.Common.Extensions;
-
+using Ban3.Infrastructures.Common.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using Rougamo;
 
 namespace Ban3.Infrastructures.Common
 {
@@ -34,16 +36,28 @@ namespace Ban3.Infrastructures.Common
                 .AddJsonFile("appSettings.json", false, true)
                 .Build();
 
-            log4net.Config.XmlConfigurator.Configure(new FileInfo(Path.Combine(Environment.CurrentDirectory, "log4net.config")));
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(Path.Combine(Environment.CurrentDirectory,
+                "log4net.config")));
 
             LocalStorage = new Models.LocalStorage
             {
                 RootPath = AppConfiguration["FilesStorage:RootPath"] + "",
                 RootUrl = AppConfiguration["FilesStorage:RootUrl"] + ""
             };
+
+            TraceSetting = new TraceSetting
+            {
+                BindFlags = AppConfiguration["TraceSetting:BindFlags"] + "" == "all"
+                    ? AccessFlags.All
+                    : AccessFlags.Public,
+                Timing = AppConfiguration["TraceSetting:Timing"] + "" != "false",
+                LoggingArguments = AppConfiguration["TraceSetting:LoggingArguments"] + "" == "true"
+            };
         }
 
         public static Models.LocalStorage LocalStorage { get; set; }
+
+        public static Models.TraceSetting TraceSetting { get; set; }
     }
 
 

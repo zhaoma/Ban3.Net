@@ -329,7 +329,7 @@ namespace Ban3.Infrastructures.Common.Extensions
             return result.Substring(0, result.Length - suffix.Length);
         }
 
-        public static string RemoveJsonp(this string input, string jsonp)
+        public static string RemoveJsonpTags(this string input, string jsonp)
             => input.Substr($"{jsonp}(", ");");
 
 

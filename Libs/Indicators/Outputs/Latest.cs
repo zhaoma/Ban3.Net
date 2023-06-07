@@ -17,12 +17,12 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
         /// <summary>
         /// 上一周期指标值
         /// </summary>
-        public PointOfTime Prev { get; set; }
+        public PointOfTime? Prev { get; set; }
 
         /// <summary>
         /// 当前周期指标值
         /// </summary>
-        public PointOfTime Current { get; set; }
+        public PointOfTime? Current { get; set; }
 
         public List<string> Features()
         {

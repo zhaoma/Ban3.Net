@@ -200,8 +200,6 @@ public static partial class Helper
         var changesets = _.GetChangesets(id,days, pageNo, pageSize);
         while (changesets is { Success: true, Value: { } } && changesets.Value.Any())
         {
-            Logger.Debug($"{DateTime.Now}:parse page {pageNo}");
-
             result.AddRange(changesets.Value
                 .Where(o=>!o.Comment.IsIgnored())
                 .Select(o => new CompositeChangeset(o)));
