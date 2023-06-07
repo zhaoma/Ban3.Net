@@ -18,10 +18,10 @@ internal class Program
         //Signalert.ExecuteDailyJob();
 
 
-        var r=Signalert.PrepareList();
+        var r=Signalert.PrepareAllList();
         Console.WriteLine(r);
 
-        var s = Signalert.LoadList();
+        var s = Signalert.LoadAllList(null);
         s.ObjToJson().WriteColorLine(ConsoleColor.Red);
 
         Console.WriteLine(s.Count);
