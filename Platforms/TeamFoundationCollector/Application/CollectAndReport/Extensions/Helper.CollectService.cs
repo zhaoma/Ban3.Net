@@ -1,10 +1,15 @@
-﻿using Ban3.Infrastructures.Common.Extensions;
+﻿using System.Net;
+using System.Text.RegularExpressions;
+using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Functions;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
+using Microsoft.Office.Interop.Outlook;
+using Action = System.Action;
+using Build = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities.Build;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
 
@@ -139,5 +144,61 @@ public static partial class Helper
 
     #endregion
 
+    public static string RegexParse(this string content)
+    {
+        var r=new Regex(@"(<(.*?)>)");
+        content = r.Replace(content, Html);
 
+        r = new Regex(@"@(<(.*?)>)");
+        content = r.Replace(content, IdentityName);
+
+        r = new Regex(@"(\[(.+?)\])(\(\b(?:https?:\/\/|www\.).\S+\b\))");
+        content = r.Replace(content, SubjectAndUrl);
+
+        // r = new Regex(@"\b(?:https?://|www\.)\S+\b");
+        // content = r.Replace(content, HttpUrl);
+
+        return content;
+    }
+
+    static string IdentityName( Match m)
+    {
+        var guid=m.Groups[2].Value;
+
+        if (guid.Length == 36)
+        {
+            var name = new Core().LoadIdentityRef(guid)?.DisplayName.ShowName() + "";
+            return $"<b style='color:rgba(16, 110, 190,1);text-decoration-line:underline;'>@{name}</b>";
+        }
+
+        return "";
+    }
+
+    static string Html(Match m)
+    {
+        var content= m.Groups[2].Value;
+        if (content.Length != 36)
+            return WebUtility.HtmlEncode(m.Value);
+
+        return m.Value;
+    }
+
+    static string HttpUrl(Match m)
+    {
+        var url = m.Value;
+        var text =
+            url.Length > 100
+                ? url.Substring(0, 100) + "..."
+                : url;
+
+        return $"<a href='{url}' target='_blank' style='color:rgba(0,90,158,1);text-decoration-line:underline;'>{text}</a>";
+    }
+
+    static string SubjectAndUrl(Match m)
+    {
+        var url = m.Groups[3].Value;
+        var text = m.Groups[2].Value;
+
+        return $"<a href='{url}' target='_blank' style='color:rgba(0,90,158,1);text-decoration-line:underline;'>{text}</a>";
+    }
 }

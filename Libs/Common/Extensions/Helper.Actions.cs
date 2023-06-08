@@ -158,6 +158,31 @@ namespace Ban3.Infrastructures.Common.Extensions
             return timer;
         }
 
+        public static Timer? CreateAsyncTimer(this Action action,Action<IAsyncResult> callbackAction, int interval)
+        {
+            var timer = new Timer
+            {
+                AutoReset = true,
+                Interval = interval,
+                Enabled = true
+            };
+
+            timer.Elapsed += (s, e) =>
+            {
+                try
+                {
+                    timer.Enabled = false;
+                    action.BeginInvoke(new AsyncCallback(callbackAction),null);
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                }
+            };
+
+            return timer;
+        }
+
         public static void TimesParallel(this int count, Action action)
         {
             Enumerable.Range(1, count)

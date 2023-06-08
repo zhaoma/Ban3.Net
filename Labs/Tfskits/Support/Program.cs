@@ -1,4 +1,5 @@
-﻿using Ban3.Infrastructures.Common.Extensions;
+﻿using System.Net;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport;
@@ -58,7 +59,7 @@ switch (teamName)
     case "--default":
         var identities =
             DevOps.Collector.Core.LoadTeams()
-                .Where(o => o.Name == teamName)
+                .Where(o => o.Name == Config.DefaultTeam)
                 .ToList()
                 .GetIdentitiesFromTeams();
 
@@ -76,6 +77,11 @@ switch (teamName)
         $"args: --key keyword : collect teams whose name contain [keyword]".WriteColorLine(ConsoleColor.DarkYellow);
         $"args: --others : collect teams exclude [ {Config.DefaultTeam} ]".WriteColorLine(ConsoleColor.DarkYellow);
         $"args: --p/invoke : prepare assemblies data".WriteColorLine(ConsoleColor.DarkYellow);
+
+        var label = $"<expectedresults> missing </expectedresults>";
+        Console.WriteLine(label.RegexParse());
+        Console.WriteLine(WebUtility.HtmlEncode(label));
+        Console.WriteLine(WebUtility.HtmlDecode(label));
 
         break;
 }

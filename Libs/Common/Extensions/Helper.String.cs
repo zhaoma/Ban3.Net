@@ -486,5 +486,12 @@ namespace Ban3.Infrastructures.Common.Extensions
 
         public static bool StartsWithIn(this string content, IEnumerable<string> prefixes)
             => prefixes.Any(o => content.ToUpper().StartsWith(o.ToUpper()));
+
+        public static bool StringEquals(this string a, string b)
+        {
+            if (string.IsNullOrEmpty(a)) return true;
+            
+            return a.Trim().ToUpper() == b.Trim().ToUpper();
+        }
     }
 }

@@ -141,4 +141,13 @@ public static partial class Helper
 
         return result;
     }
+
+    public static IdentityRef? LoadIdentityRef(this ICore _, string identityGuid)
+    {
+        var allIdentities = _.LoadTeams()
+            .GetIdentitiesFromTeams();
+
+        return allIdentities
+            .FindLast(o => o.Id.StringEquals( identityGuid));
+    }
 }
