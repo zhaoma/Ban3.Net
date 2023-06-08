@@ -152,7 +152,7 @@ public static partial class Helper
         r = new Regex(@"@(<(.*?)>)");
         content = r.Replace(content, IdentityName);
 
-        r = new Regex(@"(\[(.+?)\])(\(\b(?:https?:\/\/|www\.).\S+\b\))");
+        r = new Regex(@"(\[(.+?)\])(\((\b(?:https?:\/\/|www\.).\S+\b)\))");
         content = r.Replace(content, SubjectAndUrl);
 
         // r = new Regex(@"\b(?:https?://|www\.)\S+\b");
@@ -196,7 +196,7 @@ public static partial class Helper
 
     static string SubjectAndUrl(Match m)
     {
-        var url = m.Groups[3].Value;
+        var url = m.Groups[4].Value;
         var text = m.Groups[2].Value;
 
         return $"<a href='{url}' target='_blank' style='color:rgba(0,90,158,1);text-decoration-line:underline;'>{text}</a>";
