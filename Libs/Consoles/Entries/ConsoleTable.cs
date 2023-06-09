@@ -224,9 +224,8 @@ namespace Ban3.Infrastructures.Consoles.Entries
         /// <summary>
         /// 绘制表格
         /// </summary>
-        /// <param name="format">样式</param>
         /// <param name="color">title颜色</param>
-        public void Writer(ConsoleColor color = ConsoleColor.White)
+        public void Write(ConsoleColor color = ConsoleColor.White)
         {
             GetHeader().WriteColorLine(color);
             GetExistData().WriteInfoLine();

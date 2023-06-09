@@ -7,40 +7,37 @@ namespace Ban3.Infrastructures.SignalRClient
 {
     public class Client
     {
-        static HubConnection hubConnection;
+        static HubConnection? _hubConnection;
 
-        static string SignalRUri = Common.Config.AppConfiguration?
+        static string _signalRUri = Common.Config.AppConfiguration?
            ["SignalR:Endpoint"] + "";
 
         static Client()
         {
-            if (hubConnection == null)
-            {
-                hubConnection = new HubConnectionBuilder()
-                    .WithUrl(new Uri(SignalRUri))
-                    .WithAutomaticReconnect()
-                    .Build();
+            _hubConnection ??= new HubConnectionBuilder()
+                .WithUrl(new Uri(_signalRUri))
+                .WithAutomaticReconnect()
+                .Build();
 
-                hubConnection.On<Notify>("ReceiveMessage", (notify) =>
-                {
-                    if (ReceivedNotify != null)
-                        ReceivedNotify(notify);
-                });
-            }
+            _hubConnection.On<Notify>("ReceiveMessage", (notify) =>
+            {
+                if (ReceivedNotify != null)
+                    ReceivedNotify(notify);
+            });
         }
 
         public static async Task Send(Notify notify)
         {
             try
             {
-                if (hubConnection.State != HubConnectionState.Connected)
-                    await hubConnection.StartAsync();
+                if (_hubConnection?.State != HubConnectionState.Connected)
+                    await _hubConnection!.StartAsync();
 
-                await hubConnection.InvokeAsync("HandleOthersMessage", notify);
+                await _hubConnection.InvokeAsync("HandleOthersMessage", notify);
             }
             catch (Exception ex)
-            {
-                throw ex;
+            { 
+                //ex;
             }
         }
 

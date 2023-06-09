@@ -7,21 +7,30 @@
     <RootNamespace>Ban3.Infrastructures.NetHttp</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Ban3.Infrastructures.NetHttp</Title>
+    <Version>1.0.0</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
+    <Description>System.Net.Http extension</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\icon.png" Link="icon.png">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.2" />
     <PackageReference Include="Fody" Version="6.7.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Rougamo.Fody" Version="1.4.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
 </Project>

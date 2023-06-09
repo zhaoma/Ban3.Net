@@ -6,7 +6,23 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Ban3.Infrastructures.NetMail</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.NetMail</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Ban3.Infrastructures.NetMail</Title>
+    <Version>1.0.0</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>System.Net.Mail extension</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Link="icon.png">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.15" />

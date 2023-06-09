@@ -71,17 +71,12 @@ switch (teamName)
         break;
 
     default:
-        $"args: --default : collect team : [ {Config.DefaultTeam} ]".WriteColorLine(ConsoleColor.DarkYellow);
-        $"args: --all : prepare all teams data".WriteColorLine(ConsoleColor.DarkYellow);
-        $"args: --everyone : collect all teams".WriteColorLine(ConsoleColor.DarkYellow);
-        $"args: --key keyword : collect teams whose name contain [keyword]".WriteColorLine(ConsoleColor.DarkYellow);
-        $"args: --others : collect teams exclude [ {Config.DefaultTeam} ]".WriteColorLine(ConsoleColor.DarkYellow);
-        $"args: --p/invoke : prepare assemblies data".WriteColorLine(ConsoleColor.DarkYellow);
-
-        var label = $"<expectedresults> missing </expectedresults>";
-        Console.WriteLine(label.RegexParse());
-        Console.WriteLine(WebUtility.HtmlEncode(label));
-        Console.WriteLine(WebUtility.HtmlDecode(label));
+        $"args:   --default                   collect team : [ {Config.DefaultTeam} ]".WriteColorLine(ConsoleColor.DarkYellow);
+        $"               --all :                           prepare all teams data".WriteColorLine(ConsoleColor.DarkYellow);
+        $"              --everyone :            collect all teams".WriteColorLine(ConsoleColor.DarkYellow);
+        $"              --key [keyword] : collect teams whose name contain [keyword]".WriteColorLine(ConsoleColor.DarkYellow);
+        $"              --others :                  collect teams exclude [ {Config.DefaultTeam} ]".WriteColorLine(ConsoleColor.DarkYellow);
+        $"              --p/invoke :              prepare assemblies data".WriteColorLine(ConsoleColor.DarkYellow);
 
         break;
 }

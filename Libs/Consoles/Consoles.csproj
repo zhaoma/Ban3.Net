@@ -1,15 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>10.0</LangVersion>
     <AssemblyName>Ban3.Infrastructures.Consoles</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.Consoles</RootNamespace>
-    <Platforms>AnyCPU;x64</Platforms>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Ban3.Infrastructures.Consoles</Title>
+    <Version>1.0.0</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>Console extension</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Link="icon.png">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>

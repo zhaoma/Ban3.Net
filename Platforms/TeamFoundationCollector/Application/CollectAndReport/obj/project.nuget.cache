@@ -1,9 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "J3PNO1ENH+xlcaEtl3oMwrzNycrE43OEJz5a6gJA0erFMUUz7Rx40S/HPDJqodmiFoYTM12FCOe0yxOXWWYg0g==",
+  "dgSpecHash": "qMZaTJfw9NSX8VIJp10dy/CYfANzkWzpiUvJue56cdAe4eeC6rdeHVD2pst2vhnnyfXfyBGLxCPFJjeGX4BUpQ==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Application\\CollectAndReport\\CollectAndReport.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.2\\ban3.infrastructures.common.1.0.2.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.0\\ban3.infrastructures.nethttp.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.netmail\\1.0.0\\ban3.infrastructures.netmail.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.platforminvoke\\1.0.0\\ban3.infrastructures.platforminvoke.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.runtimecaching\\1.0.0\\ban3.infrastructures.runtimecaching.1.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\bouncycastle.cryptography\\2.1.1\\bouncycastle.cryptography.2.1.1.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\costura.fody\\5.7.0\\costura.fody.5.7.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\enums.net\\4.0.0\\enums.net.4.0.0.nupkg.sha512",

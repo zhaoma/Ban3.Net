@@ -1,9 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "QWR/OImMby8dWDiXW6poGxnI2Eb96GMHL+at/PBX7fxf+b+S7LF/2T8XgOW3EwjvhD78kFbQvxkST60C3JJ6xw==",
+  "dgSpecHash": "gDeE9xKFqmLbecZgaY7fgYLkVHy9qFEOZS625TEqR/RSAuNtYYVTSOPLT2x33GNCDUkVdeTTfTB9ZF06aljDWg==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Labs\\Tfskits\\Support\\Support.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.2\\ban3.infrastructures.common.1.0.2.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.consoles\\1.0.0\\ban3.infrastructures.consoles.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.0\\ban3.infrastructures.nethttp.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.netmail\\1.0.0\\ban3.infrastructures.netmail.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.platforminvoke\\1.0.0\\ban3.infrastructures.platforminvoke.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.runtimecaching\\1.0.0\\ban3.infrastructures.runtimecaching.1.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\bouncycastle.cryptography\\2.1.1\\bouncycastle.cryptography.2.1.1.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\costura.fody\\5.7.0\\costura.fody.5.7.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\enums.net\\4.0.0\\enums.net.4.0.0.nupkg.sha512",

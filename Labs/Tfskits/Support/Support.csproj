@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ban3.Infrastructures.Consoles" Version="1.0.0" />
     <PackageReference Include="Costura.Fody" Version="5.7.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -37,11 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Libs\Common\Common.csproj" />
-    <ProjectReference Include="..\..\..\Libs\Consoles\Consoles.csproj" />
-    <ProjectReference Include="..\..\..\Libs\NetHttp\NetHttp.csproj" />
-    <ProjectReference Include="..\..\..\Libs\NetMail\NetMail.csproj" />
-    <ProjectReference Include="..\..\..\Libs\PlatformInvoke\PlatformInvoke.csproj" />
     <ProjectReference Include="..\..\..\Libs\SpringConfig\SpringConfig.csproj" />
     <ProjectReference Include="..\..\..\Libs\WxsConfig\WxsConfig.csproj" />
     <ProjectReference Include="..\..\..\Platforms\TeamFoundationCollector\Application\CollectAndReport\CollectAndReport.csproj" />

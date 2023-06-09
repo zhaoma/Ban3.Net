@@ -4,413 +4,6 @@
     "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Application\\CollectAndReport\\CollectAndReport.csproj": {}
   },
   "projects": {
-    "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
-      "version": "1.0.1",
-      "restore": {
-        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj",
-        "projectName": "Ban3.Infrastructures.Common",
-        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj",
-        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
-        },
-        "frameworks": {
-          "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
-          "dependencies": {
-            "Fody": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.7.0, )"
-            },
-            "Microsoft.Extensions.Configuration.Json": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "NETStandard.Library": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.3, )"
-            },
-            "Rougamo.Fody": {
-              "target": "Package",
-              "version": "[1.4.1, )"
-            },
-            "System.IO": {
-              "target": "Package",
-              "version": "[4.3.0, )"
-            },
-            "System.Threading.Tasks": {
-              "target": "Package",
-              "version": "[4.3.0, )"
-            },
-            "log4net": {
-              "target": "Package",
-              "version": "[2.0.15, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj",
-        "projectName": "Ban3.Infrastructures.NetHttp",
-        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj",
-        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
-        },
-        "frameworks": {
-          "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
-            "projectReferences": {
-              "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
-                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
-          "dependencies": {
-            "Fody": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.7.0, )"
-            },
-            "NETStandard.Library": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
-            },
-            "Rougamo.Fody": {
-              "target": "Package",
-              "version": "[1.4.1, )"
-            },
-            "System.Net.Http": {
-              "target": "Package",
-              "version": "[4.3.4, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj",
-        "projectName": "Ban3.Infrastructures.NetMail",
-        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj",
-        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
-        },
-        "frameworks": {
-          "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
-          "dependencies": {
-            "MailKit": {
-              "target": "Package",
-              "version": "[4.0.0, )"
-            },
-            "MailKit.Security.SaslMechanismNtlmIntegrated": {
-              "target": "Package",
-              "version": "[0.2.0, )"
-            },
-            "Microsoft.CSharp": {
-              "target": "Package",
-              "version": "[4.7.0, )"
-            },
-            "Microsoft.Office.Interop.Outlook": {
-              "target": "Package",
-              "version": "[15.0.4797.1004, )"
-            },
-            "NETStandard.Library": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
-            },
-            "log4net": {
-              "target": "Package",
-              "version": "[2.0.15, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\PlatformInvoke.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\PlatformInvoke.csproj",
-        "projectName": "Ban3.Infrastructures.PlatformInvoke",
-        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\PlatformInvoke.csproj",
-        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
-        },
-        "frameworks": {
-          "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
-            "projectReferences": {
-              "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
-                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
-          "dependencies": {
-            "NETStandard.Library": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
-            },
-            "Rougamo.Fody": {
-              "target": "Package",
-              "version": "[1.4.1, )"
-            },
-            "System.Reflection.Metadata": {
-              "target": "Package",
-              "version": "[7.0.1, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj",
-        "projectName": "Ban3.Infrastructures.RuntimeCaching",
-        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj",
-        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
-        },
-        "frameworks": {
-          "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
-          "dependencies": {
-            "NETStandard.Library": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.3, )",
-              "autoReferenced": true
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.3, )"
-            },
-            "System.Runtime.Caching": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "log4net": {
-              "target": "Package",
-              "version": "[2.0.15, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
     "D:\\GIT\\Ban3.Net\\Libs\\SpringConfig\\SpringConfig.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -439,11 +32,7 @@
         "frameworks": {
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
-            "projectReferences": {
-              "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
-                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -456,6 +45,10 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "dependencies": {
+            "Ban3.Infrastructures.Common": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
@@ -514,11 +107,7 @@
         "frameworks": {
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
-            "projectReferences": {
-              "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
-                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -531,6 +120,10 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "dependencies": {
+            "Ban3.Infrastructures.Common": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
@@ -590,9 +183,6 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\PlatformInvoke.csproj": {
-                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\PlatformInvoke.csproj"
-              },
               "D:\\GIT\\Ban3.Net\\Libs\\SpringConfig\\SpringConfig.csproj": {
                 "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\SpringConfig\\SpringConfig.csproj"
               },
@@ -615,6 +205,14 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "dependencies": {
+            "Ban3.Infrastructures.NetMail": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Ban3.Infrastructures.PlatformInvoke": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Costura.Fody": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -671,20 +269,7 @@
         "frameworks": {
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
-            "projectReferences": {
-              "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
-                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj"
-              },
-              "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj": {
-                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj"
-              },
-              "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj": {
-                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj"
-              },
-              "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj": {
-                "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -697,6 +282,18 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "dependencies": {
+            "Ban3.Infrastructures.Common": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "Ban3.Infrastructures.NetHttp": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Ban3.Infrastructures.RuntimeCaching": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )"

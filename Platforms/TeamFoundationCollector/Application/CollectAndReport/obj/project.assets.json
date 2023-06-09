@@ -2,6 +2,88 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
+      "Ban3.Infrastructures.Common/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Json": "7.0.0",
+          "Newtonsoft.Json": "13.0.3",
+          "Rougamo.Fody": "1.4.1",
+          "System.IO": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "log4net": "2.0.15"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
+      "Ban3.Infrastructures.NetHttp/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.2",
+          "Rougamo.Fody": "1.4.1",
+          "System.Net.Http": "4.3.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
+        }
+      },
+      "Ban3.Infrastructures.NetMail/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "MailKit": "4.0.0",
+          "MailKit.Security.SaslMechanismNtlmIntegrated": "0.2.0",
+          "Microsoft.CSharp": "4.7.0",
+          "Microsoft.Office.Interop.Outlook": "15.0.4797.1004",
+          "log4net": "2.0.15"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.NetMail.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.NetMail.dll": {}
+        }
+      },
+      "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.2",
+          "Rougamo.Fody": "1.4.1",
+          "System.Reflection.Metadata": "7.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        }
+      },
+      "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Runtime.Caching": "7.0.0",
+          "log4net": "2.0.15"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.RuntimeCaching.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.RuntimeCaching.dll": {}
+        }
+      },
       "BouncyCastle.Cryptography/2.1.1": {
         "type": "package",
         "compile": {
@@ -1767,91 +1849,11 @@
           "lib/netstandard2.0/_._": {}
         }
       },
-      "Ban3.Infrastructures.Common/1.0.1": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Microsoft.Extensions.Configuration.Json": "7.0.0",
-          "Newtonsoft.Json": "13.0.3",
-          "Rougamo.Fody": "1.4.1",
-          "System.IO": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "log4net": "2.0.15"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.Common.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.Common.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.NetHttp/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.1",
-          "Rougamo.Fody": "1.4.1",
-          "System.Net.Http": "4.3.4"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.NetMail/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "MailKit": "4.0.0",
-          "MailKit.Security.SaslMechanismNtlmIntegrated": "0.2.0",
-          "Microsoft.CSharp": "4.7.0",
-          "Microsoft.Office.Interop.Outlook": "15.0.4797.1004",
-          "log4net": "2.0.15"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.NetMail.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.NetMail.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.1",
-          "Rougamo.Fody": "1.4.1",
-          "System.Reflection.Metadata": "7.0.1"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3",
-          "System.Runtime.Caching": "7.0.0",
-          "log4net": "2.0.15"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.RuntimeCaching.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.RuntimeCaching.dll": {}
-        }
-      },
       "Ban3.Infrastructures.SpringConfig/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.1",
+          "Ban3.Infrastructures.Common": "1.0.2",
           "Newtonsoft.Json": "13.0.3",
           "log4net": "2.0.15"
         },
@@ -1866,7 +1868,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.1",
+          "Ban3.Infrastructures.Common": "1.0.2",
           "Newtonsoft.Json": "13.0.3",
           "log4net": "2.0.15"
         },
@@ -1881,9 +1883,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.1",
+          "Ban3.Infrastructures.Common": "1.0.2",
           "Ban3.Infrastructures.NetHttp": "1.0.0",
-          "Ban3.Infrastructures.NetMail": "1.0.0",
           "Ban3.Infrastructures.RuntimeCaching": "1.0.0",
           "Microsoft.Extensions.Configuration": "7.0.0",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
@@ -1902,6 +1903,73 @@
     }
   },
   "libraries": {
+    "Ban3.Infrastructures.Common/1.0.2": {
+      "sha512": "tkH4yj5mk+64I/YvJASvhF5Mpgz0l2ZkfQa4Vp3OOBfyHiP5GLBHsXBUAUqQlFgcxPhbwJiKw6uQYYL9bRLdmw==",
+      "type": "package",
+      "path": "ban3.infrastructures.common/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.common.1.0.2.nupkg.sha512",
+        "ban3.infrastructures.common.nuspec",
+        "content/favicon.ico",
+        "contentFiles/any/netstandard2.0/favicon.ico",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.Common.dll"
+      ]
+    },
+    "Ban3.Infrastructures.NetHttp/1.0.0": {
+      "sha512": "XHt87sm26mSAqvTrIk6XzLH64oWjzdGRkqv0OigkUovm1Nc20z81aD/MZWVuVytLivmuBzA/CJqV9S6omqQ/Hw==",
+      "type": "package",
+      "path": "ban3.infrastructures.nethttp/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.nethttp.1.0.0.nupkg.sha512",
+        "ban3.infrastructures.nethttp.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll"
+      ]
+    },
+    "Ban3.Infrastructures.NetMail/1.0.0": {
+      "sha512": "CnVC7ftHcqO84HV4RreJIGHpZlgSOEONvjkn+ctkvpQZpqKEp2G3/FmDCBrVAeCT4QNAKMKr5SR+B3gsEGv1xQ==",
+      "type": "package",
+      "path": "ban3.infrastructures.netmail/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.netmail.1.0.0.nupkg.sha512",
+        "ban3.infrastructures.netmail.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.NetMail.dll"
+      ]
+    },
+    "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
+      "sha512": "2Pso/b77f0aBt2c4weup8L84PGWPKaCEtRaly/144oJ44K447Cyr0HKwBIkJwRJ34DQX44KD2FG+JywAlCWc6A==",
+      "type": "package",
+      "path": "ban3.infrastructures.platforminvoke/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.platforminvoke.1.0.0.nupkg.sha512",
+        "ban3.infrastructures.platforminvoke.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.PlatformInvoke.dll"
+      ]
+    },
+    "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
+      "sha512": "Lhng2uhZ34CB5bPOx9gqCirTA3V3M+lI9Ck3ffBW+IyQIEuXocFoGtPKteXtKRiUmyAwsmbNE+D3+0bkuJWb/g==",
+      "type": "package",
+      "path": "ban3.infrastructures.runtimecaching/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.runtimecaching.1.0.0.nupkg.sha512",
+        "ban3.infrastructures.runtimecaching.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.RuntimeCaching.dll"
+      ]
+    },
     "BouncyCastle.Cryptography/2.1.1": {
       "sha512": "NNQaa4eyf5YjSdLKUWGPzq5HXZQc3yGybfIOkR6UY1C/rRFWdo0UhSzBqqnxwGnq3ie4vkN0JlzhhANjfTIJIQ==",
       "type": "package",
@@ -5916,31 +5984,6 @@
         "version.txt"
       ]
     },
-    "Ban3.Infrastructures.Common/1.0.1": {
-      "type": "project",
-      "path": "../../../../Libs/Common/Common.csproj",
-      "msbuildProject": "../../../../Libs/Common/Common.csproj"
-    },
-    "Ban3.Infrastructures.NetHttp/1.0.0": {
-      "type": "project",
-      "path": "../../../../Libs/NetHttp/NetHttp.csproj",
-      "msbuildProject": "../../../../Libs/NetHttp/NetHttp.csproj"
-    },
-    "Ban3.Infrastructures.NetMail/1.0.0": {
-      "type": "project",
-      "path": "../../../../Libs/NetMail/NetMail.csproj",
-      "msbuildProject": "../../../../Libs/NetMail/NetMail.csproj"
-    },
-    "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
-      "type": "project",
-      "path": "../../../../Libs/PlatformInvoke/PlatformInvoke.csproj",
-      "msbuildProject": "../../../../Libs/PlatformInvoke/PlatformInvoke.csproj"
-    },
-    "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
-      "type": "project",
-      "path": "../../../../Libs/RuntimeCaching/RuntimeCaching.csproj",
-      "msbuildProject": "../../../../Libs/RuntimeCaching/RuntimeCaching.csproj"
-    },
     "Ban3.Infrastructures.SpringConfig/1.0.0": {
       "type": "project",
       "path": "../../../../Libs/SpringConfig/SpringConfig.csproj",
@@ -5959,6 +6002,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "Ban3.Infrastructures.NetMail >= 1.0.0",
       "Ban3.Infrastructures.PlatformInvoke >= 1.0.0",
       "Ban3.Infrastructures.SpringConfig >= 1.0.0",
       "Ban3.Infrastructures.WxsConfig >= 1.0.0",
@@ -6000,9 +6044,6 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "projectReferences": {
-            "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\PlatformInvoke.csproj": {
-              "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\PlatformInvoke\\PlatformInvoke.csproj"
-            },
             "D:\\GIT\\Ban3.Net\\Libs\\SpringConfig\\SpringConfig.csproj": {
               "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\SpringConfig\\SpringConfig.csproj"
             },
@@ -6025,6 +6066,14 @@
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
         "dependencies": {
+          "Ban3.Infrastructures.NetMail": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
+          "Ban3.Infrastructures.PlatformInvoke": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "Costura.Fody": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",

@@ -2,17 +2,56 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "BouncyCastle.Cryptography/2.1.1": {
+      "Ban3.Infrastructures.Common/1.0.2": {
         "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Json": "7.0.0",
+          "Newtonsoft.Json": "13.0.3",
+          "Rougamo.Fody": "1.4.1",
+          "System.IO": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "log4net": "2.0.15"
+        },
         "compile": {
-          "lib/netstandard2.0/BouncyCastle.Cryptography.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/BouncyCastle.Cryptography.dll": {
-            "related": ".xml"
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/netstandard2.0/favicon.ico": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
           }
+        }
+      },
+      "Ban3.Infrastructures.NetHttp/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.2",
+          "Rougamo.Fody": "1.4.1",
+          "System.Net.Http": "4.3.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
+        }
+      },
+      "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Runtime.Caching": "7.0.0",
+          "log4net": "2.0.15"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.RuntimeCaching.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.RuntimeCaching.dll": {}
         }
       },
       "Enums.NET/4.0.0": {
@@ -32,6 +71,12 @@
           }
         }
       },
+      "Fody/6.2.5": {
+        "type": "package",
+        "build": {
+          "build/_._": {}
+        }
+      },
       "log4net/2.0.15": {
         "type": "package",
         "dependencies": {
@@ -44,40 +89,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/log4net.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "MailKit/4.0.0": {
-        "type": "package",
-        "dependencies": {
-          "MimeKit": "4.0.0",
-          "System.Threading.Tasks.Extensions": "4.5.4"
-        },
-        "compile": {
-          "lib/netstandard2.0/MailKit.dll": {
-            "related": ".dll.config;.pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/MailKit.dll": {
-            "related": ".dll.config;.pdb;.xml"
-          }
-        }
-      },
-      "MailKit.Security.SaslMechanismNtlmIntegrated/0.2.0": {
-        "type": "package",
-        "dependencies": {
-          "MailKit": "3.4.1",
-          "NSspi": "0.3.1"
-        },
-        "compile": {
-          "lib/netstandard2.0/MailKit.Security.SaslMechanismNtlmIntegrated.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/MailKit.Security.SaslMechanismNtlmIntegrated.dll": {
             "related": ".xml"
           }
         }
@@ -107,19 +118,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Microsoft.CSharp/4.7.0": {
-        "type": "package",
-        "compile": {
-          "ref/netstandard2.0/Microsoft.CSharp.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.CSharp.dll": {
             "related": ".xml"
           }
         }
@@ -295,37 +293,6 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.Office.Interop.Outlook/15.0.4797.1004": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Office.Interop.Outlook.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Office.Interop.Outlook.dll": {}
-        }
-      },
-      "MimeKit/4.0.0": {
-        "type": "package",
-        "dependencies": {
-          "BouncyCastle.Cryptography": "2.1.1",
-          "System.Buffers": "4.5.1",
-          "System.Data.DataSetExtensions": "4.5.0",
-          "System.Memory": "4.5.5",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
-          "System.Security.Cryptography.Pkcs": "6.0.2",
-          "System.Text.Encoding.CodePages": "6.0.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/MimeKit.dll": {
-            "related": ".dll.config;.pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/MimeKit.dll": {
-            "related": ".dll.config;.pdb;.xml"
-          }
-        }
-      },
       "NETStandard.Library/2.0.3": {
         "type": "package",
         "dependencies": {
@@ -394,22 +361,6 @@
           },
           "lib/netstandard2.0/NPOI.dll": {
             "related": ".OOXML.deps.json;.OOXML.pdb;.OOXML.xml;.OpenXml4Net.pdb;.OpenXmlFormats.dll.config;.OpenXmlFormats.pdb;.pdb;.xml"
-          }
-        }
-      },
-      "NSspi/0.3.1": {
-        "type": "package",
-        "dependencies": {
-          "System.Security.Principal.Windows": "4.5.1"
-        },
-        "compile": {
-          "lib/netstandard2.0/NSspi.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/NSspi.dll": {
-            "related": ".xml"
           }
         }
       },
@@ -748,15 +699,6 @@
           "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {
             "related": ".xml"
           }
-        }
-      },
-      "System.Data.DataSetExtensions/4.5.0": {
-        "type": "package",
-        "compile": {
-          "ref/netstandard2.0/System.Data.DataSetExtensions.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/System.Data.DataSetExtensions.dll": {}
         }
       },
       "System.Diagnostics.Debug/4.3.0": {
@@ -1399,7 +1341,7 @@
           }
         }
       },
-      "System.Security.Cryptography.Pkcs/6.0.2": {
+      "System.Security.Cryptography.Pkcs/6.0.1": {
         "type": "package",
         "dependencies": {
           "System.Buffers": "4.5.1",
@@ -1705,93 +1647,49 @@
         "runtime": {
           "lib/netstandard2.0/_._": {}
         }
-      },
-      "Ban3.Infrastructures.Common/1.0.1": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Microsoft.Extensions.Configuration.Json": "7.0.0",
-          "Newtonsoft.Json": "13.0.3",
-          "Rougamo.Fody": "1.4.1",
-          "System.IO": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "log4net": "2.0.15"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.Common.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.Common.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.NetHttp/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.1",
-          "Rougamo.Fody": "1.4.1",
-          "System.Net.Http": "4.3.4"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.NetMail/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "MailKit": "4.0.0",
-          "MailKit.Security.SaslMechanismNtlmIntegrated": "0.2.0",
-          "Microsoft.CSharp": "4.7.0",
-          "Microsoft.Office.Interop.Outlook": "15.0.4797.1004",
-          "log4net": "2.0.15"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.NetMail.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.NetMail.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3",
-          "System.Runtime.Caching": "7.0.0",
-          "log4net": "2.0.15"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.RuntimeCaching.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.RuntimeCaching.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "BouncyCastle.Cryptography/2.1.1": {
-      "sha512": "NNQaa4eyf5YjSdLKUWGPzq5HXZQc3yGybfIOkR6UY1C/rRFWdo0UhSzBqqnxwGnq3ie4vkN0JlzhhANjfTIJIQ==",
+    "Ban3.Infrastructures.Common/1.0.2": {
+      "sha512": "tkH4yj5mk+64I/YvJASvhF5Mpgz0l2ZkfQa4Vp3OOBfyHiP5GLBHsXBUAUqQlFgcxPhbwJiKw6uQYYL9bRLdmw==",
       "type": "package",
-      "path": "bouncycastle.cryptography/2.1.1",
+      "path": "ban3.infrastructures.common/1.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.md",
-        "README.md",
-        "bouncycastle.cryptography.2.1.1.nupkg.sha512",
-        "bouncycastle.cryptography.nuspec",
-        "lib/net461/BouncyCastle.Cryptography.dll",
-        "lib/net461/BouncyCastle.Cryptography.xml",
-        "lib/net6.0/BouncyCastle.Cryptography.dll",
-        "lib/net6.0/BouncyCastle.Cryptography.xml",
-        "lib/netstandard2.0/BouncyCastle.Cryptography.dll",
-        "lib/netstandard2.0/BouncyCastle.Cryptography.xml",
-        "packageIcon.png"
+        "ban3.infrastructures.common.1.0.2.nupkg.sha512",
+        "ban3.infrastructures.common.nuspec",
+        "content/favicon.ico",
+        "contentFiles/any/netstandard2.0/favicon.ico",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.Common.dll"
+      ]
+    },
+    "Ban3.Infrastructures.NetHttp/1.0.0": {
+      "sha512": "XHt87sm26mSAqvTrIk6XzLH64oWjzdGRkqv0OigkUovm1Nc20z81aD/MZWVuVytLivmuBzA/CJqV9S6omqQ/Hw==",
+      "type": "package",
+      "path": "ban3.infrastructures.nethttp/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.nethttp.1.0.0.nupkg.sha512",
+        "ban3.infrastructures.nethttp.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll"
+      ]
+    },
+    "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
+      "sha512": "Lhng2uhZ34CB5bPOx9gqCirTA3V3M+lI9Ck3ffBW+IyQIEuXocFoGtPKteXtKRiUmyAwsmbNE+D3+0bkuJWb/g==",
+      "type": "package",
+      "path": "ban3.infrastructures.runtimecaching/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.runtimecaching.1.0.0.nupkg.sha512",
+        "ban3.infrastructures.runtimecaching.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.RuntimeCaching.dll"
       ]
     },
     "Enums.NET/4.0.0": {
@@ -1826,6 +1724,39 @@
         "lib/netstandard2.1/Enums.NET.xml"
       ]
     },
+    "Fody/6.2.5": {
+      "sha512": "wI34APXhZYWlDC9PmA/op+rq0aSB8say00dbNv4PfJIgWEktbmbwmgPflSGN48kJ+Jd5jl682shnW7IUXmKcYw==",
+      "type": "package",
+      "path": "fody/6.2.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "build/Fody.targets",
+        "fody.6.2.5.nupkg.sha512",
+        "fody.nuspec",
+        "netclassictask/Fody.dll",
+        "netclassictask/FodyCommon.dll",
+        "netclassictask/FodyHelpers.dll",
+        "netclassictask/FodyIsolated.dll",
+        "netclassictask/Mono.Cecil.Pdb.dll",
+        "netclassictask/Mono.Cecil.Pdb.pdb",
+        "netclassictask/Mono.Cecil.Rocks.dll",
+        "netclassictask/Mono.Cecil.Rocks.pdb",
+        "netclassictask/Mono.Cecil.dll",
+        "netclassictask/Mono.Cecil.pdb",
+        "netstandardtask/Fody.dll",
+        "netstandardtask/FodyCommon.dll",
+        "netstandardtask/FodyHelpers.dll",
+        "netstandardtask/FodyIsolated.dll",
+        "netstandardtask/Mono.Cecil.Pdb.dll",
+        "netstandardtask/Mono.Cecil.Pdb.pdb",
+        "netstandardtask/Mono.Cecil.Rocks.dll",
+        "netstandardtask/Mono.Cecil.Rocks.pdb",
+        "netstandardtask/Mono.Cecil.dll",
+        "netstandardtask/Mono.Cecil.pdb"
+      ]
+    },
     "log4net/2.0.15": {
       "sha512": "GahnO9ZgFka+xYcFwAfIFjW+k86P2nxFoaEpH6t3v4hiGj7tv2ksVZphxCVIHmJxoySS0HeU3dgCW+bSCcfD0A==",
       "type": "package",
@@ -1850,55 +1781,6 @@
         "log4net.2.0.15.nupkg.sha512",
         "log4net.nuspec",
         "package-icon.png"
-      ]
-    },
-    "MailKit/4.0.0": {
-      "sha512": "vtP6nUU0ByEZTnpbtsfdxyRvcssNSgIml4zi2hpBOV4gYNoaYSt+4VCx28MMnfaO/9J1IzcG+Hc8kXMkWX6iRQ==",
-      "type": "package",
-      "path": "mailkit/4.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "icons/mailkit-50.png",
-        "lib/net462/MailKit.dll",
-        "lib/net462/MailKit.dll.config",
-        "lib/net462/MailKit.pdb",
-        "lib/net462/MailKit.xml",
-        "lib/net47/MailKit.dll",
-        "lib/net47/MailKit.dll.config",
-        "lib/net47/MailKit.pdb",
-        "lib/net47/MailKit.xml",
-        "lib/net48/MailKit.dll",
-        "lib/net48/MailKit.dll.config",
-        "lib/net48/MailKit.pdb",
-        "lib/net48/MailKit.xml",
-        "lib/net6.0/MailKit.dll",
-        "lib/net6.0/MailKit.dll.config",
-        "lib/net6.0/MailKit.pdb",
-        "lib/net6.0/MailKit.xml",
-        "lib/netstandard2.0/MailKit.dll",
-        "lib/netstandard2.0/MailKit.dll.config",
-        "lib/netstandard2.0/MailKit.pdb",
-        "lib/netstandard2.0/MailKit.xml",
-        "lib/netstandard2.1/MailKit.dll",
-        "lib/netstandard2.1/MailKit.dll.config",
-        "lib/netstandard2.1/MailKit.pdb",
-        "lib/netstandard2.1/MailKit.xml",
-        "mailkit.4.0.0.nupkg.sha512",
-        "mailkit.nuspec"
-      ]
-    },
-    "MailKit.Security.SaslMechanismNtlmIntegrated/0.2.0": {
-      "sha512": "jvMTOlWaqSY/2Tbh3Z2nff6XEG6B3yNXAnzvYBRlRjNSy3z5uKADnyU0+z/qUj8T3n73dGvr1OTsKBbQ+HICQQ==",
-      "type": "package",
-      "path": "mailkit.security.saslmechanismntlmintegrated/0.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/MailKit.Security.SaslMechanismNtlmIntegrated.dll",
-        "lib/netstandard2.0/MailKit.Security.SaslMechanismNtlmIntegrated.xml",
-        "mailkit.security.saslmechanismntlmintegrated.0.2.0.nupkg.sha512",
-        "mailkit.security.saslmechanismntlmintegrated.nuspec"
       ]
     },
     "MathNet.Numerics.Signed/4.15.0": {
@@ -1942,75 +1824,6 @@
         "microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
         "microsoft.bcl.asyncinterfaces.nuspec",
         "useSharedDesignerContext.txt"
-      ]
-    },
-    "Microsoft.CSharp/4.7.0": {
-      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
-      "type": "package",
-      "path": "microsoft.csharp/4.7.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net45/_._",
-        "lib/netcore50/Microsoft.CSharp.dll",
-        "lib/netcoreapp2.0/_._",
-        "lib/netstandard1.3/Microsoft.CSharp.dll",
-        "lib/netstandard2.0/Microsoft.CSharp.dll",
-        "lib/netstandard2.0/Microsoft.CSharp.xml",
-        "lib/portable-net45+win8+wp8+wpa81/_._",
-        "lib/uap10.0.16299/_._",
-        "lib/win8/_._",
-        "lib/wp80/_._",
-        "lib/wpa81/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "microsoft.csharp.4.7.0.nupkg.sha512",
-        "microsoft.csharp.nuspec",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net45/_._",
-        "ref/netcore50/Microsoft.CSharp.dll",
-        "ref/netcore50/Microsoft.CSharp.xml",
-        "ref/netcore50/de/Microsoft.CSharp.xml",
-        "ref/netcore50/es/Microsoft.CSharp.xml",
-        "ref/netcore50/fr/Microsoft.CSharp.xml",
-        "ref/netcore50/it/Microsoft.CSharp.xml",
-        "ref/netcore50/ja/Microsoft.CSharp.xml",
-        "ref/netcore50/ko/Microsoft.CSharp.xml",
-        "ref/netcore50/ru/Microsoft.CSharp.xml",
-        "ref/netcore50/zh-hans/Microsoft.CSharp.xml",
-        "ref/netcore50/zh-hant/Microsoft.CSharp.xml",
-        "ref/netcoreapp2.0/_._",
-        "ref/netstandard1.0/Microsoft.CSharp.dll",
-        "ref/netstandard1.0/Microsoft.CSharp.xml",
-        "ref/netstandard1.0/de/Microsoft.CSharp.xml",
-        "ref/netstandard1.0/es/Microsoft.CSharp.xml",
-        "ref/netstandard1.0/fr/Microsoft.CSharp.xml",
-        "ref/netstandard1.0/it/Microsoft.CSharp.xml",
-        "ref/netstandard1.0/ja/Microsoft.CSharp.xml",
-        "ref/netstandard1.0/ko/Microsoft.CSharp.xml",
-        "ref/netstandard1.0/ru/Microsoft.CSharp.xml",
-        "ref/netstandard1.0/zh-hans/Microsoft.CSharp.xml",
-        "ref/netstandard1.0/zh-hant/Microsoft.CSharp.xml",
-        "ref/netstandard2.0/Microsoft.CSharp.dll",
-        "ref/netstandard2.0/Microsoft.CSharp.xml",
-        "ref/portable-net45+win8+wp8+wpa81/_._",
-        "ref/uap10.0.16299/_._",
-        "ref/win8/_._",
-        "ref/wp80/_._",
-        "ref/wpa81/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "useSharedDesignerContext.txt",
-        "version.txt"
       ]
     },
     "Microsoft.Extensions.Configuration/7.0.0": {
@@ -2282,55 +2095,6 @@
         "runtime.json"
       ]
     },
-    "Microsoft.Office.Interop.Outlook/15.0.4797.1004": {
-      "sha512": "17tdFXg/TGnbmSC9YNkIrB6P3vTSemOMI/TaUaZWQmRE1dMjHIVmBPffQhXasH/te4weHiFk8EEXUCi/NsGbuA==",
-      "type": "package",
-      "path": "microsoft.office.interop.outlook/15.0.4797.1004",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net20/Microsoft.Office.Interop.Outlook.dll",
-        "lib/netstandard2.0/Microsoft.Office.Interop.Outlook.dll",
-        "microsoft.office.interop.outlook.15.0.4797.1004.nupkg.sha512",
-        "microsoft.office.interop.outlook.nuspec"
-      ]
-    },
-    "MimeKit/4.0.0": {
-      "sha512": "AIyj//7nDutepZjMlYFbc19PguEl+35lryQJX2YVr486G7ihfB4X4lPXjNUyjCcclr3Wq0P2yiQ6+Sonqc7z5A==",
-      "type": "package",
-      "path": "mimekit/4.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "icons/mimekit-50.png",
-        "lib/net462/MimeKit.dll",
-        "lib/net462/MimeKit.dll.config",
-        "lib/net462/MimeKit.pdb",
-        "lib/net462/MimeKit.xml",
-        "lib/net47/MimeKit.dll",
-        "lib/net47/MimeKit.dll.config",
-        "lib/net47/MimeKit.pdb",
-        "lib/net47/MimeKit.xml",
-        "lib/net48/MimeKit.dll",
-        "lib/net48/MimeKit.dll.config",
-        "lib/net48/MimeKit.pdb",
-        "lib/net48/MimeKit.xml",
-        "lib/net6.0/MimeKit.dll",
-        "lib/net6.0/MimeKit.dll.config",
-        "lib/net6.0/MimeKit.pdb",
-        "lib/net6.0/MimeKit.xml",
-        "lib/netstandard2.0/MimeKit.dll",
-        "lib/netstandard2.0/MimeKit.dll.config",
-        "lib/netstandard2.0/MimeKit.pdb",
-        "lib/netstandard2.0/MimeKit.xml",
-        "lib/netstandard2.1/MimeKit.dll",
-        "lib/netstandard2.1/MimeKit.dll.config",
-        "lib/netstandard2.1/MimeKit.pdb",
-        "lib/netstandard2.1/MimeKit.xml",
-        "mimekit.4.0.0.nupkg.sha512",
-        "mimekit.nuspec"
-      ]
-    },
     "NETStandard.Library/2.0.3": {
       "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "type": "package",
@@ -2553,22 +2317,6 @@
         "logo/60_60.jpg",
         "npoi.2.6.0.nupkg.sha512",
         "npoi.nuspec"
-      ]
-    },
-    "NSspi/0.3.1": {
-      "sha512": "1YUQNvaKBLRbmdUBVBUAu00s4b9IJvq5nNZPBcjp33Ub8BaYDNK9it1Y/ZnX6gVtImX+6gYPfEgfrXXo0migMA==",
-      "type": "package",
-      "path": "nsspi/0.3.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "License.txt",
-        "lib/net40/NSspi.dll",
-        "lib/net40/NSspi.xml",
-        "lib/netstandard2.0/NSspi.dll",
-        "lib/netstandard2.0/NSspi.xml",
-        "nsspi.0.3.1.nupkg.sha512",
-        "nsspi.nuspec"
       ]
     },
     "Portable.BouncyCastle/1.9.0": {
@@ -3170,25 +2918,6 @@
         "system.configuration.configurationmanager.7.0.0.nupkg.sha512",
         "system.configuration.configurationmanager.nuspec",
         "useSharedDesignerContext.txt"
-      ]
-    },
-    "System.Data.DataSetExtensions/4.5.0": {
-      "sha512": "221clPs1445HkTBZPL+K9sDBdJRB8UN8rgjO3ztB0CQ26z//fmJXtlsr6whGatscsKGBrhJl5bwJuKSA8mwFOw==",
-      "type": "package",
-      "path": "system.data.datasetextensions/4.5.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net45/_._",
-        "lib/netstandard2.0/System.Data.DataSetExtensions.dll",
-        "ref/net45/_._",
-        "ref/netstandard2.0/System.Data.DataSetExtensions.dll",
-        "system.data.datasetextensions.4.5.0.nupkg.sha512",
-        "system.data.datasetextensions.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
       ]
     },
     "System.Diagnostics.Debug/4.3.0": {
@@ -4926,10 +4655,10 @@
         "system.security.cryptography.openssl.nuspec"
       ]
     },
-    "System.Security.Cryptography.Pkcs/6.0.2": {
-      "sha512": "1YcPZrdfjbHtzA2Y9EeAZ1zt7EWPBs30lgpG9PXgwP7onF91+sX1qijegcnuo4cULCcT8GiaaJFsDcEqdc9PVg==",
+    "System.Security.Cryptography.Pkcs/6.0.1": {
+      "sha512": "ynmbW2GjIGg9K1wXmVIRs4IlyDolf0JXNpzFQ8JCVgwM+myUC2JeUggl2PwQig2PNVMegKmN1aAx7WPQ8tI3vA==",
       "type": "package",
-      "path": "system.security.cryptography.pkcs/6.0.2",
+      "path": "system.security.cryptography.pkcs/6.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4958,7 +4687,7 @@
         "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.Pkcs.xml",
         "runtimes/win/lib/netstandard2.1/System.Security.Cryptography.Pkcs.dll",
         "runtimes/win/lib/netstandard2.1/System.Security.Cryptography.Pkcs.xml",
-        "system.security.cryptography.pkcs.6.0.2.nupkg.sha512",
+        "system.security.cryptography.pkcs.6.0.1.nupkg.sha512",
         "system.security.cryptography.pkcs.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -5677,33 +5406,12 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "Ban3.Infrastructures.Common/1.0.1": {
-      "type": "project",
-      "path": "../../../../Libs/Common/Common.csproj",
-      "msbuildProject": "../../../../Libs/Common/Common.csproj"
-    },
-    "Ban3.Infrastructures.NetHttp/1.0.0": {
-      "type": "project",
-      "path": "../../../../Libs/NetHttp/NetHttp.csproj",
-      "msbuildProject": "../../../../Libs/NetHttp/NetHttp.csproj"
-    },
-    "Ban3.Infrastructures.NetMail/1.0.0": {
-      "type": "project",
-      "path": "../../../../Libs/NetMail/NetMail.csproj",
-      "msbuildProject": "../../../../Libs/NetMail/NetMail.csproj"
-    },
-    "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
-      "type": "project",
-      "path": "../../../../Libs/RuntimeCaching/RuntimeCaching.csproj",
-      "msbuildProject": "../../../../Libs/RuntimeCaching/RuntimeCaching.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.1",
+      "Ban3.Infrastructures.Common >= 1.0.2",
       "Ban3.Infrastructures.NetHttp >= 1.0.0",
-      "Ban3.Infrastructures.NetMail >= 1.0.0",
       "Ban3.Infrastructures.RuntimeCaching >= 1.0.0",
       "Microsoft.Extensions.Configuration >= 7.0.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 7.0.0",
@@ -5746,20 +5454,7 @@
       "frameworks": {
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
-          "projectReferences": {
-            "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
-              "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj"
-            },
-            "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj": {
-              "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj"
-            },
-            "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj": {
-              "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetMail\\NetMail.csproj"
-            },
-            "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj": {
-              "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\RuntimeCaching\\RuntimeCaching.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -5772,6 +5467,18 @@
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
         "dependencies": {
+          "Ban3.Infrastructures.Common": {
+            "target": "Package",
+            "version": "[1.0.2, )"
+          },
+          "Ban3.Infrastructures.NetHttp": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
+          "Ban3.Infrastructures.RuntimeCaching": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
             "version": "[7.0.0, )"
