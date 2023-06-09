@@ -5,7 +5,7 @@
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>Ban3.LCW</AssemblyName>
+    <AssemblyName>cw</AssemblyName>
     <RootNamespace>Ban3.Labs.Casino.Web</RootNamespace>
   </PropertyGroup>
 

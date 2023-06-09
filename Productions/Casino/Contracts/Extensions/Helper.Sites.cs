@@ -149,8 +149,6 @@ public static partial class Helper
             StartDate = startDate,
             EndDate = endDate
         };
-
-        Console.WriteLine(getDailyParams.ObjToJson());
         
         return new GetStockPrice(getDailyParams).GetResult();
     }
@@ -297,7 +295,6 @@ public static partial class Helper
 
         allCodes.ForEach(o =>
         {
-            Console.WriteLine(o.Symbol);
             result = result && _.PrepareOnesEvents(o.Symbol);
             (3, 7).RandomDelay();
         });

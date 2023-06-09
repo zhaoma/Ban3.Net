@@ -1,11 +1,6 @@
-﻿using System.Security.AccessControl;
-using Ban3.Infrastructures.Common.Attributes;
-using Ban3.Infrastructures.Common.Extensions;
+﻿using System.Diagnostics;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Productions.Casino.CcaAndReport;
-using Ban3.Productions.Casino.Contracts.Enums;
-using Ban3.Productions.Casino.Contracts.Extensions;
-using log4net;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -13,29 +8,34 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
-        var now = DateTime.Now;
+        var controlCode = args.Any() ? args[0] .ToLower(): string.Empty;
         
-        //Signalert.ExecuteDailyJob();
+        Sw.Start();
+        switch (controlCode)
+        {
+            case "--prepare":
+                await Signalert.ExecuteFullyJob();
+                break;
 
+            case "--daily":
+                Signalert.ExecuteDailyJob();
+                break;
 
-        var r=Signalert.PrepareAllList();
-        Console.WriteLine(r);
+            case "--realtime":
+                Signalert.ExecuteRealtimeJob();
+                break;
 
-        var s = Signalert.LoadAllList(null);
-        s.ObjToJson().WriteColorLine(ConsoleColor.Red);
+            default:
+                $"args:  \r\n--prepare                 prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--daily :                      prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--realtime :               refresh realtime".WriteColorLine(ConsoleColor.DarkYellow);
 
-        Console.WriteLine(s.Count);
+                break;
+        }
+        Sw.Stop();
 
-        Console.WriteLine(DateTime.Now.Subtract(now).TotalMilliseconds + " ms");
-        // var allCodes = Signalert.Collector.LoadAllCodes();
-        // Console.WriteLine($"{allCodes.Count}");
-
-        // Console.WriteLine("PrepareAllSets");
-        // 
-        //Signalert.PrepareAllSets(allCodes);
-
-        //Console.WriteLine(DateTime.Now.Subtract(now).TotalMilliseconds + " ms");
-
-
+        $"{Sw.ElapsedMilliseconds} ms spent @{controlCode}".WriteColorLine(ConsoleColor.DarkYellow);
     }
+
+    private static readonly Stopwatch Sw= new ();
 }

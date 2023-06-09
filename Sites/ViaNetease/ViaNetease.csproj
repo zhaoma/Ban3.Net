@@ -7,6 +7,15 @@
     <NullableContextOptions>enable </NullableContextOptions>
     <RootNamespace>Ban3.Sites.ViaNetease</RootNamespace>
     <AssemblyName>Ban3.Sites.ViaNetease</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Ban3.Sites.ViaNetease</Title>
+    <Version>1.0.0</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>Via Netease.com</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -15,11 +24,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="C:\Users\z004k7zb\.nuget\packages\ban3.infrastructures.common\1.0.2\contentFiles\any\netstandard2.0\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.2" />
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.0" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Libs\NetHttp\NetHttp.csproj" />
-    <ProjectReference Include="..\..\Libs\Common\Common.csproj" />
   </ItemGroup>
 </Project>

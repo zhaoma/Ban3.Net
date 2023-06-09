@@ -2,6 +2,50 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
+      "Ban3.Infrastructures.Common/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Json": "7.0.0",
+          "Newtonsoft.Json": "13.0.3",
+          "Rougamo.Fody": "1.4.1",
+          "System.IO": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "log4net": "2.0.15"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
+      "Ban3.Infrastructures.NetHttp/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.2",
+          "Rougamo.Fody": "1.4.1",
+          "System.Net.Http": "4.3.4"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
+        }
+      },
+      "Fody/6.2.5": {
+        "type": "package",
+        "build": {
+          "build/_._": {}
+        }
+      },
       "log4net/2.0.15": {
         "type": "package",
         "dependencies": {
@@ -1244,43 +1288,71 @@
         "runtime": {
           "lib/netstandard1.3/System.Threading.Thread.dll": {}
         }
-      },
-      "Ban3.Infrastructures.Common/1.0.1": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Microsoft.Extensions.Configuration.Json": "7.0.0",
-          "Newtonsoft.Json": "13.0.3",
-          "Rougamo.Fody": "1.4.1",
-          "System.IO": "4.3.0",
-          "System.Threading.Tasks": "4.3.0",
-          "log4net": "2.0.15"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.Common.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.Common.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.NetHttp/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.1",
-          "Rougamo.Fody": "1.4.1",
-          "System.Net.Http": "4.3.4"
-        },
-        "compile": {
-          "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Ban3.Infrastructures.NetHttp.dll": {}
-        }
       }
     }
   },
   "libraries": {
+    "Ban3.Infrastructures.Common/1.0.2": {
+      "sha512": "tkH4yj5mk+64I/YvJASvhF5Mpgz0l2ZkfQa4Vp3OOBfyHiP5GLBHsXBUAUqQlFgcxPhbwJiKw6uQYYL9bRLdmw==",
+      "type": "package",
+      "path": "ban3.infrastructures.common/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.common.1.0.2.nupkg.sha512",
+        "ban3.infrastructures.common.nuspec",
+        "content/favicon.ico",
+        "contentFiles/any/netstandard2.0/favicon.ico",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.Common.dll"
+      ]
+    },
+    "Ban3.Infrastructures.NetHttp/1.0.0": {
+      "sha512": "XHt87sm26mSAqvTrIk6XzLH64oWjzdGRkqv0OigkUovm1Nc20z81aD/MZWVuVytLivmuBzA/CJqV9S6omqQ/Hw==",
+      "type": "package",
+      "path": "ban3.infrastructures.nethttp/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.nethttp.1.0.0.nupkg.sha512",
+        "ban3.infrastructures.nethttp.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll"
+      ]
+    },
+    "Fody/6.2.5": {
+      "sha512": "wI34APXhZYWlDC9PmA/op+rq0aSB8say00dbNv4PfJIgWEktbmbwmgPflSGN48kJ+Jd5jl682shnW7IUXmKcYw==",
+      "type": "package",
+      "path": "fody/6.2.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "build/Fody.targets",
+        "fody.6.2.5.nupkg.sha512",
+        "fody.nuspec",
+        "netclassictask/Fody.dll",
+        "netclassictask/FodyCommon.dll",
+        "netclassictask/FodyHelpers.dll",
+        "netclassictask/FodyIsolated.dll",
+        "netclassictask/Mono.Cecil.Pdb.dll",
+        "netclassictask/Mono.Cecil.Pdb.pdb",
+        "netclassictask/Mono.Cecil.Rocks.dll",
+        "netclassictask/Mono.Cecil.Rocks.pdb",
+        "netclassictask/Mono.Cecil.dll",
+        "netclassictask/Mono.Cecil.pdb",
+        "netstandardtask/Fody.dll",
+        "netstandardtask/FodyCommon.dll",
+        "netstandardtask/FodyHelpers.dll",
+        "netstandardtask/FodyIsolated.dll",
+        "netstandardtask/Mono.Cecil.Pdb.dll",
+        "netstandardtask/Mono.Cecil.Pdb.pdb",
+        "netstandardtask/Mono.Cecil.Rocks.dll",
+        "netstandardtask/Mono.Cecil.Rocks.pdb",
+        "netstandardtask/Mono.Cecil.dll",
+        "netstandardtask/Mono.Cecil.pdb"
+      ]
+    },
     "log4net/2.0.15": {
       "sha512": "GahnO9ZgFka+xYcFwAfIFjW+k86P2nxFoaEpH6t3v4hiGj7tv2ksVZphxCVIHmJxoySS0HeU3dgCW+bSCcfD0A==",
       "type": "package",
@@ -1803,6 +1875,7 @@
       "path": "runtime.native.system/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -1830,6 +1903,7 @@
       "path": "runtime.native.system.security.cryptography.apple/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -2000,6 +2074,7 @@
       "path": "system.collections/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2067,6 +2142,7 @@
       "path": "system.collections.concurrent/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2155,6 +2231,7 @@
       "path": "system.diagnostics.debug/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2222,6 +2299,7 @@
       "path": "system.diagnostics.diagnosticsource/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/net46/System.Diagnostics.DiagnosticSource.dll",
@@ -2242,6 +2320,7 @@
       "path": "system.diagnostics.tracing/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2331,6 +2410,7 @@
       "path": "system.globalization/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2398,6 +2478,7 @@
       "path": "system.globalization.calendars/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2435,6 +2516,7 @@
       "path": "system.globalization.extensions/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2556,6 +2638,7 @@
       "path": "system.io.filesystem/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2593,6 +2676,7 @@
       "path": "system.io.filesystem.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2768,6 +2852,7 @@
       "path": "system.net.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2893,6 +2978,7 @@
       "path": "system.reflection/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2973,6 +3059,7 @@
       "path": "system.reflection.primitives/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3029,6 +3116,7 @@
       "path": "system.resources.resourcemanager/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3283,6 +3371,7 @@
       "path": "system.runtime.handles/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3413,6 +3502,7 @@
       "path": "system.runtime.numerics/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3552,6 +3642,7 @@
       "path": "system.security.cryptography.cng/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/net46/System.Security.Cryptography.Cng.dll",
@@ -3579,6 +3670,7 @@
       "path": "system.security.cryptography.csp/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -3651,6 +3743,7 @@
       "path": "system.security.cryptography.openssl/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.6/System.Security.Cryptography.OpenSsl.dll",
@@ -4097,6 +4190,7 @@
       "path": "system.threading.tasks/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -4233,21 +4327,10 @@
         "system.threading.thread.4.3.0.nupkg.sha512",
         "system.threading.thread.nuspec"
       ]
-    },
-    "Ban3.Infrastructures.Common/1.0.1": {
-      "type": "project",
-      "path": "../../Libs/Common/Common.csproj",
-      "msbuildProject": "../../Libs/Common/Common.csproj"
-    },
-    "Ban3.Infrastructures.NetHttp/1.0.0": {
-      "type": "project",
-      "path": "../../Libs/NetHttp/NetHttp.csproj",
-      "msbuildProject": "../../Libs/NetHttp/NetHttp.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.1",
       "Ban3.Infrastructures.NetHttp >= 1.0.0",
       "NETStandard.Library >= 2.0.3",
       "Newtonsoft.Json >= 13.0.3",
@@ -4287,14 +4370,7 @@
       "frameworks": {
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
-          "projectReferences": {
-            "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj": {
-              "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj"
-            },
-            "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj": {
-              "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\NetHttp\\NetHttp.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -4307,6 +4383,10 @@
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
         "dependencies": {
+          "Ban3.Infrastructures.NetHttp": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",

@@ -5,20 +5,37 @@
     <LangVersion>10.0</LangVersion>
     <AssemblyName>Ban3.Productions.Casino.Contracts</AssemblyName>
     <RootNamespace>Ban3.Productions.Casino.Contracts</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Ban3.Productions.Casino.Contracts</Title>
+    <Version>1.0.0</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>Casino Contracts</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Charts\Charts.csproj" />
-    <ProjectReference Include="..\..\..\Libs\Common\Common.csproj" />
     <ProjectReference Include="..\..\..\Libs\Indicators\Indicators.csproj" />
-    <ProjectReference Include="..\..\..\Sites\ViaNetease\ViaNetease.csproj" />
-    <ProjectReference Include="..\..\..\Sites\ViaSina\ViaSina.csproj" />
-    <ProjectReference Include="..\..\..\Sites\ViaTushare\ViaTushare.csproj" />
-    <ProjectReference Include="..\..\..\Sites\ViaYuncaijing\ViaYuncaijing.csproj" />
-    <ProjectReference Include="..\..\..\Sites\ViaEastmoney\ViaEastmoney.csproj" />
   </ItemGroup>
   
   <ItemGroup>
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.2" />
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.0" />
+    <PackageReference Include="Ban3.Sites.ViaEastmoney" Version="1.0.0" />
+    <PackageReference Include="Ban3.Sites.ViaNetease" Version="1.0.0" />
+    <PackageReference Include="Ban3.Sites.ViaSina" Version="1.0.0" />
+    <PackageReference Include="Ban3.Sites.ViaTushare" Version="1.0.0" />
+    <PackageReference Include="Ban3.Sites.ViaYuncaijing" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="System.IO" Version="4.3.0" />

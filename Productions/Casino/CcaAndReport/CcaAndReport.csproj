@@ -5,7 +5,23 @@
     <LangVersion>10.0</LangVersion>
     <AssemblyName>Ban3.Productions.Casino.CcaAndReport</AssemblyName>
     <RootNamespace>Ban3.Productions.Casino.CcaAndReport</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Ban3.Productions.Casino.CcaAndReport</Title>
+    <Version>1.0.0</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>Casino Collect , Calculate,Analyze and Report</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.15" />
@@ -18,11 +34,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Implements\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Implements\" />
   </ItemGroup>
 </Project>

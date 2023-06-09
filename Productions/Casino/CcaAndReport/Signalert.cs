@@ -33,6 +33,65 @@ public class Signalert
 
     public static IReportor Reportor = new Reportor();
 
+    public static async Task ExecuteFullyJob()
+    {
+        Collector.PrepareAllCodes();
+
+        var allCodes = Collector.LoadAllCodes();
+
+        Collector.PrepareAllEvents(allCodes);
+
+        await PrepareAllSeeds(allCodes);
+
+        ReinstateAllPrices(allCodes);
+
+        ExecutePrepare(allCodes);
+    }
+
+    public static void ExecuteDailyJob()
+    {
+        //Collector.PrepareAllCodes();
+
+        var allCodes = Signalert.Collector.LoadAllCodes();
+
+        Collector.FixDailyPrices(allCodes);
+
+        ReinstateAllPrices(allCodes);
+
+        ExecutePrepare(allCodes);
+    }
+
+    public static void ExecuteRealtimeJob()
+    {
+        var allCodes = Signalert.Collector.LoadAllCodes();
+
+        ExecuteRealtimeJob(allCodes);
+    }
+
+    /// <summary>
+    /// 实时刷新数据
+    /// </summary>
+    /// <param name="stocks"></param>
+    public static void ExecuteRealtimeJob(List<Stock> stocks)
+    {
+        Collector.ReadRealtime(stocks);
+        
+        ExecutePrepare(stocks);
+    }
+
+    static void ExecutePrepare(List<Stock> stocks)
+    {
+        stocks.ParallelExecute((stock) => { Calculator.GenerateIndicatorLine(stock.Code); }, Config.MaxParallelTasks);
+
+        PrepareAllDiagrams(stocks);
+
+        PrepareAllSets(stocks);
+
+        PrepareAllList();
+    }
+
+    #region 计算复权因子并重新计算行情
+
     public static bool PrepareSeeds(Stock stock)
     {
         var prices = Collector.LoadDailyPrices(stock.Code);
@@ -68,51 +127,15 @@ public class Signalert
                 var reinstateOne=Calculator.ReinstatePrices(stock.Code, stock.Symbol, ps);
 
                 result = result && reinstateOne;
-
-                Console.WriteLine($"{stock.Code} -> {reinstateOne}");
             },
             Config.MaxParallelTasks);
 
         return result;
     }
 
-    public static void ExecuteDailyJob()
-    {
-        //Collector.PrepareAllCodes();
+    #endregion
 
-        var allCodes = Signalert.Collector.LoadAllCodes();
-
-        //Collector.FixDailyPrices(allCodes);
-
-        //var reinstate = Signalert.ReinstateAllPrices(allCodes);
-
-        //if (!reinstate)
-        //{
-        //    Console.WriteLine($"anyone is error");
-        //}
-
-        allCodes.ParallelExecute((stock) => { Calculator.GenerateIndicatorLine(stock.Code); }, Config.MaxParallelTasks);
-
-        PrepareAllDiagrams(allCodes);
-
-        PrepareAllSets(allCodes);
-    }
-
-    public static void ExecuteRealtimeJob()
-    {
-        var allCodes = Signalert.Collector.LoadAllCodes();
-
-        ExecuteRealtimeJob(allCodes);
-    }
-
-    public static void ExecuteRealtimeJob(List<Stock> stocks)
-    {
-        Collector.ReadRealtime(stocks);
-
-        PrepareAllDiagrams(stocks);
-
-        PrepareAllSets(stocks);
-    }
+    #region 生成个股图表/加载
 
     public static void PrepareAllDiagrams(List<Stock> allCodes = null)
     {
@@ -120,7 +143,6 @@ public class Signalert
 
         allCodes.ParallelExecute((stock) =>
         {
-            //Console.WriteLine($"{stock.Code} - {stock.Name}");
             PrepareOnesDiagram(stock);
         }, Config.MaxParallelTasks);
     }
@@ -150,7 +172,6 @@ public class Signalert
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"{stock.Code} - ERROR,{ex.Message }");
             Logger.Error(ex);
         }
 
@@ -162,6 +183,10 @@ public class Signalert
             .DataFile<Diagram>()
             .ReadFileAs<Diagram>();
 
+    #endregion
+
+    #region 生成个股特征/加载
+
     public static void PrepareAllSets(List<Stock> allCodes = null)
     {
         allCodes ??= Signalert.Collector.LoadAllCodes();
@@ -170,7 +195,6 @@ public class Signalert
 
         allCodes.ParallelExecute((stock) =>
         {
-            //Console.WriteLine($"{stock.Code} - {stock.Name}");
             var ones=PrepareOnesSets(stock);
             if (ones != null&&ones.Any())
             {
@@ -211,7 +235,6 @@ public class Signalert
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"{stock.Code} - ERROR,{ex.Message}");
             Logger.Error(ex);
         }
 
@@ -222,6 +245,10 @@ public class Signalert
         => $"latest"
             .DataFile<StockSets>()
             .ReadFileAs<List<StockSets>>();
+
+    #endregion
+
+    #region 生成排名列表/加载
 
     public static bool PrepareAllList()
     {
@@ -268,4 +295,6 @@ public class Signalert
 
         return saved.ReadFileAs<List<ListRecord>>();
     }
+
+    #endregion
 }

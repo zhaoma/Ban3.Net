@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "9xGd/Iy0uO7xIU2dWBwrZauO8bNu/ztEW1mtBtyUIen/dZg83MlAwOgHfRf5Qdoyr1SrIJwzHxyLlKoHIqXGQA==",
+  "dgSpecHash": "+KWErn0hKIjcSq/OKEf3E3RFVMNP2UZEcN3jLpi46kTlSJNA8b3AND6UW6kq1w2SNjVMQgHgbMng9zRpUNf+5g==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\ViaEastmoney.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.2\\ban3.infrastructures.common.1.0.2.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.0\\ban3.infrastructures.nethttp.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.2.5\\fody.6.2.5.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
