@@ -12,6 +12,12 @@ namespace Ban3.Infrastructures.Charts;
 [TracingIt]
 public static partial class Helper
 {
+    public const string White = "#FFF";
+    public const string Yellow = "#FCO";
+    public const string Purple = "#C09";
+    public const string Green = "#3C0";
+    public const string Gray = "#CCC";
+
     #region Diagram
 
     /// TODO : init default values
@@ -90,7 +96,13 @@ public static partial class Helper
 
     ///
     public static Series CreateSeries(
-        this Enums.SeriesType seriesType, string name, object? data, int? index)
+        this Enums.SeriesType seriesType,
+        string name,
+        object? data,
+        int? index,
+        string? color = White,
+        int? width = 1,
+        decimal? opacity = 0.7M)
     {
         return new Series
         {
@@ -101,7 +113,7 @@ public static partial class Helper
             YAxisIndex = index,
             ShowSymbol = false,
             Smooth = true,
-            LineStyle = new LineStyle { Opacity = 0.3M }
+            LineStyle = new LineStyle { Opacity =opacity, Width = width, Color = color }
         };
     }
 

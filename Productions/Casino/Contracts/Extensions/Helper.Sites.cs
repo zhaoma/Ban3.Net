@@ -33,7 +33,7 @@ public static partial class Helper
     {
         var result = true;
 
-        var local = allCodes?? _.LoadAllCodes();
+        var local = allCodes ?? _.LoadAllCodes();
 
         /*
         local.ParallelExecute((stock) =>
@@ -77,7 +77,7 @@ public static partial class Helper
     {
         var codes = Sites.ViaEastmoney.Helper.DownloadAllCodes().Result.Data.Diff;
 
-        var local =allCodes?? _.LoadAllCodes();
+        var local = allCodes ?? _.LoadAllCodes();
         if (local != null)
         {
             local.AddRange(codes.FindAll(x => local.All(y => y.Code != x.Code)).Select(o => new Stock
@@ -101,11 +101,11 @@ public static partial class Helper
                 .WriteFile(local.ObjToJson()));
     }
 
-    public static bool PrepareAllCodesFromTushare(this ISites _,List<Stock> allCodes= null)
+    public static bool PrepareAllCodesFromTushare(this ISites _, List<Stock> allCodes = null)
     {
         var result = new GetStockBasic().GetResult();
 
-        var local =allCodes?? _.LoadAllCodes();
+        var local = allCodes ?? _.LoadAllCodes();
         if (local != null)
         {
             local.AddRange(result.Data.FindAll(x => local.All(y => y.Code != x.Code)).Select(o => new Stock
@@ -142,31 +142,31 @@ public static partial class Helper
 
     #region daily prices
 
-    public static GetStockPriceResult GetDailyPrices(this ISites _,List<string> tsCodes,string startDate,string endDate)
+    public static GetStockPriceResult GetDailyPrices(this ISites _, List<string> tsCodes, string startDate, string endDate)
     {
         var getDailyParams = new GetDailyParams(tsCodes)
         {
             StartDate = startDate,
             EndDate = endDate
         };
-        
+
         return new GetStockPrice(getDailyParams).GetResult();
     }
-    
+
     public static GetStockPriceResult GetDailyPrices(this ISites _, List<string> tsCodes, DateRange dateRange)
         => _.GetDailyPrices(tsCodes, dateRange.StartDate, dateRange.EndDate);
 
     public static bool PrepareOnesDailyPrices(this ISites _, string code)
     {
         var result = false;
-        var prices=new List<StockPrice>();
+        var prices = new List<StockPrice>();
 
         var freq = 0;
 
         var r = _.GetDailyPrices(new List<string> { code }, new DateRange(10, freq));
         while (r != null && r.Data.Any())
         {
-            prices=prices.Union(r.Data).ToList();
+            prices = prices.Union(r.Data).ToList();
 
             freq++;
             r = _.GetDailyPrices(new List<string> { code }, new DateRange(10, freq));
@@ -175,7 +175,7 @@ public static partial class Helper
         if (prices.Any())
         {
             var savedPath = prices.SetsFile(code)
-                .WriteFile(prices.OrderBy(o=>o.TradeDate).ObjToJson());
+                .WriteFile(prices.OrderBy(o => o.TradeDate).ObjToJson());
             result = !string.IsNullOrEmpty(savedPath);
         }
 
@@ -186,7 +186,7 @@ public static partial class Helper
     {
         allCodes ??= _.LoadAllCodes();
         var result = true;
-        
+
         allCodes.ForEach(stock => { result = result && _.PrepareOnesDailyPrices(stock.Code); });
         return result;
     }
@@ -230,7 +230,7 @@ public static partial class Helper
 
             foreach (var code in gotCodes)
             {
-                var exists = _.LoadOnesDailyPrices(code)??new List<StockPrice>();
+                var exists = _.LoadOnesDailyPrices(code) ?? new List<StockPrice>();
 
                 var newList = ps.Data.FindAll(o => o.Code == code);
 
@@ -240,16 +240,16 @@ public static partial class Helper
                     .OrderBy(o => o.TradeDate)
                     .ToList();
 
-                var savedPath=exists.SetsFile(code)
-                    .WriteFile(exists.OrderBy(o=>o.TradeDate).ObjToJson());
+                var savedPath = exists.SetsFile(code)
+                    .WriteFile(exists.OrderBy(o => o.TradeDate).ObjToJson());
 
-                result = result&&!string.IsNullOrEmpty(savedPath);
+                result = result && !string.IsNullOrEmpty(savedPath);
             }
         }
 
         return result;
     }
-    
+
     public static List<StockPrice> LoadOnesDailyPrices(this ISites _, string code)
     {
         return typeof(StockPrice)
@@ -265,7 +265,6 @@ public static partial class Helper
     {
         var result = false;
         var events = new List<StockEvent>();
-
         var getEvents = new DownloadEvents(symbol).GetResult();
         if (getEvents.Data.Any())
         {
@@ -295,6 +294,7 @@ public static partial class Helper
 
         allCodes.ForEach(o =>
         {
+            Console.WriteLine(o.Code);
             result = result && _.PrepareOnesEvents(o.Symbol);
             (3, 7).RandomDelay();
         });
@@ -309,6 +309,7 @@ public static partial class Helper
             .ReadFileAs<List<StockEvent>>();
     }
 
+   
     #endregion
 
     #region realtime prices

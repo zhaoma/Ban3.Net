@@ -50,9 +50,11 @@ public static partial class Helper
     public static string GetStockNumPrefix(this string code)
         => code.GetStockPrefix() == "sz" ? "1" : "0";
 
-    public static List<StockPrice> ConvertCycle(this List<StockPrice> dailyPrices, StockAnalysisCycle targetCycle)
+    public static List<StockPrice> ConvertCycle(
+        this List<StockPrice> dailyPrices,
+        StockAnalysisCycle targetCycle)
     {
-        var result=new List<StockPrice>();
+        var result = new List<StockPrice>();
 
         if (dailyPrices != null && dailyPrices.Any())
         {
@@ -75,7 +77,7 @@ public static partial class Helper
                 else
                 {
                     result.Add(lastRecord);
-                    lastRecord= price;
+                    lastRecord = price;
                 }
             }
         }

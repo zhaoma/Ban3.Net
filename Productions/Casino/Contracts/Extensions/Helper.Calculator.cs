@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
@@ -13,6 +12,8 @@ namespace Ban3.Productions.Casino.Contracts.Extensions;
 
 public static partial class Helper
 {
+    #region 计算/加载复权因子
+
     public static List<StockSeed> CalculateSeeds(this ICalculator _, List<StockPrice> prices, List<StockEvent> events)
     {
         var result = new List<StockSeed>();
@@ -51,6 +52,11 @@ public static partial class Helper
             .LocalFile(symbol)
             .ReadFileAs<List<StockSeed>>();
 
+
+    #endregion
+
+    #region 计算/加载复权价格
+
     public static bool ReinstatePrices(
         this ICalculator _,
         string code,
@@ -61,8 +67,8 @@ public static partial class Helper
 
         var seeds = _.LoadSeeds(symbol);
 
-       // if (seeds == null || !seeds.Any()) return false;
-        
+        // if (seeds == null || !seeds.Any()) return false;
+
         var newPrices = prices.Select(seeds.ReinstateOnePrice)
             .ToList();
 
@@ -94,7 +100,7 @@ public static partial class Helper
             Amount = price.Amount,
 
             Open = price.Open,
-            High=price.High,
+            High = price.High,
             Low = price.Low,
             Close = price.Close,
             PreClose = price.PreClose
@@ -129,6 +135,10 @@ public static partial class Helper
         => typeof(StockPrice)
             .LocalFile($"{code}.{cycle}")
             .ReadFileAs<List<StockPrice>>();
+
+    #endregion
+
+    #region 计算/加载指标曲线 
 
     public static bool GenerateIndicatorLine(this ICalculator _, string code)
     {
@@ -168,4 +178,6 @@ public static partial class Helper
         => typeof(LineOfPoint)
             .LocalFile($"{code}.{cycle}")
             .ReadFileAs<LineOfPoint>();
+
+    #endregion
 }

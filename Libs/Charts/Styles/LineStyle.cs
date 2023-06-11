@@ -27,7 +27,7 @@ namespace  Ban3.Infrastructures.Charts.Styles
         /// Stroke line width of the text.
         /// </summary>
         [JsonProperty("width", NullValueHandling = NullValueHandling.Ignore)]
-        public int Width { get; set; } = 1;
+        public int? Width { get; set; } = 1;
 
         /// <summary>
         /// border type.

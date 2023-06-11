@@ -8,8 +8,8 @@ internal class Program
 {
     static async Task Main(string[] args)
     {
-        var controlCode = args.Any() ? args[0] .ToLower(): string.Empty;
-        
+        var controlCode = args.Any() ? args[0].ToLower() : string.Empty;
+
         Sw.Start();
         switch (controlCode)
         {
@@ -22,14 +22,14 @@ internal class Program
                 break;
 
             case "--realtime":
-                Signalert.ExecuteRealtimeJob();
+                Signalert.ExecuteDailyJob();
                 break;
 
             default:
-                $"args:  \r\n--prepare                 prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--daily :                      prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--prepare:                 prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--daily :                  prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--realtime :               refresh realtime".WriteColorLine(ConsoleColor.DarkYellow);
-
+                 Signalert.ExecuteDailyJob();
                 break;
         }
         Sw.Stop();
@@ -37,5 +37,5 @@ internal class Program
         $"{Sw.ElapsedMilliseconds} ms spent @{controlCode}".WriteColorLine(ConsoleColor.DarkYellow);
     }
 
-    private static readonly Stopwatch Sw= new ();
+    private static readonly Stopwatch Sw = new();
 }

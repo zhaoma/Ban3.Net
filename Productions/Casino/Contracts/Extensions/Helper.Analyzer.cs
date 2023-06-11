@@ -7,11 +7,20 @@ using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Sites.ViaTushare.Entries;
+using Ban3.Infrastructures.Indicators.Entries;
+using System;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
 public static partial class Helper
 {
+    /// <summary>
+    /// 用行情数据生成指标特征集
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="stock"></param>
+    /// <param name="prices"></param>
+    /// <returns></returns>
     public static List<StockSets> PrepareSets(
         this IAnalyzer _,
         Stock stock,
@@ -30,13 +39,24 @@ public static partial class Helper
         return result;
     }
 
+    /// <summary>
+    /// 指标特征集合并日/周/月指标特征集
+    /// </summary>
+    /// <param name="sets"></param>
+    /// <param name="indicatorValue"></param>
+    /// <param name="cycle"></param>
+    /// <returns></returns>
     public static List<StockSets> Merge(
         this List<StockSets> sets,
         LineOfPoint indicatorValue,
         StockAnalysisCycle cycle)
     {
-        var setsList = indicatorValue
-            .LatestList()
+        var latestList = indicatorValue
+            .LatestList();
+
+        if (latestList == null ||  !latestList.Any()) return sets;
+
+        var setsList = latestList
             .Select(o => (o.Current.MarkTime, o.Features()))
             .ToList();
 
@@ -50,12 +70,20 @@ public static partial class Helper
         return sets;
     }
 
+    /// <summary>
+    /// 指标值线转换点
+    /// </summary>
+    /// <param name="line"></param>
+    /// <returns></returns>
     public static List<Latest> LatestList(this LineOfPoint line)
     {
+        if (line.EndPoints != null && line.EndPoints.Any()) return null;
+
         var list = line.EndPoints.Select(o => new Latest
         {
             Current = o
         }).ToList();
+
         for (var i = 1; i < list.Count; i++)
         {
             list[i].Prev = list[i - 1].Current;
@@ -63,5 +91,44 @@ public static partial class Helper
 
         return list;
     }
+
+    /// <summary>
+    /// 指标特征集转换版单
+    /// </summary>
+    /// <param name="stockSets"></param>
+    /// <param name="listName"></param>
+    /// <returns></returns>
+    public static bool GenerateList(this List<StockSets> stockSets,string listName) 
+    {
+        var result = stockSets
+            .Where(o => o.SetKeys != null && o.SetKeys.Any())
+            .Select(o => new ListRecord(o))
+            .OrderByDescending(o => o.Value)
+            .ToList();
+
+        var rank = 1;
+        int? prev = null;
+        foreach (var r in result)
+        {
+            if (prev == null || r.Value == prev.Value)
+            {
+                r.Rank = rank;
+            }
+            else
+            {
+                rank++;
+            }
+
+            prev = r.Value;
+        }
+
+        var saved = listName
+            .DataFile<ListRecord>()
+            .WriteFile(result.ObjToJson());
+
+        return !string.IsNullOrEmpty(saved);
+    }
+
+
 
 }

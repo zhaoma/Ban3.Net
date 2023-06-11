@@ -10,7 +10,6 @@ using Ban3.Infrastructures.Charts.Enums;
 using Ban3.Infrastructures.Charts.Labels;
 using Ban3.Infrastructures.Charts.Styles;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
@@ -20,6 +19,16 @@ namespace Ban3.Productions.Casino.Contracts.Extensions;
 
 public static partial class Helper
 {
+    #region 个股图表（Candlestick/indicators）
+
+    /// <summary>
+    /// init echarts option
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="stock"></param>
+    /// <param name="prices"></param>
+    /// <param name="indicatorValue"></param>
+    /// <returns></returns>
     public static Diagram CreateOnesDiagram(
         this IReportor _,
         Stock stock,
@@ -157,12 +166,22 @@ public static partial class Helper
         var amount = new Infrastructures.Indicators.Formulas.Specials.AMOUNT();
         foreach (var line in amount.Details)
         {
+            var color = Infrastructures.Charts.Helper.White;
+            switch (line.Days)
+            {
+                case 5:
+                    color = Infrastructures.Charts.Helper.Yellow;
+                    break;
+                case 10:
+                    color = Infrastructures.Charts.Helper.Purple;
+                    break;
+            }
             var s = SeriesType.Line.CreateSeries(
                 $"AMOUNT.{line.Days}",
                 indicatorValue.EndPoints
                     .Select(o => o.Amount.RefAmounts?.FindLast(o => o.Days == line.Days)?.Ref)
                     .ToList(),
-                index);
+                index,color);
             result.Add(s);
         }
 
@@ -184,7 +203,7 @@ public static partial class Helper
                 "BIAS.MA",
                 indicatorValue.EndPoints
                     .Select(o => o.Bias.RefBIASMA).ToList(),
-                index)
+                index,"FC0")
         };
 
         legendData = result.Select(o => o.Name).ToList();
@@ -218,17 +237,17 @@ public static partial class Helper
                 "DMI.MDI",
                 indicatorValue.EndPoints
                     .Select(o => o.Dmi.RefMDI).ToList(),
-                index),
+                index,Infrastructures.Charts.Helper.Yellow),
             SeriesType.Line.CreateSeries(
                 "DMI.ADX",
                 indicatorValue.EndPoints
                     .Select(o => o.Dmi.RefADX).ToList(),
-                index),
+                index,Infrastructures.Charts.Helper.Purple),
             SeriesType.Line.CreateSeries(
                 "DMI.ADXR",
                 indicatorValue.EndPoints
                     .Select(o => o.Dmi.RefADXR).ToList(),
-                index)
+                index,Infrastructures.Charts.Helper.Green)
         };
         legendData = result.Select(o => o.Name).ToList();
 
@@ -243,17 +262,17 @@ public static partial class Helper
                 "ENE.Upper",
                 indicatorValue.EndPoints
                     .Select(o => o.Ene.RefUPPER).ToList(),
-                index),
+                index,Infrastructures.Charts.Helper.White,2),
             SeriesType.Line.CreateSeries(
                 "ENE",
                 indicatorValue.EndPoints
                     .Select(o => o.Ene.RefENE).ToList(),
-                index),
+                index,Infrastructures.Charts.Helper.Purple,2),
             SeriesType.Line.CreateSeries(
                 "ENE.Lower",
                 indicatorValue.EndPoints
                     .Select(o => o.Ene.RefLOWER).ToList(),
-                index)
+                index,Infrastructures.Charts.Helper.Yellow,2)
         };
         legendData = result.Select(o => o.Name).ToList();
 
@@ -274,7 +293,7 @@ public static partial class Helper
                 "KD.D",
                 indicatorValue.EndPoints
                     .Select(o => o.Kd.RefD).ToList(),
-                index)
+                index,Infrastructures.Charts.Helper.Yellow)
         };
         legendData = result.Select(o => o.Name).ToList();
 
@@ -288,11 +307,29 @@ public static partial class Helper
         var ma = new Infrastructures.Indicators.Formulas.Specials.MA();
         foreach (var line in ma.Details)
         {
-            var s = SeriesType.Line.CreateSeries(
+            var color = Infrastructures.Charts.Helper.White;
+            switch (line.Days)
+            {
+                case 10:
+                    color = Infrastructures.Charts.Helper.Yellow;
+                    break;
+                case 20:
+                    color = Infrastructures.Charts.Helper.Purple;
+                    break;
+                case 30:
+                    color = Infrastructures.Charts.Helper.Green;
+                    break;
+                case 60:
+                    color = Infrastructures.Charts.Helper.Gray;
+                    break;
+            }
+
+	    
+	    var s = SeriesType.Line.CreateSeries(
                 $"MA.{line.Days}",
                 indicatorValue.EndPoints
                     .Select(o => o.Ma.RefPrices?.FindLast(x => x.Days == line.Days)?.Ref).ToList(),
-                index);
+                index,color);
             result.Add(s);
         }
 
@@ -303,7 +340,7 @@ public static partial class Helper
 
     static Series[] MACD(this LineOfPoint indicatorValue, int? index, out List<string> legendData)
     {
-        var result= new[]
+        var result = new[]
         {
             SeriesType.Bar.CreateSeries(
                 "MACD",
@@ -314,7 +351,7 @@ public static partial class Helper
                 "MACD.DEA",
                 indicatorValue.EndPoints
                     .Select(o => o.Macd.RefDEA).ToList(),
-                index),
+                index,Infrastructures.Charts.Helper.Yellow),
             SeriesType.Line.CreateSeries(
                 "MACD.DIF",
                 indicatorValue.EndPoints
@@ -325,4 +362,7 @@ public static partial class Helper
 
         return result.ToArray();
     }
+
+    #endregion
+
 }
