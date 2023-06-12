@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.Charts.Composites;
 using Ban3.Infrastructures.Common.Attributes;
@@ -32,33 +32,31 @@ public class Signalert
 
     public static IReportor Reportor = new Reportor();
 
-    public static async Task ExecuteFullyJob()
+    #region 批量作业
+
+    public static void ExecuteFullyJob(bool reCalculateSeeds=false)
     {
-        //Collector.PrepareAllCodes();
+        Collector.PrepareAllCodes();
 
         var allCodes = Collector.LoadAllCodes();
         
-	Collector.PrepareAllEvents(allCodes);
+        new Action(() => Collector.PrepareDailyPrices(allCodes)).ExecuteAndTiming("PrepareDailyPrices");
 
-        Collector.PrepareDailyPrices(allCodes);
+        if(reCalculateSeeds)
+            PrepareEventsAndSeeds(allCodes);
 
-        await PrepareAllSeeds(allCodes);
-
-        ReinstateAllPrices(allCodes);
+        new Action(() => ReinstateAllPrices(allCodes)).ExecuteAndTiming("ReinstateAllPrices");
 
         ExecutePrepare(allCodes);
     }
 
     public static void ExecuteDailyJob()
     {
-        Collector.PrepareAllCodes();
-
         var allCodes = Collector.LoadAllCodes();
 
-        Console.WriteLine($"targets {allCodes.Count} total.");
-        Collector.FixDailyPrices(allCodes);
+        new Action(() => Collector.FixDailyPrices(allCodes)).ExecuteAndTiming("FixDailyPrices");
 
-        ReinstateAllPrices(allCodes);
+        new Action(() => ReinstateAllPrices(allCodes)).ExecuteAndTiming("ReinstateAllPrices");
 
         ExecutePrepare(allCodes);
     }
@@ -70,36 +68,91 @@ public class Signalert
         ExecuteRealtimeJob(allCodes);
     }
 
+    public static void ExecuteRealtimeJob(string startsWith, string endsWith)
+    {
+        var allCodes = Collector.LoadAllCodes()
+            .Where(o => (string.IsNullOrEmpty(startsWith) || o.Code.StartsWith(startsWith)
+                && (string.IsNullOrEmpty(endsWith) || o.Code.EndsWith(endsWith))))
+            .ToList();
+
+        ExecuteRealtimeJob(allCodes);
+    }
+
+    public static void ExecuteRealtimeJob(string codes)
+    {
+        var cs = codes.Split(',');
+        var allCodes = Collector.LoadAllCodes()
+            .Where(x=>cs.Contains(x.Code))
+            .ToList();
+
+        ExecuteRealtimeJob(allCodes);
+    }
+
     /// <summary>
     /// 实时刷新数据
     /// </summary>
     /// <param name="stocks"></param>
     public static void ExecuteRealtimeJob(List<Stock> stocks)
     {
-        Collector.ReadRealtime(stocks);
+        new Action(() => Collector.ReadRealtime(stocks)).ExecuteAndTiming("ReadRealtime");
 
         ExecutePrepare(stocks);
     }
 
     static void ExecutePrepare(List<Stock> stocks)
     {
-        stocks.ParallelExecute((stock) => { Calculator.GenerateIndicatorLine(stock.Code); }, Config.MaxParallelTasks);
+        new Action(() =>
+            stocks.ParallelExecute((stock) => { Calculator.GenerateIndicatorLine(stock.Code); },
+                Config.MaxParallelTasks)
+        ).ExecuteAndTiming("GenerateIndicatorLine");
 
-        PrepareAllDiagrams(stocks);
+        new Action(() =>
+            PrepareAllDiagrams(stocks)
+        ).ExecuteAndTiming("PrepareAllDiagrams");
 
-        PrepareAllSets(stocks);
+        new Action(() =>
+            PrepareAllSets(stocks)
+        ).ExecuteAndTiming("PrepareAllSets");
 
-        PrepareLatestList();
+        new Action(() =>
+            PrepareLatestList()
+        ).ExecuteAndTiming("PrepareLatestList");
+
+        new Action(() =>
+            stocks.ParallelExecute((stock) =>
+            {
+                var sets = Calculator.LoadSets(stock.Code);
+                
+                Infrastructures.Indicators.Helper.Profiles
+                    .Where(o => o.Persistence)
+                    .ParallelExecute((profile) =>
+                        {
+                            profile
+                                .OutputDailyOperates(sets, stock.Code)
+                                .ConvertOperates2Records(profile,stock.Code);
+                        },
+                        Config.MaxParallelTasks);
+            }, Config.MaxParallelTasks)
+        ).ExecuteAndTiming("OutputDailyOperates");
     }
+
+    #endregion
 
     #region 计算复权因子并重新计算行情
 
-    public static async Task<bool> PrepareAllSeeds(List<Stock> allCodes = null)
+    public static void PrepareEventsAndSeeds(List<Stock> allCodes = null)
+    {
+        allCodes ??= Collector.LoadAllCodes();
+        Collector.PrepareAllEvents(allCodes);
+        PrepareAllSeeds(allCodes);
+    }
+
+    public static bool PrepareAllSeeds(List<Stock> allCodes = null)
     {
         allCodes ??= Collector.LoadAllCodes();
         var result = true;
 
-        await allCodes.ParallelExecuteAsync((stock) => { result = result && PrepareSeeds(stock); },
+        allCodes.ParallelExecute((stock) => { result = result && PrepareSeeds(stock); },
             Config.MaxParallelTasks);
 
         return result;
@@ -124,11 +177,19 @@ public class Signalert
 
         allCodes.ParallelExecute((stock) =>
             {
-                var ps = Collector.LoadDailyPrices(stock.Code);
+                try
+                {
+                    var ps = Collector.LoadDailyPrices(stock.Code);
 
-                var reinstateOne = Calculator.ReinstatePrices(stock.Code, stock.Symbol, ps);
+                    var reinstateOne = Calculator.ReinstatePrices(stock.Code, stock.Symbol, ps);
 
-                result = result && reinstateOne;
+                    result = result && reinstateOne;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(stock.Code);
+                    Logger.Error(ex);
+                }
             },
             Config.MaxParallelTasks);
 
@@ -143,10 +204,7 @@ public class Signalert
     {
         allCodes ??= Collector.LoadAllCodes();
 
-        allCodes.ParallelExecute((stock) =>
-        {
-            PrepareOnesDiagram(stock);
-        }, Config.MaxParallelTasks);
+        allCodes.ParallelExecute((stock) => { PrepareOnesDiagram(stock); }, Config.MaxParallelTasks);
     }
 
     public static bool PrepareOnesDiagram(Stock stock)
@@ -164,7 +222,7 @@ public class Signalert
 
             var indicatorValue = Calculator.LoadIndicatorLine(stock.Code, cycle);
 
-            var diagram = Reportor.CreateOnesDiagram(stock, prices, indicatorValue);
+            var diagram = Reportor.CreateOnesCandlestickDiagram(stock, prices, indicatorValue);
 
             var saved = $"{stock.Code}.{cycle}"
                 .DataFile<Diagram>()
@@ -188,41 +246,7 @@ public class Signalert
     #endregion
 
     #region 生成/加载个股特征
-
-    public static List<StockSets> PrepareOnesSets(Stock stock)
-    {
-        try
-        {
-            var prices = Calculator.LoadReinstatedPrices(stock.Code, StockAnalysisCycle.DAILY);
-
-            var sets = Analyzer.PrepareSets(stock, prices);
-
-            sets.Merge(
-                Calculator.LoadIndicatorLine(stock.Code, StockAnalysisCycle.DAILY),
-                StockAnalysisCycle.DAILY);
-
-            sets.Merge(
-                Calculator.LoadIndicatorLine(stock.Code, StockAnalysisCycle.WEEKLY),
-                StockAnalysisCycle.WEEKLY);
-
-            sets.Merge(
-                Calculator.LoadIndicatorLine(stock.Code, StockAnalysisCycle.MONTHLY),
-                StockAnalysisCycle.MONTHLY);
-
-            $"{stock.Code}"
-                .DataFile<StockSets>()
-                .WriteFile(sets.ObjToJson());
-
-            return sets;
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-
-        return new List<StockSets>();
-    }
-
+    
     public static void PrepareAllSets(List<Stock> allCodes = null)
     {
         allCodes ??= Collector.LoadAllCodes();
@@ -231,8 +255,7 @@ public class Signalert
 
         allCodes.ParallelExecute((stock) =>
         {
-            var ones = PrepareOnesSets(stock);
-            if (ones != null && ones.Any())
+            if (Calculator.PrepareSets(stock,out var ones))
             {
                 aggregated.AppendToList(ones.Last());
             }
@@ -255,7 +278,7 @@ public class Signalert
     public static bool PrepareLatestList()
         => LoadAllSets().GenerateList(DateTime.Now.ToYmd());
 
-    public static bool LoadOnedaysList(DateTime? day,out List<ListRecord> records)
+    public static bool LoadOneDaysList(DateTime? day, out List<ListRecord> records)
     {
         var saved = (day ?? DateTime.Now)
             .ToYmd()
@@ -267,9 +290,10 @@ public class Signalert
             return false;
         }
 
-        records= saved.ReadFileAs<List<ListRecord>>();
+        records = saved.ReadFileAs<List<ListRecord>>();
         return true;
     }
 
     #endregion
+    
 }

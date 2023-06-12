@@ -35,7 +35,12 @@ switch (teamName)
         Console.WriteLine($"identity count={keys.Count}");
 
         keys.ParallelExecute(
-            (identity) => { DevOps.Collector.SyncOneMemberSummary(identity.Id, true); },
+            (identity) =>
+            {
+                var now=DateTime.Now;
+                DevOps.Collector.SyncOneMemberSummary(identity.Id, true);
+                Console.WriteLine( $"{identity.DisplayName} spent {DateTime.Now.Subtract(now).TotalMilliseconds} ms.");
+            },
             Config.MaxParallelTasks);
         break;
         
@@ -48,7 +53,10 @@ switch (teamName)
         Console.WriteLine($"identity count={others.Count}");
 
         others.ParallelExecute(
-            (identity) => { DevOps.Collector.SyncOneMemberSummary(identity.Id, true); },
+            (identity) =>
+            {
+                DevOps.Collector.SyncOneMemberSummary(identity.Id, true);
+            },
             Config.MaxParallelTasks);
         break;
 

@@ -11,7 +11,7 @@ public static partial class Helper
     public static bool PrepareAllCodes(this ICollector _, List<Stock> allCodes = null) => _.Sites.PrepareAllCodesFromTushare(allCodes);
 
     public static List<Stock> LoadAllCodes(this ICollector _) => _.Sites.LoadAllCodes();
-
+    
     public static bool PrepareDailyPrices(this ICollector _, List<Stock> allCodes = null) => _.Sites.PrepareAllDailyPrices(allCodes);
 
     public static bool FixDailyPrices(this ICollector _, List<Stock> allCodes = null) => _.Sites.FixAllDailyPrices(allCodes);

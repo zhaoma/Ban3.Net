@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.RuntimeCaching;
 
 namespace Ban3.Infrastructures.Indicators;
 
@@ -16,6 +17,8 @@ namespace Ban3.Infrastructures.Indicators;
 public static class Helper
 {
     static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
+
+    #region 特征定义
 
     private static readonly List<SetsFeature> Features = new List<SetsFeature>
     {
@@ -94,6 +97,8 @@ public static class Helper
         }
     }
 
+    #endregion
+
     public static bool Evaluation(this StockSets sets, out List<string> result, out int value)
     {
         result = new List<string>();
@@ -119,4 +124,41 @@ public static class Helper
 
         return false;
     }
+
+    #region Profiles
+
+    private static readonly List<Profile> DefaultProfiles = new()
+    {
+        new()
+        {
+            Identity = "default",
+            Subject = "MACD MWD C0",
+            BuySets = new List<string[]>
+            {
+                new []{"MACD.C0.DAILY","MACD.C0.WEEKLY","MACD.C0.MONTHLY"}
+            },
+            SellSets = new List<string[]>{new []{ "MACD.DC.DAILY" } },
+            Persistence=true,
+            IsDefault = true
+        },
+        new()
+        {
+            Identity = "extend",
+            Subject = "MACD extend",
+            BuySets = new List<string[]>
+            {
+                new []{"MACD.P.MONTHLY,MACD.P.WEEKLY,MACD.P.DAILY,MACD.GC.DAILY"}
+            },
+            SellSets = new List<string[]> {new[] {"MACD.DC.DAILY"}},
+            Persistence=true,
+            IsDefault = false
+        }
+    };
+
+    const string CacheKey = "casino.Profiles";
+    private static readonly string ProfilesFile = "all".DataFile<Profile>();
+    public static List<Profile> Profiles
+        => CacheKey.LoadOrSetDefault(DefaultProfiles, ProfilesFile);
+
+    #endregion
 }

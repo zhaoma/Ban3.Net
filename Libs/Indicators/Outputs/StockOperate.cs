@@ -5,7 +5,8 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using Enums = Ban3.Infrastructures.Indicators.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace  Ban3.Infrastructures.Indicators.Outputs
 {
@@ -21,11 +22,14 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
         /// <summary>
         /// 建议操作
         /// </summary>
+        [JsonProperty("operate")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public Enums.StockOperate Operate { get; set; }
 
         /// <summary>
         /// 操作是否正确
         /// </summary>
+        [JsonProperty("isRight")]
         public bool IsRight { get; set; }
     }
 }

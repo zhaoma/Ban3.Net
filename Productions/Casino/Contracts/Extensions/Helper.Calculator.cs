@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
@@ -178,6 +179,161 @@ public static partial class Helper
         => typeof(LineOfPoint)
             .LocalFile($"{code}.{cycle}")
             .ReadFileAs<LineOfPoint>();
+
+
+    /// <summary>
+    /// 指标值线转换点
+    /// </summary>
+    /// <param name="line"></param>
+    /// <returns></returns>
+    public static List<Latest> LatestList(this LineOfPoint line)
+    {
+        if (line is { EndPoints: { } } && !line.EndPoints.Any()) return null;
+
+        var list = line?.EndPoints?.Select(o => new Latest
+        {
+            Current = o
+        }).ToList();
+
+        for (var i = 1; i < list?.Count; i++)
+        {
+            list[i].Prev = list[i - 1].Current;
+        }
+
+        return list;
+    }
+
+    #endregion
+
+    #region 计算/加载特征集合
+
+    /// <summary>
+    /// 指标特征集合并日/周/月指标特征集
+    /// </summary>
+    /// <param name="sets"></param>
+    /// <param name="indicatorValue"></param>
+    /// <param name="cycle"></param>
+    /// <returns></returns>
+    static List<StockSets> Merge(
+        this List<StockSets> sets,
+        LineOfPoint indicatorValue,
+        StockAnalysisCycle cycle)
+    {
+        var latestList = indicatorValue
+            .LatestList();
+
+        if (latestList == null || !latestList.Any()) return sets;
+
+        var setsList = latestList
+            .Select(o => (o.Current!.MarkTime, o.Features()))
+            .ToList();
+
+        sets.ForEach(o =>
+        {
+            var ss = setsList.FindLast(x => x.MarkTime.Subtract(o.MarkTime).TotalDays >= 0);
+            if (ss.Item2 != null && ss.Item2.Any())
+                o.SetKeys = o.SetKeys?.Union(ss.Item2.Select(y => $"{y}.{cycle}"));
+        });
+
+        return sets;
+    }
+
+    static List<StockSets> Merge(
+        this ICalculator _, List<StockSets> sets,string code, StockAnalysisCycle cycle)
+    {
+        return sets.Merge(_.LoadIndicatorLine(code, cycle), cycle);
+    }
+
+    static List<StockSets> Merge(
+        this ICalculator _, List<StockSets> sets, string code)
+    {
+        _.Merge(sets, code, StockAnalysisCycle.DAILY);
+        _.Merge(sets, code, StockAnalysisCycle.WEEKLY);
+        _.Merge(sets, code, StockAnalysisCycle.MONTHLY);
+
+        return sets;
+    }
+
+    public static bool PrepareSets(
+        this ICalculator _,
+        Stock stock,
+        out List<StockSets> sets)
+    {
+        try
+        {
+            var prices = _.LoadReinstatedPrices(stock.Code, StockAnalysisCycle.DAILY);
+            sets = prices.Select(o => new StockSets
+            {
+                Close = (decimal)o.Close,
+                MarkTime = o.TradeDate.ToDateTimeEx(),
+                Code = stock.Code,
+                Symbol = stock.Symbol,
+                SetKeys = new List<string>()
+            }).ToList();
+
+            sets = _.Merge(sets, stock.Code);
+
+            var saved = $"{stock.Code}"
+                .DataFile<StockSets>()
+                .WriteFile(sets.ObjToJson());
+
+            return !string.IsNullOrEmpty(saved);
+        }catch(Exception ex){Logger.Error(ex);}
+
+        sets = new List<StockSets>();
+        return false;
+    }
+
+    public static List<StockSets> LoadSets(this ICalculator _, string code)
+        => code
+            .DataFile<StockSets>()
+            .ReadFileAs<List<StockSets>>();
+
+    #endregion
+
+    #region 计算/加载个股榜单
+
+    /// <summary>
+    /// 指标特征集转换榜单
+    /// </summary>
+    /// <param name="stockSets"></param>
+    /// <param name="listName"></param>
+    /// <returns></returns>
+    public static bool GenerateList(this List<StockSets> stockSets, string listName)
+    {
+        var result = stockSets
+            .Where(o => o.SetKeys != null && o.SetKeys.Any())
+            .Select(o => new ListRecord(o))
+            .OrderByDescending(o => o.Value)
+            .ToList();
+
+        var rank = 1;
+        int? prev = null;
+        foreach (var r in result)
+        {
+            if (prev == null || r.Value == prev.Value)
+            {
+                r.Rank = rank;
+            }
+            else
+            {
+                rank++;
+            }
+
+            prev = r.Value;
+        }
+
+        var saved = listName
+            .DataFile<ListRecord>()
+            .WriteFile(result.ObjToJson());
+
+        return !string.IsNullOrEmpty(saved);
+    }
+
+    public static List<ListRecord> LoadList(this ICalculator _, string listName)
+        => listName
+            .DataFile<ListRecord>()
+            .ReadFileAs<List<ListRecord>>();
 
     #endregion
 }

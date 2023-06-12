@@ -15,6 +15,6 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
     public class LineOfPoint
     {
         //public AnalysisCycle Cycle { set; get; }
-        public List<PointOfTime> EndPoints { set; get; }
+        public List<PointOfTime>? EndPoints { set; get; }
     }
 }
