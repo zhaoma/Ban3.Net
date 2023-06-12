@@ -262,22 +262,25 @@ public static partial class Helper
         try
         {
             var prices = _.LoadReinstatedPrices(stock.Code, StockAnalysisCycle.DAILY);
-            sets = prices.Select(o => new StockSets
+            if (prices != null && prices.Any())
             {
-                Close = (decimal)o.Close,
-                MarkTime = o.TradeDate.ToDateTimeEx(),
-                Code = stock.Code,
-                Symbol = stock.Symbol,
-                SetKeys = new List<string>()
-            }).ToList();
+                sets = prices.Select(o => new StockSets
+                {
+                    Close = (decimal)o.Close,
+                    MarkTime = o.TradeDate.ToDateTimeEx(),
+                    Code = stock.Code,
+                    Symbol = stock.Symbol,
+                    SetKeys = new List<string>()
+                }).ToList();
 
-            sets = _.Merge(sets, stock.Code);
+                sets = _.Merge(sets, stock.Code);
 
-            var saved = $"{stock.Code}"
-                .DataFile<StockSets>()
-                .WriteFile(sets.ObjToJson());
+                var saved = $"{stock.Code}"
+                    .DataFile<StockSets>()
+                    .WriteFile(sets.ObjToJson());
 
-            return !string.IsNullOrEmpty(saved);
+                return !string.IsNullOrEmpty(saved);
+            }
         }catch(Exception ex){Logger.Error(ex);}
 
         sets = new List<StockSets>();

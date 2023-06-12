@@ -34,15 +34,15 @@ public class Signalert
 
     #region 批量作业
 
-    public static void ExecuteFullyJob(bool reCalculateSeeds=false)
+    public static void ExecuteFullyJob(bool reCalculateSeeds = false)
     {
         Collector.PrepareAllCodes();
 
         var allCodes = Collector.LoadAllCodes();
-        
+
         new Action(() => Collector.PrepareDailyPrices(allCodes)).ExecuteAndTiming("PrepareDailyPrices");
 
-        if(reCalculateSeeds)
+        if (reCalculateSeeds)
             PrepareEventsAndSeeds(allCodes);
 
         new Action(() => ReinstateAllPrices(allCodes)).ExecuteAndTiming("ReinstateAllPrices");
@@ -82,7 +82,7 @@ public class Signalert
     {
         var cs = codes.Split(',');
         var allCodes = Collector.LoadAllCodes()
-            .Where(x=>cs.Contains(x.Code))
+            .Where(x => cs.Contains(x.Code))
             .ToList();
 
         ExecuteRealtimeJob(allCodes);
@@ -122,14 +122,14 @@ public class Signalert
             stocks.ParallelExecute((stock) =>
             {
                 var sets = Calculator.LoadSets(stock.Code);
-                
+
                 Infrastructures.Indicators.Helper.Profiles
                     .Where(o => o.Persistence)
                     .ParallelExecute((profile) =>
                         {
                             profile
                                 .OutputDailyOperates(sets, stock.Code)
-                                .ConvertOperates2Records(profile,stock.Code);
+                                .ConvertOperates2Records(profile, stock.Code);
                         },
                         Config.MaxParallelTasks);
             }, Config.MaxParallelTasks)
@@ -243,10 +243,15 @@ public class Signalert
             .DataFile<Diagram>()
             .ReadFileAs<Diagram>();
 
+    public static string LoadDiagramContent(Stock stock, StockAnalysisCycle cycle = StockAnalysisCycle.DAILY)
+        => $"{stock.Code}.{cycle}"
+            .DataFile<Diagram>()
+        .ReadFile();
+
     #endregion
 
     #region 生成/加载个股特征
-    
+
     public static void PrepareAllSets(List<Stock> allCodes = null)
     {
         allCodes ??= Collector.LoadAllCodes();
@@ -255,7 +260,7 @@ public class Signalert
 
         allCodes.ParallelExecute((stock) =>
         {
-            if (Calculator.PrepareSets(stock,out var ones))
+            if (Calculator.PrepareSets(stock, out var ones))
             {
                 aggregated.AppendToList(ones.Last());
             }
@@ -295,5 +300,5 @@ public class Signalert
     }
 
     #endregion
-    
+
 }

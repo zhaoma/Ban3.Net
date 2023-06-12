@@ -14,9 +14,9 @@ function bindCharts(elementId, stockCode,cycle) {
     var currentChart = echarts.init(chartDom);
 
     $.get("/home/Diagram/" + stockCode + "?cycle=" + cycle , function (rawData) {
-        console.log(rawData);
-        currentChart.setOption(
-            (option = rawData),true
-        );
+        
+        var diagramOption = eval("(" + rawData + ")");
+        console.log(diagramOption);
+        currentChart.setOption(diagramOption);
     });
 }

@@ -44,25 +44,29 @@ public static partial class Helper
     {
         try
         {
-            var operates = everydayKeys.Select(o => new StockOperate
+            if (everydayKeys != null && everydayKeys.Any())
             {
-                MarkTime = o.MarkTime,
-                Operate = Infrastructures.Indicators.Enums.StockOperate.Left,
-                Close = o.Close
-            }).ToList();
 
-            var currentOp = Infrastructures.Indicators.Enums.StockOperate.Left;
-            for (int op = 0; op < operates.Count(); op++)
-            {
-                operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile.BuySets, profile.SellSets, currentOp);
-                currentOp = operates[op].Operate;
+                var operates = everydayKeys.Select(o => new StockOperate
+                {
+                    MarkTime = o.MarkTime,
+                    Operate = Infrastructures.Indicators.Enums.StockOperate.Left,
+                    Close = o.Close
+                }).ToList();
+
+                var currentOp = Infrastructures.Indicators.Enums.StockOperate.Left;
+                for (int op = 0; op < operates.Count(); op++)
+                {
+                    operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile.BuySets, profile.SellSets, currentOp);
+                    currentOp = operates[op].Operate;
+                }
+
+                $"{code}.{profile.Identity}"
+                    .DataFile<StockOperate>()
+                    .WriteFile(operates.ObjToJson());
+
+                return operates;
             }
-
-            $"{code}.{profile.Identity}"
-                .DataFile<StockOperate>()
-                .WriteFile(operates.ObjToJson());
-
-            return operates;
         }
         catch (Exception ex)
         {
@@ -86,41 +90,44 @@ public static partial class Helper
     {
         var tradeRecords = new List<StockOperationRecord>();
 
-        foreach (var op in stockOperates)
+        if (stockOperates != null && stockOperates.Any())
         {
-            var latest = tradeRecords.Any()
-                ? tradeRecords.Last()
-                : null;
 
-            if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Buy)
+            foreach (var op in stockOperates)
             {
-                if (latest == null || latest.SellPrice > 0)
+                var latest = tradeRecords.Any()
+                    ? tradeRecords.Last()
+                    : null;
+
+                if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Buy)
                 {
-                    latest = new StockOperationRecord
+                    if (latest == null || latest.SellPrice > 0)
                     {
-                        BuyDate = op.MarkTime,
-                        BuyPrice = op.Close,
+                        latest = new StockOperationRecord
+                        {
+                            BuyDate = op.MarkTime,
+                            BuyPrice = op.Close,
 
-                    };
-                    tradeRecords.Add(latest);
+                        };
+                        tradeRecords.Add(latest);
+                    }
                 }
-            }
 
-            if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Sell)
-            {
-                if (latest != null)
+                if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Sell)
                 {
-                    latest.SellDate = op.MarkTime;
-                    latest.SellPrice = op.Close;
+                    if (latest != null)
+                    {
+                        latest.SellDate = op.MarkTime;
+                        latest.SellPrice = op.Close;
+                    }
                 }
             }
+
+            if (profile.Persistence)
+                $"{code}.{profile.Identity}"
+                    .DataFile<StockOperationRecord>()
+                    .WriteFile(tradeRecords.ObjToJson());
         }
-
-        if (profile.Persistence)
-            $"{code}.{profile.Identity}"
-                .DataFile<StockOperationRecord>()
-                .WriteFile(tradeRecords.ObjToJson());
-
         return tradeRecords;
     }
 

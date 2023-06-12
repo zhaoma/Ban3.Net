@@ -28,12 +28,14 @@ public class HomeController : Controller
         return View(stock);
     }
 
-    public JsonResult Diagram(string id, string cycle = "Daily")
+    public ContentResult Diagram(string id, string cycle = "Daily")
     {
         cycle = cycle.ToUpper();
         var cycleEnum = cycle.StringToEnum<StockAnalysisCycle>();
-        var diagram = Signalert.LoadDiagram(new Stock { Code = id, }, cycleEnum);
+        var diagram = Signalert.LoadDiagramContent(new Stock { Code = id, }, cycleEnum);
 
-        return Json(diagram);
+        return Content(diagram);
+
+
     }
 }

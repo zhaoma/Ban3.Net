@@ -14,14 +14,8 @@
 <div class="container">
     <main role="main" class="pb-3">
         <div class="row">
-            <div class="col-3">
+            <div class="col-9">
                 <div id="chartsDaysContainer" style="height: 1400px; width: 100%;"></div>
-            </div>
-            <div class="col-3">
-                <div id="chartsWeeksContainer" style="height: 1400px; width: 100%;"></div>
-            </div>
-            <div class="col-3">
-                <div id="chartsMonthsContainer" style="height: 1400px; width: 100%;"></div>
             </div>
             <div class="col-3">
             </div>
@@ -33,7 +27,5 @@
 {
     <script>
         bindCharts("chartsDaysContainer", "@Model.Code", "DAILY");
-        bindCharts("chartsWeeksContainer", "@Model.Code", "WEEKLY");
-        bindCharts("chartsMonthsContainer", "@Model.Code", "MONTHLY");
     </script>
 }

@@ -28,7 +28,7 @@ internal class Program
                 break;
 
             case "--realtime":
-                if (args.Length<=1)
+                if (args.Length <= 1)
                 {
                     new Action(Signalert.ExecuteRealtimeJob).ExecuteAndTiming("realtime(ExecuteRealtimeJob)");
                 }
@@ -53,6 +53,7 @@ internal class Program
                 $"--daily :                  prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one code :               prepare ones daily prices".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--realtime [codes] :       refresh realtime".WriteColorLine(ConsoleColor.DarkYellow);
+
                 break;
         }
 
