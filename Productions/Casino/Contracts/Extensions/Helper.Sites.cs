@@ -220,31 +220,46 @@ public static partial class Helper
     public static bool FixAllDailyPrices(this ISites _, List<string> codes)
     {
         var result = true;
-        var ps = _.GetDailyPrices(codes, new DateRange(Config.FixDailyPrices));
-        if (ps != null && ps.Data.Any())
+
+        try
         {
-            var gotCodes = ps.Data.Select(o => o.Code)
-                .GroupBy(o => o)
-                .Select(o => o.Key)
-                .ToList();
-
-            foreach (var code in gotCodes)
+            var ps = _.GetDailyPrices(codes, new DateRange(Config.FixDailyPrices));
+            if (ps != null && ps.Data.Any())
             {
-                var exists = _.LoadOnesDailyPrices(code) ?? new List<StockPrice>();
-
-                var newList = ps.Data.FindAll(o => o.Code == code);
-
-                newList = newList.Where(x => exists.All(y => y.TradeDate != x.TradeDate)).ToList();
-
-                exists = exists.Union(newList)
-                    .OrderBy(o => o.TradeDate)
+                var gotCodes = ps.Data.Select(o => o.Code)
+                    .GroupBy(o => o)
+                    .Select(o => o.Key)
                     .ToList();
 
-                var savedPath = exists.SetsFile(code)
-                    .WriteFile(exists.OrderBy(o => o.TradeDate).ObjToJson());
+                foreach (var code in gotCodes)
+                {
+                    try
+                    {
+                        var exists = _.LoadOnesDailyPrices(code) ?? new List<StockPrice>();
 
-                result = result && !string.IsNullOrEmpty(savedPath);
+                        var newList = ps.Data.FindAll(o => o.Code == code);
+
+                        newList = newList.Where(x => exists.All(y => y.TradeDate != x.TradeDate)).ToList();
+
+                        exists = exists.Union(newList)
+                            .OrderBy(o => o.TradeDate)
+                            .ToList();
+
+                        var savedPath = exists.SetsFile(code)
+                            .WriteFile(exists.OrderBy(o => o.TradeDate).ObjToJson());
+
+                        result = result && !string.IsNullOrEmpty(savedPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error(code);
+                    }
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
         }
 
         return result;
@@ -321,12 +336,13 @@ public static partial class Helper
             allCodes ??= _.LoadAllCodes();
 
             var p = 1;
+            var total= allCodes.Count%Config.FixPageSize>0?allCodes.Count /Config.FixPageSize+1: allCodes.Count / Config.FixPageSize;
             var codes = allCodes.Take(Config.FixPageSize).ToList();
 
             while (codes.Any())
             {
                 var targets = codes.Select(o => (o.Symbol.GetStockNumPrefix(), o.Symbol)).ToList();
-
+                Logger.Debug($"{p}/{total} - ; {allCodes.Count}");
                 var rs = await Sites.ViaNetease.Helper.ReadRealtimePrices(new ReadRealTime(targets));
 
                 rs.Data.AsParallel()

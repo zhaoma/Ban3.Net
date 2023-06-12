@@ -55,7 +55,7 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report
                     if (_handler == null)
                     {
                         _handler = new Infrastructures.PlatformInvoke.Handles.ProcessHandlerAsync(cmd,
-                            new[] { "--default" });
+                            new[] { "--key","SSME" });
 
                         _handler.ReceivedData += (s) => { Console.WriteLine($"info:{s}"); };
                         _handler.ReceivedError += (s) => { Console.WriteLine($"error:{s}"); };

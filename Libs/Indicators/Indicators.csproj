@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.2" />
     <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.0" />
+    <PackageReference Include="Ban3.Infrastructures.RuntimeCaching" Version="1.0.0" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Fody" Version="6.7.0">
       <PrivateAssets>all</PrivateAssets>

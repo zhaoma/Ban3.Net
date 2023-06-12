@@ -29,7 +29,7 @@ public static partial class Helper
     /// <param name="prices"></param>
     /// <param name="indicatorValue"></param>
     /// <returns></returns>
-    public static Diagram CreateOnesDiagram(
+    public static Diagram CreateOnesCandlestickDiagram(
         this IReportor _,
         Stock stock,
         List<StockPrice> prices,
@@ -178,8 +178,8 @@ public static partial class Helper
             }
             var s = SeriesType.Line.CreateSeries(
                 $"AMOUNT.{line.Days}",
-                indicatorValue.EndPoints
-                    .Select(o => o.Amount.RefAmounts?.FindLast(o => o.Days == line.Days)?.Ref)
+                indicatorValue.EndPoints?
+                    .Select(o => o.Amount.RefAmounts.FindLast(x => x.Days == line.Days)?.Ref)
                     .ToList(),
                 index,color);
             result.Add(s);
@@ -196,12 +196,12 @@ public static partial class Helper
         {
             SeriesType.Line.CreateSeries(
                 "BIAS",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Bias.RefBIAS).ToList(),
                 index),
             SeriesType.Line.CreateSeries(
                 "BIAS.MA",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Bias.RefBIASMA).ToList(),
                 index,"FC0")
         };
@@ -215,7 +215,7 @@ public static partial class Helper
     {
         var result =SeriesType.Line.CreateSeries(
             "CCI",
-            indicatorValue.EndPoints
+            indicatorValue.EndPoints?
                 .Select(o => o.Cci.RefCCI).ToList(),
             index);
 
@@ -230,22 +230,22 @@ public static partial class Helper
         {
             SeriesType.Line.CreateSeries(
                 "DMI.PDI",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Dmi.RefPDI).ToList(),
                 index),
             SeriesType.Line.CreateSeries(
                 "DMI.MDI",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Dmi.RefMDI).ToList(),
                 index,Infrastructures.Charts.Helper.Yellow),
             SeriesType.Line.CreateSeries(
                 "DMI.ADX",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Dmi.RefADX).ToList(),
                 index,Infrastructures.Charts.Helper.Purple),
             SeriesType.Line.CreateSeries(
                 "DMI.ADXR",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Dmi.RefADXR).ToList(),
                 index,Infrastructures.Charts.Helper.Green)
         };
@@ -260,17 +260,17 @@ public static partial class Helper
         {
             SeriesType.Line.CreateSeries(
                 "ENE.Upper",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Ene.RefUPPER).ToList(),
                 index,Infrastructures.Charts.Helper.White,2),
             SeriesType.Line.CreateSeries(
                 "ENE",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Ene.RefENE).ToList(),
                 index,Infrastructures.Charts.Helper.Purple,2),
             SeriesType.Line.CreateSeries(
                 "ENE.Lower",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Ene.RefLOWER).ToList(),
                 index,Infrastructures.Charts.Helper.Yellow,2)
         };
@@ -286,12 +286,12 @@ public static partial class Helper
         {
             SeriesType.Line.CreateSeries(
                 "KD.K",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Kd.RefK).ToList(),
                 index),
             SeriesType.Line.CreateSeries(
                 "KD.D",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Kd.RefD).ToList(),
                 index,Infrastructures.Charts.Helper.Yellow)
         };
@@ -327,8 +327,8 @@ public static partial class Helper
 	    
 	    var s = SeriesType.Line.CreateSeries(
                 $"MA.{line.Days}",
-                indicatorValue.EndPoints
-                    .Select(o => o.Ma.RefPrices?.FindLast(x => x.Days == line.Days)?.Ref).ToList(),
+                indicatorValue.EndPoints?
+                    .Select(o => o.Ma.RefPrices.FindLast(x => x.Days == line.Days)?.Ref).ToList(),
                 index,color);
             result.Add(s);
         }
@@ -344,17 +344,17 @@ public static partial class Helper
         {
             SeriesType.Bar.CreateSeries(
                 "MACD",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Macd.RefMACD).ToList(),
                 index),
             SeriesType.Line.CreateSeries(
                 "MACD.DEA",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Macd.RefDEA).ToList(),
                 index,Infrastructures.Charts.Helper.Yellow),
             SeriesType.Line.CreateSeries(
                 "MACD.DIF",
-                indicatorValue.EndPoints
+                indicatorValue.EndPoints?
                     .Select(o => o.Macd.RefDIF).ToList(),
                 index)
         };

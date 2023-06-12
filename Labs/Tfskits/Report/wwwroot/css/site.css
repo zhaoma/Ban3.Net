@@ -351,3 +351,55 @@ video {
     width: 95%;
     box-shadow: 6px 3px 3px #888;
 }
+
+
+.satic-area {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+.dynamic-area1 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url(../images/b.png) repeat-x 0px 0px;
+    background-size: cover;
+    background-attachment: fixed;
+    animation: posterDrop1 6000s linear infinite;
+}
+
+@keyframes posterDrop1 {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 4000% 0;
+    }
+}
+
+.dynamic-area2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url(../images/a.png) repeat-x 0px 0px;
+    background-attachment: fixed;
+    background-size: cover;
+    animation: posterDrop2 8000s linear infinite;
+}
+
+@keyframes posterDrop2 {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 30000% 0;
+    }
+}

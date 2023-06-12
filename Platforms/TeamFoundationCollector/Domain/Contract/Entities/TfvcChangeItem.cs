@@ -8,7 +8,7 @@ public class TfvcChangeItem
     public int Version { get; set; }
 
     [JsonProperty("size")]
-    public int Size { get; set; }
+    public long Size { get; set; }
 
     [JsonProperty("hashValue")]
     public string HashValue { get; set; } = string.Empty;

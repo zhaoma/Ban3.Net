@@ -14,24 +14,21 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
     /// <summary>
     /// 投资策略
     /// </summary>
-    [Serializable, DataContract]
     public class Profile
     {
         /// <summary>
         /// 
         /// </summary>
         public Profile() {}
-
+        
         /// <summary>
         /// 标识
         /// </summary>
-        [DataMember]
         public string Identity { get; set; }
 
         /// <summary>
         /// 主题
         /// </summary>
-        [DataMember]
         public string Subject { get; set; }
 
         /// <summary>
@@ -42,26 +39,26 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 买入条件
         /// </summary>
-        [DataMember]
-        public IEnumerable<string[]> BuySets { get; set; }
+        public List<string[]> BuySets { get; set; }
 
         /// <summary>
         /// 排序条件
         /// ParamA 与 Order
         /// </summary>
-        [DataMember]
         public List<Condition> OrderConditions { get; set; }
 
         /// <summary>
         /// 卖出条件
         /// </summary>
-        [DataMember]
-        public IEnumerable<string[]> SellSets { get; set; }
+        public List<string[]> SellSets { get; set; }
 
         /// <summary>
         /// 发掘条数
         /// </summary>
-        [DataMember]
         public int DigRecordCount { get; set; }
+
+        public bool Persistence { get; set; }
+
+        public bool IsDefault { get; set; }
     }
 }

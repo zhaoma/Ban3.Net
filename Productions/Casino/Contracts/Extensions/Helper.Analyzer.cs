@@ -3,132 +3,132 @@ using Ban3.Infrastructures.Indicators.Outputs;
 using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Productions.Casino.Contracts.Entities;
-using Ban3.Productions.Casino.Contracts.Enums;
-using Ban3.Productions.Casino.Contracts.Interfaces;
-using Ban3.Sites.ViaTushare.Entries;
-using Ban3.Infrastructures.Indicators.Entries;
 using System;
+using Ban3.Infrastructures.Indicators.Inputs;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
 public static partial class Helper
 {
-    /// <summary>
-    /// 用行情数据生成指标特征集
-    /// </summary>
-    /// <param name="_"></param>
-    /// <param name="stock"></param>
-    /// <param name="prices"></param>
-    /// <returns></returns>
-    public static List<StockSets> PrepareSets(
-        this IAnalyzer _,
-        Stock stock,
-        List<StockPrice> prices
-        )
+
+    static Infrastructures.Indicators.Enums.StockOperate GetOperate(
+        IEnumerable<string> codeKeys,
+        IEnumerable<string[]> filterBuy,
+        IEnumerable<string[]> filterSell,
+        Infrastructures.Indicators.Enums.StockOperate prevOperation)
     {
-        var result = prices.Select(o => new StockSets
+        switch (prevOperation)
         {
-            Close = (decimal)o.Close,
-            MarkTime = o.TradeDate.ToDateTimeEx(),
-            Code = stock.Code,
-            Symbol = stock.Symbol,
-            SetKeys = new List<string>()
-        }).ToList();
+            case Infrastructures.Indicators.Enums.StockOperate.Buy:
+            case Infrastructures.Indicators.Enums.StockOperate.Keep:
+                return codeKeys.AllFoundIn(filterSell)
+                    ? Infrastructures.Indicators.Enums.StockOperate.Sell
+                    : Infrastructures.Indicators.Enums.StockOperate.Keep;
 
-        return result;
-    }
-
-    /// <summary>
-    /// 指标特征集合并日/周/月指标特征集
-    /// </summary>
-    /// <param name="sets"></param>
-    /// <param name="indicatorValue"></param>
-    /// <param name="cycle"></param>
-    /// <returns></returns>
-    public static List<StockSets> Merge(
-        this List<StockSets> sets,
-        LineOfPoint indicatorValue,
-        StockAnalysisCycle cycle)
-    {
-        var latestList = indicatorValue
-            .LatestList();
-
-        if (latestList == null ||  !latestList.Any()) return sets;
-
-        var setsList = latestList
-            .Select(o => (o.Current.MarkTime, o.Features()))
-            .ToList();
-
-        sets.ForEach(o =>
-        {
-            var ss = setsList.FindLast(x => x.MarkTime.Subtract(o.MarkTime).TotalDays >= 0);
-            if (ss.Item2!=null&&ss.Item2.Any())
-                o.SetKeys = o.SetKeys.Union(ss.Item2.Select(y => $"{y}.{cycle}"));
-        });
-
-        return sets;
-    }
-
-    /// <summary>
-    /// 指标值线转换点
-    /// </summary>
-    /// <param name="line"></param>
-    /// <returns></returns>
-    public static List<Latest> LatestList(this LineOfPoint line)
-    {
-        if (line.EndPoints != null && line.EndPoints.Any()) return null;
-
-        var list = line.EndPoints.Select(o => new Latest
-        {
-            Current = o
-        }).ToList();
-
-        for (var i = 1; i < list.Count; i++)
-        {
-            list[i].Prev = list[i - 1].Current;
+            case Infrastructures.Indicators.Enums.StockOperate.Sell:
+            case Infrastructures.Indicators.Enums.StockOperate.Left:
+                return codeKeys.AllFoundIn(filterBuy)
+                    ? Infrastructures.Indicators.Enums.StockOperate.Buy
+                    : Infrastructures.Indicators.Enums.StockOperate.Left;
         }
 
-        return list;
+        return Infrastructures.Indicators.Enums.StockOperate.Left;
     }
 
-    /// <summary>
-    /// 指标特征集转换版单
-    /// </summary>
-    /// <param name="stockSets"></param>
-    /// <param name="listName"></param>
-    /// <returns></returns>
-    public static bool GenerateList(this List<StockSets> stockSets,string listName) 
+
+    ///
+    public static List<StockOperate> OutputDailyOperates(
+        this Profile profile,
+        List<StockSets> everydayKeys,
+        string code)
     {
-        var result = stockSets
-            .Where(o => o.SetKeys != null && o.SetKeys.Any())
-            .Select(o => new ListRecord(o))
-            .OrderByDescending(o => o.Value)
-            .ToList();
-
-        var rank = 1;
-        int? prev = null;
-        foreach (var r in result)
+        try
         {
-            if (prev == null || r.Value == prev.Value)
+            var operates = everydayKeys.Select(o => new StockOperate
             {
-                r.Rank = rank;
-            }
-            else
+                MarkTime = o.MarkTime,
+                Operate = Infrastructures.Indicators.Enums.StockOperate.Left,
+                Close = o.Close
+            }).ToList();
+
+            var currentOp = Infrastructures.Indicators.Enums.StockOperate.Left;
+            for (int op = 0; op < operates.Count(); op++)
             {
-                rank++;
+                operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile.BuySets, profile.SellSets, currentOp);
+                currentOp = operates[op].Operate;
             }
 
-            prev = r.Value;
+            $"{code}.{profile.Identity}"
+                .DataFile<StockOperate>()
+                .WriteFile(operates.ObjToJson());
+
+            return operates;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
         }
 
-        var saved = listName
-            .DataFile<ListRecord>()
-            .WriteFile(result.ObjToJson());
-
-        return !string.IsNullOrEmpty(saved);
+        return null;
     }
 
+    public static List<StockOperate> LoadDailyOperates(
+        this Profile profile, string code)
+    {
+        return $"{code}.{profile.Identity}"
+            .DataFile<StockOperate>()
+            .ReadFileAs<List<StockOperate>>();
+    }
 
+    ///
+    public static List<StockOperationRecord> ConvertOperates2Records(
+        this List<StockOperate> stockOperates, Profile profile, string code)
+    {
+        var tradeRecords = new List<StockOperationRecord>();
 
+        foreach (var op in stockOperates)
+        {
+            var latest = tradeRecords.Any()
+                ? tradeRecords.Last()
+                : null;
+
+            if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Buy)
+            {
+                if (latest == null || latest.SellPrice > 0)
+                {
+                    latest = new StockOperationRecord
+                    {
+                        BuyDate = op.MarkTime,
+                        BuyPrice = op.Close,
+
+                    };
+                    tradeRecords.Add(latest);
+                }
+            }
+
+            if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Sell)
+            {
+                if (latest != null)
+                {
+                    latest.SellDate = op.MarkTime;
+                    latest.SellPrice = op.Close;
+                }
+            }
+        }
+
+        if (profile.Persistence)
+            $"{code}.{profile.Identity}"
+                .DataFile<StockOperationRecord>()
+                .WriteFile(tradeRecords.ObjToJson());
+
+        return tradeRecords;
+    }
+
+    public static List<StockOperationRecord> LoadOperationRecords(
+        this Profile profile, string code)
+    {
+        return $"{code}.{profile.Identity}"
+            .DataFile<StockOperationRecord>()
+            .ReadFileAs<List<StockOperationRecord>>();
+    }
 }

@@ -1,30 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "/Users/zhaoma/Projects/Ban3.Net/Libs/Indicators/Indicators.csproj": {}
+    "D:\\GIT\\Ban3.Net\\Libs\\Indicators\\Indicators.csproj": {}
   },
   "projects": {
-    "/Users/zhaoma/Projects/Ban3.Net/Libs/Indicators/Indicators.csproj": {
+    "D:\\GIT\\Ban3.Net\\Libs\\Indicators\\Indicators.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Libs/Indicators/Indicators.csproj",
+        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\Indicators\\Indicators.csproj",
         "projectName": "Ban3.Infrastructures.Indicators",
-        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Indicators/Indicators.csproj",
-        "packagesPath": "/Users/zhaoma/.nuget/packages/",
-        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Indicators/obj/",
+        "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Indicators\\Indicators.csproj",
+        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\Indicators\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -47,6 +50,10 @@
               "version": "[1.0.2, )"
             },
             "Ban3.Infrastructures.NetHttp": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Ban3.Infrastructures.RuntimeCaching": {
               "target": "Package",
               "version": "[1.0.0, )"
             },
@@ -82,7 +89,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

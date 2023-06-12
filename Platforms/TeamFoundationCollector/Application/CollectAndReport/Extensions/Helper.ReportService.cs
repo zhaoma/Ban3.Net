@@ -574,7 +574,7 @@ public static partial class Helper
                 }
 
                 var issues = reportService.Build.GetBuildIssues(build.Id);
-                if (!string.IsNullOrEmpty(issues) && issues.Length <= 1024)
+                if (!string.IsNullOrEmpty(issues) && issues.Length <= 4096)
                 {
                     sb.AppendLine(
                         $"<tr><td colspan='4' style='padding:5px;word-break: break-all;word-wrap: break-word;' class='issuesTable'>{issues}</td></tr>");

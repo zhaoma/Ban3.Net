@@ -25,7 +25,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// 
         /// </summary>
         [DataMember]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// 
@@ -48,7 +48,6 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// </summary>
         /// <param name="current"></param>
         /// <param name="yest"></param>
-        /// <param name="position"></param>
         /// <param name="days"></param>
         /// <param name="round"></param>
         /// <returns></returns>
@@ -65,9 +64,8 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="current"></param>
         /// <param name="values"></param>
-        /// <param name="position"></param>
-        /// <param name="days"></param>
         /// <param name="round"></param>
         /// <returns></returns>
         public decimal AVEDEV( decimal current, List<decimal> values, int round = 3 )
@@ -189,7 +187,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
             for( int r = 0; r < N; r++ )
             {
                 m++;
-                d += prices[ Math.Max( 0, current - r ) ].Amount.Value;
+                d += prices[ Math.Max( 0, current - r ) ].Amount!.Value;
             }
 
             return Math.Round( d / m, 0 );
@@ -210,7 +208,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
             for( int r = 0; r < N; r++ )
             {
                 m++;
-                d += prices[ Math.Max( 0, current - r ) ].CurrentClose.Value;
+                d += prices[ Math.Max( 0, current - r ) ].CurrentClose!.Value;
             }
 
             return Math.Round( d / m, 3 );

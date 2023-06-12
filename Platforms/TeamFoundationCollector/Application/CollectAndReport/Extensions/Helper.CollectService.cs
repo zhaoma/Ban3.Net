@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Text.RegularExpressions;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Functions;
@@ -67,19 +68,27 @@ public static partial class Helper
 
     public static void SyncOneMemberSummary(this ICollectService _, string identityGuid, bool forceOverwrite = true)
     {
-        var file = identityGuid.DataFile<IdentitySummary>();
-        if (!forceOverwrite && File.Exists(file)) return;
-
-        var result = new IdentitySummary
+        try
         {
-            Id = identityGuid
-        };
+            var file = identityGuid.DataFile<IdentitySummary>();
+            if (!forceOverwrite && File.Exists(file)) return;
 
-        result.AppendChangesets(_.FulfillDiscussion(_.Tfvc.PrepareChangesets(identityGuid,0,true)));
-        result.AppendShelvesets(_.FulfillDiscussion(_.Tfvc.PrepareShelvesets(identityGuid,true),identityGuid));
-        
-        file
-            .WriteFile(result.ObjToJson());
+            var result = new IdentitySummary
+            {
+                Id = identityGuid
+            };
+
+            result.AppendChangesets(_.FulfillDiscussion(_.Tfvc.PrepareChangesets(identityGuid, 0, true)));
+            result.AppendShelvesets(_.FulfillDiscussion(_.Tfvc.PrepareShelvesets(identityGuid, true), identityGuid));
+
+            file
+                .WriteFile(result.ObjToJson());
+        }
+        catch (System.Exception ex)
+        {
+            Logger.Error(identityGuid);
+            Logger.Error(ex);
+        }
     }
 
     private static List<CompositeChangeset> FulfillDiscussion(
