@@ -13,10 +13,11 @@ namespace Ban3.Infrastructures.Charts;
 public static partial class Helper
 {
     public const string White = "#FFF";
-    public const string Yellow = "#FCO";
+    public const string Yellow = "#FC0";
     public const string Purple = "#C09";
     public const string Green = "#3C0";
     public const string Gray = "#CCC";
+    public const string Red = "#F00";
 
     #region Diagram
 
@@ -100,7 +101,7 @@ public static partial class Helper
         string name,
         object? data,
         int? index,
-        string? color = White,
+        string? color = Red,
         int? width = 1,
         decimal? opacity = 0.7M)
     {

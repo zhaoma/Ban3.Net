@@ -49,6 +49,7 @@ public static partial class Helper
 
         var diagram = Infrastructures.Charts.Helper.CreateDiagram();
 
+        diagram.Toolbox = new Toolbox { Show = false };
         diagram
             .SetTitle(
                 new[]
@@ -64,13 +65,13 @@ public static partial class Helper
             .SetGrid(
                 new Grid[]
                 {
-                    new("5%", "5%", "30%", "3%"),
-                    new("5%", "5%", "10%", "38%"),
-                    new("5%", "5%", "10%", "50%"),
-                    new("5%", "5%", "7%", "60%"),
-                    new("5%", "5%", "7%", "70%"),
-                    new("5%", "5%", "7%", "80%"),
-                    new("5%", "5%", "7%", "90%")
+                    new("5%", "5%", "24%", "3%"),
+                    new("5%", "5%", "11%", "30%"),
+                    new("5%", "5%", "11%", "44%"),
+                    new("5%", "5%", "8%", "58%"),
+                    new("5%", "5%", "8%", "69%"),
+                    new("5%", "5%", "8%", "80%"),
+                    new("5%", "5%", "8%", "91%")
                 })
             .SetXAxis(
                 new CartesianAxis[]
@@ -113,13 +114,13 @@ public static partial class Helper
 
         diagram.SetLegend(new[]
         {
-            new Legend(legendDataOne,"5%","3%" ),
-            new Legend(legendAmount,"5%","38%" ),
-            new Legend(legendMACD,"5%","50%" ),
-            new Legend(legendDMI,"5%","60%" ),
-            new Legend(legendKD,"5%","70%" ),
+            new Legend(legendDataOne,"5%","0" ),
+            new Legend(legendAmount,"5%","30%" ),
+            new Legend(legendMACD,"5%","42%" ),
+            new Legend(legendDMI,"5%","55%" ),
+            new Legend(legendKD,"5%","68%" ),
             new Legend(legendBIAS,"5%","80%" ),
-            new Legend(legendCCI,"5%","90%" ),
+            new Legend(legendCCI,"5%","89%" ),
 
         });
 
@@ -166,7 +167,7 @@ public static partial class Helper
         var amount = new Infrastructures.Indicators.Formulas.Specials.AMOUNT();
         foreach (var line in amount.Details)
         {
-            var color = Infrastructures.Charts.Helper.White;
+            var color = Infrastructures.Charts.Helper.Red;
             switch (line.Days)
             {
                 case 5:
@@ -203,7 +204,7 @@ public static partial class Helper
                 "BIAS.MA",
                 indicatorValue.EndPoints?
                     .Select(o => o.Bias.RefBIASMA).ToList(),
-                index,"FC0")
+                index,Infrastructures.Charts.Helper.Yellow)
         };
 
         legendData = result.Select(o => o.Name).ToList();
@@ -219,6 +220,18 @@ public static partial class Helper
                 .Select(o => o.Cci.RefCCI).ToList(),
             index);
 
+        result.MarkLine = new Mark
+        {
+            Symbol = Symbol.None,
+            LineStyle = new LineStyle{Color = Infrastructures.Charts.Helper.Red },
+            Data=new List<MarkLine>
+            {
+                new MarkLine {YAxis = 200},
+                new MarkLine {YAxis = 100}, 
+                new MarkLine {YAxis = -200},
+            }
+        };
+
         legendData = new List<string>{"CCI"};
 
         return result;
@@ -226,6 +239,22 @@ public static partial class Helper
 
     static Series[] DMI(this LineOfPoint indicatorValue, int? index, out List<string> legendData)
     {
+        var adx = SeriesType.Line.CreateSeries(
+            "DMI.ADX",
+            indicatorValue.EndPoints?
+                .Select(o => o.Dmi.RefADX).ToList(),
+            index, Infrastructures.Charts.Helper.Purple);
+
+        adx.MarkLine = new Mark
+        {
+            Symbol = Symbol.None,
+            LineStyle = new LineStyle { Color = Infrastructures.Charts.Helper.Purple },
+            Data = new List<MarkLine>
+            {
+                new MarkLine {YAxis = 80}
+            }
+        };
+
         var result= new[]
         {
             SeriesType.Line.CreateSeries(
@@ -238,11 +267,7 @@ public static partial class Helper
                 indicatorValue.EndPoints?
                     .Select(o => o.Dmi.RefMDI).ToList(),
                 index,Infrastructures.Charts.Helper.Yellow),
-            SeriesType.Line.CreateSeries(
-                "DMI.ADX",
-                indicatorValue.EndPoints?
-                    .Select(o => o.Dmi.RefADX).ToList(),
-                index,Infrastructures.Charts.Helper.Purple),
+            adx,
             SeriesType.Line.CreateSeries(
                 "DMI.ADXR",
                 indicatorValue.EndPoints?
@@ -250,29 +275,39 @@ public static partial class Helper
                 index,Infrastructures.Charts.Helper.Green)
         };
         legendData = result.Select(o => o.Name).ToList();
-
+        
         return result.ToArray();
     }
 
     static Series[] ENE(this LineOfPoint indicatorValue, int? index, out List<string> legendData)
     {
+        var upper = SeriesType.Line.CreateSeries(
+            "ENE.Upper",
+            indicatorValue.EndPoints?
+                .Select(o => o.Ene.RefUPPER).ToList(),
+            index, Infrastructures.Charts.Helper.Red, 2);
+
+        upper.LineStyle!.Type = BorderType.Dotted;
+
+        var ene = SeriesType.Line.CreateSeries(
+            "ENE",
+            indicatorValue.EndPoints?
+                .Select(o => o.Ene.RefENE).ToList(),
+            index, Infrastructures.Charts.Helper.Purple, 2);
+
+        ene.LineStyle!.Type = BorderType.Dotted;
+
+        var lower = SeriesType.Line.CreateSeries(
+            "ENE.Lower",
+            indicatorValue.EndPoints?
+                .Select(o => o.Ene.RefLOWER).ToList(),
+            index, Infrastructures.Charts.Helper.Yellow, 2);
+
+        lower.LineStyle!.Type = BorderType.Dotted;
+
         var result= new[]
         {
-            SeriesType.Line.CreateSeries(
-                "ENE.Upper",
-                indicatorValue.EndPoints?
-                    .Select(o => o.Ene.RefUPPER).ToList(),
-                index,Infrastructures.Charts.Helper.White,2),
-            SeriesType.Line.CreateSeries(
-                "ENE",
-                indicatorValue.EndPoints?
-                    .Select(o => o.Ene.RefENE).ToList(),
-                index,Infrastructures.Charts.Helper.Purple,2),
-            SeriesType.Line.CreateSeries(
-                "ENE.Lower",
-                indicatorValue.EndPoints?
-                    .Select(o => o.Ene.RefLOWER).ToList(),
-                index,Infrastructures.Charts.Helper.Yellow,2)
+            upper,ene,lower
         };
         legendData = result.Select(o => o.Name).ToList();
 
@@ -282,13 +317,26 @@ public static partial class Helper
 
     static Series[] KD(this LineOfPoint indicatorValue, int? index, out List<string> legendData)
     {
+        var k = SeriesType.Line.CreateSeries(
+            "KD.K",
+            indicatorValue.EndPoints?
+                .Select(o => o.Kd.RefK).ToList(),
+            index);
+
+        k.MarkLine = new Mark
+        {
+            Symbol = Symbol.None,
+            LineStyle = new LineStyle { Color = Infrastructures.Charts.Helper.Red },
+            Data = new List<MarkLine>
+            {
+                new MarkLine {YAxis = 80},
+                new MarkLine {YAxis = 10},
+            }
+        };
+
         var result= new[]
         {
-            SeriesType.Line.CreateSeries(
-                "KD.K",
-                indicatorValue.EndPoints?
-                    .Select(o => o.Kd.RefK).ToList(),
-                index),
+            k,
             SeriesType.Line.CreateSeries(
                 "KD.D",
                 indicatorValue.EndPoints?
@@ -307,7 +355,7 @@ public static partial class Helper
         var ma = new Infrastructures.Indicators.Formulas.Specials.MA();
         foreach (var line in ma.Details)
         {
-            var color = Infrastructures.Charts.Helper.White;
+            var color = Infrastructures.Charts.Helper.Red;
             switch (line.Days)
             {
                 case 10:

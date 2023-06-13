@@ -20,7 +20,7 @@ namespace  Ban3.Infrastructures.Charts.Cogs
     {
         #region IHasSymbol
 
-        /// 
+        ///
         public ECharts.Symbol? Symbol { get; set; }
 
         /// 
