@@ -247,9 +247,9 @@ public static partial class Helper
     static List<StockSets> Merge(
         this ICalculator _, List<StockSets> sets, string code)
     {
-        _.Merge(sets, code, StockAnalysisCycle.DAILY);
-        _.Merge(sets, code, StockAnalysisCycle.WEEKLY);
-        _.Merge(sets, code, StockAnalysisCycle.MONTHLY);
+        sets = _.Merge(sets, code, StockAnalysisCycle.DAILY);
+        sets = _.Merge(sets, code, StockAnalysisCycle.WEEKLY);
+        sets = _.Merge(sets, code, StockAnalysisCycle.MONTHLY);
 
         return sets;
     }

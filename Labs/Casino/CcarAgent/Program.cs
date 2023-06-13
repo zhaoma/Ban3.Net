@@ -40,7 +40,13 @@ internal class Program
                 break;
 
             case "--one":
-                new Action(() => Signalert.Collector.Sites.PrepareOnesDailyPrices(args[1])).ExecuteAndTiming($"one(PrepareOnesDailyPrices({args[1]}))");
+                new Action(
+                    () =>
+                    {
+                        Signalert.ExecuteDailyJob(args[1]);
+
+                    }).ExecuteAndTiming($"one(PrepareOnesDailyPrices({args[1]}))");
+
                 break;
 
             case "--check":

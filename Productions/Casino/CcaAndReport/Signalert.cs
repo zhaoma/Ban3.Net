@@ -44,9 +44,7 @@ public class Signalert
 
         if (reCalculateSeeds)
             PrepareEventsAndSeeds(allCodes);
-
-        new Action(() => ReinstateAllPrices(allCodes)).ExecuteAndTiming("ReinstateAllPrices");
-
+        
         ExecutePrepare(allCodes);
     }
 
@@ -54,11 +52,24 @@ public class Signalert
     {
         var allCodes = Collector.LoadAllCodes();
 
-        new Action(() => Collector.FixDailyPrices(allCodes)).ExecuteAndTiming("FixDailyPrices");
+        ExecuteDailyJob(allCodes);
+    }
 
-        new Action(() => ReinstateAllPrices(allCodes)).ExecuteAndTiming("ReinstateAllPrices");
+    public static void ExecuteDailyJob(string codes)
+    {
+        var cs = codes.Split(',');
+        var allCodes = Collector.LoadAllCodes()
+            .Where(x => cs.Contains(x.Code))
+            .ToList();
 
-        ExecutePrepare(allCodes);
+        ExecuteDailyJob(allCodes);
+    }
+
+    public static void ExecuteDailyJob(List<Stock> stocks)
+    {
+        new Action(() => Collector.FixDailyPrices(stocks)).ExecuteAndTiming("FixDailyPrices");
+
+        ExecutePrepare(stocks);
     }
 
     public static void ExecuteRealtimeJob()
@@ -101,6 +112,9 @@ public class Signalert
 
     static void ExecutePrepare(List<Stock> stocks)
     {
+
+        new Action(() => ReinstateAllPrices(stocks)).ExecuteAndTiming("ReinstateAllPrices");
+
         new Action(() =>
             stocks.ParallelExecute((stock) => { Calculator.GenerateIndicatorLine(stock.Code); },
                 Config.MaxParallelTasks)
