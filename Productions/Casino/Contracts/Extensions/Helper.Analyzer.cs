@@ -1,44 +1,29 @@
-﻿
-using Ban3.Infrastructures.Indicators.Outputs;
+﻿using Ban3.Infrastructures.Indicators.Outputs;
 using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using System;
 using Ban3.Infrastructures.Indicators.Inputs;
+using Ban3.Productions.Casino.Contracts.Interfaces;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
+/// <summary>
+/// IAnalyzer扩展方法，分析相关
+/// </summary>
 public static partial class Helper
 {
-
-    static Infrastructures.Indicators.Enums.StockOperate GetOperate(
-        IEnumerable<string> codeKeys,
-        IEnumerable<string[]> filterBuy,
-        IEnumerable<string[]> filterSell,
-        Infrastructures.Indicators.Enums.StockOperate prevOperation)
-    {
-        switch (prevOperation)
-        {
-            case Infrastructures.Indicators.Enums.StockOperate.Buy:
-            case Infrastructures.Indicators.Enums.StockOperate.Keep:
-                return codeKeys.AllFoundIn(filterSell)
-                    ? Infrastructures.Indicators.Enums.StockOperate.Sell
-                    : Infrastructures.Indicators.Enums.StockOperate.Keep;
-
-            case Infrastructures.Indicators.Enums.StockOperate.Sell:
-            case Infrastructures.Indicators.Enums.StockOperate.Left:
-                return codeKeys.AllFoundIn(filterBuy)
-                    ? Infrastructures.Indicators.Enums.StockOperate.Buy
-                    : Infrastructures.Indicators.Enums.StockOperate.Left;
-        }
-
-        return Infrastructures.Indicators.Enums.StockOperate.Left;
-    }
-
-
-    ///
+    /// <summary>
+    /// 根据策略与每日特征生成每日操作建议
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="profile"></param>
+    /// <param name="everydayKeys"></param>
+    /// <param name="code"></param>
+    /// <returns></returns>
     public static List<StockOperate> OutputDailyOperates(
-        this Profile profile,
+        this IAnalyzer _,
+        Profile profile,
         List<StockSets> everydayKeys,
         string code)
     {
@@ -76,15 +61,62 @@ public static partial class Helper
         return null;
     }
 
+    /// <summary>
+    /// 根据前一记录和策略生成当前操作建议
+    /// </summary>
+    /// <param name="codeKeys"></param>
+    /// <param name="filterBuy"></param>
+    /// <param name="filterSell"></param>
+    /// <param name="prevOperation"></param>
+    /// <returns></returns>
+    static Infrastructures.Indicators.Enums.StockOperate GetOperate(
+        IEnumerable<string> codeKeys,
+        IEnumerable<string[]> filterBuy,
+        IEnumerable<string[]> filterSell,
+        Infrastructures.Indicators.Enums.StockOperate prevOperation)
+    {
+        switch (prevOperation)
+        {
+            case Infrastructures.Indicators.Enums.StockOperate.Buy:
+            case Infrastructures.Indicators.Enums.StockOperate.Keep:
+                return codeKeys.AllFoundIn(filterSell)
+                    ? Infrastructures.Indicators.Enums.StockOperate.Sell
+                    : Infrastructures.Indicators.Enums.StockOperate.Keep;
+
+            case Infrastructures.Indicators.Enums.StockOperate.Sell:
+            case Infrastructures.Indicators.Enums.StockOperate.Left:
+                return codeKeys.AllFoundIn(filterBuy)
+                    ? Infrastructures.Indicators.Enums.StockOperate.Buy
+                    : Infrastructures.Indicators.Enums.StockOperate.Left;
+        }
+
+        return Infrastructures.Indicators.Enums.StockOperate.Left;
+    }
+
+    /// <summary>
+    /// 加载每日操作建议记录
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="profile"></param>
+    /// <param name="code"></param>
+    /// <returns></returns>
     public static List<StockOperate> LoadDailyOperates(
-        this Profile profile, string code)
+        this IAnalyzer _,
+        Profile profile, 
+        string code)
     {
         return $"{code}.{profile.Identity}"
             .DataFile<StockOperate>()
             .ReadFileAs<List<StockOperate>>();
     }
 
-    ///
+    /// <summary>
+    /// 根据每日操作建议记录创建操作纪录
+    /// </summary>
+    /// <param name="stockOperates"></param>
+    /// <param name="profile"></param>
+    /// <param name="code"></param>
+    /// <returns></returns>
     public static List<StockOperationRecord> ConvertOperates2Records(
         this List<StockOperate> stockOperates, Profile profile, string code)
     {
@@ -131,8 +163,17 @@ public static partial class Helper
         return tradeRecords;
     }
 
+    /// <summary>
+    /// 加载操作纪录
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="profile"></param>
+    /// <param name="code"></param>
+    /// <returns></returns>
     public static List<StockOperationRecord> LoadOperationRecords(
-        this Profile profile, string code)
+        this IAnalyzer _,
+        Profile profile, 
+        string code)
     {
         return $"{code}.{profile.Identity}"
             .DataFile<StockOperationRecord>()

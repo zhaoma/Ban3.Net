@@ -17,6 +17,9 @@ using Ban3.Sites.ViaTushare.Entries;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
+/// <summary>
+/// IReportor扩展方法，报告报表相关
+/// </summary>
 public static partial class Helper
 {
     #region 个股图表（Candlestick/indicators）

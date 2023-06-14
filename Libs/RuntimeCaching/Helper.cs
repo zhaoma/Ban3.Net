@@ -1,93 +1,49 @@
 ﻿using System.Runtime.Caching;
 using System;
-using System.IO;
-using System.Text;
-using System.Threading;
-using log4net;
-using Newtonsoft.Json;
+using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Infrastructures.RuntimeCaching
 {
     public static class Helper
     {
-        #region private
+        public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, DateTime absoluteTime)
+            => key.LoadOrSetDefault( defaultValue, absoluteTime, null, null);
 
-        static readonly ILog _logger = LogManager.GetLogger(typeof(Helper));
+        public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, int minutes)
+            => key.LoadOrSetDefault( defaultValue, null, minutes, null);
 
-        static readonly ReaderWriterLockSlim LockSlim = new ReaderWriterLockSlim();
-        const int LockSlimTimeout = 1000;
+        public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, string localFile)
+            => key.LoadOrSetDefault(defaultValue, null,  null, localFile);
 
-        static string WriteFile(this string path, string content, string charset = "utf-8")
-        {
-            string result = string.Empty;
-
-            if (LockSlim.TryEnterWriteLock(LockSlimTimeout))
-            {
-                try
-                {
-                    Encoding encoding = Encoding.GetEncoding(charset);
-
-                    using (var stream = new StreamWriter(path, false, encoding))
-                    {
-                        stream.Write(content);
-                        stream.Close();
-
-                        result = path;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex);
-                }
-                finally
-                {
-                    LockSlim.ExitWriteLock();
-                }
-            }
-
-            return result;
-        }
-
-         static string ObjToJson(this object obj)
-        {
-            return JsonConvert.SerializeObject(obj);
-        }
+        public static T LoadOrSetDefault<T>(this string key, string localFile)
+            => key.LoadOrSetDefault(() => localFile.ReadFileAs<T>(), localFile);
 
         /// <summary>
-        /// json转实体
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="str"></param>
-        /// <returns></returns>
-         static T JsonToObj<T>(this string str)
-        {
-            return JsonConvert.DeserializeObject<T>(str);
-        }
-
-        #endregion
-
-        /// <summary>
-        /// 
+        /// 从缓存加载或是设置
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <param name="defaultValue"></param>
+        /// <param name="absoluteTime"></param>
+        /// <param name="minutes"></param>
         /// <param name="localFile"></param>
         /// <returns></returns>
-        public static T LoadOrSetDefault<T>(this string key, T defaultValue, string localFile = "")
+        public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue,DateTime? absoluteTime, int? minutes,string localFile)
         {
             var cached = key.LoadFromMemoryCache().JsonToObj<T>();
 
-            if (cached == null
-                    && defaultValue != null)
-            {
-                if (!string.IsNullOrEmpty(localFile))
-                {
-                    localFile.WriteFile(defaultValue.ObjToJson());
-                    key.AppendToMemoryCache(defaultValue.ObjToJson(), localFile);
-                }
-                return defaultValue;
-            }
+            if (cached != null) return cached;
+
+            cached=defaultValue();
+
+            if(absoluteTime!=null)
+                AppendToMemoryCache(key,cached.ObjToJson(),absoluteTime.Value);
+
+            if(minutes!=null)
+                AppendToMemoryCache(key,cached.ObjToJson(),minutes.Value);
+
+            if(!string.IsNullOrEmpty(localFile))
+                AppendToMemoryCache(key,cached.ObjToJson(),localFile);
 
             return cached;
         }
@@ -107,10 +63,7 @@ namespace Ban3.Infrastructures.RuntimeCaching
         /// </summary>
         /// <param name="key">键名</param>
         /// <param name="val">键值</param>
-        public static void AppendToMemory(
-        this string key,
-        string val
-        )
+        public static void AppendToMemoryCache(this string key, string val)
         {
             MemoryCache.Default.Set(
                 new CacheItem(key, val),
@@ -122,10 +75,7 @@ namespace Ban3.Infrastructures.RuntimeCaching
         /// </summary>
         /// <param name="key">键名</param>
         /// <param name="val">键值</param>
-        public static void AppendToMemoryCacheOneDay(
-                this string key,
-                string val
-        )
+        public static void AppendToMemoryCacheOneDay(this string key, string val)
         {
             key.AppendToMemoryCache(val, DateTime.Now.AddDays(1));
         }
@@ -136,14 +86,8 @@ namespace Ban3.Infrastructures.RuntimeCaching
         /// <param name="key">键名</param>
         /// <param name="val">键值</param>
         /// <param name="absoluteTime">绝对过期时间</param>
-        public static void AppendToMemoryCache(
-                this string key,
-                string val,
-                DateTime absoluteTime
-        )
-        {
-            MemoryCache.Default.Set(key, val, absoluteTime);
-        }
+        public static void AppendToMemoryCache(this string key, string val, DateTime absoluteTime)
+            => MemoryCache.Default.Set(key, val, absoluteTime);
 
         /// <summary>
         /// 写入相对过期缓存
@@ -151,14 +95,8 @@ namespace Ban3.Infrastructures.RuntimeCaching
         /// <param name="key">键名</param>
         /// <param name="val">键值</param>
         /// <param name="minutes">存活分钟数</param>
-        public static void AppendToMemoryCache(
-                this string key,
-                string val,
-                int minutes
-        )
-        {
-            MemoryCache.Default.Set(key, val, DateTime.Now.AddMinutes(minutes));
-        }
+        public static void AppendToMemoryCache(this string key, string val, int minutes)
+            => MemoryCache.Default.Set(key, val, DateTime.Now.AddMinutes(minutes));
 
         /// <summary>
         /// 写入文件以来缓存
@@ -166,25 +104,18 @@ namespace Ban3.Infrastructures.RuntimeCaching
         /// <param name="key">键名</param>
         /// <param name="val">键值</param>
         /// <param name="dependencyFile">依赖文件</param>
-        public static void AppendToMemoryCache(
-                this string key,
-                string val,
-                string dependencyFile
-        )
-        {
-            var policy = new CacheItemPolicy { Priority = CacheItemPriority.Default };
-            policy.ChangeMonitors.Add(new HostFileChangeMonitor(new[] { dependencyFile }));
-            MemoryCache.Default.Set(key, val, policy);
-        }
+        public static void AppendToMemoryCache(this string key, string val, string dependencyFile)
+            => MemoryCache.Default.Set(key, val, new CacheItemPolicy
+            {
+                Priority = CacheItemPriority.Default,
+                ChangeMonitors = { new HostFileChangeMonitor(new[] { dependencyFile }) }
+            });
 
         /// <summary>
         /// 移除缓存
         /// </summary>
         /// <param name="key">键名</param>
-        public static void RemoveFromMemoryCache(
-                this string key)
-        {
-            MemoryCache.Default.Remove(key);
-        }
+        public static void RemoveFromMemoryCache(this string key)
+            => MemoryCache.Default.Remove(key);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Sites.ViaNetease.Entries;
@@ -134,9 +135,7 @@ public static partial class Helper
     }
 
     public static List<Stock> LoadAllCodes(this ISites _)
-        => typeof(Stock)
-            .LocalFile()
-            .ReadFileAs<List<Stock>>();
+        => Config.CacheKey<Stock>("all").LoadOrSetDefault<List<Stock>>(typeof(Stock).LocalFile());
 
     #endregion
 

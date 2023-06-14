@@ -44,7 +44,6 @@ internal class Program
                     () =>
                     {
                         Signalert.ExecuteDailyJob(args[1]);
-
                     }).ExecuteAndTiming($"one(PrepareOnesDailyPrices({args[1]}))");
 
                 break;
@@ -59,7 +58,7 @@ internal class Program
                 $"--daily :                  prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one code :               prepare ones daily prices".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--realtime [codes] :       refresh realtime".WriteColorLine(ConsoleColor.DarkYellow);
-
+                CheckSomething();
                 break;
         }
 
@@ -69,4 +68,9 @@ internal class Program
     }
 
     private static readonly Stopwatch Sw = new();
+
+    private static void CheckSomething()
+    {
+
+    }
 }

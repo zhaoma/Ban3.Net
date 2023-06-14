@@ -7,6 +7,9 @@ using Ban3.Sites.ViaTushare.Entries;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
+/// <summary>
+/// Stock扩展方法，常规转换
+/// </summary>
 public static partial class Helper
 {
 
@@ -50,6 +53,12 @@ public static partial class Helper
     public static string GetStockNumPrefix(this string code)
         => code.GetStockPrefix() == "sz" ? "1" : "0";
 
+    /// <summary>
+    /// 价格周期转换
+    /// </summary>
+    /// <param name="dailyPrices"></param>
+    /// <param name="targetCycle"></param>
+    /// <returns></returns>
     public static List<StockPrice> ConvertCycle(
         this List<StockPrice> dailyPrices,
         StockAnalysisCycle targetCycle)

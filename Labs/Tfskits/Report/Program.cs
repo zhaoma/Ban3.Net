@@ -43,29 +43,31 @@ namespace Ban3.Labs.TeamFoundationCollector.Presentation.Report
             _jobTimer = new System.Timers.Timer
             {
                 AutoReset = true,
-                Interval = 1000*60*1,
+                Interval = 1000 * 60 * 1,
                 Enabled = true
             };
             _jobTimer.Elapsed += (s, e) =>
+            {
+                _jobTimer.Enabled = false;
+                var cmd = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "support.exe");
+                Console.WriteLine(cmd);
+
+                if (_handler == null)
                 {
-                    _jobTimer.Enabled = false;
-                    var cmd = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "support.exe");
-                    Console.WriteLine(cmd);
+                    var args = Infrastructures.Common.Config.AppConfiguration["Support:Args"] + "";
+                    if (args == "")
+                        args = "--key SSME";
+                    _handler = new Infrastructures.PlatformInvoke.Handles.ProcessHandlerAsync(cmd,
+                        args.Split(' '));
 
-                    if (_handler == null)
-                    {
-                        _handler = new Infrastructures.PlatformInvoke.Handles.ProcessHandlerAsync(cmd,
-                            new[] { "--key","SSME" });
+                    _handler.ReceivedData += (s) => { Console.WriteLine($"info:{s}"); };
+                    _handler.ReceivedError += (s) => { Console.WriteLine($"error:{s}"); };
 
-                        _handler.ReceivedData += (s) => { Console.WriteLine($"info:{s}"); };
-                        _handler.ReceivedError += (s) => { Console.WriteLine($"error:{s}"); };
+                    _handler.Exited += JobCallback;
+                }
 
-                        _handler.Exited += JobCallback;
-                    }
-
-                    _handler?.Execute();
-                };
-
+                _handler?.Execute();
+            };
         }
 
         static void JobCallback()
