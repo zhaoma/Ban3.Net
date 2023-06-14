@@ -1,7 +1,11 @@
 ﻿using System.Diagnostics;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
+using Ban3.Infrastructures.Indicators.Inputs;
+using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Labs.Casino.CcarAgent;
@@ -71,6 +75,9 @@ internal class Program
 
     private static void CheckSomething()
     {
+        var stock = Signalert.Collector.LoadStock("300560.SZ");
+
+        Signalert.ExecuteDailyJob(new List<Stock>{stock});
 
     }
 }

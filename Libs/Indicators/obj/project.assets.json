@@ -40,9 +40,10 @@
           "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
         }
       },
-      "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
+      "Ban3.Infrastructures.RuntimeCaching/1.0.2": {
         "type": "package",
         "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.2",
           "Newtonsoft.Json": "13.0.3",
           "System.Runtime.Caching": "7.0.0",
           "log4net": "2.0.15"
@@ -1337,17 +1338,18 @@
         "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll"
       ]
     },
-    "Ban3.Infrastructures.RuntimeCaching/1.0.0": {
-      "sha512": "Lhng2uhZ34CB5bPOx9gqCirTA3V3M+lI9Ck3ffBW+IyQIEuXocFoGtPKteXtKRiUmyAwsmbNE+D3+0bkuJWb/g==",
+    "Ban3.Infrastructures.RuntimeCaching/1.0.2": {
+      "sha512": "Rn4mcLzxgy33IgwOIOdmXi4danMuyzBIwijTvGdlQzbhCMeJqAtRuAfff+5HEiXZMPrRIYzJqwEueowFevnuxA==",
       "type": "package",
-      "path": "ban3.infrastructures.runtimecaching/1.0.0",
+      "path": "ban3.infrastructures.runtimecaching/1.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.runtimecaching.1.0.0.nupkg.sha512",
+        "ban3.infrastructures.runtimecaching.1.0.2.nupkg.sha512",
         "ban3.infrastructures.runtimecaching.nuspec",
         "icon.png",
-        "lib/netstandard2.0/Ban3.Infrastructures.RuntimeCaching.dll"
+        "lib/netstandard2.0/Ban3.Infrastructures.RuntimeCaching.dll",
+        "readme.md"
       ]
     },
     "Fody/6.7.0": {
@@ -4365,7 +4367,7 @@
     ".NETStandard,Version=v2.0": [
       "Ban3.Infrastructures.Common >= 1.0.2",
       "Ban3.Infrastructures.NetHttp >= 1.0.0",
-      "Ban3.Infrastructures.RuntimeCaching >= 1.0.0",
+      "Ban3.Infrastructures.RuntimeCaching >= 1.0.2",
       "Fody >= 6.7.0",
       "NETStandard.Library >= 2.0.3",
       "Rougamo.Fody >= 1.4.1",
@@ -4427,7 +4429,7 @@
           },
           "Ban3.Infrastructures.RuntimeCaching": {
             "target": "Package",
-            "version": "[1.0.0, )"
+            "version": "[1.0.2, )"
           },
           "Fody": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

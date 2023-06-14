@@ -241,6 +241,8 @@ public static partial class Helper
                         newList = newList.Where(x => exists.All(y => y.TradeDate != x.TradeDate)).ToList();
 
                         exists = exists.Union(newList)
+                            .Where( o=>o.Close!=0)
+                            .Distinct(o=>o)
                             .OrderBy(o => o.TradeDate)
                             .ToList();
 
@@ -252,6 +254,7 @@ public static partial class Helper
                     catch (Exception ex)
                     {
                         Logger.Error(code);
+                        Logger.Error(ex);
                     }
                 }
             }

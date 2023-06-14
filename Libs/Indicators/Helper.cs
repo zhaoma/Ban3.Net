@@ -135,7 +135,7 @@ public static class Helper
             Subject = "MACD MWD C0",
             BuySets = new List<string[]>
             {
-                new []{"MACD.C0.DAILY","MACD.C0.WEEKLY","MACD.C0.MONTHLY"}
+                new []{"MACD.C0.DAILY","MACD.P.WEEKLY", "MACD.PDI.WEEKLY", "MACD.PDI.MONTHLY","MACD.P.MONTHLY" }
             },
             SellSets = new List<string[]>{new []{ "MACD.DC.DAILY" } },
             Persistence=true,
@@ -158,7 +158,7 @@ public static class Helper
     const string CacheKey = "casino.Profiles";
     private static readonly string ProfilesFile = "all".DataFile<Profile>();
     public static List<Profile> Profiles
-        => CacheKey.LoadOrSetDefault(DefaultProfiles, ProfilesFile);
+        => CacheKey.LoadOrSetDefault(()=>DefaultProfiles, ProfilesFile);
 
     #endregion
 }

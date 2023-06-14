@@ -9,13 +9,15 @@
     <AssemblyName>Ban3.Sites.ViaTushare</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Ban3.Sites.ViaTushare</Title>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
     <Description>Via Tushare.com</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageId>Ban3.Sites.ViaTushare</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,6 +33,13 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

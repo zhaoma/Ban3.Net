@@ -4,6 +4,10 @@ using Newtonsoft.Json;
 
 namespace Ban3.Sites.ViaTushare.Entries;
 
+/// <summary>
+/// A股日线行情
+/// https://tushare.pro/document/2?doc_id=27
+/// </summary>
 public class StockPrice
 {
     [JsonIgnore]
@@ -12,23 +16,59 @@ public class StockPrice
         "ts_code", "trade_date", "open", "high", "low", "close", "pre_close", "change","pct_chg","vol","amount"
     };
 
-
+    /// <summary>
+    /// 股票代码
+    /// </summary>
     public string Code { get; set; }
 
+    /// <summary>
+    /// 交易日期
+    /// </summary>
     public string TradeDate { get; set; }
 
+    /// <summary>
+    /// 开盘价
+    /// </summary>
     public float Open { get; set; }
+
+    /// <summary>
+    /// 最高价
+    /// </summary>
     public float High { get; set; }
+
+    /// <summary>
+    /// 最低价
+    /// </summary>
     public float Low { get; set; }
+
+    /// <summary>
+    /// 收盘价
+    /// </summary>
     public float Close { get; set; }
+
+    /// <summary>
+    /// 昨收价(前复权)
+    /// </summary>
     public float PreClose { get; set; }
 
+    /// <summary>
+    /// 涨跌额
+    /// </summary>
     public float Change { get; set; }
 
+    /// <summary>
+    /// 涨跌幅 （未复权 ）
+    /// </summary>
     public float ChangePercent { get; set; }
-    
+
+    /// <summary>
+    /// 成交量 （手）
+    /// </summary>
     public float Vol { get; set; }
-    
+
+    /// <summary>
+    /// 成交额 （千元）
+    /// </summary>
     public float Amount { get; set; }
     
     public StockPrice(){}

@@ -318,21 +318,31 @@ public static partial class Helper
         LineOfPoint indicatorValue,
         StockAnalysisCycle cycle)
     {
-        var latestList = indicatorValue
-            .LatestList();
-
-        if (latestList == null || !latestList.Any()) return sets;
-
-        var setsList = latestList
-            .Select(o => (o.Current!.MarkTime, o.Features()))
-            .ToList();
-
-        sets.ForEach(o =>
+        try
         {
-            var ss = setsList.FindLast(x => x.MarkTime.Subtract(o.MarkTime).TotalDays >= 0);
-            if (ss.Item2 != null && ss.Item2.Any())
-                o.SetKeys = o.SetKeys?.Union(ss.Item2.Select(y => $"{y}.{cycle}"));
-        });
+            var latestList = indicatorValue
+                .LatestList();
+
+            if (latestList == null || !latestList.Any() || !sets.Any()) return sets;
+
+            var setsList = latestList
+                .Select(o => (o.Current!.MarkTime, o.Features()))
+                .OrderBy(o => o.MarkTime)
+                .ToList();
+
+            sets.ForEach(o =>
+            {
+                var ss = setsList.First(x => x.MarkTime.Subtract(o.MarkTime).TotalDays >= 0);
+                if (ss.Item2 != null && ss.Item2.Any())
+                {
+                    o.SetKeys = o.SetKeys?.Union(ss.Item2.Select(y => $"{y}.{cycle}"));
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
 
         return sets;
     }

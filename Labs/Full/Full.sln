@@ -7,6 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{C7ACADA2-B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuntimeCaching", "..\..\Libs\RuntimeCaching\RuntimeCaching.csproj", "{7675A898-4F47-4273-A9B7-431CC378BC34}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sites", "Sites", "{A1CCF12E-F3DA-4A4F-9FD3-56B20DB9728B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaTushare", "..\..\Sites\ViaTushare\ViaTushare.csproj", "{70E3C88E-8BA7-404F-B801-E23B55DBAD4F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\..\Libs\Common\Common.csproj", "{88705B55-292E-45B1-AEE1-18EE034588C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +23,22 @@ Global
 		{7675A898-4F47-4273-A9B7-431CC378BC34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7675A898-4F47-4273-A9B7-431CC378BC34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7675A898-4F47-4273-A9B7-431CC378BC34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70E3C88E-8BA7-404F-B801-E23B55DBAD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70E3C88E-8BA7-404F-B801-E23B55DBAD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70E3C88E-8BA7-404F-B801-E23B55DBAD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70E3C88E-8BA7-404F-B801-E23B55DBAD4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88705B55-292E-45B1-AEE1-18EE034588C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88705B55-292E-45B1-AEE1-18EE034588C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88705B55-292E-45B1-AEE1-18EE034588C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88705B55-292E-45B1-AEE1-18EE034588C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7675A898-4F47-4273-A9B7-431CC378BC34} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
+		{70E3C88E-8BA7-404F-B801-E23B55DBAD4F} = {A1CCF12E-F3DA-4A4F-9FD3-56B20DB9728B}
+		{88705B55-292E-45B1-AEE1-18EE034588C2} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0411A79E-D9D7-4686-8190-6E05F219E28D}

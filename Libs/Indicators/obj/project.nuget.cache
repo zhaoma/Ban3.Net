@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "XVhHOmceXSSsE7K25IkqCTb0/daAHEkOC7JBI4k6dy67dAIyPk4iXpSTcGtSYXGemV/D6fNZxJq6RGJt5ldacg==",
+  "dgSpecHash": "ZcqIw5tZ6Jz58NPUTj5MMjXDd8spZsqvCESXnwXpcG+NcLctnc9WAG9/KzdWp6mTFR6ZEqoXd5B+z56jqUUJeA==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Libs\\Indicators\\Indicators.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.2\\ban3.infrastructures.common.1.0.2.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.0\\ban3.infrastructures.nethttp.1.0.0.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.runtimecaching\\1.0.0\\ban3.infrastructures.runtimecaching.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.runtimecaching\\1.0.2\\ban3.infrastructures.runtimecaching.1.0.2.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.7.0\\fody.6.7.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

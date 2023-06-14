@@ -67,14 +67,14 @@ public static partial class Helper
 
         if (dailyPrices != null && dailyPrices.Any())
         {
+            dailyPrices = dailyPrices.OrderBy(o => o.TradeDate).ToList();
             var lastRecord = dailyPrices[0];
-            foreach (var price in dailyPrices)
+            var endDate = lastRecord.TradeDate.ToDateTimeEx().NextDate(targetCycle);
+            for (var i=0;i<dailyPrices.Count;i++)
             {
-                var endDate = targetCycle == StockAnalysisCycle.WEEKLY
-                    ? lastRecord.TradeDate.ToDateTimeEx().FindWeekend()
-                    : lastRecord.TradeDate.ToDateTimeEx().FindMonthend();
+                var price = dailyPrices[i];
 
-                if (endDate.Subtract(price.TradeDate.ToDateTimeEx()).TotalDays >= 0)
+                if (endDate.ToYmd().ToInt() > price.TradeDate.ToInt())
                 {
                     lastRecord.TradeDate = price.TradeDate;
                     lastRecord.High = Math.Max(lastRecord.High, price.High);
@@ -82,15 +82,32 @@ public static partial class Helper
                     lastRecord.Vol += price.Vol;
                     lastRecord.Amount += price.Amount;
                     lastRecord.Close = price.Close;
+
+                    if (i == dailyPrices.Count - 1)
+                    {
+                        result.Add(lastRecord);
+                    }
                 }
                 else
                 {
+                    lastRecord.Change = lastRecord.Close - lastRecord.PreClose;
+                    lastRecord.ChangePercent=lastRecord.PreClose != 0
+                        ?(float)Math.Round((lastRecord.Close-lastRecord.PreClose) /lastRecord.PreClose,2)
+                        :0F;
                     result.Add(lastRecord);
                     lastRecord = price;
+                    endDate = endDate.AddDays(1).NextDate(targetCycle);
                 }
             }
         }
 
         return result;
+    }
+
+    static DateTime NextDate(this DateTime from, StockAnalysisCycle targetCycle)
+    {
+        return targetCycle == StockAnalysisCycle.WEEKLY
+            ? from.FindWeekend()
+            : from.FindMonthend();
     }
 }

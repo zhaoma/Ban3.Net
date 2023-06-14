@@ -55,7 +55,7 @@
             },
             "Ban3.Infrastructures.RuntimeCaching": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[1.0.2, )"
             },
             "Fody": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

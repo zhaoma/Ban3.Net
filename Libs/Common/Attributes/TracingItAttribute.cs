@@ -7,7 +7,9 @@ using log4net;
 namespace Ban3.Infrastructures.Common.Attributes;
 
 /// <summary>
-/// 
+/// 用Rougamo 记录方法(方法的执行耗时)
+/// 配置在appsettings.json: TraceSetting:BindFlags/Timing/LoggingArguments
+/// 默认(未设置) public/true/false
 /// </summary>
 public class TracingItAttribute : MoAttribute
 {

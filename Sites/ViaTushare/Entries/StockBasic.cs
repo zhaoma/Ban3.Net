@@ -3,19 +3,36 @@ using Newtonsoft.Json;
 
 namespace Ban3.Sites.ViaTushare.Entries;
 
+/// <summary>
+/// 基础信息
+/// https://tushare.pro/document/2?doc_id=25
+/// </summary>
 public class StockBasic
 {
-    [JsonIgnore] public List<string> RequestFields = new()
+    [JsonIgnore] 
+    public List<string> RequestFields = new()
     {
         "ts_code", "symbol", "name", "list_date"
     };
-    
+
+    /// <summary>
+    /// TS代码
+    /// </summary>
     public string Code { get; set; }
 
+    /// <summary>
+    /// 股票代码
+    /// </summary>
     public string Symbol { get; set; }
 
+    /// <summary>
+    /// 股票名称
+    /// </summary>
     public string Name { get; set; }
 
+    /// <summary>
+    /// 上市日期
+    /// </summary>
     public string ListDate { get; set; }
 
     public StockBasic(){}
