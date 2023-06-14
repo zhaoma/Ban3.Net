@@ -7,8 +7,6 @@ namespace Ban3.Infrastructures.NetHttp.Entries;
 
 public class TargetHost : ITargetHost
 {
-    //private TargetHost(){}
-
     public bool Anonymous { get; set; } = false;
 
     public string BaseUrl { get; set; } = string.Empty;
@@ -45,7 +43,6 @@ public class TargetHost : ITargetHost
 
     private HttpClientHandler Handler()
     {
-        Console.WriteLine("Create Client");
         var defaultCredential = string.IsNullOrEmpty(Domain)
             ? new NetworkCredential(UserName, Password)
             : new NetworkCredential(UserName, Password, Domain);

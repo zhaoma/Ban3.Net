@@ -21,7 +21,6 @@ public static partial class Helper
 
     #region Diagram
 
-    /// TODO : init default values
     public static Diagram CreateDiagram()
     {
         return new Diagram();
@@ -117,6 +116,14 @@ public static partial class Helper
             LineStyle = new LineStyle { Opacity =opacity, Width = width, Color = color }
         };
     }
+
+    public static Series SetXAxis(this Series series,int xAxisIndex)
+    {
+        series.XAxisIndex = xAxisIndex;
+        return series;
+    }
+
+    
 
     #endregion
 }

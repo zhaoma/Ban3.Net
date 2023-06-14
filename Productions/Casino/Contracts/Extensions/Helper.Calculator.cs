@@ -326,16 +326,16 @@ public static partial class Helper
             if (latestList == null || !latestList.Any() || !sets.Any()) return sets;
 
             var setsList = latestList
-                .Select(o => (o.Current!.MarkTime, o.Features()))
+                .Select(o =>new StockSets { MarkTime = o.Current!.MarkTime, SetKeys = o.Features() })
                 .OrderBy(o => o.MarkTime)
                 .ToList();
 
             sets.ForEach(o =>
             {
                 var ss = setsList.First(x => x.MarkTime.Subtract(o.MarkTime).TotalDays >= 0);
-                if (ss.Item2 != null && ss.Item2.Any())
+                if (ss !=null && ss.SetKeys != null && ss.SetKeys.Any())
                 {
-                    o.SetKeys = o.SetKeys?.Union(ss.Item2.Select(y => $"{y}.{cycle}"));
+                    o.SetKeys = o.SetKeys?.Union(ss.SetKeys.Select(y => $"{y}.{cycle}"));
                 }
             });
         }

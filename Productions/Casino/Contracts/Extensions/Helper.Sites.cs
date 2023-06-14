@@ -186,7 +186,9 @@ public static partial class Helper
         allCodes ??= _.LoadAllCodes();
         var result = true;
 
-        allCodes.ForEach(stock => { result = result && _.PrepareOnesDailyPrices(stock.Code); });
+        allCodes.ForEach(stock => {
+            Console.WriteLine(stock.Code);
+	     result = result && _.PrepareOnesDailyPrices(stock.Code); });
         return result;
     }
 
@@ -241,8 +243,8 @@ public static partial class Helper
                         newList = newList.Where(x => exists.All(y => y.TradeDate != x.TradeDate)).ToList();
 
                         exists = exists.Union(newList)
-                            .Where( o=>o.Close!=0)
-                            .Distinct(o=>o)
+                            .Where(o => o.Close != 0)
+                            .Distinct(o => o)
                             .OrderBy(o => o.TradeDate)
                             .ToList();
 
@@ -326,7 +328,7 @@ public static partial class Helper
             .ReadFileAs<List<StockEvent>>();
     }
 
-   
+
     #endregion
 
     #region realtime prices
@@ -338,7 +340,7 @@ public static partial class Helper
             allCodes ??= _.LoadAllCodes();
 
             var p = 1;
-            var total= allCodes.Count%Config.FixPageSize>0?allCodes.Count /Config.FixPageSize+1: allCodes.Count / Config.FixPageSize;
+            var total = allCodes.Count % Config.FixPageSize > 0 ? allCodes.Count / Config.FixPageSize + 1 : allCodes.Count / Config.FixPageSize;
             var codes = allCodes.Take(Config.FixPageSize).ToList();
 
             while (codes.Any())

@@ -9,10 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
-using  Ban3.Infrastructures.Indicators.Formulas.Specials;
-using  Ban3.Infrastructures.Indicators.Outputs;
+using Ban3.Infrastructures.Indicators.Formulas.Specials;
+using Ban3.Infrastructures.Indicators.Outputs;
 
-namespace  Ban3.Infrastructures.Indicators.Formulas;
+namespace Ban3.Infrastructures.Indicators.Formulas;
 
 /// <summary>
 /// 完整指标
@@ -20,7 +20,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas;
 public class Full
     : Communal
 {
-    public LineOfPoint Result { get; set; }=new ();
+    public LineOfPoint Result { get; set; } = new();
 
     public void Calculate(List<Inputs.Price> prices)
     {
@@ -39,32 +39,32 @@ public class Full
                     Close = o.CurrentClose!.Value,
                     Amount = new Outputs.Values.AMOUNT
                     {
-                        MarkTime=o.MarkTime,
+                        MarkTime = o.MarkTime,
                         RefAmounts = new List<LineWithValue>()
                     },
-                    Bias = new Outputs.Values.BIAS{MarkTime = o.MarkTime},
+                    Bias = new Outputs.Values.BIAS { MarkTime = o.MarkTime },
                     Cci = new Outputs.Values.CCI
                     {
-                        MarkTime=o.MarkTime,
+                        MarkTime = o.MarkTime,
                         RefTYP = Math.Round((o.CurrentHigh!.Value + o.CurrentLow!.Value + o.CurrentClose.Value) / 3, 3)
                     },
                     Dmi = new Outputs.Values.DMI
                     {
-                        MarkTime=o.MarkTime,
+                        MarkTime = o.MarkTime,
                         RefADX = 0M,
                         RefADXR = 0M,
                         RefPDI = 0M,
                         RefMDI = 0M
                     },
-                    Ene = new Outputs.Values.ENE{MarkTime=o.MarkTime},
+                    Ene = new Outputs.Values.ENE { MarkTime = o.MarkTime },
                     Kd = new Outputs.Values.KD
                     {
                         MarkTime = o.MarkTime,
                         RefLLV = o.CurrentLow,
                         RefHHV = o.CurrentHigh
                     },
-                    Ma = new Outputs.Values.MA {MarkTime = o.MarkTime, RefPrices = new List<LineWithValue>() },
-                    Macd = new Outputs.Values.MACD{MarkTime = o.MarkTime}
+                    Ma = new Outputs.Values.MA { MarkTime = o.MarkTime, RefPrices = new List<LineWithValue>() },
+                    Macd = new Outputs.Values.MACD { MarkTime = o.MarkTime }
                 })
                 .ToList()
         };
@@ -79,7 +79,7 @@ public class Full
         var macd = new MACD();
 
         var middles = prices.Select(o =>
-            new []
+            new[]
             {
                 o.CurrentHigh!.Value,
                 o.CurrentLow!.Value,
