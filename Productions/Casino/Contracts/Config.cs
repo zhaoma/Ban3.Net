@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Request;
 
@@ -28,4 +30,17 @@ public class Config
             { StockAnalysisCycle.DAILY, 21F }
         }
     };
+
+    public static bool NeedSync() 
+    {
+        var result = false;
+
+        var now = DateTime.Now.ToString("HHmm").ToInt();
+
+        result = result || (now >= 915 && now <= 1130);
+
+        result = result || (now >= 1300 && now <= 1500);
+
+        return result;
+    } 
 }

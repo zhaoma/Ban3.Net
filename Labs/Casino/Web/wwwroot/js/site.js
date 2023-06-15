@@ -25,10 +25,12 @@ function bindCharts(elementId, dataUrl) {
     var chartDom = document.getElementById(elementId);
     var currentChart = echarts.init(chartDom);
 
-    $.get(dataUrl , function (rawData) {
-        
+    $.get(dataUrl, function (rawData) {
+
         var diagramOption = eval("(" + rawData + ")");
 
         currentChart.setOption(diagramOption);
+
+        window.onresize = currentChart.resize;
     });
 }

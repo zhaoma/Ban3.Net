@@ -103,13 +103,15 @@ public partial class Signalert
 
         ExecuteRealtimeJob(allCodes);
     }
-    
+
     /// <summary>
     /// 实时刷新数据
     /// </summary>
     /// <param name="stocks"></param>
     public static void ExecuteRealtimeJob(List<Stock> stocks)
     {
+        if (!Config.NeedSync()) return;
+
         new Action(() => Collector.ReadRealtime(stocks)).ExecuteAndTiming("ReadRealtime");
 
         ExecutePrepare(stocks);
@@ -129,6 +131,8 @@ public partial class Signalert
     /// <param name="stocks"></param>
     static void ExecutePrepare(List<Stock> stocks)
     {
+        if (!Config.NeedSync()) return;
+
         new Action(() => ReinstateAllPrices(stocks)).ExecuteAndTiming("ReinstateAllPrices");
 
         new Action(() =>

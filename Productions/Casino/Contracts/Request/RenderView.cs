@@ -1,0 +1,15 @@
+﻿using System;
+using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Productions.Casino.Contracts.Enums;
+
+namespace Ban3.Productions.Casino.Contracts.Request;
+
+public class RenderView
+{
+    public string Id { get; set; }
+
+    public string Cycle { get; set; }
+
+    public StockAnalysisCycle CycleEnum()
+       => Cycle.ToUpper().StringToEnum<StockAnalysisCycle>();
+}
