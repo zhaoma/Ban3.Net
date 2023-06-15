@@ -4,9 +4,11 @@ using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
+using Ban3.Productions.Casino.Contracts.Request;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -75,9 +77,17 @@ internal class Program
 
     private static void CheckSomething()
     {
-        var stock = Signalert.Collector.LoadStock("300560.SZ");
-
-        Signalert.ExecuteDailyJob(new List<Stock>{stock});
-
+        new Action(() =>
+        {
+            if (Signalert.PrepareFocus(Config.DefaultFilter, out var result))
+            {
+                result.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
+            }
+            else
+            {
+                Console.WriteLine("Prepare failure.");
+            }
+        }).ExecuteAndTiming($"PrepareFocus[{Config.DefaultFilter.Subject}]");
+        
     }
 }

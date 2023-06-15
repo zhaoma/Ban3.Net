@@ -1,22 +1,34 @@
 ﻿$(document).ready(function () {
 
-    //if ($(".singleStock").length > 0) {
-    //    $(".singleStock").each(function () {
+    if ($(".renderCharts").length > 0) {
+        $(".renderCharts").each(function () {
+            var renderElement = $(this).attr("renderElement");
+            var dataUrl = $(this).attr("dataUrl");
+            alert(renderElement + "-" + dataUrl);
+            bindCharts(renderElement, dataUrl);
+        });
+    }
 
-    //    });
-    //}
+    if ($(".renderChartsButton").length > 0) {
+        $(".renderChartsButton").click(function () {
+            var renderElement = $(this).attr("renderElement");
+            var dataUrl = $(this).attr("dataUrl");
+
+            bindCharts(renderElement, dataUrl);
+        });
+    }
 
 });
 
 
-function bindCharts(elementId, stockCode,cycle) {
+function bindCharts(elementId, dataUrl) {
     var chartDom = document.getElementById(elementId);
     var currentChart = echarts.init(chartDom);
 
-    $.get("/home/Diagram/" + stockCode + "?cycle=" + cycle , function (rawData) {
+    $.get(dataUrl , function (rawData) {
         
         var diagramOption = eval("(" + rawData + ")");
-        console.log(diagramOption);
+
         currentChart.setOption(diagramOption);
     });
 }

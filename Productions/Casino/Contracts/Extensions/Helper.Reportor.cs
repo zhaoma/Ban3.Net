@@ -13,6 +13,7 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
+using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Sites.ViaTushare.Entries;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
@@ -22,6 +23,46 @@ namespace Ban3.Productions.Casino.Contracts.Extensions;
 /// </summary>
 public static partial class Helper
 {
+    #region 特征值图表（treemap）
+
+    public static Diagram CreateTreemapDiagram(
+        this IReportor _, 
+        FocusFilter filter,
+        Dictionary<string, int> keysDic)
+    {
+        var treemapData = Infrastructures.Indicators.Helper.FeatureGroups.Select(
+            g =>
+                new TreemapRecord
+                {
+                    Name = g,
+                    Value = keysDic.Where(o => o.Key.StartsWith($"{g}.")).Sum(o => o.Value),
+                    Children = Infrastructures.Indicators.Helper.Features
+                        .Where(f => f.Key.StartsWith($"{g}."))
+                        .Select(f => new TreemapRecord
+                        {
+                            Name = f.Key,
+                            Value = keysDic.Where(o => o.Key.StartsWith($"{f.Key}.")).Sum(o => o.Value),
+                            Children = keysDic.Where(o => o.Key.StartsWith($"{f.Key}."))
+                                .Select(d => new TreemapRecord
+                                {
+                                    Name = d.Key,
+                                    Value = d.Value
+                                }).ToList()
+                        })
+                        .ToList()
+                }).ToList();
+
+        var diagram = Infrastructures.Charts.Helper.CreateDiagram();
+
+        diagram.SetTitle(new Title[] { new Title(filter.Subject) { Left = "center" } });
+        diagram.AddSeries(SeriesType.Treemap.CreateSeries(treemapData));
+
+        return diagram;
+    }
+
+
+    #endregion
+
     #region 个股图表（Candlestick/indicators）
 
     /// <summary>

@@ -22,7 +22,7 @@ public class Full
 {
     public LineOfPoint Result { get; set; } = new();
 
-    public void Calculate(List<Inputs.Price> prices)
+    public void Calculate(List<Inputs.Price> prices,string code)
     {
         if (!prices.Any())
         {
@@ -287,6 +287,10 @@ public class Full
                         (prices[i].CurrentClose!.Value - Result.EndPoints[i].Kd.RefLLV!.Value) * 100M /
                         (Result.EndPoints[i].Kd.RefHHV!.Value - Result.EndPoints[i].Kd.RefLLV!.Value), 3);
                 }
+                else
+                {
+                    Result.EndPoints[i].Kd.RefDailyPSV = 0;
+                }
 
                 if (i > 0)
                 {
@@ -319,6 +323,7 @@ public class Full
             }
             catch (Exception ex)
             {
+                Logger.Error($"Code={code}");
                 Logger.Error(ex);
             }
 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.NetHttp;
@@ -14,8 +15,13 @@ public static class Helper
 {
     static async Task<GetBaseResult> GetBase(GetBase request)
     {
-        return await new TargetHost { Anonymous = true }
+        var response= await new TargetHost { Anonymous = true }
             .RequestGeneric<GetBaseResult>(request);
+
+        if(!string.IsNullOrEmpty(response.Message))
+            Console.WriteLine(response.Message);
+
+        return response;
     }
 
     public static GetStockBasicResult GetResult(this GetStockBasic request)

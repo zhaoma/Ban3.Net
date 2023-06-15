@@ -20,7 +20,12 @@ public static class Helper
 
     #region 特征定义
 
-    private static readonly List<SetsFeature> Features = new List<SetsFeature>
+    public static readonly List<string> FeatureGroups = new List<string>
+    {
+        "AMOUNT","BIAS","CCI","DMI","ENE","KD","MA","MACD"
+    };
+
+    public static readonly List<SetsFeature> Features = new List<SetsFeature>
     {
         new("AMOUNT.UP", "成交量多头", 1),
         new("BIAS.GE", "乖离合理", 1),

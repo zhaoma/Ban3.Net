@@ -326,8 +326,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     {
                         adx += Result[ r ].RefPDI + Result[ r ].RefMDI == 0M
                                        ? 0M
-                                       : Math.Abs( Result[ r ].RefMDI.ToDecimal() - Result[ r ].RefPDI.ToDecimal() ) /
-                                         (Result[ r ].RefPDI.ToDecimal() + Result[ r ].RefMDI.ToDecimal()) * 100M;
+                                       : Math.Abs( Result[ r ].RefMDI!.ToDecimal() - Result[ r ].RefPDI!.ToDecimal() ) /
+                                         (Result[ r ].RefPDI!.ToDecimal() + Result[ r ].RefMDI!.ToDecimal()) * 100M;
                     }
 
                     Result[ i ].RefADX = adx / M;
@@ -338,12 +338,12 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     Result[ i ].RefADXR = (Result[ i ].RefADX.ToDecimal() + Result[ i - M ].RefADX.ToDecimal()) / 2;
                 }
 
-                Result[ i ].RefADX = Math.Round( Result[ i ].RefADX.ToDecimal(), 3 );
-                Result[ i ].RefADXR = Math.Round( Result[ i ].RefADXR.ToDecimal(), 3 );
-                Result[ i ].RefHD = Math.Round( Result[ i ].RefHD.ToDecimal(), 3 );
-                Result[ i ].RefLD = Math.Round( Result[ i ].RefLD.ToDecimal(), 3 );
-                Result[ i ].RefMDI = Math.Round( Result[ i ].RefMDI.ToDecimal(), 3 );
-                Result[ i ].RefPDI = Math.Round( Result[ i ].RefPDI.ToDecimal(), 3 );
+                Result[ i ].RefADX = Math.Round( Result[ i ].RefADX!.ToDecimal(), 3 );
+                Result[ i ].RefADXR = Math.Round( Result[ i ].RefADXR!.ToDecimal(), 3 );
+                Result[ i ].RefHD = Math.Round( Result[ i ].RefHD!.ToDecimal(), 3 );
+                Result[ i ].RefLD = Math.Round( Result[ i ].RefLD!.ToDecimal(), 3 );
+                Result[ i ].RefMDI = Math.Round( Result[ i ].RefMDI!.ToDecimal(), 3 );
+                Result[ i ].RefPDI = Math.Round( Result[ i ].RefPDI!.ToDecimal(), 3 );
             }
         }
     }

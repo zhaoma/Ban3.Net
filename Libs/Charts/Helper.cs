@@ -94,6 +94,17 @@ public static partial class Helper
 
     #region Series
 
+    public static Series CreateSeries(
+        this Enums.SeriesType seriesType,
+        object? data)
+    {
+        return new Series
+        {
+            Type = seriesType,
+            Data = data
+        };
+    }
+
     ///
     public static Series CreateSeries(
         this Enums.SeriesType seriesType,

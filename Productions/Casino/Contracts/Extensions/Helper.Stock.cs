@@ -92,7 +92,7 @@ public static partial class Helper
                 {
                     lastRecord.Change = lastRecord.Close - lastRecord.PreClose;
                     lastRecord.ChangePercent=lastRecord.PreClose != 0
-                        ?(float)Math.Round((lastRecord.Close-lastRecord.PreClose) /lastRecord.PreClose,2)
+                        ?(float)Math.Round((lastRecord.Close-lastRecord.PreClose) /lastRecord.PreClose*100,2)
                         :0F;
                     result.Add(lastRecord);
                     lastRecord = price;

@@ -27,27 +27,4 @@ public class HomeController : Controller
             return RedirectToAction("Index");
 
         return View(stock);
-    }
-
-    public ContentResult Diagram(string id, string cycle = "Daily")
-    {
-        cycle = cycle.ToUpper();
-        var cycleEnum = cycle.StringToEnum<StockAnalysisCycle>();
-        var diagram = Signalert.LoadDiagramContent(new Stock { Code = id, }, cycleEnum);
-
-        return Content(diagram);
-    }
-
-    public IActionResult Indicator(string id, string cycle = "Daily")
-    {
-        cycle = cycle.ToUpper();
-        var cycleEnum = cycle.StringToEnum<StockAnalysisCycle>();
-        var data= Signalert.Calculator.LoadIndicatorLine(id, cycleEnum);
-        return View(data);
-    }
-
-    public IActionResult Sets(string id, string cycle = "Daily")
-    {
-
-    }
-}
+    } }

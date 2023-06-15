@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Entries;
@@ -7,6 +8,8 @@ using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Interfaces;
+using Ban3.Productions.Casino.Contracts.Request;
+using Ban3.Productions.Casino.Contracts.Response;
 using Ban3.Sites.ViaTushare.Entries;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
@@ -169,7 +172,7 @@ public static partial class Helper
 
     #endregion
 
-    #region 计算/加载指标曲线 
+    #region 计算/加载指标曲线
 
     /// <summary>
     /// 计算指标曲线 
@@ -202,7 +205,7 @@ public static partial class Helper
         }).ToList();
 
         var indicator = new Infrastructures.Indicators.Formulas.Full();
-        indicator.Calculate(inputsPrices);
+        indicator.Calculate(inputsPrices, code);
 
         var line = indicator.Result;
         var saved = typeof(LineOfPoint)
@@ -222,7 +225,7 @@ public static partial class Helper
         => typeof(LineOfPoint)
             .LocalFile($"{code}.{cycle}")
             .ReadFileAs<LineOfPoint>();
-    
+
     /// <summary>
     /// 指标值线转换点
     /// </summary>
@@ -284,7 +287,10 @@ public static partial class Helper
                 return !string.IsNullOrEmpty(saved);
             }
         }
-        catch (Exception ex) { Logger.Error(ex); }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
 
         sets = new List<StockSets>();
         return false;
@@ -301,7 +307,7 @@ public static partial class Helper
     }
 
     static List<StockSets> Merge(
-        this ICalculator _, List<StockSets> sets,string code, StockAnalysisCycle cycle)
+        this ICalculator _, List<StockSets> sets, string code, StockAnalysisCycle cycle)
     {
         return sets.Merge(_.LoadIndicatorLine(code, cycle), cycle);
     }
@@ -326,14 +332,14 @@ public static partial class Helper
             if (latestList == null || !latestList.Any() || !sets.Any()) return sets;
 
             var setsList = latestList
-                .Select(o =>new StockSets { MarkTime = o.Current!.MarkTime, SetKeys = o.Features() })
+                .Select(o => new StockSets { MarkTime = o.Current!.MarkTime, SetKeys = o.Features() })
                 .OrderBy(o => o.MarkTime)
                 .ToList();
 
             sets.ForEach(o =>
             {
-                var ss = setsList.First(x => x.MarkTime.Subtract(o.MarkTime).TotalDays >= 0);
-                if (ss !=null && ss.SetKeys != null && ss.SetKeys.Any())
+                var ss = setsList.FirstOrDefault(x => x.MarkTime.Subtract(o.MarkTime).TotalDays >= 0);
+                if (ss is { SetKeys: { } } && ss.SetKeys.Any())
                 {
                     o.SetKeys = o.SetKeys?.Union(ss.SetKeys.Select(y => $"{y}.{cycle}"));
                 }
@@ -409,6 +415,201 @@ public static partial class Helper
         => listName
             .DataFile<ListRecord>()
             .ReadFileAs<List<ListRecord>>();
+
+    #endregion
+
+    #region 计算/加载特征热力图
+
+    public static bool PrepareFocus(
+        this ICalculator _,
+        List<Stock> stocks,
+        FocusFilter filter,
+        out FocusFilterResult targetsResult)
+    {
+        var result = new FocusFilterResult();
+
+        stocks.ParallelExecute((stock) =>
+        {
+            var target = _.ParseFocusTarget(filter, stock);
+            if (target != null)
+            {
+                result.Append(stock.Code, target);
+            }
+        }, Config.MaxParallelTasks);
+
+        var saved = filter.Identity.DataFile<FocusTarget>()
+            .WriteFile(result.Targets.ObjToJson());
+
+        targetsResult = result;
+        return string.IsNullOrEmpty(saved);
+    }
+
+    public static FocusTarget? ParseFocusTarget(
+        this ICalculator _,
+        FocusFilter filter,
+        Stock stock)
+    {
+        var one = new FocusTarget()
+        {
+            Name = stock.Name,
+            Symbol = stock.Symbol,
+            Days = _.ParseFocusData(filter, stock, StockAnalysisCycle.DAILY),
+            Weeks = _.ParseFocusData(filter, stock, StockAnalysisCycle.WEEKLY),
+            Months = _.ParseFocusData(filter, stock, StockAnalysisCycle.MONTHLY)
+        };
+
+        if (one.Days != null || one.Weeks != null || one.Months != null)
+        {
+            return one;
+        }
+
+        return null;
+    }
+
+    static FocusData? ParseFocusData(
+        this ICalculator _,
+        FocusFilter filter,
+        Stock stock,
+        StockAnalysisCycle cycle)
+    {
+        var data = new FocusData();
+
+        var prices = _.LoadReinstatedPrices(stock.Code, cycle);
+
+        if (prices == null || !prices.Any()) return null;
+
+        prices = prices
+            .Where(o => DateTime.Now.Subtract(o.TradeDate.ToDateTimeEx()).TotalDays <= 250)
+            .ToList();
+
+        var line = _.LoadIndicatorLine(stock.Code, cycle);
+        if (line == null || line.EndPoints == null || !line.EndPoints.Any()) return null;
+
+        var sets = line
+            .LatestList()
+            .Select(o => new StockSets
+                { MarkTime = o.Current!.MarkTime, SetKeys = o.Features().Select(y => $"{y}.{cycle}") })
+            .ToList();
+
+        if (prices != null)
+        {
+            data.Total = prices.Count;
+            for (var i = 0; i < prices.Count; i++)
+            {
+                try
+                {
+                    if (filter.IsMatch(prices[i], cycle))
+                    {
+                        data.Current.Add(new FocusRecord(prices[i])
+                        {
+                            SetKeys = GetSets(sets, prices[i].TradeDate)
+                        });
+                        if (i > 0)
+                            data.Previous.Add(new FocusRecord(prices[i - 1])
+                            {
+                                SetKeys = GetSets(sets, prices[i - 1].TradeDate)
+                            });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("ERROR");
+                    Console.WriteLine(prices[i].ObjToJson());
+
+                }
+            }
+
+            return data;
+        }
+
+        return null;
+    }
+
+    static List<string>? GetSets(List<StockSets> sets, string tradeDate)
+    {
+        var s = sets.Last(o => o.MarkTime.ToYmd() == tradeDate);
+        if (s is { SetKeys: { } })
+            return s.SetKeys.ToList();
+
+        return null;
+    }
+
+    public static Dictionary<string, FocusTarget> LoadFocus(this ICalculator _, FocusFilter filter)
+        => filter.Identity
+            .DataFile<FocusTarget>()
+            .ReadFileAs<Dictionary<string, FocusTarget>>();
+    
+    public static Dictionary<string, int> KeysDictionary(this List<FocusRecord> records)
+    {
+        var result = new Dictionary<string, int>();
+
+        records.ForEach(x => { result.AppendKeys(x.SetKeys); });
+
+        return result;
+    }
+
+    static void AppendKeys(this Dictionary<string, int> dic, List<string> keys)
+    {
+        keys.ForEach(o =>
+        {
+            if (dic.ContainsKey(o))
+            {
+                dic[o] += 1;
+            }
+            else
+            {
+                dic.Add(o, 1);
+            }
+        });
+    }
+
+    static Dictionary<string, int> Merge(this Dictionary<string, int> dic, Dictionary<string, int> addDic)
+    {
+        if (addDic != null)
+        {
+
+            foreach (var i in addDic)
+            {
+                if (dic.ContainsKey(i.Key))
+                {
+                    dic[i.Key] += 1;
+                }
+                else
+                {
+                    dic.Add(i.Key, 1);
+                }
+            }
+        }
+
+        return dic;
+    }
+
+    public static Dictionary<string, int> MergePrevious(this IEnumerable<FocusTarget> targets)
+    {
+        var dic = new Dictionary<string, int>();
+        foreach (var focusTarget in targets)
+        {
+            dic = dic.Merge(focusTarget.Days?.PreviousKeys());
+            dic = dic.Merge(focusTarget.Weeks?.PreviousKeys());
+            dic = dic.Merge(focusTarget.Months?.PreviousKeys());
+        }
+        return dic;
+    }
+
+    public static Dictionary<string, int> MergeCurrent(this IEnumerable<FocusTarget> targets)
+    {
+        var dic = new Dictionary<string, int>();
+        foreach (var focusTarget in targets)
+        {
+            dic = dic.Merge(focusTarget.Days?.CurrentKeys());
+            dic = dic.Merge(focusTarget.Weeks?.CurrentKeys());
+            dic = dic.Merge(focusTarget.Months?.CurrentKeys());
+        }
+
+        return dic;
+    }
+
+
 
     #endregion
 }

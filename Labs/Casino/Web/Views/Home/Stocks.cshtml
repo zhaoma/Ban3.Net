@@ -1,6 +1,7 @@
 ﻿@model Ban3.Productions.Casino.Contracts.Entities.Stock
 @{
     ViewData["Title"] = $"{Model.Name}.{Model.Symbol}";
+    var url = $"/data/Candlestick/{Model.Code}?cycle=DAILY";
 }
 
 <div class="container-fluid">
@@ -15,7 +16,7 @@
     <main role="main" class="pb-3">
         <div class="row">
             <div class="col-9">
-                <div id="chartsDaysContainer" style="height: 1400px; width: 100%;"></div>
+                <div id="chartsDaysContainer" class="renderCharts" style="height: 1400px; width: 100%;" renderElement="chartsDaysContainer" dataUrl="@url"></div>
             </div>
             <div class="col-3">
             </div>
@@ -25,7 +26,5 @@
 
 @section TailJs
 {
-    <script>
-        bindCharts("chartsDaysContainer", "@Model.Code", "DAILY");
-    </script>
+
 }

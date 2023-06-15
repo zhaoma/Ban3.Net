@@ -5,6 +5,9 @@ using Ban3.Infrastructures.Common.Extensions;
 using System;
 using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Productions.Casino.Contracts.Interfaces;
+using Ban3.Productions.Casino.Contracts.Request;
+using Ban3.Productions.Casino.Contracts.Response;
+using Ban3.Productions.Casino.Contracts.Entities;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -42,7 +45,8 @@ public static partial class Helper
                 var currentOp = Infrastructures.Indicators.Enums.StockOperate.Left;
                 for (int op = 0; op < operates.Count(); op++)
                 {
-                    operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile.BuySets, profile.SellSets, currentOp);
+                    operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile.BuySets, profile.SellSets,
+                        currentOp);
                     currentOp = operates[op].Operate;
                 }
 
@@ -102,7 +106,7 @@ public static partial class Helper
     /// <returns></returns>
     public static List<StockOperate> LoadDailyOperates(
         this IAnalyzer _,
-        Profile profile, 
+        Profile profile,
         string code)
     {
         return $"{code}.{profile.Identity}"
@@ -160,6 +164,7 @@ public static partial class Helper
                     .DataFile<StockOperationRecord>()
                     .WriteFile(tradeRecords.ObjToJson());
         }
+
         return tradeRecords;
     }
 
@@ -172,11 +177,12 @@ public static partial class Helper
     /// <returns></returns>
     public static List<StockOperationRecord> LoadOperationRecords(
         this IAnalyzer _,
-        Profile profile, 
+        Profile profile,
         string code)
     {
         return $"{code}.{profile.Identity}"
             .DataFile<StockOperationRecord>()
             .ReadFileAs<List<StockOperationRecord>>();
     }
+
 }
