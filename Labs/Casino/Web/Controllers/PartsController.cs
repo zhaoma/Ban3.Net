@@ -16,13 +16,44 @@ namespace Ban3.Labs.Casino.Web.Controllers
 
         public IActionResult Indicator(RenderView request)
         {
-            var data = Signalert.Calculator.LoadIndicatorLine(request.Id, request.CycleEnum());
-            return View(data);
+            var lineOfPoint = Signalert.Calculator.LoadIndicatorLine(request.Id, request.CycleEnum());
+            return string.IsNullOrEmpty(request.ViewName)
+                ? View(lineOfPoint)
+                : View(request.ViewName, lineOfPoint);
         }
 
-        public IActionResult Prices(string id, string cycle = "Daily")
+        public IActionResult Prices(RenderView request)
         {
-            return View();
+            var prices = Signalert.Calculator.LoadReinstatedPrices(request.Id, request.CycleEnum());
+            return string.IsNullOrEmpty(request.ViewName)
+                ? View(prices)
+                : View(request.ViewName, prices);
+        }
+
+        public IActionResult Sets(RenderView request)
+        {
+            var cycle = request.CycleEnum();
+            var sets = cycle==StockAnalysisCycle.DAILY
+                            ?Signalert.Calculator.LoadSets(request.Id)
+                            :Signalert.Calculator.LoadIndicatorLine(request.Id, cycle).LineToSets();
+            return string.IsNullOrEmpty(request.ViewName)
+                ? View(sets)
+                : View(request.ViewName, sets);
+        }
+
+        public IActionResult List(RenderView request)
+        {
+            var listName = DateTime.Now.ToYmd();
+            var listData = Signalert.Calculator.LoadList(listName)
+                .Where(o =>
+                    (string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
+                    &&
+                    (string.IsNullOrEmpty(request.EndsWith) || o.Code.EndsWith(request.EndsWith))
+                );
+
+            return string.IsNullOrEmpty(request.ViewName)
+                ? View(listData)
+                : View(request.ViewName, listData);
         }
     }
 }

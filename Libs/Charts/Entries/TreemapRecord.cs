@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Charts.Entries;
 
+/// <summary>
+/// Treemap data define
+/// </summary>
 public class TreemapRecord
 {
     [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]

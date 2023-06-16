@@ -1,21 +1,20 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Charts.Enums
+namespace  Ban3.Infrastructures.Charts.Enums;
+
+///
+public enum GraphicElementAction
 {
-    ///
-    public enum GraphicElementAction
-    {
-        /// 
-        [Description("merge"), EnumMember(Value = "merge")]
-        Merge,
+    /// 
+    [Description("merge"), EnumMember(Value = "merge")]
+    Merge,
 
-        /// 
-        [Description("replace"), EnumMember(Value = "replace")]
-        Replace,
+    /// 
+    [Description("replace"), EnumMember(Value = "replace")]
+    Replace,
 
-        /// 
-        [Description("remove"), EnumMember(Value = "remove")]
-        Remove
-    }
+    /// 
+    [Description("remove"), EnumMember(Value = "remove")]
+    Remove
 }

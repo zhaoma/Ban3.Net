@@ -6,7 +6,6 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Ban3.Infrastructures.Charts.Axes;
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Labels;
 using Ban3.Infrastructures.Charts.Lines;

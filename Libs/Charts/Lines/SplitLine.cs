@@ -4,18 +4,12 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using System;
-using  Ban3.Infrastructures.Charts.Components;
-using  Ban3.Infrastructures.Charts.Styles;
 using  Ban3.Infrastructures.Charts.Elements;
-using Newtonsoft.Json;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Lines
+namespace  Ban3.Infrastructures.Charts.Lines;
+
+public class SplitLine
+    : GeneralLine
 {
-    public class SplitLine
-        :GeneralLine
-    {
 
-    }
 }

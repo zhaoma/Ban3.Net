@@ -326,15 +326,9 @@ public static partial class Helper
     {
         try
         {
-            var latestList = indicatorValue
-                .LatestList();
+            if (!sets.Any()) return sets;
 
-            if (latestList == null || !latestList.Any() || !sets.Any()) return sets;
-
-            var setsList = latestList
-                .Select(o => new StockSets { MarkTime = o.Current!.MarkTime, SetKeys = o.Features() })
-                .OrderBy(o => o.MarkTime)
-                .ToList();
+            var setsList = indicatorValue.LineToSets();
 
             sets.ForEach(o =>
             {
@@ -351,6 +345,24 @@ public static partial class Helper
         }
 
         return sets;
+    }
+
+    public static List<StockSets> LineToSets(this LineOfPoint indicatorValue)
+    {
+        var latestList = indicatorValue
+            .LatestList();
+
+        if (latestList == null || !latestList.Any() ) return new List<StockSets>();
+
+       return latestList
+            .Select(o => new StockSets
+            {
+                MarkTime = o.Current!.MarkTime,
+                Close=o.Current.Close,
+                SetKeys = o.Features()
+            })
+            .OrderBy(o => o.MarkTime)
+            .ToList();
     }
 
     /// <summary>
@@ -483,42 +495,40 @@ public static partial class Helper
             .ToList();
 
         var line = _.LoadIndicatorLine(stock.Code, cycle);
-        if (line == null || line.EndPoints == null || !line.EndPoints.Any()) return null;
+        if (line?.EndPoints == null || !line.EndPoints.Any()) return null;
 
         var sets = line
             .LatestList()
             .Select(o => new StockSets
-                { MarkTime = o.Current!.MarkTime, SetKeys = o.Features().Select(y => $"{y}.{cycle}") })
+                { MarkTime = o.Current!.MarkTime,Close=o.Current.Close, SetKeys = o.Features().Select(y => $"{y}.{cycle}") })
             .ToList();
 
-        if (prices != null)
+        data.Total = prices.Count;
+        for (var i = 0; i < prices.Count; i++)
         {
-            data.Total = prices.Count;
-            for (var i = 0; i < prices.Count; i++)
+            try
             {
-                try
+                if (filter.IsMatch(prices[i], cycle))
                 {
-                    if (filter.IsMatch(prices[i], cycle))
+                    data.Current.Add(new FocusRecord(prices[i])
                     {
-                        data.Current.Add(new FocusRecord(prices[i])
-                        {
-                            SetKeys = GetSets(sets, prices[i].TradeDate)
-                        });
-                        if (i > 0)
-                            data.Previous.Add(new FocusRecord(prices[i - 1])
-                            {
-                                SetKeys = GetSets(sets, prices[i - 1].TradeDate)
-                            });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("ERROR");
-                    Console.WriteLine(prices[i].ObjToJson());
+                        SetKeys = GetSets(sets, prices[i].TradeDate)
+                    });
 
+                    if (prices.Count > 0)
+                        data.Previous.Add(new FocusRecord(prices[i - 1])
+                        {
+                            SetKeys = GetSets(sets, prices[i - 1].TradeDate)
+                        });
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR");
+                Console.WriteLine(prices[i].ObjToJson());
 
+            }
+            
             return data;
         }
 

@@ -6,9 +6,6 @@
 
 using  Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace  Ban3.Infrastructures.Charts.Styles
 {

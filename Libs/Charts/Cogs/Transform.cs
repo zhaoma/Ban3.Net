@@ -5,25 +5,20 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace  Ban3.Infrastructures.Charts.Cogs
+namespace  Ban3.Infrastructures.Charts.Cogs;
+
+public class Transform
 {
+    /// 
+    [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
+    public string? Type { get; set; }
 
-    public class Transform
-    {
-        /// 
-        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Type { get; set; }
+    /// 
+    [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
+    public object? Config { get; set; }
 
-        /// 
-        [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
-        public object? Config { get; set; }
-
-        /// 
-        [JsonProperty("print", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Print { get; set; }
-    }
+    /// 
+    [JsonProperty("print", NullValueHandling = NullValueHandling.Ignore)]
+    public bool? Print { get; set; }
 }

@@ -4,18 +4,13 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using System;
-using System.Collections.Generic;
-using System.Text;
+namespace  Ban3.Infrastructures.Charts.Cogs;
 
-namespace  Ban3.Infrastructures.Charts.Cogs
+public class MediaQuery
 {
-    public class MediaQuery
-    {
-        public int? MinWidth { get; set; }
+    public int? MinWidth { get; set; }
 
-        public int? MaxHeight { get; set; }
+    public int? MaxHeight { get; set; }
 
-        public decimal? MinAspectRatio { get; set; }
-    }
+    public decimal? MinAspectRatio { get; set; }
 }

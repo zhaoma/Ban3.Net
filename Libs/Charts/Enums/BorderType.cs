@@ -1,17 +1,16 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Charts.Enums
+namespace  Ban3.Infrastructures.Charts.Enums;
+
+public enum BorderType
 {
-    public enum BorderType
-    {
-        [Description("solid"), EnumMember(Value = "solid")]
-        Solid,
+    [Description("solid"), EnumMember(Value = "solid")]
+    Solid,
 
-        [Description("dashed"), EnumMember(Value = "dashed")]
-        Dashed,
+    [Description("dashed"), EnumMember(Value = "dashed")]
+    Dashed,
 
-        [Description("dotted"), EnumMember(Value = "dotted")]
-        Dotted
-    }
+    [Description("dotted"), EnumMember(Value = "dotted")]
+    Dotted
 }

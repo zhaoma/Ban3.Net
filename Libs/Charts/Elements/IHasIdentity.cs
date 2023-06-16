@@ -3,7 +3,7 @@
 //  function:	IIdentity.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using System;
+
 using Newtonsoft.Json;
 
 namespace  Ban3.Infrastructures.Charts.Elements;

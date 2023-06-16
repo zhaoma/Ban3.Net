@@ -16,7 +16,6 @@ namespace  Ban3.Infrastructures.Charts.Styles
     public class CheckpointStyle
         : GeneralStyle, IHasSymbol
     {
-
         #region IHasSymbol
 
         /// 

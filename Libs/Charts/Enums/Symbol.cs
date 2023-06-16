@@ -1,41 +1,40 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Charts.Enums
+namespace  Ban3.Infrastructures.Charts.Enums;
+
+/// 
+public enum Symbol
 {
     /// 
-    public enum Symbol
-    {
-        /// 
-        [Description("circle"), EnumMember(Value = "circle")]
-        Circle,
+    [Description("circle"), EnumMember(Value = "circle")]
+    Circle,
 
-        /// 
-        [Description("rect"), EnumMember(Value = "rect")]
-        Rect,
+    /// 
+    [Description("rect"), EnumMember(Value = "rect")]
+    Rect,
 
-        /// 
-        [Description("roundRect"), EnumMember(Value = "roundRect")] 
-        RoundRect,
+    /// 
+    [Description("roundRect"), EnumMember(Value = "roundRect")]
+    RoundRect,
 
-        /// 
-        [Description("triangle"), EnumMember(Value = "triangle")] 
-        Triangle,
+    /// 
+    [Description("triangle"), EnumMember(Value = "triangle")]
+    Triangle,
 
-        /// 
-        [Description("diamond"), EnumMember(Value = "diamond")] 
-        Diamond,
+    /// 
+    [Description("diamond"), EnumMember(Value = "diamond")]
+    Diamond,
 
-        /// 
-        [Description("pin"), EnumMember(Value = "pin")] 
-        Pin,
+    /// 
+    [Description("pin"), EnumMember(Value = "pin")]
+    Pin,
 
-        /// 
-        [Description("arrow"), EnumMember(Value = "arrow")] 
-        Arrow,
+    /// 
+    [Description("arrow"), EnumMember(Value = "arrow")]
+    Arrow,
 
-        /// 
-        [Description("none"), EnumMember(Value = "none")] 
-        None
-    }
+    /// 
+    [Description("none"), EnumMember(Value = "none")]
+    None
 }

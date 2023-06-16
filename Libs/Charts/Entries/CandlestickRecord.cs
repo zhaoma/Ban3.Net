@@ -2,6 +2,9 @@
 
 namespace Ban3.Infrastructures.Charts.Entries;
 
+/// <summary>
+/// Candlestick data define
+/// </summary>
 public class CandlestickRecord
 {
     public DateTime TradeDate { get; set; }

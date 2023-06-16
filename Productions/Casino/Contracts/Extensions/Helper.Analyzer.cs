@@ -185,4 +185,5 @@ public static partial class Helper
             .ReadFileAs<List<StockOperationRecord>>();
     }
 
+
 }

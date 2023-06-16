@@ -6,26 +6,20 @@
 
 using  Ban3.Infrastructures.Charts.Cogs;
 using Newtonsoft.Json;
-using System;
 
-namespace  Ban3.Infrastructures.Charts.Components
+namespace  Ban3.Infrastructures.Charts.Components;
+
+/// <summary>
+/// graphic component enables creating graphic elements in ECharts.
+/// </summary>
+public class Graphic
 {
-    /// <summary>
-    /// graphic component enables creating graphic elements in ECharts.
-    /// </summary>
-    public class Graphic
-	{
-		public Graphic()
-		{
-		}
+    /// 
+    [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
+    public string? Id { get; set; }
 
-        /// 
-        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Id { get; set; }
-
-        /// 
-        [JsonProperty("elements", NullValueHandling = NullValueHandling.Ignore)]
-        public GraphicElement[]? Elements { get; set; }
-    }
+    /// 
+    [JsonProperty("elements", NullValueHandling = NullValueHandling.Ignore)]
+    public GraphicElement[]? Elements { get; set; }
 }
 

@@ -7,23 +7,22 @@
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Charts.Enums
+namespace  Ban3.Infrastructures.Charts.Enums;
+
+/// <summary>
+/// 
+/// </summary>
+public enum Layout
 {
     /// <summary>
-    /// 
+    /// 水平排布各个坐标轴
     /// </summary>
-    public enum Layout
-    {
-        /// <summary>
-        /// 水平排布各个坐标轴
-        /// </summary>
-        [Description("horizontal"), EnumMember(Value = "horizontal")]
-        Horizontal,
+    [Description("horizontal"), EnumMember(Value = "horizontal")]
+    Horizontal,
 
-        /// <summary>
-        /// 竖直排布各个坐标轴
-        /// </summary>
-        [Description("vertical"), EnumMember(Value = "vertical")]
-        Vertical
-    }
+    /// <summary>
+    /// 竖直排布各个坐标轴
+    /// </summary>
+    [Description("vertical"), EnumMember(Value = "vertical")]
+    Vertical
 }

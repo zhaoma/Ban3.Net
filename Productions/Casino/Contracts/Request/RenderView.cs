@@ -12,4 +12,10 @@ public class RenderView
 
     public StockAnalysisCycle CycleEnum()
        => Cycle.ToUpper().StringToEnum<StockAnalysisCycle>();
+
+    public string StartsWith { get; set; }
+
+    public string EndsWith { get; set; }
+
+    public string ViewName { get; set; }
 }

@@ -4,7 +4,7 @@
         $(".renderCharts").each(function () {
             var renderElement = $(this).attr("renderElement");
             var dataUrl = $(this).attr("dataUrl");
-            alert(renderElement + "-" + dataUrl);
+
             bindCharts(renderElement, dataUrl);
         });
     }

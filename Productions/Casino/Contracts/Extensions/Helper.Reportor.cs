@@ -54,8 +54,25 @@ public static partial class Helper
 
         var diagram = Infrastructures.Charts.Helper.CreateDiagram();
 
-        diagram.SetTitle(new Title[] { new Title(filter.Subject) { Left = "center" } });
-        diagram.AddSeries(SeriesType.Treemap.CreateSeries(treemapData));
+        diagram.SetTitle(new [] { new Title(filter.Subject) {Show = false,Left = "center" } });
+
+        var series = SeriesType.Treemap.CreateSeries(treemapData);
+        series.Levels = new List<TreemapLevel>
+        {
+            new ()
+            {
+                ItemStyle = new ItemStyle { BorderColor = "#777", BorderWidth = 0, GapWidth = 1 },
+                UpperLabel = new Label { Show = false }
+            },
+            new()
+            {
+                ItemStyle = new ItemStyle { BorderColor = "#555", BorderWidth = 1, GapWidth =5 },
+                Emphasis = new Emphasis { ItemStyle = new ItemStyle{BorderColor = "#ddd"} }
+            }
+        };
+
+        diagram.AddSeries(series);
+        diagram.SetTooltip(new[] { new Tooltip { Formatter = "{b}:{c}" } });
 
         return diagram;
     }

@@ -5,24 +5,20 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace  Ban3.Infrastructures.Charts.Cogs
+namespace  Ban3.Infrastructures.Charts.Cogs;
+
+public class RadarIndicator
 {
-    public class RadarIndicator
-    {
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Name { get; set; }
+    [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+    public string? Name { get; set; }
 
-        [JsonProperty("max", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Max { get; set; }
+    [JsonProperty("max", NullValueHandling = NullValueHandling.Ignore)]
+    public int? Max { get; set; }
 
-        [JsonProperty("min", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Min { get; set; }
+    [JsonProperty("min", NullValueHandling = NullValueHandling.Ignore)]
+    public int? Min { get; set; }
 
-        [JsonProperty("color", NullValueHandling = NullValueHandling.Ignore)]
-        public string? Color { get; set; }
-    }
+    [JsonProperty("color", NullValueHandling = NullValueHandling.Ignore)]
+    public string? Color { get; set; }
 }

@@ -1,29 +1,28 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Charts.Enums
+namespace  Ban3.Infrastructures.Charts.Enums;
+
+/// <summary>
+/// font style.
+/// </summary>
+public enum FontStyle
 {
     /// <summary>
-    /// font style.
+    /// normal
     /// </summary>
-    public enum FontStyle
-    {
-        /// <summary>
-        /// normal
-        /// </summary>
-        [Description("normal"), EnumMember(Value = "normal")]
-        Normal,
+    [Description("normal"), EnumMember(Value = "normal")]
+    Normal,
 
-        /// <summary>
-        /// italic
-        /// </summary>
-        [Description("italic"), EnumMember(Value = "italic")]
-        Italic,
+    /// <summary>
+    /// italic
+    /// </summary>
+    [Description("italic"), EnumMember(Value = "italic")]
+    Italic,
 
-        /// <summary>
-        /// oblique
-        /// </summary>
-        [Description("oblique"), EnumMember(Value = "oblique")]
-        Oblique
-    }
+    /// <summary>
+    /// oblique
+    /// </summary>
+    [Description("oblique"), EnumMember(Value = "oblique")]
+    Oblique
 }

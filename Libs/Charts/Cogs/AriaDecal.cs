@@ -6,18 +6,17 @@
 
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Cogs
+namespace  Ban3.Infrastructures.Charts.Cogs;
+
+/// <summary>
+/// 使用默认贴花图案的方式非常简单，只需要开启即可
+/// </summary>
+public class AriaDecal
 {
     /// <summary>
-    /// 使用默认贴花图案的方式非常简单，只需要开启即可
+    /// 是否显示贴花图案，默认不显示。如果要显示贴花，
+    /// 需要保证 aria.enabled 与 aria.decal.show 都是 true。
     /// </summary>
-    public class AriaDecal
-    {
-        /// <summary>
-        /// 是否显示贴花图案，默认不显示。如果要显示贴花，
-        /// 需要保证 aria.enabled 与 aria.decal.show 都是 true。
-        /// </summary>
-        [JsonProperty("show", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Show { get; set; }
-    }
+    [JsonProperty("show", NullValueHandling = NullValueHandling.Ignore)]
+    public bool? Show { get; set; }
 }

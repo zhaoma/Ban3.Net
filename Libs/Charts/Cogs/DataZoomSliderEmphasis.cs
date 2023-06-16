@@ -6,24 +6,20 @@
 
 using  Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace  Ban3.Infrastructures.Charts.Cogs
+namespace  Ban3.Infrastructures.Charts.Cogs;
+
+public class DataZoomSliderEmphasis
 {
-    public class DataZoomSliderEmphasis
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("handleStyle", NullValueHandling = NullValueHandling.Ignore)]
-        public GeneralStyle? HandleStyle { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("handleStyle", NullValueHandling = NullValueHandling.Ignore)]
+    public GeneralStyle? HandleStyle { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [JsonProperty("moveHandleStyle", NullValueHandling = NullValueHandling.Ignore)]
-        public GeneralStyle? MoveHandleStyle { get; set; }
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("moveHandleStyle", NullValueHandling = NullValueHandling.Ignore)]
+    public GeneralStyle? MoveHandleStyle { get; set; }
 }

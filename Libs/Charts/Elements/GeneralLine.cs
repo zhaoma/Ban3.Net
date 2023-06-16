@@ -3,26 +3,24 @@
 //  function:	GeneralLine.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using System;
+
 using  Ban3.Infrastructures.Charts.Styles;
 
-namespace  Ban3.Infrastructures.Charts.Elements
+namespace  Ban3.Infrastructures.Charts.Elements;
+
+public class GeneralLine
+    : IHasLine
 {
-	public class GeneralLine
-		:IHasLine
-    {
-        #region IHasLine
+    #region IHasLine
 
-        /// 
-        public bool? Show { get; set; } = true;
+    /// 
+    public bool? Show { get; set; } = true;
 
-        ///
-	    public LineStyle? LineStyle { get; set; }
+    ///
+    public LineStyle? LineStyle { get; set; }
 
-        ///
-        public object? Interval { get; set; }
+    ///
+    public object? Interval { get; set; }
 
-        #endregion
-    }
+    #endregion
 }
-

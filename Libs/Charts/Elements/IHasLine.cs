@@ -3,7 +3,7 @@
 //  function:	IHasLine.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using System;
+
 using  Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
 

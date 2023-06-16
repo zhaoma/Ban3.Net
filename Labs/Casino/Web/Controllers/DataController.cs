@@ -14,8 +14,11 @@ namespace Ban3.Labs.Casino.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ContentResult Treemap()
+        public ContentResult CurrentTreemap()
             => Content(Signalert.LoadCurrentTreemap(Config.DefaultFilter).ObjToJson());
+
+        public ContentResult PreviousTreemap()
+            => Content(Signalert.LoadPreviousTreemap(Config.DefaultFilter).ObjToJson());
 
         public ContentResult Candlestick(string id, string cycle = "Daily")
         {

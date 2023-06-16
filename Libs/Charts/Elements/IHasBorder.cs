@@ -86,11 +86,11 @@ public interface IHasBorder
     /// padding: 5
     /// padding: [5, 10]
     /// padding: [
-    //    5,   up
-    //    10,  right
-    //    5,   down
-    //    10,  left
-    //  ]
+    ///    5,   up
+    ///    10,  right
+    ///    5,   down
+    ///    10,  left
+    ///  ]
     /// </summary>
     [JsonProperty("padding", NullValueHandling = NullValueHandling.Ignore)]
     object? Padding { get; set; }

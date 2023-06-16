@@ -5,37 +5,33 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System;
-using  Ban3.Infrastructures.Charts.Styles;
 using  Ban3.Infrastructures.Charts.Elements;
-using Newtonsoft.Json;
 using ECharts =  Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Lines
+namespace  Ban3.Infrastructures.Charts.Lines;
+
+/// <summary>
+/// 轴线
+/// </summary>
+public class AxisLine
+    : GeneralLine, IHasSymbol
 {
-    /// <summary>
-    /// 轴线
-    /// </summary>
-    public class AxisLine
-        :GeneralLine,IHasSymbol
-    {
-        #region IHasSymbol
+    #region IHasSymbol
 
-        /// 
-        public ECharts.Symbol? Symbol { get; set; }
+    /// 
+    public ECharts.Symbol? Symbol { get; set; }
 
-        /// 
-        public object? SymbolSize { get; set; }
+    /// 
+    public object? SymbolSize { get; set; }
 
-        /// 
-        public int? SymbolRotate { get; set; }
+    /// 
+    public int? SymbolRotate { get; set; }
 
-        /// 
-        public bool? SymbolKeepAspect { get; set; }
+    /// 
+    public bool? SymbolKeepAspect { get; set; }
 
-        /// 
-        public object? SymbolOffset { get; set; }
+    /// 
+    public object? SymbolOffset { get; set; }
 
-        #endregion
-    }
+    #endregion
 }

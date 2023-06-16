@@ -4,16 +4,11 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using System;
-using System.Collections.Generic;
-using System.Text;
+namespace  Ban3.Infrastructures.Charts.Cogs;
 
-namespace  Ban3.Infrastructures.Charts.Cogs
+public class Media
 {
-    public class Media
-    {
-        public MediaQuery? Query { get; set; }
+    public MediaQuery? Query { get; set; }
 
-        public object? Option { get; set; }
-    }
+    public object? Option { get; set; }
 }

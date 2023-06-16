@@ -23,4 +23,13 @@ public partial class Signalert
 
         return Reportor.CreateTreemapDiagram(Config.DefaultFilter, dicCurrent);
     }
+    
+    public static Diagram LoadPreviousTreemap(FocusFilter filter)
+    {
+        var data = Signalert.Calculator.LoadFocus(Config.DefaultFilter);
+        var dicCurrent = data.Select(o => o.Value)
+            .MergePrevious();
+
+        return Reportor.CreateTreemapDiagram(Config.DefaultFilter, dicCurrent);
+    }
 }

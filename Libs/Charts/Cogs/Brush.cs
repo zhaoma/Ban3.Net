@@ -18,10 +18,6 @@ namespace  Ban3.Infrastructures.Charts.Cogs;
 /// </summary>
 public class Brush
 {
-    public Brush()
-    {
-    }
-
     /// 
     [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
     public string? Id { get; set; }
