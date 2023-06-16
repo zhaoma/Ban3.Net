@@ -1,0 +1,29 @@
+﻿@using Ban3.Infrastructures.Common.Extensions
+@model IEnumerable<Ban3.Infrastructures.Indicators.Entries.ListRecord> 
+@{
+    Layout = null;
+}
+
+<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
+    <thead>
+    <tr>
+        <th class="col-1">Date</th>
+        <th class="col-1">Symbol</th>
+        <th class="col-1">Close</th>
+        <th class="col-8">Value</th>
+        <th class="col-1">Rank</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var point in Model.OrderBy(o => o.Rank))
+    {
+        <tr>
+            <td>@point.MarkTime.ToYmd()</td>
+            <td>@point.Symbol</td>
+            <td>@point.Close</td>
+            <td>@point.Value</td>
+            <td>@point.Rank</td>
+        </tr>
+    }
+    </tbody>
+</table>

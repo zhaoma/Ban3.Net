@@ -1,0 +1,35 @@
+﻿@using Ban3.Infrastructures.Common.Extensions
+@model IEnumerable<Ban3.Productions.Casino.Contracts.Entities.StockEvent> 
+@{
+    Layout = null;
+}
+
+<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
+    <thead>
+    <tr>
+        <th class="col-1">Date</th>
+        <th class="col-1">Subject</th>
+            <th class="col-2">送股(每十股)</th>
+            <th class="col-2">转增(每十股)</th>
+            <th class="col-2">派息(每十股)</th>
+            <th class="col-2">配股(每十股)</th>
+            <th class="col-2">基准股本</th>
+        <th class="col-2">解禁数量</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var point in Model.OrderBy(o => o.MarkTime))
+    {
+        <tr>
+            <td>@point.MarkTime.ToYmd()</td>
+            <td>@point.EventSubject</td>
+                <td>@point.Sbonus</td>
+                <td>@point.Zbonus</td>
+                <td>@point.Xmoney</td>
+                <td>@point.Pprice / @point.Pbonus</td>
+                <td>@point.Pcapital</td>
+                <td>@point.Lifted</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Ban3.Sites.ViaTushare.Entries.StockPrice> 
+@{
+    Layout = null;
+}
+
+<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
+    <thead>
+        <tr>
+            <th class="col-1">Date</th>
+            <th class="col-1">Open</th>
+            <th class="col-1">High</th>
+            <th class="col-1">Low</th>
+            <th class="col-1">Close</th>
+            <th class="col-1">PreClose</th>
+            <th class="col-1">Change</th>
+            <td class="col-1">Percent</td>
+            <th class="col-2">Vol</th>
+            <td class="col-2">Amount</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var point in Model.OrderByDescending(o => o.TradeDate))
+        {
+            var className = point.Change > 0 ? "red" : point.Change == 0 ? "gray" : "green";
+                <tr class="@className">
+                    <td>@point.TradeDate</td>
+                    <td>@point.Open</td>
+                    <td>@point.High</td>
+                    <td>@point.Low</td>
+                    <td>@point.Close</td>
+                    <td>@point.PreClose</td>
+                    <td>@point.Change</td>
+                    <td>@point.ChangePercent %</td>
+                    <td>@point.Vol</td>
+                    <td>@point.Amount</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

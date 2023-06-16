@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Entries;
@@ -618,8 +617,6 @@ public static partial class Helper
 
         return dic;
     }
-
-
-
+    
     #endregion
 }

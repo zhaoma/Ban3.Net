@@ -20,6 +20,22 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// 
         /// </summary>
         public Profile() {}
+
+        public Profile(
+            string identity, 
+            string subject,
+            string[] buyKeys, 
+            string[] sellKeys,
+            bool persistence = false,
+            bool isDefault = false)
+        {
+            Identity=identity;
+            Subject = subject;
+            BuySets = new List<string[]> { buyKeys };
+            SellSets=new List<string[]>{sellKeys};
+            Persistence=persistence;
+            IsDefault=isDefault;
+        }
         
         /// <summary>
         /// 标识

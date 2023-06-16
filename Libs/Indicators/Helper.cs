@@ -161,9 +161,14 @@ public static class Helper
     };
 
     const string CacheKey = "casino.Profiles";
+
     private static readonly string ProfilesFile = "all".DataFile<Profile>();
+
     public static List<Profile> Profiles
         => CacheKey.LoadOrSetDefault(()=>DefaultProfiles, ProfilesFile);
+
+    public static void UpdateProfiles(this List<Profile> profiles)
+        => "all".DataFile<Profile>().WriteFile(profiles.ObjToJson());
 
     #endregion
 }

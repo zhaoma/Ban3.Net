@@ -8,6 +8,8 @@ using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Productions.Casino.Contracts.Response;
 using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Enums;
+using Ban3.Sites.ViaTushare.Entries;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -16,6 +18,8 @@ namespace Ban3.Productions.Casino.Contracts.Extensions;
 /// </summary>
 public static partial class Helper
 {
+    #region 生成每日操作建议
+
     /// <summary>
     /// 根据策略与每日特征生成每日操作建议
     /// </summary>
@@ -185,5 +189,43 @@ public static partial class Helper
             .ReadFileAs<List<StockOperationRecord>>();
     }
 
+    #endregion
 
+    public static List<DotInfo> DotsOfBuyingOrSelling(this List<StockPrice> prices, FocusFilter filter)
+    {
+        if (prices == null || !prices.Any()) return new List<DotInfo>();
+
+        var result=new List<DotInfo>();
+        for (var i = 0; i < prices.Count; i++)
+        {
+            if (prices.GetDayDot(filter, i, out var dot))
+            {
+                result.Add(dot);
+            }
+        }
+
+        return result;
+    }
+
+    static bool GetDayDot(this List<StockPrice> prices, FocusFilter filter, int i,out DotInfo dot)
+    {
+        var current = prices[i];
+
+        if (prices.Count > i + 1)
+        {
+            var nextDay = prices[i + 1];
+            if(filter.IsMatch( nextDay.ChangePercent,StockAnalysisCycle.DAILY,out var isDotOfBuying))
+            {
+
+            }
+        }
+
+        var week = new StockPrice[5];
+        prices.CopyTo(i+1,week,0,5);
+
+        var month=new StockPrice[20];
+        prices.CopyTo(i+1,month,0,20);
+
+
+    }
 }

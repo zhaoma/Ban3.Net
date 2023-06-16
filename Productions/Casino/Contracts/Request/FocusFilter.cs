@@ -12,24 +12,26 @@ public class FocusFilter
 
     public string Subject { get; set; } = string.Empty;
 
-    public Dictionary<StockAnalysisCycle, float>? MinChangePercent { get; set; }
+    public Dictionary<StockAnalysisCycle, float>? BuyingCondition { get; set; }
 
-    public Dictionary<StockAnalysisCycle, float>? MaxChangePercent { get; set; }
+    public Dictionary<StockAnalysisCycle, float>? SellingCondition { get; set; }
 
-    public bool IsMatch(StockPrice price, StockAnalysisCycle cycle)
+    public bool IsMatch(float changePercent, StockAnalysisCycle cycle, out bool isDotOfBuying)
     {
-        var result = Math.Abs(price.Open - price.Close) > 0.01F;
+        isDotOfBuying = false;
+        var result = false;
 
-        if (MinChangePercent != null&&MinChangePercent.TryGetValue(cycle, out var min))
+        if (BuyingCondition != null && BuyingCondition.TryGetValue(cycle, out var min))
         {
-            result = price.ChangePercent >= min;
+            result = changePercent >= min;
+            isDotOfBuying = true;
         }
 
-        if (MaxChangePercent != null&& MaxChangePercent.TryGetValue(cycle, out var max))
+        if (SellingCondition != null && SellingCondition.TryGetValue(cycle, out var max))
         {
-            result = result && price.ChangePercent <= MaxChangePercent[cycle];
+            result = changePercent <= max;
         }
-        
+
         return result;
     }
 }

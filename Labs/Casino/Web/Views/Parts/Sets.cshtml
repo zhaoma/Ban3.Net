@@ -1,0 +1,27 @@
+﻿@using Ban3.Infrastructures.Common.Extensions
+@model IEnumerable<Ban3.Infrastructures.Indicators.Outputs.StockSets> 
+@{
+    Layout = null;
+}
+
+<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
+    <thead>
+    <tr>
+        <th class="col-1">Date</th>
+        <th class="col-1">Symbol</th>
+        <th class="col-1">Close</th>
+        <th class="col-9">SetKeys</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var point in Model.OrderByDescending(o => o.MarkTime))
+    {
+        <tr>
+            <td>@point.MarkTime.ToYmd()</td>
+            <td>@point.Symbol</td>
+            <td>@point.Close</td>
+            <td>@point.SetKeys?.AggregateToString(" , ")</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Ban3.Productions.Casino.Contracts.Entities.Stock> 
+@{
+    Layout = null;
+}
+
+<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
+    <thead>
+    <tr>
+        <th class="col-2">Symbol</th>
+        <th class="col-2">Name</th>
+        <th class="col-8">ListDate</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var point in Model.OrderBy(o => o.Symbol))
+    {
+        <tr>
+            <td>@point.Symbol</td>
+            <td>@point.Name</td>
+            <td>@point.ListDate</td>
+        </tr>
+    }
+    </tbody>
+</table>

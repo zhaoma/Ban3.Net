@@ -19,15 +19,17 @@ public class Config
     {
         Identity = "D7W30M40",
         Subject = "D7W30M40",
-        MinChangePercent = new Dictionary<StockAnalysisCycle, float>
+        BuyingCondition = new Dictionary<StockAnalysisCycle, float>
         {
             { StockAnalysisCycle.DAILY, 7F },
             { StockAnalysisCycle.WEEKLY, 30F },
             { StockAnalysisCycle.MONTHLY, 40F }
         },
-        MaxChangePercent = new Dictionary<StockAnalysisCycle, float>
+        SellingCondition = new Dictionary<StockAnalysisCycle, float>
         {
-            { StockAnalysisCycle.DAILY, 21F }
+            { StockAnalysisCycle.DAILY, -7F },
+            { StockAnalysisCycle.WEEKLY, -30F },
+            { StockAnalysisCycle.MONTHLY, -40F }
         }
     };
 

@@ -13,6 +13,13 @@ namespace Ban3.Labs.Casino.Web.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+        public IActionResult Events(RenderView request)
+        {
+            var evs = Signalert.Collector.LoadOnesEvents(request.Id);
+            return string.IsNullOrEmpty(request.ViewName)
+                ? View(evs)
+                : View(request.ViewName, evs);
+        }
 
         public IActionResult Indicator(RenderView request)
         {
@@ -20,6 +27,21 @@ namespace Ban3.Labs.Casino.Web.Controllers
             return string.IsNullOrEmpty(request.ViewName)
                 ? View(lineOfPoint)
                 : View(request.ViewName, lineOfPoint);
+        }
+
+        public IActionResult List(RenderView request)
+        {
+            var listName = DateTime.Now.ToYmd();
+            var listData = Signalert.Calculator.LoadList(listName)
+                .Where(o =>
+                    (string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
+                    &&
+                    (string.IsNullOrEmpty(request.EndsWith) || o.Code.EndsWith(request.EndsWith))
+                );
+
+            return string.IsNullOrEmpty(request.ViewName)
+                ? View(listData)
+                : View(request.ViewName, listData);
         }
 
         public IActionResult Prices(RenderView request)
@@ -41,10 +63,9 @@ namespace Ban3.Labs.Casino.Web.Controllers
                 : View(request.ViewName, sets);
         }
 
-        public IActionResult List(RenderView request)
+        public IActionResult Stocks(RenderView request)
         {
-            var listName = DateTime.Now.ToYmd();
-            var listData = Signalert.Calculator.LoadList(listName)
+            var stocks = Signalert.Collector.LoadAllCodes()
                 .Where(o =>
                     (string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
                     &&
@@ -52,8 +73,8 @@ namespace Ban3.Labs.Casino.Web.Controllers
                 );
 
             return string.IsNullOrEmpty(request.ViewName)
-                ? View(listData)
-                : View(request.ViewName, listData);
+                ? View(stocks)
+                : View(request.ViewName, stocks);
         }
     }
 }
