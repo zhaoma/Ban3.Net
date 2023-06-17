@@ -1,5 +1,7 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.CcaAndReport.Implements;
+using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
@@ -20,8 +22,14 @@ namespace Ban3.Labs.Casino.Web.Controllers
         public ContentResult PreviousTreemap()
             => Content(Signalert.LoadPreviousTreemap(Config.DefaultFilter).ObjToJson());
 
-        public ContentResult DotsTreemap(int forbuying)
-            => Content(Signalert.LoadDotsKey(Config.DefaultFilter, forbuying == 1).ObjToJson());
+        public ContentResult DotsTreemap(int id = 1)
+        {
+            var dic = Signalert.LoadDotsKey(Config.DefaultFilter, id == 1);
+            var diagram = Signalert.Reportor.CreateTreemapDiagram(dic, id == 1 ? "buying" : "selling");
+
+            return Content(diagram.ObjToJson());
+
+        }
 
         public ContentResult Candlestick(string id, string cycle = "Daily")
         {

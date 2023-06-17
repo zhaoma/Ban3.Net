@@ -6,12 +6,12 @@
 <table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
     <thead>
         <tr>
-            <th class="col-9">Key</th>
-            <th class="col-3">Counter</th>
+            <th style="width:75%;">Key</th>
+            <th style="width:25%;">Counter</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var point in Model)
+        @foreach (var point in Model.OrderByDescending(o=>o.Value))
         {
             <tr>
                 <td>@point.Key</td>

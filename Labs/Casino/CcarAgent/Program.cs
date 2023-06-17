@@ -100,11 +100,11 @@ internal class Program
 
         Console.WriteLine(ds.ObjToJson());
 	
+	*/
         new Action(() =>
         {
             Signalert.PrepareDots(Config.DefaultFilter);
         }).ExecuteAndTiming("Prepare Dots");
-	*/
         var now = DateTime.Now;
 
         var kvs =Signalert.Calculator.LoadDots(Config.DefaultFilter);

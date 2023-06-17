@@ -4,7 +4,7 @@ namespace Ban3.Labs.Casino.Web
     {
         public static void Main(string[] args)
         {
-            ScheduleTimer();
+            //ScheduleTimer();
 
             #region  web app run
 
@@ -30,7 +30,7 @@ namespace Ban3.Labs.Casino.Web
         }
 
         /// <summary>
-        /// »á¶ÂÈû
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½
         /// Operation is not supported on this platform.
         /// </summary>
         static void ScheduleTimer()

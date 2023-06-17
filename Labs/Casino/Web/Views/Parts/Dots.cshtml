@@ -3,61 +3,41 @@
     Layout = null;
 }
 
-<div class="row">
-    <div class="col-6 ">
-        <div id="previousTreemapContainer" style="height: 600px;" class="renderCharts" renderElement="previousTreemapContainer" dataUrl="/data/dotstreemap/1"></div>
-    </div>
-    <div class="col-6 ">
-        <div id="currentTreemapContainer" style="height: 600px;" class="renderCharts" renderElement="currentTreemapContainer" dataUrl="/data/dotstreemap/0"></div>
-    </div>
-</div>
+<table data-pagination="true" class="table table-hover table-dark  table-bordered">
+    <thead>
+        <tr>
+            <th class="col-3">Code</th>
+            <th class="col-2">Date</th>
+            <th class="col-1">Type</th>
+            <th class="col-1">Cycle</th>
+            <th class="col-1">Days</th>
+            <td class="col-2">Percent</td>
+            <th class="col-2">Close</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var point in Model)
+        {
+            var rowIndex = 1;
 
-
-<div class="row">
-    <div class="col-3 lazyLoad" dataUrl="/parts/dotskey/1">
-    </div>
-    <div class="col-6 ">
-        <table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
-            <thead>
-                <tr>
-                    <th class="col-3">Code</th>
-                    <th class="col-2">Date</th>
-                    <th class="col-1">Type</th>
-                    <th class="col-1">Cycle</th>
-                    <th class="col-1">Days</th>
-                    <td class="col-2">Percent</td>
-                    <th class="col-2">Close</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var point in Model)
-                {
-                    var rowIndex = 1;
-
-                    foreach (var row in point.Value)
+            foreach (var row in point.Value)
+            {
+                var className = row.ChangePercent > 0 ? "red" : "green";
+                <tr class="@className">
+                    @if (rowIndex == 1)
                     {
-                        var className = row.ChangePercent > 0 ? "red" : "green";
-                        <tr class="@className">
-                            @if (rowIndex == 1)
-                            {
-                                <td rowspan="@point.Value.Count">@point.Key</td>
-                            }
-                            <td>@row.TradeDate</td>
-                            <td>@(row.IsDotOfBuying?"B":"S")</td>
-
-                            <td>@row.Cycle</td>
-                            <td>@row.Days</td>
-                            <td>@row.ChangePercent %</td>
-                            <td>@row.Close</td>
-                        </tr>
-                        rowIndex++;
+                        <td rowspan="@point.Value.Count">@point.Key</td>
                     }
-                }
-                }
+                    <td>@row.TradeDate</td>
+                    <td>@(row.IsDotOfBuying?"B":"S")</td>
 
-            </tbody>
-        </table>
-    </div>
-    <div class="col-3 lazyLoad" dataUrl="/parts/dotskey/0">
-    </div>
-</div>
+                    <td>@row.Cycle</td>
+                    <td>@row.Days</td>
+                    <td>@Math.Round(row.ChangePercent,2) %</td>
+                    <td>@row.Close</td>
+                </tr>
+                rowIndex++;
+            }
+        }
+    </tbody>
+</table>

@@ -18,8 +18,12 @@ namespace Ban3.Labs.Casino.Web.Controllers
 
         public IActionResult Dots(RenderView? request)
         {
+            request ??= new RenderView();
             var dots = Signalert.Calculator.LoadDots(Config.DefaultFilter)
                 .ExtendedDots(request);
+
+            dots = dots.Skip((request.Page - 1) * request.PageSize).Take(request.PageSize).ToList();
+
             return string.IsNullOrEmpty(request?.ViewName)
                 ? View(dots)
                 : View(request.ViewName, dots);

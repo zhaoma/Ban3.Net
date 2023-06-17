@@ -21,13 +21,13 @@ public class Config
         Subject = "日7周25月40",
         BuyingCondition = new Dictionary<StockAnalysisCycle, float>
         {
-            { StockAnalysisCycle.DAILY, 7F },
+            //{ StockAnalysisCycle.DAILY, 7F },
             { StockAnalysisCycle.WEEKLY, 20F },
             { StockAnalysisCycle.MONTHLY, 40F }
         },
         SellingCondition = new Dictionary<StockAnalysisCycle, float>
         {
-            { StockAnalysisCycle.DAILY, -7F },
+            //{ StockAnalysisCycle.DAILY, -7F },
             { StockAnalysisCycle.WEEKLY, -20F },
             { StockAnalysisCycle.MONTHLY, -40F }
         }
