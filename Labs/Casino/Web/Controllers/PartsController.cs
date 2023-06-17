@@ -1,5 +1,7 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Request;
@@ -13,6 +15,23 @@ namespace Ban3.Labs.Casino.Web.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult Dots(RenderView? request)
+        {
+            var dots = Signalert.Calculator.LoadDots(Config.DefaultFilter)
+                .ExtendedDots(request);
+            return string.IsNullOrEmpty(request?.ViewName)
+                ? View(dots)
+                : View(request.ViewName, dots);
+        }
+
+
+        public IActionResult DotsKey(int id)
+        {
+            var dots = Signalert.LoadDotsKey(Config.DefaultFilter, id == 1);
+            return  View(dots);
+        }
+
         public IActionResult Events(RenderView request)
         {
             var evs = Signalert.Collector.LoadOnesEvents(request.Id);

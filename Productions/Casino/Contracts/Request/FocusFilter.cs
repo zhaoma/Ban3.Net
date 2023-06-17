@@ -21,15 +21,21 @@ public class FocusFilter
         isDotOfBuying = false;
         var result = false;
 
-        if (BuyingCondition != null && BuyingCondition.TryGetValue(cycle, out var min))
+        if (changePercent > 0)
         {
-            result = changePercent >= min;
-            isDotOfBuying = true;
+            if (BuyingCondition != null && BuyingCondition.TryGetValue(cycle, out var min))
+            {
+                result = changePercent >= min;
+                isDotOfBuying = true;
+            }
         }
-
-        if (SellingCondition != null && SellingCondition.TryGetValue(cycle, out var max))
+        else
         {
-            result = changePercent <= max;
+            if (SellingCondition != null && SellingCondition.TryGetValue(cycle, out var max))
+            {
+                result = changePercent <= max;
+                isDotOfBuying = false;
+            }
         }
 
         return result;

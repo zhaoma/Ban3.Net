@@ -20,6 +20,9 @@ namespace Ban3.Labs.Casino.Web.Controllers
         public ContentResult PreviousTreemap()
             => Content(Signalert.LoadPreviousTreemap(Config.DefaultFilter).ObjToJson());
 
+        public ContentResult DotsTreemap(int forbuying)
+            => Content(Signalert.LoadDotsKey(Config.DefaultFilter, forbuying == 1).ObjToJson());
+
         public ContentResult Candlestick(string id, string cycle = "Daily")
         {
             cycle = cycle.ToUpper();

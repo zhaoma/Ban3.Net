@@ -18,6 +18,13 @@
         });
     }
 
+    if ($(".lazyLoad").length > 0) { 
+        $(".lazyLoad").each(function () {
+            var dataUrl = $(this).attr("dataUrl");
+            $(this).load(dataUrl);
+        });
+    }
+
 });
 
 

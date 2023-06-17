@@ -1,0 +1,22 @@
+﻿@model Dictionary<string, int>
+@{
+    Layout = null;
+}
+
+<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
+    <thead>
+        <tr>
+            <th class="col-9">Key</th>
+            <th class="col-3">Counter</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var point in Model)
+        {
+            <tr>
+                <td>@point.Key</td>
+                <td>@point.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>

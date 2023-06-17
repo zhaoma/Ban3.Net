@@ -27,8 +27,8 @@ public static partial class Helper
 
     public static Diagram CreateTreemapDiagram(
         this IReportor _, 
-        FocusFilter filter,
-        Dictionary<string, int> keysDic)
+        Dictionary<string, int> keysDic,
+	    string title)
     {
         var treemapData = Infrastructures.Indicators.Helper.FeatureGroups.Select(
             g =>
@@ -54,7 +54,7 @@ public static partial class Helper
 
         var diagram = Infrastructures.Charts.Helper.CreateDiagram();
 
-        diagram.SetTitle(new [] { new Title(filter.Subject) {Show = false,Left = "center" } });
+        diagram.SetTitle(new [] { new Title(title) {Show = false,Left = "center" } });
 
         var series = SeriesType.Treemap.CreateSeries(treemapData);
         series.Levels = new List<TreemapLevel>

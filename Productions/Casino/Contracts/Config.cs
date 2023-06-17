@@ -17,18 +17,18 @@ public class Config
 
     public static FocusFilter DefaultFilter = new FocusFilter
     {
-        Identity = "D7W30M40",
-        Subject = "D7W30M40",
+        Identity = "FF752",
+        Subject = "日7周25月40",
         BuyingCondition = new Dictionary<StockAnalysisCycle, float>
         {
             { StockAnalysisCycle.DAILY, 7F },
-            { StockAnalysisCycle.WEEKLY, 30F },
+            { StockAnalysisCycle.WEEKLY, 20F },
             { StockAnalysisCycle.MONTHLY, 40F }
         },
         SellingCondition = new Dictionary<StockAnalysisCycle, float>
         {
             { StockAnalysisCycle.DAILY, -7F },
-            { StockAnalysisCycle.WEEKLY, -30F },
+            { StockAnalysisCycle.WEEKLY, -20F },
             { StockAnalysisCycle.MONTHLY, -40F }
         }
     };

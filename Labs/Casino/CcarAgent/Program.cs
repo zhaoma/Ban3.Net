@@ -4,6 +4,7 @@ using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
@@ -55,15 +56,15 @@ internal class Program
                 break;
 
             case "--check":
-                new Action(() => Signalert.ExecuteRealtimeJob(args[1])).ExecuteAndTiming($"realtime(ExecuteRealtimeJob({args[1]}))");
+                new Action(() => CheckSomething()).ExecuteAndTiming($"CheckSomething");
                 break;
 
             default:
                 $"--all:                     prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--prepare:                 prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--daily :                  prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--one code :               prepare ones daily prices".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--realtime [codes] :       refresh realtime".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--daily :                  prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--one code :               prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--realtime [codes] :       refresh all realtime data".WriteColorLine(ConsoleColor.DarkYellow);
                 CheckSomething();
                 break;
         }
@@ -77,6 +78,7 @@ internal class Program
 
     private static void CheckSomething()
     {
+        /*
         new Action(() =>
         {
             if (Signalert.PrepareFocus(Config.DefaultFilter, out var result))
@@ -89,5 +91,35 @@ internal class Program
             }
         }).ExecuteAndTiming($"PrepareFocus[{Config.DefaultFilter.Subject}]");
         
+	
+
+        var code = "688004.SH";
+        Console.WriteLine(code);
+        var stock = Signalert.Collector.LoadStock(code);
+        var ds = Signalert.GetOnesDots(stock);
+
+        Console.WriteLine(ds.ObjToJson());
+	
+        new Action(() =>
+        {
+            Signalert.PrepareDots(Config.DefaultFilter);
+        }).ExecuteAndTiming("Prepare Dots");
+	*/
+        var now = DateTime.Now;
+
+        var kvs =Signalert.Calculator.LoadDots(Config.DefaultFilter);
+
+        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalMilliseconds} ms . got {kvs.Count} ");
+
+        now = DateTime.Now;
+
+        var ds = Signalert.LoadDots(Config.DefaultFilter, null,out var dotsOfBuyings,out var dotsOfSelling);
+
+        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalMilliseconds} ms . got {ds.Count} ");
+
+        dotsOfBuyings.ObjToJson().WriteColorLine(ConsoleColor.DarkGreen);
+
+        dotsOfSelling.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
+
     }
 }

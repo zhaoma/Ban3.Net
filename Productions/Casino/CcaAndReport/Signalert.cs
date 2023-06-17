@@ -43,7 +43,7 @@ public partial class Signalert
 
         if (reCalculateSeeds)
             PrepareEventsAndSeeds(allCodes);
-        
+
         ExecutePrepare(allCodes);
     }
 
@@ -131,7 +131,7 @@ public partial class Signalert
     /// <param name="stocks"></param>
     static void ExecutePrepare(List<Stock> stocks)
     {
-        if (!Config.NeedSync()) return;
+        //if (!Config.NeedSync()) return;
 
         new Action(() => ReinstateAllPrices(stocks)).ExecuteAndTiming("ReinstateAllPrices");
 
@@ -162,7 +162,7 @@ public partial class Signalert
                     .ParallelExecute((profile) =>
                         {
                             Analyzer
-                                .OutputDailyOperates(profile,sets, stock.Code)
+                                .OutputDailyOperates(profile, sets, stock.Code)
                                 .ConvertOperates2Records(profile, stock.Code);
                         },
                         Config.MaxParallelTasks);

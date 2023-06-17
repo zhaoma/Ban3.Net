@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Outputs;
+using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Interfaces;
@@ -351,17 +354,17 @@ public static partial class Helper
         var latestList = indicatorValue
             .LatestList();
 
-        if (latestList == null || !latestList.Any() ) return new List<StockSets>();
+        if (latestList == null || !latestList.Any()) return new List<StockSets>();
 
-       return latestList
-            .Select(o => new StockSets
-            {
-                MarkTime = o.Current!.MarkTime,
-                Close=o.Current.Close,
-                SetKeys = o.Features()
-            })
-            .OrderBy(o => o.MarkTime)
-            .ToList();
+        return latestList
+             .Select(o => new StockSets
+             {
+                 MarkTime = o.Current!.MarkTime,
+                 Close = o.Current.Close,
+                 SetKeys = o.Features()
+             })
+             .OrderBy(o => o.MarkTime)
+             .ToList();
     }
 
     /// <summary>
@@ -499,7 +502,7 @@ public static partial class Helper
         var sets = line
             .LatestList()
             .Select(o => new StockSets
-                { MarkTime = o.Current!.MarkTime,Close=o.Current.Close, SetKeys = o.Features().Select(y => $"{y}.{cycle}") })
+            { MarkTime = o.Current!.MarkTime, Close = o.Current.Close, SetKeys = o.Features().Select(y => $"{y}.{cycle}") })
             .ToList();
 
         data.Total = prices.Count;
@@ -507,17 +510,17 @@ public static partial class Helper
         {
             try
             {
-                if (filter.IsMatch(prices[i], cycle))
+                if (filter.IsMatch(prices[i].ChangePercent, cycle, out var buying))
                 {
                     data.Current.Add(new FocusRecord(prices[i])
                     {
-                        SetKeys = GetSets(sets, prices[i].TradeDate)
+                        SetKeys = sets.GetSets(prices[i].TradeDate)
                     });
 
                     if (prices.Count > 0)
                         data.Previous.Add(new FocusRecord(prices[i - 1])
                         {
-                            SetKeys = GetSets(sets, prices[i - 1].TradeDate)
+                            SetKeys = sets.GetSets(prices[i - 1].TradeDate)
                         });
                 }
             }
@@ -527,14 +530,14 @@ public static partial class Helper
                 Console.WriteLine(prices[i].ObjToJson());
 
             }
-            
+
             return data;
         }
 
         return null;
     }
 
-    static List<string>? GetSets(List<StockSets> sets, string tradeDate)
+    public static List<string>? GetSets(this List<StockSets> sets, string tradeDate)
     {
         var s = sets.Last(o => o.MarkTime.ToYmd() == tradeDate);
         if (s is { SetKeys: { } })
@@ -547,7 +550,7 @@ public static partial class Helper
         => filter.Identity
             .DataFile<FocusTarget>()
             .ReadFileAs<Dictionary<string, FocusTarget>>();
-    
+
     public static Dictionary<string, int> KeysDictionary(this List<FocusRecord> records)
     {
         var result = new Dictionary<string, int>();
@@ -557,9 +560,9 @@ public static partial class Helper
         return result;
     }
 
-    static void AppendKeys(this Dictionary<string, int> dic, List<string> keys)
+    static void AppendKeys(this Dictionary<string, int> dic, IEnumerable<string> keys)
     {
-        keys.ForEach(o =>
+        foreach (var o in keys)
         {
             if (dic.ContainsKey(o))
             {
@@ -569,7 +572,17 @@ public static partial class Helper
             {
                 dic.Add(o, 1);
             }
-        });
+        }
+    }
+
+    public static Dictionary<string, int> MergeToDictionary(this IEnumerable<IEnumerable<string>> keys)
+    {
+        var dic = new Dictionary<string, int>();
+        foreach(var list in keys) {
+            dic.AppendKeys(list);
+	    }
+
+        return dic;
     }
 
     static Dictionary<string, int> Merge(this Dictionary<string, int> dic, Dictionary<string, int> addDic)
@@ -617,6 +630,269 @@ public static partial class Helper
 
         return dic;
     }
-    
+
+    #endregion
+
+    #region 计算/加载买卖位置
+
+    public static bool PrepareDots(
+        this ICalculator _,
+        FocusFilter filter,
+        List<Stock> stocks,
+	    out DotOfBuyingOrSelling dic
+    )
+    {
+        var result= new DotOfBuyingOrSelling();
+
+        stocks.ForEach(o =>
+        {
+            var dots = _.GetOnesDots(filter, o);
+            if (dots != null && dots.Any())
+                result.Add(o.Code, dots);
+        });
+
+        var saved = typeof(DotOfBuyingOrSelling)
+            .LocalFile(filter.Identity)
+            .WriteFile(result.ObjToJson());
+
+        dic = result;
+        return !string.IsNullOrEmpty(saved);
+    }
+
+    public static List<DotInfo> GetOnesDots(
+        this ICalculator _, 
+        FocusFilter filter, 
+	    Stock stock)
+    {
+        var prices = _.LoadReinstatedPrices(stock.Code, StockAnalysisCycle.DAILY);
+
+        if (prices == null || !prices.Any()) return new List<DotInfo>();
+
+        prices = prices
+            .Where(o => DateTime.Now.Subtract(o.TradeDate.ToDateTimeEx()).TotalDays <= 250)
+            .ToList();
+
+        return prices.DotsOfBuyingOrSelling(filter);
+    }
+
+
+    public static List<DotInfo> DotsOfBuyingOrSelling(this List<StockPrice> prices, FocusFilter filter)
+    {
+        if (prices == null || !prices.Any()) return new List<DotInfo>();
+
+        var result = new List<DotInfo>();
+        for (var i = 0; i < prices.Count; i++)
+        {
+            if (prices.GetDayDot(filter, i, out var dotForDay))
+            {
+                result.Add(dotForDay);
+            }
+
+
+            if (prices.GetWeekDot(filter, i, out var dotForWeek))
+            {
+                result.Add(dotForWeek);
+            }
+
+
+            if (prices.GetMonthDot(filter, i, out var dotForMonth))
+            {
+                result.Add(dotForMonth);
+            }
+        }
+
+        return result;
+    }
+
+    static bool GetDayDot(this List<StockPrice> prices, FocusFilter filter, int i, out DotInfo dot)
+    {
+        var current = prices[i];
+
+        if (prices.Count > i + 1)
+        {
+            var nextDay = prices[i + 1];
+            if (filter.IsMatch(nextDay.ChangePercent, StockAnalysisCycle.DAILY, out var isDotOfBuying))
+            {
+                dot = new DotInfo
+                {
+                    Cycle = StockAnalysisCycle.DAILY,
+                    IsDotOfBuying = isDotOfBuying,
+                    TradeDate = current.TradeDate,
+                    Days = 1,
+                    ChangePercent = nextDay.ChangePercent,
+                    Close = nextDay.Close
+                };
+                return true;
+            }
+        }
+
+        dot = null;
+        return false;
+    }
+
+    static bool GetWeekDot(this List<StockPrice> prices, FocusFilter filter, int i, out DotInfo dot)
+    {
+        var current = prices[i];
+
+        dot = null;
+
+        if (prices.Count == i + 1) return false;
+
+        var len = Math.Min(5, prices.Count - i - 1);
+
+        var week = new StockPrice[len];
+        prices.CopyTo(i + 1, week, 0, len);
+
+        if (week == null || !week.Any()) return false;
+
+        var max = week.Max(o => o.Close);
+        var min = week.Min(o => o.Close);
+
+        if (max > current.Close)
+        {
+            var plus = (max - current.Close) / current.Close * 100F;
+            if (filter.IsMatch(plus, StockAnalysisCycle.WEEKLY, out var isDotOfBuying))
+            {
+                if (week.FindIndexOfValue(max, ge: true, baseline: current.Close, out var index))
+                {
+                    dot = new DotInfo
+                    {
+                        Cycle = StockAnalysisCycle.WEEKLY,
+                        IsDotOfBuying = isDotOfBuying,
+                        TradeDate = current.TradeDate,
+                        Days = index,
+                        ChangePercent = plus,
+                        Close = max
+                    };
+                    return true;
+                }
+            }
+        }
+
+        if (min < current.Close)
+        {
+            var minus = (min - current.Close) / current.Close * 100F;
+            if (filter.IsMatch(minus, StockAnalysisCycle.WEEKLY, out var isDotOfBuying))
+            {
+                if (week.FindIndexOfValue(max, ge: false, baseline: current.Close, out var index))
+                {
+                    dot = new DotInfo
+                    {
+                        Cycle = StockAnalysisCycle.WEEKLY,
+                        IsDotOfBuying = isDotOfBuying,
+                        TradeDate = current.TradeDate,
+                        Days = index,
+                        ChangePercent = minus,
+                        Close = max
+                    };
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    static bool GetMonthDot(this List<StockPrice> prices, FocusFilter filter, int i, out DotInfo dot)
+    {
+        var current = prices[i];
+
+        dot = null;
+
+        if (prices.Count == i + 1) return false;
+
+        var len = Math.Min(20, prices.Count - i - 1);
+
+        var month = new StockPrice[len];
+        prices.CopyTo(i + 1, month, 0, len);
+
+        if (month == null || !month.Any()) return false;
+
+        var max = month.Max(o => o.Close);
+        var min = month.Min(o => o.Close);
+
+        if (max > current.Close)
+        {
+            var plus = (max - current.Close) / current.Close * 100F;
+            if (filter.IsMatch(plus, StockAnalysisCycle.MONTHLY, out var isDotOfBuying))
+            {
+                if (month.FindIndexOfValue(max, ge: true, baseline: current.Close, out var index))
+                {
+                    dot = new DotInfo
+                    {
+                        Cycle = StockAnalysisCycle.MONTHLY,
+                        IsDotOfBuying = isDotOfBuying,
+                        TradeDate = current.TradeDate,
+                        Days = index,
+                        ChangePercent = plus,
+                        Close = max
+                    };
+                    return true;
+                }
+            }
+        }
+
+        if (min < current.Close)
+        {
+            var minus = (min - current.Close) / current.Close * 100F;
+            if (filter.IsMatch(minus, StockAnalysisCycle.MONTHLY, out var isDotOfBuying))
+            {
+                if (month.FindIndexOfValue(max, ge: false, baseline: current.Close, out var index))
+                {
+                    dot = new DotInfo
+                    {
+                        Cycle = StockAnalysisCycle.MONTHLY,
+                        IsDotOfBuying = isDotOfBuying,
+                        TradeDate = current.TradeDate,
+                        Days = index,
+                        ChangePercent = minus,
+                        Close = max
+                    };
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    static bool FindIndexOfValue(this StockPrice[] arr, float close, bool ge, float baseline, out int index)
+    {
+        index = arr.Length;
+        for (var i = 0; i < arr.Length; i++)
+        {
+            if (arr[i].Close == close)
+                index = i + 1;
+        }
+
+        var newList = new StockPrice[index];
+        Array.Copy(arr, newList, index);
+
+        return newList.All(o => ge ? o.Close >= baseline : o.Close <= baseline);
+    }
+
+    public static Dictionary<string, List<DotInfo>> LoadDots(this ICalculator _, FocusFilter filter)
+            => Config.CacheKey<DotOfBuyingOrSelling>(filter.Identity)
+            .LoadOrSetDefault(
+                () => typeof(DotOfBuyingOrSelling).LocalFile(filter.Identity).ReadFileAs<Dictionary<string, List<DotInfo>>>(),
+                typeof(DotOfBuyingOrSelling).LocalFile(filter.Identity)
+                );
+
+    public static List<KeyValuePair<string, List<DotInfo>>> ExtendedDots(
+	    this Dictionary<string, 
+	    List<DotInfo>> dots, 
+	    RenderView? request)
+    {
+        return dots
+        //.Where(o =>
+        //    request == null
+        //    || (!string.IsNullOrEmpty(request.Id) || o.Key.StringEquals(request.Id))
+        //    || (!string.IsNullOrEmpty(request.StartsWith) || o.Key.StartsWithIn(request.StartsWith.Split(',')))
+        //    || (!string.IsNullOrEmpty(request.EndsWith) || o.Key.EndsWith(request.EndsWith))
+        //)
+        .Select(o => o)
+        .ToList();
+    }
+
     #endregion
 }

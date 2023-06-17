@@ -191,41 +191,4 @@ public static partial class Helper
 
     #endregion
 
-    public static List<DotInfo> DotsOfBuyingOrSelling(this List<StockPrice> prices, FocusFilter filter)
-    {
-        if (prices == null || !prices.Any()) return new List<DotInfo>();
-
-        var result=new List<DotInfo>();
-        for (var i = 0; i < prices.Count; i++)
-        {
-            if (prices.GetDayDot(filter, i, out var dot))
-            {
-                result.Add(dot);
-            }
-        }
-
-        return result;
-    }
-
-    static bool GetDayDot(this List<StockPrice> prices, FocusFilter filter, int i,out DotInfo dot)
-    {
-        var current = prices[i];
-
-        if (prices.Count > i + 1)
-        {
-            var nextDay = prices[i + 1];
-            if(filter.IsMatch( nextDay.ChangePercent,StockAnalysisCycle.DAILY,out var isDotOfBuying))
-            {
-
-            }
-        }
-
-        var week = new StockPrice[5];
-        prices.CopyTo(i+1,week,0,5);
-
-        var month=new StockPrice[20];
-        prices.CopyTo(i+1,month,0,20);
-
-
-    }
 }
