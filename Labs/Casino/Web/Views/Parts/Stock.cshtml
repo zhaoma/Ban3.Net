@@ -1,0 +1,12 @@
+﻿@model Ban3.Productions.Casino.Contracts.Entities.Stock
+@{
+    Layout = null;
+    var url = $"/data/Candlestick/{Model.Code}?cycle=DAILY";
+}
+
+<div id="chartsDaysContainer" 
+     class="renderCharts" 
+     style="height: 1400px; width: 100%;"
+     renderElement="chartsDaysContainer" 
+     dataUrl="@url">
+</div>

@@ -291,6 +291,10 @@ public class Series
     [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
     public object? Data { get; set; }
 
+
+    [JsonProperty("links", NullValueHandling = NullValueHandling.Ignore)]
+    public object? Links { get; set; }
+
     [JsonProperty("markPoint", NullValueHandling = NullValueHandling.Ignore)]
     public Mark? MarkPoint { get; set; }
 
@@ -317,4 +321,12 @@ public class Series
     /// </summary>
     [JsonProperty("colorSaturation", NullValueHandling = NullValueHandling.Ignore)]
     public object? ColorSaturation { get; set; }
+
+    /// <summary>
+    /// justify: 节点双端对齐。
+    /// left: 节点左对齐。
+    /// right: 节点右对齐。
+    /// </summary>
+    [JsonProperty("nodeAlign", NullValueHandling = NullValueHandling.Ignore)]
+    public object? NodeAlign { get; set; }
 }

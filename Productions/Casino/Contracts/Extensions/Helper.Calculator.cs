@@ -434,6 +434,14 @@ public static partial class Helper
 
     #region 计算/加载特征热力图
 
+    /// <summary>
+    /// 计算特征热力图
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="stocks"></param>
+    /// <param name="filter"></param>
+    /// <param name="targetsResult"></param>
+    /// <returns></returns>
     public static bool PrepareFocus(
         this ICalculator _,
         List<Stock> stocks,
@@ -458,6 +466,13 @@ public static partial class Helper
         return string.IsNullOrEmpty(saved);
     }
 
+    /// <summary>
+    /// 计算个股特征热力图
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="filter"></param>
+    /// <param name="stock"></param>
+    /// <returns></returns>
     public static FocusTarget? ParseFocusTarget(
         this ICalculator _,
         FocusFilter filter,
@@ -528,7 +543,7 @@ public static partial class Helper
             {
                 Console.WriteLine("ERROR");
                 Console.WriteLine(prices[i].ObjToJson());
-
+                Logger.Error(ex);
             }
 
             return data;
@@ -537,6 +552,12 @@ public static partial class Helper
         return null;
     }
 
+    /// <summary>
+    /// 获取指定日期的特征集合
+    /// </summary>
+    /// <param name="sets"></param>
+    /// <param name="tradeDate"></param>
+    /// <returns></returns>
     public static List<string>? GetSets(this List<StockSets> sets, string tradeDate)
     {
         var s = sets.Last(o => o.MarkTime.ToYmd() == tradeDate);
@@ -635,6 +656,14 @@ public static partial class Helper
 
     #region 计算/加载买卖位置
 
+    /// <summary>
+    /// 计算买卖位置
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="filter"></param>
+    /// <param name="stocks"></param>
+    /// <param name="dic"></param>
+    /// <returns></returns>
     public static bool PrepareDots(
         this ICalculator _,
         FocusFilter filter,
@@ -688,16 +717,16 @@ public static partial class Helper
                 result.Add(dotForDay);
             }
 
-
             if (prices.GetWeekDot(filter, i, out var dotForWeek))
             {
                 result.Add(dotForWeek);
+                i = i + dotForWeek.Days;
             }
-
 
             if (prices.GetMonthDot(filter, i, out var dotForMonth))
             {
                 result.Add(dotForMonth);
+                i = i + dotForMonth.Days;
             }
         }
 
@@ -871,16 +900,8 @@ public static partial class Helper
         return newList.All(o => ge ? o.Close >= baseline : o.Close <= baseline);
     }
 
-    public static Dictionary<string, List<DotInfo>> LoadDots(this ICalculator _, FocusFilter filter)
-            => Config.CacheKey<DotOfBuyingOrSelling>(filter.Identity)
-            .LoadOrSetDefault(
-                () => typeof(DotOfBuyingOrSelling).LocalFile(filter.Identity).ReadFileAs<Dictionary<string, List<DotInfo>>>(),
-                typeof(DotOfBuyingOrSelling).LocalFile(filter.Identity)
-                );
-
     public static List<KeyValuePair<string, List<DotInfo>>> ExtendedDots(
-	    this Dictionary<string, 
-	    List<DotInfo>> dots, 
+	    this Dictionary<string, List<DotInfo>> dots, 
 	    RenderView? request)
     {
         return dots

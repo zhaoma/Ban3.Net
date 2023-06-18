@@ -22,14 +22,14 @@ public class Config
         BuyingCondition = new Dictionary<StockAnalysisCycle, float>
         {
             //{ StockAnalysisCycle.DAILY, 7F },
-            { StockAnalysisCycle.WEEKLY, 20F },
-            { StockAnalysisCycle.MONTHLY, 40F }
+            { StockAnalysisCycle.WEEKLY, 25F },
+            //{ StockAnalysisCycle.MONTHLY, 40F }
         },
         SellingCondition = new Dictionary<StockAnalysisCycle, float>
         {
             //{ StockAnalysisCycle.DAILY, -7F },
-            { StockAnalysisCycle.WEEKLY, -20F },
-            { StockAnalysisCycle.MONTHLY, -40F }
+            { StockAnalysisCycle.WEEKLY, -25F },
+            //{ StockAnalysisCycle.MONTHLY, -40F }
         }
     };
 

@@ -3,7 +3,8 @@
     Layout = null;
 }
 
-<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
+<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered caption-top">
+    <caption>@Model.Sum(o=>o.Value) / @Model.Count</caption>
     <thead>
         <tr>
             <th style="width:75%;">Key</th>

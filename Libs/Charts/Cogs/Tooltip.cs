@@ -9,6 +9,7 @@ using  Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using ECharts =  Ban3.Infrastructures.Charts.Enums;
+
 namespace  Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
@@ -56,7 +57,7 @@ public class Tooltip
     /// </summary>
     [JsonProperty("triggrOn", NullValueHandling = NullValueHandling.Ignore)]
     [JsonConverter(typeof(StringEnumConverter))]
-    public ECharts.Trigger? TriggerOn { get; set; }
+    public ECharts.TriggerOn? TriggerOn { get; set; }
 
     /// <summary>
     /// 浮层显示的延迟，单位为 ms，默认没有延迟，也不建议设置。在 triggerOn 为 'mousemove' 时有效。

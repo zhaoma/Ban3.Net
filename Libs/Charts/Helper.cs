@@ -4,6 +4,7 @@ using Ban3.Infrastructures.Charts.Axes;
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Components;
 using Ban3.Infrastructures.Charts.Composites;
+using Ban3.Infrastructures.Charts.Entries;
 using Ban3.Infrastructures.Charts.Styles;
 using Ban3.Infrastructures.Common.Attributes;
 
@@ -134,7 +135,15 @@ public static partial class Helper
         return series;
     }
 
-    
+    public static Series SankeySeries(List<SankeyRecord>? data, List<SankeyLink>? links)
+    {
+        var series = Enums.SeriesType.Sankey
+            .CreateSeries(data);
+
+        series.Links = links;
+
+        return series;
+    }
 
     #endregion
 }

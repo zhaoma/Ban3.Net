@@ -11,6 +11,7 @@ using Ban3.Infrastructures.Charts.Labels;
 using Ban3.Infrastructures.Charts.Styles;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Outputs;
+using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Productions.Casino.Contracts.Request;
@@ -23,8 +24,103 @@ namespace Ban3.Productions.Casino.Contracts.Extensions;
 /// </summary>
 public static partial class Helper
 {
+    #region 特征值图表（sankey）
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="title"></param>
+    /// <param name="records"></param>
+    /// <param name="keys"></param>
+    /// <returns></returns>
+    public static Diagram CreateSankeyDiagram(
+	    this IReportor _,
+        string title,
+        List<DotRecord> records,
+        Dictionary<string, int> keys
+    )
+    {
+        var data =new List<SankeyRecord>();
+        var links = new List<SankeyLink>();
+
+        data.AddRange(Infrastructures.Indicators.Helper.FeatureGroups.Select(o => new SankeyRecord
+        {
+            Name = o,
+            ItemStyle = new ItemStyle
+            {
+                Color =Infrastructures.Indicators.Helper.ColorsDic[o],
+                BorderColor = Infrastructures.Indicators.Helper.ColorsDic[o],
+            }
+        }));
+        data.AddRange(Infrastructures.Indicators.Helper.Features.Select(o => new SankeyRecord
+        {
+            Name = o.Key
+
+        }));
+        data.AddRange(keys.Select(o => new SankeyRecord { Name = o.Key }));
+
+        links.AddRange(
+            Infrastructures.Indicators.Helper.FeatureGroups.Select(g =>
+                Infrastructures.Indicators.Helper.Features
+                    .Where(f => f.Key.StartsWith($"{g}."))
+                    .Select(f => new SankeyLink { Source = g, Target = f.Key,Value=1 })
+            ).UnionAll());
+
+        links.AddRange(
+            Infrastructures.Indicators.Helper.AllFeatures
+                .Select(a => {
+                    var v = 1;
+                    if (keys.TryGetValue(a.Key, out var vv))
+                        v = vv;
+
+                  return  Infrastructures.Indicators.Helper.Features
+                        .Where(f => a.Key.StartsWith($"{f.Key}."))
+                        .Select(f => new SankeyLink { Source = f.Key, Target = a.Key, Value = v });
+                }
+            ).UnionAll());
+
+        records.ForEach(o =>
+        {
+            if (!data.Any(x => x.Name == o.Code))
+                data.Add(new SankeyRecord { Name = o.Code });
+            links.AddRange(o.SetKeys.Select(x => new SankeyLink { Source = x, Target = o.Code,Value=1 }));
+        });
+
+        var diagram = Infrastructures.Charts.Helper.CreateDiagram();
+
+        diagram.SetTitle(new[] { new Title(title) });
+
+        var series = Infrastructures.Charts.Helper.SankeySeries(data, links);
+        series.NodeAlign = "justify";
+
+        diagram.AddSeries(series);
+        diagram.SetTooltip(new[] { new Tooltip { Trigger = Trigger.Item,TriggerOn=TriggerOn.MouseoverOrClick } });
+
+        return diagram;
+    }
+
+    public static List<DotRecord> LoadDotsSankey(
+        this IReportor _,
+        FocusFilter filter)
+    {
+        var key = $"{filter.Identity}.Sankey";
+        return typeof(DotOfBuyingOrSelling)
+            .LocalFile(key)
+            .ReadFileAs<List<DotRecord>>();
+    }
+
+    #endregion
+
     #region 特征值图表（treemap）
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="keysDic"></param>
+    /// <param name="title"></param>
+    /// <returns></returns>
     public static Diagram CreateTreemapDiagram(
         this IReportor _, 
         Dictionary<string, int> keysDic,
@@ -77,6 +173,25 @@ public static partial class Helper
         return diagram;
     }
 
+    public static Dictionary<string, int> LoadDotsKey(
+        this IReportor _,
+        FocusFilter filter,
+        bool forBuying)
+    {
+        var key = forBuying ? $"{filter.Identity}.Buying" : $"{filter.Identity}.Selling";
+        return typeof(DotOfBuyingOrSelling)
+            .LocalFile(key)
+            .ReadFileAs<Dictionary<string, int>>();
+    }
+
+    public static Dictionary<string, List<DotInfo>> LoadDots(
+	    this IReportor _, 
+	    FocusFilter filter)
+            => Config.CacheKey<DotOfBuyingOrSelling>(filter.Identity)
+            .LoadOrSetDefault(
+                () => typeof(DotOfBuyingOrSelling).LocalFile(filter.Identity).ReadFileAs<Dictionary<string, List<DotInfo>>>(),
+                typeof(DotOfBuyingOrSelling).LocalFile(filter.Identity)
+                );
 
     #endregion
 

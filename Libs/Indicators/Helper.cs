@@ -25,6 +25,19 @@ public static class Helper
         "AMOUNT","BIAS","CCI","DMI","ENE","KD","MA","MACD"
     };
 
+    public static readonly Dictionary<string, string> ColorsDic = new Dictionary<string, string>
+    {
+        { "AMOUNT","#CCC" },
+    {"MA","#CCC" },
+
+    {"BIAS","#FC0" },
+    {"CCI","#FC0" },
+    {"DMI","#C09" },
+    {"ENE","#CCC" },
+    {"KD","#FC0" },
+    {"MACD","#C09"  }
+    };
+
     public static readonly List<SetsFeature> Features = new List<SetsFeature>
     {
         new("AMOUNT.UP", "成交量多头", 1),

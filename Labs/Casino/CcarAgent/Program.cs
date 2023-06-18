@@ -59,12 +59,21 @@ internal class Program
                 new Action(() => CheckSomething()).ExecuteAndTiming($"CheckSomething");
                 break;
 
+            case "--dots":
+                new Action(() =>
+                {
+                    Signalert.PrepareFocus(Config.DefaultFilter, out var _);
+                    Signalert.PrepareDots(Config.DefaultFilter);
+                }).ExecuteAndTiming("Prepare Dots & Focus");
+                break;
+
             default:
                 $"--all:                     prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--prepare:                 prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--daily :                  prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one code :               prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--realtime [codes] :       refresh all realtime data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--dots :                   refresh dagram data".WriteColorLine(ConsoleColor.DarkYellow);
                 CheckSomething();
                 break;
         }
@@ -78,48 +87,6 @@ internal class Program
 
     private static void CheckSomething()
     {
-        /*
-        new Action(() =>
-        {
-            if (Signalert.PrepareFocus(Config.DefaultFilter, out var result))
-            {
-                result.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
-            }
-            else
-            {
-                Console.WriteLine("Prepare failure.");
-            }
-        }).ExecuteAndTiming($"PrepareFocus[{Config.DefaultFilter.Subject}]");
-        
-	
-
-        var code = "688004.SH";
-        Console.WriteLine(code);
-        var stock = Signalert.Collector.LoadStock(code);
-        var ds = Signalert.GetOnesDots(stock);
-
-        Console.WriteLine(ds.ObjToJson());
-	
-	*/
-        new Action(() =>
-        {
-            Signalert.PrepareDots(Config.DefaultFilter);
-        }).ExecuteAndTiming("Prepare Dots");
-        var now = DateTime.Now;
-
-        var kvs =Signalert.Calculator.LoadDots(Config.DefaultFilter);
-
-        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalMilliseconds} ms . got {kvs.Count} ");
-
-        now = DateTime.Now;
-
-        var ds = Signalert.LoadDots(Config.DefaultFilter, null,out var dotsOfBuyings,out var dotsOfSelling);
-
-        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalMilliseconds} ms . got {ds.Count} ");
-
-        dotsOfBuyings.ObjToJson().WriteColorLine(ConsoleColor.DarkGreen);
-
-        dotsOfSelling.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
-
+        $"program line 90, nothing in check".WriteColorLine(ConsoleColor.Yellow);
     }
 }

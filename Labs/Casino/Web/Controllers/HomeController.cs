@@ -12,15 +12,4 @@ public class HomeController : Controller
             ? View()
             : View(id);
     }
-
-    public IActionResult Stocks(string id)
-    {
-        var allCodes = Signalert.Collector.LoadAllCodes();
-        var stock = allCodes.FindLast(o => o.Code.ToUpper() == id.ToUpper());
-
-        if (stock == null)
-            return RedirectToAction("Index");
-
-        return View(stock);
-    }
 }

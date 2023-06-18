@@ -38,6 +38,8 @@ public partial class Signalert
         return Reportor.CreateTreemapDiagram(dicCurrent, $"{filter.Subject}.Previous");
     }
 
+    #region diagram data
+
     public static bool PrepareDots(FocusFilter filter)
     {
         var allCodes = Collector.LoadAllCodes();
@@ -46,10 +48,18 @@ public partial class Signalert
             foreach (var kv in dic)
             {
                 var sets = Calculator.LoadSets(kv.Key);
-                kv.Value.ForEach(x => { x.SetKeys = sets.GetSets(x.TradeDate); });
+                kv.Value.ForEach(x =>
+                {
+                    x.Code = kv.Key;
+                    x.SetKeys = sets.GetSets(x.TradeDate);
+                });
             }
 
             var allDots = dic.Select(o => o.Value).UnionAll();
+
+            typeof(DotOfBuyingOrSelling)
+            .LocalFile($"{filter.Identity}.Sankey")
+            .WriteFile(allDots.Select(o=>new DotRecord(o)).ObjToJson());
 
             var dotsOfBuyings = allDots.Where(o => o.IsDotOfBuying)
                 .Select(o => o.SetKeys)
@@ -87,7 +97,7 @@ public partial class Signalert
             .LocalFile($"{filter.Identity}.Selling")
             .ReadFileAs<Dictionary<string, int>>();
 
-        return Calculator.LoadDots(filter)
+        return Reportor.LoadDots(filter)
             .ExtendedDots(request);
     }
 
@@ -96,18 +106,9 @@ public partial class Signalert
         RenderView? request
     )
     {
-        return Calculator.LoadDots(filter)
+        return Reportor.LoadDots(filter)
             .ExtendedDots(request);
     }
 
-    public static Dictionary<string,int> LoadDotsKey(
-        FocusFilter filter,
-        bool forBuying)
-    {
-        var key = forBuying ? $"{filter.Identity}.Buying" : $"{filter.Identity}.Selling";
-        return typeof(DotOfBuyingOrSelling)
-            .LocalFile(key)
-            .ReadFileAs<Dictionary<string, int>>();
-    }
-
+    #endregion
 }

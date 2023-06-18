@@ -2,9 +2,11 @@
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
 using Ban3.Productions.Casino.Contracts;
+using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Request;
+using Ban3.Productions.Casino.Contracts.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ban3.Labs.Casino.Web.Controllers
@@ -19,20 +21,29 @@ namespace Ban3.Labs.Casino.Web.Controllers
         public IActionResult Dots(RenderView? request)
         {
             request ??= new RenderView();
-            var dots = Signalert.Calculator.LoadDots(Config.DefaultFilter)
+            var dots = Signalert.Reportor.LoadDots(Config.DefaultFilter)
                 .ExtendedDots(request);
 
-            dots = dots.Skip((request.Page - 1) * request.PageSize).Take(request.PageSize).ToList();
+            var result = new RenderViewResult<KeyValuePair<string, List<DotInfo>>>
+            {
+                Request = request,
+                Counter = new Dictionary<string, int>(),
+                ShowData = dots.Skip((request.Page - 1) * request.PageSize).Take(request.PageSize).ToList()
+            };
 
+            result.Counter.Add("buying", dots.Sum(o => o.Value.Count(x => x.IsDotOfBuying)));
+            result.Counter.Add("selling", dots.Sum(o => o.Value.Count(x => !x.IsDotOfBuying)));
+            result.Counter.Add("total", dots.Sum(o => o.Value.Count()));
+            
             return string.IsNullOrEmpty(request?.ViewName)
-                ? View(dots)
-                : View(request.ViewName, dots);
+                ? View(result)
+                : View(request.ViewName, result);
         }
 
 
         public IActionResult DotsKey(int id)
         {
-            var dots = Signalert.LoadDotsKey(Config.DefaultFilter, id == 1);
+            var dots = Signalert.Reportor.LoadDotsKey(Config.DefaultFilter, id == 1);
             return  View(dots);
         }
 
@@ -84,6 +95,15 @@ namespace Ban3.Labs.Casino.Web.Controllers
             return string.IsNullOrEmpty(request.ViewName)
                 ? View(sets)
                 : View(request.ViewName, sets);
+        }
+
+        public IActionResult Stock(RenderView request)
+        {
+            var stock = Signalert.Collector.LoadStock(request.Id);
+
+            return string.IsNullOrEmpty(request.ViewName)
+                ? View(stock)
+                : View(request.ViewName, stock);
         }
 
         public IActionResult Stocks(RenderView request)

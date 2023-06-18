@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "CAsinO's";
 }
 
 <div class="container">
@@ -13,25 +13,39 @@
     </main>
 </div>
 
-<div class="container">
-
-    <div class="row">
-            <div class="col-6">
-                <div id="buyingTreemapContainer" style="height: 600px;" class="renderCharts" renderElement="buyingTreemapContainer" dataUrl="/data/dotstreemap/1"></div>
-            </div>
-            <div class="col-6">
-                <div id="sellingTreemapContainer" style="height: 600px;" class="renderCharts" renderElement="sellingTreemapContainer" dataUrl="/data/dotstreemap/0"></div>
-            </div>
-    </div>
-
-    <div class="row">
-        <div class="col-3 lazyLoad" dataUrl="/parts/dotskey/1">
-        </div>
-        <div class="col-6 lazyLoad" dataUrl="/parts/dots">
-
-        </div>
-        <div class="col-3 lazyLoad" dataUrl="/parts/dotskey/0">
+<div class="container" id="sankeyContainer">
+    <div class="row pb-3">
+        <div id="buyingSankeyContainer"
+             style="height: 600px; width: 100%;"
+             class="renderCharts"
+             renderElement="buyingSankeyContainer"
+             dataUrl="/data/sankey/1">
         </div>
     </div>
+</div>
 
+<div class="container" id="dotsContainer">
+    <div class="row pb-3">
+        <div class="col-6">
+            <div id="buyingTreemapContainer"
+                 style="height: 600px; width: 100%;"
+                 class="renderCharts"
+                 renderElement="buyingTreemapContainer"
+                 dataUrl="/data/dotstreemap/1">
+            </div>
+        </div>
+        <div class="col-6">
+            <div id="sellingTreemapContainer"
+                 style="height: 600px; width: 100%;"
+                 class="renderCharts"
+                 renderElement="sellingTreemapContainer"
+                 dataUrl="/data/dotstreemap/0">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 lazyLoad" dataUrl="/parts/dotskey/1"></div>
+        <div class="col-6 lazyLoad" dataUrl="/parts/dots"></div>
+        <div class="col-3 lazyLoad" dataUrl="/parts/dotskey/0"></div>
+    </div>
 </div>
