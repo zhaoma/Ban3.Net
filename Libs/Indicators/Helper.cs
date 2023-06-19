@@ -72,6 +72,12 @@ public static class Helper
         new("MACD.D0", "平均线下穿零", -1)
     };
 
+    public static List<string> FeatureKeys(string indicator, bool plus)
+        => Features
+            .Where(o => o.Key.StartsWith($"{indicator.ToUpper()}.") && (o.Value > 0) == plus)
+            .Select(o => o.Key + ".")
+            .ToList();
+
     static SetsFeature ReNew(this SetsFeature feature, string cycleSubject, int newValue)
     {
         return new SetsFeature(feature.Key, cycleSubject + feature.Subject, feature.Value * newValue);
@@ -91,7 +97,7 @@ public static class Helper
         );
         result.AddRange(
             Features.Select(o =>
-                new KeyValuePair<string, SetsFeature>($"{o.Key}.{StockAnalysisCycle.DAILY}", o.ReNew("月线", 3)))
+                new KeyValuePair<string, SetsFeature>($"{o.Key}.{StockAnalysisCycle.MONTHLY}", o.ReNew("月线", 3)))
         );
 
         return result;
@@ -158,18 +164,6 @@ public static class Helper
             SellSets = new List<string[]>{new []{ "MACD.DC.DAILY" } },
             Persistence=true,
             IsDefault = true
-        },
-        new()
-        {
-            Identity = "extend",
-            Subject = "MACD extend",
-            BuySets = new List<string[]>
-            {
-                new []{"MACD.P.MONTHLY,MACD.P.WEEKLY,MACD.P.DAILY,MACD.GC.DAILY"}
-            },
-            SellSets = new List<string[]> {new[] {"MACD.DC.DAILY"}},
-            Persistence=true,
-            IsDefault = false
         }
     };
 
@@ -184,4 +178,21 @@ public static class Helper
         => "all".DataFile<Profile>().WriteFile(profiles.ObjToJson());
 
     #endregion
+
+
+    public static Func<StockSets, bool> JudgeForBuying
+        = (qs) => qs.SetKeys != null
+                  && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
+                  && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
+                  && qs.SetKeys.Count(x => x.StartsWith("MACD.C0.")) >= 1
+                  && qs.SetKeys.Count(x => x.StartsWith("MACD.GC.")) >= 1
+                  && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
+                  && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
+                  && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2;
+
+    public static Func<StockSets, bool> JudgeForSelling
+        = (qs) => qs.SetKeys != null
+                  &&
+                  (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY"));
+
 }

@@ -12,7 +12,8 @@ public class DotRecord
     public DotRecord(DotInfo info) {
         Code = info.Code;
         ChangePercent = info.ChangePercent;
-        SetKeys = info.SetKeys.ToList();
+        TradeDate = info.TradeDate;
+        SetKeys = info.SetKeys?.ToList();
     }
 
     [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
@@ -20,6 +21,9 @@ public class DotRecord
     {
         get; set;
     }
+
+    [JsonProperty("tradeDate", NullValueHandling = NullValueHandling.Ignore)]
+    public string TradeDate { get; set; }
 
     [JsonProperty("changePercent", NullValueHandling = NullValueHandling.Ignore)]
     public float ChangePercent { get; set; }

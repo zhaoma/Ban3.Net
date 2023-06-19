@@ -44,7 +44,13 @@ public static partial class Helper
         var data =new List<SankeyRecord>();
         var links = new List<SankeyLink>();
 
-        data.AddRange(Infrastructures.Indicators.Helper.FeatureGroups.Select(o => new SankeyRecord
+        var groups = Infrastructures.Indicators.Helper.FeatureGroups
+            .Where(o => new[] { "MACD","DMI","BIAS","KD" }.Contains(o))
+            .ToList();
+
+        records = records.Where(o => o.Code.StartsWith("68")).ToList();
+
+        data.AddRange(groups.Select(o => new SankeyRecord
         {
             Name = o,
             ItemStyle = new ItemStyle
@@ -53,38 +59,52 @@ public static partial class Helper
                 BorderColor = Infrastructures.Indicators.Helper.ColorsDic[o],
             }
         }));
-        data.AddRange(Infrastructures.Indicators.Helper.Features.Select(o => new SankeyRecord
-        {
-            Name = o.Key
 
-        }));
-        data.AddRange(keys.Select(o => new SankeyRecord { Name = o.Key }));
+        var features = Infrastructures.Indicators.Helper.Features
+            .Where(o => o.Key.StartsWithIn(groups.Select(x => $"{x}.")))
+            .ToList();
 
-        links.AddRange(
-            Infrastructures.Indicators.Helper.FeatureGroups.Select(g =>
-                Infrastructures.Indicators.Helper.Features
+        data.AddRange(features.Select(o => new SankeyRecord { Name = o.Key }));
+        data.AddRange(keys
+            .Where( o=>o.Key.StartsWithIn(groups.Select(x => $"{x}.")))
+            .Select(o => new SankeyRecord { Name = o.Key }));
+
+        groups
+            .ForEach(g =>
+            {
+                links.AddRange(
+                    features
                     .Where(f => f.Key.StartsWith($"{g}."))
-                    .Select(f => new SankeyLink { Source = g, Target = f.Key,Value=1 })
-            ).UnionAll());
+                    .Select(f => new SankeyLink { Source = g, Target = f.Key, Value = keys.Where(o=> o.Key.StartsWith($"{f.Key}.")).Sum(o=>o.Value) }));
+            });
 
-        links.AddRange(
-            Infrastructures.Indicators.Helper.AllFeatures
-                .Select(a => {
-                    var v = 1;
-                    if (keys.TryGetValue(a.Key, out var vv))
-                        v = vv;
+        var allFeatureDetails= Infrastructures.Indicators.Helper.AllFeatures
+            .Where(o => o.Key.StartsWithIn(groups.Select(x => $"{x}.")) && keys.ContainsKey(o.Key))
+            .ToList();
 
-                  return  Infrastructures.Indicators.Helper.Features
-                        .Where(f => a.Key.StartsWith($"{f.Key}."))
-                        .Select(f => new SankeyLink { Source = f.Key, Target = a.Key, Value = v });
-                }
-            ).UnionAll());
+        features
+            .ForEach(f =>
+            {
+                links.AddRange(allFeatureDetails
+                    .Where(a=>a.Key.StartsWith($"{f.Key}."))
+                    .Select(a =>
+                        {
+                            var v = 1;
+                            if (keys.TryGetValue(a.Key, out var vv))
+                                v = vv;
 
+                            return new SankeyLink { Source = f.Key, Target = a.Key, Value = v };
+                        }));
+            });
+        
         records.ForEach(o =>
         {
-            if (!data.Any(x => x.Name == o.Code))
+            if (data.All(x => x.Name != o.Code))
                 data.Add(new SankeyRecord { Name = o.Code });
-            links.AddRange(o.SetKeys.Select(x => new SankeyLink { Source = x, Target = o.Code,Value=1 }));
+
+            links.AddRange(o.SetKeys
+                .Where( x=>x.StartsWithIn(groups.Select(y => $"{y}.")))
+                .Select(x => new SankeyLink { Source = x, Target = o.Code,Value=1 }));
         });
 
         var diagram = Infrastructures.Charts.Helper.CreateDiagram();
@@ -188,8 +208,7 @@ public static partial class Helper
 	    this IReportor _, 
 	    FocusFilter filter)
             => Config.CacheKey<DotOfBuyingOrSelling>(filter.Identity)
-            .LoadOrSetDefault(
-                () => typeof(DotOfBuyingOrSelling).LocalFile(filter.Identity).ReadFileAs<Dictionary<string, List<DotInfo>>>(),
+            .LoadOrSetDefault<Dictionary<string, List<DotInfo>>>(
                 typeof(DotOfBuyingOrSelling).LocalFile(filter.Identity)
                 );
 
@@ -589,4 +608,11 @@ public static partial class Helper
 
     #endregion
 
+    public static List<StockSets> LoadAllLatestSets(this IReportor _)
+    {
+        var file = $"latest".DataFile<StockSets>();
+
+        return Config.CacheKey<StockSets>("latest")
+            .LoadOrSetDefault<List<StockSets>>(file);
+    }
 }

@@ -87,15 +87,17 @@ public static partial class Helper
         {
             case Infrastructures.Indicators.Enums.StockOperate.Buy:
             case Infrastructures.Indicators.Enums.StockOperate.Keep:
-                return codeKeys.AllFoundIn(filterSell)
-                    ? Infrastructures.Indicators.Enums.StockOperate.Sell
-                    : Infrastructures.Indicators.Enums.StockOperate.Keep;
+                return //codeKeys.AllFoundIn(filterSell)
+                    Infrastructures.Indicators.Helper.JudgeForSelling(new StockSets { SetKeys = codeKeys })
+                        ? Infrastructures.Indicators.Enums.StockOperate.Sell
+                        : Infrastructures.Indicators.Enums.StockOperate.Keep;
 
             case Infrastructures.Indicators.Enums.StockOperate.Sell:
             case Infrastructures.Indicators.Enums.StockOperate.Left:
-                return codeKeys.AllFoundIn(filterBuy)
-                    ? Infrastructures.Indicators.Enums.StockOperate.Buy
-                    : Infrastructures.Indicators.Enums.StockOperate.Left;
+                return //codeKeys.AllFoundIn(filterBuy)
+                    Infrastructures.Indicators.Helper.JudgeForBuying(new StockSets { SetKeys = codeKeys })
+                        ? Infrastructures.Indicators.Enums.StockOperate.Buy
+                        : Infrastructures.Indicators.Enums.StockOperate.Left;
         }
 
         return Infrastructures.Indicators.Enums.StockOperate.Left;

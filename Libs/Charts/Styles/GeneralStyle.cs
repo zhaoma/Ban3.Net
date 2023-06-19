@@ -25,16 +25,16 @@ namespace  Ban3.Infrastructures.Charts.Styles
         #region IHasBorder
 
         /// 
-        public string? BackgroundColor { get; set; } = "transparent";
+        public string? BackgroundColor { get; set; } 
 
         /// 
-        public string? BorderColor { get; set; } = "#ccc";
+        public string? BorderColor { get; set; } 
 
         /// 
         public ECharts.BorderType? BorderType { get; set; }
 
         /// 
-        public int? BorderWidth { get; set; } = 1;
+        public int? BorderWidth { get; set; } 
 
         /// 
         public object? BorderRadius { get; set; }
@@ -52,7 +52,7 @@ namespace  Ban3.Infrastructures.Charts.Styles
         public int? BorderMiterLimit { get; set; }
 
         ///
-        public object? Padding { get; set; } = 5;
+        public object? Padding { get; set; } 
 
         #endregion
 

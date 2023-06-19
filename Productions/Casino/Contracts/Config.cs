@@ -35,14 +35,8 @@ public class Config
 
     public static bool NeedSync() 
     {
-        var result = false;
-
         var now = DateTime.Now.ToString("HHmm").ToInt();
-
-        result = result || (now >= 915 && now <= 1130);
-
-        result = result || (now >= 1300 && now <= 1500);
-
-        return result;
+        //and <= 1130 or >= 1300
+        return now is >= 915  and <= 1500;
     } 
 }

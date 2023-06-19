@@ -148,17 +148,12 @@ public partial class Signalert
             .WriteFile(aggregated.ObjToJson());
     }
 
-    public static List<StockSets> LoadAllSets()
-        => $"latest"
-            .DataFile<StockSets>()
-            .ReadFileAs<List<StockSets>>();
-
     #endregion
 
     #region 生成/加载排名列表
 
     public static bool PrepareLatestList()
-        => LoadAllSets().GenerateList(DateTime.Now.ToYmd());
+        => Reportor.LoadAllLatestSets().GenerateList(DateTime.Now.ToYmd());
 
     public static bool LoadOneDaysList(DateTime? day, out List<ListRecord> records)
     {

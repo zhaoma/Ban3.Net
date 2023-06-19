@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Charts.Composites;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Productions.Casino.Contracts.Response;
+using Helper = Ban3.Infrastructures.Common.Extensions.Helper;
 
 namespace Ban3.Productions.Casino.CcaAndReport;
 
@@ -58,8 +60,8 @@ public partial class Signalert
             var allDots = dic.Select(o => o.Value).UnionAll();
 
             typeof(DotOfBuyingOrSelling)
-            .LocalFile($"{filter.Identity}.Sankey")
-            .WriteFile(allDots.Select(o=>new DotRecord(o)).ObjToJson());
+                .LocalFile($"{filter.Identity}.Sankey")
+                .WriteFile(allDots.Select(o => new DotRecord(o)).ObjToJson());
 
             var dotsOfBuyings = allDots.Where(o => o.IsDotOfBuying)
                 .Select(o => o.SetKeys)
@@ -70,12 +72,12 @@ public partial class Signalert
                 .MergeToDictionary();
 
             typeof(DotOfBuyingOrSelling)
-            .LocalFile($"{filter.Identity}.Buying")
-            .WriteFile(dotsOfBuyings.ObjToJson());
+                .LocalFile($"{filter.Identity}.Buying")
+                .WriteFile(dotsOfBuyings.ObjToJson());
 
             typeof(DotOfBuyingOrSelling)
-            .LocalFile($"{filter.Identity}.Selling")
-            .WriteFile(dotsOfSelling.ObjToJson());
+                .LocalFile($"{filter.Identity}.Selling")
+                .WriteFile(dotsOfSelling.ObjToJson());
         }
 
         return true;
@@ -111,4 +113,10 @@ public partial class Signalert
     }
 
     #endregion
+
+    public static List<StockSets> FilterStockSets(List<StockSets> sets)
+    {
+        return sets.Where(o =>Infrastructures.Indicators.Helper.JudgeForBuying(o)).ToList();
+    }
+
 }

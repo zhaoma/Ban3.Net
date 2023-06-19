@@ -86,5 +86,7 @@ switch (teamName)
         $"              --others :                  collect teams exclude [ {Config.DefaultTeam} ]".WriteColorLine(ConsoleColor.DarkYellow);
         $"              --p/invoke :              prepare assemblies data".WriteColorLine(ConsoleColor.DarkYellow);
 
+      var r=  DevOps.Collector.WorkItemTracking.Query(@"Update System Set Title='[u]StartInfoPassedToWorklfowActivity' WHERE Id=768431");
+        Console.WriteLine(r.ObjToJson());
         break;
 }

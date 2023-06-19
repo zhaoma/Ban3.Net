@@ -52,7 +52,7 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
             var result = new List<string>();
 
             result.Add(RefDIF > RefDEA ? "MACD.PDI" : "MACD.MDI");
-            result.Add(RefMACD >= 0 ? "MACD.P" : "MACD.N");
+            result.Add(RefDIF >= 0 ? "MACD.P" : "MACD.N");
 
             if (pre != null)
             {

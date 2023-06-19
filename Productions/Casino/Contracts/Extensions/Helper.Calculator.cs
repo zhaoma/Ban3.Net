@@ -407,6 +407,7 @@ public static partial class Helper
             else
             {
                 rank++;
+                r.Rank = rank;
             }
 
             prev = r.Value;
@@ -517,7 +518,10 @@ public static partial class Helper
         var sets = line
             .LatestList()
             .Select(o => new StockSets
-            { MarkTime = o.Current!.MarkTime, Close = o.Current.Close, SetKeys = o.Features().Select(y => $"{y}.{cycle}") })
+            {
+                MarkTime = o.Current!.MarkTime, Close = o.Current.Close,
+                SetKeys = o.Features().Select(y => $"{y}.{cycle}")
+            })
             .ToList();
 
         data.Total = prices.Count;
@@ -532,7 +536,7 @@ public static partial class Helper
                         SetKeys = sets.GetSets(prices[i].TradeDate)
                     });
 
-                    if (prices.Count > 0)
+                    if (i > 0)
                         data.Previous.Add(new FocusRecord(prices[i - 1])
                         {
                             SetKeys = sets.GetSets(prices[i - 1].TradeDate)
@@ -541,15 +545,13 @@ public static partial class Helper
             }
             catch (Exception ex)
             {
-                Console.WriteLine("ERROR");
+                Console.WriteLine($"ERROR:{ex.Message}");
                 Console.WriteLine(prices[i].ObjToJson());
                 Logger.Error(ex);
             }
-
-            return data;
         }
 
-        return null;
+        return data;
     }
 
     /// <summary>
@@ -768,11 +770,11 @@ public static partial class Helper
         if (prices.Count == i + 1) return false;
 
         var len = Math.Min(5, prices.Count - i - 1);
-
+        if (len <= 0) return false;
         var week = new StockPrice[len];
         prices.CopyTo(i + 1, week, 0, len);
 
-        if (week == null || !week.Any()) return false;
+        if ( !week.Any()) return false;
 
         var max = week.Max(o => o.Close);
         var min = week.Min(o => o.Close);
@@ -831,11 +833,11 @@ public static partial class Helper
         if (prices.Count == i + 1) return false;
 
         var len = Math.Min(20, prices.Count - i - 1);
-
+        if (len <= 0) return false;
         var month = new StockPrice[len];
         prices.CopyTo(i + 1, month, 0, len);
 
-        if (month == null || !month.Any()) return false;
+        if (!month.Any()) return false;
 
         var max = month.Max(o => o.Close);
         var min = month.Min(o => o.Close);
