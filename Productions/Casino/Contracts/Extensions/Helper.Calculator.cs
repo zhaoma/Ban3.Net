@@ -927,6 +927,8 @@ public static partial class Helper
                 .Where(o=>string.IsNullOrEmpty(request.StartsWith)||o.Code.StartsWithIn(request.StartsWith.Split(',')))
                 .Where( o=>string.IsNullOrEmpty(request.EndsWith)||o.Code.EndsWith(request.EndsWith))
                 .Where( o=>string.IsNullOrEmpty(request.Id)||o.Code==request.Id)
+                .OrderByDescending(o=>o.TradeDate)
+                .ThenByDescending(o=>o.Code)
                 .ToList();
         }
 

@@ -15,19 +15,61 @@
             <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-redOnlyDotsTreemap"
                     renderElement="buyingChartsContainer"
                     dataUrl="/data/dotstreemap/1"
-                    renderContainer="redOnlyTreemap">Treemap</button>
+                    renderContainer="redOnlyTreemap">
+                Treemap
+            </button>
             <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-redOnlyDotsSankey"
                     renderElement="buyingChartsContainer"
                     dataUrl="/data/sankey/1"
-                    renderContainer="redOnlyTreemap">Sankey</button>
+                    renderContainer="redOnlyTreemap">
+                Sankey
+            </button>
         </div>
         <div class="lazyLoad roundBox grayBox" dataUrl="/parts/dotskey/1">
 
         </div>
     </div>
     <div class="col-9">
-        <div class="lazyLoad roundBox grayBox" id="redOnlyDots" dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=redOnlyDots&amp;dataUrl=/parts/dots&amp;redOnly=1">
+        <div class="btn-group pb-3" role="group">
+                <button class="btn btn-outline-secondary lazyLoadButton" type="button" id="button-redOnlyDotsTable"
+                        renderElement="redOnlyDots"
+                        dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=redOnlyDots&amp;dataUrl=/parts/dots&amp;redOnly=1&amp;endsWith=BJ"
+                        renderContainer="redOnlyTreemap">
+                    BJ
+                </button>
+                <button class="btn btn-outline-secondary lazyLoadButton" type="button" id="button-redOnlyDotsTable"
+                        renderElement="redOnlyDots"
+                        dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=redOnlyDots&amp;dataUrl=/parts/dots&amp;redOnly=1&amp;endsWith=SH"
+                        renderContainer="redOnlyTreemap">
+                    SH
+                </button>
+                <button class="btn btn-outline-secondary lazyLoadButton" type="button" id="button-redOnlyDotsTable"
+                        renderElement="redOnlyDots"
+                        dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=redOnlyDots&amp;dataUrl=/parts/dots&amp;redOnly=1&amp;endsWith=SZ"
+                        renderContainer="redOnlyTreemap">
+                    SZ
+                </button>
+                <button class="btn btn-outline-secondary lazyLoadButton" type="button" id="button-redOnlyDotsTable"
+                        renderElement="redOnlyDots"
+                        dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=redOnlyDots&amp;dataUrl=/parts/dots&amp;redOnly=1&amp;startsWith=68"
+                        renderContainer="redOnlyTreemap">
+                    68xxxx
+                </button>
+                <button class="btn btn-outline-secondary lazyLoadButton" type="button" id="button-redOnlyDotsTable"
+                        renderElement="redOnlyDots"
+                        dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=redOnlyDots&amp;dataUrl=/parts/dots&amp;redOnly=1&amp;startsWith=30"
+                        renderContainer="redOnlyTreemap">
+                    30xxxx
+                </button>
+                <button class="btn btn-outline-secondary lazyLoadButton" type="button" id="button-redOnlyDotsTable"
+                        renderElement="redOnlyDots"
+                        dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=redOnlyDots&amp;dataUrl=/parts/dots&amp;redOnly=1&amp;startsWith=002,003"
+                        renderContainer="redOnlyTreemap">
+                    002/003
+                </button>
         </div>
-    </div>
+            <div class="lazyLoad roundBox grayBox" id="redOnlyDots" dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=redOnlyDots&amp;dataUrl=/parts/dots&amp;redOnly=1">
+            </div>
+        </div>
 </div>
 

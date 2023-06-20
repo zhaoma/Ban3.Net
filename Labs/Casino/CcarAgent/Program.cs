@@ -70,12 +70,16 @@ internal class Program
             case "--dots":
                 Console.WriteLine("Prepare Focus...");
                 new Action(() => { Signalert.PrepareFocus(Config.DefaultFilter, out var _); }).ExecuteAndTiming(
-                    "Prepare Focus");
+                    "Prepare Focus.");
 
                 Console.WriteLine();
 
                 Console.WriteLine("Prepare Dots...");
-                new Action(() => { Signalert.PrepareDots(Config.DefaultFilter); }).ExecuteAndTiming("Prepare Dots");
+                new Action(() => { Signalert.PrepareDots(Config.DefaultFilter); }).ExecuteAndTiming("Prepare Dots.");
+
+                new Action(() => {
+                    Signalert.Collector.ReadRealtime();
+                }).ExecuteAndTiming("Prepare realtime prices only.");
                 break;
 
             default:

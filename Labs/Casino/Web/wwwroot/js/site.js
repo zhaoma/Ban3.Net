@@ -100,7 +100,6 @@ function renderContainer() {
         $("#partsContainer .lazyLoadButton").click(function () {
             var renderElement = $(this).attr("renderElement");
             var dataUrl = $(this).attr("dataUrl");
-            alert(dataUrl+">.>" + renderElement);
             $("#"+renderElement).load(dataUrl);
             return false;
         });

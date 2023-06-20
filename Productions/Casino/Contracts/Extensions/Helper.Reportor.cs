@@ -80,6 +80,7 @@ public static partial class Helper
 
         var allFeatureDetails= Infrastructures.Indicators.Helper.AllFeatures
             .Where(o => o.Key.StartsWithIn(groups.Select(x => $"{x}.")) && keys.ContainsKey(o.Key))
+            .Where(o=>records.Any(x=>x.SetKeys.Any(y=>y==o.Key)))
             .ToList();
 
         features
