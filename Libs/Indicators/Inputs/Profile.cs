@@ -5,6 +5,7 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
+using Ban3.Infrastructures.Indicators.Outputs;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -24,15 +25,15 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         public Profile(
             string identity, 
             string subject,
-            string[] buyKeys, 
-            string[] sellKeys,
+            Func<StockSets, bool> buyingJudge,
+            Func<StockSets, bool> sellingJudge,
             bool persistence = false,
             bool isDefault = false)
         {
             Identity=identity;
             Subject = subject;
-            BuySets = new List<string[]> { buyKeys };
-            SellSets=new List<string[]>{sellKeys};
+            BuyingJudge =  buyingJudge;
+            SellingJudge = sellingJudge;
             Persistence=persistence;
             IsDefault=isDefault;
         }
@@ -55,7 +56,7 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 买入条件
         /// </summary>
-        public List<string[]> BuySets { get; set; }
+        public Func<StockSets, bool> BuyingJudge { get; set; }
 
         /// <summary>
         /// 排序条件
@@ -66,7 +67,7 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 卖出条件
         /// </summary>
-        public List<string[]> SellSets { get; set; }
+        public Func<StockSets, bool> SellingJudge { get; set; }
 
         /// <summary>
         /// 发掘条数

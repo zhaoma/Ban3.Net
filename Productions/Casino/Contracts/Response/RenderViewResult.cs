@@ -11,5 +11,9 @@ public class RenderViewResult<T>
 	public RenderView Request { get; set; }
 
 	public List<T> ShowData { get; set; }
+
+	public string Pagination { get; set; }
+
+
 }
 

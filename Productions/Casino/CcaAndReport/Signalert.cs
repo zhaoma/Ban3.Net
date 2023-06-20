@@ -110,8 +110,6 @@ public partial class Signalert
     /// <param name="stocks"></param>
     public static void ExecuteRealtimeJob(List<Stock> stocks)
     {
-        if (!Config.NeedSync()) return;
-
         new Action(() => Collector.ReadRealtime(stocks)).ExecuteAndTiming("ReadRealtime");
 
         ExecutePrepare(stocks);
@@ -157,7 +155,7 @@ public partial class Signalert
             {
                 var sets = Calculator.LoadSets(stock.Code);
 
-                Infrastructures.Indicators.Helper.Profiles
+                Infrastructures.Indicators.Helper.DefaultProfiles
                     .Where(o => o.Persistence)
                     .ParallelExecute((profile) =>
                         {

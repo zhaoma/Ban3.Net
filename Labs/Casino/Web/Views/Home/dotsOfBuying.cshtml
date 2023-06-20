@@ -2,24 +2,31 @@
     Layout = null;
 }
 
-<div class="pb-3">
+<div class="pb-3 hide" id="redOnlyTreemap">
     <div class="col-12 roundBox grayBox">
-        <div id="buyingTreemapContainer"
-             style="height: 600px; width: 100%;"
-             class="renderCharts"
-             renderElement="buyingTreemapContainer"
-             dataUrl="/data/dotstreemap/1">
+        <div id="buyingChartsContainer"
+             style="height: 600px; width: 100%;">
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-3">
+        <div class="btn-group pb-3" role="group">
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-redOnlyDotsTreemap"
+                    renderElement="buyingChartsContainer"
+                    dataUrl="/data/dotstreemap/1"
+                    renderContainer="redOnlyTreemap">Treemap</button>
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-redOnlyDotsSankey"
+                    renderElement="buyingChartsContainer"
+                    dataUrl="/data/sankey/1"
+                    renderContainer="redOnlyTreemap">Sankey</button>
+        </div>
         <div class="lazyLoad roundBox grayBox" dataUrl="/parts/dotskey/1">
 
         </div>
     </div>
     <div class="col-9">
-        <div class="lazyLoad roundBox grayBox" dataUrl="/parts/dots">
+        <div class="lazyLoad roundBox grayBox" id="redOnlyDots" dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=redOnlyDots&amp;dataUrl=/parts/dots&amp;redOnly=1">
         </div>
     </div>
 </div>

@@ -27,15 +27,14 @@ public static class Helper
 
     public static readonly Dictionary<string, string> ColorsDic = new Dictionary<string, string>
     {
-        { "AMOUNT","#CCC" },
-    {"MA","#CCC" },
-
-    {"BIAS","#FC0" },
-    {"CCI","#FC0" },
-    {"DMI","#C09" },
-    {"ENE","#CCC" },
-    {"KD","#FC0" },
-    {"MACD","#C09"  }
+        { "AMOUNT", "#CCC" },
+        { "MA", "#CCC" },
+        { "BIAS", "#FC0" },
+        { "CCI", "#FC0" },
+        { "DMI", "#C09" },
+        { "ENE", "#CCC" },
+        { "KD", "#FC0" },
+        { "MACD", "#C09" }
     };
 
     public static readonly List<SetsFeature> Features = new List<SetsFeature>
@@ -123,6 +122,13 @@ public static class Helper
 
     #endregion
 
+    /// <summary>
+    /// 评估特征计分
+    /// </summary>
+    /// <param name="sets"></param>
+    /// <param name="result"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static bool Evaluation(this StockSets sets, out List<string> result, out int value)
     {
         result = new List<string>();
@@ -151,48 +157,27 @@ public static class Helper
 
     #region Profiles
 
-    private static readonly List<Profile> DefaultProfiles = new()
+    public static readonly List<Profile> DefaultProfiles = new()
     {
         new()
         {
             Identity = "default",
             Subject = "MACD MWD C0",
-            BuySets = new List<string[]>
-            {
-                new []{"MACD.C0.DAILY","MACD.P.WEEKLY", "MACD.PDI.WEEKLY", "MACD.PDI.MONTHLY","MACD.P.MONTHLY" }
-            },
-            SellSets = new List<string[]>{new []{ "MACD.DC.DAILY" } },
+            BuyingJudge = (qs) => qs.SetKeys != null
+                             && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
+                             && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
+                             && qs.SetKeys.Count(x => x.StartsWith("MACD.C0.")) >= 1
+                             && qs.SetKeys.Count(x => x.StartsWith("MACD.GC.")) >= 1
+                             && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
+                             && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
+                             && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2,
+            SellingJudge =  (qs) => qs.SetKeys != null
+                                    &&
+                                    (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY")),
             Persistence=true,
             IsDefault = true
         }
     };
 
-    const string CacheKey = "casino.Profiles";
-
-    private static readonly string ProfilesFile = "all".DataFile<Profile>();
-
-    public static List<Profile> Profiles
-        => CacheKey.LoadOrSetDefault(()=>DefaultProfiles, ProfilesFile);
-
-    public static void UpdateProfiles(this List<Profile> profiles)
-        => "all".DataFile<Profile>().WriteFile(profiles.ObjToJson());
-
     #endregion
-
-
-    public static Func<StockSets, bool> JudgeForBuying
-        = (qs) => qs.SetKeys != null
-                  && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
-                  && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
-                  && qs.SetKeys.Count(x => x.StartsWith("MACD.C0.")) >= 1
-                  && qs.SetKeys.Count(x => x.StartsWith("MACD.GC.")) >= 1
-                  && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
-                  && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
-                  && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2;
-
-    public static Func<StockSets, bool> JudgeForSelling
-        = (qs) => qs.SetKeys != null
-                  &&
-                  (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY"));
-
 }

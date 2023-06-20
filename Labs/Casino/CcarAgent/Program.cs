@@ -79,8 +79,7 @@ internal class Program
                 break;
 
             default:
-                $"--all:                     prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor
-                    .DarkYellow);
+                $"--all:                     prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--prepare:                 prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--daily :                  prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one code :               prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
@@ -99,86 +98,11 @@ internal class Program
 
     private static void CheckSomething()
     {
-        //$"program line 90, nothing in check".WriteColorLine(ConsoleColor.Yellow);
-        var now = DateTime.Now;
-
-        var drs = Signalert.Reportor.LoadDotsSankey(Config.DefaultFilter)
-            .Where(o => o.ChangePercent > 0);
-
-        var up4 = drs.Where(o => 
-        o.SetKeys.Count(x=>x.StartsWith("MACD.PDI."))+ o.SetKeys.Count(x => x.StartsWith("DMI.PDI."))>4
-        ).ToList();
-
-        $"up4={up4.Count}".WriteColorLine(ConsoleColor.Red);
-
-        var k = "MACD";
-        var dots = drs
-                .OrderBy(o=>o.TradeDate)
-                .ToList();
-        dots
-            .ForEach(o =>
+        new Action(Signalert.ExecuteRealtimeJob).ExecuteAndTiming("realtime(ExecuteRealtimeJob)");
+        for (var i = 1; i <= 50; i++)
         {
-            var macd = o.SetKeys.Where(o => o.StartsWith($"{k}.")).OrderBy(o => o);
-            $"{o.Code}:{o.TradeDate}/{Math.Round(o.ChangePercent,2)}:{macd.AggregateToString(",")}  ".WriteColorLine(ConsoleColor.DarkYellow);
-
-            $"{macd.Count(o=>o.StartsWith($"{k}.PDI."))} .PDI".WriteColorLine(ConsoleColor.Green);
-        });
-
-        var dic = dots.Select(o => o.SetKeys.Where(x => x.StartsWith($"{k}."))).MergeToDictionary();
-        Console.WriteLine(dots.Count);
-
-        foreach (var kv in dic.OrderByDescending(o=>o.Value))
-        {
-            $"{kv.Key }={kv.Value}".WriteColorLine(ConsoleColor.Red);
+            var r = StockRealtime.Records;
+            Console.WriteLine(r.Count);
         }
-
-        var s = Signalert.Reportor.LoadAllLatestSets();
-        var t = Signalert.FilterStockSets(s);
-        Console.WriteLine("FilterStockSets=" + t.Count);
-
-        for (var i = 0; i < Math.Min(10, t.Count); i++)
-        {
-            $"{t[i].Code}:{t[i].SetKeys?.AggregateToString(",")}".WriteColorLine(ConsoleColor.Blue);
-        }
-       
     }
-
-    /*
-    var s = Signalert.Reportor.LoadAllLatestSets();
-    Console.WriteLine(s.Count);
-
-    s.GenerateList($"{now.ToYmd()}.all");
-
-    var t = Signalert.FilterStockSets(s);
-    Console.WriteLine(t.Count);
-
-    t.GenerateList($"{now.ToYmd()}.filter");
-
-    var all = Signalert.Calculator.LoadList($"{now.ToYmd()}.all")
-        .Take(20);
-
-    foreach (var listRecord in all)
-    {
-        var r1 = s.Last(o => o.Code == listRecord.Code);
-        var k1 = r1.SetKeys?
-            .Where(o => o.StartsWithIn(new List<string> { "MACD.", "DMI." }))
-            .OrderBy(o => o);
-
-        $"{listRecord.Code}:{listRecord.Value}->{listRecord.Rank}:{k1?.AggregateToString(" , ")}".WriteColorLine(
-            ConsoleColor.Red);
-    }
-
-    var filter = Signalert.Calculator.LoadList($"{now.ToYmd()}.filter")
-        .Take(20);
-
-    foreach (var listRecord in filter)
-    {
-        var r2 = s.Last(o => o.Code == listRecord.Code);
-        var k2 = r2.SetKeys?
-            .Where(o => o.StartsWithIn(new List<string> { "MACD.", "DMI." }))
-            .OrderBy(o => o);
-
-        $"{listRecord.Code}:{listRecord.Value}->{listRecord.Rank}:{k2?.AggregateToString(" , ")}".WriteColorLine(
-            ConsoleColor.DarkBlue);
-    }*/
 }

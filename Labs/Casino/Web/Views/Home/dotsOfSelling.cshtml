@@ -2,17 +2,34 @@
     Layout = null;
 }
 
-<div class="row pb-3">
-    <div class="col-12">
-        <div id="sellingTreemapContainer"
-             style="height: 600px; width: 100%;"
-             class="renderCharts"
-             renderElement="sellingTreemapContainer"
-             dataUrl="/data/dotstreemap/0">
+<div class="pb-3 hide" id="greenOnlyTreemap">
+    <div class="col-12 roundBox grayBox">
+        <div id="buyingChartsContainer"
+             style="height: 600px; width: 100%;">
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-3 lazyLoad" dataUrl="/parts/dotskey/0"></div>
-    <div class="col-9 lazyLoad" dataUrl="/parts/dots"></div>
+    <div class="col-3">
+        <div class="btn-group pb-3" role="group">
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-greenOnlyDotsTreemap"
+                    renderElement="buyingChartsContainer"
+                    dataUrl="/data/dotstreemap/0"
+                    renderContainer="greenOnlyTreemap">
+                Treemap
+            </button>
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-greenOnlyDotsSankey"
+                    renderElement="buyingChartsContainer"
+                    dataUrl="/data/sankey/0"
+                    renderContainer="greenOnlyTreemap">
+                Sankey
+            </button>
+        </div>
+        <div class="lazyLoad roundBox grayBox" dataUrl="/parts/dotskey/0">
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="lazyLoad roundBox grayBox" id="greenOnlyDots" dataUrl="/parts/dots?pageSize=100&amp;page=1&amp;renderElement=greenOnlyDots&amp;dataUrl=/parts/dots&amp;greenOnly=1">
+        </div>
+    </div>
 </div>

@@ -5,11 +5,6 @@ using Ban3.Infrastructures.Common.Extensions;
 using System;
 using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Productions.Casino.Contracts.Interfaces;
-using Ban3.Productions.Casino.Contracts.Request;
-using Ban3.Productions.Casino.Contracts.Response;
-using Ban3.Productions.Casino.Contracts.Entities;
-using Ban3.Productions.Casino.Contracts.Enums;
-using Ban3.Sites.ViaTushare.Entries;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -38,7 +33,6 @@ public static partial class Helper
         {
             if (everydayKeys != null && everydayKeys.Any())
             {
-
                 var operates = everydayKeys.Select(o => new StockOperate
                 {
                     MarkTime = o.MarkTime,
@@ -49,7 +43,7 @@ public static partial class Helper
                 var currentOp = Infrastructures.Indicators.Enums.StockOperate.Left;
                 for (int op = 0; op < operates.Count(); op++)
                 {
-                    operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile.BuySets, profile.SellSets,
+                    operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile.BuyingJudge, profile.SellingJudge,
                         currentOp);
                     currentOp = operates[op].Operate;
                 }
@@ -73,14 +67,14 @@ public static partial class Helper
     /// 根据前一记录和策略生成当前操作建议
     /// </summary>
     /// <param name="codeKeys"></param>
-    /// <param name="filterBuy"></param>
-    /// <param name="filterSell"></param>
+    /// <param name="buyingJudge"></param>
+    /// <param name="sellingJudge"></param>
     /// <param name="prevOperation"></param>
     /// <returns></returns>
     static Infrastructures.Indicators.Enums.StockOperate GetOperate(
         IEnumerable<string> codeKeys,
-        IEnumerable<string[]> filterBuy,
-        IEnumerable<string[]> filterSell,
+        Func<StockSets, bool> buyingJudge,
+        Func<StockSets, bool> sellingJudge,
         Infrastructures.Indicators.Enums.StockOperate prevOperation)
     {
         switch (prevOperation)
@@ -88,14 +82,14 @@ public static partial class Helper
             case Infrastructures.Indicators.Enums.StockOperate.Buy:
             case Infrastructures.Indicators.Enums.StockOperate.Keep:
                 return //codeKeys.AllFoundIn(filterSell)
-                    Infrastructures.Indicators.Helper.JudgeForSelling(new StockSets { SetKeys = codeKeys })
+                    buyingJudge(new StockSets { SetKeys = codeKeys })
                         ? Infrastructures.Indicators.Enums.StockOperate.Sell
                         : Infrastructures.Indicators.Enums.StockOperate.Keep;
 
             case Infrastructures.Indicators.Enums.StockOperate.Sell:
             case Infrastructures.Indicators.Enums.StockOperate.Left:
                 return //codeKeys.AllFoundIn(filterBuy)
-                    Infrastructures.Indicators.Helper.JudgeForBuying(new StockSets { SetKeys = codeKeys })
+                    sellingJudge(new StockSets { SetKeys = codeKeys })
                         ? Infrastructures.Indicators.Enums.StockOperate.Buy
                         : Infrastructures.Indicators.Enums.StockOperate.Left;
         }

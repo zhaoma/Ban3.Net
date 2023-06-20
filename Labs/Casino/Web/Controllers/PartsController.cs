@@ -18,24 +18,27 @@ namespace Ban3.Labs.Casino.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Dots(RenderView? request)
+        /// <summary>
+        /// dots of buying or selling main table
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public IActionResult Dots(RenderView request)
         {
-            request ??= new RenderView();
             var dots = Signalert.Reportor.LoadDots(Config.DefaultFilter)
                 .ExtendedDots(request);
 
-            var result = new RenderViewResult<KeyValuePair<string, List<DotInfo>>>
+            request.Total = dots.Count;
+            var result = new RenderViewResult<DotInfo>
             {
                 Request = request,
                 Counter = new Dictionary<string, int>(),
                 ShowData = dots.Skip((request.Page - 1) * request.PageSize).Take(request.PageSize).ToList()
             };
-
-            result.Counter.Add("buying", dots.Sum(o => o.Value.Count(x => x.IsDotOfBuying)));
-            result.Counter.Add("selling", dots.Sum(o => o.Value.Count(x => !x.IsDotOfBuying)));
-            result.Counter.Add("total", dots.Sum(o => o.Value.Count()));
             
-            return string.IsNullOrEmpty(request?.ViewName)
+            result.Counter.Add("total", dots.Count());
+            
+            return string.IsNullOrEmpty(request.ViewName)
                 ? View(result)
                 : View(request.ViewName, result);
         }
@@ -66,12 +69,16 @@ namespace Ban3.Labs.Casino.Web.Controllers
         public IActionResult List(RenderView request)
         {
             var listName = DateTime.Now.ToYmd();
-            var listData = Signalert.Calculator.LoadList(listName)
+            var listData = Signalert.Calculator.LoadList(listName);
+
+                listData=listData
                 .Where(o =>
                     (string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
                     &&
                     (string.IsNullOrEmpty(request.EndsWith) || o.Code.EndsWith(request.EndsWith))
-                );
+                )
+                .Take(request.PageSize)
+                .ToList();
 
             return string.IsNullOrEmpty(request.ViewName)
                 ? View(listData)

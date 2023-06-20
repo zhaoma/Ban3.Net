@@ -17,12 +17,18 @@ public class DataController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+
     public ContentResult CurrentTreemap()
         => Content(Signalert.LoadCurrentTreemap(Config.DefaultFilter).ObjToJson());
 
     public ContentResult PreviousTreemap()
         => Content(Signalert.LoadPreviousTreemap(Config.DefaultFilter).ObjToJson());
 
+    /// <summary>
+    /// 买点（Config.）treemap
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public ContentResult DotsTreemap(int id = 1)
     {
         var dic = Signalert.Reportor.LoadDotsKey(Config.DefaultFilter, id == 1);

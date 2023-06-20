@@ -2,27 +2,29 @@
 @model IEnumerable<Ban3.Infrastructures.Indicators.Entries.ListRecord> 
 @{
     Layout = null;
+    var runtime = Ban3.Productions.Casino.Contracts.Entities.StockRealtime.Records;
 }
-
-<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
+<table data-pagination="true" class="table table-hover  table-bordered">
     <thead>
     <tr>
-        <th class="col-1">Date</th>
-        <th class="col-1">Symbol</th>
-        <th class="col-1">Close</th>
-        <th class="col-8">Value</th>
-        <th class="col-1">Rank</th>
+        <th class="col-3">Symbol</th>
+        <th class="col-2">Close</th>
+        <th class="col-2">Value</th>
+        <th class="col-2">Rank</th>
+        <th class="col-3">Change</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var point in Model.OrderBy(o => o.Rank))
     {
-        <tr>
-            <td>@point.MarkTime.ToYmd()</td>
+        var r = runtime.TryGetValue(point.Symbol, out var p);
+        var className =r? p?.ChangePercent > 0 ? "red" : p?.ChangePercent == 0 ? "gray" : "green":"";
+        <tr class="@className">
             <td>@point.Symbol</td>
             <td>@point.Close</td>
             <td>@point.Value</td>
             <td>@point.Rank</td>
+            <td>@(p!=null?Math.Round(p.ChangePercent,2):"")</td>
         </tr>
     }
     </tbody>

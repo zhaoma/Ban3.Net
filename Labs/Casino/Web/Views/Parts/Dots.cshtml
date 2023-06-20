@@ -1,47 +1,37 @@
-﻿@model Ban3.Productions.Casino.Contracts.Response.RenderViewResult<KeyValuePair<string, List<Ban3.Productions.Casino.Contracts.Entities.DotInfo>>>
+﻿@model Ban3.Productions.Casino.Contracts.Response.RenderViewResult<Ban3.Productions.Casino.Contracts.Entities.DotInfo>
 @{
     Layout = null;
 }
 
 <table data-pagination="true" class="table table-hover table-dark  table-bordered caption-top">
     <caption>
-        <span class="gray">@Model.Counter["total"]</span> 
-        | <span class="green">@Model.Counter["selling"]</span>
-        | <span class="red">@Model.Counter["buying"]</span>
+        <span class="gray">@Model.Request.Total ; Page.@Model.Request.Page</span>
     </caption>
     <thead>
-        <tr>
-            <th class="col-3">Code</th>
-            <th class="col-2">Date</th>
-            <th class="col-1">Type</th>
-            <th class="col-1">Cycle</th>
-            <th class="col-1">Days</th>
-            <td class="col-2">Percent</td>
-            <th class="col-2">Close</th>
-        </tr>
+    <tr>
+        <th class="col-3">Code</th>
+        <th class="col-2">Date</th>
+        <th class="col-1">Cycle</th>
+        <th class="col-1">Days</th>
+        <td class="col-2">Percent</td>
+        <th class="col-2">Close</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var point in Model.ShowData)
-        {
-            var rowIndex = 1;
-
-            foreach (var row in point.Value)
-            {
-                var className = row.ChangePercent > 0 ? "red" : "green";
-                <tr class="@className">
-                    @if (rowIndex == 1)
-                    {
-                        <td rowspan="@point.Value.Count">@point.Key</td>
-                    }
-                    <td>@row.TradeDate</td>
-                    <td>@(row.IsDotOfBuying?"B":"S")</td>
-                    <td>@row.Cycle</td>
-                    <td>@row.Days</td>
-                    <td>@Math.Round(row.ChangePercent,2) %</td>
-                    <td>@row.Close</td>
-                </tr>
-                rowIndex++;
-            }
-        }
+    @foreach (var row in Model.ShowData)
+    {
+        var className = row.ChangePercent > 0 ? "red" : "green";
+        <tr class="@className">
+            <td>@row.Code</td>
+            <td>@row.TradeDate</td>
+            <td>@row.Cycle</td>
+            <td>@row.Days</td>
+            <td>@Math.Round(row.ChangePercent, 2) %</td>
+            <td>@row.Close</td>
+        </tr>
+    }
     </tbody>
+    <tfoot>
+    <tr><td colspan="6">@Html.Raw(Model.Request.Pagination())</td></tr>
+    </tfoot>
 </table>

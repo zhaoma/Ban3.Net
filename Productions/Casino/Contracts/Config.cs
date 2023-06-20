@@ -15,6 +15,9 @@ public class Config
     public static string CacheKey<T>(string key)
         => $"{typeof(T).Name}.{key}";
 
+    /// <summary>
+    /// 默认买点筛选规则
+    /// </summary>
     public static FocusFilter DefaultFilter = new FocusFilter
     {
         Identity = "FF752",
@@ -33,6 +36,10 @@ public class Config
         }
     };
 
+    /// <summary>
+    /// 只在交易时间运行ca --realtime
+    /// </summary>
+    /// <returns></returns>
     public static bool NeedSync() 
     {
         var now = DateTime.Now.ToString("HHmm").ToInt();

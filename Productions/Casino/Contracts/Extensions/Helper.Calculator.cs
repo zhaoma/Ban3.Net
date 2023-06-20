@@ -427,9 +427,8 @@ public static partial class Helper
     /// <param name="listName"></param>
     /// <returns></returns>
     public static List<ListRecord> LoadList(this ICalculator _, string listName)
-        => listName
-            .DataFile<ListRecord>()
-            .ReadFileAs<List<ListRecord>>();
+        =>Config.CacheKey<ListRecord>(listName)
+            .LoadOrSetDefault<List<ListRecord>>( listName .DataFile<ListRecord>());
 
     #endregion
 
@@ -902,19 +901,36 @@ public static partial class Helper
         return newList.All(o => ge ? o.Close >= baseline : o.Close <= baseline);
     }
 
-    public static List<KeyValuePair<string, List<DotInfo>>> ExtendedDots(
+    /// <summary>
+    /// 对dots of buying or selling main table按照RenderView筛选
+    /// </summary>
+    /// <param name="dots"></param>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public static List<DotInfo> ExtendedDots(
 	    this Dictionary<string, List<DotInfo>> dots, 
-	    RenderView? request)
+	    RenderView request)
     {
-        return dots
-        //.Where(o =>
-        //    request == null
-        //    || (!string.IsNullOrEmpty(request.Id) || o.Key.StringEquals(request.Id))
-        //    || (!string.IsNullOrEmpty(request.StartsWith) || o.Key.StartsWithIn(request.StartsWith.Split(',')))
-        //    || (!string.IsNullOrEmpty(request.EndsWith) || o.Key.EndsWith(request.EndsWith))
-        //)
-        .Select(o => o)
-        .ToList();
+        var result=new List<DotInfo>();
+            
+        foreach (var keyValuePair in dots)
+        {
+            keyValuePair.Value.ForEach(o=>o.Code=keyValuePair.Key);
+            result.AddRange(keyValuePair.Value);
+        }
+        
+        if (request != null)
+        {
+            result = result
+                .Where(o => request.RedOnly is 0 or null || o.ChangePercent > 0)
+                .Where(o=>request.GreenOnly is 0 or null||o.ChangePercent<0)
+                .Where(o=>string.IsNullOrEmpty(request.StartsWith)||o.Code.StartsWithIn(request.StartsWith.Split(',')))
+                .Where( o=>string.IsNullOrEmpty(request.EndsWith)||o.Code.EndsWith(request.EndsWith))
+                .Where( o=>string.IsNullOrEmpty(request.Id)||o.Code==request.Id)
+                .ToList();
+        }
+
+        return result;
     }
 
     #endregion

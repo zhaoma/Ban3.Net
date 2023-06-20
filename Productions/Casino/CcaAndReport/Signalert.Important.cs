@@ -83,40 +83,6 @@ public partial class Signalert
         return true;
     }
 
-    public static List<KeyValuePair<string, List<DotInfo>>> LoadDots(
-        FocusFilter filter,
-        RenderView? request,
-        out Dictionary<string, int> dotsOfBuyings,
-        out Dictionary<string, int> dotsOfSelling
-    )
-    {
-        dotsOfBuyings = typeof(DotOfBuyingOrSelling)
-            .LocalFile($"{filter.Identity}.Buying")
-            .ReadFileAs<Dictionary<string, int>>();
-
-
-        dotsOfSelling = typeof(DotOfBuyingOrSelling)
-            .LocalFile($"{filter.Identity}.Selling")
-            .ReadFileAs<Dictionary<string, int>>();
-
-        return Reportor.LoadDots(filter)
-            .ExtendedDots(request);
-    }
-
-    public static List<KeyValuePair<string, List<DotInfo>>> LoadDots(
-        FocusFilter filter,
-        RenderView? request
-    )
-    {
-        return Reportor.LoadDots(filter)
-            .ExtendedDots(request);
-    }
-
     #endregion
-
-    public static List<StockSets> FilterStockSets(List<StockSets> sets)
-    {
-        return sets.Where(o =>Infrastructures.Indicators.Helper.JudgeForBuying(o)).ToList();
-    }
-
+    
 }

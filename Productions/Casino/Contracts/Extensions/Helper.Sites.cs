@@ -385,8 +385,10 @@ public static partial class Helper
 
                         prices.SetsFile(c.Code)
                             .WriteFile(prices.OrderBy(x => x.TradeDate).ObjToJson());
+
                     });
 
+                new Action(() => StockRealtime.Append(rs.Data)).ExecuteAndTiming("sync to realtime dic");
                 p++;
                 codes = allCodes.Skip((p - 1) * Config.FixPageSize).Take(Config.FixPageSize).ToList();
             }
