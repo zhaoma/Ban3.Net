@@ -6,6 +6,7 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using log4net;
@@ -139,12 +140,20 @@ public partial class Signalert
         ).ExecuteAndTiming("GenerateIndicatorLine");
 
         new Action(() =>
-            PrepareAllDiagrams(stocks)
-        ).ExecuteAndTiming("PrepareAllDiagrams");
-
-        new Action(() =>
             PrepareAllSets(stocks)
         ).ExecuteAndTiming("PrepareAllSets");
+
+        new Action(() =>
+                PrepareFocus(stocks,Config.DefaultFilter, out var _)
+        ).ExecuteAndTiming("PrepareFocus");
+
+        new Action(() =>
+            PrepareDots(stocks, Config.DefaultFilter)
+        ).ExecuteAndTiming("PrepareDots");
+
+        new Action(() =>
+            PrepareAllDiagrams(stocks)
+        ).ExecuteAndTiming("PrepareAllDiagrams");
 
         new Action(() =>
             PrepareLatestList()
@@ -169,6 +178,37 @@ public partial class Signalert
     }
 
     #endregion
+
+    public static void InitFavorites()
+    {
+        var favorite=new Favorite();
+
+        var dots = Reportor.LoadDots(Config.DefaultFilter);
+        
+        var allCodes=Collector.LoadAllCodes();
+        allCodes.ForEach(o =>
+        {
+            Console.WriteLine(o.Code);
+            if (o.Code.EndsWith(".BJ"))
+            {
+                favorite.ParseOne(StockFavoriteType.BlackList, o, StockRealtime.Close(o.Code), true);
+            }
+            else
+            {
+                if (new List<string> { "688004", "301047", "002855" }.Contains(o.Symbol))
+                {
+                    favorite.ParseOne(StockFavoriteType.Position, o, StockRealtime.Close(o.Code), true);
+                }
+                else
+                {
+                    favorite.ParseOne(dots.ContainsKey(o.Code)?StockFavoriteType.Focus: StockFavoriteType.Ignore
+                        , o, StockRealtime.Close(o.Code), true);
+                }
+            }
+        });
+        
+        favorite.Update();
+    }
 
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
 }

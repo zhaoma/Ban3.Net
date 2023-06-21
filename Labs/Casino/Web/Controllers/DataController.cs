@@ -17,6 +17,15 @@ public class DataController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+    public ContentResult FindAnything(string id)
+    {
+        var allCodes = Signalert.Collector.LoadAllCodes()
+            .Where(o=>o.Code.Contains(id.ToUpper()))
+            .Take(50)
+            .ToList();
+
+        return Content(allCodes.ObjToJson());
+    }
 
     public ContentResult CurrentTreemap()
         => Content(Signalert.LoadCurrentTreemap(Config.DefaultFilter).ObjToJson());

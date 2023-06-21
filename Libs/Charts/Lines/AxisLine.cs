@@ -19,7 +19,7 @@ public class AxisLine
     #region IHasSymbol
 
     /// 
-    public ECharts.Symbol? Symbol { get; set; }
+    public object? Symbol { get; set; }
 
     /// 
     public object? SymbolSize { get; set; }

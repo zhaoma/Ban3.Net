@@ -1,24 +1,44 @@
 ﻿@model IEnumerable<Ban3.Productions.Casino.Contracts.Entities.Stock> 
 @{
     Layout = null;
+    var code = Model.Any() ? Model.First().Code : "3001047.SZ";
+    var url = $"/data/Candlestick/{code}?cycle=DAILY";
 }
-
-<table data-pagination="true" class="table table-hover table-striped table-dark  table-bordered">
-    <thead>
-    <tr>
-        <th class="col-2">Symbol</th>
-        <th class="col-2">Name</th>
-        <th class="col-8">ListDate</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var point in Model.OrderBy(o => o.Symbol))
-    {
-        <tr>
-            <td>@point.Symbol</td>
-            <td>@point.Name</td>
-            <td>@point.ListDate</td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-3">
+        <div class="list-group">
+            @foreach (var point in Model.OrderBy(o => o.Symbol))
+            {
+                <a href="#" class="list-group-item list-group-item-action renderChartsButton"
+                   dataUrl="@($"/data/Candlestick/{@point.Code}")"
+                   renderElement="chartsDaysContainer">@point.Symbol - @point.Name</a>
+            }
+        </div>    
+        </div>
+    <div class="col-9"  id="onesChartsContainer">
+        <div class="btn-group pb-3" role="group">
+            <span class="input-group-text">@code</span>
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-daily"
+                    renderElement="chartsDaysContainer"
+                    dataUrl="@($"/data/Candlestick/{@code}?cycle=DAILY")">
+                DAILY
+            </button>
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-weekly"
+                    renderElement="chartsDaysContainer"
+                    dataUrl="@($"/data/Candlestick/{@code}?cycle=WEEKLY")">
+                WEEKLY
+            </button>
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-monthly"
+                    renderElement="chartsDaysContainer"
+                    dataUrl="@($"/data/Candlestick/{@code}?cycle=MONTHLY")">
+                MONTHLY
+            </button>
+        </div>
+        <div id="chartsDaysContainer"
+             class="renderCharts roundBox whiteBox"
+             style="height: 1500px; width: 100%; padding-top: 1em;"
+             renderElement="chartsDaysContainer"
+             dataUrl="@url">
+        </div>
+    </div>
+</div>

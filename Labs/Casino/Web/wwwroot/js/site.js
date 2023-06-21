@@ -19,6 +19,29 @@ $(document).ready(function () {
         return false;
     });
     }
+
+
+    // JS
+    var oneByOne = document.getElementById("one");
+
+    oneByOne.ondragstart = (e) => {
+        e.dataTransfer.effectAllowed = e.target.dataset.effect;
+        console.log(e);
+        source = e.target;
+
+        console.log('ondragstart');
+        console.log(e.target);
+    };
+
+    oneByOne.ondragover = function (e) {
+        e.preventDefault();
+    }
+    oneByOne.ondragenter = function (e) {
+        e.preventDefault();
+    }
+    oneByOne.ondrop = (e) => {
+        console.log(e.source);
+    };
 });
 
 function clearNav() {
@@ -100,7 +123,9 @@ function renderContainer() {
         $("#partsContainer .lazyLoadButton").click(function () {
             var renderElement = $(this).attr("renderElement");
             var dataUrl = $(this).attr("dataUrl");
-            $("#"+renderElement).load(dataUrl);
+            $("#" + renderElement).load(dataUrl);
+            console.log("init container");
+            InitContainer($("#" + renderElement));
             return false;
         });
     }
@@ -110,7 +135,20 @@ function renderContainer() {
     }
 }
 
+function InitContainer(ele) {
+    var renderCharts = $(ele).find('.renderCharts');
+    console.log('renderCharts.length=' + renderCharts.length);
+    if (renderCharts.length > 0) {
+        renderCharts.each(function () {
+            var renderElement = $(this).attr("renderElement");
+            var dataUrl = $(this).attr("dataUrl");
+            console.log(dataUrl + ' -> ' + renderElement);
+            bindCharts(renderElement, dataUrl);
+        });
+    }
 
+
+}
 
 function bindButton(ele) {
     var renderElement = $(ele).attr("renderElement");
@@ -129,15 +167,28 @@ function bindChartsButton(ele) {
 }
 
 function bindCharts(elementId, dataUrl) {
+    console.log('bind charts.');
     var chartDom = document.getElementById(elementId);
     var currentChart = echarts.init(chartDom);
     //currentChart.showLoading();
     $.get(dataUrl, function (rawData) {
         
         var diagramOption = eval("(" + rawData + ")");
-
+        console.log(diagramOption);
         diagramOption&&currentChart.setOption(diagramOption);
 
         window.onresize = currentChart.resize;
     });
 }
+
+function findAny() {
+    var k = $("#id").val();
+
+    $.get('/parts/stocks/'+k, function (html) {
+        $("#partsContainer").html(html);
+        renderContainer();
+    });
+
+    return false;
+}
+

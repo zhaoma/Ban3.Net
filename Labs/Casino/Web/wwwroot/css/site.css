@@ -109,14 +109,16 @@ html {
     text-align:right;
     padding-right:20px;
 }
+.whiteBox {
+    background-color: #FFF;
+}
 .grayBox {
     background-color: #000;
     opacity:0.7;
 }
-
-    .grayBox:hover {
-        opacity:1;
-    }
+.grayBox:hover {
+    opacity: 1;
+}
     .indexCol {
     background-color: #FFF;
     opacity: 0.3;

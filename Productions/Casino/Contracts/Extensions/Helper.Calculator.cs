@@ -891,7 +891,7 @@ public static partial class Helper
         index = arr.Length;
         for (var i = 0; i < arr.Length; i++)
         {
-            if (arr[i].Close == close)
+            if (arr[i].Close.Equals(close))
                 index = i + 1;
         }
 

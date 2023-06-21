@@ -117,11 +117,15 @@ namespace Ban3.Labs.Casino.Web.Controllers
         {
             var stocks = Signalert.Collector.LoadAllCodes()
                 .Where(o =>
+                    (string.IsNullOrEmpty(request.Id) || o.Code.Contains(request.Id))
+                    &&
                     (string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
                     &&
                     (string.IsNullOrEmpty(request.EndsWith) || o.Code.EndsWith(request.EndsWith))
-                );
-
+                )
+                .Take(50)
+                .ToList();
+            
             return string.IsNullOrEmpty(request.ViewName)
                 ? View(stocks)
                 : View(request.ViewName, stocks);

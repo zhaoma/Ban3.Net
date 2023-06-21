@@ -16,9 +16,9 @@ namespace Ban3.Productions.Casino.CcaAndReport;
 
 public partial class Signalert
 {
-    public static bool PrepareFocus(FocusFilter filter, out FocusFilterResult targetsResult)
+    public static bool PrepareFocus(List<Stock> allCodes,FocusFilter filter, out FocusFilterResult targetsResult)
     {
-        var allCodes = Collector.LoadAllCodes();
+        allCodes ??= Collector.LoadAllCodes();
         return Calculator.PrepareFocus(allCodes, filter, out targetsResult);
     }
 
@@ -42,9 +42,9 @@ public partial class Signalert
 
     #region diagram data
 
-    public static bool PrepareDots(FocusFilter filter)
+    public static bool PrepareDots(List<Stock> allCodes, FocusFilter filter)
     {
-        var allCodes = Collector.LoadAllCodes();
+        allCodes ??= Collector.LoadAllCodes();
         if (Calculator.PrepareDots(filter, allCodes, out var dic))
         {
             foreach (var kv in dic)

@@ -2,11 +2,11 @@
 using Ban3.Sites.ViaNetease.Entries;
 using Newtonsoft.Json;
 
-namespace Ban3.Productions.Casino.Contracts.Extensions;
+namespace Ban3.Productions.Casino.Contracts.Entities;
 
 public class StockRuntimeRecord
 {
-    [JsonProperty("code",NullValueHandling = NullValueHandling.Ignore)]
+    [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
     public string Code { get; set; }
 
     [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
@@ -39,7 +39,7 @@ public class StockRuntimeRecord
     [JsonProperty("amount", NullValueHandling = NullValueHandling.Ignore)]
     public float Amount { get; set; }
 
-    public StockRuntimeRecord(){}
+    public StockRuntimeRecord() { }
 
     public StockRuntimeRecord(StockRecord o)
     {
@@ -50,7 +50,7 @@ public class StockRuntimeRecord
         Low = (float)o.Low;
         Close = (float)o.Price;
         PreClose = (float)o.YestClose;
-        ChangePercent = (float)o.Percent*100;
+        ChangePercent = (float)o.Percent * 100;
         Vol = (float)o.Volume;
         Amount = (float)o.TurnOver;
     }

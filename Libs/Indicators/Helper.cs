@@ -179,5 +179,24 @@ public static class Helper
         }
     };
 
+    public static readonly Profile DefaultProfile = new()
+    {
+        Identity = "default",
+        Subject = "MACD MWD C0",
+        BuyingJudge = (qs) => qs.SetKeys != null
+                              && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
+                              && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
+                              && qs.SetKeys.Count(x => x.StartsWith("MACD.C0.")) >= 1
+                              && qs.SetKeys.Count(x => x.StartsWith("MACD.GC.")) >= 1
+                              && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
+                              && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
+                              && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2,
+        SellingJudge = (qs) => qs.SetKeys != null
+                               &&
+                               (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY")),
+        Persistence = true,
+        IsDefault = true
+    };
+
     #endregion
 }

@@ -5,14 +5,17 @@
 <div class="container">
     <main role="main" class="pb-3 mb-3 indexBox rounded-2">
         <div class="text-center col-8 offset-2">
+            <form action="/data/findanything" method="get" onsubmit="return findAny();">
             <div class="input-group  input-group-lg">
-                <span class="input-group-text" id="addon-wrapping"><i class="bi bi-heart-pulse"></i></span>
-                <input type="text" class="form-control form-control-lg col-10" placeholder="code here" aria-label="code here" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary btn-lg" type="button" id="button-addon2">PinG !</button>
-            </div>
+                    <span class="input-group-text" id="addon-wrapping"><i class="bi bi-heart-pulse"></i></span>
+                    <input type="text" id="id" name="id" class="form-control form-control-lg col-10" placeholder="code here" aria-label="code here" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary btn-lg" type="submit" id="button-addon2">PinG !</button>
+
+                </div>
+            </form>
         </div>
         <div class="col-8 offset-2 pb3 iconsBox">
-            <ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list">
+            <ul class="row row-cols-4 row-cols-sm-4 row-cols-lg-4 row-cols-xl-8 list-unstyled list">
                 <li class="col" data-tags="number numeral" data-categories="shapes">
                     <a class="d-block text-dark text-decoration-none partsNav" href="javascript:;" dataUrl="/home/index/dotsOfBuying">
                         <div class="p-3 py-4 mb-2 bg-light text-center rounded">
@@ -21,28 +24,12 @@
                         <div class="name text-muted text-decoration-none text-center pt-1">dots of buying</div>
                     </a>
                 </li>
-                <li class="col" data-tags="number numeral" data-categories="shapes">
-                    <a class="d-block text-dark text-decoration-none partsNav" href="javascript:;" dataUrl="/home/index/calendar">
-                        <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                            <i class="bi bi-calendar2-date"></i>
-                        </div>
-                        <div class="name text-muted text-decoration-none text-center pt-1">calendar</div>
-                    </a>
-                </li>
-                <li class="col" data-tags="number numeral" data-categories="shapes">
+                <li class="col" id="one" data-tags="number numeral" data-categories="shapes">
                     <a class="d-block text-dark text-decoration-none partsNav" href="javascript:;" dataUrl="/home/index/one">
                         <div class="p-3 py-4 mb-2 bg-light text-center rounded">
                             <i class="bi bi-eye-fill"></i>
                         </div>
                         <div class="name text-muted text-decoration-none text-center pt-1">one by one</div>
-                    </a>
-                </li>
-                <li class="col" data-tags="number numeral" data-categories="shapes">
-                    <a class="d-block text-dark text-decoration-none partsNav" href="javascript:;" dataUrl="/home/index/command">
-                        <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                            <i class="bi bi-c-square"></i>
-                        </div>
-                        <div class="name text-muted text-decoration-none text-center pt-1">command online</div>
                     </a>
                 </li>
                 <li class="col" data-tags="number numeral" data-categories="shapes">

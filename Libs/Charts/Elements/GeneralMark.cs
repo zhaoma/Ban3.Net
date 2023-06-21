@@ -1,24 +1,18 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    
-//  reference:
-//  ————————————————————————————————————————————————————————————————————————————
-
-using  Ban3.Infrastructures.Charts.Elements;
-using  Ban3.Infrastructures.Charts.Styles;
-using  Ban3.Infrastructures.Charts.Labels;
+﻿using System.Collections.Generic;
+using Ban3.Infrastructures.Charts.Cogs;
+using Ban3.Infrastructures.Charts.Labels;
+using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Elements;
 
-public class Mark
+public class GeneralMark
     : IHasSymbol, IHasAnimation
 {
     #region IHasSymbol
 
     ///
-    public ECharts.Symbol? Symbol { get; set; }
+    public object? Symbol { get; set; }
 
     /// 
     public object? SymbolSize { get; set; }
@@ -80,7 +74,7 @@ public class Mark
     /// 
     /// </summary>
     [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
-    public object? Data { get; set; }
+    public List< GeneralData>? Data { get; set; }
 
     #region IHasAnimation
 
@@ -90,13 +84,13 @@ public class Mark
 
     public object? AnimationDuration { get; set; } = 1000;
 
-    public ECharts.EasingEffect? AnimationEasing { get; set; } = ECharts.EasingEffect.CubicOut;
+    public Enums.EasingEffect? AnimationEasing { get; set; } = Enums.EasingEffect.CubicOut;
 
     public object? AnimationDelay { get; set; } = 0;
 
     public object? AnimationDurationUpdate { get; set; } = 300;
 
-    public ECharts.EasingEffect? AnimationEasingUpdate { get; set; } = ECharts.EasingEffect.CubicInOut;
+    public Enums.EasingEffect? AnimationEasingUpdate { get; set; } = Enums.EasingEffect.CubicInOut;
 
     public object? AnimationDelayUpdate { get; set; } = 0;
 

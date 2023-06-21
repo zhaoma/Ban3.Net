@@ -27,7 +27,7 @@ public class Series
     /// 
     /// </summary>
     [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
-    public string Name { get; set; } = string.Empty;
+    public string? Name { get; set; } 
 
     /// <summary>
     /// 
@@ -38,6 +38,8 @@ public class Series
     /// <summary>
     /// 
     /// </summary>
+    [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonConverter(typeof(StringEnumConverter))]
     public ECharts.SeriesType Type { get; set; }
 
     /// <summary>
@@ -118,7 +120,7 @@ public class Series
     #region IHasSymbol
 
     /// 
-    public ECharts.Symbol? Symbol { get; set; }
+    public object? Symbol { get; set; }
 
     /// 
     public object? SymbolSize { get; set; }
@@ -296,14 +298,13 @@ public class Series
     public object? Links { get; set; }
 
     [JsonProperty("markPoint", NullValueHandling = NullValueHandling.Ignore)]
-    public Mark? MarkPoint { get; set; }
+    public GeneralMark? MarkPoint { get; set; }
 
     [JsonProperty("markLine", NullValueHandling = NullValueHandling.Ignore)]
-    public Mark? MarkLine { get; set; }
-
-
+    public GeneralMark? MarkLine { get; set; }
+    
     [JsonProperty("markArea", NullValueHandling = NullValueHandling.Ignore)]
-    public Mark? MarkArea { get; set; }
+    public GeneralMark? MarkArea { get; set; }
 
     [JsonProperty("universalTransition", NullValueHandling = NullValueHandling.Ignore)]
     public Transition? UniversalTransition { get; set; }

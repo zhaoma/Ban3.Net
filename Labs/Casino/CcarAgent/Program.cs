@@ -67,15 +67,7 @@ internal class Program
                 new Action(CheckSomething).ExecuteAndTiming($"CheckSomething");
                 break;
 
-            case "--dots":
-                Console.WriteLine("Prepare Focus...");
-                new Action(() => { Signalert.PrepareFocus(Config.DefaultFilter, out var _); }).ExecuteAndTiming(
-                    "Prepare Focus.");
-
-                Console.WriteLine();
-
-                Console.WriteLine("Prepare Dots...");
-                new Action(() => { Signalert.PrepareDots(Config.DefaultFilter); }).ExecuteAndTiming("Prepare Dots.");
+            case "--rronly":
 
                 new Action(() => {
                     Signalert.Collector.ReadRealtime();
@@ -88,7 +80,7 @@ internal class Program
                 $"--daily :                  prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one code :               prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--realtime [codes] :       refresh all realtime data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--dots :                   refresh diagram data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--dots :                 refresh diagram data".WriteColorLine(ConsoleColor.DarkYellow);
                 CheckSomething();
                 break;
         }
@@ -102,11 +94,7 @@ internal class Program
 
     private static void CheckSomething()
     {
-        new Action(Signalert.ExecuteRealtimeJob).ExecuteAndTiming("realtime(ExecuteRealtimeJob)");
-        for (var i = 1; i <= 50; i++)
-        {
-            var r = StockRealtime.Records;
-            Console.WriteLine(r.Count);
-        }
+        Signalert.PrepareAllDiagrams();
+        //Signalert.InitFavorites();
     }
 }

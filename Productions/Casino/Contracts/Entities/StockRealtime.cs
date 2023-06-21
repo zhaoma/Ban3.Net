@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
-using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Sites.ViaNetease.Entries;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
@@ -16,9 +15,19 @@ public class StockRealtime
                 typeof(StockRealtime).LocalFile()
             );
 
+    public static float Close(string code)
+    {
+        if (Records.TryGetValue(code, out var r))
+        {
+            return r.Close;
+        }
+
+        return 0;
+    }
+
     protected static object Lock=new ();
     protected static Dictionary<string, StockRuntimeRecord> _records;
-
+    
     public static void Append(StockRecord sr)
     {
         var r=new StockRuntimeRecord(sr);

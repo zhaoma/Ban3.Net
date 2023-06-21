@@ -5,8 +5,6 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
 
 namespace  Ban3.Infrastructures.Charts.Elements;
 
@@ -19,8 +17,7 @@ public interface IHasSymbol
     /// Icons can be set to arbitrary vector path via 'path://' in ECharts.
     /// </summary>
     [JsonProperty("symbol", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonConverter(typeof(StringEnumConverter))]
-    ECharts.Symbol? Symbol { get; set; }
+    object? Symbol { get; set; }
 
     /// <summary>
     /// timeline symbol size. It can be set to single numbers like 10, 

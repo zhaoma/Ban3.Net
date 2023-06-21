@@ -27,9 +27,21 @@ namespace Ban3.Productions.Casino.Contracts.Enums
         Focus = 2,
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Description("备选")]
+        Pool =3,
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        [Description("不理")]
+        Ignore = 4,
+
+        /// <summary>
         /// 黑名单
         /// </summary>
         [Description("黑名单")]
-        BlackList = 3
+        BlackList = 5
     }
 }

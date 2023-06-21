@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Charts;
 using Ban3.Infrastructures.Charts.Axes;
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Components;
 using Ban3.Infrastructures.Charts.Composites;
+using Ban3.Infrastructures.Charts.Elements;
 using Ban3.Infrastructures.Charts.Entries;
 using Ban3.Infrastructures.Charts.Enums;
 using Ban3.Infrastructures.Charts.Labels;
@@ -229,7 +231,8 @@ public static partial class Helper
         this IReportor _,
         Stock stock,
         List<StockPrice> prices,
-        LineOfPoint indicatorValue)
+        LineOfPoint indicatorValue
+        )
     {
         var candlestickData = new CandlestickData()
         {
@@ -291,8 +294,53 @@ public static partial class Helper
                     new(true, true, 5){Show = false},
                     new(true, true, 6){Show = false}
                 });
-        
-        diagram.AddSeries(SeriesType.Candlestick.CreateSeries(stock.Symbol, candlestickData.ChartData(), null));
+
+        var candlestickSeries = SeriesType.Candlestick.CreateSeries(stock.Symbol, candlestickData.ChartData(), null);
+
+        if (_.LoadDots(Config.DefaultFilter).TryGetValue(stock.Code, out var dots))
+        {
+            if (dots != null && dots.Any())
+            {
+                candlestickSeries.MarkPoint ??= new GeneralMark
+                {
+                    Data = new List<GeneralData>()
+                };
+
+                dots.ForEach(dot =>
+                {
+                    candlestickSeries.MarkPoint.Data!.Add(
+                        dot.IsDotOfBuying
+                            ? Infrastructures.Charts.Helper.DotOfBuying(
+                                dot.TradeDate,
+                                new object[2] { dot.TradeDate, dot.Close })
+                            : Infrastructures.Charts.Helper.DotOfSelling(
+                                dot.TradeDate,
+                                new object[2] { dot.TradeDate, dot.Close })
+                    );
+                });
+            }
+        }
+
+        var now = DateTime.Now;
+        var notices = indicatorValue.LineToSets()
+            .Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0.")))
+            .Select(o => new object[2] { o.Code, o.Close })
+            .ToList();
+
+        if (notices.Any())
+        {
+            candlestickSeries.MarkPoint ??= new GeneralMark
+            {
+                Data = new List<GeneralData>()
+            };
+            notices.ForEach(os =>
+            {
+                candlestickSeries.MarkPoint.Data!.Add(Infrastructures.Charts.Helper.DotOfNotice("xx", os));
+            });
+        }
+        Console.WriteLine($"{DateTime.Now.Subtract(now).Milliseconds} ms elapsed.");
+
+        diagram.AddSeries(candlestickSeries);
         diagram.AddSeries(indicatorValue.MA(null, out var legendMA));
         diagram.AddSeries(indicatorValue.ENE(null,out var legendENE));
 
@@ -348,7 +396,7 @@ public static partial class Helper
 
         return diagram;
     }
-
+    
     static Series[] AMOUNT(this LineOfPoint indicatorValue, List<StockPrice> prices, int? index,out List<string> legendData)
     {
         var result = new List<Series>
@@ -416,15 +464,15 @@ public static partial class Helper
                 .Select(o => o.Cci.RefCCI).ToList(),
             index);
 
-        result.MarkLine = new Mark
+        result.MarkLine = new GeneralMark
         {
-            Symbol = Symbol.None,
+            Symbol = Symbol.None.ToString(),
             LineStyle = new LineStyle{Color = Infrastructures.Charts.Helper.Red },
-            Data=new List<MarkLine>
+            Data=new()
             {
-                new MarkLine {YAxis = 200},
-                new MarkLine {YAxis = 100}, 
-                new MarkLine {YAxis = -200},
+                new GeneralData {YAxis = 200},
+                new GeneralData {YAxis = 100}, 
+                new GeneralData {YAxis = -200},
             }
         };
 
@@ -441,13 +489,13 @@ public static partial class Helper
                 .Select(o => o.Dmi.RefADX).ToList(),
             index, Infrastructures.Charts.Helper.Purple);
 
-        adx.MarkLine = new Mark
+        adx.MarkLine = new GeneralMark
         {
-            Symbol = Symbol.None,
+            Symbol = Symbol.None.ToString(),
             LineStyle = new LineStyle { Color = Infrastructures.Charts.Helper.Purple },
-            Data = new List<MarkLine>
+            Data = new ()
             {
-                new MarkLine {YAxis = 80}
+                new GeneralData {YAxis = 80}
             }
         };
 
@@ -519,14 +567,14 @@ public static partial class Helper
                 .Select(o => o.Kd.RefK).ToList(),
             index);
 
-        k.MarkLine = new Mark
+        k.MarkLine = new GeneralMark
         {
-            Symbol = Symbol.None,
+            Symbol = Symbol.None.ToString(),
             LineStyle = new LineStyle { Color = Infrastructures.Charts.Helper.Red },
-            Data = new List<MarkLine>
+            Data = new ()
             {
-                new MarkLine {YAxis = 80},
-                new MarkLine {YAxis = 10},
+                new GeneralData {YAxis = 80},
+                new GeneralData {YAxis = 10},
             }
         };
 
