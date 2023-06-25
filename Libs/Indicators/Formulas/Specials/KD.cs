@@ -71,14 +71,18 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             N = 9;
             M = 3;
+
+            Result = new List<Outputs.Values.KD>();
         }
 
-        public KD( int n = 9, int m = 3 )
+        public KD(int n = 9, int m = 3)
         {
             Title = $"KD({n},{m})";
 
             N = n;
             M = m;
+
+            Result = new List<Outputs.Values.KD>();
         }
 
         /// <summary>
@@ -225,19 +229,19 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( Result[ i ].RefHHV - Result[ i ].RefLLV != 0 )
                 {
-                    Result[ i ].RefDailyPSV = Math.Round( (prices[ i ].CurrentClose.Value - Result[ i ].RefLLV.Value) * 100M / (Result[ i ].RefHHV.Value - Result[ i ].RefLLV.Value), 3 );
+                    Result[ i ].RefDailyPSV = Math.Round( (prices[ i ].CurrentClose!.Value - Result[ i ].RefLLV!.Value) * 100M / (Result[ i ].RefHHV!.Value - Result[ i ].RefLLV!.Value), 3 );
                 }
 
                 if( i > 0 )
                 {
                     Result[ i ].RefPSV = EMA(
-                                             Result[ i ].RefDailyPSV.Value,
-                                             Result[ i - 1 ].RefPSV.Value,
+                                             Result[ i ].RefDailyPSV!.Value,
+                                             Result[ i - 1 ].RefPSV!.Value,
                                              M );
 
                     Result[ i ].RefK = EMA(
-                                           Result[ i ].RefPSV.Value,
-                                           Result[ i - 1 ].RefK.Value,
+                                           Result[ i ].RefPSV!.Value,
+                                           Result[ i - 1 ].RefK!.Value,
                                            M );
                 }
                 else
@@ -251,7 +255,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     var d = 0M;
                     for( int r = 0; r < M; r++ )
                     {
-                        d += Result[ i - r ].RefK.Value;
+                        d += Result[ i - r ].RefK!.Value;
                     }
 
                     Result[ i ].RefD = Math.Round( d / M, 3 );

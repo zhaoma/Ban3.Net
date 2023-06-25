@@ -48,12 +48,14 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         {
             N = 14;
             Title = "CCI(14)";
+            Result = new List<Outputs.Values.CCI>();
         }
 
         public CCI( int n = 14 )
         {
             N = n;
             Title = $"CCI({n})";
+            Result = new List<Outputs.Values.CCI>();
         }
 
         public List<Outputs.Values.CCI> Result { get; set; }
@@ -140,7 +142,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = prices.Select( o => new Outputs.Values.CCI
             {
                     MarkTime = o.MarkTime,
-                    RefTYP = Math.Round( (o.CurrentHigh.Value + o.CurrentLow.Value + o.CurrentClose.Value) / 3, 3 )
+                    RefTYP = Math.Round( (o.CurrentHigh!.Value + o.CurrentLow!.Value + o.CurrentClose!.Value) / 3, 3 )
             } ).ToList();
 
             #region Calculate

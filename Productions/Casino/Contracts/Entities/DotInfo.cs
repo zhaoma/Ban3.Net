@@ -27,7 +27,7 @@ public class DotInfo
     public float Close { get; set; }
 
     [JsonProperty("setKeys", NullValueHandling = NullValueHandling.Ignore)]
-    public IEnumerable<string>? SetKeys { get; set; }
+    public IEnumerable<string> SetKeys { get; set; }
 
     [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
     public string Code { get; set; }

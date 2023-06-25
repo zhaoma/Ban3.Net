@@ -86,6 +86,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             SHORT = 12;
             LONG = 26;
             MID = 9;
+
+            Result = new List<Outputs.Values.MACD>();
         }
 
         public MACD( int s = 12, int l = 26, int m = 9 )
@@ -95,6 +97,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             SHORT = s;
             LONG = l;
             MID = m;
+
+            Result = new List<Outputs.Values.MACD>();
         }
 
 
@@ -210,8 +214,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     Result[ i ] = new Outputs.Values.MACD
                     {
                             MarkTime = prices[ i ].MarkTime,
-                            RefEMAShort = prices[ i ].CurrentClose.Value,
-                            RefEMALong = prices[ i ].CurrentClose.Value
+                            RefEMAShort = prices[ i ].CurrentClose!.Value,
+                            RefEMALong = prices[ i ].CurrentClose!.Value
                     };
                 }
                 else
@@ -219,8 +223,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     Result[ i ] = new Outputs.Values.MACD
                     {
                             MarkTime = prices[ i ].MarkTime,
-                            RefEMAShort = EMA( prices[ i ].CurrentClose.Value, emaShortYest, SHORT ),
-                            RefEMALong = EMA( prices[ i ].CurrentClose.Value, emaLongYest, LONG )
+                            RefEMAShort = EMA( prices[ i ].CurrentClose!.Value, emaShortYest, SHORT ),
+                            RefEMALong = EMA( prices[ i ].CurrentClose!.Value, emaLongYest, LONG )
                     };
 
                     Result[ i ].RefDIF = Math.Round( Result[ i ].RefEMAShort - Result[ i ].RefEMALong, 3 );

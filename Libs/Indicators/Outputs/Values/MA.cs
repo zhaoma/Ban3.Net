@@ -25,6 +25,7 @@ public class MA
     /// </summary>
     public MA()
     {
+        RefPrices = new List<LineWithValue>();
     }
 
     public List<string> Features()

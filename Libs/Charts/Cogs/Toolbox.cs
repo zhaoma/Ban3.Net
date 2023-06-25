@@ -85,13 +85,13 @@ public class Toolbox
     /// 
     /// </summary>
     [JsonProperty("iconStyle", NullValueHandling = NullValueHandling.Ignore)]
-    public GeneralStyle IconStyle { get; set; }
+    public GeneralStyle? IconStyle { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
     [JsonProperty("emphasis", NullValueHandling = NullValueHandling.Ignore)]
-    public IconEmphasis Emphasis { get; set; }
+    public IconEmphasis? Emphasis { get; set; }
 
     /// <summary>
     /// 工具箱的 tooltip 配置，配置项同 tooltip。

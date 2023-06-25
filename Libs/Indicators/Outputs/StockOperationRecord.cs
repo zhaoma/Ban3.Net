@@ -26,7 +26,7 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
         /// 股票编码
         /// </summary>
         [DataMember]
-        public string StockCode { get; set; }
+        public string StockCode { get; set; } = string.Empty;
 
         /// <summary>
         /// 买入时间

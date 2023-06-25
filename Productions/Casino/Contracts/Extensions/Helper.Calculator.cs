@@ -475,7 +475,7 @@ public static partial class Helper
     /// <param name="filter"></param>
     /// <param name="stock"></param>
     /// <returns></returns>
-    public static FocusTarget? ParseFocusTarget(
+    public static FocusTarget ParseFocusTarget(
         this ICalculator _,
         FocusFilter filter,
         Stock stock)
@@ -497,7 +497,7 @@ public static partial class Helper
         return null;
     }
 
-    static FocusData? ParseFocusData(
+    static FocusData ParseFocusData(
         this ICalculator _,
         FocusFilter filter,
         Stock stock,
@@ -561,7 +561,7 @@ public static partial class Helper
     /// <param name="sets"></param>
     /// <param name="tradeDate"></param>
     /// <returns></returns>
-    public static List<string>? GetSets(this List<StockSets> sets, string tradeDate)
+    public static List<string> GetSets(this List<StockSets> sets, string tradeDate)
     {
         var s = sets.Last(o => o.MarkTime.ToYmd() == tradeDate);
         if (s is { SetKeys: { } })

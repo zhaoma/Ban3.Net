@@ -56,6 +56,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             N = 6;
             M = 6;
+
+            Result = new List<Outputs.Values.BIAS>();
         }
 
         public BIAS( int n = 6, int m = 6 )
@@ -63,6 +65,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Title = $"BIAS({n},{m})";
             N = n;
             M = m;
+            Result = new List<Outputs.Values.BIAS>();
         }
 
         public List<Outputs.Values.BIAS> Result { get; set; }
@@ -162,7 +165,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                     if( ma != 0 )
                     {
-                        Result[ i ].RefBIAS = Math.Round( (prices[ i ].CurrentClose.Value - ma) / ma * 100M, 3 );
+                        Result[ i ].RefBIAS = Math.Round( (prices[ i ].CurrentClose!.Value - ma) / ma * 100M, 3 );
                     }
                 }
 
@@ -173,7 +176,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     {
                         if( Result[ i - j ].RefBIAS != null )
                         {
-                            biasSum += Result[ i - j ].RefBIAS.Value;
+                            biasSum += Result[ i - j ].RefBIAS!.Value;
                         }
                     }
 

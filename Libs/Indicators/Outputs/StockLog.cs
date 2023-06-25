@@ -22,10 +22,10 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
         /// 标的代码
         /// </summary>
         [JsonProperty("code")]
-        public string Code { get; set; }
+        public string Code { get; set; } = string.Empty;
 
         [JsonProperty("symbol")]
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = string.Empty;
 
         /// <summary>
         /// 标注日期

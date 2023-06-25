@@ -91,6 +91,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             N = 14;
             M = 6;
+
+            Result = new List<Outputs.Values.DMI>();
         }
 
         public DMI( int n = 14, int m = 6 )
@@ -99,6 +101,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             N = n;
             M = m;
+            Result = new List<Outputs.Values.DMI>();
         }
 
         public List<Outputs.Values.DMI> Result { get; set; }
@@ -266,9 +269,9 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             var middles = prices.Select( o =>
                                                  new decimal[]
                                                  {
-                                                         o.CurrentHigh.Value,
-                                                         o.CurrentLow.Value,
-                                                         o.CurrentClose.Value,
+                                                         o.CurrentHigh!.Value,
+                                                         o.CurrentLow!.Value,
+                                                         o.CurrentClose!.Value,
                                                          0,
                                                          0,
                                                          Math.Abs( o.CurrentHigh.Value - o.CurrentLow.Value )
@@ -281,8 +284,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     Result[ i ].RefHD = middles[ i ][ 0 ] - middles[ i - 1 ][ 0 ];
                     Result[ i ].RefLD = middles[ i - 1 ][ 1 ] - middles[ i ][ 1 ];
 
-                    middles[ i ][ 3 ] = Result[ i ].RefHD.Value > 0 && Result[ i ].RefHD.Value > Result[ i ].RefLD.Value ? Result[ i ].RefHD.Value : 0M;
-                    middles[ i ][ 4 ] = Result[ i ].RefLD.Value > 0 && Result[ i ].RefLD.Value > Result[ i ].RefHD.Value ? Result[ i ].RefLD.Value : 0M;
+                    middles[ i ][ 3 ] = Result[ i ].RefHD!.Value > 0 && Result[ i ].RefHD!.Value > Result[ i ].RefLD!.Value ? Result[ i ].RefHD!.Value : 0M;
+                    middles[ i ][ 4 ] = Result[ i ].RefLD!.Value > 0 && Result[ i ].RefLD!.Value > Result[ i ].RefHD!.Value ? Result[ i ].RefLD!.Value : 0M;
 
                     middles[ i ][ 5 ] = Math.Max( middles[ i ][ 5 ], Math.Abs( middles[ i ][ 0 ] - middles[ i - 1 ][ 2 ] ) );
                     middles[ i ][ 5 ] = Math.Max( middles[ i ][ 5 ], Math.Abs( middles[ i ][ 1 ] - middles[ i - 1 ][ 2 ] ) );
@@ -335,7 +338,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( i >= 2 * M - 1 )
                 {
-                    Result[ i ].RefADXR = (Result[ i ].RefADX.ToDecimal() + Result[ i - M ].RefADX.ToDecimal()) / 2;
+                    Result[ i ].RefADXR = (Result[ i ].RefADX!.ToDecimal() + Result[ i - M ].RefADX!.ToDecimal()) / 2;
                 }
 
                 Result[ i ].RefADX = Math.Round( Result[ i ].RefADX!.ToDecimal(), 3 );

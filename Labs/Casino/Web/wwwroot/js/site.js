@@ -126,7 +126,7 @@ function initDragdrop() {
     console.log(draggableElements);
     var oneByOne = document.getElementById("one");
 
-    oneByOne.ondragstart = (e) => {
+    draggableElements.ondragstart = (e) => {
         e.dataTransfer.effectAllowed = e.target.dataset.effect;
         console.log(e);
         source = e.target;
@@ -158,8 +158,7 @@ function initContainer(ele) {
     }
 
     var renderChartsButtons = $(ele).find(".renderChartsButton");
-    if (renderChartsButtons.length > 0) 
-    {
+    if (renderChartsButtons.length > 0) {
         renderChartsButtons.each(() => {
             $(this).click = () => { bindChartsButton(this); }
         });
@@ -188,6 +187,12 @@ function initContainer(ele) {
             $(this).click = () => { bindButton(this); }
         });
     }
+
+    var grids = $(ele).find(".grid");
+    if (grids.length>0)
+    {
+        grids.each(() => $(this).masonry();)
+    }
 }
 
 function bindButton(ele) {
@@ -195,7 +200,7 @@ function bindButton(ele) {
     var dataUrl = $(ele).attr("dataUrl");
 
     $("#" + renderElement).load(dataUrl);
-    $.get(dataUrl, function (html) { 
+    $.get(dataUrl, function (html) {
         $("#" + renderElement).html(html);
 
         initContainer($("#" + renderElement));
@@ -241,7 +246,7 @@ function bindChartsButton(ele) {
             $(this).addClass('btn-secondary');
         }
     }
-    
+
     return false;
 }
 

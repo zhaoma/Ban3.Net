@@ -21,17 +21,17 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
         /// <summary>
         /// 代码
         /// </summary>
-        public string StockCode { get; set; }
+        public string StockCode { get; set; } = string.Empty;
 
         /// <summary>
         /// 名称
         /// </summary>
-        public string StockName { get; set; }
+        public string StockName { get; set; } = string.Empty;
 
         /// <summary>
         /// 图标
         /// </summary>
-        public string StockIcon { get; set; }
+        public string StockIcon { get; set; } = string.Empty;
 
         /// <summary>
         /// 板块

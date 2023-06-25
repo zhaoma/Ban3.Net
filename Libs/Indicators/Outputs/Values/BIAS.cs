@@ -27,7 +27,10 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
         /// <summary>
         /// 
         /// </summary>
-        public BIAS() {}
+        public BIAS()
+        {
+
+        }
 
         public List<string> Features(BIAS? pre)
         {

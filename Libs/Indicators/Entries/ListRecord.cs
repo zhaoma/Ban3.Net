@@ -29,13 +29,13 @@ public class ListRecord:Record
     /// TS_CODE
     /// </summary>
     [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
-    public string Code { get; set; }
+    public string Code { get; set; } = string.Empty;
 
     /// <summary>
     /// 代码
     /// </summary>
     [JsonProperty("symbol", NullValueHandling = NullValueHandling.Ignore)]
-    public string Symbol { get; set; }
+    public string Symbol { get; set; } = string.Empty;
 
     /// <summary>
     /// 计分

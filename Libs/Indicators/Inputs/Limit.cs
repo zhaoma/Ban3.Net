@@ -29,21 +29,21 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 单个约束
         /// </summary>
-        public Stake RowStake { get; set; }
+        public Stake? RowStake { get; set; }
 
         /// <summary>
         /// 标的范围（市场）
         /// </summary>
-        public List<Enums.StockGroup> Groups { get; set; }
+        public List<Enums.StockGroup>? Groups { get; set; }
 
         /// <summary>
         /// 标的范围（题材）
         /// </summary>
-        public List<int> NotionIds { get; set; }
+        public List<int>? NotionIds { get; set; }
 
         /// <summary>
         /// 标的范围（票）
         /// </summary>
-        public List<string> Codes { get; set; }
+        public List<string>? Codes { get; set; }
     }
 }

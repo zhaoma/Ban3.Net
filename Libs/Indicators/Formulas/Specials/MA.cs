@@ -46,6 +46,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     //new MALine {ParamId=7,Days=120 },
                     //new MALine {ParamId=8,Days=250 }
             };
+            Result = new List<Outputs.Values.MA>();
         }
 
         public MA( int d1 = 5, int d2 = 10, int d3 = 20, int d4 = 30 )
@@ -62,6 +63,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     //new MALine {ParamId=7,Days=120 },
                     //new MALine {ParamId=8,Days=250 }
             };
+            Result = new List<Outputs.Values.MA>();
         }
 
         public List<Outputs.Values.MA> Result { get; set; }

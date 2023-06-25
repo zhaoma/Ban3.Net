@@ -25,17 +25,19 @@ public class AMOUNT
     /// </summary>
     public AMOUNT()
     {
+        RefAmounts = new List<LineWithValue>();
     }
 
     public List<string> Features()
     {
         var result = new List<string>();
 
-        if (RefAmounts.Any()&&
+        if (RefAmounts.Any() &&
             RefAmounts.OrderBy(o => o.Days)
                 .Select(o => o.Ref)
                 .ToList()
-                .IsAsc()){
+                .IsAsc())
+        {
             result.Add("AMOUNT.UP");
         }
 

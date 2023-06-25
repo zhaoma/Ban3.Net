@@ -34,11 +34,11 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
         /// <summary>
         /// 相关题材
         /// </summary>
-        public IEnumerable<string> Notions { get; set; }
+        public IEnumerable<string>? Notions { get; set; }
 
         /// <summary>
         /// 所有特征
         /// </summary>
-        public IEnumerable<string> Keys { get; set; }
+        public IEnumerable<string>? Keys { get; set; }
     }
 }

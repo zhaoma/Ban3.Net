@@ -73,6 +73,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             N = 10;
             M1 = 11;
             M2 = 9;
+            Result = new List<Outputs.Values.ENE>();
         }
 
         public ENE( int n = 10, int m1 = 11, int m2 = 9 )
@@ -82,6 +83,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             N = n;
             M1 = m1;
             M2 = m2;
+            Result = new List<Outputs.Values.ENE>();
         }
 
         public List<Outputs.Values.ENE> Result { get; set; }
@@ -184,7 +186,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                     Result[ i ].RefUPPER = Math.Round( (1 + M1 / 100M) * ma, 2 );
                     Result[ i ].RefLOWER = Math.Round( (1 - M2 / 100M) * ma, 2 );
-                    Result[ i ].RefENE = Math.Round( (Result[ i ].RefUPPER.Value + Result[ i ].RefLOWER.Value) / 2, 2 );
+                    Result[ i ].RefENE = Math.Round( (Result[ i ].RefUPPER!.Value + Result[ i ].RefLOWER!.Value) / 2, 2 );
                 }
             }
         }

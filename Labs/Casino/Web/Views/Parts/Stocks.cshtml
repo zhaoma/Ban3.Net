@@ -10,56 +10,12 @@
         <div class="list-group">
             @foreach (var point in Model.OrderBy(o => o.Symbol))
             {
-                <a href="#" class="list-group-item list-group-item-action renderChartsButton"
-                   dataUrl="@($"/data/Candlestick/{@point.Code}")"
-                   renderElement="chartsDaysContainer">@point.Symbol - @point.Name</a>
+                <a href="#" class="list-group-item list-group-item-action lazyLoadButton"
+                   dataUrl="@($"/data/stock/{@point.Code}")"
+                   renderElement="onesChartsContainer">@point.Symbol - @point.Name</a>
             }
         </div>    
         </div>
     <div class="@(isOnly?"col-12":"col-9")"  id="onesChartsContainer">
-        <div class="btn-group pb-3" role="group">
-            <span class="input-group-text">@code</span>
-            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-daily"
-                    renderElement="chartsDaysContainer"
-                    dataUrl="@($"/data/Candlestick/{@code}?cycle=DAILY")">
-                DAILY
-            </button>
-            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-weekly"
-                    renderElement="chartsDaysContainer"
-                    dataUrl="@($"/data/Candlestick/{@code}?cycle=WEEKLY")">
-                WEEKLY
-            </button>
-            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-monthly"
-                    renderElement="chartsDaysContainer"
-                    dataUrl="@($"/data/Candlestick/{@code}?cycle=MONTHLY")">
-                MONTHLY
-            </button>
-            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-bias"
-                    renderElement="chartsDaysContainer"
-                    dataUrl="@($"/data/bias/{@code}")">
-                BIAS
-            </button>
-            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-dmi"
-                    renderElement="chartsDaysContainer"
-                    dataUrl="@($"/data/dmi/{@code}")">
-                DMI
-            </button>
-            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-dmi"
-                    renderElement="chartsDaysContainer"
-                    dataUrl="@($"/data/kd/{@code}")">
-                KD
-            </button>
-            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-dmi"
-                    renderElement="chartsDaysContainer"
-                    dataUrl="@($"/data/macd/{@code}")">
-                MACD
-            </button>
-        </div>
-        <div id="chartsDaysContainer"
-             class="renderCharts roundBox whiteBox"
-             style="height: 1500px; width: 100%; padding-top: 1em;"
-             renderElement="chartsDaysContainer"
-             dataUrl="@url">
-        </div>
     </div>
 </div>

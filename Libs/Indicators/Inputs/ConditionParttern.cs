@@ -17,7 +17,7 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 主题
         /// </summary>
-        public string Subject { get; set; }
+        public string Subject { get; set; } = string.Empty;
 
         /// <summary>
         /// 分析周期（日/周/月）
@@ -27,17 +27,17 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 条件组
         /// </summary>
-        public List<Condition> Conditions { get; set; }
+        public List<Condition>? Conditions { get; set; }
 
         /// <summary>
         /// 标识（RedisSetKey）
         /// </summary>
-        public string Key { get; set; }
+        public string Key { get; set; } = string.Empty;
 
         /// <summary>
         /// 多票筛选结果（存入Set）
         /// </summary>
-        public List<string> Output { get; set; }
+        public List<string>? Output { get; set; }
 
         /// <summary>
         /// 单票筛选结果

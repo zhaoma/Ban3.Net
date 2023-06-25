@@ -41,33 +41,33 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 标识
         /// </summary>
-        public string Identity { get; set; }
+        public string Identity { get; set; } = string.Empty;
 
         /// <summary>
         /// 主题
         /// </summary>
-        public string Subject { get; set; }
+        public string Subject { get; set; } = string.Empty;
 
         /// <summary>
         /// 投资限制（标的与投入方式）
         /// </summary>
-        public Limit InvestorLimit { get; set; }
+        public Limit? InvestorLimit { get; set; }
 
         /// <summary>
         /// 买入条件
         /// </summary>
-        public Func<StockSets, bool> BuyingJudge { get; set; }
+        public Func<StockSets, bool>? BuyingJudge { get; set; }
 
         /// <summary>
         /// 排序条件
         /// ParamA 与 Order
         /// </summary>
-        public List<Condition> OrderConditions { get; set; }
+        public List<Condition>? OrderConditions { get; set; }
 
         /// <summary>
         /// 卖出条件
         /// </summary>
-        public Func<StockSets, bool> SellingJudge { get; set; }
+        public Func<StockSets, bool>? SellingJudge { get; set; }
 
         /// <summary>
         /// 发掘条数

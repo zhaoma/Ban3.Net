@@ -226,7 +226,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
             var mins = new List<decimal>();
             for( int r = 0; r < N; r++ )
             {
-                mins.Add( prices[ Math.Max( 0, current - r ) ].CurrentLow.Value );
+                mins.Add( prices[ Math.Max( 0, current - r ) ].CurrentLow!.Value );
             }
 
             return mins.Min();
@@ -244,7 +244,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
             var maxes = new List<decimal>();
             for( int r = 0; r < N; r++ )
             {
-                maxes.Add( prices[ Math.Max( 0, current - r ) ].CurrentHigh.Value );
+                maxes.Add( prices[ Math.Max( 0, current - r ) ].CurrentHigh!.Value );
             }
 
             return maxes.Max();

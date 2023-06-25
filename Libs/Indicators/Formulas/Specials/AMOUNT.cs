@@ -29,7 +29,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         /// 数据线条
         /// </summary>
         [DataMember]
-        public List<Line> Details { get; set; }
+        public List<Line>? Details { get; set; }
 
         /// <summary>
         /// 默认参数选择 5日与10日 均量
@@ -42,6 +42,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     new Line { ParamId = 30, Days = 5 },
                     new Line { ParamId = 31, Days = 10 }
             };
+            Result = new List<Outputs.Values.AMOUNT>();
         }
 
         /// <summary>
@@ -57,6 +58,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     new Line { ParamId = 30, Days = s },
                     new Line { ParamId = 31, Days = l }
             };
+            Result = new List<Outputs.Values.AMOUNT>();
         }
 
         public List<Outputs.Values.AMOUNT> Result { get; set; }
@@ -116,14 +118,14 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                         MarkTime = prices[ i ].MarkTime,
                         RefAmounts = new List<LineWithValue>()
                 };
-                foreach( var detail in Details )
+                foreach( var detail in Details! )
                 {
                     if( i >= detail.Days - 1 )
                     {
                         var d = 0M;
                         for( int r = i; r > i - detail.Days; r-- )
                         {
-                            d += prices[ r ].Amount.Value;
+                            d += prices[ r ].Amount!.Value;
                         }
 
                         if( oneDay.RefAmounts.All( o => o.ParamId != detail.ParamId ) )
@@ -167,7 +169,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             for( var i = 0; i < prices.Count; i++ )
             {
-                foreach( var detail in Details )
+                foreach( var detail in Details! )
                 {
                     if( i >= detail.Days - 1 )
                     {
