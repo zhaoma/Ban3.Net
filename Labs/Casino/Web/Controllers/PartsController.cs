@@ -68,8 +68,7 @@ namespace Ban3.Labs.Casino.Web.Controllers
 
         public IActionResult List(RenderView request)
         {
-            var listName = DateTime.Now.ToYmd();
-            var listData = Signalert.Calculator.LoadList(listName);
+            var listData = Signalert.Calculator.LoadList();
 
                 listData=listData
                 .Where(o =>

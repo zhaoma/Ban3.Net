@@ -115,11 +115,6 @@ public partial class Signalert
         return false;
     }
 
-    public static Diagram LoadDiagram(Stock stock, StockAnalysisCycle cycle = StockAnalysisCycle.DAILY)
-        => $"{stock.Code}.{cycle}"
-            .DataFile<Diagram>()
-            .ReadFileAs<Diagram>();
-
     public static string LoadDiagramContent(Stock stock, StockAnalysisCycle cycle = StockAnalysisCycle.DAILY)
         => $"{stock.Code}.{cycle}"
             .DataFile<Diagram>()

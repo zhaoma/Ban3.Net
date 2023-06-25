@@ -15,6 +15,7 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Sites.ViaTushare.Entries;
@@ -258,8 +259,8 @@ public static partial class Helper
             .SetDataZoom(
                 new DataZoom[]
                 {
-                    new DataZoomInside { XAxisIndex = new[] { 0, 1, 2, 3, 4, 5, 6 } ,Start = 90,End = 100},
-                    new DataZoomSlider { XAxisIndex = new[] { 0, 1, 2, 3, 4, 5, 6 } }
+                    new DataZoomInside { XAxisIndex = "all",Start = 90,End = 100},
+                    new DataZoomSlider { XAxisIndex = "all" }
                 })
             .SetGrid(
                 new Grid[]
@@ -335,7 +336,7 @@ public static partial class Helper
             };
             notices.ForEach(os =>
             {
-                candlestickSeries.MarkPoint.Data!.Add(Infrastructures.Charts.Helper.DotOfNotice("xx", os));
+                candlestickSeries.MarkPoint.Data!.Add(Infrastructures.Charts.Helper.DotOfNotice(os[0]+".MACD.CO", os));
             });
         }
         Console.WriteLine($"{DateTime.Now.Subtract(now).Milliseconds} ms elapsed.");
@@ -396,7 +397,9 @@ public static partial class Helper
 
         return diagram;
     }
-    
+
+    #region indicators
+
     static Series[] AMOUNT(this LineOfPoint indicatorValue, List<StockPrice> prices, int? index,out List<string> legendData)
     {
         var result = new List<Series>
@@ -466,7 +469,7 @@ public static partial class Helper
 
         result.MarkLine = new GeneralMark
         {
-            Symbol = Symbol.None.ToString(),
+            Symbol = Symbol.None.ToString().ToLower(),
             LineStyle = new LineStyle{Color = Infrastructures.Charts.Helper.Red },
             Data=new()
             {
@@ -491,7 +494,7 @@ public static partial class Helper
 
         adx.MarkLine = new GeneralMark
         {
-            Symbol = Symbol.None.ToString(),
+            Symbol = Symbol.None.ToString().ToLower(),
             LineStyle = new LineStyle { Color = Infrastructures.Charts.Helper.Purple },
             Data = new ()
             {
@@ -569,7 +572,7 @@ public static partial class Helper
 
         k.MarkLine = new GeneralMark
         {
-            Symbol = Symbol.None.ToString(),
+            Symbol = Symbol.None.ToString().ToLower(),
             LineStyle = new LineStyle { Color = Infrastructures.Charts.Helper.Red },
             Data = new ()
             {
@@ -653,6 +656,119 @@ public static partial class Helper
         legendData = result.Select(o => o.Name).ToList();
 
         return result.ToArray();
+    }
+    #endregion
+
+    public static Diagram LoadDiagram(
+        this IReportor _, 
+	    Stock stock, 
+        StockAnalysisCycle cycle = StockAnalysisCycle.DAILY)
+        => $"{stock.Code}.{cycle}"
+            .DataFile<Diagram>()
+            .ReadFileAs<Diagram>();
+
+    public static Diagram MacdDiagram(this IReportor _, Stock stock)
+        => _.IndicatorDiagram(stock, "MACD");
+
+    public static Diagram DmiDiagram(this IReportor _, Stock stock)
+        => _.IndicatorDiagram(stock, "DMI");
+
+    public static Diagram KdDiagram(this IReportor _, Stock stock)
+        => _.IndicatorDiagram(stock, "KD");
+
+    public static Diagram BiasDiagram(this IReportor _, Stock stock)
+        => _.IndicatorDiagram(stock, "BIAS");
+
+    public static Diagram IndicatorDiagram(this IReportor _, Stock stock,string indicator)
+    {
+        var dailyDiagram = _.LoadDiagram(stock, StockAnalysisCycle.DAILY);
+        var weeklyDiagram = _.LoadDiagram(stock, StockAnalysisCycle.WEEKLY);
+        var monthlyDiagram = _.LoadDiagram(stock, StockAnalysisCycle.MONTHLY);
+
+        var candlestickSeries = dailyDiagram.Series.FirstOrDefault(o => o.Type == SeriesType.Candlestick);
+
+        var dailySeries = dailyDiagram.Series.FindAll(o => o.Name.StartsWith(indicator));
+
+        dailySeries.ForEach(o => {
+            o.XAxisIndex = 1;
+            o.YAxisIndex = 1;
+        });
+        var dailyX1 = dailyDiagram.XAxis[0];
+        dailyX1.Show = false;
+        var dailyX2 = dailyDiagram.XAxis[1];
+        dailyX2.Show = true;
+
+        var weeklySeries = weeklyDiagram.Series.FindAll(o => o.Name.StartsWith(indicator));
+        var weeklyXAxis = weeklyDiagram.XAxis[0];
+        weeklyXAxis.Show = true;
+        weeklyXAxis.GridIndex = 2;
+        weeklySeries.ForEach(o => {
+            o.XAxisIndex = 2;
+            o.YAxisIndex = 2;
+            o.Name = $"weekly.{o.Name}"; });
+        var monthlySeries = monthlyDiagram.Series.FindAll(o => o.Name.StartsWith(indicator));
+        var monthlyXAxis = monthlyDiagram.XAxis[0];
+        monthlyXAxis.Show = true;
+        monthlyXAxis.GridIndex = 3;
+        monthlySeries.ForEach(o => {
+            o.XAxisIndex = 3;
+            o.YAxisIndex = 3;
+	        o.Name = $"monthly.{o.Name}"; 
+	    });
+
+        var diagram = Infrastructures.Charts.Helper.CreateDiagram();
+
+        diagram.Toolbox = new Toolbox { Show = false };
+
+        diagram.SetGrid(
+                new Grid[]
+                {
+                    new("5%", "5%", "24%", "3%"),
+                    new("5%", "5%", "20%", "30%"),
+                    new("5%", "5%", "20%", "53%"),
+                    new("5%", "5%", "20%", "76%")
+                })
+            .SetDataZoom(
+                new DataZoom[]
+                {
+                    new DataZoomInside { XAxisIndex = "all",Start = 90,End = 100},
+                    new DataZoomSlider { XAxisIndex = "all" }
+                })
+            .SetXAxis(
+                new CartesianAxis[]
+                {
+                    dailyX1,
+                    dailyX2,
+                    weeklyXAxis,
+                    monthlyXAxis
+                })
+            .SetYAxis(
+                new CartesianAxis[]
+                {
+                    new(true, true),
+                    new(true, true, 1){Show = false},
+                    new(true, true, 2){Show = false},
+                    new(true, true, 3){Show = false}
+                });
+
+        diagram.AddSeries(candlestickSeries);
+        diagram.AddSeries(dailySeries.ToArray());
+        diagram.AddSeries(weeklySeries.ToArray());
+        diagram.AddSeries(monthlySeries.ToArray());
+
+        diagram.SetTooltip(new[]
+        {
+            new Tooltip
+            {
+                Trigger=Trigger.Axis,
+                AxisPointer = new AxisPointer{Type = AxisPointerType.Cross},
+                BorderWidth=1,
+                BorderColor = "#CCC",
+                Padding = 10,
+                TextStyle = new TextStyle(){Color = "#000"}
+            }
+        });
+        return diagram;
     }
 
     #endregion

@@ -7,26 +7,26 @@
 
 using System;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.Indicators.Entries
+namespace Ban3.Infrastructures.Indicators.Entries;
+
+/// <summary>
+/// 指标值
+/// </summary>
+[Serializable, DataContract]
+public class RecordWithValue
+        : Record
 {
     /// <summary>
-    /// 指标值
+    /// 指标参数
     /// </summary>
-    [Serializable, DataContract]
-    public class RecordWithValue
-            : Record
-    {
-        /// <summary>
-        /// 指标参数
-        /// </summary>
-        [DataMember(Name = "paramId")]
-        public virtual int ParamId { get; set; }
+    [JsonProperty("paramId", NullValueHandling = NullValueHandling.Ignore)]
+    public virtual int ParamId { get; set; }
 
-        /// <summary>
-        /// 计算获值
-        /// </summary>
-        [DataMember(Name = "ref")]
-        public virtual decimal Ref { get; set; }
-    }
+    /// <summary>
+    /// 计算获值
+    /// </summary>
+    [JsonProperty("ref", NullValueHandling = NullValueHandling.Ignore)]
+    public virtual decimal Ref { get; set; }
 }

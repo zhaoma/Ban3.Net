@@ -7,6 +7,7 @@
 
 using System;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Entries
 {
@@ -19,7 +20,7 @@ namespace Ban3.Infrastructures.Indicators.Entries
         /// <summary>
         /// 记录时间
         /// </summary>
-        [DataMember(Name = "markTime")]
+        [JsonProperty("markTime", NullValueHandling = NullValueHandling.Ignore)]
         public DateTime MarkTime { get; set; }
     }
 }

@@ -94,7 +94,8 @@ internal class Program
 
     private static void CheckSomething()
     {
-        Signalert.PrepareAllDiagrams();
+        var allCodes = Signalert.Collector.LoadAllCodes();
+        Signalert.PrepareOutput(allCodes);
         //Signalert.InitFavorites();
     }
 }

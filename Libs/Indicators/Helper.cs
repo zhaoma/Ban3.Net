@@ -39,36 +39,29 @@ public static class Helper
 
     public static readonly List<SetsFeature> Features = new List<SetsFeature>
     {
-        new("AMOUNT.UP", "成交量多头", 1),
         new("BIAS.GE", "乖离合理", 1),
         new("BIAS.LT", "乖离不合理", -1),
-        new("BIAS.GC", "乖离金叉", 1),
-        new("BIAS.DC", "乖离死叉", -1),
-        new("CCI.200", "顺势超买", 1),
-        new("CCI.100", "顺势强势", 1),
-        new("CCI.-200", "顺势超卖", -1),
+        new("BIAS.GC", "乖离金叉", 2),
+        new("BIAS.DC", "乖离死叉", -2),
         new("DMI.PDI", "多空多头", 1),
         new("DMI.MDI", "多空空头", -1),
         new("DMI.80", "多空转向", -1),
-        new("DMI.GC", "多空金叉", 1),
-        new("DMI.DC", "多空死叉", -1),
-        new("ENE.UPPER", "轨道上轨", 1),
-        new("ENE.LOWER", "轨道下轨", -1),
+        new("DMI.GC", "多空金叉", 2),
+        new("DMI.DC", "多空死叉", -2),
         new("KD.PDI", "随机多头", 1),
         new("KD.MDI", "随机空头", -1),
-        new("KD.GC", "随机金叉", 1),
+        new("KD.GC", "随机金叉", 2),
         new("KD.80", "随机强势", 1),
         new("KD.10", "随机超跌", -1),
-        new("KD.DC", "随机死叉", -1),
-        new("MA.UP", "均线多头", 1),
+        new("KD.DC", "随机死叉", -2),
         new("MACD.PDI", "平均线多头", 1),
         new("MACD.MDI", "平均线空头", -1),
         new("MACD.P", "平均线零上", 1),
         new("MACD.N", "平均线零下", -1),
-        new("MACD.GC", "平均线金叉", 1),
-        new("MACD.DC", "平均线死叉", -1),
-        new("MACD.C0", "平均线上穿零", 1),
-        new("MACD.D0", "平均线下穿零", -1)
+        new("MACD.GC", "平均线金叉", 2),
+        new("MACD.DC", "平均线死叉", -2),
+        new("MACD.C0", "平均线上穿零", 3),
+        new("MACD.D0", "平均线下穿零", -3)
     };
 
     public static List<string> FeatureKeys(string indicator, bool plus)

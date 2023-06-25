@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<Ban3.Productions.Casino.Contracts.Entities.Stock> 
 @{
     Layout = null;
+    var isOnly = Model.Count() == 1;
     var code = Model.Any() ? Model.First().Code : "3001047.SZ";
-    var url = $"/data/Candlestick/{code}?cycle=DAILY";
+    var url = $"/data/macd/{code}?cycle=DAILY";
 }
 <div class="row">
-    <div class="col-3">
+    <div class="col-3 @(isOnly?"hide":"")">
         <div class="list-group">
             @foreach (var point in Model.OrderBy(o => o.Symbol))
             {
@@ -15,7 +16,7 @@
             }
         </div>    
         </div>
-    <div class="col-9"  id="onesChartsContainer">
+    <div class="@(isOnly?"col-12":"col-9")"  id="onesChartsContainer">
         <div class="btn-group pb-3" role="group">
             <span class="input-group-text">@code</span>
             <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-daily"
@@ -32,6 +33,26 @@
                     renderElement="chartsDaysContainer"
                     dataUrl="@($"/data/Candlestick/{@code}?cycle=MONTHLY")">
                 MONTHLY
+            </button>
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-bias"
+                    renderElement="chartsDaysContainer"
+                    dataUrl="@($"/data/bias/{@code}")">
+                BIAS
+            </button>
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-dmi"
+                    renderElement="chartsDaysContainer"
+                    dataUrl="@($"/data/dmi/{@code}")">
+                DMI
+            </button>
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-dmi"
+                    renderElement="chartsDaysContainer"
+                    dataUrl="@($"/data/kd/{@code}")">
+                KD
+            </button>
+            <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-dmi"
+                    renderElement="chartsDaysContainer"
+                    dataUrl="@($"/data/macd/{@code}")">
+                MACD
             </button>
         </div>
         <div id="chartsDaysContainer"

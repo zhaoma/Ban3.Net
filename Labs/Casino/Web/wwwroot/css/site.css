@@ -183,3 +183,7 @@ html {
     color: #FFF;
     opacity: 0.7;
 }
+
+.card-body td {
+    font-size: 9px;
+}

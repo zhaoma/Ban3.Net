@@ -139,6 +139,11 @@ public partial class Signalert
                 Config.MaxParallelTasks)
         ).ExecuteAndTiming("GenerateIndicatorLine");
 
+        PrepareOutput(stocks);
+    }
+
+    public static void PrepareOutput(List<Stock> stocks) { 
+    
         new Action(() =>
             PrepareAllSets(stocks)
         ).ExecuteAndTiming("PrepareAllSets");
@@ -175,10 +180,14 @@ public partial class Signalert
                         Config.MaxParallelTasks);
             }, Config.MaxParallelTasks)
         ).ExecuteAndTiming("OutputDailyOperates");
+    
     }
 
     #endregion
 
+    /// <summary>
+    /// 临时方法，初始化one by one列表
+    /// </summary>
     public static void InitFavorites()
     {
         var favorite=new Favorite();

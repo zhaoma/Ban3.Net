@@ -6,7 +6,7 @@
 
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Elements;
+namespace Ban3.Infrastructures.Charts.Elements;
 
 public interface IHasSymbol
 {
@@ -24,7 +24,7 @@ public interface IHasSymbol
     /// or use an array to represent width and height. 
     /// For example, [20, 10] means symbol width is 20, and height is10.
     /// </summary>
-    [JsonProperty("SymbolSize", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonProperty("symbolSize", NullValueHandling = NullValueHandling.Ignore)]
     object? SymbolSize { get; set; }
 
     /// <summary>

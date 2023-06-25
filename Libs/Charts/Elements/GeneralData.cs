@@ -14,14 +14,14 @@ public class GeneralData
 
     public GeneralData(
         string name,
-        object? coords,
+        object? coord,
         object? value,
         object? symbol,
         object? symbolSize,
         GeneralStyle? itemStyle)
     {
         Name = name;
-        Coords = coords;
+        Coord = coord;
         Value = value;
         Symbol = symbol;
         SymbolSize = symbolSize;
@@ -57,8 +57,8 @@ public class GeneralData
     /// It can be x, and y for rectangular coordinates, or radius, and angle for polar coordinates.
     /// e.g. coord: [5, 33.4], means [xAxis,yAxis]
     /// </summary>
-    [JsonProperty("coords", NullValueHandling = NullValueHandling.Ignore)]
-    public object? Coords { get; set; }
+    [JsonProperty("coord", NullValueHandling = NullValueHandling.Ignore)]
+    public object? Coord { get; set; }
 
     /// <summary>
     /// X position according to container, in pixel.

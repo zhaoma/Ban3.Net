@@ -7,11 +7,9 @@
 <table data-pagination="true" class="table table-hover  table-bordered">
     <thead>
     <tr>
-        <th class="col-3">Symbol</th>
-        <th class="col-2">Close</th>
-        <th class="col-2">Value</th>
-        <th class="col-2">Rank</th>
-        <th class="col-3">Change</th>
+        <th class="col-4">Symbol</th>
+        <th class="col-4">Close</th>
+        <th class="col-4">Rank</th>
     </tr>
     </thead>
     <tbody>
@@ -21,10 +19,8 @@
         var className =r? p?.ChangePercent > 0 ? "red" : p?.ChangePercent == 0 ? "gray" : "green":"";
         <tr class="@className">
             <td>@point.Symbol</td>
-            <td>@point.Close</td>
-            <td>@point.Value</td>
-            <td>@point.Rank</td>
-            <td>@(p!=null?Math.Round(p.ChangePercent,2):"")</td>
+            <td>@point.Close<span class="badge">@(p!=null?Math.Round(p.ChangePercent,2):"")%</span></td>
+            <td>@($"{point.Rank}")<span class="badge">@point.Value</span></td>
         </tr>
     }
     </tbody>

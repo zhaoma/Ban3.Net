@@ -3,52 +3,32 @@ var currentCharts = "";
 
 $(document).ready(function () {
     if ($(".partsNav").length > 0) {
-    $(".partsNav").click(function () {
-        var nav = $(this);
-        var dataUrl = $(this).attr("dataUrl");
-        clearNav();
-        $.get(dataUrl, function(html){
-            $("#partsContainer").html(html);
-            if (!$(nav).hasClass("active")) { $(nav).addClass('active'); }
-            console.log("render parts");
-            currentParts = dataUrl;
-            console.log("bind events.");
-            renderContainer();
+        $(".partsNav").click(function () {
+            var nav = $(this);
+            var dataUrl = $(this).attr("dataUrl");
+            clearNav();
+            $.get(dataUrl, function (html) {
+                $("#partsContainer").html(html);
+                if (!$(nav).hasClass("active")) { $(nav).addClass('active'); }
+                console.log("render parts");
+                currentParts = dataUrl;
+                console.log("bind events.");
+                renderContainer();
+            });
+
+            return false;
         });
-        
-        return false;
-    });
     }
 
 
     // JS
-    var oneByOne = document.getElementById("one");
-
-    oneByOne.ondragstart = (e) => {
-        e.dataTransfer.effectAllowed = e.target.dataset.effect;
-        console.log(e);
-        source = e.target;
-
-        console.log('ondragstart');
-        console.log(e.target);
-    };
-
-    oneByOne.ondragover = function (e) {
-        e.preventDefault();
-    }
-    oneByOne.ondragenter = function (e) {
-        e.preventDefault();
-    }
-    oneByOne.ondrop = (e) => {
-        console.log(e.source);
-    };
 });
 
 function clearNav() {
     $(".partsNav").each(function () {
         if ($(this).hasClass("active")) {
             $(this).removeClass("active");
-	     }
+        }
     });
 }
 
@@ -112,6 +92,10 @@ function renderContainer() {
             $.get(dataUrl, function (html) {
                 console.log("loaded:" + dataUrl);
                 $(box).html(html);
+
+                //await sleep(300);
+                $(box).delay(300);
+
                 if ($("#partsContainer .grid").length > 0) {
                     $("#partsContainer .grid").masonry();
                 }
@@ -135,9 +119,35 @@ function renderContainer() {
     }
 }
 
-function InitContainer(ele) {
+function initDragdrop() {
+    console.log('initDragdrop');
+
+    var draggableElements = document.querySelector('.draggable');
+    console.log(draggableElements);
+    var oneByOne = document.getElementById("one");
+
+    oneByOne.ondragstart = (e) => {
+        e.dataTransfer.effectAllowed = e.target.dataset.effect;
+        console.log(e);
+        source = e.target;
+
+        console.log('ondragstart');
+        console.log(e.target);
+    };
+
+    oneByOne.ondragover = function (e) {
+        e.preventDefault();
+    }
+    oneByOne.ondragenter = function (e) {
+        e.preventDefault();
+    }
+    oneByOne.ondrop = (e) => {
+        console.log(e.source);
+    };
+}
+
+function initContainer(ele) {
     var renderCharts = $(ele).find('.renderCharts');
-    console.log('renderCharts.length=' + renderCharts.length);
     if (renderCharts.length > 0) {
         renderCharts.each(function () {
             var renderElement = $(this).attr("renderElement");
@@ -147,7 +157,37 @@ function InitContainer(ele) {
         });
     }
 
+    var renderChartsButtons = $(ele).find(".renderChartsButton");
+    if (renderChartsButtons.length > 0) 
+    {
+        renderChartsButtons.each(() => {
+            $(this).click = () => { bindChartsButton(this); }
+        });
+    }
 
+    var lazyLoad = $(ele).find(".lazyLoad");
+    if (lazyLoad.length > 0) {
+        lazyLoad.each(function () {
+            var box = $(this);
+            var dataUrl = $(this).attr("dataUrl");
+
+            $.get(dataUrl, function (html) {
+                $(box).html(html);
+                $(box).delay(300);
+
+                if ($(ele).find(".grid").length > 0) {
+                    $(ele).each(() => { $(this).masonry(); });
+                }
+            });
+        });
+    }
+
+    var lazyLoadButtons = $(ele).find(".lazyLoadButton");
+    if (lazyLoadButtons.length > 0) {
+        lazyLoadButtons.each(() => {
+            $(this).click = () => { bindButton(this); }
+        });
+    }
 }
 
 function bindButton(ele) {
@@ -155,6 +195,12 @@ function bindButton(ele) {
     var dataUrl = $(ele).attr("dataUrl");
 
     $("#" + renderElement).load(dataUrl);
+    $.get(dataUrl, function (html) { 
+        $("#" + renderElement).html(html);
+
+        initContainer($("#" + renderElement));
+        if (!$(ele).hasClass("active")) { $(ele).addClass('active'); }
+    });
     return false;
 }
 
@@ -163,19 +209,50 @@ function bindChartsButton(ele) {
     var dataUrl = $(ele).attr("dataUrl");
 
     bindCharts(renderElement, dataUrl);
+
+    var renderContainer = $(this).attr("renderContainer");
+
+    if ($("#" + renderContainer).is(":visible")) {
+        if (dataUrl == currentCharts) {
+            $("#" + renderContainer).slideUp(600, 'linear');
+            if ($(this).hasClass("btn-secondary")) {
+                $(this).removeClass('btn-secondary');
+                $(this).addClass('btn-outline-secondary');
+            }
+        } else {
+            $("#partsContainer .renderChartsButton").each(function () {
+                if ($(this).hasClass("btn-secondary")) {
+                    $(this).removeClass("btn-secondary");
+                    $(this).addClass('btn-outline-secondary');
+                }
+            });
+            currentCharts = dataUrl;
+            $("#" + renderContainer).slideDown(600, 'linear');
+            if (!$(this).hasClass("btn-secondary")) {
+                $(this).removeClass('btn-outline-secondary');
+                $(this).addClass('btn-secondary');
+            }
+        }
+    } else {
+        currentCharts = dataUrl;
+        $("#" + renderContainer).slideDown(600, 'linear');
+        if (!$(this).hasClass("btn-secondary")) {
+            $(this).removeClass('btn-outline-secondary');
+            $(this).addClass('btn-secondary');
+        }
+    }
+    
     return false;
 }
 
 function bindCharts(elementId, dataUrl) {
-    console.log('bind charts.');
     var chartDom = document.getElementById(elementId);
     var currentChart = echarts.init(chartDom);
     //currentChart.showLoading();
     $.get(dataUrl, function (rawData) {
-        
+
         var diagramOption = eval("(" + rawData + ")");
-        console.log(diagramOption);
-        diagramOption&&currentChart.setOption(diagramOption);
+        diagramOption && currentChart.setOption(diagramOption);
 
         window.onresize = currentChart.resize;
     });
@@ -184,7 +261,7 @@ function bindCharts(elementId, dataUrl) {
 function findAny() {
     var k = $("#id").val();
 
-    $.get('/parts/stocks/'+k, function (html) {
+    $.get('/parts/stocks/' + k, function (html) {
         $("#partsContainer").html(html);
         renderContainer();
     });
@@ -192,3 +269,7 @@ function findAny() {
     return false;
 }
 
+var casino = (function () {
+
+
+});

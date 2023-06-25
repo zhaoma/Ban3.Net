@@ -47,6 +47,27 @@ public class DataController : Controller
 
     }
 
+    public ContentResult Bias(string id) 
+    {
+        var stock = Signalert.Collector.LoadStock(id);
+        return Content(Signalert.Reportor.BiasDiagram(stock).ObjToJson());
+    }
+    public ContentResult Dmi(string id)
+    {
+        var stock = Signalert.Collector.LoadStock(id);
+        return Content(Signalert.Reportor.DmiDiagram(stock).ObjToJson());
+    }
+    public ContentResult Kd(string id)
+    {
+        var stock = Signalert.Collector.LoadStock(id);
+        return Content(Signalert.Reportor.KdDiagram(stock).ObjToJson());
+    }
+    public ContentResult Macd(string id)
+    {
+        var stock = Signalert.Collector.LoadStock(id);
+        return Content(Signalert.Reportor.MacdDiagram(stock).ObjToJson());
+    }
+
     public ContentResult Candlestick(string id, string cycle = "Daily")
     {
         cycle = cycle.ToUpper();

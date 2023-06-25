@@ -412,6 +412,8 @@ public static partial class Helper
 
             prev = r.Value;
         }
+        "latest".DataFile<ListRecord>()
+            .WriteFile(result.ObjToJson());
 
         var saved = listName
             .DataFile<ListRecord>()
@@ -426,7 +428,7 @@ public static partial class Helper
     /// <param name="_"></param>
     /// <param name="listName"></param>
     /// <returns></returns>
-    public static List<ListRecord> LoadList(this ICalculator _, string listName)
+    public static List<ListRecord> LoadList(this ICalculator _, string listName="latest")
         =>Config.CacheKey<ListRecord>(listName)
             .LoadOrSetDefault<List<ListRecord>>( listName .DataFile<ListRecord>());
 
@@ -713,7 +715,7 @@ public static partial class Helper
         var result = new List<DotInfo>();
         for (var i = 0; i < prices.Count; i++)
         {
-            if (prices.GetDayDot(filter, i, out var dotForDay))
+            if ( prices.GetDayDot(filter, i, out var dotForDay))
             {
                 result.Add(dotForDay);
             }
@@ -825,6 +827,7 @@ public static partial class Helper
 
     static bool GetMonthDot(this List<StockPrice> prices, FocusFilter filter, int i, out DotInfo dot)
     {
+
         var current = prices[i];
 
         dot = null;
