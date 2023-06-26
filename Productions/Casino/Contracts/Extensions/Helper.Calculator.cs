@@ -926,28 +926,7 @@ public static partial class Helper
 
         if (request != null)
         {
-            var limitScope = false;
-            var codeScope = new List<StockSets>();
-
-            if (!string.IsNullOrEmpty(request.IncludeKeys) || !string.IsNullOrEmpty(request.ExcludeKeys))
-            {
-
-                limitScope = true;
-                codeScope = LoadAllLatestSets();
-
-                if (!string.IsNullOrEmpty(request.IncludeKeys))
-                {
-                    codeScope = codeScope.Where(o => o.SetKeys.AllFound(request.IncludeKeys.Split(','))).ToList();
-                }
-
-                if (!string.IsNullOrEmpty(request.ExcludeKeys))
-                {
-                    codeScope = codeScope.Where(o => o.SetKeys.NotFound(request.ExcludeKeys.Split(','))).ToList();
-                }
-            }
-
             result = result
-                .Where(o => !limitScope || codeScope.Any(x => x.Code == o.Code))
                 .Where(o => request.RedOnly is 0 or null || o.ChangePercent > 0)
                 .Where(o => request.GreenOnly is 0 or null || o.ChangePercent < 0)
                 .Where(o => string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
@@ -967,7 +946,7 @@ public static partial class Helper
 
     static bool NotFound(this IEnumerable<string> pool, string[] keys) => keys.All(x => pool.All(y => x != y));
 
-    public static List<StockSets> LoadAllLatestSets()
+    public static List<StockSets> LoadAllLatestSets(this ICalculator _)
     {
         var file = $"latest".DataFile<StockSets>();
 
@@ -976,39 +955,31 @@ public static partial class Helper
     }
 
     public static List<StockSets> ScopedByRenderView(
-        this List<StockSets> targets,
+        this ICalculator _,
         RenderView request)
     {
-
+        var targets= _.LoadAllLatestSets();
         if (request != null)
         {
-            var limitScope = false;
-            var codeScope = new List<StockSets>();
-
             if (!string.IsNullOrEmpty(request.IncludeKeys) || !string.IsNullOrEmpty(request.ExcludeKeys))
             {
-
-                limitScope = true;
-                codeScope = LoadAllLatestSets();
-
                 if (!string.IsNullOrEmpty(request.IncludeKeys))
                 {
-                    codeScope = codeScope.Where(o => o.SetKeys.AllFound(request.IncludeKeys.Split(','))).ToList();
+                    targets = targets.Where(o => o.SetKeys.AllFound(request.IncludeKeys.Split(','))).ToList();
                 }
 
                 if (!string.IsNullOrEmpty(request.ExcludeKeys))
                 {
-                    codeScope = codeScope.Where(o => o.SetKeys.NotFound(request.ExcludeKeys.Split(','))).ToList();
+                    targets = targets.Where(o => o.SetKeys.NotFound(request.ExcludeKeys.Split(','))).ToList();
                 }
             }
 
             targets = targets
-                .Where(o => !limitScope || codeScope.Any(x => x.Code == o.Code))
                 .Where(o => string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
                 .Where(o => string.IsNullOrEmpty(request.EndsWith) || o.Code.EndsWith(request.EndsWith))
                 .Where(o => string.IsNullOrEmpty(request.Id) || o.Code == request.Id)
                 .OrderByDescending(o => o.Code)
-                .ThenByDescending(o=>o.MarkTime)
+                .ThenByDescending(o => o.MarkTime)
                 .ToList();
         }
 

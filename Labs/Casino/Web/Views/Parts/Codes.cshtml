@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Ban3.Infrastructures.Indicators.Outputs.StockSets>
+@{
+    Layout = null;
+}
+
+<div class="list-group">
+    @foreach (var point in Model.OrderBy(o => o.Code))
+    {
+        <a href="#" class="list-group-item list-group-item-action lazyLoadButton"
+           dataUrl="@($"/parts/stock/{@point.Code}")"
+           renderElement="onesChartsContainer">@point.Symbol - @point.Name</a>
+    }
+</div>

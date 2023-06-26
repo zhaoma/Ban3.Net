@@ -3,6 +3,7 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Extensions;
@@ -107,6 +108,29 @@ internal class Program
 
     private static void CheckSomething()
     {
+        var stocks = Signalert.Collector.LoadAllCodes();
+
+        new Action(() =>
+            stocks.ParallelExecute((stock) =>
+            {
+                var sets = Signalert.Calculator.LoadSets(stock.Code);
+                if (sets != null && sets.Any())
+                {
+                    Infrastructures.Indicators.Helper.DefaultProfiles
+                        .Where(o => o.Persistence)
+                        .ParallelExecute((profile) =>
+                        {
+                            Signalert.Analyzer
+                                .OutputDailyOperates(profile, sets, stock.Code)
+                                .ConvertOperates2Records(profile, stock.Code);
+                        },
+                            Config.MaxParallelTasks);
+                }
+            }, Config.MaxParallelTasks)
+        ).ExecuteAndTiming("OutputDailyOperates");
+
+        /*
+
         var code = "688160.SH";
         var indicatorValue = Signalert.Calculator.LoadIndicatorLine(code,Productions.Casino.Contracts.Enums.StockAnalysisCycle.DAILY);
 
@@ -127,8 +151,6 @@ internal class Program
 
         Console.WriteLine(ns.Count);
 
-
-        /*
 
         var latest=Signalert.Calculator.LoadList().OrderBy(o=>o.Rank).ThenByDescending(o=>o.Code);
         latest.Take(10).ToList()

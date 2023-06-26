@@ -148,7 +148,7 @@ public partial class Signalert
     #region 生成/加载排名列表
 
     public static bool PrepareLatestList()
-        => Reportor.LoadAllLatestSets().GenerateList(DateTime.Now.ToYmd());
+        => Calculator.LoadAllLatestSets().GenerateList(DateTime.Now.ToYmd());
 
     public static bool LoadOneDaysList(DateTime? day, out List<ListRecord> records)
     {

@@ -171,16 +171,18 @@ public partial class Signalert
             stocks.ParallelExecute((stock) =>
             {
                 var sets = Calculator.LoadSets(stock.Code);
-
-                Infrastructures.Indicators.Helper.DefaultProfiles
-                    .Where(o => o.Persistence)
-                    .ParallelExecute((profile) =>
-                        {
-                            Analyzer
-                                .OutputDailyOperates(profile, sets, stock.Code)
-                                .ConvertOperates2Records(profile, stock.Code);
-                        },
-                        Config.MaxParallelTasks);
+                if (sets != null && sets.Any())
+                {
+                    Infrastructures.Indicators.Helper.DefaultProfiles
+                        .Where(o => o.Persistence)
+                        .ParallelExecute((profile) =>
+                            {
+                                Analyzer
+                                    .OutputDailyOperates(profile, sets, stock.Code)
+                                    .ConvertOperates2Records(profile, stock.Code);
+                            },
+                            Config.MaxParallelTasks);
+                }
             }, Config.MaxParallelTasks)
         ).ExecuteAndTiming("OutputDailyOperates");
     
