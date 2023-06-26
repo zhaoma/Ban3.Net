@@ -428,9 +428,9 @@ public static partial class Helper
     /// <param name="_"></param>
     /// <param name="listName"></param>
     /// <returns></returns>
-    public static List<ListRecord> LoadList(this ICalculator _, string listName="latest")
-        =>Config.CacheKey<ListRecord>(listName)
-            .LoadOrSetDefault<List<ListRecord>>( listName .DataFile<ListRecord>());
+    public static List<ListRecord> LoadList(this ICalculator _, string listName = "latest")
+        => Config.CacheKey<ListRecord>(listName)
+            .LoadOrSetDefault<List<ListRecord>>(listName.DataFile<ListRecord>());
 
     #endregion
 
@@ -520,7 +520,8 @@ public static partial class Helper
             .LatestList()
             .Select(o => new StockSets
             {
-                MarkTime = o.Current!.MarkTime, Close = o.Current.Close,
+                MarkTime = o.Current!.MarkTime,
+                Close = o.Current.Close,
                 SetKeys = o.Features().Select(y => $"{y}.{cycle}")
             })
             .ToList();
@@ -672,10 +673,10 @@ public static partial class Helper
         this ICalculator _,
         FocusFilter filter,
         List<Stock> stocks,
-	    out DotOfBuyingOrSelling dic
+        out DotOfBuyingOrSelling dic
     )
     {
-        var result= new DotOfBuyingOrSelling();
+        var result = new DotOfBuyingOrSelling();
 
         stocks.ForEach(o =>
         {
@@ -693,9 +694,9 @@ public static partial class Helper
     }
 
     public static List<DotInfo> GetOnesDots(
-        this ICalculator _, 
-        FocusFilter filter, 
-	    Stock stock)
+        this ICalculator _,
+        FocusFilter filter,
+        Stock stock)
     {
         var prices = _.LoadReinstatedPrices(stock.Code, StockAnalysisCycle.DAILY);
 
@@ -716,7 +717,7 @@ public static partial class Helper
         var result = new List<DotInfo>();
         for (var i = 0; i < prices.Count; i++)
         {
-            if ( prices.GetDayDot(filter, i, out var dotForDay))
+            if (prices.GetDayDot(filter, i, out var dotForDay))
             {
                 result.Add(dotForDay);
             }
@@ -776,7 +777,7 @@ public static partial class Helper
         var week = new StockPrice[len];
         prices.CopyTo(i + 1, week, 0, len);
 
-        if ( !week.Any()) return false;
+        if (!week.Any()) return false;
 
         var max = week.Max(o => o.Close);
         var min = week.Min(o => o.Close);
@@ -912,27 +913,48 @@ public static partial class Helper
     /// <param name="request"></param>
     /// <returns></returns>
     public static List<DotInfo> ExtendedDots(
-	    this Dictionary<string, List<DotInfo>> dots, 
-	    RenderView request)
+        this Dictionary<string, List<DotInfo>> dots,
+        RenderView request)
     {
-        var result=new List<DotInfo>();
-            
+        var result = new List<DotInfo>();
+
         foreach (var keyValuePair in dots)
         {
-            keyValuePair.Value.ForEach(o=>o.Code=keyValuePair.Key);
+            keyValuePair.Value.ForEach(o => o.Code = keyValuePair.Key);
             result.AddRange(keyValuePair.Value);
         }
-        
+
         if (request != null)
         {
+            var limitScope = false;
+            var codeScope = new List<StockSets>();
+
+            if (!string.IsNullOrEmpty(request.IncludeKeys) || !string.IsNullOrEmpty(request.ExcludeKeys))
+            {
+
+                limitScope = true;
+                codeScope = LoadAllLatestSets();
+
+                if (!string.IsNullOrEmpty(request.IncludeKeys))
+                {
+                    codeScope = codeScope.Where(o => o.SetKeys.AllFound(request.IncludeKeys.Split(','))).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(request.ExcludeKeys))
+                {
+                    codeScope = codeScope.Where(o => o.SetKeys.NotFound(request.ExcludeKeys.Split(','))).ToList();
+                }
+            }
+
             result = result
+                .Where(o => !limitScope || codeScope.Any(x => x.Code == o.Code))
                 .Where(o => request.RedOnly is 0 or null || o.ChangePercent > 0)
-                .Where(o=>request.GreenOnly is 0 or null||o.ChangePercent<0)
-                .Where(o=>string.IsNullOrEmpty(request.StartsWith)||o.Code.StartsWithIn(request.StartsWith.Split(',')))
-                .Where( o=>string.IsNullOrEmpty(request.EndsWith)||o.Code.EndsWith(request.EndsWith))
-                .Where( o=>string.IsNullOrEmpty(request.Id)||o.Code==request.Id)
-                .OrderByDescending(o=>o.TradeDate)
-                .ThenByDescending(o=>o.Code)
+                .Where(o => request.GreenOnly is 0 or null || o.ChangePercent < 0)
+                .Where(o => string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
+                .Where(o => string.IsNullOrEmpty(request.EndsWith) || o.Code.EndsWith(request.EndsWith))
+                .Where(o => string.IsNullOrEmpty(request.Id) || o.Code == request.Id)
+                .OrderByDescending(o => o.TradeDate)
+                .ThenByDescending(o => o.Code)
                 .ToList();
         }
 
@@ -940,4 +962,57 @@ public static partial class Helper
     }
 
     #endregion
+
+    static bool AllFound(this IEnumerable<string> pool, string[] keys) => keys.All(x => pool.Any(y => x == y));
+
+    static bool NotFound(this IEnumerable<string> pool, string[] keys) => keys.All(x => pool.All(y => x != y));
+
+    public static List<StockSets> LoadAllLatestSets()
+    {
+        var file = $"latest".DataFile<StockSets>();
+
+        return Config.CacheKey<StockSets>("latest")
+            .LoadOrSetDefault<List<StockSets>>(file);
+    }
+
+    public static List<StockSets> ScopedByRenderView(
+        this List<StockSets> targets,
+        RenderView request)
+    {
+
+        if (request != null)
+        {
+            var limitScope = false;
+            var codeScope = new List<StockSets>();
+
+            if (!string.IsNullOrEmpty(request.IncludeKeys) || !string.IsNullOrEmpty(request.ExcludeKeys))
+            {
+
+                limitScope = true;
+                codeScope = LoadAllLatestSets();
+
+                if (!string.IsNullOrEmpty(request.IncludeKeys))
+                {
+                    codeScope = codeScope.Where(o => o.SetKeys.AllFound(request.IncludeKeys.Split(','))).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(request.ExcludeKeys))
+                {
+                    codeScope = codeScope.Where(o => o.SetKeys.NotFound(request.ExcludeKeys.Split(','))).ToList();
+                }
+            }
+
+            targets = targets
+                .Where(o => !limitScope || codeScope.Any(x => x.Code == o.Code))
+                .Where(o => string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
+                .Where(o => string.IsNullOrEmpty(request.EndsWith) || o.Code.EndsWith(request.EndsWith))
+                .Where(o => string.IsNullOrEmpty(request.Id) || o.Code == request.Id)
+                .OrderByDescending(o => o.Code)
+                .ThenByDescending(o=>o.MarkTime)
+                .ToList();
+        }
+
+        return targets;
+
+    }
 }

@@ -324,7 +324,7 @@ public static partial class Helper
 
         var now = DateTime.Now;
         var notices = indicatorValue.LineToSets()
-            .Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0.")))
+            .Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0")))
             .Select(o => new object[] { o.Code, o.Close })
             .ToList();
 
@@ -772,11 +772,4 @@ public static partial class Helper
 
     #endregion
 
-    public static List<StockSets> LoadAllLatestSets(this IReportor _)
-    {
-        var file = $"latest".DataFile<StockSets>();
-
-        return Config.CacheKey<StockSets>("latest")
-            .LoadOrSetDefault<List<StockSets>>(file);
-    }
 }

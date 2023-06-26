@@ -86,14 +86,14 @@ internal class Program
                 $"--daily :                  prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--realtime [codes] :       refresh all realtime data(prices and reinstate etc.)".WriteColorLine(
                     ConsoleColor.DarkYellow);
-                $"--one [code] :               prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--realtimeOnly :                 refresh realtime prices only"
+                $"--one [code] :             prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--realtimeOnly :           refresh realtime prices only"
                     .WriteColorLine(ConsoleColor.DarkYellow);
-                $"--reinstate :                 reinstate prices and indicators data".WriteColorLine(ConsoleColor
+                $"--reinstate :              reinstate prices and indicators data".WriteColorLine(ConsoleColor
                     .DarkYellow);
                 $"--output :                 prepare charts or others output data".WriteColorLine(ConsoleColor
                     .DarkYellow);
-                $"--check :                 check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--check :                  check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
 
                 break;
         }
@@ -107,8 +107,40 @@ internal class Program
 
     private static void CheckSomething()
     {
-                var dotsDic = Signalert.Reportor.LoadDots(Config.DefaultFilter);
+        var code = "688160.SH";
+        var indicatorValue = Signalert.Calculator.LoadIndicatorLine(code,Productions.Casino.Contracts.Enums.StockAnalysisCycle.DAILY);
 
+        var a = indicatorValue.LineToSets();
+        a.ObjToJson().WriteColorLine(ConsoleColor.Red);
+    var notices = a
+            .Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0")))
+            .Select(o => new object[] { o.Code, o.Close })
+            .ToList();
+
+        Console.WriteLine(notices.Count);
+
+
+        var ss = Signalert.Calculator.LoadSets(code);
+        var ns=ss.Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0.")))
+            .Select(o => new object[] { o.Code, o.Close })
+            .ToList();
+
+        Console.WriteLine(ns.Count);
+
+
+        /*
+
+        var latest=Signalert.Calculator.LoadList().OrderBy(o=>o.Rank).ThenByDescending(o=>o.Code);
+        latest.Take(10).ToList()
+            .ForEach(
+            o =>
+            {
+                $"{o.Code} -> {o.Close}".WriteColorLine(ConsoleColor.DarkGreen);
+            });
+        return;
+
+
+        var dotsDic = Signalert.Reportor.LoadDots(Config.DefaultFilter);
         Signalert.Collector.LoadAllCodes()
             .Where(o=>dotsDic.ContainsKey(o.Code))
             .ToList()
@@ -206,6 +238,6 @@ internal class Program
                     });
                 Console.Read();
             }
-        );
+        );*/
     }
 }

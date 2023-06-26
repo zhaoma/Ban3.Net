@@ -37,21 +37,35 @@ public static class Helper
 
     public static readonly List<SetsFeature> Features = new List<SetsFeature>
     {
+        new("AMOUNT.UP","量升",0),
         new("BIAS.GE", "乖离合理", 1),
         new("BIAS.LT", "乖离不合理", -1),
         new("BIAS.GC", "乖离金叉", 2),
         new("BIAS.DC", "乖离死叉", -2),
+
+        new("CCI.200","CCI200",0),
+        new("CCI.100","CCI100",0),
+
+        new("CCI.-200","CCI-200",0),
+
         new("DMI.PDI", "多空多头", 1),
         new("DMI.MDI", "多空空头", -1),
         new("DMI.80", "多空转向", -1),
         new("DMI.GC", "多空金叉", 2),
         new("DMI.DC", "多空死叉", -2),
+
+        new("ENE.UPPER","轨道上轨",0),
+        new("ENE.LOWER","轨道下轨",0),
+
         new("KD.PDI", "随机多头", 1),
         new("KD.MDI", "随机空头", -1),
         new("KD.GC", "随机金叉", 2),
         new("KD.80", "随机强势", 1),
         new("KD.10", "随机超跌", -1),
         new("KD.DC", "随机死叉", -2),
+
+        new("MA.UP","均线多头",0),
+
         new("MACD.PDI", "平均线多头", 1),
         new("MACD.MDI", "平均线空头", -1),
         new("MACD.P", "平均线零上", 1),

@@ -30,6 +30,12 @@ public class RenderView
     [JsonProperty("endsWith", NullValueHandling = NullValueHandling.Ignore)]
     public string EndsWith { get; set; }
 
+    [JsonProperty("includeKeys", NullValueHandling = NullValueHandling.Ignore)]
+    public string IncludeKeys { get; set; }
+
+    [JsonProperty("excludeKeys", NullValueHandling = NullValueHandling.Ignore)]
+    public string ExcludeKeys { get; set; }
+
     [JsonProperty("viewName", NullValueHandling = NullValueHandling.Ignore)]
     public string ViewName { get; set; }
 
@@ -94,6 +100,10 @@ public class RenderView
             sb.Append($"&startsWith={StartsWith}");
         if (!string.IsNullOrEmpty(EndsWith))
             sb.Append($"&endsWith={EndsWith}");
+        if (!string.IsNullOrEmpty(IncludeKeys))
+            sb.Append($"&includeKeys={IncludeKeys}");
+        if (!string.IsNullOrEmpty(ExcludeKeys))
+            sb.Append($"&excludeKeys={ExcludeKeys}");
 
         return sb.ToString();
     }
