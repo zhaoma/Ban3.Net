@@ -313,10 +313,10 @@ public static partial class Helper
                         dot.IsDotOfBuying
                             ? Infrastructures.Charts.Helper.DotOfBuying(
                                 dot.TradeDate,
-                                new object[2] { dot.TradeDate, dot.Close })
+                                new object[] { dot.TradeDate, dot.Close })
                             : Infrastructures.Charts.Helper.DotOfSelling(
                                 dot.TradeDate,
-                                new object[2] { dot.TradeDate, dot.Close })
+                                new object[] { dot.TradeDate, dot.Close })
                     );
                 });
             }
@@ -325,7 +325,7 @@ public static partial class Helper
         var now = DateTime.Now;
         var notices = indicatorValue.LineToSets()
             .Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0.")))
-            .Select(o => new object[2] { o.Code, o.Close })
+            .Select(o => new object[] { o.Code, o.Close })
             .ToList();
 
         if (notices.Any())
@@ -339,7 +339,6 @@ public static partial class Helper
                 candlestickSeries.MarkPoint.Data!.Add(Infrastructures.Charts.Helper.DotOfNotice(os[0]+".MACD.CO", os));
             });
         }
-        Console.WriteLine($"{DateTime.Now.Subtract(now).Milliseconds} ms elapsed.");
 
         diagram.AddSeries(candlestickSeries);
         diagram.AddSeries(indicatorValue.MA(null, out var legendMA));
@@ -412,7 +411,7 @@ public static partial class Helper
         };
 
         var amount = new Infrastructures.Indicators.Formulas.Specials.AMOUNT();
-        foreach (var line in amount.Details)
+        foreach (var line in amount.Details!)
         {
             var color = Infrastructures.Charts.Helper.Red;
             switch (line.Days)
@@ -427,7 +426,7 @@ public static partial class Helper
             var s = SeriesType.Line.CreateSeries(
                 $"AMOUNT.{line.Days}",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Amount.RefAmounts.FindLast(x => x.Days == line.Days)?.Ref)
+                    .Select(o => o.Amount!.RefAmounts.FindLast(x => x.Days == line.Days)?.Ref)
                     .ToList(),
                 index,color);
             result.Add(s);
@@ -445,12 +444,12 @@ public static partial class Helper
             SeriesType.Line.CreateSeries(
                 "BIAS",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Bias.RefBIAS).ToList(),
+                    .Select(o => o.Bias!.RefBIAS).ToList(),
                 index),
             SeriesType.Line.CreateSeries(
                 "BIAS.MA",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Bias.RefBIASMA).ToList(),
+                    .Select(o => o.Bias!.RefBIASMA).ToList(),
                 index,Infrastructures.Charts.Helper.Yellow)
         };
 
@@ -464,7 +463,7 @@ public static partial class Helper
         var result =SeriesType.Line.CreateSeries(
             "CCI",
             indicatorValue.EndPoints?
-                .Select(o => o.Cci.RefCCI).ToList(),
+                .Select(o => o.Cci!.RefCCI).ToList(),
             index);
 
         result.MarkLine = new GeneralMark
@@ -489,7 +488,7 @@ public static partial class Helper
         var adx = SeriesType.Line.CreateSeries(
             "DMI.ADX",
             indicatorValue.EndPoints?
-                .Select(o => o.Dmi.RefADX).ToList(),
+                .Select(o => o.Dmi!.RefADX).ToList(),
             index, Infrastructures.Charts.Helper.Purple);
 
         adx.MarkLine = new GeneralMark
@@ -507,18 +506,18 @@ public static partial class Helper
             SeriesType.Line.CreateSeries(
                 "DMI.PDI",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Dmi.RefPDI).ToList(),
+                    .Select(o => o.Dmi!.RefPDI).ToList(),
                 index),
             SeriesType.Line.CreateSeries(
                 "DMI.MDI",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Dmi.RefMDI).ToList(),
+                    .Select(o => o.Dmi!.RefMDI).ToList(),
                 index,Infrastructures.Charts.Helper.Yellow),
             adx,
             SeriesType.Line.CreateSeries(
                 "DMI.ADXR",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Dmi.RefADXR).ToList(),
+                    .Select(o => o.Dmi!.RefADXR).ToList(),
                 index,Infrastructures.Charts.Helper.Green)
         };
         legendData = result.Select(o => o.Name).ToList();
@@ -531,7 +530,7 @@ public static partial class Helper
         var upper = SeriesType.Line.CreateSeries(
             "ENE.Upper",
             indicatorValue.EndPoints?
-                .Select(o => o.Ene.RefUPPER).ToList(),
+                .Select(o => o.Ene!.RefUPPER).ToList(),
             index, Infrastructures.Charts.Helper.Red, 2);
 
         upper.LineStyle!.Type = BorderType.Dotted;
@@ -539,7 +538,7 @@ public static partial class Helper
         var ene = SeriesType.Line.CreateSeries(
             "ENE",
             indicatorValue.EndPoints?
-                .Select(o => o.Ene.RefENE).ToList(),
+                .Select(o => o.Ene!.RefENE).ToList(),
             index, Infrastructures.Charts.Helper.Purple, 2);
 
         ene.LineStyle!.Type = BorderType.Dotted;
@@ -547,7 +546,7 @@ public static partial class Helper
         var lower = SeriesType.Line.CreateSeries(
             "ENE.Lower",
             indicatorValue.EndPoints?
-                .Select(o => o.Ene.RefLOWER).ToList(),
+                .Select(o => o.Ene!.RefLOWER).ToList(),
             index, Infrastructures.Charts.Helper.Yellow, 2);
 
         lower.LineStyle!.Type = BorderType.Dotted;
@@ -567,7 +566,7 @@ public static partial class Helper
         var k = SeriesType.Line.CreateSeries(
             "KD.K",
             indicatorValue.EndPoints?
-                .Select(o => o.Kd.RefK).ToList(),
+                .Select(o => o.Kd!.RefK).ToList(),
             index);
 
         k.MarkLine = new GeneralMark
@@ -587,7 +586,7 @@ public static partial class Helper
             SeriesType.Line.CreateSeries(
                 "KD.D",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Kd.RefD).ToList(),
+                    .Select(o => o.Kd!.RefD).ToList(),
                 index,Infrastructures.Charts.Helper.Yellow)
         };
         legendData = result.Select(o => o.Name).ToList();
@@ -623,7 +622,7 @@ public static partial class Helper
 	    var s = SeriesType.Line.CreateSeries(
                 $"MA.{line.Days}",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Ma.RefPrices.FindLast(x => x.Days == line.Days)?.Ref).ToList(),
+                    .Select(o => o.Ma!.RefPrices.FindLast(x => x.Days == line.Days)?.Ref).ToList(),
                 index,color);
             result.Add(s);
         }
@@ -640,17 +639,17 @@ public static partial class Helper
             SeriesType.Bar.CreateSeries(
                 "MACD",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Macd.RefMACD).ToList(),
+                    .Select(o => o.Macd!.RefMACD).ToList(),
                 index),
             SeriesType.Line.CreateSeries(
                 "MACD.DEA",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Macd.RefDEA).ToList(),
+                    .Select(o => o.Macd!.RefDEA).ToList(),
                 index,Infrastructures.Charts.Helper.Yellow),
             SeriesType.Line.CreateSeries(
                 "MACD.DIF",
                 indicatorValue.EndPoints?
-                    .Select(o => o.Macd.RefDIF).ToList(),
+                    .Select(o => o.Macd!.RefDIF).ToList(),
                 index)
         };
         legendData = result.Select(o => o.Name).ToList();
@@ -681,33 +680,33 @@ public static partial class Helper
 
     public static Diagram IndicatorDiagram(this IReportor _, Stock stock,string indicator)
     {
-        var dailyDiagram = _.LoadDiagram(stock, StockAnalysisCycle.DAILY);
+        var dailyDiagram = _.LoadDiagram(stock);
         var weeklyDiagram = _.LoadDiagram(stock, StockAnalysisCycle.WEEKLY);
         var monthlyDiagram = _.LoadDiagram(stock, StockAnalysisCycle.MONTHLY);
 
-        var candlestickSeries = dailyDiagram.Series.FirstOrDefault(o => o.Type == SeriesType.Candlestick);
+        var candlestickSeries = dailyDiagram.Series!.FirstOrDefault(o => o.Type == SeriesType.Candlestick);
 
-        var dailySeries = dailyDiagram.Series.FindAll(o => o.Name.StartsWith(indicator));
+        var dailySeries = dailyDiagram.Series.FindAll(o => o.Name!.StartsWith(indicator));
 
         dailySeries.ForEach(o => {
             o.XAxisIndex = 1;
             o.YAxisIndex = 1;
         });
-        var dailyX1 = dailyDiagram.XAxis[0];
+        var dailyX1 = dailyDiagram.XAxis![0];
         dailyX1.Show = false;
         var dailyX2 = dailyDiagram.XAxis[1];
         dailyX2.Show = true;
 
-        var weeklySeries = weeklyDiagram.Series.FindAll(o => o.Name.StartsWith(indicator));
-        var weeklyXAxis = weeklyDiagram.XAxis[0];
+        var weeklySeries = weeklyDiagram.Series!.FindAll(o => o.Name!.StartsWith(indicator));
+        var weeklyXAxis = weeklyDiagram.XAxis![0];
         weeklyXAxis.Show = true;
         weeklyXAxis.GridIndex = 2;
         weeklySeries.ForEach(o => {
             o.XAxisIndex = 2;
             o.YAxisIndex = 2;
             o.Name = $"weekly.{o.Name}"; });
-        var monthlySeries = monthlyDiagram.Series.FindAll(o => o.Name.StartsWith(indicator));
-        var monthlyXAxis = monthlyDiagram.XAxis[0];
+        var monthlySeries = monthlyDiagram.Series!.FindAll(o => o.Name!.StartsWith(indicator));
+        var monthlyXAxis = monthlyDiagram.XAxis![0];
         monthlyXAxis.Show = true;
         monthlyXAxis.GridIndex = 3;
         monthlySeries.ForEach(o => {
@@ -735,7 +734,7 @@ public static partial class Helper
                     new DataZoomSlider { XAxisIndex = "all" }
                 })
             .SetXAxis(
-                new CartesianAxis[]
+                new []
                 {
                     dailyX1,
                     dailyX2,
@@ -751,7 +750,7 @@ public static partial class Helper
                     new(true, true, 3){Show = false}
                 });
 
-        diagram.AddSeries(candlestickSeries);
+        diagram.AddSeries(candlestickSeries!);
         diagram.AddSeries(dailySeries.ToArray());
         diagram.AddSeries(weeklySeries.ToArray());
         diagram.AddSeries(monthlySeries.ToArray());

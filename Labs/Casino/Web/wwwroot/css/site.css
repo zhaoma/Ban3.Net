@@ -184,6 +184,4 @@ html {
     opacity: 0.7;
 }
 
-.card-body td {
-    font-size: 9px;
-}
+.card-body .badge{ color: #BBB;font-size: 12px;}

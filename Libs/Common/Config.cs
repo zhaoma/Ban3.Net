@@ -6,13 +6,10 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.IO;
-
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Common.Models;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 using Rougamo;
 
 namespace Ban3.Infrastructures.Common
@@ -38,8 +35,8 @@ namespace Ban3.Infrastructures.Common
 
             log4net.Config.XmlConfigurator.Configure(new FileInfo(Path.Combine(Environment.CurrentDirectory,
                 "log4net.config")));
-
-            LocalStorage = new Models.LocalStorage
+            
+            LocalStorage = new LocalStorage
             {
                 RootPath = AppConfiguration["FilesStorage:RootPath"] + "",
                 RootUrl = AppConfiguration["FilesStorage:RootUrl"] + ""
@@ -55,9 +52,15 @@ namespace Ban3.Infrastructures.Common
             };
         }
 
-        public static Models.LocalStorage LocalStorage { get; set; }
+        public static LocalStorage LocalStorage { get; set; }
 
-        public static Models.TraceSetting TraceSetting { get; set; }
+        public static TraceSetting TraceSetting { get; set; }
+
+        public static string GetString(string key)
+            => AppConfiguration[key] + "";
+
+        public static int GetInt(string key)
+            => GetString(key).ToInt();
     }
 
 

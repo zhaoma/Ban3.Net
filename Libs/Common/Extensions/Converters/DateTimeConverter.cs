@@ -1,41 +1,49 @@
 ﻿using Newtonsoft.Json.Converters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.Common.Extensions.Converters
+namespace Ban3.Infrastructures.Common.Extensions.Converters;
+
+/// <summary>
+/// Newtonsoft DateTime Converter
+/// </summary>
+public class DateTimeConverter
+    : DateTimeConverterBase
 {
+    private readonly IsoDateTimeConverter _dtConvertor;
+    
+    public DateTimeConverter()
+    {
+        _dtConvertor = new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fffffffZ" };
+    }
+
+    public DateTimeConverter(string? formatter)
+    {
+        _dtConvertor = new IsoDateTimeConverter { DateTimeFormat = formatter };
+    }
+
     /// <summary>
     /// 
     /// </summary>
-    public class DateOnlyConverter:DateTimeConverterBase
+    /// <param name="writer"></param>
+    /// <param name="value"></param>
+    /// <param name="serializer"></param>
+    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
     {
-        private static IsoDateTimeConverter dtConvertor = new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd" };
+        _dtConvertor.WriteJson(writer, value, serializer);
+    }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="value"></param>
-        /// <param name="serializer"></param>
-        public override void WriteJson(Newtonsoft.Json.JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
-        {
-            dtConvertor.WriteJson(writer, value, serializer);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="reader"></param>
-        /// <param name="objectType"></param>
-        /// <param name="existingValue"></param>
-        /// <param name="serializer"></param>
-        /// <returns></returns>
-        public override object ReadJson(Newtonsoft.Json.JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
-        {
-            return dtConvertor.ReadJson(reader, objectType, existingValue, serializer);
-        }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="reader"></param>
+    /// <param name="objectType"></param>
+    /// <param name="existingValue"></param>
+    /// <param name="serializer"></param>
+    /// <returns></returns>
+    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+    {
+        if (existingValue == null) return null;
+        return _dtConvertor.ReadJson(reader, objectType, existingValue, serializer);
     }
 }

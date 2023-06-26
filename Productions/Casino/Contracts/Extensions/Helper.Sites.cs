@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
-using Ban3.Sites.ViaNetease.Entries;
 using Ban3.Sites.ViaNetease.Request;
 using Ban3.Sites.ViaSina;
 using Ban3.Sites.ViaSina.Request;
@@ -16,7 +14,6 @@ using Ban3.Sites.ViaTushare.Entries;
 using Ban3.Sites.ViaTushare.Request;
 using Ban3.Sites.ViaTushare.Response;
 using Ban3.Sites.ViaYuncaijing.Request;
-using Newtonsoft.Json.Bson;
 using StockPrice = Ban3.Sites.ViaTushare.Entries.StockPrice;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
@@ -24,10 +21,12 @@ namespace Ban3.Productions.Casino.Contracts.Extensions;
 public static partial class Helper
 {
     #region icons
+
     /// <summary>
     /// 云财经有防火墙规则
     /// </summary>
     /// <param name="_"></param>
+    /// <param name="allCodes"></param>
     /// <returns></returns>
     [Obsolete("云财经有防火墙规则")]
     public static bool DownloadAllIcons(this ISites _, List<Stock> allCodes = null)
@@ -186,9 +185,7 @@ public static partial class Helper
         allCodes ??= _.LoadAllCodes();
         var result = true;
 
-        allCodes.ForEach(stock => {
-            Console.WriteLine(stock.Code);
-	     result = result && _.PrepareOnesDailyPrices(stock.Code); });
+        allCodes.ForEach(stock => { result = result && _.PrepareOnesDailyPrices(stock.Code); });
         return result;
     }
 

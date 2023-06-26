@@ -7,31 +7,32 @@
 
 using System;
 
-namespace Ban3.Infrastructures.Common.Attributes
+namespace Ban3.Infrastructures.Common.Attributes;
+
+/// <summary>
+/// 外键字段属性
+/// </summary>
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+public class ForeignKeyAttribute : Attribute
 {
     /// <summary>
-    /// 字段属性
+    /// 
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public class ForeignKeyAttribute : Attribute
+    public ForeignKeyAttribute()
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public ForeignKeyAttribute() { }
+    }
 
-        /// <summary>
-        /// 转字符格式
-        /// </summary>
-        public Type Referer { get; set; }
+    /// <summary>
+    /// 转字符格式
+    /// </summary>
+    public Type? Referer { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="referer"></param>
-        public ForeignKeyAttribute(Type referer)
-        {
-            Referer = referer;
-        }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="referer"></param>
+    public ForeignKeyAttribute(Type referer)
+    {
+        Referer = referer;
     }
 }

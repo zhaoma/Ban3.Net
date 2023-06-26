@@ -3,7 +3,7 @@
     Layout = null;
     var isOnly = Model.Count() == 1;
     var code = Model.Any() ? Model.First().Code : "3001047.SZ";
-    var url = $"/data/macd/{code}?cycle=DAILY";
+    var url = $"/parts/stock/{code}";
 }
 <div class="row">
     <div class="col-3 @(isOnly?"hide":"")">
@@ -11,11 +11,11 @@
             @foreach (var point in Model.OrderBy(o => o.Symbol))
             {
                 <a href="#" class="list-group-item list-group-item-action lazyLoadButton"
-                   dataUrl="@($"/data/stock/{@point.Code}")"
+                   dataUrl="@($"/parts/stock/{@point.Code}")"
                    renderElement="onesChartsContainer">@point.Symbol - @point.Name</a>
             }
         </div>    
         </div>
-    <div class="@(isOnly?"col-12":"col-9")"  id="onesChartsContainer">
+    <div class="@(isOnly?"col-12":"col-9") lazyLoad" dataUrl="@url"  id="onesChartsContainer">
     </div>
 </div>

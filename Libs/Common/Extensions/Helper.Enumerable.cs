@@ -8,178 +8,172 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Ban3.Infrastructures.Common.Models;
-using Newtonsoft.Json.Linq;
 
-namespace Ban3.Infrastructures.Common.Extensions
+namespace Ban3.Infrastructures.Common.Extensions;
+
+/// <summary>
+/// 列表扩展
+/// </summary>
+public static partial class Helper
 {
-    /// <summary>
-    /// 列表扩展
-    /// </summary>
-    public static partial class Helper
+    /// 
+    public static List<RecursionNode> AllChildren(
+        this List<RecursionNode> allNodes,
+        int specialNodeId)
     {
-        /// 
-        public static List<RecursionNode> AllChildren(
-	        this IEnumerable<RecursionNode> allNodes, 
-	        int specialNodeId)
+        var result = new List<RecursionNode>();
+        
+        var node = allNodes.FindLast(o => o.Id == specialNodeId);
+
+        if (node != null)
+            result.Add(node);
+
+        RecursionScan(allNodes, result, specialNodeId);
+
+        return result;
+    }
+
+    private static void RecursionScan(
+        List<RecursionNode> all,
+        List<RecursionNode> result,
+        int specialNodeId)
+    {
+        var temp = all.FindAll(o => o.ParentId == specialNodeId);
+        if (!temp.Any()) return;
+
+        foreach (var node in temp)
         {
-            var result = new List<RecursionNode>();
+            result.Add(node);
 
-            var node = allNodes.ToList().FindLast(o => o.Id == specialNodeId);
-
-            if (node != null)
-                result.Add(node);
-
-            RecursionScan(allNodes, result, specialNodeId);
-
-            return result;
+            RecursionScan(all, result, node.Id);
         }
+    }
 
-        private static void RecursionScan(
-	        IEnumerable<RecursionNode> all, 
-	        List<RecursionNode> result, 
-	        int specialNodeId)
+    ///
+    public static string AggregateToString(this IEnumerable<object> names, string seq = " ")
+    {
+        return string.Join(seq, names);
+    }
+
+    public static void AppendList(this Dictionary<string, List<string>> result, string key, List<string> values)
+    {
+        if (result.ContainsKey(key))
         {
-            var temp = all.ToList().FindAll(o => o.ParentId == specialNodeId);
-            if (temp != null && temp.Any())
-            {
-                foreach (var node in temp)
-                {
-                    result.Add(node);
+            result[key] = result[key].Union(values).ToList();
+        }
+        else
+        {
+            result.Add(key, values);
+        }
+    }
 
-                    RecursionScan(all, result, node.Id);
+    public static void AppendList(this Dictionary<string, List<string>> result, List<string> keys, string value)
+    {
+        keys.ForEach(key =>
+        {
+            if (!string.IsNullOrEmpty(key))
+            {
+                if (result.ContainsKey(key))
+                {
+                    result[key] = result[key].Union(new List<string> { value }).ToList();
+                }
+                else
+                {
+                    result.Add(key, new List<string> { value });
                 }
             }
+        });
+    }
+
+    /// 
+    public static IEnumerable<T> UnionAll<T>(
+        this IEnumerable<IEnumerable<T>> source)
+    {
+        var result = new List<T>();
+        source
+            .AsParallel<IEnumerable<T>>()
+            .ForAll<IEnumerable<T>>((Action<IEnumerable<T>>)(a => result = result.Union<T>(a).ToList<T>()));
+        return result;
+    }
+
+    /// 
+    public static bool AllFoundIn(this IEnumerable<string> keys, IEnumerable<string[]> filterKeys)
+    {
+        var targets = filterKeys.UnionAll().ToList();
+        return targets.All(keys.Contains);
+    }
+
+    /// 
+    public static List<T> RandomResortList<T>(this List<T> oriList)
+    {
+        Random random = new Random();
+        List<T> newList = new List<T>();
+
+        foreach (T item in oriList)
+        {
+            newList.Insert(random.Next(newList.Count), item);
         }
 
-        ///
-        public static string AggregateToString(this IEnumerable<object> names, string seq = " ")
+        return newList;
+    }
+
+    /// 
+    public static bool Matches(this Type[] arr, Type[] args)
+    {
+        if (arr.Length != args.Length) return false;
+        for (var i = 0; i < args.Length; i++)
         {
-            return string.Join(seq,names);
+            if (!arr[i].IsAssignableFrom(args[i]))
+                return false;
         }
 
-        public static void AppendList(this Dictionary<string, List<string>> result, string key, List<string> values)
+        return true;
+    }
+    
+    public static void AppendToList<T>(this List<T> all, T one)
+    {
+        try
         {
-            if (result.ContainsKey(key))
-            {
-                result[key] = result[key].Union(values).ToList();
-            }
-            else
-            {
-                result.Add(key, values);
-            }
+            LockSlim.EnterWriteLock();
+            if (!all.Contains(one))
+                all.Add(one);
         }
-
-        public static void AppendList(this Dictionary<string, List<string>> result, List<string> keys, string value)
+        catch (Exception ex)
         {
-            keys.ForEach(key =>
-            {
-                if (!string.IsNullOrEmpty(key))
-                {
-                    if (result.ContainsKey(key))
-                    {
-                        result[key] = result[key].Union(new List<string> { value }).ToList();
-                    }
-                    else
-                    {
-                        result.Add(key, new List<string> { value });
-                    }
-                }
-            });
+            Logger.Error(ex);
         }
-
-        /// 
-        public static IEnumerable<T> UnionAll<T>(
-          this IEnumerable<IEnumerable<T>> source)
+        finally
         {
-            var result = new List<T>();
-            source
-                .AsParallel<IEnumerable<T>>()
-                .ForAll<IEnumerable<T>>((Action<IEnumerable<T>>)(a => result = result.Union<T>(a).ToList<T>()));
-            return (IEnumerable<T>)result;
+            LockSlim.ExitWriteLock();
         }
+    }
 
-        /// 
-        public static bool AllFoundIn(this IEnumerable<string> keys, IEnumerable<string[]> filterKeys)
+    /// <summary>
+    /// 递归记录hierarchy
+    /// </summary>
+    /// <param name="arr"></param>
+    /// <param name="length"></param>
+    /// <returns></returns>
+    public static string[] ReDim(this string[] arr, int length)
+    {
+        var r = new string[length];
+
+        Array.Copy(arr, r, length - 1);
+
+        return r;
+    }
+
+    public static bool IsAsc(this List<decimal> numbers)
+    {
+        for (int i = 1; i < numbers.Count; i++)
         {
-            var targets = filterKeys.UnionAll().ToList();
-            return targets.All(o => keys.Contains(o));
-        }
-
-        /// 
-        public static List<T> RandomResortList<T>(this List<T> oriList)
-        {
-            Random random = new Random();
-            List<T> newList = new List<T>();
-            if (oriList != null)
+            if (numbers[i - 1] > numbers[i])
             {
-                foreach (T item in oriList)
-                {
-                    newList.Insert(random.Next(newList.Count), item);
-                }
-            }
-
-            return newList;
-        }
-
-        /// 
-        public static bool Matches(this Type[] arr, Type[] args)
-        {
-            if (arr.Length != args.Length) return false;
-            for (var i = 0; i < args.Length; i++)
-            {
-                if (!arr[i].IsAssignableFrom(args[i]))
-                    return false;
-            }
-            return true;
-        }
-
-
-        public static void AppendToList<T>(this List<T> all, T one)
-        {
-            try
-            {
-                LockSlim.EnterWriteLock();
-                if (!all.Contains(one))
-                    all.Add(one);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
-            }
-            finally
-            {
-                LockSlim.ExitWriteLock();
+                return false;
             }
         }
 
-        /// <summary>
-        /// 递归记录hierarchy
-        /// </summary>
-        /// <param name="arr"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        public static string[] Redim(this string[] arr, int length)
-        {
-            var r = new string[length];
-
-            Array.Copy(arr, r, length - 1);
-
-            return r;
-        }
-
-        public static bool IsAsc(this List<decimal> nums)
-        {
-            for (int i = 1; i < nums.Count; i++)
-            {
-                if (nums[i - 1] > nums[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
+        return true;
     }
 }

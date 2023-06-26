@@ -130,16 +130,19 @@ public partial class Signalert
     /// <param name="stocks"></param>
     static void ExecutePrepare(List<Stock> stocks)
     {
-        //if (!Config.NeedSync()) return;
+        ReinstateData(stocks);
 
+        PrepareOutput(stocks);
+    }
+
+    public static void ReinstateData(List<Stock> stocks)
+    {
         new Action(() => ReinstateAllPrices(stocks)).ExecuteAndTiming("ReinstateAllPrices");
 
         new Action(() =>
             stocks.ParallelExecute((stock) => { Calculator.GenerateIndicatorLine(stock.Code); },
                 Config.MaxParallelTasks)
         ).ExecuteAndTiming("GenerateIndicatorLine");
-
-        PrepareOutput(stocks);
     }
 
     public static void PrepareOutput(List<Stock> stocks) { 
@@ -197,7 +200,6 @@ public partial class Signalert
         var allCodes=Collector.LoadAllCodes();
         allCodes.ForEach(o =>
         {
-            Console.WriteLine(o.Code);
             if (o.Code.EndsWith(".BJ"))
             {
                 favorite.ParseOne(StockFavoriteType.BlackList, o, StockRealtime.Close(o.Code), true);

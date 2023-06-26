@@ -8,8 +8,8 @@
     <thead>
     <tr>
         <th class="col-4">Symbol</th>
-        <th class="col-4">Close</th>
-        <th class="col-4">Rank</th>
+        <th class="col-5">Close</th>
+        <th class="col-3">Rank</th>
     </tr>
     </thead>
     <tbody>
@@ -19,8 +19,8 @@
         var className =r? p?.ChangePercent > 0 ? "red" : p?.ChangePercent == 0 ? "gray" : "green":"";
         <tr class="@className">
             <td>@point.Symbol</td>
-            <td>@point.Close<span class="badge">@(p!=null?Math.Round(p.ChangePercent,2):"")%</span></td>
-            <td>@($"{point.Rank}")<span class="badge">@point.Value</span></td>
+                <td>@point.Close  <span class="badge">@(p != null ? Math.Round(p.ChangePercent, 2) : "")%</span></td>
+                <td>@($"{point.Rank}")  <span class="badge">@point.Value</span></td>
         </tr>
     }
     </tbody>

@@ -15,11 +15,11 @@ namespace Ban3.Infrastructures.Common.Extensions
     /// 
     public static partial class Helper
     {
-        static readonly ILog _logger = LogManager.GetLogger(typeof(Helper));
+        static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
 
-        static readonly object _objLock = new object();
+        static readonly object ObjLock = new ();
 
-        static readonly ReaderWriterLockSlim LockSlim = new ReaderWriterLockSlim();
+        static readonly ReaderWriterLockSlim LockSlim = new ();
 
         const int LockSlimTimeout = 1000;
 

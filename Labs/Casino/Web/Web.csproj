@@ -12,11 +12,6 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Web' " />
 
   <ItemGroup>
-    <Content Remove="688004.SH.json" />
-    <Content Remove="wwwroot\lib\bootstrap-icons\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Ban3.Infrastructures.PlatformInvoke" Version="1.0.0" />
     <PackageReference Include="Costura.Fody" Version="5.7.0">
       <PrivateAssets>all</PrivateAssets>
@@ -31,8 +26,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Productions\Casino\CcaAndReport\CcaAndReport.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\bootstrap-icons\" />
   </ItemGroup>
 </Project>

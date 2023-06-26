@@ -7,35 +7,30 @@
 
 using System.ComponentModel;
 
-namespace Ban3.Infrastructures.Common.Enums
+namespace Ban3.Infrastructures.Common.Enums;
+
+/// <summary>
+/// 响应状态码
+/// </summary>
+public enum ResponseStatusCode
 {
     /// <summary>
-    /// 响应状态码
+    /// 
     /// </summary>
-    public enum ResponseStatusCode
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        [Description("OK")]
-        Code200,
+    [Description("OK")] Code200,
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [Description("Denied")]
-        Code401,
+    /// <summary>
+    /// 
+    /// </summary>
+    [Description("Denied")] Code401,
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [Description("Not found")]
-        Code404,
+    /// <summary>
+    /// 
+    /// </summary>
+    [Description("Not found")] Code404,
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [Description("Error")]
-        Code500
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    [Description("Error")] Code500
 }

@@ -2,26 +2,7 @@
 var currentCharts = "";
 
 $(document).ready(function () {
-    if ($(".partsNav").length > 0) {
-        $(".partsNav").click(function () {
-            var nav = $(this);
-            var dataUrl = $(this).attr("dataUrl");
-            clearNav();
-            $.get(dataUrl, function (html) {
-                $("#partsContainer").html(html);
-                if (!$(nav).hasClass("active")) { $(nav).addClass('active'); }
-                console.log("render parts");
-                currentParts = dataUrl;
-                console.log("bind events.");
-                renderContainer();
-            });
-
-            return false;
-        });
-    }
-
-
-    // JS
+    initContainer('#navIcons');
 });
 
 function clearNav() {
@@ -30,93 +11,6 @@ function clearNav() {
             $(this).removeClass("active");
         }
     });
-}
-
-function renderContainer() {
-    if ($("#partsContainer .renderCharts").length > 0) {
-        $("#partsContainer .renderCharts").each(function () {
-            var renderElement = $(this).attr("renderElement");
-            var dataUrl = $(this).attr("dataUrl");
-
-            bindCharts(renderElement, dataUrl);
-        });
-    }
-
-    if ($("#partsContainer .renderChartsButton").length > 0) {
-        $("#partsContainer .renderChartsButton").click(function () {
-            var renderElement = $(this).attr("renderElement");
-            var renderContainer = $(this).attr("renderContainer");
-            var dataUrl = $(this).attr("dataUrl");
-
-            if ($("#" + renderContainer).is(":visible")) {
-                if (dataUrl == currentCharts) {
-                    $("#" + renderContainer).slideUp(600, 'linear');
-                    if ($(this).hasClass("btn-secondary")) {
-                        $(this).removeClass('btn-secondary');
-                        $(this).addClass('btn-outline-secondary');
-                    }
-                } else {
-                    $("#partsContainer .renderChartsButton").each(function () {
-                        if ($(this).hasClass("btn-secondary")) {
-                            $(this).removeClass("btn-secondary");
-                            $(this).addClass('btn-outline-secondary');
-                        }
-                    });
-                    currentCharts = dataUrl;
-                    $("#" + renderContainer).slideDown(600, 'linear');
-                    if (!$(this).hasClass("btn-secondary")) {
-                        $(this).removeClass('btn-outline-secondary');
-                        $(this).addClass('btn-secondary');
-                    }
-                }
-            } else {
-                currentCharts = dataUrl;
-                $("#" + renderContainer).slideDown(600, 'linear');
-                if (!$(this).hasClass("btn-secondary")) {
-                    $(this).removeClass('btn-outline-secondary');
-                    $(this).addClass('btn-secondary');
-                }
-            }
-
-            bindCharts(renderElement, dataUrl);
-            return false;
-        });
-    }
-
-    if ($("#partsContainer .lazyLoad").length > 0) {
-        $("#partsContainer .lazyLoad").each(function () {
-            var box = $(this);
-            var dataUrl = $(this).attr("dataUrl");
-            console.log(dataUrl);
-
-            $.get(dataUrl, function (html) {
-                console.log("loaded:" + dataUrl);
-                $(box).html(html);
-
-                //await sleep(300);
-                $(box).delay(300);
-
-                if ($("#partsContainer .grid").length > 0) {
-                    $("#partsContainer .grid").masonry();
-                }
-            });
-        });
-    }
-
-    if ($("#partsContainer .lazyLoadButton").length > 0) {
-        $("#partsContainer .lazyLoadButton").click(function () {
-            var renderElement = $(this).attr("renderElement");
-            var dataUrl = $(this).attr("dataUrl");
-            $("#" + renderElement).load(dataUrl);
-            console.log("init container");
-            InitContainer($("#" + renderElement));
-            return false;
-        });
-    }
-
-    if ($("#partsContainer .grid").length > 0) {
-        $("#partsContainer .grid").masonry();
-    }
 }
 
 function initDragdrop() {
@@ -149,22 +43,23 @@ function initDragdrop() {
 function initContainer(ele) {
     var renderCharts = $(ele).find('.renderCharts');
     if (renderCharts.length > 0) {
-        renderCharts.each(function () {
+        renderCharts.each(function () {           
             var renderElement = $(this).attr("renderElement");
             var dataUrl = $(this).attr("dataUrl");
-            console.log(dataUrl + ' -> ' + renderElement);
             bindCharts(renderElement, dataUrl);
         });
     }
 
     var renderChartsButtons = $(ele).find(".renderChartsButton");
     if (renderChartsButtons.length > 0) {
-        renderChartsButtons.each(() => {
-            $(this).click = () => { bindChartsButton(this); }
+        renderChartsButtons.each(function () {
+            var button = $(this);
+            button.bind('click', function () {return bindChartsButton(button); });
         });
     }
 
     var lazyLoad = $(ele).find(".lazyLoad");
+    console.log('lazyLoad.length=' + lazyLoad.length);
     if (lazyLoad.length > 0) {
         lazyLoad.each(function () {
             var box = $(this);
@@ -172,26 +67,29 @@ function initContainer(ele) {
 
             $.get(dataUrl, function (html) {
                 $(box).html(html);
-                $(box).delay(300);
+                $(box).delay(500);
 
-                if ($(ele).find(".grid").length > 0) {
-                    $(ele).each(() => { $(this).masonry(); });
-                }
+                initGrid();
+
+                initContainer($(box));
             });
         });
     }
 
     var lazyLoadButtons = $(ele).find(".lazyLoadButton");
+    console.log('lazyLoadButtons.length=' + lazyLoadButtons.length);
     if (lazyLoadButtons.length > 0) {
-        lazyLoadButtons.each(() => {
-            $(this).click = () => { bindButton(this); }
+        lazyLoadButtons.each(function () {
+            var button = $(this);
+            button.bind('click', function () { return bindButton(button); });
         });
     }
+}
 
-    var grids = $(ele).find(".grid");
-    if (grids.length>0)
-    {
-        grids.each(() => $(this).masonry();)
+function initGrid() {
+    var grids = $(".grid");
+    if (grids.length > 0) {
+        grids.each(function () { $(this).masonry(); });
     }
 }
 
@@ -201,9 +99,16 @@ function bindButton(ele) {
 
     $("#" + renderElement).load(dataUrl);
     $.get(dataUrl, function (html) {
-        $("#" + renderElement).html(html);
 
+        $("#" + renderElement).html(html);
+        console.log("html render over.")
         initContainer($("#" + renderElement));
+
+        var li = $(ele).parent().parent().find(".lazyLoadButton");
+        if (li.length > 0) {
+            li.each(function () { $(this).removeClass('active') });
+        }
+
         if (!$(ele).hasClass("active")) { $(ele).addClass('active'); }
     });
     return false;
@@ -247,12 +152,28 @@ function bindChartsButton(ele) {
         }
     }
 
+    var li = $(ele).parent().parent().find(".renderChartsButton");
+    if (li.length > 0) {
+        li.each(function () { $(this).removeClass('active') });
+    }
+
+    if (!$(ele).hasClass("active")) { $(ele).addClass('active'); }
+
     return false;
 }
 
 function bindCharts(elementId, dataUrl) {
     var chartDom = document.getElementById(elementId);
-    var currentChart = echarts.init(chartDom);
+
+    var currentChart = echarts.getInstanceByDom(chartDom);
+
+    if (currentChart == null) {
+        currentChart = echarts.init(chartDom);
+    } else {
+        //currentChart.dispose();
+    }
+       
+    currentChart.setOption({}, true);
     //currentChart.showLoading();
     $.get(dataUrl, function (rawData) {
 
@@ -265,10 +186,9 @@ function bindCharts(elementId, dataUrl) {
 
 function findAny() {
     var k = $("#id").val();
-
     $.get('/parts/stocks/' + k, function (html) {
         $("#partsContainer").html(html);
-        renderContainer();
+        initContainer($("#partsContainer"));
     });
 
     return false;

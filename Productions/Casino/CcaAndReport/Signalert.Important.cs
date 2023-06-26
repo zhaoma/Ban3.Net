@@ -63,7 +63,7 @@ public partial class Signalert
                 .LocalFile($"{filter.Identity}.Sankey")
                 .WriteFile(allDots.Select(o => new DotRecord(o)).ObjToJson());
 
-            var dotsOfBuyings = allDots.Where(o => o.IsDotOfBuying)
+            var dotsOfBuying = allDots.Where(o => o.IsDotOfBuying)
                 .Select(o => o.SetKeys)
                 .MergeToDictionary();
 
@@ -73,7 +73,7 @@ public partial class Signalert
 
             typeof(DotOfBuyingOrSelling)
                 .LocalFile($"{filter.Identity}.Buying")
-                .WriteFile(dotsOfBuyings.ObjToJson());
+                .WriteFile(dotsOfBuying.ObjToJson());
 
             typeof(DotOfBuyingOrSelling)
                 .LocalFile($"{filter.Identity}.Selling")

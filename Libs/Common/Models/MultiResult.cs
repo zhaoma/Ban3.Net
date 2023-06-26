@@ -20,6 +20,6 @@ namespace Ban3.Infrastructures.Common.Models
         /// <summary>
         /// 分页记录集
         /// </summary>
-        public List<T> Data { get; set; }
+        public List<T>? Data { get; set; }
     }
 }

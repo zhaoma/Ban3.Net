@@ -105,7 +105,7 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// <param name="expression">The expression.</param>
         /// <param name="defValue">if set to <c>true</c> [def value].</param>
         /// <returns></returns>
-        public static bool ToBool( this object expression, bool defValue )
+        public static bool ToBool( this object? expression, bool defValue )
         {
             if( expression == null )
             {
@@ -201,12 +201,24 @@ namespace Ban3.Infrastructures.Common.Extensions
                                   );
         }
 
+        public static bool TimeGe(this DateTime inVal, DateTime compareTime)
+            =>
+                inVal.Subtract(new DateTime(
+                        inVal.Year,
+                        inVal.Month,
+                        inVal.Day,
+                        compareTime.Hour,
+                        compareTime.Minute,
+                        compareTime.Second
+                    ))
+                    .TotalSeconds >= 0;
+
         /// <summary>
         /// 找到周末
         /// </summary>
         /// <param name="day"></param>
         /// <returns></returns>
-        public static DateTime FindWeekend( this DateTime day )
+        public static DateTime FindWeekEnd( this DateTime day )
         {
             DateTime weekend = day;
             while( weekend.DayOfWeek != DayOfWeek.Saturday )
@@ -219,7 +231,7 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="day"></param>
         /// <returns></returns>
-        public static DateTime FindMonthend( this DateTime day ) => new DateTime( day.Year, day.Month, 1 ).AddMonths( 1 );
+        public static DateTime FindMonthEnd( this DateTime day ) => new DateTime( day.Year, day.Month, 1 ).AddMonths( 1 );
 
         /// <summary>
         /// 金额（币种）
@@ -233,21 +245,24 @@ namespace Ban3.Infrastructures.Common.Extensions
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public static string ToAmount( this Decimal val ) => Math.Round( val / 10000M, 1 ).ToString() + "万";
+        public static string ToAmount( this Decimal val ) => Math.Round( val / 10000M, 1 ) + "万";
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public static string ToAmount( this double val ) => Math.Round( val / 1000000.0, 0 ).ToString() + "M";
+        public static string ToAmount( this double val ) => Math.Round( val / 1000000.0, 0 ) + "M";
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public static string ToCapital( this long val ) => val <= 100000000L ? Math.Round( (Decimal)val / 10000M, 0 ).ToString() + "万" : Math.Round( (Decimal)val / 100000000M, 2 ).ToString() + "亿";
+        public static string ToCapital( this long val ) 
+            => val <= 100000000L 
+                ? Math.Round(val / 10000M, 0 ) + "万" 
+                : Math.Round( val / 100000000M, 2 ) + "亿";
 
         /// <summary>
         /// 
