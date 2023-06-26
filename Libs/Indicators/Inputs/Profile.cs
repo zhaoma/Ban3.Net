@@ -20,24 +20,26 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 
         /// </summary>
-        public Profile() {}
+        public Profile()
+        {
+        }
 
         public Profile(
-            string identity, 
+            string identity,
             string subject,
             Func<StockSets, bool> buyingJudge,
             Func<StockSets, bool> sellingJudge,
             bool persistence = false,
             bool isDefault = false)
         {
-            Identity=identity;
+            Identity = identity;
             Subject = subject;
-            BuyingJudge =  buyingJudge;
+            BuyingJudge = buyingJudge;
             SellingJudge = sellingJudge;
-            Persistence=persistence;
-            IsDefault=isDefault;
+            Persistence = persistence;
+            IsDefault = isDefault;
         }
-        
+
         /// <summary>
         /// 标识
         /// </summary>
@@ -77,5 +79,8 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         public bool Persistence { get; set; }
 
         public bool IsDefault { get; set; }
+
+        public bool Match(StockSets qs)
+            => BuyingJudge != null && SellingJudge != null && BuyingJudge(qs) && !SellingJudge(qs);
     }
 }

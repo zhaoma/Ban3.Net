@@ -6,10 +6,8 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.RuntimeCaching;
 
 namespace Ban3.Infrastructures.Indicators;
 
@@ -150,26 +148,9 @@ public static class Helper
 
     #region Profiles
 
-    public static readonly List<Profile> DefaultProfiles = new()
+    public static readonly List<Profile> DefaultProfiles = new List<Profile>
     {
-        new()
-        {
-            Identity = "default",
-            Subject = "MACD MWD C0",
-            BuyingJudge = (qs) => qs.SetKeys != null
-                             && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
-                             && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
-                             && qs.SetKeys.Count(x => x.StartsWith("MACD.C0.")) >= 1
-                             && qs.SetKeys.Count(x => x.StartsWith("MACD.GC.")) >= 1
-                             && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
-                             && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
-                             && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2,
-            SellingJudge =  (qs) => qs.SetKeys != null
-                                    &&
-                                    (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY")),
-            Persistence=true,
-            IsDefault = true
-        }
+        DefaultProfile
     };
 
     public static readonly Profile DefaultProfile = new()
@@ -179,8 +160,6 @@ public static class Helper
         BuyingJudge = (qs) => qs.SetKeys != null
                               && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
                               && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
-                              && qs.SetKeys.Count(x => x.StartsWith("MACD.C0.")) >= 1
-                              && qs.SetKeys.Count(x => x.StartsWith("MACD.GC.")) >= 1
                               && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
                               && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
                               && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2,

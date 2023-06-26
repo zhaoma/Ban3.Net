@@ -1,8 +1,10 @@
 ﻿using System.Diagnostics;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
+using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
 using Ban3.Productions.Casino.Contracts;
+using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Labs.Casino.CcarAgent;
@@ -52,7 +54,7 @@ internal class Program
                 break;
 
             case "--one":
-                new Action( () => { Signalert.ExecuteDailyJob(args[1]); })
+                new Action(() => { Signalert.ExecuteDailyJob(args[1]); })
                     .ExecuteAndTiming($"one(PrepareOnesDailyPrices({args[1]}))");
 
                 break;
@@ -78,14 +80,19 @@ internal class Program
                 break;
 
             default:
-                $"--all:                     prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--all:                     prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor
+                    .DarkYellow);
                 $"--prepare:                 prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--daily :                  prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--realtime [codes] :       refresh all realtime data(prices and reinstate etc.)".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--realtime [codes] :       refresh all realtime data(prices and reinstate etc.)".WriteColorLine(
+                    ConsoleColor.DarkYellow);
                 $"--one [code] :               prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--realtimeOnly :                 refresh realtime prices only".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--reinstate :                 reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--output :                 prepare charts or others output data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--realtimeOnly :                 refresh realtime prices only"
+                    .WriteColorLine(ConsoleColor.DarkYellow);
+                $"--reinstate :                 reinstate prices and indicators data".WriteColorLine(ConsoleColor
+                    .DarkYellow);
+                $"--output :                 prepare charts or others output data".WriteColorLine(ConsoleColor
+                    .DarkYellow);
                 $"--check :                 check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
 
                 break;
@@ -100,8 +107,105 @@ internal class Program
 
     private static void CheckSomething()
     {
-        //var allCodes = Signalert.Collector.LoadAllCodes();
-        //Signalert.PrepareOutput(allCodes);
-        //Signalert.InitFavorites();
+                var dotsDic = Signalert.Reportor.LoadDots(Config.DefaultFilter);
+
+        Signalert.Collector.LoadAllCodes()
+            .Where(o=>dotsDic.ContainsKey(o.Code))
+            .ToList()
+            .ForEach(
+            target =>
+            {
+                target.Code.WriteColorLine(ConsoleColor.Green);
+                var dic = new Dictionary<string, List<KeyValuePair<string, ConsoleColor>>>();
+                var sets = Signalert.Calculator.LoadSets(target.Code);
+
+                var ss = sets.FindAll(o => o.SetKeys.Any(x => x.StartsWith("MACD.C0.")));
+                $"{ss.Count()} found.".WriteColorLine(ConsoleColor.Blue);
+                ss.ForEach(o =>
+                {
+                    if (dic.ContainsKey(o.MarkTime.ToYmd()))
+                    {
+
+
+                        if (Infrastructures.Indicators.Helper.DefaultProfile.Match(o))
+                        {
+                            dic[o.MarkTime.ToYmd()].Add(
+                                new KeyValuePair<string, ConsoleColor>(o.SetKeys.AggregateToString(","),
+                                ConsoleColor.Yellow));
+
+                            dic[o.MarkTime.ToYmd()]
+                                .Add(new KeyValuePair<string, ConsoleColor>(
+                                    "MATCH",
+                                    ConsoleColor.Blue));
+                        }
+                    }
+                    else
+                    {
+
+                        if (Infrastructures.Indicators.Helper.DefaultProfile.Match(o))
+                        {
+                            var nd = new List<KeyValuePair<string, ConsoleColor>>
+                            {
+                                new KeyValuePair<string, ConsoleColor>(
+                                    o.SetKeys.AggregateToString(","),
+                                    ConsoleColor.Yellow)
+                            };
+
+                            nd.Add(new KeyValuePair<string, ConsoleColor>("MATCH",
+                                ConsoleColor.Blue));
+
+                            dic.Add(o.MarkTime.ToYmd(),nd);
+                        }
+                    }
+                });
+
+                if (dotsDic.TryGetValue(target.Code, out var dots))
+                {
+                    dots.ForEach(o =>
+                    {
+                        var sks = sets.GetSets(o.TradeDate);
+
+                        if (dic.ContainsKey(o.TradeDate))
+                        {
+                            dic[o.TradeDate]
+                                .Add(new KeyValuePair<string, ConsoleColor>($"{o.Days}:{o.ChangePercent}{sks.OrderBy(y=>y).AggregateToString("\r\n")}",
+                                    ConsoleColor.Red));
+                            if (Infrastructures.Indicators.Helper.DefaultProfile.Match(new StockSets { SetKeys = sks }))
+                            dic[o.TradeDate]
+                                .Add(new KeyValuePair<string, ConsoleColor>(
+                                  "MATCH",
+                                    ConsoleColor.Blue));
+                        }
+                        else
+                        {
+                            var nc = new List<KeyValuePair<string, ConsoleColor>>
+                            {
+                                new KeyValuePair<string, ConsoleColor>(
+                                    $"{o.Days}:{o.ChangePercent}{sks.OrderBy(y => y).AggregateToString("\r\n")}",
+                                    ConsoleColor.Red)
+                            };
+
+                            if(Infrastructures.Indicators.Helper.DefaultProfile.Match(new StockSets { SetKeys = sks }))
+                                nc.Add(new KeyValuePair<string, ConsoleColor>(
+                                        "MATCH",
+                                        ConsoleColor.Blue));
+
+                            dic.Add(o.TradeDate,nc);
+                        }
+                    });
+                }
+
+                dic.OrderBy(o => o.Key)
+                    .ToList()
+                    .ForEach(o =>
+                    {
+                        foreach (var keyValuePair in o.Value)
+                        {
+                            $"{o.Key}:{keyValuePair.Key}".WriteColorLine(keyValuePair.Value);
+                        }
+                    });
+                Console.Read();
+            }
+        );
     }
 }
