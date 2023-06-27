@@ -2,9 +2,9 @@
     Layout = null;
 }
 
-<div class="pb-3 hide" id="redOnlyTreemap">
+<div class="pb-3 hide" id="chartsSection">
     <div class="col-12 roundBox grayBox">
-        <div id="buyingChartsContainer"
+        <div id="chartsContainer"
              style="height: 600px; width: 100%;">
         </div>
     </div>
@@ -13,15 +13,15 @@
     <div class="col-3">
         <div class="btn-group pb-3" role="group">
             <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-redOnlyDotsTreemap"
-                    renderElement="buyingChartsContainer"
+                    renderElement="chartsContainer"
                     dataUrl="/data/dotstreemap/1"
-                    renderContainer="redOnlyTreemap">
+                    renderContainer="chartsSection">
                 Treemap
             </button>
             <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-redOnlyDotsSankey"
-                    renderElement="buyingChartsContainer"
+                    renderElement="chartsContainer"
                     dataUrl="/data/sankey/1"
-                    renderContainer="redOnlyTreemap">
+                    renderContainer="chartsSection">
                 Sankey
             </button>
         </div>

@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
+using System.Security.Cryptography;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
+using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
@@ -108,6 +110,25 @@ internal class Program
 
     private static void CheckSomething()
     {
+        var latest=Signalert.Calculator.LoadAllLatestSets();
+
+        var dic = latest.Select(o =>
+        {
+                var macds = o.SetKeys.Where(x => x.StartsWith("MACD")).ToList();
+                var val = macds.Evaluation(out var notice);
+                return new Tuple<string, int, List<string>, List<string>>(o.Code, val, o.SetKeys.ToList(), notice);
+            
+        });
+
+        foreach (var keyValuePair in dic.OrderByDescending(o=>o.Item2).Take(20))
+        {
+            $"{keyValuePair.Item1}={keyValuePair.Item2}".WriteColorLine(ConsoleColor.Red);
+            $"{keyValuePair.Item4.AggregateToString(",")}".WriteColorLine(ConsoleColor.Blue);
+            $"{keyValuePair.Item3.AggregateToString(",")}".WriteColorLine(ConsoleColor.DarkYellow);
+        }
+
+        /*
+
         var stocks = Signalert.Collector.LoadAllCodes();
 
         new Action(() =>
@@ -128,8 +149,6 @@ internal class Program
                 }
             }, Config.MaxParallelTasks)
         ).ExecuteAndTiming("OutputDailyOperates");
-
-        /*
 
         var code = "688160.SH";
         var indicatorValue = Signalert.Calculator.LoadIndicatorLine(code,Productions.Casino.Contracts.Enums.StockAnalysisCycle.DAILY);

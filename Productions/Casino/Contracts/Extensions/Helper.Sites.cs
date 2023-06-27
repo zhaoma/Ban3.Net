@@ -337,13 +337,13 @@ public static partial class Helper
             allCodes ??= _.LoadAllCodes();
 
             var p = 1;
-            var total = allCodes.Count % Config.FixPageSize > 0 ? allCodes.Count / Config.FixPageSize + 1 : allCodes.Count / Config.FixPageSize;
+            //var total = allCodes.Count % Config.FixPageSize > 0 ? allCodes.Count / Config.FixPageSize + 1 : allCodes.Count / Config.FixPageSize;
             var codes = allCodes.Take(Config.FixPageSize).ToList();
 
             while (codes.Any())
             {
                 var targets = codes.Select(o => (o.Symbol.GetStockNumPrefix(), o.Symbol)).ToList();
-                Logger.Debug($"{p}/{total} - ; {allCodes.Count}");
+                //Logger.Debug($"{p}/{total} - ; {allCodes.Count}");
                 var rs = await Sites.ViaNetease.Helper.ReadRealtimePrices(new ReadRealTime(targets));
 
                 rs.Data.AsParallel()
@@ -385,7 +385,7 @@ public static partial class Helper
 
                     });
 
-                new Action(() => StockRealtime.Append(rs.Data)).ExecuteAndTiming("sync to realtime dic");
+                new Action(() => StockRealtime.Append(rs.Data)).Invoke();//.ExecuteAndTiming("sync to realtime dic");
                 p++;
                 codes = allCodes.Skip((p - 1) * Config.FixPageSize).Take(Config.FixPageSize).ToList();
             }

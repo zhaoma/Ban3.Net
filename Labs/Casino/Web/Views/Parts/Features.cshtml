@@ -3,44 +3,55 @@
     Layout = null;
 }
 
-<form>
-    <div class="input-group">
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
-        <input type="text" id="id" name="id" class="form-control col-7" placeholder="code here" aria-label="code here" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary btn-lg" type="submit" id="button-addon2">PinG !</button>
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
+<form id="latestSetsForm" method="post" action="/parts/onescodes" onsubmit="return onesCodes();">
+    <div class="input-group pb-3">
+        <span class="input-group-text col-4">starts with</span>
+        <input type="text" name="startsWith" class="form-control col" 
+               value="688,30,002,003"
+               placeholder="688,60,30,002 etc." aria-label="code starts with" aria-describedby="button-addon2">
     </div>
-    <div class="input-group">
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
-        <input type="text" id="id" name="id" class="form-control col-7" placeholder="code here" aria-label="code here" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary btn-lg" type="submit" id="button-addon2">PinG !</button>
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
-        <div class="input-group-text col">
-            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-        </div>
+
+    <div class="input-group pb-3">
+        <span class="input-group-text col-4">ends with</span>
+        <input type="text" name="endsWith" class="form-control col" 
+               placeholder="SH/SZ/BJ etc." aria-label="code ends with" aria-describedby="button-addon2">
     </div>
+
+    <div class="input-group pb-3">
+        <button type="submit" class="btn btn-secondary col">Filter Codes from latest sets</button>
+    </div>
+
+    @foreach (var f in Model.OrderByDescending(o=>o.Value))
+    {
+        <div class="input-group pb-3">
+            <div class="input-group-text col">
+                <input class="form-check-input mt-0" type="checkbox"
+                       name="include"
+                       id="@($"include.{f.Key}")"
+                       value="@f.Key" aria-label="Checkbox for following text input" title="include">
+            </div>
+            <label class="input-group-text col-4" id="addon-wrapping" for="@($"include.{f.Key}")">@f.Key</label>
+            <div class="input-group-text col">
+                <input class="form-check-input mt-0" type="checkbox"
+                       name="@($"{f.Key}.cycle")"
+                       value="DAILY" aria-label="Checkbox for following text input" title="DAILY">
+            </div>
+            <div class="input-group-text col">
+                <input class="form-check-input mt-0" type="checkbox"
+                       name="@($"{f.Key}.cycle")"
+                       value="WEEKLY" aria-label="Checkbox for following text input" title="WEEKLY">
+            </div>
+            <div class="input-group-text col">
+                <input class="form-check-input mt-0" type="checkbox"
+                       name="@($"{f.Key}.cycle")"
+                       value="MONTHLY" aria-label="Checkbox for following text input" title="MONTHLY">
+            </div>
+            <div class="input-group-text col">
+                <input class="form-check-input mt-0" type="checkbox"
+                       name="exclude"
+                       value="@f.Key" aria-label="Checkbox for following text input" title="exclude">
+            </div>
+        </div>
+    }
 </form>
 

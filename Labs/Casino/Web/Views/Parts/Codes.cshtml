@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Ban3.Infrastructures.Indicators.Outputs.StockSets>
+﻿@using Ban3.Infrastructures.Indicators
+@using Ban3.Productions.Casino.Contracts.Entities
+@model IEnumerable<Ban3.Infrastructures.Indicators.Outputs.StockSets>
 @{
     Layout = null;
 }
@@ -6,8 +8,20 @@
 <div class="list-group">
     @foreach (var point in Model.OrderBy(o => o.Code))
     {
-        <a href="#" class="list-group-item list-group-item-action lazyLoadButton"
+        var refreshed = StockRealtime.Records.TryGetValue(point.Symbol, out var record);
+        var evaluated = point.Evaluation(out var keys, out var val);
+        var info = refreshed && record != null ? $"{record.Name} <span class='badge'>{Math.Round(record.ChangePercent, 2)}</span>" : "";
+        var className = record?.ChangePercent > 0
+            ? "red" 
+            : record?.ChangePercent == 0 
+                ? "gray" 
+                : "green";
+
+        if (evaluated)
+            info += $"<span class='badge'>{val}</span>";
+
+        <a href="#" class="list-group-item list-group-item-action lazyLoadButton @className"
            dataUrl="@($"/parts/stock/{@point.Code}")"
-           renderElement="onesChartsContainer">@point.Symbol - @point.Name</a>
+           renderElement="onesChartsContainer">@Html.Raw(point.Symbol+info)</a>
     }
 </div>

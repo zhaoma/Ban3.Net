@@ -115,8 +115,10 @@ public static partial class Helper
 
         diagram.SetTitle(new[] { new Title(title) });
 
+        data = data.Where(x => links.Any(y => y.Source + "" == x.Name||y.Target+""==x.Name)).ToList();
+
         var series = Infrastructures.Charts.Helper.SankeySeries(data, links);
-        series.NodeAlign = "justify";
+        series.NodeAlign = "left";
 
         diagram.AddSeries(series);
         diagram.SetTooltip(new[] { new Tooltip { Trigger = Trigger.Item,TriggerOn=TriggerOn.MouseoverOrClick } });
@@ -325,7 +327,7 @@ public static partial class Helper
         var now = DateTime.Now;
         var notices = indicatorValue.LineToSets()
             .Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0")))
-            .Select(o => new object[] { o.Code, o.Close })
+            .Select(o => new object[] { o.MarkTime.ToYmd(), o.Close })
             .ToList();
 
         if (notices.Any())

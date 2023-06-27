@@ -17,7 +17,10 @@
     {
         var r = runtime.TryGetValue(point.Symbol, out var p);
         var className =r? p?.ChangePercent > 0 ? "red" : p?.ChangePercent == 0 ? "gray" : "green":"";
-        <tr class="@className">
+            <tr class="@className renderChartsButton"
+                renderElement="chartsContainer"
+                dataUrl="/data/macd/@point.Code"
+                renderContainer="chartsSection">
             <td>@point.Symbol</td>
                 <td>@point.Close  <span class="badge">@(p != null ? Math.Round(p.ChangePercent, 2) : "")%</span></td>
                 <td>@($"{point.Rank}")  <span class="badge">@point.Value</span></td>

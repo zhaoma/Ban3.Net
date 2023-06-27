@@ -21,7 +21,10 @@
     @foreach (var row in Model.ShowData)
     {
         var className = row.ChangePercent > 0 ? "red" : "green";
-        <tr class="@className">
+        <tr class="@className renderChartsButton"
+                renderElement="chartsContainer"
+                dataUrl="/data/macd/@row.Code"
+                renderContainer="chartsSection">
             <td>@row.Code</td>
             <td>@row.TradeDate</td>
             <td>@row.Cycle</td>

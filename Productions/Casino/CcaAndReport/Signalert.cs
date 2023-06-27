@@ -167,6 +167,7 @@ public partial class Signalert
             PrepareLatestList()
         ).ExecuteAndTiming("PrepareLatestList");
 
+        /*
         new Action(() =>
             stocks.ParallelExecute((stock) =>
             {
@@ -185,7 +186,7 @@ public partial class Signalert
                 }
             }, Config.MaxParallelTasks)
         ).ExecuteAndTiming("OutputDailyOperates");
-    
+    */
     }
 
     #endregion

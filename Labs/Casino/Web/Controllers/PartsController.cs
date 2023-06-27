@@ -133,15 +133,66 @@ public class PartsController : Controller
     public IActionResult Features()
     {
         var features = Infrastructures.Indicators.Helper.Features;
-        return View();
+        return View(features);
     }
 
     public IActionResult Codes(RenderView request)
     {
-        var all = Signalert.Calculator.LoadAllLatestSets();
+        var all = Signalert.Calculator.ScopedByRenderView(request);
 
-        var result = all.Take(20);
+        var result = all.Take(request.PageSize);
 
         return View(result);
     }
+    
+    public IActionResult OnesCodes(IFormCollection form)
+    {
+        var request = new RenderView
+        {
+            StartsWith = form["startsWith"],
+            EndsWith = form["to"]
+        };
+        
+        var includes = form["include"]+"";
+        if (!string.IsNullOrEmpty(includes))
+        {
+            var includeKeys = new List<string>();
+            foreach (var includeKey in includes.Split(','))
+            {
+                var cycles = form[$"{includeKey}.cycle"] + "";
+                if (!string.IsNullOrEmpty(cycles))
+                {
+                    foreach (var s in cycles.Split(','))
+                    {
+                        includeKeys.Add($"{includeKey}.{s}");
+                    }
+                }
+            }
+
+            request.IncludeKeys = includeKeys.AggregateToString(",");
+        }
+
+        var excludes = form["exclude"] + "";
+        if (!string.IsNullOrEmpty(excludes))
+        {
+            var excludeKeys = new List<string>();
+            foreach (var excludeKey in excludes.Split(','))
+            {
+                var cycles = form[$"{excludeKey}.cycle"] + "";
+                if (!string.IsNullOrEmpty(cycles))
+                {
+                    foreach (var s in cycles.Split(','))
+                    {
+                        excludeKeys.Add($"{excludeKey}.{s}");
+                    }
+                }
+            }
+
+            request.ExcludeKeys = excludeKeys.AggregateToString(",");
+        }
+        
+        return RedirectToAction("Codes", request);
+    }
+
+
 }

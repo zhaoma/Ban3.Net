@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
+using Newtonsoft.Json.Linq;
 
 namespace Ban3.Infrastructures.Indicators;
 
@@ -127,6 +128,21 @@ public static class Helper
 
     #endregion
 
+    public static int Evaluation(this List<string> features, out List<string> result)
+    {
+        result = new List<string>();
+        var value = 0;
+
+        foreach (var f in features)
+        {
+            if (!AllFeatures.TryGetValue(f, out var sf)) continue;
+            value += sf.Value;
+            result.Add($"{sf.Subject}:[{sf.Value}]");
+        }
+
+        return value;
+    }
+
     /// <summary>
     /// 评估特征计分
     /// </summary>
@@ -164,25 +180,25 @@ public static class Helper
 
     public static readonly List<Profile> DefaultProfiles = new List<Profile>
     {
-        DefaultProfile
+        new()
+        {
+            Identity = "default",
+            Subject = "MACD MWD C0",
+            BuyingJudge = (qs) => qs.SetKeys != null
+                                  && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
+                                  && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
+                                  && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
+                                  && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
+                                  && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2,
+            SellingJudge = (qs) => qs.SetKeys != null
+                                   &&
+                                   (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY")),
+            Persistence = true,
+            IsDefault = true
+        }
     };
 
-    public static readonly Profile DefaultProfile = new()
-    {
-        Identity = "default",
-        Subject = "MACD MWD C0",
-        BuyingJudge = (qs) => qs.SetKeys != null
-                              && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
-                              && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
-                              && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
-                              && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
-                              && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2,
-        SellingJudge = (qs) => qs.SetKeys != null
-                               &&
-                               (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY")),
-        Persistence = true,
-        IsDefault = true
-    };
+    public static readonly Profile DefaultProfile = DefaultProfiles[0];
 
     #endregion
 }

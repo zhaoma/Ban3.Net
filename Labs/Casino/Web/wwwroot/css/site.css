@@ -184,4 +184,8 @@ html {
     opacity: 0.7;
 }
 
-.card-body .badge{ color: #BBB;font-size: 9px;}
+#codesContainer .badge,
+.card-body .badge {
+    color: #BBB;
+    font-size: 9px;
+}

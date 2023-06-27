@@ -47,6 +47,7 @@ function initContainer(ele) {
             var renderElement = $(this).attr("renderElement");
             var dataUrl = $(this).attr("dataUrl");
             bindCharts(renderElement, dataUrl);
+            $(this).delay(200).fadeIn(300);
         });
     }
 
@@ -54,12 +55,11 @@ function initContainer(ele) {
     if (renderChartsButtons.length > 0) {
         renderChartsButtons.each(function () {
             var button = $(this);
-            button.bind('click', function () {return bindChartsButton(button); });
+            button.bind('click', function () { return bindChartsButton(button); });
         });
     }
 
     var lazyLoad = $(ele).find(".lazyLoad");
-    console.log('lazyLoad.length=' + lazyLoad.length);
     if (lazyLoad.length > 0) {
         lazyLoad.each(function () {
             var box = $(this);
@@ -67,17 +67,16 @@ function initContainer(ele) {
 
             $.get(dataUrl, function (html) {
                 $(box).html(html);
-                $(box).delay(500);
 
                 initGrid();
 
                 initContainer($(box));
             });
+            $(box).delay(200).fadeIn(300);
         });
     }
 
     var lazyLoadButtons = $(ele).find(".lazyLoadButton");
-    console.log('lazyLoadButtons.length=' + lazyLoadButtons.length);
     if (lazyLoadButtons.length > 0) {
         lazyLoadButtons.each(function () {
             var button = $(this);
@@ -99,11 +98,8 @@ function bindButton(ele) {
 
     $("#" + renderElement).load(dataUrl);
     $.get(dataUrl, function (html) {
-
         $("#" + renderElement).html(html);
-        console.log("html render over.")
         initContainer($("#" + renderElement));
-
         var li = $(ele).parent().parent().find(".lazyLoadButton");
         if (li.length > 0) {
             li.each(function () { $(this).removeClass('active') });
@@ -117,44 +113,28 @@ function bindButton(ele) {
 function bindChartsButton(ele) {
     var renderElement = $(ele).attr("renderElement");
     var dataUrl = $(ele).attr("dataUrl");
-
-    bindCharts(renderElement, dataUrl);
-
-    var renderContainer = $(this).attr("renderContainer");
+    var renderContainer = $(ele).attr("renderContainer");
 
     if ($("#" + renderContainer).is(":visible")) {
         if (dataUrl == currentCharts) {
             $("#" + renderContainer).slideUp(600, 'linear');
-            if ($(this).hasClass("btn-secondary")) {
-                $(this).removeClass('btn-secondary');
-                $(this).addClass('btn-outline-secondary');
-            }
         } else {
-            $("#partsContainer .renderChartsButton").each(function () {
-                if ($(this).hasClass("btn-secondary")) {
-                    $(this).removeClass("btn-secondary");
-                    $(this).addClass('btn-outline-secondary');
-                }
-            });
             currentCharts = dataUrl;
             $("#" + renderContainer).slideDown(600, 'linear');
-            if (!$(this).hasClass("btn-secondary")) {
-                $(this).removeClass('btn-outline-secondary');
-                $(this).addClass('btn-secondary');
-            }
         }
     } else {
         currentCharts = dataUrl;
         $("#" + renderContainer).slideDown(600, 'linear');
-        if (!$(this).hasClass("btn-secondary")) {
-            $(this).removeClass('btn-outline-secondary');
-            $(this).addClass('btn-secondary');
-        }
     }
+
+    $(ele).delay(200).fadeIn(300);
+    bindCharts(renderElement, dataUrl);
 
     var li = $(ele).parent().parent().find(".renderChartsButton");
     if (li.length > 0) {
-        li.each(function () { $(this).removeClass('active') });
+        li.each(function () {
+            $(this).removeClass('active');
+        });
     }
 
     if (!$(ele).hasClass("active")) { $(ele).addClass('active'); }
@@ -191,6 +171,21 @@ function findAny() {
         initContainer($("#partsContainer"));
     });
 
+    return false;
+}
+
+function onesCodes() {
+    console.log($("#latestSetsForm").serialize());
+    $.ajax({
+        type: "post",
+        data: $("#latestSetsForm").serialize(),
+        url: $("#latestSetsForm").attr("action"),
+        dataType: "text",
+        success: function (response) {
+            $("#codesContainer").html(response);
+            initContainer($("#codesContainer"));
+        }
+    });
     return false;
 }
 
