@@ -67,36 +67,41 @@ public static partial class Helper
 
         if (dailyPrices != null && dailyPrices.Any())
         {
-            dailyPrices = dailyPrices.OrderBy(o => o.TradeDate).ToList();
-            var lastRecord = dailyPrices[0];
-            var endDate = lastRecord.TradeDate.ToDateTimeEx().NextDate(targetCycle);
-            for (var i=0;i<dailyPrices.Count;i++)
             {
-                var price = dailyPrices[i];
-
-                if (endDate.ToYmd().ToInt() > price.TradeDate.ToInt())
+                dailyPrices = dailyPrices.OrderBy(o => o.TradeDate).ToList();
+                var lastRecord = dailyPrices[0];
+                var endDate = lastRecord.TradeDate.ToDateTimeEx().NextDate(targetCycle);
+                for (var i = 0; i < dailyPrices.Count; i++)
                 {
-                    lastRecord.TradeDate = price.TradeDate;
-                    lastRecord.High = Math.Max(lastRecord.High, price.High);
-                    lastRecord.Low = Math.Min(lastRecord.Low, price.Low);
-                    lastRecord.Vol += price.Vol;
-                    lastRecord.Amount += price.Amount;
-                    lastRecord.Close = price.Close;
+                    var price = dailyPrices[i];
 
-                    if (i == dailyPrices.Count - 1)
+                    if (endDate.ToYmd().ToInt() > price.TradeDate.ToInt())
                     {
-                        result.Add(lastRecord);
+                        lastRecord.TradeDate = price.TradeDate;
+                        lastRecord.High = Math.Max(lastRecord.High, price.High);
+                        lastRecord.Low = Math.Min(lastRecord.Low, price.Low);
+                        lastRecord.Vol += price.Vol;
+                        lastRecord.Amount += price.Amount;
+                        lastRecord.Close = price.Close;
+
+                        if (i == dailyPrices.Count - 1)
+                        {
+                            result.Add(lastRecord);
+                        }
                     }
-                }
-                else
-                {
-                    lastRecord.Change = lastRecord.Close - lastRecord.PreClose;
-                    lastRecord.ChangePercent=lastRecord.PreClose != 0
-                        ?(float)Math.Round((lastRecord.Close-lastRecord.PreClose) /lastRecord.PreClose*100,2)
-                        :0F;
-                    result.Add(lastRecord);
-                    lastRecord = price;
-                    endDate = endDate.AddDays(1).NextDate(targetCycle);
+                    else
+                    {
+                        lastRecord.Change = lastRecord.Close - lastRecord.PreClose;
+                        lastRecord.ChangePercent = lastRecord.PreClose != 0
+                            ? (float)Math.Round((lastRecord.Close - lastRecord.PreClose) / lastRecord.PreClose * 100, 2)
+                            : 0F;
+                        result.Add(lastRecord);
+
+                        lastRecord = price;
+                        endDate = endDate.AddDays(1).NextDate(targetCycle);
+                        if ( i == dailyPrices.Count - 1)
+                            result.Add(lastRecord);
+                    }
                 }
             }
         }

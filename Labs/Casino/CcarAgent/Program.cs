@@ -8,6 +8,7 @@ using Ban3.Productions.Casino.CcaAndReport;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Labs.Casino.CcarAgent;
@@ -98,6 +99,7 @@ internal class Program
                     .DarkYellow);
                 $"--check :                  check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
 
+                CheckSomething();
                 break;
         }
 
@@ -128,6 +130,11 @@ internal class Program
         }
 
         /*
+
+        var prices = Signalert.Collector.LoadDailyPrices("301203.SZ");
+        var x = prices.ConvertCycle(StockAnalysisCycle.MONTHLY);
+
+        x.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
 
         var stocks = Signalert.Collector.LoadAllCodes();
 
