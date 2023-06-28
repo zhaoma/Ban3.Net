@@ -11,66 +11,6 @@
     $("#HasComments").change(function () {
         requestTable();
     });
-
-
-
-    /*
-
-    if ($(".followButton").length > 0) {
-        $(".followButton").each(function () {
-            var button = $(this);
-            button.click(
-                function () { followOne(button); }
-            );
-        });
-    }
-
-    function followOne(button) {
-        var url = "/home/follow/" + button.attr("r");
-
-        $.ajax({
-            url: url,
-            type: "get",
-            dataType: "json",
-            success: function (response) {
-                console.log(response);
-                if (response.team.followed) {
-                    button.removeClass("followthem");
-                    button.removeClass("bg-warning");
-                    button.addClass("unfollow");
-                    button.html("followed");
-                } else {
-                    button.removeClass("unfollow");
-                    button.addClass("bg-warning");
-                    button.addClass("followthem");
-                    button.html("follow them");
-                }
-            }
-        });
-
-        return false;
-    }
-     $(".author").each(function() {
-        $(this).click(function() {
-            if ($(this).hasClass("selectedAuthor")) {
-                $(this).removeClass("selectedAuthor");
-            } else {
-                $(this).addClass("selectedAuthor");
-            }
-
-            requestTable();
-
-        });
-    });
-
-    $("#ref").change(function() {
-        requestTable();
-    });
-
-    requestTable();
-    startSignalR();
-    
-    */
 });
 
 function focusNav(id) {
@@ -136,7 +76,6 @@ function requestTable() {
     var toDate = $("#toDate").val();
     var keyword = $("#keyword").val();
     var exclude = $("#exclude").val();
-
 
     limitTeamNames.push($("#LimitTeamNames").val());
 

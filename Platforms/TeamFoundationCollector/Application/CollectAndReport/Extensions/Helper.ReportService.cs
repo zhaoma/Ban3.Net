@@ -197,16 +197,34 @@ public static partial class Helper
         var changesets = new List<CompositeChangeset>();
 
         changesets.AddRange(identitySummary.Changesets.Select(o => o.Value));
-
+        Console.WriteLine($"GetCompositeChangesets:{filter.ObjToJson()}");
         changesets = changesets.Where(o =>
             (!filter.HasComments || (o.Threads != null && o.Threads.Any()))
             && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
-            && o.CreatedDate.DateGE(filter.FromDate)
-            && o.CreatedDate.DateLE(filter.ToDate)
+            && o.CreatedDate.DateGe(filter.FromDate)
+            && o.CreatedDate.DateLe(filter.ToDate)
             && (o.Comment.StringExists(filter.Keyword) || o.Threads.ThreadsHasKeywords(filter.Keyword))
         ).ToList();
 
         return changesets;
+    }
+
+    static bool DateGe(this string dateString, string dateVal)
+    {
+        var r = string.IsNullOrEmpty(dateVal) ||
+                dateString.ToDateTime().ToYmd().ToInt() >= dateVal.ToDateTime().ToYmd().ToInt();
+        Console.WriteLine($" GE {dateString}{dateVal}={r}");
+
+        return r;
+    }
+
+    public static bool DateLe(this string dateString, string dateVal)
+    {
+        var r=string.IsNullOrEmpty(dateVal) || 
+              dateString.ToDateTime().ToYmd().ToInt() <= dateVal.ToDateTime().ToYmd().ToInt();
+        Console.WriteLine($" LE {dateString}{dateVal}={r}");
+
+        return r;
     }
 
     private static List<CompositeShelveset> GetCompositeShelvesets(
@@ -219,12 +237,12 @@ public static partial class Helper
         var shelvesets = new List<CompositeShelveset>();
 
         shelvesets.AddRange(identitySummary.Shelvesets.Select(o => o.Value));
-
+        Console.WriteLine($"GetCompositeShelvesets:{filter.ObjToJson()}");
         shelvesets = shelvesets.Where(o =>
             (!filter.HasComments || (o.Threads != null && o.Threads.Any()))
             && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
-            && o.CreatedDate.DateGE(filter.FromDate)
-            && o.CreatedDate.DateLE(filter.ToDate)
+            && o.CreatedDate.DateGe(filter.FromDate)
+            && o.CreatedDate.DateLe(filter.ToDate)
             && (o.Comment.StringExists(filter.Keyword) || o.Threads.ThreadsHasKeywords(filter.Keyword))
         ).ToList();
 

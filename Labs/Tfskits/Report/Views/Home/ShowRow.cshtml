@@ -48,7 +48,7 @@
 
         @if (Model.Threads != null && Model.Threads.Any())
         {
-            @foreach (var tc in Model.Threads.Where(o => o.Comments != null && o.Comments.Any()))
+            @foreach (var tc in Model.Threads.Where(o => o.Comments != null && o.Comments.Any(x=>!string.IsNullOrEmpty(x.Content))))
             {
                 var fileUrl = Model.ReportRef == ReportRef.Changeset
                     ? Model.Url + "?path=" + tc.Properties?.ItemPath
@@ -60,7 +60,7 @@
                             <a target="_blank" href="@fileUrl">@tc.Properties?.ItemPath</a> ( <a href="javascript:;" onclick="return showCode('@tc.Id','@Model.ReportRef','@Model.FileId','@tc.Properties?.ObjToJson()');">preview</a> )
 </h5>
                         <pre id="threads_@tc.Id" style="display: none;" class="prettyprint border0"></pre>
-                        @foreach (var t in tc.Comments)
+                        @foreach (var t in tc.Comments.Where(x=>!string.IsNullOrEmpty(x.Content)))
                         {
                             <div class="dataRow">
                                 <div class="col row ">
