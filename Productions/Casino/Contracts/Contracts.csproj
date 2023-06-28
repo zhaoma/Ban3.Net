@@ -29,13 +29,13 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.2" />
-    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.0" />
-    <PackageReference Include="Ban3.Infrastructures.RuntimeCaching" Version="1.0.2" />
-    <PackageReference Include="Ban3.Sites.ViaEastmoney" Version="1.0.0" />
-    <PackageReference Include="Ban3.Sites.ViaNetease" Version="1.0.0" />
-    <PackageReference Include="Ban3.Sites.ViaSina" Version="1.0.0" />
-    <PackageReference Include="Ban3.Sites.ViaTushare" Version="1.0.2" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.4" />
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.4" />
+    <PackageReference Include="Ban3.Infrastructures.RuntimeCaching" Version="1.0.4" />
+    <PackageReference Include="Ban3.Sites.ViaEastmoney" Version="1.0.1" />
+    <PackageReference Include="Ban3.Sites.ViaNetease" Version="1.0.1" />
+    <PackageReference Include="Ban3.Sites.ViaSina" Version="1.0.1" />
+    <PackageReference Include="Ban3.Sites.ViaTushare" Version="1.0.3" />
     <PackageReference Include="Ban3.Sites.ViaYuncaijing" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="log4net" Version="2.0.15" />

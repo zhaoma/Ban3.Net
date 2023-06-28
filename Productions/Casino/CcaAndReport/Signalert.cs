@@ -50,6 +50,10 @@ public partial class Signalert
 
     #region 日常任务
 
+    /// <summary>
+    /// 日常任务
+    /// 无参数，全市场
+    /// </summary>
     public static void ExecuteDailyJob()
     {
         var allCodes = Collector.LoadAllCodes();
@@ -57,6 +61,10 @@ public partial class Signalert
         ExecuteDailyJob(allCodes);
     }
 
+    /// <summary>
+    /// 指定codes，","分割
+    /// </summary>
+    /// <param name="codes"></param>
     public static void ExecuteDailyJob(string codes)
     {
         var cs = codes.Split(',');
@@ -67,6 +75,10 @@ public partial class Signalert
         ExecuteDailyJob(allCodes);
     }
 
+    /// <summary>
+    /// 指定标的集合
+    /// </summary>
+    /// <param name="stocks"></param>
     public static void ExecuteDailyJob(List<Stock> stocks)
     {
         new Action(() => Collector.FixDailyPrices(stocks)).ExecuteAndTiming("FixDailyPrices");
@@ -135,6 +147,10 @@ public partial class Signalert
         PrepareOutput(stocks);
     }
 
+    /// <summary>
+    /// 价格复权，计算指标值
+    /// </summary>
+    /// <param name="stocks"></param>
     public static void ReinstateData(List<Stock> stocks)
     {
         new Action(() => ReinstateAllPrices(stocks)).ExecuteAndTiming("ReinstateAllPrices");
@@ -145,6 +161,10 @@ public partial class Signalert
         ).ExecuteAndTiming("GenerateIndicatorLine");
     }
 
+    /// <summary>
+    /// 准备输出数据(图表与统计结果)
+    /// </summary>
+    /// <param name="stocks"></param>
     public static void PrepareOutput(List<Stock> stocks) { 
     
         new Action(() =>
@@ -167,7 +187,14 @@ public partial class Signalert
             PrepareLatestList()
         ).ExecuteAndTiming("PrepareLatestList");
 
-        /*
+    }
+
+    /// <summary>
+    /// 策略评估
+    /// </summary>
+    /// <param name="stocks"></param>
+    public static void EvaluateProfiles(List<Stock> stocks)
+    {
         new Action(() =>
             stocks.ParallelExecute((stock) =>
             {
@@ -186,7 +213,6 @@ public partial class Signalert
                 }
             }, Config.MaxParallelTasks)
         ).ExecuteAndTiming("OutputDailyOperates");
-    */
     }
 
     #endregion
@@ -201,6 +227,7 @@ public partial class Signalert
         var dots = Reportor.LoadDots(Config.DefaultFilter);
         
         var allCodes=Collector.LoadAllCodes();
+
         allCodes.ForEach(o =>
         {
             if (o.Code.EndsWith(".BJ"))

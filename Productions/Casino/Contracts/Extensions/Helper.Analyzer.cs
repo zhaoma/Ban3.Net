@@ -57,6 +57,7 @@ public static partial class Helper
         }
         catch (Exception ex)
         {
+            Logger.Error($"fault when OutputDailyOperates {code}");
             Logger.Error(ex);
         }
 
@@ -122,50 +123,60 @@ public static partial class Helper
     /// <param name="code"></param>
     /// <returns></returns>
     public static List<StockOperationRecord> ConvertOperates2Records(
-        this List<StockOperate> stockOperates, Profile profile, string code)
+        this List<StockOperate>? stockOperates, Profile profile, string code)
     {
-        var tradeRecords = new List<StockOperationRecord>();
-
-        if (stockOperates != null && stockOperates.Any())
+        try
         {
+            var tradeRecords = new List<StockOperationRecord>();
 
-            foreach (var op in stockOperates)
+            if (stockOperates != null && stockOperates.Any())
             {
-                var latest = tradeRecords.Any()
-                    ? tradeRecords.Last()
-                    : null;
 
-                if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Buy)
+                foreach (var op in stockOperates)
                 {
-                    if (latest == null || latest.SellPrice > 0)
+                    var latest = tradeRecords.Any()
+                        ? tradeRecords.Last()
+                        : null;
+
+                    if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Buy)
                     {
-                        latest = new StockOperationRecord
+                        if (latest == null || latest.SellPrice > 0)
                         {
-                            BuyDate = op.MarkTime,
-                            BuyPrice = op.Close,
+                            latest = new StockOperationRecord
+                            {
+                                BuyDate = op.MarkTime,
+                                BuyPrice = op.Close,
 
-                        };
-                        tradeRecords.Add(latest);
+                            };
+                            tradeRecords.Add(latest);
+                        }
                     }
-                }
 
-                if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Sell)
-                {
-                    if (latest != null)
+                    if (op.Operate == Infrastructures.Indicators.Enums.StockOperate.Sell)
                     {
-                        latest.SellDate = op.MarkTime;
-                        latest.SellPrice = op.Close;
+                        if (latest != null)
+                        {
+                            latest.SellDate = op.MarkTime;
+                            latest.SellPrice = op.Close;
+                        }
                     }
                 }
+
+                if (profile.Persistence)
+                    $"{code}.{profile.Identity}"
+                        .DataFile<StockOperationRecord>()
+                        .WriteFile(tradeRecords.ObjToJson());
             }
 
-            if (profile.Persistence)
-                $"{code}.{profile.Identity}"
-                    .DataFile<StockOperationRecord>()
-                    .WriteFile(tradeRecords.ObjToJson());
+            return tradeRecords;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"fault when ConvertOperates2Records {code}");
+            Logger.Error(ex);
         }
 
-        return tradeRecords;
+        return null;
     }
 
     /// <summary>
@@ -186,5 +197,6 @@ public static partial class Helper
     }
 
     #endregion
+
 
 }

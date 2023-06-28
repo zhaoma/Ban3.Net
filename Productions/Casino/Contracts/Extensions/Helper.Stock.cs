@@ -112,7 +112,7 @@ public static partial class Helper
     static DateTime NextDate(this DateTime from, StockAnalysisCycle targetCycle)
     {
         return targetCycle == StockAnalysisCycle.WEEKLY
-            ? from.FindWeekend()
-            : from.FindMonthend();
+            ? from.FindWeekEnd()
+            : from.FindMonthEnd();
     }
 }

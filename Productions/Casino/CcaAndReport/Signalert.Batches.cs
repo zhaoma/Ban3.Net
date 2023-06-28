@@ -109,6 +109,7 @@ public partial class Signalert
         }
         catch (Exception ex)
         {
+            Logger.Error($"fault when PrepareDiagram {stock.Code}");
             Logger.Error(ex);
         }
 
@@ -134,7 +135,7 @@ public partial class Signalert
         {
             if (Calculator.PrepareSets(stock, out var ones))
             {
-                aggregated.AppendToList(ones.Last());
+                aggregated.Append(ones.Last());
             }
         }, Config.MaxParallelTasks);
 

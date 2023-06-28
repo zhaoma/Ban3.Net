@@ -78,6 +78,11 @@ internal class Program
                     .ExecuteAndTiming("PrepareOutput.");
                 break;
 
+            case "--eva":
+                new Action(() => { Signalert.EvaluateProfiles(Signalert.Collector.LoadAllCodes()); })
+                    .ExecuteAndTiming("EvaluateProfiles.");
+                break;
+
             case "--check":
                 new Action(CheckSomething)
                     .ExecuteAndTiming("CheckSomething.");
@@ -99,7 +104,6 @@ internal class Program
                     .DarkYellow);
                 $"--check :                  check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
 
-                CheckSomething();
                 break;
         }
 

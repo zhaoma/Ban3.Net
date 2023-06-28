@@ -18,6 +18,9 @@ using StockPrice = Ban3.Sites.ViaTushare.Entries.StockPrice;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
+/// <summary>
+/// 数据采集
+/// </summary>
 public static partial class Helper
 {
     #region icons
@@ -330,6 +333,12 @@ public static partial class Helper
 
     #region realtime prices
 
+    /// <summary>
+    /// 网易实时接口失效后，暂无合适的实时行情接口
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="allCodes"></param>
+    /// <returns></returns>
     public static async Task<bool> ReadRealtime(this ISites _, List<Stock> allCodes = null)
     {
         try

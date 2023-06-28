@@ -510,7 +510,7 @@ public static partial class Helper
         if (prices == null || !prices.Any()) return null;
 
         prices = prices
-            .Where(o => DateTime.Now.Subtract(o.TradeDate.ToDateTimeEx()).TotalDays <= 250)
+            .Where(o => DateTime.Now.Year-o.TradeDate.ToDateTimeEx().Year <= 1)
             .ToList();
 
         var line = _.LoadIndicatorLine(stock.Code, cycle);
@@ -611,52 +611,6 @@ public static partial class Helper
         return dic;
     }
 
-    static void AppendKeys(this Dictionary<string, int> dic, IEnumerable<string> keys)
-    {
-        foreach (var o in keys)
-        {
-            if (dic.ContainsKey(o))
-            {
-                dic[o] += 1;
-            }
-            else
-            {
-                dic.Add(o, 1);
-            }
-        }
-    }
-
-    public static Dictionary<string, int> MergeToDictionary(this IEnumerable<IEnumerable<string>> keys)
-    {
-        var dic = new Dictionary<string, int>();
-        foreach (var list in keys)
-        {
-            dic.AppendKeys(list);
-        }
-
-        return dic;
-    }
-
-    static Dictionary<string, int> Merge(this Dictionary<string, int> dic, Dictionary<string, int> addDic)
-    {
-        if (addDic != null)
-        {
-
-            foreach (var i in addDic)
-            {
-                if (dic.ContainsKey(i.Key))
-                {
-                    dic[i.Key] += 1;
-                }
-                else
-                {
-                    dic.Add(i.Key, 1);
-                }
-            }
-        }
-
-        return dic;
-    }
     #endregion
 
     #region 计算/加载买卖位置
