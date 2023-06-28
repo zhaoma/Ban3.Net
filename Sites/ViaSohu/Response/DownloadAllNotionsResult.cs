@@ -3,13 +3,14 @@
 //  function:	DownloadAllNotionsResult.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using Ban3.Infrastructures.Common.Contracts.Entities.Platforms.Sohu;
-using System;
 
-namespace Ban3.Infrastructures.Common.Contracts.Responses.Platforms.Sohu
+using Ban3.Infrastructures.Common.Models;
+using Ban3.Sites.ViaSohu.Entries;
+
+namespace Ban3.Sites.ViaSohu.Response
 {
 	public class DownloadAllNotionsResult
-		:GenericListCallback<Mapping>
+		: MultiResult<Mapping>
 	{
 		public DownloadAllNotionsResult()
 		{

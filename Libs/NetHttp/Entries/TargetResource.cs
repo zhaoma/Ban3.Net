@@ -7,22 +7,50 @@ using Ban3.Infrastructures.NetHttp.Request;
 
 namespace Ban3.Infrastructures.NetHttp.Entries;
 
+/// <summary>
+/// 目标资源
+/// </summary>
 public class TargetResource : ITargetResource
 {
+    /// <summary>
+    /// 资源地址
+    /// </summary>
     public string Url { get; set; } = string.Empty;
 
+    /// <summary>
+    /// 请求方式
+    /// </summary>
     public string Method { get; set; } = "Get";
 
+    /// <summary>
+    /// 字符集
+    /// </summary>
     public string Charset { get; set; } 
 
+    /// <summary>
+    /// 是否jsonp响应
+    /// </summary>
     public bool ResourceIsJsonp { get; set; } = false;
 
+    /// <summary>
+    /// jsonp前缀
+    /// </summary>
     public string JsonpPrefix { get; set; } = string.Empty;
 
+    /// <summary>
+    /// 附加头部信息
+    /// </summary>
     public Dictionary<string, string> Headers { get; set; } = null;
 
+    /// <summary>
+    /// 请求体
+    /// </summary>
     public Body Body { get; set; } = null;
 
+    /// <summary>
+    /// 转HttpRequestMessage
+    /// </summary>
+    /// <returns></returns>
     public HttpRequestMessage Request()
     {
         var request = new HttpRequestMessage

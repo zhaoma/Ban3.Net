@@ -3,11 +3,13 @@
 //  function:	DownloadNotionStocksResult.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using System;
-namespace Ban3.Infrastructures.Common.Contracts.Responses.Platforms.Sohu
+
+using Ban3.Infrastructures.Common.Models;
+
+namespace Ban3.Sites.ViaSohu.Response
 {
 	public class DownloadNotionStocksResult
-		:GenericListCallback<string>
+		: MultiResult<string>
 	{
 		public DownloadNotionStocksResult()
 		{

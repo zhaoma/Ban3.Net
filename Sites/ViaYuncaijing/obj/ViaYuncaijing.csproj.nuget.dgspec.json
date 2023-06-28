@@ -5,7 +5,7 @@
   },
   "projects": {
     "D:\\GIT\\Ban3.Net\\Sites\\ViaYuncaijing\\ViaYuncaijing.csproj": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "restore": {
         "projectUniqueName": "D:\\GIT\\Ban3.Net\\Sites\\ViaYuncaijing\\ViaYuncaijing.csproj",
         "projectName": "Ban3.Sites.ViaYuncaijing",
@@ -47,11 +47,11 @@
           "dependencies": {
             "Ban3.Infrastructures.Common": {
               "target": "Package",
-              "version": "[1.0.2, )"
+              "version": "[1.0.4, )"
             },
             "Ban3.Infrastructures.NetHttp": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[1.0.4, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",

@@ -53,7 +53,7 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="value">The value.</param>
     /// <returns></returns>
-    public static T UnsafeCast<T>(this object value)
+    public static T? UnsafeCast<T>(this object value)
     {
         return value.IsNull() ? default(T) : (T)value;
     }
@@ -64,7 +64,7 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="value">The value.</param>
     /// <returns></returns>
-    public static T SafeCast<T>(this object value)
+    public static T? SafeCast<T>(this object value)
     {
         return value is T ? value.UnsafeCast<T>() : default(T);
     }

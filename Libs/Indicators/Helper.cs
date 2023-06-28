@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace Ban3.Infrastructures.Indicators;
 

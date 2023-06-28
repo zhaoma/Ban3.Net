@@ -1,5 +1,4 @@
 ﻿using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributes;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributesi;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Enums
 {

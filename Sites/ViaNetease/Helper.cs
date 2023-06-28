@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.NetHttp;
@@ -12,6 +13,7 @@ namespace Ban3.Sites.ViaNetease;
 
 public static class Helper
 {
+    [Obsolete("网易已关闭股票行情数据接口")]
     public static async Task<DownloadDailyPricesResult> DownloadDailyPrices(DownloadDailyPrices request)
     {
         var host = new TargetHost
@@ -25,6 +27,7 @@ public static class Helper
         return new DownloadDailyPricesResult { Path = savePath };
     }
 
+    [Obsolete("网易已关闭股票行情数据接口")]
     public static async Task<ReadRealtimePricesResult> ReadRealtimePrices(ReadRealTime request)
     {
         var dic = await new TargetHost
@@ -40,6 +43,7 @@ public static class Helper
     /// </summary>
     /// <param name="request"></param>
     /// <returns>Netease StockFinance List</returns>
+    [Obsolete("网易已关闭股票行情数据接口")]
     public static async Task<DownloadFinancesResult> DownloadFinances(DownloadFinances request)
     {
         var csv = await new TargetHost

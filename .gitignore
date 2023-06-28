@@ -363,3 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 Labs/Tfskits/.vs/Tfskits/v17/.suo
 *.v2
+Labs/Casino/CcarAgent/appsettings.json
+Labs/Casino/Web/appsettings.json
+Labs/Casino/CcarAgent/appsettings.json
+Labs/Casino/Web/appsettings.json

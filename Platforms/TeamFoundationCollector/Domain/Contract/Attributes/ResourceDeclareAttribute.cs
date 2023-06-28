@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributesi;
+namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Attributes;
 
 /// <summary>
 /// 资源的属性定义(路径),Not in use

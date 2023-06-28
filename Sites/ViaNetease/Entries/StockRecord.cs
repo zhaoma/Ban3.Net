@@ -13,32 +13,32 @@ public class StockRecord
     /// 类型(SZ/SH)
     /// </summary>
     [DataMember(Name = "type")]
-    public string Type { get; set; }
+    public string Type { get; set; } = string.Empty;
 
     /// <summary>
     /// 编码
     /// 1/0+代码 1=深圳 0=上海
     /// </summary>
     [DataMember(Name = "code")]
-    public string Code { get; set; }
+    public string Code { get; set; } = string.Empty;
 
     /// <summary>
     /// 代码
     /// </summary>
     [DataMember(Name = "symbol")]
-    public string Symbol { get; set; }
+    public string Symbol { get; set; } = string.Empty;
 
     /// <summary>
     /// 名称
     /// </summary>
     [DataMember(Name = "name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// 方向
     /// </summary>
     [DataMember(Name = "arrow")]
-    public string Arrow { get; set; }
+    public string Arrow { get; set; } = string.Empty;
 
     /// <summary>
     /// 涨幅=*100

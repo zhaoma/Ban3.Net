@@ -6,12 +6,32 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Ban3.Infrastructures.Indicators</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.Indicators</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Ban3.Infrastructures.Indicators</Title>
+    <Version>1.0.4</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>Indicators extension</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.4</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <BaseOutputPath>D:\GIT\output</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\output\</OutputPath>
+    <DocumentationFile>..\..\..\output\Ban3.Infrastructures.Indicators.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.2" />
-    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.0" />
-    <PackageReference Include="Ban3.Infrastructures.RuntimeCaching" Version="1.0.2" />
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.4" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Fody" Version="6.7.0">
       <PrivateAssets>all</PrivateAssets>

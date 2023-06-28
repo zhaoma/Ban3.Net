@@ -231,4 +231,14 @@ public static partial class Helper
     }
 
     private static readonly Dictionary<string, string> FilesTimestampDic = new();
+
+    /// <summary>
+    /// 程序集文件名检查
+    /// </summary>
+    /// <param name="assembly"></param>
+    /// <returns></returns>
+    public static string AssemblyName(this string assembly)
+    {
+        return assembly.EndsWith(".dll") ? assembly : assembly + ".dll";
+    }
 }

@@ -5,24 +5,25 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-namespace Ban3.Infrastructures.Common.Models
+namespace Ban3.Infrastructures.Common.Models;
+
+/// <summary>
+/// 递归节点
+/// </summary>
+public class RecursionNode
 {
-    /// <summary>
-    /// 递归节点
-    /// </summary>
-    public class RecursionNode
+    /// ctor
+    public RecursionNode()
     {
-        /// ctor
-        public RecursionNode() { }
-
-        /// <summary>
-        /// key
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// 上级key
-        /// </summary>
-        public int ParentId { get; set; }
     }
+
+    /// <summary>
+    /// key
+    /// </summary>
+    public int Id { get; set; }
+
+    /// <summary>
+    /// 上级key
+    /// </summary>
+    public int ParentId { get; set; }
 }

@@ -69,6 +69,14 @@ public static partial class Helper
 
     internal static SemaphoreSlim? Semaphore;
 
+    /// <summary>
+    /// 实际使用中发现，信号量会增加些开销
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="all"></param>
+    /// <param name="action"></param>
+    /// <param name="taskCount"></param>
+    /// <returns></returns>
     public static async Task ParallelExecuteAsync<T>(
         this IEnumerable<T> all,
         Action<T> action,
@@ -98,6 +106,12 @@ public static partial class Helper
 
     private static string? _latestExecutedDate;
 
+    /// <summary>
+    /// 给任务创建一个定时时钟
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="dailyTime"></param>
+    /// <returns></returns>
     public static Timer CreateTimer(this Action action, DateTime dailyTime)
     {
         var timer = new Timer
@@ -107,7 +121,7 @@ public static partial class Helper
             Enabled = true
         };
 
-        timer.Elapsed += (s, e) =>
+        timer.Elapsed += (_, _) =>
         {
             var now = DateTime.Now;
 
@@ -133,6 +147,12 @@ public static partial class Helper
         return timer;
     }
 
+    /// <summary>
+    /// 给任务创建一个频发时钟
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="interval"></param>
+    /// <returns></returns>
     public static Timer CreateTimer(this Action action, int interval)
     {
         var timer = new Timer
@@ -142,7 +162,7 @@ public static partial class Helper
             Enabled = true
         };
 
-        timer.Elapsed += (s, e) =>
+        timer.Elapsed += (_, _) =>
         {
             try
             {
@@ -163,6 +183,13 @@ public static partial class Helper
         return timer;
     }
 
+    /// <summary>
+    /// 给异步任务创建一个频发时钟
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="callbackAction"></param>
+    /// <param name="interval"></param>
+    /// <returns></returns>
     public static Timer CreateAsyncTimer(this Action action, Action<IAsyncResult> callbackAction, int interval)
     {
         var timer = new Timer
@@ -172,7 +199,7 @@ public static partial class Helper
             Enabled = true
         };
 
-        timer.Elapsed += (s, e) =>
+        timer.Elapsed += (_, _) =>
         {
             try
             {
@@ -188,6 +215,11 @@ public static partial class Helper
         return timer;
     }
 
+    /// <summary>
+    /// 并发任务
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="count"></param>
     public static void TimesParallel(this Action action, int count)
     {
         Enumerable.Range(1, count)
@@ -196,7 +228,11 @@ public static partial class Helper
                 _ => action());
     }
 
-
+    /// <summary>
+    /// 重发任务
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="count"></param>
     public static void Times(this Action action, int count)
     {
         Enumerable.Range(1, count)

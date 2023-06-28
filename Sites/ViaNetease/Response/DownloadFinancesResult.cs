@@ -11,6 +11,7 @@ namespace Ban3.Sites.ViaNetease.Response;
 
 public class DownloadFinancesResult
 {
-    public List<StockFinance> Data { get; set; }
+    /// 
+    public List<StockFinance> Data { get; set; } = new();
 }
 

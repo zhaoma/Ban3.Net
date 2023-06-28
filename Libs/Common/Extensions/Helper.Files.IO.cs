@@ -24,6 +24,7 @@ public static partial class Helper
         bool includeSubFolders = true)
         => rootPath.GetFilesByPattern(pattern, includeSubFolders);
 
+    /// 
     public static string[] GetFilesByPattern(this string rootPath, string pattern, bool includeSubFolders = true)
     {
         var result = new List<string>();

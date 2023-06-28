@@ -1,5 +1,4 @@
-﻿using System;
-using Ban3.Infrastructures.Indicators.Outputs;
+﻿using Ban3.Infrastructures.Indicators.Outputs;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Entries;
@@ -19,7 +18,7 @@ public class ListRecord:Record
         Close = sets.Close;
         MarkTime = sets.MarkTime;
 
-        if (sets.Evaluation(out var _, out int value))
+        if (sets.Evaluation(out  _, out int value))
         {
             Value = value;
         }

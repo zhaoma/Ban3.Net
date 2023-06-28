@@ -12,11 +12,13 @@ public class DateTimeConverter
 {
     private readonly IsoDateTimeConverter _dtConvertor;
     
+    /// 
     public DateTimeConverter()
     {
         _dtConvertor = new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fffffffZ" };
     }
 
+    /// 
     public DateTimeConverter(string? formatter)
     {
         _dtConvertor = new IsoDateTimeConverter { DateTimeFormat = formatter };

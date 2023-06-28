@@ -5,7 +5,7 @@
   },
   "projects": {
     "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\ViaEastmoney.csproj": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "restore": {
         "projectUniqueName": "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\ViaEastmoney.csproj",
         "projectName": "Ban3.Sites.ViaEastmoney",
@@ -47,7 +47,7 @@
           "dependencies": {
             "Ban3.Infrastructures.NetHttp": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[1.0.4, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",

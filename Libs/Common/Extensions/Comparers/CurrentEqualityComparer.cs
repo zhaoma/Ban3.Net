@@ -17,8 +17,8 @@ namespace Ban3.Infrastructures.Common.Extensions.Comparers;
 /// <typeparam name="TV">The type of the V.</typeparam>
 public class CurrentEqualityComparer<T, TV> : IEqualityComparer<T>
 {
-    private Func<T, TV> keySelector;
-    private IEqualityComparer<TV> comparer;
+    private readonly Func<T, TV> _keySelector;
+    private readonly IEqualityComparer<TV> _comparer;
 
     /// <summary>
     /// 
@@ -27,8 +27,8 @@ public class CurrentEqualityComparer<T, TV> : IEqualityComparer<T>
     /// <param name="comparer"></param>
     public CurrentEqualityComparer(Func<T, TV> keySelector, IEqualityComparer<TV> comparer)
     {
-        this.keySelector = keySelector;
-        this.comparer = comparer;
+        this._keySelector = keySelector;
+        this._comparer = comparer;
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ public class CurrentEqualityComparer<T, TV> : IEqualityComparer<T>
     /// <returns></returns>
     public bool Equals(T x, T y)
     {
-        return comparer.Equals(keySelector(x), keySelector(y));
+        return _comparer.Equals(_keySelector(x), _keySelector(y));
     }
 
     /// <summary>
@@ -58,6 +58,6 @@ public class CurrentEqualityComparer<T, TV> : IEqualityComparer<T>
     /// <returns></returns>
     public int GetHashCode(T obj)
     {
-        return comparer.GetHashCode(keySelector(obj));
+        return _comparer.GetHashCode(_keySelector(obj));
     }
 }

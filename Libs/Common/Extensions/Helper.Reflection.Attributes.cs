@@ -18,7 +18,7 @@ public static partial class Helper
     }
 
     /// 
-    public static T GetFirstAttribute<T>(
+    public static T? GetFirstAttribute<T>(
         this object obj,
         bool includeInherited = true) where T : Attribute
     {

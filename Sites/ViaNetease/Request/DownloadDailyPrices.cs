@@ -5,6 +5,7 @@
 
 using Ban3.Infrastructures.NetHttp.Entries;
 using System;
+using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Sites.ViaNetease.Request;
 
@@ -17,7 +18,7 @@ public class DownloadDailyPrices
         Code = code;
 
         Url =
-             $"http://quotes.money.163.com/service/chddata.html?code={prefix}{code}&end={DateTime.Now.ToString("yyyyMMdd")}&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP";
+             $"http://quotes.money.163.com/service/chddata.html?code={prefix}{code}&end={DateTime.Now.ToYmd()}&fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP";
     }
 
     public string Prefix { get; set; }

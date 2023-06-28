@@ -56,15 +56,15 @@ public static partial class Helper
         foreach (var e in Enum.GetValues(enumType))
         {
             var m = new EnumOption();
-            object[] attacheds = e.GetType()
+            object[] attachedAttributes = e.GetType()
                 .GetField(e.ToString())
                 .GetCustomAttributes(typeof(EnumAttachedAttribute), true);
 
-            if (attacheds.Length > 0)
+            if (attachedAttributes.Length > 0)
             {
-                EnumAttachedAttribute aa = attacheds[0] as EnumAttachedAttribute;
+                var aa = attachedAttributes[0] as EnumAttachedAttribute;
 
-                m.TagType = aa.TagType;
+                m.TagType = aa!.TagType;
                 m.Description = aa.Description;
                 m.Icon = aa.Icon;
                 m.IconColor = aa.IconColor;
@@ -92,16 +92,16 @@ public static partial class Helper
     /// <summary>
     /// 枚举转枚举
     /// </summary>
-    /// <typeparam name="Told"></typeparam>
-    /// <typeparam name="Tnew"></typeparam>
+    /// <typeparam name="TOld"></typeparam>
+    /// <typeparam name="TNew"></typeparam>
     /// <param name="inVal"></param>
     /// <returns></returns>
-    public static Tnew EnumToEnum<Told, Tnew>(this Told inVal)
-        where Told : Enum
-        where Tnew : struct
+    public static TNew EnumToEnum<TOld, TNew>(this TOld inVal)
+        where TOld : Enum
+        where TNew : struct
     {
-        var success = Enum.TryParse<Tnew>($"{inVal}", out var result);
+        var success = Enum.TryParse<TNew>($"{inVal}", out var result);
 
-        return !success ? default(Tnew) : result;
+        return !success ? default(TNew) : result;
     }
 }

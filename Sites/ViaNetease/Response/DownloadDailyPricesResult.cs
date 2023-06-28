@@ -11,5 +11,6 @@ namespace Ban3.Sites.ViaNetease.Response;
 /// </summary>
 public class DownloadDailyPricesResult
 {
-    public string Path { get; set; }
+    /// 
+    public string Path { get; set; } = string.Empty;
 }

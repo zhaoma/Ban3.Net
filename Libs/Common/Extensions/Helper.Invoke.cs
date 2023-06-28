@@ -19,22 +19,25 @@ public static partial class Helper
     /// <summary>
     /// Invokes the method.
     /// </summary>
-    /// <param name="obj">The obj.</param>
-    /// <param name="methodName">Name of the method.</param>
-    /// <param name="parameters">The parameters.</param>
-    /// <returns></returns>
-    public static object? InvokeMethod(this object obj, string methodName, params object[] parameters) 
-        => InvokeMethod<object>(obj, methodName, parameters);
-
-    /// <summary>
-    /// Invokes the method.
-    /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="obj">The obj.</param>
     /// <param name="methodName">Name of the method.</param>
     /// <returns></returns>
     public static T? InvokeMethod<T>(this object obj, string methodName) 
         => obj.InvokeMethod<T>(methodName, null);
+
+    /// <summary>
+    /// Invokes the method.
+    /// </summary>
+    /// <param name="obj">The obj.</param>
+    /// <param name="methodName">Name of the method.</param>
+    /// <param name="parameters">The parameters.</param>
+    /// <returns></returns>
+    public static object? InvokeMethod(
+        this object obj, 
+        string methodName, 
+        params object[] parameters) 
+        => InvokeMethod<object>(obj, methodName, parameters);
 
     /// <summary>
     /// Invokes the method.

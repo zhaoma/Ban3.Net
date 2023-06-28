@@ -1,10 +1,12 @@
-﻿using System;
-using Ban3.Infrastructures.NetHttp.Request;
+﻿using Ban3.Infrastructures.NetHttp.Request;
 using System.Collections.Generic;
 using System.Net.Http;
 
 namespace Ban3.Infrastructures.NetHttp.Interfaces;
 
+/// <summary>
+/// 目标资源接口申明
+/// </summary>
 public interface ITargetResource
 {
     string Url { get; set; }

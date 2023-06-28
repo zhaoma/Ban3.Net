@@ -1,7 +1,7 @@
 ﻿
 using System.Collections.Generic;
 
-namespace Ban3.Infrastructures.Common.Contracts.Entities.Platforms.Sohu
+namespace Ban3.Sites.ViaSohu.Entries
 {
     /// <summary>
     /// 

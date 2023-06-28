@@ -266,6 +266,12 @@ public static partial class Helper
         ) || (input + "").ToUpper().Contains((pattern + "").ToUpper());
     }
 
+    /// <summary>
+    /// 第一个匹配项
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="pattern"></param>
+    /// <returns></returns>
     public static string FirstMatchValue(this string input, string pattern)
     {
         var match = Regex.Match(
@@ -277,12 +283,24 @@ public static partial class Helper
         return match.Groups[1].Value;
     }
 
+    /// <summary>
+    /// 第一张图片
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="imgSymbol"></param>
+    /// <returns></returns>
     public static string FirstHtmlImage(this string input, string imgSymbol)
     {
         var pattern = $@"<img.+{imgSymbol}.+?src=[\""'](?<value>.+?)[\""'].*?>";
         return input.FirstMatchValue(pattern);
     }
 
+    /// <summary>
+    /// 查找表格单元格
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="tdSymbol"></param>
+    /// <returns></returns>
     public static List<string> FindHtmlTd(this string input, string tdSymbol)
     {
         var pattern = $@"<td.+{tdSymbol}.+>(?<value>.+?)</td>";
@@ -291,6 +309,13 @@ public static partial class Helper
         return (from Match mc in matches select mc.Groups[1].Value).ToList();
     }
 
+    /// <summary>
+    /// 截取字符串
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="prefix"></param>
+    /// <param name="suffix"></param>
+    /// <returns></returns>
     public static string Substr(this string input, string prefix, string suffix)
     {
         if (!input.Contains(prefix)) return string.Empty;
@@ -303,6 +328,12 @@ public static partial class Helper
             : result.Substring(0, result.Length - suffix.Length);
     }
 
+    /// <summary>
+    /// 移出jsonp标签
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="jsonp"></param>
+    /// <returns></returns>
     public static string RemoveJsonpTags(this string input, string jsonp)
         => input.Substr($"{jsonp}(", ");");
     
@@ -389,7 +420,7 @@ public static partial class Helper
         return sb;
     }
 
-
+    /// 
     public static StringBuilder AppendQuery(this StringBuilder sb, string key, Enum? value)
     {
         if (value != null)
@@ -403,6 +434,7 @@ public static partial class Helper
         return sb;
     }
 
+    /// 
     public static StringBuilder AppendQuery(this StringBuilder sb, string key, int? value)
     {
         if (value != null)
@@ -416,6 +448,7 @@ public static partial class Helper
         return sb;
     }
 
+    /// 
     public static StringBuilder AppendQuery(this StringBuilder sb, string key, bool? value)
     {
         if (value != null)
@@ -429,6 +462,7 @@ public static partial class Helper
         return sb;
     }
 
+    /// 
     public static bool DateGe(this string dateString, string dateVal)
     {
         if (string.IsNullOrEmpty(dateVal)) return true;
@@ -439,6 +473,7 @@ public static partial class Helper
                >= 0;
     }
 
+    /// 
     public static bool DateLe(this string dateString, string dateVal)
     {
         if (string.IsNullOrEmpty(dateVal)) return true;
@@ -449,6 +484,7 @@ public static partial class Helper
                >= 0;
     }
 
+    /// 
     public static bool StringExists(this string content, string key)
     {
         if (string.IsNullOrEmpty(key)) return true;
@@ -457,9 +493,11 @@ public static partial class Helper
         return keys.Any(o => content.Contains(o.Trim()));
     }
 
+    /// 
     public static bool StartsWithIn(this string content, IEnumerable<string> prefixes)
         => prefixes.Any(o => content.ToUpper().StartsWith(o.ToUpper()));
 
+    /// 
     public static bool StringEquals(this string a, string b)
     {
         if (string.IsNullOrEmpty(a)) return true;

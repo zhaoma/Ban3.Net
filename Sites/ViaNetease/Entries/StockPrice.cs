@@ -21,7 +21,7 @@ public class StockPrice
     /// <summary>
     /// 编码
     /// </summary>
-    public string Symbal { get; set; }
+    public string Symbol { get; set; }
 
     /// <summary>
     /// 名称
@@ -97,7 +97,7 @@ public class StockPrice
         var cols = neteaseRow.Split(',');
 
         Date = cols[0].ToDateTime().ToString("yyyy-MM-ddTHH:mm:ssZ").ToDateTime();
-        Symbal = cols[1].Replace("'", "").Trim();
+        Symbol = cols[1].Replace("'", "").Trim();
         Name = (cols[2] + "").Trim();
         Close = cols[3].ToDecimal();
         High = cols[4].ToDecimal();
@@ -120,6 +120,6 @@ public class StockPrice
     public string ToRowString()
     {
         return
-            $"{Date.ToString("yyyy-MM-dd")},{Symbal},{Name},{Close},{High},{Low},{Open},{CloseBefore},{Change},{ChangeRatio},{TurnoverRate},{Volume},{Amount},{TotalValue},{TradableValue}";
+            $"{Date.ToString("yyyy-MM-dd")},{Symbol},{Name},{Close},{High},{Low},{Open},{CloseBefore},{Change},{ChangeRatio},{TurnoverRate},{Volume},{Amount},{TotalValue},{TradableValue}";
     }
 }

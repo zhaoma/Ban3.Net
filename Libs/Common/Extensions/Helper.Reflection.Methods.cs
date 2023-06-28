@@ -10,11 +10,13 @@ public static partial class Helper
 {
     private const BindingFlags BindingFlags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic;
 
-    private static volatile Dictionary<int, CompiledMethodInfo> _cachedMembers =
-        new Dictionary<int, CompiledMethodInfo>();
+    private static volatile Dictionary<int, CompiledMethodInfo> _cachedMembers = new ();
 
+    /// 
     public static object? Invoke<T>(this T obj, string methodName, params object[] args)
     {
+        if (obj == null) return null;
+
         var type = obj.GetType();
         var hash = Hash(type, methodName, args);
         var exists = _cachedMembers.TryGetValue(hash, out var method);
@@ -29,13 +31,27 @@ public static partial class Helper
             var m = GetMember(type, methodName, argTypes);
             method = m == null ? null : new CompiledMethodInfo(m, type);
 
-            var dict = new Dictionary<int, CompiledMethodInfo>(_cachedMembers) { { hash, method } };
+            if (method != null)
+            {
+                var dict = new Dictionary<int, CompiledMethodInfo>(_cachedMembers) { { hash, method } };
 
-            _cachedMembers = dict;
-            return method.Invoke(obj, args);
+                _cachedMembers = dict;
+                return method.Invoke(obj, args);
+            }
+
         }
+
+        return null;
     }
 
+    /// <summary>
+    /// 获取接口的实现方法
+    /// </summary>
+    /// <param name="implementation"></param>
+    /// <param name="interface"></param>
+    /// <param name="methodName"></param>
+    /// <param name="argTypes"></param>
+    /// <returns></returns>
     public static string GetImplementationNameOfInterfaceMethod(this Type implementation, Type @interface,
         string methodName, params Type[] argTypes)
     {
@@ -109,7 +125,7 @@ internal class CompiledMethodInfo
             _func = (instance, arguments) =>
             {
                 action(instance, arguments);
-                return null;
+                return null!;
             };
         }
         else

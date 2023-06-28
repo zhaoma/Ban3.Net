@@ -15,6 +15,12 @@
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <BaseOutputPath>D:\GIT\output</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\output\</OutputPath>
+    <DocumentationFile>..\..\..\output\Ban3.Infrastructures.Consoles.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

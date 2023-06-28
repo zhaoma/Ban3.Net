@@ -22,24 +22,24 @@ public class StockToday
     /// 名称
     /// </summary>
     [DataMember]
-    public string Symbol { get; set; }
+    public string Symbol { get; set; } = string.Empty;
 
     /// <summary>
     /// 编码
     /// </summary>
     [DataMember]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// 数据
     /// </summary>
     [DataMember]
-    public List<List<object>> Data { get; set; }
+    public List<List<object>> Data { get; set; } = new();
 
     /// <summary>
     /// 
     /// </summary>
-    public List<StockM1> M1s
+    public List<StockM1> M1S
     {
         get
         {

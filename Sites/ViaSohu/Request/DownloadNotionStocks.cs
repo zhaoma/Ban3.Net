@@ -3,33 +3,25 @@
 //  function:	DownloadNotionStocks.cs
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
-using System;
-namespace Ban3.Infrastructures.Common.Contracts.Requests.Platforms.Sohu
+
+using Ban3.Infrastructures.NetHttp.Entries;
+using Ban3.Sites.ViaSohu.Entries;
+
+namespace Ban3.Sites.ViaSohu.Request
 {
 	public class DownloadNotionStocks
-        :NormalRequest
-	{
+        : TargetResource
+    {
 		public DownloadNotionStocks()
-		{
-		}
+        {
+            Charset = "gb2312";
+            Url = $"http://q.stock.sohu.com/cn/bk_{NotionId}.shtml"; 
+        }
 
         /// <summary>
         /// 
         /// </summary>
         public int NotionId { get; set; }
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public override Servers.NetResource NetResource()
-        {
-            return new Servers.NetResource
-            {
-                Charset = "gb2312",
-                Url = Servers.Sohu.UrlForNotionStocks(NotionId)
-            };
-        }
     }
 }
 

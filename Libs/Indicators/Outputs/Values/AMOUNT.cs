@@ -36,7 +36,7 @@ public class AMOUNT
             RefAmounts.OrderBy(o => o.Days)
                 .Select(o => o.Ref)
                 .ToList()
-                .IsAsc())
+                .IsAsc(o=>o))
         {
             result.Add("AMOUNT.UP");
         }

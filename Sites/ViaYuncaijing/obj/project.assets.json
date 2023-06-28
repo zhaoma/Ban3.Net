@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "Ban3.Infrastructures.Common/1.0.2": {
+      "Ban3.Infrastructures.Common/1.0.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
@@ -26,12 +26,13 @@
           }
         }
       },
-      "Ban3.Infrastructures.NetHttp/1.0.0": {
+      "Ban3.Infrastructures.NetHttp/1.0.4": {
         "type": "package",
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.2",
+          "Ban3.Infrastructures.Common": "1.0.4",
           "Rougamo.Fody": "1.4.1",
-          "System.Net.Http": "4.3.4"
+          "System.Net.Http": "4.3.4",
+          "log4net": "2.0.15"
         },
         "compile": {
           "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
@@ -1292,14 +1293,14 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.Common/1.0.2": {
-      "sha512": "tkH4yj5mk+64I/YvJASvhF5Mpgz0l2ZkfQa4Vp3OOBfyHiP5GLBHsXBUAUqQlFgcxPhbwJiKw6uQYYL9bRLdmw==",
+    "Ban3.Infrastructures.Common/1.0.4": {
+      "sha512": "n1dVdPa9rNa7BLpX7RzF+zu+84J+qDqBa8cGsJmXw+GnW+KJeWFtm08FW4vcyuJ0xTfyUUnjVHu9NS62xpwkYQ==",
       "type": "package",
-      "path": "ban3.infrastructures.common/1.0.2",
+      "path": "ban3.infrastructures.common/1.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.common.1.0.2.nupkg.sha512",
+        "ban3.infrastructures.common.1.0.4.nupkg.sha512",
         "ban3.infrastructures.common.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
@@ -1307,14 +1308,14 @@
         "lib/netstandard2.0/Ban3.Infrastructures.Common.dll"
       ]
     },
-    "Ban3.Infrastructures.NetHttp/1.0.0": {
-      "sha512": "XHt87sm26mSAqvTrIk6XzLH64oWjzdGRkqv0OigkUovm1Nc20z81aD/MZWVuVytLivmuBzA/CJqV9S6omqQ/Hw==",
+    "Ban3.Infrastructures.NetHttp/1.0.4": {
+      "sha512": "30+CLUdRab7seSJb2U+qSUUEzGb2ipDHlljvba11ebxoskqyTeNSI5BN3s/kwWDVVzgLQBxJX+2VOqOsW2etuQ==",
       "type": "package",
-      "path": "ban3.infrastructures.nethttp/1.0.0",
+      "path": "ban3.infrastructures.nethttp/1.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.nethttp.1.0.0.nupkg.sha512",
+        "ban3.infrastructures.nethttp.1.0.4.nupkg.sha512",
         "ban3.infrastructures.nethttp.nuspec",
         "icon.png",
         "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll"
@@ -4331,8 +4332,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.2",
-      "Ban3.Infrastructures.NetHttp >= 1.0.0",
+      "Ban3.Infrastructures.Common >= 1.0.4",
+      "Ban3.Infrastructures.NetHttp >= 1.0.4",
       "NETStandard.Library >= 2.0.3",
       "Newtonsoft.Json >= 13.0.3",
       "System.Threading.Thread >= 4.3.0",
@@ -4344,7 +4345,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "restore": {
       "projectUniqueName": "D:\\GIT\\Ban3.Net\\Sites\\ViaYuncaijing\\ViaYuncaijing.csproj",
       "projectName": "Ban3.Sites.ViaYuncaijing",
@@ -4386,11 +4387,11 @@
         "dependencies": {
           "Ban3.Infrastructures.Common": {
             "target": "Package",
-            "version": "[1.0.2, )"
+            "version": "[1.0.4, )"
           },
           "Ban3.Infrastructures.NetHttp": {
             "target": "Package",
-            "version": "[1.0.0, )"
+            "version": "[1.0.4, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",

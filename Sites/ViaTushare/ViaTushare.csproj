@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,15 +9,21 @@
     <AssemblyName>Ban3.Sites.ViaTushare</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Ban3.Sites.ViaTushare</Title>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
     <Description>Via Tushare.com</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <AssemblyVersion>1.0.2.3</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageId>Ban3.Sites.ViaTushare</PackageId>
+    <BaseOutputPath>D:\GIT\output</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\output\</OutputPath>
+    <DocumentationFile>..\..\..\output\Ban3.Sites.ViaTushare.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,8 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.2" />
-    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.0" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.4" />
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
