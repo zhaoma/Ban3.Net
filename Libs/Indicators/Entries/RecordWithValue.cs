@@ -5,8 +5,6 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Entries;
@@ -14,7 +12,6 @@ namespace Ban3.Infrastructures.Indicators.Entries;
 /// <summary>
 /// 指标值
 /// </summary>
-[Serializable, DataContract]
 public class RecordWithValue
         : Record
 {

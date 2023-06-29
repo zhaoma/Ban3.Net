@@ -6,21 +6,17 @@
  */
 
 using System;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.Indicators.Entries
+namespace Ban3.Infrastructures.Indicators.Entries;
+/// <summary>
+/// 记录基类
+/// </summary>
+public class Record
 {
     /// <summary>
-    /// 记录基类
+    /// 记录时间
     /// </summary>
-    [Serializable, DataContract]
-    public class Record
-    {
-        /// <summary>
-        /// 记录时间
-        /// </summary>
-        [JsonProperty("markTime", NullValueHandling = NullValueHandling.Ignore)]
-        public DateTime MarkTime { get; set; }
-    }
+    [JsonProperty("markTime", NullValueHandling = NullValueHandling.Ignore)]
+    public DateTime MarkTime { get; set; }
 }

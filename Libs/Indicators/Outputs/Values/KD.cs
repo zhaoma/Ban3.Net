@@ -2,50 +2,50 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Outputs.Values
 {
     /// <summary>
     /// 随机震荡指数
     /// </summary>
-    [Serializable, DataContract]
     public class KD
             : Record
     {
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("refK", NullValueHandling = NullValueHandling.Ignore)]
         public decimal? RefK { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("refD", NullValueHandling = NullValueHandling.Ignore)]
         public decimal? RefD { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public decimal? RefPSV { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public decimal? RefDailyPSV { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public decimal? RefLLV { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public decimal? RefHHV { get; set; }
 
         /// <summary>

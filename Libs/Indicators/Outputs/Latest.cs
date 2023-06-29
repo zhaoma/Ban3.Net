@@ -6,53 +6,55 @@
  */
 
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Indicators.Outputs
+namespace  Ban3.Infrastructures.Indicators.Outputs;
+
+/// <summary>
+/// 最新指标值
+/// </summary>
+public class Latest
 {
     /// <summary>
-    /// 最新指标值
+    /// 上一周期指标值
     /// </summary>
-    public class Latest
+    [JsonProperty("prev", NullValueHandling = NullValueHandling.Ignore)]
+    public PointOfTime? Prev { get; set; }
+
+    /// <summary>
+    /// 当前周期指标值
+    /// </summary>
+    [JsonProperty("current", NullValueHandling = NullValueHandling.Ignore)]
+    public PointOfTime? Current { get; set; }
+
+    public List<string> Features()
     {
-        /// <summary>
-        /// 上一周期指标值
-        /// </summary>
-        public PointOfTime? Prev { get; set; }
+        var result = new List<string>();
 
-        /// <summary>
-        /// 当前周期指标值
-        /// </summary>
-        public PointOfTime? Current { get; set; }
+        if (Current?.Amount != null)
+            result.AddRange(Current.Amount.Features());
 
-        public List<string> Features()
-        {
-            var result = new List<string>();
+        if (Current?.Bias != null)
+            result.AddRange(Current.Bias.Features(Prev?.Bias));
 
-            if (Current?.Amount != null)
-                result.AddRange(Current.Amount.Features());
+        if (Current?.Cci != null)
+            result.AddRange(Current.Cci.Features());
 
-            if (Current?.Bias != null)
-                result.AddRange(Current.Bias.Features(Prev?.Bias));
+        if (Current?.Dmi != null)
+            result.AddRange(Current.Dmi.Features(Prev?.Dmi));
 
-            if (Current?.Cci != null)
-                result.AddRange(Current.Cci.Features());
+        if (Current?.Ene != null)
+            result.AddRange(Current.Ene.Features(Current.Close));
 
-            if (Current?.Dmi != null)
-                result.AddRange(Current.Dmi.Features(Prev?.Dmi));
+        if (Current?.Kd != null)
+            result.AddRange(Current.Kd.Features(Prev?.Kd));
 
-            if (Current?.Ene != null)
-                result.AddRange(Current.Ene.Features(Current.Close));
+        if (Current?.Ma != null)
+            result.AddRange(Current.Ma.Features());
 
-            if (Current?.Kd != null)
-                result.AddRange(Current.Kd.Features(Prev?.Kd));
+        if (Current?.Macd != null)
+            result.AddRange(Current.Macd.Features(Prev?.Macd));
 
-            if (Current?.Ma != null)
-                result.AddRange(Current.Ma.Features());
-
-            if (Current?.Macd != null)
-                result.AddRange(Current.Macd.Features(Prev?.Macd));
-
-            return result;
-        }
+        return result;
     }
 }

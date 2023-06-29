@@ -9,30 +9,33 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace  Ban3.Infrastructures.Indicators.Outputs
+namespace  Ban3.Infrastructures.Indicators.Outputs;
+
+/// <summary>
+/// 标的操作
+/// </summary>
+public class StockOperate
+        : StockLog
 {
+    /// ctor
+    public StockOperate() { }
+
     /// <summary>
-    /// 标的操作
+    /// 建议操作
     /// </summary>
-    public class StockOperate
-            : StockLog
-    {
-        /// ctor
-        public StockOperate() {}
+    [JsonProperty("operate", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public Enums.StockOperate Operate { get; set; }
 
-        /// <summary>
-        /// 建议操作
-        /// </summary>
-        [JsonProperty("operate")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public Enums.StockOperate Operate { get; set; }
+    /// <summary>
+    /// 操作是否正确
+    /// </summary>
+    [JsonProperty("isRight", NullValueHandling = NullValueHandling.Ignore)]
+    public bool IsRight { get; set; }
 
-        /// <summary>
-        /// 操作是否正确
-        /// </summary>
-        [JsonProperty("isRight")]
-        public bool IsRight { get; set; }
-
-        [JsonProperty("keys")] public List<string> Keys { get; set; } = new();
-    }
+    /// <summary>
+    /// 特征集合
+    /// </summary>
+    [JsonProperty("keys", NullValueHandling = NullValueHandling.Ignore)]
+    public List<string>? Keys { get; set; }
 }

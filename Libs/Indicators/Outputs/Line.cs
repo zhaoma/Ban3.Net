@@ -5,27 +5,24 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Indicators.Outputs
+namespace  Ban3.Infrastructures.Indicators.Outputs;
+
+/// <summary>
+/// 输出线
+/// </summary>
+public class Line
 {
     /// <summary>
-    /// 输出线
+    /// 
     /// </summary>
-    [Serializable, DataContract]
-    public class Line
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        [DataMember]
-        public int ParamId { get; set; }
+    [JsonIgnore]
+    public int ParamId { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        [DataMember]
-        public int Days { get; set; }
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("days", NullValueHandling = NullValueHandling.Ignore)]
+    public int Days { get; set; }
 }

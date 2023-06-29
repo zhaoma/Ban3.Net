@@ -6,15 +6,18 @@
  */
 
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Indicators.Outputs
+namespace  Ban3.Infrastructures.Indicators.Outputs;
+
+/// <summary>
+/// 输出时间线
+/// </summary>
+public class LineOfPoint
 {
     /// <summary>
-    /// 输出时间线
+    /// 时间点集合
     /// </summary>
-    public class LineOfPoint
-    {
-        //public AnalysisCycle Cycle { set; get; }
-        public List<PointOfTime>? EndPoints { set; get; }
-    }
+    [JsonProperty("endPoints", NullValueHandling = NullValueHandling.Ignore)]
+    public List<PointOfTime>? EndPoints { set; get; }
 }

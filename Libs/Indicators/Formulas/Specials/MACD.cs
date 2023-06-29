@@ -19,61 +19,61 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Interfaces;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 {
     /// <summary>
     /// 平滑异同平均
     /// </summary>
-    [Serializable, DataContract]
     public class MACD : Communal, IIndicatorFormula
     {
         /// <summary>
         /// SHORT(短期)
         /// </summary>
-        [DataMember]
+        [JsonProperty("short", NullValueHandling = NullValueHandling.Ignore)]
         public int SHORT { get; set; }
 
         /// <summary>
         /// LONG(长期)
         /// </summary>
-        [DataMember]
+        [JsonProperty("long", NullValueHandling = NullValueHandling.Ignore)]
         public int LONG { get; set; }
 
         /// <summary>
         /// M 天数
         /// </summary>
-        [DataMember]
+        [JsonProperty("mid", NullValueHandling = NullValueHandling.Ignore)]
         public int MID { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdDIF { get; set; } = 9;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdDEA { get; set; } = 10;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdMACD { get; set; } = 11;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdEMAShort { get; set; } = 21;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdEMALong { get; set; } = 22;
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = new List<Outputs.Values.MACD>();
         }
 
-
+        [JsonIgnore]
         public List<Outputs.Values.MACD> Result { get; set; }
 
         /// <summary>

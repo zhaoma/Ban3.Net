@@ -20,66 +20,64 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Entries;
-using Ban3.Infrastructures.Indicators.Formulas;
 using Ban3.Infrastructures.Indicators.Interfaces;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 {
     /// <summary>
     /// 趋向指标
     /// </summary>
-    [Serializable, DataContract]
     public class DMI : Communal, IIndicatorFormula
     {
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("n", NullValueHandling = NullValueHandling.Ignore)]
         public int N { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("m", NullValueHandling = NullValueHandling.Ignore)]
         public int M { get; set; }
 
         /// <summary>
         /// 上升方向线
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdPDI { get; set; } = 12;
 
         /// <summary>
         /// 下降方向线
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdMDI { get; set; } = 13;
 
         /// <summary>
         /// 趋向平均值
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdADX { get; set; } = 14;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdADXR { get; set; } = 15;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdHD { get; set; } = 27;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdLD { get; set; } = 28;
 
         /// <summary>
@@ -104,6 +102,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = new List<Outputs.Values.DMI>();
         }
 
+        [JsonIgnore]
         public List<Outputs.Values.DMI> Result { get; set; }
 
         /// <summary>

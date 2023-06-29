@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Outputs.Values
 {
     /// <summary>
     /// 乖离率
     /// </summary>
-    [Serializable, DataContract]
     public class BIAS
             : Record
     {
         /// <summary>
         /// 乖离
         /// </summary>
-        [DataMember]
+        [JsonProperty("refBIAS", NullValueHandling = NullValueHandling.Ignore)]
         public decimal? RefBIAS { get; set; }
 
         /// <summary>
         /// 平均乖离
         /// </summary>
-        [DataMember]
+        [JsonProperty("refBIASMA", NullValueHandling = NullValueHandling.Ignore)]
         public decimal? RefBIASMA { get; set; }
 
         /// <summary>

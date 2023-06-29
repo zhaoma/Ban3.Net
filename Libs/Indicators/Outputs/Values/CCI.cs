@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Outputs.Values;
 
 /// <summary>
 /// 顺势指标
 /// </summary>
-[Serializable, DataContract]
 public class CCI
     : Record
 {
     /// <summary>
     /// 
     /// </summary>
-    [DataMember]
+    [JsonProperty("refCCI", NullValueHandling = NullValueHandling.Ignore)]
     public decimal? RefCCI { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    [DataMember]
+    [JsonProperty("refTYP", NullValueHandling = NullValueHandling.Ignore)]
     public decimal RefTYP { get; set; }
 
     /// <summary>

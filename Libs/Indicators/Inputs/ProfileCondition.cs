@@ -8,6 +8,13 @@ namespace Ban3.Infrastructures.Indicators.Inputs;
 
 public class ProfileCondition
 {
+    public ProfileCondition() { }
+
+    public ProfileCondition(List<string> include,List<string> exclude) {
+        Include = include;
+        Exclude = exclude;
+    }
+
     /// <summary>
     /// 包含特征
     /// </summary>

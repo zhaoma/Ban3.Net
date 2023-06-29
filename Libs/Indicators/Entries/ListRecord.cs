@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Entries;
-#nullable enable
 
 /// <summary>
 /// 标的排名
@@ -53,5 +52,4 @@ public class ListRecord:Record
     /// </summary>
     [JsonProperty("close", NullValueHandling = NullValueHandling.Ignore)]
     public decimal Close { get; set; }
-
 }

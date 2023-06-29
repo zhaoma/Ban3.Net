@@ -5,30 +5,29 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-namespace Ban3.Infrastructures.Indicators.Enums
+namespace Ban3.Infrastructures.Indicators.Enums;
+
+/// <summary>
+/// 指标公式
+/// </summary>
+public enum IndicatorType
 {
-    /// <summary>
-    /// 指标公式
-    /// </summary>
-    public enum IndicatorType
-    {
-        /// refer Indicators.Formulas
-        AMOUNT,
-        /// refer Indicators.Formulas
-        BIAS,
-        /// refer Indicators.Formulas
-        CCI,
-        /// refer Indicators.Formulas
-        DMI,
-        /// refer Indicators.Formulas
-        ENE,
-        /// refer Indicators.Formulas
-        KD,
-        /// refer Indicators.Formulas
-        MA,
-        /// refer Indicators.Formulas
-        MACD,
-        /// refer Indicators.Formulas
-        FULL
-    }
+    /// refer Indicators.Formulas
+    AMOUNT,
+    /// refer Indicators.Formulas
+    BIAS,
+    /// refer Indicators.Formulas
+    CCI,
+    /// refer Indicators.Formulas
+    DMI,
+    /// refer Indicators.Formulas
+    ENE,
+    /// refer Indicators.Formulas
+    KD,
+    /// refer Indicators.Formulas
+    MA,
+    /// refer Indicators.Formulas
+    MACD,
+    /// refer Indicators.Formulas
+    FULL
 }

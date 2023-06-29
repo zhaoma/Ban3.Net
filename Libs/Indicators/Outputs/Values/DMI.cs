@@ -2,66 +2,68 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Outputs.Values
 {
     /// <summary>
     /// 趋向指标
     /// </summary>
-    [Serializable, DataContract]
     public class DMI
             : Record
     {
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public decimal? RefHD { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public decimal? RefLD { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("refPDI", NullValueHandling = NullValueHandling.Ignore)]
         public decimal? RefPDI { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("refMDI", NullValueHandling = NullValueHandling.Ignore)]
         public decimal? RefMDI { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("refADX", NullValueHandling = NullValueHandling.Ignore)]
         public decimal? RefADX { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("refADXR", NullValueHandling = NullValueHandling.Ignore)]
         public decimal? RefADXR { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public decimal RefMTR { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
+        [JsonIgnore]
         public decimal RefDMP { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
+        [JsonIgnore]
         public decimal RefDMM { get; set; }
 
         /// <summary>

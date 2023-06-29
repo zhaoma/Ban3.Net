@@ -13,53 +13,51 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
-using Ban3.Infrastructures.Indicators.Formulas;
 using Ban3.Infrastructures.Indicators.Interfaces;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 {
     /// <summary>
     /// 随机指标
     /// </summary>
-    [Serializable, DataContract]
     public class KD : Communal, IIndicatorFormula
     {
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("n", NullValueHandling = NullValueHandling.Ignore)]
         public int N { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("m", NullValueHandling = NullValueHandling.Ignore)]
         public int M { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdK { get; set; } = 18;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdD { get; set; } = 19;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdPSV { get; set; } = 29;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdDailyPSV { get; set; } = 32;
 
         /// <summary>
@@ -85,9 +83,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = new List<Outputs.Values.KD>();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        [JsonIgnore]
         public List<Outputs.Values.KD> Result { get; set; }
 
         /// <summary>

@@ -5,21 +5,20 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-namespace Ban3.Infrastructures.Indicators.Enums
+namespace Ban3.Infrastructures.Indicators.Enums;
+
+/// <summary>
+/// 博弈记录类型
+/// </summary>
+public enum CasinoRecordType
 {
     /// <summary>
-    /// 博弈记录类型
+    /// 流水记录
     /// </summary>
-    public enum CasinoRecordType
-    {
-        /// <summary>
-        /// 流水记录
-        /// </summary>
-        LOG=1,
+    LOG = 1,
 
-        /// <summary>
-        /// 模拟交易
-        /// </summary>
-        TRADE=2
-    }
+    /// <summary>
+    /// 模拟交易
+    /// </summary>
+    TRADE = 2
 }

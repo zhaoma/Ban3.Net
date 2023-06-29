@@ -6,18 +6,19 @@
  */
 
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Indicators.Outputs
+namespace  Ban3.Infrastructures.Indicators.Outputs;
+
+/// <summary>
+/// 输出标的特征
+/// </summary>
+public class StockSets
+        : StockLog
 {
     /// <summary>
-    /// 输出标的特征
+    /// 特征
     /// </summary>
-    public class StockSets
-            : StockLog
-    {
-        /// <summary>
-        /// 特征
-        /// </summary>
-        public IEnumerable<string>? SetKeys { get; set; }
-    }
+    [JsonProperty("setKeys", NullValueHandling = NullValueHandling.Ignore)]
+    public IEnumerable<string>? SetKeys { get; set; }
 }

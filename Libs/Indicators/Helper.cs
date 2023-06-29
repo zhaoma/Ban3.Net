@@ -19,11 +19,17 @@ public static class Helper
 
     #region 特征定义
 
+    /// <summary>
+    /// 指标
+    /// </summary>
     public static readonly List<string> FeatureGroups = new List<string>
     {
         "AMOUNT", "BIAS", "CCI", "DMI", "ENE", "KD", "MA", "MACD"
     };
 
+    /// <summary>
+    /// 指标颜色定义字典
+    /// </summary>
     public static readonly Dictionary<string, string> ColorsDic = new Dictionary<string, string>
     {
         { "AMOUNT", "#CCC" },
@@ -36,6 +42,9 @@ public static class Helper
         { "MACD", "#C09" }
     };
 
+    /// <summary>
+    /// 指标特征字典
+    /// </summary>
     public static readonly List<SetsFeature> Features = new List<SetsFeature>
     {
         new("AMOUNT.UP", "量升", 0),
@@ -77,16 +86,30 @@ public static class Helper
         new("MACD.D0", "平均线下穿零", -3)
     };
 
+    /// <summary>
+    /// 指标下加分/减分特征集合
+    /// </summary>
+    /// <param name="indicator"></param>
+    /// <param name="plus"></param>
+    /// <returns></returns>
     public static List<string> FeatureKeys(string indicator, bool plus)
         => Features
             .Where(o => o.Key.StartsWith($"{indicator.ToUpper()}.") && (o.Value > 0) == plus)
             .Select(o => o.Key + ".")
             .ToList();
 
+    /// <summary>
+    /// 输出特征值描述信息
+    /// </summary>
+    /// <param name="feature"></param>
+    /// <param name="cycleSubject"></param>
+    /// <param name="newValue"></param>
+    /// <returns></returns>
     static SetsFeature ReNew(this SetsFeature feature, string cycleSubject, int newValue)
     {
         return new SetsFeature(feature.Key, cycleSubject + feature.Subject, feature.Value * newValue);
     }
+
 
     static Dictionary<string, SetsFeature> PrepareFeatureDictionary()
     {
@@ -111,6 +134,9 @@ public static class Helper
     static readonly object ObjectLock = new();
     static Dictionary<string, SetsFeature>? _allFeatures;
 
+    /// <summary>
+    /// 所有指标特征值
+    /// </summary>
     public static Dictionary<string, SetsFeature> AllFeatures
     {
         get
@@ -128,6 +154,12 @@ public static class Helper
 
     #endregion
 
+    /// <summary>
+    /// 评估特征计分
+    /// </summary>
+    /// <param name="features"></param>
+    /// <param name="result"></param>
+    /// <returns></returns>
     public static int Evaluation(this List<string> features, out List<string> result)
     {
         result = new List<string>();
@@ -176,6 +208,12 @@ public static class Helper
         return false;
     }
 
+    /// <summary>
+    /// 全包含，包括复合条件
+    /// </summary>
+    /// <param name="keys"></param>
+    /// <param name="setKeys"></param>
+    /// <returns></returns>
     public static bool AllFoundInComplex(this List<string> keys, List<string> setKeys)
     {
         var result = true;
@@ -203,42 +241,50 @@ public static class Helper
 
     #region Profiles
 
-    public static readonly List<Profile> DefaultProfiles = new List<Profile>
+    /// <summary>
+    /// 默认策略
+    /// </summary>
+    public static readonly Profile DefaultProfile = new()
     {
-        new()
+        Identity = "default",
+        Subject = "MACD MWD C0",
+        BuyingCondition = new ProfileCondition
         {
-            Identity = "default",
-            Subject = "MACD MWD C0",
-            BuyingCondition = new ProfileCondition
-            {
-                Include = new List<string>
+            Include = new List<string>
                 {
-                    "DMI.PDI.DAILY|DMI.GC.DAILY",
-                    "MACD.C0.WEEKLY|MACD.P.WEEKLY;MACD.PDI.WEEKLY|MACD.P.WEEKLY;MACD.GC.WEEKLY",
-                    "MACD.Co.DAILY|MACD.P.DAILY;MACD.PDI.DAILY|MACD.P.DAILY;MACD.GC.DAILY"
+                    "DMI.PDI.DAILY",
+                    "MACD.C0.WEEKLY|MACD.C0.MONTHLY",
+                    "MACD.C0.DAILY|MACD.P.DAILY;MACD.GC.DAILY"
                 },
-                Exclude = new List<string> { "KD.MDI.DAILY" }
-            },
-            SellingCondition = new ProfileCondition
-            {
-                Include = new List<string> { "KD.DC.DAILY" }
-            },
-            Persistence = true,
-            IsDefault = true
-        }
+            Exclude = new List<string> { "MACD.MDI.DAILY" }
+        },
+        SellingCondition = new ProfileCondition
+        {
+            Include = new List<string> { "KD.DC.DAILY" }
+        },
+        Persistence = true,
+        IsDefault = true
     };
 
-/*
- *
- *            BuyingJudge = (qs) => qs.SetKeys != null
-                              && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
-                              && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
-                              && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
-                              && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
-                              && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2,
-                SellingJudge = (qs) => qs.SetKeys != null
-                               &&
-                               (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY")),
- */
+    /// <summary>
+    /// 默认策略池
+    /// </summary>
+    public static readonly List<Profile> DefaultProfiles = new List<Profile>
+    {
+       DefaultProfile,
+       new Profile(
+           "harsh",
+           "MACD 3C0",
+           new ProfileCondition(new List<string>{"MACD.C0.DAILY","MACD.C0.WEEKLY","MACD.C0.MONTHLY"},new List<string>{"KD.MDI.DAILY"}),
+           new ProfileCondition(new List<string>{"KD.DC.DAILY"},new List<string>())
+           ),
+       new Profile(
+           "rebound",
+           "Rebound CK",
+           new ProfileCondition(new List<string>{"CCI.-200.DAILY","KD.GC.DAILY","KD.10.DAILY"},new List<string>()),
+           new ProfileCondition(new List<string>{"KD.DC.DAILY"},new List<string>())
+       )
+    };
+
     #endregion
 }

@@ -12,10 +12,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
-using Ban3.Infrastructures.Indicators.Formulas;
 using Ban3.Infrastructures.Indicators.Interfaces;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 {
@@ -23,44 +22,43 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
     /// ENE指标
     /// 
     /// </summary>
-    [Serializable, DataContract]
     public class ENE
             : Communal, IIndicatorFormula
     {
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("n", NullValueHandling = NullValueHandling.Ignore)]
         public int N { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("m1", NullValueHandling = NullValueHandling.Ignore)]
         public int M1 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("m2", NullValueHandling = NullValueHandling.Ignore)]
         public int M2 { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdUPPER { get; set; } = 23;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdLOWER { get; set; } = 24;
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public int ParamIdENE { get; set; } = 25;
 
         /// <summary>
@@ -86,6 +84,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = new List<Outputs.Values.ENE>();
         }
 
+        [JsonIgnore]
         public List<Outputs.Values.ENE> Result { get; set; }
 
         /// <summary>

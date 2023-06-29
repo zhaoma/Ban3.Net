@@ -4,20 +4,20 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Entries;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Outputs.Values;
 
 /// <summary>
 /// 移动平均线
 /// </summary>
-[Serializable, DataContract]
 public class MA
     : Record
 {
     /// <summary>
     /// 
     /// </summary>
-    [DataMember]
+    [JsonProperty("refPrices", NullValueHandling = NullValueHandling.Ignore)]
     public List<LineWithValue> RefPrices { get; set; }
 
     /// <summary>

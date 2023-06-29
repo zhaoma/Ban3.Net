@@ -5,20 +5,20 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Indicators.Outputs
+namespace  Ban3.Infrastructures.Indicators.Outputs;
+
+/// <summary>
+/// 标的里程碑
+/// </summary>
+public class MileStone
+        : StockLog
 {
     /// <summary>
-    /// 标的里程碑
+    /// 
     /// </summary>
-    public class MileStone
-            : StockLog
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<NoticeDate>? NoticeDates { get; set; }
-    }
+    [JsonProperty("noticeDates", NullValueHandling = NullValueHandling.Ignore)]
+    public List<NoticeDate>? NoticeDates { get; set; }
 }

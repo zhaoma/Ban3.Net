@@ -10,13 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using log4net;
+using Newtonsoft.Json;
 
 namespace  Ban3.Infrastructures.Indicators.Formulas
 {
     /// <summary>
     /// 共用公式
     /// </summary>
-    [Serializable, DataContract]
     public class Communal
     {
         public ILog Logger = LogManager.GetLogger(typeof(Communal));
@@ -24,7 +24,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
         public string Title { get; set; } = string.Empty;
 
         /// <summary>

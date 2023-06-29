@@ -14,20 +14,20 @@ using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Formulas;
 using Ban3.Infrastructures.Indicators.Interfaces;
 using Ban3.Infrastructures.Indicators.Outputs;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 {
     /// <summary>
     /// 均线
     /// </summary>
-    [Serializable, DataContract]
     public class MA : Communal, IIndicatorFormula
     {
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
-        public List<Line> Details { get; set; }
+        [JsonProperty("details", NullValueHandling = NullValueHandling.Ignore)]
+        public List<Line>? Details { get; set; }
 
         /// <summary>
         /// 
@@ -66,6 +66,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = new List<Outputs.Values.MA>();
         }
 
+        [JsonIgnore]
         public List<Outputs.Values.MA> Result { get; set; }
 
         /// <summary>

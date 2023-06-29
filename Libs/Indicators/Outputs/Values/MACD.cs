@@ -2,44 +2,44 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Outputs.Values
 {
     /// <summary>
     /// 异同移动平均线
     /// </summary>
-    [Serializable, DataContract]
     public class MACD
             : Record
     {
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public decimal RefEMAShort { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember]
+        [JsonIgnore]
         public decimal RefEMALong { get; set; }
 
         /// <summary>
         /// 快线
         /// </summary>
-        [DataMember]
+        [JsonProperty("refDIF", NullValueHandling = NullValueHandling.Ignore)]
         public decimal RefDIF { get; set; }
 
         /// <summary>
         /// 加权移动均线
         /// </summary>
-        [DataMember]
+        [JsonProperty("refDEA", NullValueHandling = NullValueHandling.Ignore)]
         public decimal RefDEA { get; set; }
 
         /// <summary>
         /// MACD柱
         /// </summary>
-        [DataMember]
+        [JsonProperty("refMACD", NullValueHandling = NullValueHandling.Ignore)]
         public decimal RefMACD { get; set; }
 
         /// <summary>

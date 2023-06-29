@@ -5,22 +5,19 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System.ComponentModel;
+namespace Ban3.Infrastructures.Indicators.Enums;
 
-namespace Ban3.Infrastructures.Indicators.Enums
+/// <summary>
+/// 条件参数类型
+/// </summary>
+public enum ConditionParamIs
 {
     /// <summary>
-    /// 条件参数类型
+    /// 指标
     /// </summary>
-    public enum ConditionParamIs
-    {
-        /// <summary>
-        /// 指标
-        /// </summary>
-        Indicator=0,
-        /// <summary>
-        /// 资料（财务指标）
-        /// </summary>
-        Information=1
-    }
+    Indicator = 0,
+    /// <summary>
+    /// 资料（财务指标）
+    /// </summary>
+    Information = 1
 }

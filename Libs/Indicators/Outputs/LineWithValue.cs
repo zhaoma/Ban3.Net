@@ -5,21 +5,18 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Indicators.Outputs
+namespace  Ban3.Infrastructures.Indicators.Outputs;
+
+/// <summary>
+/// 带值输出线
+/// </summary>
+public class LineWithValue : Line
 {
     /// <summary>
-    /// 带值输出线
+    /// 指标值
     /// </summary>
-    [Serializable, DataContract]
-    public class LineWithValue : Line
-    {
-        /// <summary>
-        /// 指标值
-        /// </summary>
-        [DataMember]
-        public decimal Ref { get; set; }
-    }
+    [JsonProperty("ref", NullValueHandling = NullValueHandling.Ignore)]
+    public decimal Ref { get; set; }
 }

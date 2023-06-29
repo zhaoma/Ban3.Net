@@ -7,6 +7,8 @@ namespace Ban3.Infrastructures.Indicators.Entries;
 /// </summary>
 public class SetsFeature
 {
+    public SetsFeature() { }
+
     public SetsFeature(string key, string subject,  int value)
     {
         Key = key;
@@ -18,13 +20,13 @@ public class SetsFeature
     /// 特征值
     /// </summary>
     [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
-    public string Key { get; set; }
+    public string Key { get; set; } = string.Empty;
 
     /// <summary>
     /// 描述
     /// </summary>
     [JsonProperty("subject", NullValueHandling = NullValueHandling.Ignore)]
-    public string Subject { get; set; }
+    public string Subject { get; set; } = string.Empty;
 
     /// <summary>
     /// 评分

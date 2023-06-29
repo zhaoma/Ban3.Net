@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Indicators.Outputs.Values;
 
@@ -15,19 +16,19 @@ public class ENE
     /// <summary>
     /// 上轨
     /// </summary>
-    [DataMember]
+    [JsonProperty("refUPPER", NullValueHandling = NullValueHandling.Ignore)]
     public decimal? RefUPPER { get; set; }
 
     /// <summary>
     /// 下轨
     /// </summary>
-    [DataMember]
+    [JsonProperty("refLOWER", NullValueHandling = NullValueHandling.Ignore)]
     public decimal? RefLOWER { get; set; }
 
     /// <summary>
     /// 中轨
     /// </summary>
-    [DataMember]
+    [JsonProperty("refENE", NullValueHandling = NullValueHandling.Ignore)]
     public decimal? RefENE { get; set; }
 
     /// <summary>
