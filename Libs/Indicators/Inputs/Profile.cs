@@ -6,9 +6,7 @@
  */
 
 using Ban3.Infrastructures.Indicators.Outputs;
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace  Ban3.Infrastructures.Indicators.Inputs
 {
@@ -27,15 +25,15 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         public Profile(
             string identity,
             string subject,
-            Func<StockSets, bool> buyingJudge,
-            Func<StockSets, bool> sellingJudge,
+            ProfileCondition buyingCondition,
+            ProfileCondition sellingCondition,
             bool persistence = false,
             bool isDefault = false)
         {
             Identity = identity;
             Subject = subject;
-            BuyingJudge = buyingJudge;
-            SellingJudge = sellingJudge;
+            BuyingCondition = buyingCondition;
+            SellingCondition = sellingCondition;
             Persistence = persistence;
             IsDefault = isDefault;
         }
@@ -58,7 +56,7 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 买入条件
         /// </summary>
-        public Func<StockSets, bool>? BuyingJudge { get; set; }
+        public ProfileCondition? BuyingCondition { get; set; }
 
         /// <summary>
         /// 排序条件
@@ -69,7 +67,7 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 卖出条件
         /// </summary>
-        public Func<StockSets, bool>? SellingJudge { get; set; }
+        public ProfileCondition? SellingCondition { get; set; }
 
         /// <summary>
         /// 发掘条数
@@ -80,7 +78,12 @@ namespace  Ban3.Infrastructures.Indicators.Inputs
 
         public bool IsDefault { get; set; }
 
-        public bool Match(StockSets qs)
-            => BuyingJudge != null && SellingJudge != null && BuyingJudge(qs) && !SellingJudge(qs);
+        /// 
+        public bool MatchBuying(StockSets qs)
+            => BuyingCondition != null && BuyingCondition.Match(qs);
+
+        /// 
+        public bool MatchSelling(StockSets qs)
+            => SellingCondition != null && SellingCondition.Match(qs);
     }
 }

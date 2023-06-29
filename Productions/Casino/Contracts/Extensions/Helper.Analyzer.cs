@@ -43,8 +43,9 @@ public static partial class Helper
                 var currentOp = Infrastructures.Indicators.Enums.StockOperate.Left;
                 for (int op = 0; op < operates.Count(); op++)
                 {
-                    operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile.BuyingJudge, profile.SellingJudge,
-                        currentOp);
+                    operates[op].Keys = everydayKeys[op].SetKeys!=null? everydayKeys[op].SetKeys.ToList():new List<string>();
+                    operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile, currentOp);
+
                     currentOp = operates[op].Operate;
                 }
 
@@ -68,14 +69,12 @@ public static partial class Helper
     /// 根据前一记录和策略生成当前操作建议
     /// </summary>
     /// <param name="codeKeys"></param>
-    /// <param name="buyingJudge"></param>
-    /// <param name="sellingJudge"></param>
+    /// <param name="profile"></param>
     /// <param name="prevOperation"></param>
     /// <returns></returns>
     static Infrastructures.Indicators.Enums.StockOperate GetOperate(
         IEnumerable<string> codeKeys,
-        Func<StockSets, bool> buyingJudge,
-        Func<StockSets, bool> sellingJudge,
+        Profile profile,
         Infrastructures.Indicators.Enums.StockOperate prevOperation)
     {
         switch (prevOperation)
@@ -83,14 +82,14 @@ public static partial class Helper
             case Infrastructures.Indicators.Enums.StockOperate.Buy:
             case Infrastructures.Indicators.Enums.StockOperate.Keep:
                 return //codeKeys.AllFoundIn(filterSell)
-                    buyingJudge(new StockSets { SetKeys = codeKeys })
+                    profile.MatchSelling(new StockSets { SetKeys = codeKeys })
                         ? Infrastructures.Indicators.Enums.StockOperate.Sell
                         : Infrastructures.Indicators.Enums.StockOperate.Keep;
 
             case Infrastructures.Indicators.Enums.StockOperate.Sell:
             case Infrastructures.Indicators.Enums.StockOperate.Left:
                 return //codeKeys.AllFoundIn(filterBuy)
-                    sellingJudge(new StockSets { SetKeys = codeKeys })
+                    profile.MatchBuying(new StockSets { SetKeys = codeKeys })
                         ? Infrastructures.Indicators.Enums.StockOperate.Buy
                         : Infrastructures.Indicators.Enums.StockOperate.Left;
         }

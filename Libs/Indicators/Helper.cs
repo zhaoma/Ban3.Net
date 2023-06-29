@@ -6,6 +6,7 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ban3.Infrastructures.Common;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 
@@ -20,7 +21,7 @@ public static class Helper
 
     public static readonly List<string> FeatureGroups = new List<string>
     {
-        "AMOUNT","BIAS","CCI","DMI","ENE","KD","MA","MACD"
+        "AMOUNT", "BIAS", "CCI", "DMI", "ENE", "KD", "MA", "MACD"
     };
 
     public static readonly Dictionary<string, string> ColorsDic = new Dictionary<string, string>
@@ -37,16 +38,16 @@ public static class Helper
 
     public static readonly List<SetsFeature> Features = new List<SetsFeature>
     {
-        new("AMOUNT.UP","量升",0),
+        new("AMOUNT.UP", "量升", 0),
         new("BIAS.GE", "乖离合理", 1),
         new("BIAS.LT", "乖离不合理", -1),
         new("BIAS.GC", "乖离金叉", 2),
         new("BIAS.DC", "乖离死叉", -2),
 
-        new("CCI.200","CCI200",0),
-        new("CCI.100","CCI100",0),
+        new("CCI.200", "CCI200", 0),
+        new("CCI.100", "CCI100", 0),
 
-        new("CCI.-200","CCI-200",0),
+        new("CCI.-200", "CCI-200", 0),
 
         new("DMI.PDI", "多空多头", 1),
         new("DMI.MDI", "多空空头", -1),
@@ -54,8 +55,8 @@ public static class Helper
         new("DMI.GC", "多空金叉", 2),
         new("DMI.DC", "多空死叉", -2),
 
-        new("ENE.UPPER","轨道上轨",0),
-        new("ENE.LOWER","轨道下轨",0),
+        new("ENE.UPPER", "轨道上轨", 0),
+        new("ENE.LOWER", "轨道下轨", 0),
 
         new("KD.PDI", "随机多头", 1),
         new("KD.MDI", "随机空头", -1),
@@ -64,7 +65,7 @@ public static class Helper
         new("KD.10", "随机超跌", -1),
         new("KD.DC", "随机死叉", -2),
 
-        new("MA.UP","均线多头",0),
+        new("MA.UP", "均线多头", 0),
 
         new("MACD.PDI", "平均线多头", 1),
         new("MACD.MDI", "平均线空头", -1),
@@ -175,6 +176,31 @@ public static class Helper
         return false;
     }
 
+    public static bool AllFoundInComplex(this List<string> keys, List<string> setKeys)
+    {
+        var result = true;
+
+        keys.ForEach(k =>
+        {
+            if (k.Contains("|"))
+            {
+                var ks = k.Split('|');
+                var one = ks.Select(s => s.Contains(";")
+                        ? s.Split(';').Aggregate(true, (current, s1) => current && setKeys.Contains(s1))
+                        : setKeys.Contains(s))
+                    .Aggregate(false, (current1, x) => current1 || x);
+
+                result = result && one;
+            }
+            else
+            {
+                result = result && setKeys.Contains(k);
+            }
+        });
+
+        return result;
+    }
+
     #region Profiles
 
     public static readonly List<Profile> DefaultProfiles = new List<Profile>
@@ -183,21 +209,36 @@ public static class Helper
         {
             Identity = "default",
             Subject = "MACD MWD C0",
-            BuyingJudge = (qs) => qs.SetKeys != null
-                                  && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
-                                  && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
-                                  && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
-                                  && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
-                                  && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2,
-            SellingJudge = (qs) => qs.SetKeys != null
-                                   &&
-                                   (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY")),
+            BuyingCondition = new ProfileCondition
+            {
+                Include = new List<string>
+                {
+                    "DMI.PDI.DAILY|DMI.GC.DAILY",
+                    "MACD.C0.WEEKLY|MACD.P.WEEKLY;MACD.PDI.WEEKLY|MACD.P.WEEKLY;MACD.GC.WEEKLY",
+                    "MACD.Co.DAILY|MACD.P.DAILY;MACD.PDI.DAILY|MACD.P.DAILY;MACD.GC.DAILY"
+                },
+                Exclude = new List<string> { "KD.MDI.DAILY" }
+            },
+            SellingCondition = new ProfileCondition
+            {
+                Include = new List<string> { "KD.DC.DAILY" }
+            },
             Persistence = true,
             IsDefault = true
         }
     };
 
-    public static readonly Profile DefaultProfile = DefaultProfiles[0];
-
+/*
+ *
+ *            BuyingJudge = (qs) => qs.SetKeys != null
+                              && qs.SetKeys.Count(x => x.StartsWith("MACD.PDI.")) >= 2
+                              && qs.SetKeys.Count(x => x.StartsWith("MACD.P.")) >= 2
+                              && qs.SetKeys.Count(x => x.StartsWith("DMI.PDI.")) >= 2
+                              && qs.SetKeys.Count(x => x.StartsWith("KD.PDI.")) >= 2
+                              && qs.SetKeys.Count(x => x.StartsWith("BIAS.GE.")) >= 2,
+                SellingJudge = (qs) => qs.SetKeys != null
+                               &&
+                               (qs.SetKeys.Contains("MACD.DC.DAILY") || qs.SetKeys.Contains("KD.DC.DAILY")),
+ */
     #endregion
 }

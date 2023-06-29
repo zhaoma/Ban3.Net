@@ -116,7 +116,7 @@ public static partial class Helper
             .FindLast(o => o.Name == name);
     }
 
-    public static List<IdentityRef> GetIdentitiesFromTeams(this List<WebApiTeam> teams, string code = "--all")
+    public static List<IdentityRef> GetIdentitiesFromTeams(this List<WebApiTeam> teams)
     {
         var result = new List<IdentityRef>();
 

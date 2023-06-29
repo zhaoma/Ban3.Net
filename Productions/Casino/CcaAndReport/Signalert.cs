@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators.Inputs;
+using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
@@ -136,8 +139,6 @@ public partial class Signalert
     /// 准备指标图表数据
     /// 准备指标特征数据
     /// 生成最新列表
-    /// 生成个股操作建议
-    /// 生成个股操作纪录
     /// </summary>
     /// <param name="stocks"></param>
     static void ExecutePrepare(List<Stock> stocks)
@@ -191,18 +192,36 @@ public partial class Signalert
 
     /// <summary>
     /// 策略评估
+    /// 生成个股操作建议
+    /// 生成个股操作纪录
     /// </summary>
     /// <param name="stocks"></param>
     public static void EvaluateProfiles(List<Stock> stocks)
     {
+        var profileFile = typeof(Profile).LocalFile();
+        var profiles = Config.CacheKey<Profile>("all")
+            .LoadOrSetDefault(() =>
+            {
+                var ps = Infrastructures.Indicators.Helper.DefaultProfiles;
+                if (!File.Exists(profileFile))
+                {
+                    profileFile.WriteFile(ps.ObjToJson());
+                }
+
+                return ps;
+            }, profileFile);
+
         new Action(() =>
             stocks.ParallelExecute((stock) =>
             {
                 var sets = Calculator.LoadSets(stock.Code);
                 if (sets != null && sets.Any())
                 {
-                    Infrastructures.Indicators.Helper.DefaultProfiles
-                        .Where(o => o.Persistence)
+                    sets = sets
+                        .Where(o => DateTime.Now.Year - o.MarkTime.Year <= 1)
+                        .ToList();
+
+                    profiles
                         .ParallelExecute((profile) =>
                             {
                                 Analyzer

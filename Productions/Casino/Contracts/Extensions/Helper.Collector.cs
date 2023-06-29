@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
@@ -25,6 +26,9 @@ public static partial class Helper
     /// <param name="_"></param>
     /// <returns></returns>
     public static List<Stock> LoadAllCodes(this ICollector _) => _.Sites.LoadAllCodes();
+
+    public static List<Stock> ScopedCodes(this ICollector _)
+        => _.LoadAllCodes().Where(o => o.Code.EndsWith(".SH") || o.Code.EndsWith(".SZ")).ToList();
 
     /// <summary>
     /// 获取某一标的

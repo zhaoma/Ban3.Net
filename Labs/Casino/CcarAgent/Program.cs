@@ -79,7 +79,7 @@ internal class Program
                 break;
 
             case "--eva":
-                new Action(() => { Signalert.EvaluateProfiles(Signalert.Collector.LoadAllCodes()); })
+                new Action(() => { Signalert.EvaluateProfiles(Signalert.Collector.ScopedCodes()); })
                     .ExecuteAndTiming("EvaluateProfiles.");
                 break;
 

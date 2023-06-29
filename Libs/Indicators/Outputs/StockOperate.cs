@@ -5,6 +5,7 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -31,5 +32,7 @@ namespace  Ban3.Infrastructures.Indicators.Outputs
         /// </summary>
         [JsonProperty("isRight")]
         public bool IsRight { get; set; }
+
+        [JsonProperty("keys")] public List<string> Keys { get; set; } = new();
     }
 }

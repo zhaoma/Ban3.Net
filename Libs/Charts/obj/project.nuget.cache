@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9rp2Q5dJfoxr3HfvctrwdLHp/TWJhV7FEMnyL553L6MwTsBDofKqYgefiF8qaumrOX93omVKz0JrqLS7qLay0Q==",
+  "dgSpecHash": "Y9HLB1WkrjvbRQE8iBJNFYE+deRYMx80ACZmHPKHjp0Ql4iiKmreAkDslLyixCLHyAX+r7R6Gxc1PxvkV9RY7g==",
   "success": true,
-  "projectFilePath": "d:\\GIT\\Ban3.Net\\Libs\\Charts\\Charts.csproj",
+  "projectFilePath": "D:\\GIT\\Ban3.Net\\Libs\\Charts\\Charts.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.4\\ban3.infrastructures.common.1.0.4.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.7.0\\fody.6.7.0.nupkg.sha512",
