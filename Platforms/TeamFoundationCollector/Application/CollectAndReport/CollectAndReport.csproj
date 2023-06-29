@@ -32,10 +32,6 @@
   <ItemGroup>
     <PackageReference Include="Ban3.Infrastructures.NetMail" Version="1.0.0" />
     <PackageReference Include="Ban3.Infrastructures.PlatformInvoke" Version="1.0.0" />
-    <PackageReference Include="Costura.Fody" Version="5.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

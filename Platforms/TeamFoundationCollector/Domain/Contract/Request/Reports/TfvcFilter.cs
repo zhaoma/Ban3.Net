@@ -19,17 +19,17 @@ public class TfvcFilter
     /// <summary>
     /// 包含关键字
     /// </summary>
-    public string Keyword { get; set; }
+    public string Keyword { get; set; } = string.Empty;
 
     /// <summary>
     /// 起始日期
     /// </summary>
-    public string FromDate { get; set; }
+    public string FromDate { get; set; } = string.Empty;
 
     /// <summary>
     /// 截至日期
     /// </summary>
-    public string ToDate { get; set; }
+    public string ToDate { get; set; } = string.Empty;
 
     /// <summary>
     /// 页尺寸
@@ -44,7 +44,7 @@ public class TfvcFilter
     /// <summary>
     /// 评论作者
     /// </summary>
-    public string CommentAuthor { get; set; }
+    public string CommentAuthor { get; set; } = string.Empty;
 
     /// <summary>
     /// 报告目标，all/changeset/shelveset

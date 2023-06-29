@@ -107,13 +107,8 @@ public static partial class Helper
     }
 
     public static List<WebApiTeam> LoadTeams(this ICore _)
-    {
-        var file = new List<WebApiTeam>().SetsFile();
-        return file.LoadOrSetDefault(
-            file.ReadFile().JsonToObj<List<WebApiTeam>>()!,
-            file
-        );
-    }
+    => Config.CacheKey<WebApiTeam>()
+        .LoadOrSetDefault<List<WebApiTeam>>(typeof(WebApiTeam).LocalFile());
 
     public static WebApiTeam? LoadTeamByName(this ICore _, string name)
     {
@@ -121,22 +116,20 @@ public static partial class Helper
             .FindLast(o => o.Name == name);
     }
 
-    public static List<IdentityRef> GetIdentitiesFromTeams(this List<WebApiTeam> teams)
+    public static List<IdentityRef> GetIdentitiesFromTeams(this List<WebApiTeam> teams, string code = "--all")
     {
-        var result=new List<IdentityRef>();
+        var result = new List<IdentityRef>();
 
-        foreach (var webApiTeam in teams)
+        foreach (var newList in
+                 from webApiTeam in teams
+                 where webApiTeam.Members != null && webApiTeam.Members.Any()
+                 select webApiTeam.Members
+                     .Where(o => o.Identity != null)
+                     .Select(o => o.Identity!)
+                     .Where(x => result!.All(y => y.Id != x.Id)))
         {
-            if (webApiTeam.Members != null && webApiTeam.Members.Any())
-            {
-                var newList = webApiTeam.Members
-                    .Where(o=>o.Identity!=null)
-                    .Select(o => o.Identity!)
-                    .Where(x => result.All(y => y.Id != x.Id));
-
-                result = result.Union(newList)
-                    .ToList();
-            }
+            result = result.Union(newList)
+                .ToList();
         }
 
         return result;

@@ -3,7 +3,12 @@
 @{
     Layout = null;
 
-    var showTeams = Model.Where(o => o.Members != null && o.Members.Count > 0 && o.Name.Contains("SSME"))
+    var showTeams = Model
+        .Where(o => o.Members is {Count: > 0 } )
+        .Where(o => string.IsNullOrEmpty(Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Config.SliderKeywords)
+                    || o.Name.Contains(Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Config.SliderKeywords))
+        .Where(o => string.IsNullOrEmpty(Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Config.SliderTeams)
+            || Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Config.SliderTeams.Split(',').Contains(o.Name))
         .OrderBy(o=>o.Name)
         .ToList();
 }
@@ -41,8 +46,6 @@
     $(document).ready(function () {
         if ($("#LimitTeamNames").val() != "") {
             $("input:radio[value='" + $("#LimitTeamNames").val() + "']").attr('checked', 'true');
-
-
             requestIdentities();
             requestTable();
         }

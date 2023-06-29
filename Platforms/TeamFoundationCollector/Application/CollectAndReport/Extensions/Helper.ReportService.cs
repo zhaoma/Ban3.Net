@@ -318,7 +318,7 @@ public static partial class Helper
     {
         if (!shelvesets.Any()) return;
 
-        var sheet = workbook.CreateSheet();
+        var sheet = workbook.CreateSheet("Shelvesets");
 
         var headerRow = sheet.CreateRow(0);
 
@@ -344,10 +344,10 @@ public static partial class Helper
             rowIndex++;
 
             if (row.Threads == null || !row.Threads.Any()) continue;
-            foreach (var thread in row.Threads)
+            foreach (var thread in row.Threads.Where(o => o.Comments != null && o.Comments.Any(x => !string.IsNullOrEmpty(x.Content))))
             {
                 if (thread.Comments == null) continue;
-                foreach (var threadComment in thread.Comments)
+                foreach (var threadComment in thread.Comments.Where(x => !string.IsNullOrEmpty(x.Content)))
                 {
                     var dataComment = sheet.CreateRow(rowIndex);
 
@@ -365,7 +365,7 @@ public static partial class Helper
     private static void AddSheet(this HSSFWorkbook workbook, List<CompositeChangeset> changesets)
     {
         if (!changesets.Any()) return;
-        var sheet = workbook.CreateSheet();
+        var sheet = workbook.CreateSheet("Changesets");
 
         var headerRow = sheet.CreateRow(0);
 
@@ -391,10 +391,10 @@ public static partial class Helper
             rowIndex++;
 
             if (row.Threads == null || !row.Threads.Any()) continue;
-            foreach (var thread in row.Threads)
+            foreach (var thread in row.Threads.Where(o => o.Comments != null && o.Comments.Any(x => !string.IsNullOrEmpty(x.Content))))
             {
                 if (thread.Comments == null) continue;
-                foreach (var threadComment in thread.Comments)
+                foreach (var threadComment in thread.Comments.Where(x => !string.IsNullOrEmpty(x.Content)))
                 {
                     var dataComment = sheet.CreateRow(rowIndex);
 
@@ -744,7 +744,7 @@ public static partial class Helper
             foreach (var dll in assemblies)
             {
                 var roads = Infrastructures.PlatformInvoke.Helper.AllLowerLevels(dll.Name, allDlls);
-                result.AssemblyFilesFromDependencies.AppendList(roads.UnionAll().ToList(), dll.Name);
+                result.AssemblyFilesFromDependencies.Append(roads.UnionAll().ToList(), dll.Name);
             }
         }
 
@@ -767,8 +767,7 @@ public static partial class Helper
                 var dlls = c.GetAssemblies(allAlias, allDeclares)
                     .Where(o=>!string.IsNullOrEmpty(o))
                     .Select(o => o.AssemblyName()).ToList();
-                result.AssemblyFilesFromSpringConfigs.AppendList(dlls, c.FilePath
-                );
+                result.AssemblyFilesFromSpringConfigs.Append(dlls, c.FilePath);
 
                 if (dlls.All(o => !result.AssemblyFilesFromDependencies.ContainsKey(o)))
                 {

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace Ban3.Infrastructures.LcmConfig.Entries;
 
 public class ManagedExe
     : ManagedProcess
 {
-    public string File { get; set; }
+    public string File { get; set; } = string.Empty;
 
     public string Description { get; set; }
 

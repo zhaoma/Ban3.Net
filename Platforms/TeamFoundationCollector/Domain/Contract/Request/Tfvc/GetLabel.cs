@@ -22,6 +22,7 @@ public class GetLabel
 
     public string RequestPath() => $"{Instance}/{Organization}/{Project}/_apis/tfvc/labels/{LabelId}";
 
+    /*
     public string RequestQuery()
     {
         var sb = new StringBuilder();
@@ -41,6 +42,6 @@ public class GetLabel
         sb.Append($"api-version={ApiVersion}");
         return sb.ToString();
     }
-
+    */
     
 }

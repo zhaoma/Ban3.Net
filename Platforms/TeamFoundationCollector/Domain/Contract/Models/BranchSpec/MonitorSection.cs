@@ -4,10 +4,10 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BranchSp
 
 public class MonitorSection
 {
-    public string SectionName { get; set; }
+    public string SectionName { get; set; } = string.Empty;
     
     public KeyValuePair<string, string> Target { get; set; }
 
-    public Dictionary<string, string> Guidelines { get; set; }
+    public Dictionary<string, string> Guidelines { get; set; } = new();
 
 }

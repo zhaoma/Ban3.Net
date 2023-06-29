@@ -1,4 +1,5 @@
-﻿using Ban3.Infrastructures.SpringConfig.Entries;
+﻿using System;
+using Ban3.Infrastructures.SpringConfig.Entries;
 using log4net;
 using System.Collections.Generic;
 using System.IO;
@@ -148,7 +149,7 @@ public static class Helper
             if (!string.IsNullOrEmpty(a))
             {
                 var xmlPath = Path.GetDirectoryName(filePath);
-                var importPath = Path.GetFullPath(Path.Combine(xmlPath, a));
+                var importPath = Path.GetFullPath(Path.Combine(xmlPath!, a));
 
                 if (!result.Contains(importPath))
                     result.Add(importPath);
@@ -168,7 +169,7 @@ public static class Helper
 
             if (node.Name == "object")
             {
-                foreach (XmlAttribute objectAttributes in node.Attributes)
+                foreach (XmlAttribute objectAttributes in node.Attributes!)
                 {
                     one.Type = node.TryGetAttribute("type");
                     one.Id = node.TryGetAttribute("id");
@@ -176,14 +177,12 @@ public static class Helper
                     one.Name = node.TryGetAttribute("Name");
                     one.FactoryObject = node.TryGetAttribute("factory-object");
 
-                    if (!string.IsNullOrEmpty(one.Type))
+                    if (string.IsNullOrEmpty(one.Type)) continue;
+                    var ts = one.Type.Split(',').Select(o => o.Trim()).ToArray();
+                    if (ts.Length >= 2)
                     {
-                        var ts = one.Type.Split(',').Select(o => o.Trim()).ToArray();
-                        if (ts.Length >= 2)
-                        {
-                            one.TypeName = ts[0];
-                            one.AssemblyName = ts[ts.Length - 1];
-                        }
+                        one.TypeName = ts[0];
+                        one.AssemblyName = ts[ts.Length - 1];
                     }
                 }
 
@@ -236,7 +235,7 @@ public static class Helper
             }
             else
             {
-                val = argListItem.TryGetAttribute("factory-object");
+                argListItem.TryGetAttribute("factory-object");
             }
         }
 
@@ -447,13 +446,7 @@ public static class Helper
     {
         return a.ToUpper() == b.Trim().Replace(" ", "").ToUpper();
     }
-
-    static bool AssemblyEqual(this string a, string b)
-    {
-        return a.TextEqual(b)
-               || $"{a}.dll".TextEqual(b);
-    }
-
+    
     #endregion
 
     #region AllHighLevel Roads
@@ -468,10 +461,10 @@ public static class Helper
         if (a == null)
             return new List<string[]>();
 
-        var rds = HighLevels(all, a, list, new string[0]);
+        var rds = HighLevels(all, a, list, Array.Empty<string>());
         foreach (var r in rds)
         {
-            var oneRoad = new string[0];
+            var oneRoad = Array.Empty<string>();
 
             FetchHighLevels(oneRoad, r, all, list, 1);
         }
@@ -533,8 +526,7 @@ public static class Helper
 
     public static List<string[]> AllLowerLevels(List<SpringXml> configs, List<SpringXml> all = null)
     {
-        var list = new List<string[]>();
-        all = all ?? LoadConfigs();
+        all ??= LoadConfigs();
 
         return configs.Select(o => AllLowerLevels(o.FilePath, all))
             .UnionAll()
@@ -555,7 +547,7 @@ public static class Helper
         var rds = a.Imports;
         foreach (var r in rds)
         {
-            var oneRoad = new string[0];
+            var oneRoad = Array.Empty<string>();
 
             FetchLowerLevels(oneRoad, r, all, list, 1);
         }

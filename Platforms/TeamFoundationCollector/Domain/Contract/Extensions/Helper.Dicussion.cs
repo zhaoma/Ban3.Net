@@ -30,7 +30,7 @@ public static partial class Helper
             if (thread.Id > 0)
             {
                 id.DataFile<DiscussionThread>()
-                    .WriteFile(thread.ObjToJson());
+                    .PersistFileOnDemand(thread);
             }
 
             id++;

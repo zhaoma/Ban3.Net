@@ -66,7 +66,7 @@ public class MonitorBuildReports
     static readonly string ConfigFile = Path.Combine(Environment.CurrentDirectory, $"{CacheKey}.json");
 
     public static List<ReportDefine> Jobs
-        =>  CacheKey.LoadOrSetDefault(DefaultJobs, ConfigFile);
+        =>  CacheKey.LoadOrSetDefault(() => DefaultJobs, ConfigFile);
 
     public static bool Update(List<ReportDefine> jobs)
     {

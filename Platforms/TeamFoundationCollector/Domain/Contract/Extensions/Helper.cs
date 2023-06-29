@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading;
 using Ban3.Infrastructures.Common.Extensions;
 using log4net;
 using Newtonsoft.Json;
@@ -14,18 +13,15 @@ public static partial  class Helper
 {
     static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
 
-    static readonly object ObjLock = new object();
+    #region string parse
 
-    static readonly ReaderWriterLockSlim LockSlim = new ReaderWriterLockSlim();
-
-    const int LockSlimTimeout = 1000;
     public static string ShowName(this string displayName)
     {
         if (string.IsNullOrEmpty(displayName)) return "-";
 
         try
         {
-            return displayName.Substring(0, (displayName + "").IndexOf("("));
+            return displayName.Substring(0, (displayName + "").IndexOf("(", StringComparison.Ordinal));
         }
         catch (Exception) { }
 
@@ -38,8 +34,8 @@ public static partial  class Helper
 
         try
         {
-            var start = (displayName + "").IndexOf("(") + 1;
-            return displayName.Substring(start, (displayName + "").IndexOf(")") - start);
+            var start = (displayName + "").IndexOf("(", StringComparison.Ordinal) + 1;
+            return displayName.Substring(start, (displayName + "").IndexOf(")", StringComparison.Ordinal) - start);
         }
         catch (Exception) { }
 
@@ -70,8 +66,9 @@ public static partial  class Helper
         return dateString;
     }
 
-    public static bool IsIgnored(this string str)
-        => Config.IgnoredKeys.Any(str.Contains);
+    #endregion
+
+    #region request parse
 
     public static string ToQueryString(this Dictionary<string, object> dic)
     {
@@ -103,18 +100,17 @@ public static partial  class Helper
     {
         var properties = obj.GetType()
                             .GetProperties();
-
-
+        
         foreach (var prop in properties)
         {
             var attribute = prop.GetCustomAttribute<JsonPropertyAttribute>();
             if (attribute != null)
             {
-                var key = attribute?.PropertyName;
-                var val = prop?.GetValue(obj);
-                var type = prop?.PropertyType;
+                var key = attribute.PropertyName;
+                var val = prop.GetValue(obj);
+                var type = prop.PropertyType;
 
-                var isPrimitive = type != null && (type.IsValueType || type == typeof(string));
+                var isPrimitive = type.IsValueType || type == typeof(string);
 
                 if (!isPrimitive)
                 {
@@ -133,4 +129,51 @@ public static partial  class Helper
             }
         }
     }
+
+    #endregion
+
+    public static bool IsIgnored(this string str)
+        => Config.IgnoredKeys.Any(str.Contains);
+
+    public static bool PersistFileOnDemand<T>(this string filePath, T content)
+    {
+        try
+        {
+            var timestamp = content!.ObjToJson().MD5String();
+
+            var foundTimestamp = PersistFilesTimestampDic.TryGetValue(filePath, out var ts);
+            if (foundTimestamp && ts != null && ts.Equals(timestamp))
+            {
+                Console.Write("_");
+                return true;
+            }
+
+            if (!foundTimestamp)
+            {
+                ts = filePath.ReadFile().MD5String();
+                if (ts.Equals(timestamp))
+                {
+                    Console.Write(".");
+                    return true;
+                }
+                else
+                {
+                    Console.Write("+");
+                }
+            }
+
+            filePath.WriteFile(content!.ObjToJson());
+            PersistFilesTimestampDic.AddOrReplace(filePath, timestamp);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+        
+        return false;
+    }
+
+    private static readonly Dictionary<string, string> PersistFilesTimestampDic = new();
 }

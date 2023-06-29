@@ -60,7 +60,7 @@ public static partial class Helper
             if (branches is { Success: true, Value: { } })
             {
                 var file = branches.Value.SetsFile();
-                file.WriteFile(branches.Value.ObjToJson());
+                file.PersistFileOnDemand(branches.Value);
             }
 
             return true;
@@ -74,13 +74,10 @@ public static partial class Helper
     }
 
     public static List<TfvcBranch> LoadBranches(this ITfvc _)
-    {
-        var file = new List<TfvcBranch>().SetsFile();
-        return file.LoadOrSetDefault(
-            file.ReadFile().JsonToObj<List<TfvcBranch>>()!,
-            file
-        );
-    }
+        => Config.CacheKey<TfvcBranch>()
+            .LoadOrSetDefault<List<TfvcBranch>>(
+                typeof(TfvcBranch).LocalFile()
+                );
 
     public static GetBranchRefsResult GetBranchRefs(this ITfvc _, GetBranchRefs request)
         => ServerResource.TfvcGetBranchRefs.Execute<GetBranchRefsResult>(request).Result;
@@ -96,7 +93,7 @@ public static partial class Helper
 
     public static GetChangesetResult GetChangeset(this ITfvc _, int changesetId)
         => _.GetChangeset(new GetChangeset { Id = changesetId });
-    
+
     public static bool GetChangesetAndSave(this ITfvc _, TfvcChangesetRef changesetRef)
     {
         try
@@ -105,10 +102,11 @@ public static partial class Helper
 
             if (changeset.Success)
             {
-                changeset.ChangesetId.DataFile<TfvcChangeset>()
-                    .WriteFile(changeset.ObjToJson());
+                if (!changeset.Comment.IsIgnored())
+                    changeset.ChangesetId.DataFile<TfvcChangeset>()
+                        .PersistFileOnDemand(changeset);
             }
-            
+
             return true;
         }
         catch (Exception ex)
@@ -163,6 +161,7 @@ public static partial class Helper
     /// </summary>
     /// <param name="_"></param>
     /// <param name="id">authorId(GUID)</param>
+    /// <param name="days"></param>
     /// <param name="pageNo"></param>
     /// <param name="pageSize"></param>
     /// <returns></returns>
@@ -281,7 +280,7 @@ public static partial class Helper
         if (!string.IsNullOrEmpty(branchName))
         {
 
-            nodes = xmlDoc.FindBranchNode(branchName)
+            nodes = xmlDoc.FindBranchNode(branchName)?
                 .SelectNodes("Dependencies/Dependency");
         }
 
@@ -296,7 +295,7 @@ public static partial class Helper
         return result;
     }
 
-    private static XmlNode FindBranchNode(this XmlDocument xmlDoc, string branchName)
+    private static XmlNode? FindBranchNode(this XmlDocument xmlDoc, string branchName)
     {
         var ns = xmlDoc.SelectNodes("//Branch");
 
@@ -376,7 +375,7 @@ public static partial class Helper
             ShelvesetId = shelvesetId,
             RequestData=new Request.SubCondition.RequestData()
         });
-    
+
     public static bool GetShelvesetAndSave(this ITfvc _, TfvcShelvesetRef shelvesetRef)
     {
         try
@@ -385,8 +384,9 @@ public static partial class Helper
 
             if (shelveset.Success)
             {
-                shelveset.Id.MD5String().DataFile<TfvcShelveset>()
-                    .WriteFile(shelveset.ObjToJson());
+                if (!shelveset.Comment.IsIgnored())
+                    shelveset.Id.MD5String().DataFile<TfvcShelveset>()
+                        .PersistFileOnDemand(shelveset);
             }
 
             return true;
@@ -398,7 +398,6 @@ public static partial class Helper
 
         return false;
     }
-
 
     public static GetShelvesetsResult GetShelvesets(this ITfvc _, GetShelvesets request)
         => ServerResource.TfvcGetShelvesets.Execute<GetShelvesetsResult>(request).Result;

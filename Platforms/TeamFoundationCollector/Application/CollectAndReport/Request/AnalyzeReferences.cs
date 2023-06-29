@@ -2,7 +2,7 @@
 
 public class AnalyzeReferences
 {
-    public string SpringConfigFile { get; set; }
+    public string SpringConfigFile { get; set; } = string.Empty;
 
-    public string AssembliesStartWith { get; set; }
+    public string AssembliesStartWith { get; set; } = string.Empty;
 }

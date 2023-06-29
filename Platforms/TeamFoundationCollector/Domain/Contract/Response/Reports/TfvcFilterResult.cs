@@ -19,7 +19,7 @@ public class TfvcFilterResult
         Rows=new();
     }
 
-    public TfvcFilter Filter { get; set; }
+    public TfvcFilter Filter { get; set; } =new();
     
     public List<CompositeChangeset> Changesets { get; set; }
 
@@ -29,7 +29,7 @@ public class TfvcFilterResult
 
     public List<ShowRow> Rows { get; set; }
 
-    public List<ShowRow> PagedRows { get; set; }
+    public List<ShowRow> PagedRows { get; set; } = new();
 
     public int TotalPage
     {

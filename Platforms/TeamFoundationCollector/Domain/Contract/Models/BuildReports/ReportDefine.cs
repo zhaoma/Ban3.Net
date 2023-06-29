@@ -7,13 +7,13 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BuildRep
 {
     public class ReportDefine
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = string.Empty;
 
-        public string Subject { get; set; }
+        public string Subject { get; set; } = string.Empty;
 
-        public List<ReportSection> Sections { get; set; }
+        public List<ReportSection> Sections { get; set; } = new();
 
-        public List<string> Subscribed { get; set; }
+        public List<string> Subscribed { get; set; } = new();
 
         public List<string>? CC { get; set; }
     }

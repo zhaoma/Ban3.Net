@@ -22,7 +22,7 @@ public class MonitorBranchSpec
                     {
                         SectionName = "MAIN",
                         Target = new KeyValuePair<string, string>("IDT(MAIN)", @"$/CTS/IDT/MAIN/BranchSpec.xml"),
-                        Guidelines = new ()
+                        Guidelines = new()
                         {
                             { "ICS.INT(MAIN)", @"$/CTS/Development/ICS/ICS.INT/BranchSpec.xml" }
                         }
@@ -32,7 +32,7 @@ public class MonitorBranchSpec
                     {
                         SectionName = "VA50",
                         Target = new KeyValuePair<string, string>("IDT(VA50)", @"$/CTS/IDT/PCP/VA50/BranchSpec.xml"),
-                        Guidelines = new ()
+                        Guidelines = new()
                         {
                             { "ICS.INT(VA50)", @"$/CTS/PCP/VA50/Dev/ICS/ICS.INT/BranchSpec.xml" }
                         }
@@ -42,7 +42,7 @@ public class MonitorBranchSpec
                     {
                         SectionName = "VA40",
                         Target = new KeyValuePair<string, string>("IDT(VA40)", @"$/CTS/IDT/PCP/VA40/BranchSpec.xml"),
-                        Guidelines = new ()
+                        Guidelines = new()
                         {
                             { "ICS.INT(VA40)", @"$/CTS/PCP/VA40/Dev/ICS/ICS.INT/BranchSpec.xml" }
                         }
@@ -50,7 +50,7 @@ public class MonitorBranchSpec
                 },
                 Subscribed = new List<string>
                 {
-                    "zhifeng.zhao.ext@siemens-healthineers.com" ,
+                    "zhifeng.zhao.ext@siemens-healthineers.com",
                     "yaoyao.guo@siemens-healthineers.com",
                     "yongfeng.feng@siemens-healthineers.com",
                     "yunjie.zeng@siemens-healthineers.com",
@@ -63,7 +63,7 @@ public class MonitorBranchSpec
     static readonly string ConfigFile = Path.Combine(Environment.CurrentDirectory, $"{CacheKey}.json");
 
     public static List<MonitorJob> Jobs
-        => CacheKey.LoadOrSetDefault(DefaultJobs, ConfigFile);
+        => CacheKey.LoadOrSetDefault(() => DefaultJobs, ConfigFile);
 
     public static bool Update(List<MonitorJob> jobs)
     {

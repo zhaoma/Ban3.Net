@@ -262,7 +262,7 @@ public static partial class Helper
             if (controllers is { Success: true, Value: { } })
             {
                 var file = controllers.Value.SetsFile();
-                file.WriteFile(controllers.Value.ObjToJson());
+                file.PersistFileOnDemand(controllers.Value);
             }
 
             return true;
@@ -278,9 +278,8 @@ public static partial class Helper
     public static List<BuildController> LoadControllers(this IBuild _)
     {
         var file = new List<BuildController>().SetsFile();
-        return file.LoadOrSetDefault(
-            file.ReadFile().JsonToObj<List<BuildController>>()!,
-            file);
+        return Config.CacheKey<BuildController>()
+            .LoadOrSetDefault<List<BuildController>>(file);
     }
     
     public static ListDefinitionsResult ListDefinitions(this IBuild _, ListDefinitions request)
@@ -295,7 +294,7 @@ public static partial class Helper
             if (definitions is { Success: true, Value: { } })
             {
                 var file = definitions.Value.SetsFile();
-                file.WriteFile(definitions.Value.ObjToJson());
+                file.PersistFileOnDemand(definitions.Value);
             }
 
             return true;
@@ -309,12 +308,7 @@ public static partial class Helper
     }
 
     public static List<BuildDefinitionReference> LoadDefinitionRefs(this IBuild _)
-    {
-        var file = new List<BuildDefinitionReference>().SetsFile();
-        return file.LoadOrSetDefault(
-            file.ReadFile().JsonToObj<List<BuildDefinitionReference>>()!,
-            file);
-    }
+    => Config.CacheKey<BuildDefinitionReference>().LoadOrSetDefault<List<BuildDefinitionReference>>(typeof(BuildDefinitionReference).LocalFile());
 
     public static ListFoldersResult ListFolders(this IBuild _, ListFolders request)
         => ServerResource.BuildListFolders.Execute<ListFoldersResult>(request).Result;
@@ -328,7 +322,7 @@ public static partial class Helper
             if (folders is { Success: true, Value: { } })
             {
                 var file = folders.Value.SetsFile();
-                file.WriteFile(folders.Value.ObjToJson());
+                file.PersistFileOnDemand(folders.Value);
             }
 
             return true;
@@ -342,12 +336,7 @@ public static partial class Helper
     }
 
     public static List<Folder> LoadFolders(this IBuild _)
-    {
-        var file = new List<Folder>().SetsFile();
-        return file.LoadOrSetDefault(
-            file.ReadFile().JsonToObj<List<Folder>>()!,
-            file);
-    }
+    => Config.CacheKey<Folder>().LoadOrSetDefault<List<Folder>>(typeof(Folder).LocalFile());
 
     public static QueueBuildResult QueueBuild(this IBuild _, QueueBuild request)
         => ServerResource.BuildQueueBuild.Execute<QueueBuildResult>(request).Result;

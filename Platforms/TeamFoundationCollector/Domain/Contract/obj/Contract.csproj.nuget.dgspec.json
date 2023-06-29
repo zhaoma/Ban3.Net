@@ -47,15 +47,15 @@
           "dependencies": {
             "Ban3.Infrastructures.Common": {
               "target": "Package",
-              "version": "[1.0.2, )"
+              "version": "[1.0.4, )"
             },
             "Ban3.Infrastructures.NetHttp": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[1.0.4, )"
             },
             "Ban3.Infrastructures.RuntimeCaching": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[1.0.4, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",

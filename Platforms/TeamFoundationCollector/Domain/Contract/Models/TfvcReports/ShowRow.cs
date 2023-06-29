@@ -22,7 +22,7 @@ public class ShowRow
 
     public List<TfvcChange>? Changes { get; set; }
 
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
     
     public List<CompositeThread>? Threads { get; set; }
 }

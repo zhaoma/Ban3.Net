@@ -54,7 +54,7 @@ public static partial class Helper
             if (pipelines is { Success: true, Value: { } })
             {
                 var file = pipelines.Value.SetsFile();
-                file.WriteFile(pipelines.Value.ObjToJson());
+                file.PersistFileOnDemand(pipelines.Value);
             }
 
             return true;
@@ -68,12 +68,10 @@ public static partial class Helper
     }
 
     public static List<Pipeline> LoadPipelines(this IPipelines _)
-    {
-        var file = new List<Pipeline>().SetsFile();
-        return file.LoadOrSetDefault(
-            file.ReadFile().JsonToObj<List<Pipeline>>()!,
-            file);
-    }
+        => Config.CacheKey<Pipeline>()
+            .LoadOrSetDefault<List<Pipeline>>(
+                typeof(Pipeline).LocalFile()
+            );
 
     public static ListRunsResult ListRuns(this IPipelines _, ListRuns request)
         => ServerResource.PipelinesListRuns.Execute<ListRunsResult>(request).Result;

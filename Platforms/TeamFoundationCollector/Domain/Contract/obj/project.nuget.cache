@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "kVWZJ7e5kWanxjPhCXz3KoWG6Dj9zrYH2FrVakAizV4pVNoTD+b1EF0JnK5+l9cfSjrpkkeCHAnpcGjS/NwI+w==",
+  "dgSpecHash": "+UFOEWAOZ7SoUtTFU1T96J1Mmaj9p+ZXGJ1UXJnoWLDzrwc/apTrn1jqDBRymWnJz/FVZzFIqEHdx4aIl/VCAw==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Platforms\\TeamFoundationCollector\\Domain\\Contract\\Contract.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.2\\ban3.infrastructures.common.1.0.2.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.0\\ban3.infrastructures.nethttp.1.0.0.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.runtimecaching\\1.0.0\\ban3.infrastructures.runtimecaching.1.0.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.4\\ban3.infrastructures.common.1.0.4.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.4\\ban3.infrastructures.nethttp.1.0.4.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.runtimecaching\\1.0.4\\ban3.infrastructures.runtimecaching.1.0.4.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\enums.net\\4.0.0\\enums.net.4.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.2.5\\fody.6.2.5.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",

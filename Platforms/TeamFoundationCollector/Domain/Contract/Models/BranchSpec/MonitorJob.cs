@@ -4,9 +4,9 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BranchSp
 
 public class MonitorJob
 {
-    public string Subject { get; set; }
+    public string Subject { get; set; } = string.Empty;
 
-    public List<MonitorSection> Sections { get; set; }
+    public List<MonitorSection> Sections { get; set; } = new();
     
-    public List<string> Subscribed { get; set; }
+    public List<string> Subscribed { get; set; } = new();
 }

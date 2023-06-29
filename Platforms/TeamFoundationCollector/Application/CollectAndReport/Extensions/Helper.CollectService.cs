@@ -6,10 +6,7 @@ using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Functi
 using Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Interfaces;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Extensions;
-using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Interfaces.Functions;
 using Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.TfvcReports;
-using Microsoft.Office.Interop.Outlook;
-using Action = System.Action;
 using Build = Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Entities.Build;
 
 namespace Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Extensions;
@@ -26,9 +23,7 @@ public static partial class Helper
 
     public static Build? DefinitionsLastBuild(this ICollectService _, int definitionId)
         => _.Build.GetLastBuildForDefinition(definitionId);
-
-
-
+    
     #endregion
 
     #region Tfvc
@@ -40,7 +35,7 @@ public static partial class Helper
         teams.ParallelExecute(
             (team) =>
             {
-                _.SyncOneTeamSummary(team.Id, true);
+                _.SyncOneTeamSummary(team.Id);
             }, Config.MaxParallelTasks
         );
     }
@@ -71,6 +66,7 @@ public static partial class Helper
         try
         {
             var file = identityGuid.DataFile<IdentitySummary>();
+
             if (!forceOverwrite && File.Exists(file)) return;
 
             var result = new IdentitySummary
@@ -81,10 +77,9 @@ public static partial class Helper
             result.AppendChangesets(_.FulfillDiscussion(_.Tfvc.PrepareChangesets(identityGuid, 0, true)));
             result.AppendShelvesets(_.FulfillDiscussion(_.Tfvc.PrepareShelvesets(identityGuid, true), identityGuid));
 
-            file
-                .WriteFile(result.ObjToJson());
+            file.PersistFileOnDemand(result);
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             Logger.Error(identityGuid);
             Logger.Error(ex);
@@ -115,7 +110,7 @@ public static partial class Helper
                             });
 
 
-                }).ExecuteAndTiming($"parse page {pageNo} changesets discussion.");
+                }).ExecuteAndTiming($"Page {pageNo} Changesets Discussion");
             });
 
         return changesets;
@@ -145,7 +140,7 @@ public static partial class Helper
                         {
                             o.Threads = _.Discussion.GetThreads(o.Id, authorGuid).GetCompositeThreads();
                         });
-                }).ExecuteAndTiming($"parse page {pageNo} shelvesets discussion.");
+                }).ExecuteAndTiming($"Page {pageNo} Shelvesets Discussion");
             });
 
         return shelvesets;

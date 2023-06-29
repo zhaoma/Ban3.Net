@@ -4,7 +4,7 @@ namespace Ban3.Platforms.TeamFoundationCollector.Application.CollectAndReport.Re
 
 public class GetRelationsResult
 {
-    public Dictionary<string,List<string>> ObjectsAndReasons { get; set; }
+    public Dictionary<string,List<string>> ObjectsAndReasons { get; set; } = new();
 
-    public List<WxsXml> Incos { get; set; }
+    public List<WxsXml> Incos { get; set; } = new();
 }

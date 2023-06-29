@@ -8,11 +8,11 @@ namespace Ban3.Platforms.TeamFoundationCollector.Domain.Contract.Models.BranchSp
 {
     public class MonitorRecord
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public string Version { get; set; }
+        public string Version { get; set; } = string.Empty;
 
-        public Dictionary<string,string> GuidelineVersions { get; set; }
+        public Dictionary<string, string> GuidelineVersions { get; set; } = new();
 
         public bool NotSame 
             => GuidelineVersions.Any(o => o.Value != Version);
