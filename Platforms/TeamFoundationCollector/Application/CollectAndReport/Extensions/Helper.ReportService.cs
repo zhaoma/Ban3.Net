@@ -197,7 +197,7 @@ public static partial class Helper
         var changesets = new List<CompositeChangeset>();
 
         changesets.AddRange(identitySummary.Changesets.Select(o => o.Value));
-        Console.WriteLine($"GetCompositeChangesets:{filter.ObjToJson()}");
+
         changesets = changesets.Where(o =>
             (!filter.HasComments || (o.Threads != null && o.Threads.Any()))
             && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))
@@ -213,7 +213,6 @@ public static partial class Helper
     {
         var r = string.IsNullOrEmpty(dateVal) ||
                 dateString.ToDateTime().ToYmd().ToInt() >= dateVal.ToDateTime().ToYmd().ToInt();
-        Console.WriteLine($" GE {dateString}{dateVal}={r}");
 
         return r;
     }
@@ -222,7 +221,6 @@ public static partial class Helper
     {
         var r=string.IsNullOrEmpty(dateVal) || 
               dateString.ToDateTime().ToYmd().ToInt() <= dateVal.ToDateTime().ToYmd().ToInt();
-        Console.WriteLine($" LE {dateString}{dateVal}={r}");
 
         return r;
     }
@@ -237,7 +235,7 @@ public static partial class Helper
         var shelvesets = new List<CompositeShelveset>();
 
         shelvesets.AddRange(identitySummary.Shelvesets.Select(o => o.Value));
-        Console.WriteLine($"GetCompositeShelvesets:{filter.ObjToJson()}");
+
         shelvesets = shelvesets.Where(o =>
             (!filter.HasComments || (o.Threads != null && o.Threads.Any()))
             && (string.IsNullOrEmpty(filter.CommentAuthor) || o.Threads.ThreadsHasAuthor(filter.CommentAuthor))

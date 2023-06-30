@@ -19,8 +19,8 @@
           "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
         },
         "contentFiles": {
-          "contentFiles/any/any/_._": {
-            "buildAction": "None",
+          "contentFiles/any/netstandard2.0/favicon.ico": {
+            "buildAction": "Content",
             "codeLanguage": "any",
             "copyToOutput": false
           }
@@ -68,20 +68,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.NetMail.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.2",
-          "Rougamo.Fody": "1.4.1",
-          "System.Reflection.Metadata": "7.0.1"
-        },
-        "compile": {
-          "lib/netstandard2.0/Ban3.Infrastructures.PlatformInvoke.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Ban3.Infrastructures.PlatformInvoke.dll": {}
         }
       },
       "Ban3.Infrastructures.RuntimeCaching/1.0.4": {
@@ -1111,7 +1097,7 @@
           "lib/net45/_._": {}
         }
       },
-      "System.Reflection.Metadata/7.0.1": {
+      "System.Reflection.Metadata/7.0.2": {
         "type": "package",
         "dependencies": {
           "System.Collections.Immutable": "7.0.0",
@@ -1642,6 +1628,21 @@
           "lib/net45/_._": {}
         }
       },
+      "Ban3.Infrastructures.PlatformInvoke/1.0.1": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.4",
+          "Rougamo.Fody": "1.4.1",
+          "System.Reflection.Metadata": "7.0.2"
+        },
+        "compile": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        }
+      },
       "Ban3.Infrastructures.SpringConfig/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -1677,7 +1678,7 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Ban3.Infrastructures.NetMail": "1.0.0",
-          "Ban3.Infrastructures.PlatformInvoke": "1.0.0",
+          "Ban3.Infrastructures.PlatformInvoke": "1.0.1",
           "Ban3.Infrastructures.SpringConfig": "1.0.0",
           "Ban3.Infrastructures.WxsConfig": "1.0.0",
           "Ban3.Platforms.TeamFoundationCollector.Domain.Contract": "1.0.0"
@@ -1729,8 +1730,8 @@
           "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
         },
         "contentFiles": {
-          "contentFiles/any/any/_._": {
-            "buildAction": "None",
+          "contentFiles/any/netstandard2.0/favicon.ico": {
+            "buildAction": "Content",
             "codeLanguage": "any",
             "copyToOutput": false
           }
@@ -1778,20 +1779,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.NetMail.dll": {}
-        }
-      },
-      "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.2",
-          "Rougamo.Fody": "1.4.1",
-          "System.Reflection.Metadata": "7.0.1"
-        },
-        "compile": {
-          "lib/netstandard2.0/Ban3.Infrastructures.PlatformInvoke.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Ban3.Infrastructures.PlatformInvoke.dll": {}
         }
       },
       "Ban3.Infrastructures.RuntimeCaching/1.0.4": {
@@ -2801,7 +2788,7 @@
           "lib/net45/_._": {}
         }
       },
-      "System.Reflection.Metadata/7.0.1": {
+      "System.Reflection.Metadata/7.0.2": {
         "type": "package",
         "dependencies": {
           "System.Collections.Immutable": "7.0.0",
@@ -3270,6 +3257,21 @@
           "lib/net45/_._": {}
         }
       },
+      "Ban3.Infrastructures.PlatformInvoke/1.0.1": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.4",
+          "Rougamo.Fody": "1.4.1",
+          "System.Reflection.Metadata": "7.0.2"
+        },
+        "compile": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ban3.Infrastructures.PlatformInvoke.dll": {}
+        }
+      },
       "Ban3.Infrastructures.SpringConfig/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -3305,7 +3307,7 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Ban3.Infrastructures.NetMail": "1.0.0",
-          "Ban3.Infrastructures.PlatformInvoke": "1.0.0",
+          "Ban3.Infrastructures.PlatformInvoke": "1.0.1",
           "Ban3.Infrastructures.SpringConfig": "1.0.0",
           "Ban3.Infrastructures.WxsConfig": "1.0.0",
           "Ban3.Platforms.TeamFoundationCollector.Domain.Contract": "1.0.0"
@@ -3394,19 +3396,6 @@
         "ban3.infrastructures.netmail.nuspec",
         "icon.png",
         "lib/netstandard2.0/Ban3.Infrastructures.NetMail.dll"
-      ]
-    },
-    "Ban3.Infrastructures.PlatformInvoke/1.0.0": {
-      "sha512": "2Pso/b77f0aBt2c4weup8L84PGWPKaCEtRaly/144oJ44K447Cyr0HKwBIkJwRJ34DQX44KD2FG+JywAlCWc6A==",
-      "type": "package",
-      "path": "ban3.infrastructures.platforminvoke/1.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "ban3.infrastructures.platforminvoke.1.0.0.nupkg.sha512",
-        "ban3.infrastructures.platforminvoke.nuspec",
-        "icon.png",
-        "lib/netstandard2.0/Ban3.Infrastructures.PlatformInvoke.dll"
       ]
     },
     "Ban3.Infrastructures.RuntimeCaching/1.0.4": {
@@ -5811,10 +5800,10 @@
         "system.reflection.extensions.nuspec"
       ]
     },
-    "System.Reflection.Metadata/7.0.1": {
-      "sha512": "HwfDQmefTQlZpSipknpn0nPv1OcWQizt7rMAk6KBq4RDAZSJwD1s723p2LLdjyRI9HXf/5DXHM6dXQGeEnsOrg==",
+    "System.Reflection.Metadata/7.0.2": {
+      "sha512": "eDRR3/gdnAx0lRhZssc3y32+iCalFgQzaw/5ZNtqtkZ1hMnRFvazcuojYeRo0MH1DrnBAH4rrwJgeXc2KfkP+A==",
       "type": "package",
-      "path": "system.reflection.metadata/7.0.1",
+      "path": "system.reflection.metadata/7.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5834,7 +5823,7 @@
         "lib/net7.0/System.Reflection.Metadata.xml",
         "lib/netstandard2.0/System.Reflection.Metadata.dll",
         "lib/netstandard2.0/System.Reflection.Metadata.xml",
-        "system.reflection.metadata.7.0.1.nupkg.sha512",
+        "system.reflection.metadata.7.0.2.nupkg.sha512",
         "system.reflection.metadata.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -7523,6 +7512,11 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "Ban3.Infrastructures.PlatformInvoke/1.0.1": {
+      "type": "project",
+      "path": "../../../Libs/PlatformInvoke/PlatformInvoke.csproj",
+      "msbuildProject": "../../../Libs/PlatformInvoke/PlatformInvoke.csproj"
+    },
     "Ban3.Infrastructures.SpringConfig/1.0.0": {
       "type": "project",
       "path": "../../../Libs/SpringConfig/SpringConfig.csproj",
@@ -7546,6 +7540,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
+      "Ban3.Infrastructures.Common >= 1.0.4",
       "Ban3.Infrastructures.Consoles >= 1.0.0",
       "Ban3.Infrastructures.SpringConfig >= 1.0.0",
       "Ban3.Infrastructures.WxsConfig >= 1.0.0",
@@ -7615,6 +7610,10 @@
       "net48": {
         "targetAlias": "net48",
         "dependencies": {
+          "Ban3.Infrastructures.Common": {
+            "target": "Package",
+            "version": "[1.0.4, )"
+          },
           "Ban3.Infrastructures.Consoles": {
             "target": "Package",
             "version": "[1.0.0, )"

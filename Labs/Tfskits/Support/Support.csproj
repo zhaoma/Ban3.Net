@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.4" />
     <PackageReference Include="Ban3.Infrastructures.Consoles" Version="1.0.0" />
     <PackageReference Include="Costura.Fody" Version="5.7.0">
       <PrivateAssets>all</PrivateAssets>

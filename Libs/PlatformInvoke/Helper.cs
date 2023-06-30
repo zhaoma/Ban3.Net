@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.PortableExecutable;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.PlatformInvoke.Entries;
@@ -70,7 +69,7 @@ public static class Helper
                 }
 
                 if (one.ReferencesOrDependencies != null && one.ReferencesOrDependencies.Any())
-                    all.AppendToList(one);
+                    all.AppendDistinct(one);
 
                 i++;
                 Logger.Debug($"{i}:{total}[{one.IsManaged}]:->{one.Name}/{one.ReferencesOrDependencies?.Count}");
@@ -311,7 +310,7 @@ public static class Helper
             if (found)
             {
                 if (!string.IsNullOrEmpty(lines[i]))
-                    result.AppendToList(lines[i]);
+                    result.Append(lines[i]);
                 else
                     found = false;
             }

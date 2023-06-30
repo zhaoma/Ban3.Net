@@ -31,10 +31,10 @@
 
   <ItemGroup>
     <PackageReference Include="Ban3.Infrastructures.NetMail" Version="1.0.0" />
-    <PackageReference Include="Ban3.Infrastructures.PlatformInvoke" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Libs\PlatformInvoke\PlatformInvoke.csproj" />
     <ProjectReference Include="..\..\..\..\Libs\SpringConfig\SpringConfig.csproj" />
     <ProjectReference Include="..\..\..\..\Libs\WxsConfig\WxsConfig.csproj" />
     <ProjectReference Include="..\..\Domain\Contract\Contract.csproj" />

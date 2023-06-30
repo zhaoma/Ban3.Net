@@ -15,7 +15,7 @@ public static class Helper
     private static readonly string RootFolder
         = Common.Config.AppConfiguration["WxsXmls:RootFolder"];
 
-    public static bool Prepare()
+    public static void Prepare()
     {
         try
         {
@@ -29,14 +29,11 @@ public static class Helper
 
             list.SetsFile()
                 .WriteFile(list.ObjToJson());
-            return true;
         }
         catch (Exception ex)
         {
             Logger.Error(ex);
         }
-
-        return false;
     }
 
     public static List<WxsXml> Load()

@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WxsConfig", "..\..\Libs\Wxs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LcmConfig", "..\..\Libs\LcmConfig\LcmConfig.csproj", "{212823B5-6B4F-44B9-AC12-3A0485445BB1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformInvoke", "..\..\Libs\PlatformInvoke\PlatformInvoke.csproj", "{331FAA3E-D598-4702-9BA2-0FBD283D8BA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{212823B5-6B4F-44B9-AC12-3A0485445BB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{212823B5-6B4F-44B9-AC12-3A0485445BB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{212823B5-6B4F-44B9-AC12-3A0485445BB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{331FAA3E-D598-4702-9BA2-0FBD283D8BA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{331FAA3E-D598-4702-9BA2-0FBD283D8BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{331FAA3E-D598-4702-9BA2-0FBD283D8BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{331FAA3E-D598-4702-9BA2-0FBD283D8BA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{61C965A3-D0F2-4BF2-8AE1-72BFF3A598D6} = {4ED05C33-683F-438B-B8C3-84E82E136551}
 		{933D715B-BC55-4707-BC9A-CC3E23C5E875} = {4ED05C33-683F-438B-B8C3-84E82E136551}
 		{212823B5-6B4F-44B9-AC12-3A0485445BB1} = {4ED05C33-683F-438B-B8C3-84E82E136551}
+		{331FAA3E-D598-4702-9BA2-0FBD283D8BA5} = {4ED05C33-683F-438B-B8C3-84E82E136551}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01EB0EEC-4EE4-4B8F-AD9A-0DD3DBA1A717}

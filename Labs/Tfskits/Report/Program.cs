@@ -36,7 +36,7 @@ public class Program
         _jobTimer = new System.Timers.Timer
         {
             AutoReset = true,
-            Interval = 1000 * 60 * 1,
+            Interval = 1000 * 60 * 30,
             Enabled = true
         };
         _jobTimer.Elapsed += (s, e) =>
@@ -53,8 +53,8 @@ public class Program
                 _handler = new Infrastructures.PlatformInvoke.Handles.ProcessHandlerAsync(cmd,
                     args.Split(' '));
 
-                _handler.ReceivedData += (s) => { Console.WriteLine($"info:{s}"); };
-                _handler.ReceivedError += (s) => { Console.WriteLine($"error:{s}"); };
+                _handler.ReceivedData += (s) => { Console.WriteLine($"Support resp:{s}"); };
+                _handler.ReceivedError += (s) => { Console.WriteLine($"Support error:{s}"); };
 
                 _handler.Exited += JobCallback;
             }

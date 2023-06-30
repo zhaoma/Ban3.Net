@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "anemMkICa/YKmyKwj0l8s0T1j7rdD3tzqwF5jfEZDxXhL9pmYe3hCnYZxHToMJkrybdVVbuB8c2dd5xLlJS6SQ==",
+  "dgSpecHash": "1qI91jSoTdQkL6AYAUTzc+1rZgWJTdt/YUDlMhcdEqPtMxP0j1tu03lxKYUN4YZlc8FacKR1UD6utisGTdS5Lg==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Labs\\Tfskits\\Support\\Support.csproj",
   "expectedPackageFiles": [
@@ -8,7 +8,6 @@
     "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.consoles\\1.0.0\\ban3.infrastructures.consoles.1.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.4\\ban3.infrastructures.nethttp.1.0.4.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.netmail\\1.0.0\\ban3.infrastructures.netmail.1.0.0.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.platforminvoke\\1.0.0\\ban3.infrastructures.platforminvoke.1.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.runtimecaching\\1.0.4\\ban3.infrastructures.runtimecaching.1.0.4.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\bouncycastle.cryptography\\2.1.1\\bouncycastle.cryptography.2.1.1.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\costura.fody\\5.7.0\\costura.fody.5.7.0.nupkg.sha512",
@@ -70,7 +69,7 @@
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.objectmodel\\4.3.0\\system.objectmodel.4.3.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.reflection.extensions\\4.3.0\\system.reflection.extensions.4.3.0.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\system.reflection.metadata\\7.0.1\\system.reflection.metadata.7.0.1.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\system.reflection.metadata\\7.0.2\\system.reflection.metadata.7.0.2.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
@@ -101,7 +100,8 @@
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.platforminvoke\\1.0.1\\ban3.infrastructures.platforminvoke.1.0.1.nupkg.sha512"
   ],
   "logs": []
 }
