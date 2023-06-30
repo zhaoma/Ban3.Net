@@ -7,7 +7,7 @@
         <div class="text-center col-8 offset-2">
             <form action="/data/findanything" method="get" onsubmit="return findAny();">
             <div class="input-group  input-group-lg">
-                    <span class="input-group-text" id="addon-wrapping"><i class="bi bi-heart-pulse"></i></span>
+                    <span class="input-group-text lazyLoadButton" dataUrl="/parts/summaries" renderElement="partsContainer" id="addon-wrapping"><i class="bi bi-heart-pulse"></i></span>
                     <input type="text" id="id" name="id" class="form-control form-control-lg col-10" placeholder="code here" aria-label="code here" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary btn-lg" type="submit" id="button-addon2">PinG !</button>
 
@@ -61,4 +61,4 @@
     </main>
 </div>
 
-<div class="container" id="partsContainer"></div>
+<div class="container lazyLoad" dataUrl="/parts/summaries" id="partsContainer"></div>

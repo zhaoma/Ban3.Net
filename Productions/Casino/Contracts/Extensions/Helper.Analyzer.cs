@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using System;
+using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Inputs;
+using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Interfaces;
+using Ban3.Productions.Casino.Contracts.Entities;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -43,7 +46,9 @@ public static partial class Helper
                 var currentOp = Infrastructures.Indicators.Enums.StockOperate.Left;
                 for (int op = 0; op < operates.Count(); op++)
                 {
-                    operates[op].Keys = everydayKeys[op].SetKeys!=null? everydayKeys[op].SetKeys.ToList():new List<string>();
+                    operates[op].Keys = everydayKeys[op].SetKeys != null
+                        ? everydayKeys[op].SetKeys.ToList()
+                        : new List<string>();
                     operates[op].Operate = GetOperate(everydayKeys[op].SetKeys, profile, currentOp);
 
                     currentOp = operates[op].Operate;
@@ -143,6 +148,7 @@ public static partial class Helper
                         {
                             latest = new StockOperationRecord
                             {
+                                Code=code,
                                 BuyDate = op.MarkTime,
                                 BuyPrice = op.Close,
 
@@ -157,11 +163,12 @@ public static partial class Helper
                         {
                             latest.SellDate = op.MarkTime;
                             latest.SellPrice = op.Close;
+                            latest.Ratio=Math.Round((op.Close! -latest.BuyPrice!)/latest.BuyPrice!*100M,2);
                         }
                     }
                 }
 
-                if (profile.Persistence)
+                if (tradeRecords.Any())
                     $"{code}.{profile.Identity}"
                         .DataFile<StockOperationRecord>()
                         .WriteFile(tradeRecords.ObjToJson());
@@ -197,5 +204,97 @@ public static partial class Helper
 
     #endregion
 
+    private static Dictionary<string, ProfileSummary> _evaluateSummary;
 
+    public static void ClearSummary(this IAnalyzer _)
+    {
+        lock (_lock)
+        {
+            _evaluateSummary = new();
+        }
+    }
+
+    public static void SaveSummary(this IAnalyzer _)
+    {
+        lock (_lock)
+        {
+            typeof(ProfileSummary)
+                .LocalFile()
+                .WriteFile(_evaluateSummary.ObjToJson());
+        }
+    }
+
+    public static Dictionary<string, ProfileSummary> LoadSummary(this IAnalyzer _)
+        => typeof(ProfileSummary)
+            .LocalFile()
+            .ReadFileAs<Dictionary<string, ProfileSummary>>();
+
+    public static decimal FinalProfit(this List<StockOperationRecord> records) 
+        => records.Aggregate(1M,
+            (current, record) => current * (1 + (record.SellPrice - record.BuyPrice) / record.BuyPrice)!.Value);
+
+    public static void MergeSummary(this List<StockOperationRecord> records, Profile profile)
+    {
+        var validRecords = records.Where(o => o.SellDate != null && o.BuyPrice > 0).ToList();
+        if (!validRecords.Any()) return;
+        lock (_lock)
+        {
+
+            var newSummary = new ProfileSummary
+            {
+                Identity = profile.Identity,
+                StockCount = 1,
+                RecordCount = validRecords.Count(),
+                RightCount = validRecords.Count(o => o.SellPrice > o.BuyPrice),
+                Best = validRecords.Max(o => (o.SellPrice - o.BuyPrice) / o.BuyPrice * 100M)!.Value,
+                Worst = validRecords.Min(o => (o.SellPrice - o.BuyPrice) / o.BuyPrice * 100M)!.Value,
+                Average = validRecords.FinalProfit()
+            };
+            
+            if (_evaluateSummary.TryGetValue(profile.Identity, out var summary))
+            {
+                summary.Best = Math.Max(summary.Best, newSummary.Best);
+                summary.Worst = Math.Min(summary.Worst, newSummary.Worst);
+                summary.Average = (summary.StockCount * summary.Average + newSummary.Average) /
+                                  (summary.StockCount + 1);
+                summary.StockCount += 1;
+                summary.RecordCount += newSummary.RecordCount;
+                summary.RightCount+= newSummary.RightCount;
+
+                _evaluateSummary[profile.Identity] = summary;
+            }
+            else
+            {
+                _evaluateSummary.Add(profile.Identity,newSummary);
+            }
+        }
+    }
+
+    public static List<StockOperationRecord> LoadProfileDetails(this IAnalyzer _, List<Stock> stocks, string identity)
+        =>
+            Config.CacheKey<StockOperationRecord>(identity)
+                .LoadOrSetDefault(
+                    () => _.PrepareProfileDetails(stocks, identity), typeof(ProfileSummary)
+                        .LocalFile()
+                );
+
+    static List<StockOperationRecord> PrepareProfileDetails(this IAnalyzer _, List<Stock> stocks, string identity)
+    {
+        var result = new List<StockOperationRecord>();
+
+        stocks.AsParallel()
+            .ForAll(s =>
+            {
+                var rs = _.LoadOperationRecords(new Profile { Identity = identity }, s.Code);
+                if (rs != null && rs.Any())
+                {
+                    lock (_lock)
+                    {
+                        result.AddRange(rs.Where(o => o.SellDate != null));
+                    }
+                }
+            });
+
+        return result;
+    }
 }

@@ -211,26 +211,35 @@ public partial class Signalert
                 return ps;
             }, profileFile);
 
-        new Action(() =>
-            stocks.ParallelExecute((stock) =>
-            {
-                var sets = Calculator.LoadSets(stock.Code);
-                if (sets != null && sets.Any())
-                {
-                    sets = sets
-                        .Where(o => DateTime.Now.Year - o.MarkTime.Year <= 1)
-                        .ToList();
+        Analyzer.ClearSummary();
 
-                    profiles
-                        .ParallelExecute((profile) =>
-                            {
-                                Analyzer
-                                    .OutputDailyOperates(profile, sets, stock.Code)
-                                    .ConvertOperates2Records(profile, stock.Code);
-                            },
-                            Config.MaxParallelTasks);
-                }
-            }, Config.MaxParallelTasks)
+        new Action(() =>
+            {
+                stocks.ParallelExecute((stock) =>
+                {
+                    var sets = Calculator.LoadSets(stock.Code);
+                    if (sets != null && sets.Any())
+                    {
+                        sets = sets
+                            .Where(o => DateTime.Now.Year - o.MarkTime.Year <= 1)
+                            .ToList();
+
+                        profiles
+                            .ParallelExecute((profile) =>
+                                {
+                                    Analyzer
+                                        .OutputDailyOperates(profile, sets, stock.Code)
+                                        .ConvertOperates2Records(profile, stock.Code)
+                                        .MergeSummary(profile);
+                                },
+                                Config.MaxParallelTasks);
+
+
+                    }
+                }, Config.MaxParallelTasks);
+
+                Analyzer.SaveSummary();
+            }
         ).ExecuteAndTiming("OutputDailyOperates");
     }
 
@@ -271,4 +280,6 @@ public partial class Signalert
     }
 
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
+
+
 }

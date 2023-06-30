@@ -6,7 +6,6 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ban3.Infrastructures.Common;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 
@@ -252,11 +251,11 @@ public static class Helper
         {
             Include = new List<string>
                 {
-                    "DMI.PDI.DAILY",
-                    "MACD.C0.WEEKLY|MACD.C0.MONTHLY",
+                    "MACD.C0.MONTHLY",
+                    "MACD.C0.WEEKLY",
                     "MACD.C0.DAILY|MACD.P.DAILY;MACD.GC.DAILY"
                 },
-            Exclude = new List<string> { "MACD.MDI.DAILY" }
+            Exclude = new List<string> { "KD.MDI.DAILY" }
         },
         SellingCondition = new ProfileCondition
         {

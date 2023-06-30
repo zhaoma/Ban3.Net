@@ -2,7 +2,7 @@
 var currentCharts = "";
 
 $(document).ready(function () {
-    initContainer('#navIcons');
+    initContainer($(document));
 });
 
 function clearNav() {
@@ -98,8 +98,14 @@ function bindButton(ele) {
 
     $("#" + renderElement).load(dataUrl);
     $.get(dataUrl, function (html) {
+        console.log("#" + renderElement +"->"+html);
         $("#" + renderElement).html(html);
+        console.log($("#" + renderElement));
+
         initContainer($("#" + renderElement));
+        if ($("#" + renderElement).parent().hasClass("hide")) {
+            $("#" + renderElement).parent().removeClass("hide")
+        }
         var li = $(ele).parent().parent().find(".lazyLoadButton");
         if (li.length > 0) {
             li.each(function () { $(this).removeClass('active') });

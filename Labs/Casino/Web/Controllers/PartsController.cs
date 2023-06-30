@@ -1,5 +1,4 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
@@ -194,5 +193,20 @@ public class PartsController : Controller
         return RedirectToAction("Codes", request);
     }
 
+    public IActionResult Summaries()
+    {
+        var data = Signalert.Analyzer.LoadSummary()
+            .Select(o=>o.Value)
+            .OrderBy(o=>o.RecordCount)
+            .ToList();
+        return View(data);
+    }
 
+    public IActionResult ProfileDetail(string id)
+    {
+        var codes = Signalert.Collector.ScopedCodes();
+        var data = Signalert.Analyzer.LoadProfileDetails(codes, id);
+
+        return View(data);
+    }
 }

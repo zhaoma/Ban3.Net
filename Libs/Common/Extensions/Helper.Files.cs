@@ -216,8 +216,17 @@ public static partial class Helper
             var foundTimestamp = FilesTimestampDic.TryGetValue(filePath, out var ts);
             if (foundTimestamp && ts != null && ts.Equals(timestamp)) return true;
 
-            FilesTimestampDic.AddOrReplace(filePath, timestamp);
+            if (!foundTimestamp)
+            {
+                ts = filePath.ReadFile().MD5String();
+                if (ts.Equals(timestamp))
+                {
+                    return true;
+                }
+            }
+
             filePath.WriteFile(content!.ObjToJson());
+            FilesTimestampDic.AddOrReplace(filePath, timestamp);
 
             return true;
         }

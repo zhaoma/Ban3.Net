@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Ban3.Infrastructures.Indicators.Entries.ProfileSummary> 
+@{
+    Layout = null;
+}
+<div class="pb-3 hide" id="chartsSection">
+    <div class="col-12 roundBox grayBox">
+        <div id="chartsContainer"
+             style="height: 600px; width: 100%;">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="roundBox grayBox">
+            <table data-pagination="true" class="table table-hover table-dark  table-bordered caption-top">
+                <caption>@Model.Count() summaries</caption>
+                <thead>
+                <tr>
+                    <th class="col-2">Identity</th>
+                    <th class="col-1">Stocks</th>
+                    <th class="col-2">Records</th>
+                    <th class="col-1">RightTimes</th>
+                    <th class="col-2">Best</th>
+                    <th class="col-2">Worst</th>
+                    <th class="col-2">Average</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var point in Model.OrderByDescending(o => o.Best))
+                {
+                    var className = point.RightCount > 0.7 * point.RecordCount ? "red" : "green";
+                    <tr class="@className lazyLoadButton" dataUrl="/parts/profileDetail/@point.Identity" renderElement="detailsContainer">
+                        <td>@point.Identity</td>
+                        <td>@point.StockCount</td>
+                        <td>@point.RecordCount</td>
+                        <td>@point.RightCount</td>
+                        <td>@Math.Round(point.Best, 2) %</td>
+                        <td>@Math.Round(point.Worst, 2) %</td>
+                        <td>@Math.Round(point.Average, 2) %</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-6">
+        <div  id="detailsContainer">
+        </div>
+    </div>
+</div>
