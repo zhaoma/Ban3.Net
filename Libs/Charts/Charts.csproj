@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.4" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.5" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Fody" Version="6.7.0">
       <PrivateAssets>all</PrivateAssets>

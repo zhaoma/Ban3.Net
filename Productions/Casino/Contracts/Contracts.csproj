@@ -29,7 +29,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.4" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.5" />
     <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.4" />
     <PackageReference Include="Ban3.Infrastructures.RuntimeCaching" Version="1.0.4" />
     <PackageReference Include="Ban3.Sites.ViaEastmoney" Version="1.0.1" />

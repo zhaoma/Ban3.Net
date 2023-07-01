@@ -207,37 +207,6 @@ public static class Helper
         return false;
     }
 
-    /// <summary>
-    /// 全包含，包括复合条件
-    /// </summary>
-    /// <param name="keys"></param>
-    /// <param name="setKeys"></param>
-    /// <returns></returns>
-    public static bool AllFoundInComplex(this List<string> keys, List<string> setKeys)
-    {
-        var result = true;
-
-        keys.ForEach(k =>
-        {
-            if (k.Contains("|"))
-            {
-                var ks = k.Split('|');
-                var one = ks.Select(s => s.Contains(";")
-                        ? s.Split(';').Aggregate(true, (current, s1) => current && setKeys.Contains(s1))
-                        : setKeys.Contains(s))
-                    .Aggregate(false, (current1, x) => current1 || x);
-
-                result = result && one;
-            }
-            else
-            {
-                result = result && setKeys.Contains(k);
-            }
-        });
-
-        return result;
-    }
-
     #region Profiles
 
     /// <summary>

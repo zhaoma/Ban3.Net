@@ -256,7 +256,7 @@ public static partial class Helper
             .SetTitle(
                 new[]
                 {
-                    new Title($"{stock.Name}.{stock.Code}"){Show =false ,Left = "5%"}
+                    new Title($"{stock.Name}"){Show =false ,Left = "5%"}
                 })
             .SetDataZoom(
                 new DataZoom[]
@@ -360,7 +360,7 @@ public static partial class Helper
 
         diagram.SetLegend(new[]
         {
-            new Legend(legendDataOne,"5%","0" ),
+            new Legend(legendDataOne,"5%","2%" ),
             new Legend(legendAmount,"5%","30%" ),
             new Legend(legendMACD,"5%","42%" ),
             new Legend(legendDMI,"5%","55%" ),
