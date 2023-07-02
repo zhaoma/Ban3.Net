@@ -125,32 +125,32 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( pv.ParamId == ParamIdHD )
                 {
-                    r.RefHD = pv.Ref;
+                    r.RefHD = (decimal)pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdLD )
                 {
-                    r.RefLD = pv.Ref;
+                    r.RefLD = (decimal)pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdPDI )
                 {
-                    r.RefPDI = pv.Ref;
+                    r.RefPDI = (decimal)pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdMDI )
                 {
-                    r.RefMDI = pv.Ref;
+                    r.RefMDI = (decimal)pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdADX )
                 {
-                    r.RefADX = pv.Ref;
+                    r.RefADX = (decimal)pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdADXR )
                 {
-                    r.RefADXR = pv.Ref;
+                    r.RefADXR =(decimal) pv.Ref;
                 }
             }
         }

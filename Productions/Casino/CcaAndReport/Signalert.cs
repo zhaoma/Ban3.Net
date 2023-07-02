@@ -190,6 +190,23 @@ public partial class Signalert
 
     }
 
+    public static List<Profile> Profiles()
+    {
+        var profileFile = typeof(Profile).LocalFile();
+        return Config.CacheKey<Profile>("all")
+             .LoadOrSetDefault(() =>
+             {
+                 var ps = Infrastructures.Indicators.Helper.DefaultProfiles;
+                 if (!File.Exists(profileFile))
+                 {
+                     profileFile.WriteFile(ps.ObjToJson());
+                 }
+
+                 return ps;
+             }, profileFile);
+    }
+
+
     /// <summary>
     /// 策略评估
     /// 生成个股操作建议
@@ -198,19 +215,7 @@ public partial class Signalert
     /// <param name="stocks"></param>
     public static void EvaluateProfiles(List<Stock> stocks)
     {
-        var profileFile = typeof(Profile).LocalFile();
-        var profiles = Config.CacheKey<Profile>("all")
-            .LoadOrSetDefault(() =>
-            {
-                var ps = Infrastructures.Indicators.Helper.DefaultProfiles;
-                if (!File.Exists(profileFile))
-                {
-                    profileFile.WriteFile(ps.ObjToJson());
-                }
-
-                return ps;
-            }, profileFile);
-
+        var profiles = Profiles();
         Analyzer.ClearSummary();
 
         new Action(() =>

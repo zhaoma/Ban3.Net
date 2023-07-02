@@ -345,7 +345,7 @@ public class Full
                                 new LineWithValue
                                 {
                                     ParamId = detail.ParamId,
-                                    Ref = Math.Round(maMa, 2),
+                                    Ref =(double) Math.Round(maMa, 2),
                                     Days = detail.Days
                                 });
                         }

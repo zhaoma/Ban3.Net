@@ -79,12 +79,12 @@ public class CCI : Communal, IIndicatorFormula
 
             if (pv.ParamId == ParamIdCCI)
             {
-                r.RefCCI = pv.Ref;
+                r.RefCCI =(decimal) pv.Ref;
             }
 
             if (pv.ParamId == ParamIdTYP)
             {
-                r.RefTYP = pv.Ref;
+                r.RefTYP =(decimal) pv.Ref;
             }
         }
     }

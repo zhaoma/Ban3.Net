@@ -90,12 +90,12 @@ public class BIAS : Communal, IIndicatorFormula
 
             if (pv.ParamId == ParamIdBIAS)
             {
-                r.RefBIAS = pv.Ref;
+                r.RefBIAS =(decimal) pv.Ref;
             }
 
             if (pv.ParamId == ParamIdBIASMA)
             {
-                r.RefBIASMA = pv.Ref;
+                r.RefBIASMA =(decimal) pv.Ref;
             }
         }
     }

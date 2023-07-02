@@ -49,7 +49,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = new List<Outputs.Values.MA>();
         }
 
-        public MA( int d1 = 5, int d2 = 10, int d3 = 20, int d4 = 30 )
+        public MA(int d1 = 5, int d2 = 10, int d3 = 20, int d4 = 30)
         {
             this.Title = $"MA({d1},{d2},{d3},{d4})";
             Details = new List<Line>
@@ -74,34 +74,34 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         /// </summary>
         /// <param name="paramValues"></param>
         /// <returns></returns>
-        public void ConvertFrom( List<RecordWithValue> paramValues )
+        public void ConvertFrom(List<RecordWithValue> paramValues)
         {
             Result = new List<Outputs.Values.MA>();
 
-            foreach( var pv in paramValues )
+            foreach (var pv in paramValues)
             {
-                if( Details.Any( o => o.ParamId == pv.ParamId ) )
+                if (Details.Any(o => o.ParamId == pv.ParamId))
                 {
-                    var r = Result.FindLast( o => o.MarkTime == pv.MarkTime );
+                    var r = Result.FindLast(o => o.MarkTime == pv.MarkTime);
 
-                    if( r == null )
+                    if (r == null)
                     {
                         r = new Outputs.Values.MA
                         {
-                                MarkTime = pv.MarkTime,
-                                RefPrices = new List<LineWithValue>()
+                            MarkTime = pv.MarkTime,
+                            RefPrices = new List<LineWithValue>()
                         };
-                        Result.Add( r );
+                        Result.Add(r);
                     }
 
-                    var line = r.RefPrices.FindLast( o => o.ParamId == pv.ParamId );
-                    if( line == null )
+                    var line = r.RefPrices.FindLast(o => o.ParamId == pv.ParamId);
+                    if (line == null)
                     {
-                        r.RefPrices.Add( new LineWithValue
+                        r.RefPrices.Add(new LineWithValue
                         {
-                                ParamId = pv.ParamId,
-                                Ref = pv.Ref
-                        } );
+                            ParamId = pv.ParamId,
+                            Ref = pv.Ref
+                        });
                     }
                     else
                     {
@@ -117,9 +117,9 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         /// <param name="values"></param>
         /// <param name="prices"></param>
         /// <returns></returns>
-        public void CalculateLastValues( string stockCode, List<Inputs.Price> prices )
+        public void CalculateLastValues(string stockCode, List<Inputs.Price> prices)
         {
-            CalculateAll( prices );
+            CalculateAll(prices);
             /*
             for (var i = prices.Count - 1; i < prices.Count; i++)
             {
@@ -174,31 +174,31 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         /// </summary>
         /// <param name="prices"></param>
         /// <returns></returns>
-        public void CalculateAll( List<Inputs.Price> prices )
+        public void CalculateAll(List<Inputs.Price> prices)
         {
-            Result = prices.Select( o => new Outputs.Values.MA
+            Result = prices.Select(o => new Outputs.Values.MA
             {
-                    MarkTime = o.MarkTime,
-                    RefPrices = new List<LineWithValue>()
-            } ).ToList();
+                MarkTime = o.MarkTime,
+                RefPrices = new List<LineWithValue>()
+            }).ToList();
 
-            for( var i = 0; i < prices.Count; i++ )
+            for (var i = 0; i < prices.Count; i++)
             {
-                foreach( var detail in Details )
+                foreach (var detail in Details)
                 {
-                    if( i >= detail.Days - 1 )
+                    if (i >= detail.Days - 1)
                     {
-                        var ma = DescRangeCloseAverage( prices, i, detail.Days );
+                        var ma = DescRangeCloseAverage(prices, i, detail.Days);
 
-                        if( Result[ i ].RefPrices.All( o => o.ParamId != detail.ParamId ) )
+                        if (Result[i].RefPrices.All(o => o.ParamId != detail.ParamId))
                         {
-                            Result[ i ].RefPrices.Add(
+                            Result[i].RefPrices.Add(
                                                       new LineWithValue
                                                       {
-                                                              ParamId = detail.ParamId,
-                                                              Ref = Math.Round( ma, 2 ),
-                                                              Days = detail.Days
-                                                      } );
+                                                          ParamId = detail.ParamId,
+                                                          Ref =(double) Math.Round(ma, 2),
+                                                          Days = detail.Days
+                                                      });
                         }
                     }
                 }

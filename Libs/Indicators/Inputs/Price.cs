@@ -49,12 +49,12 @@ namespace Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 
         /// </summary>
-        public decimal? Volume { get; set; }
+        public double? Volume { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal? Amount { get; set; }
+        public double? Amount { get; set; }
 
         /// <summary>
         /// 

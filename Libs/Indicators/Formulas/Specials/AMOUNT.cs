@@ -121,7 +121,7 @@ public class AMOUNT : Communal, IIndicatorFormula
             {
                 if (i >= detail.Days - 1)
                 {
-                    var d = 0M;
+                    var d = 0D;
                     for (int r = i; r > i - detail.Days; r--)
                     {
                         d += prices[r].Amount!.Value;

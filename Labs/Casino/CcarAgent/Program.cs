@@ -116,6 +116,21 @@ internal class Program
 
     private static void CheckSomething()
     {
+        var target = Signalert.Collector.LoadStock("688328.SH");
+        var success=Signalert.PrepareOne(target, out var messages);
+
+        if (success)
+        {
+            $"Success".WriteColorLine(ConsoleColor.Red);
+        }
+
+        messages.ForEach(m =>
+        {
+            m.WriteColorLine(ConsoleColor.DarkBlue);
+        });
+
+        /*
+
         var latest=Signalert.Calculator.LoadAllLatestSets();
 
         var dic = latest.Select(o =>
@@ -132,9 +147,6 @@ internal class Program
             $"{keyValuePair.Item4.AggregateToString(",")}".WriteColorLine(ConsoleColor.Blue);
             $"{keyValuePair.Item3.AggregateToString(",")}".WriteColorLine(ConsoleColor.DarkYellow);
         }
-
-        /*
-
         var prices = Signalert.Collector.LoadDailyPrices("301203.SZ");
         var x = prices.ConvertCycle(StockAnalysisCycle.MONTHLY);
 

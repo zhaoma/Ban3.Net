@@ -18,5 +18,5 @@ public class LineWithValue : Line
     /// 指标值
     /// </summary>
     [JsonProperty("ref", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal Ref { get; set; }
+    public double Ref { get; set; }
 }

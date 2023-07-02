@@ -207,6 +207,20 @@ public static class Helper
         return false;
     }
 
+    public static bool IsAsc<T>(this List<T>? numbers, Func<T, double> toDecimal)
+    {
+        if (numbers is not { Count: > 1 }) return true;
+
+        for (var i = 1; i < numbers.Count; i++)
+        {
+            if (toDecimal(numbers[i - 1]) > toDecimal(numbers[i]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
     #region Profiles
 
     /// <summary>

@@ -194,27 +194,47 @@ public static partial class Helper
         var prices = _.LoadReinstatedPrices(code, cycle);
         if (prices == null || !prices.Any()) return false;
 
-        var inputsPrices = prices.Select(o => new Infrastructures.Indicators.Inputs.Price
-        {
-            MarkTime = o.TradeDate.ToDateTimeEx(),
-            CloseBefore = (decimal)o.PreClose,
-            CurrentOpen = (decimal)o.Open,
-            CurrentClose = (decimal)o.Close,
-            CurrentHigh = (decimal)o.High,
-            CurrentLow = (decimal)o.Low,
-            Volume = (decimal)o.Vol,
-            Amount = (decimal)o.Amount
-        }).ToList();
-
-        var indicator = new Infrastructures.Indicators.Formulas.Full();
-        indicator.Calculate(inputsPrices, code);
-
-        var line = indicator.Result;
+        var line = prices.IndicatorLine(code);
         var saved = typeof(LineOfPoint)
             .LocalFile($"{code}.{cycle}")
             .WriteFile(line.ObjToJson());
         return !string.IsNullOrEmpty(saved);
     }
+
+    public static LineOfPoint IndicatorLine(this List<StockPrice> prices,string code)
+    {
+        var inputsPrices = prices.PricesForIndicators();
+
+        var indicator = new Infrastructures.Indicators.Formulas.Full();
+
+        indicator.Calculate(inputsPrices, code);
+
+        return indicator.Result;
+    }
+
+    public static List<Infrastructures.Indicators.Inputs.Price> PricesForIndicators(this List<StockPrice> prices)
+    => prices.Select(o => {
+        try
+        {
+            return new Infrastructures.Indicators.Inputs.Price
+            {
+                MarkTime = o.TradeDate.ToDateTimeEx(),
+                CloseBefore = (decimal)o.PreClose,
+                CurrentOpen = (decimal)o.Open,
+                CurrentClose = (decimal)o.Close,
+                CurrentHigh = (decimal)o.High,
+                CurrentLow = (decimal)o.Low,
+                Volume = (double)o.Vol,
+                Amount = (double)o.Amount
+            };
+        }
+        catch (Exception)
+        {
+            Console.WriteLine(o.ObjToJson());
+
+        throw new Exception("-----------");
+        }
+    }).ToList();
 
     /// <summary>
     /// 加载指标曲线 

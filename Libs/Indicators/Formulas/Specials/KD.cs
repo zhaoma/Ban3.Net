@@ -106,22 +106,22 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( pv.ParamId == ParamIdK )
                 {
-                    r.RefK = pv.Ref;
+                    r.RefK = (decimal)pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdD )
                 {
-                    r.RefD = pv.Ref;
+                    r.RefD = (decimal)pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdPSV )
                 {
-                    r.RefPSV = pv.Ref;
+                    r.RefPSV = (decimal)pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdDailyPSV )
                 {
-                    r.RefDailyPSV = pv.Ref;
+                    r.RefDailyPSV = (decimal)pv.Ref;
                 }
             }
         }

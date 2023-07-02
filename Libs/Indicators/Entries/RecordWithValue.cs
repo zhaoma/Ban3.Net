@@ -25,5 +25,5 @@ public class RecordWithValue
     /// 计算获值
     /// </summary>
     [JsonProperty("ref", NullValueHandling = NullValueHandling.Ignore)]
-    public virtual decimal Ref { get; set; }
+    public virtual double Ref { get; set; }
 }

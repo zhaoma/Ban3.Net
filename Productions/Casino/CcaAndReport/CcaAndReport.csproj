@@ -38,7 +38,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Signalert.Optimize.cs" />
-  </ItemGroup>
 </Project>

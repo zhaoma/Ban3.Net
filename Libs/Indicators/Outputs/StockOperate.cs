@@ -36,6 +36,6 @@ public class StockOperate
     /// <summary>
     /// 特征集合
     /// </summary>
-    [JsonProperty("keys", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonIgnore]
     public List<string>? Keys { get; set; }
 }

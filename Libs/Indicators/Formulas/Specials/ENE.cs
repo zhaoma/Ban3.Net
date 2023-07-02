@@ -107,17 +107,17 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( pv.ParamId == ParamIdENE )
                 {
-                    r.RefENE = pv.Ref;
+                    r.RefENE =(decimal) pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdUPPER )
                 {
-                    r.RefUPPER = pv.Ref;
+                    r.RefUPPER = (decimal)pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdLOWER )
                 {
-                    r.RefLOWER = pv.Ref;
+                    r.RefLOWER = (decimal)pv.Ref;
                 }
             }
         }

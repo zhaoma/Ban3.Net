@@ -127,19 +127,19 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                 }
 
                 if( pv.ParamId == ParamIdDIF )
-                    r.RefDIF = pv.Ref;
+                    r.RefDIF =(decimal) pv.Ref;
 
                 if( pv.ParamId == ParamIdDEA )
-                    r.RefDEA = pv.Ref;
+                    r.RefDEA = (decimal)pv.Ref;
 
                 if( pv.ParamId == ParamIdMACD )
-                    r.RefMACD = pv.Ref;
+                    r.RefMACD = (decimal)pv.Ref;
 
                 if( pv.ParamId == ParamIdEMAShort )
-                    r.RefEMAShort = pv.Ref;
+                    r.RefEMAShort = (decimal)pv.Ref;
 
                 if( pv.ParamId == ParamIdEMALong )
-                    r.RefEMALong = pv.Ref;
+                    r.RefEMALong = (decimal)pv.Ref;
             }
         }
 

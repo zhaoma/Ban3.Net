@@ -179,9 +179,9 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="current"></param>
         /// <param name="N"></param>
         /// <returns></returns>
-        public decimal DescRangeAmountAverage( List<Inputs.Price> prices, int current, int N )
+        public double DescRangeAmountAverage( List<Inputs.Price> prices, int current, int N )
         {
-            var d = 0M;
+            var d = 0D;
             var m = 0;
 
             for( int r = 0; r < N; r++ )
