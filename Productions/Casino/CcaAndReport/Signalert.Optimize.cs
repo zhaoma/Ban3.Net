@@ -101,12 +101,29 @@ public partial class Signalert
 
             for (var index = 0; index < d.Count; index++)
             {
+                Console.WriteLine($"step 1:{d[index].MarkTime.ToYmd()}:{d[index].SetKeys.AggregateToString(",")}");
+                Console.WriteLine();
+
                 var keys = d[index].SetKeys.Select(o => $"{o}.{Contracts.Enums.StockAnalysisCycle.DAILY}");
+
+                Console.WriteLine($"step 2:{d[index].MarkTime.ToYmd()}:{keys.AggregateToString(",")}");
+                Console.WriteLine();
+
+
                 keys = keys.Union(w[index].SetKeys.Select(o => $"{o}.{Contracts.Enums.StockAnalysisCycle.WEEKLY}"));
+
+                Console.WriteLine($"step 3:{d[index].MarkTime.ToYmd()}:{keys.AggregateToString(",")}");
+                Console.WriteLine();
+
+
                 keys = keys.Union(m[index].SetKeys.Select(o => $"{o}.{Contracts.Enums.StockAnalysisCycle.MONTHLY}"));
+
+                Console.WriteLine($"step:4:{d[index].MarkTime.ToYmd()}:{keys.AggregateToString(",")}");
+                Console.WriteLine();
+
+
                 d[index].SetKeys = keys;
 
-                Console.WriteLine($"i{d[index].MarkTime.ToYmd()}:{keys.AggregateToString(",")}");
 
                 //Console.WriteLine(d[index].MarkTime.ToYmd() + ":" + d[index].SetKeys.AggregateToString(","));
                 //Console.WriteLine();
