@@ -7,6 +7,7 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Sites.ViaTushare.Entries;
 
@@ -14,10 +15,8 @@ namespace Ban3.Productions.Casino.CcaAndReport;
 
 public partial class Signalert
 {
-    public static bool PrepareOne(Stock stock, out List<string> message)
+    public static bool PrepareOne(Stock stock, Action<string> messageCallback)
     {
-        message = new List<string>();
-
         try
         {
             var sw = new Stopwatch();
@@ -26,40 +25,63 @@ public partial class Signalert
             var prices = Calculator.LoadReinstatedPrices(stock.Code, Contracts.Enums.StockAnalysisCycle.DAILY);
 
             sw.Stop();
-            message.Add($"Load ReinstatedPrices,{sw.ElapsedMilliseconds} elapsed.=>{prices.Count}");
+            messageCallback($"Load ReinstatedPrices,{sw.ElapsedMilliseconds} ms elapsed.=>{prices.Count}");
             sw.Restart();
 
             var weeklyPrices = new List<StockPrice>();
             var monthlyPrices = new List<StockPrice>();
-
+            
+            //var destPrices=new List<StockPrice>();
             for (var i = 1; i <= prices.Count; i++)
             {
-                var destPrices = new StockPrice[i];
-                prices.CopyTo(0, destPrices, 0, i);
+                weeklyPrices.AppendLatest(prices[i-1],StockAnalysisCycle.WEEKLY);
+                monthlyPrices.AppendLatest(prices[i-1],StockAnalysisCycle.MONTHLY);
+                /*
+                //var destPrices = prices.CloneNew(i);
 
-                var a = destPrices.ToList().ConvertCycle(Contracts.Enums.StockAnalysisCycle.WEEKLY);
-                var b = destPrices.ToList().ConvertCycle(Contracts.Enums.StockAnalysisCycle.MONTHLY);
+                var o = prices[i - 1];
+                destPrices.Add(new StockPrice
+                {
+                    Code = o.Code,
+                    TradeDate = o.TradeDate,
+                    Open = o.Open,
+                    High = o.High,
+                    Low = o.Low,
+                    Close = o.Close,
+                    PreClose = o.PreClose,
+                    Change = o.Change,
+                    ChangePercent = o.ChangePercent,
+                    Vol = o.Vol,
+                    Amount = o.Amount
+                });
 
+                //var destPrices = new StockPrice[i];
+                //prices.CopyTo(0, destPrices, 0, i);
+                
+                var a = destPrices.ConvertCycle(Contracts.Enums.StockAnalysisCycle.WEEKLY);
+                var b = destPrices.ConvertCycle(Contracts.Enums.StockAnalysisCycle.MONTHLY);
+       
                 weeklyPrices.Add(a.Last());
-                monthlyPrices.Add(b.Last());
+                monthlyPrices.Add(b.Last());        
+                */
             }
-
+            
             sw.Stop();
-            message.Add($"Generate weekly and monthly prices {sw.ElapsedMilliseconds} ms elapsed.=>W:{weeklyPrices.Count};M:{monthlyPrices.Count}");
+            messageCallback($"Generate weekly and monthly prices {sw.ElapsedMilliseconds} ms elapsed.=>W:{weeklyPrices.Count};M:{monthlyPrices.Count}");
             sw.Restart();
 
             weeklyPrices.SetsFile($"{stock.Code}.{Contracts.Enums.StockAnalysisCycle.WEEKLY}")
                 .SaveFileOnDemand(weeklyPrices, out _);
 
             sw.Stop();
-            message.Add($"Save weekly prices {sw.ElapsedMilliseconds} ms elapsed.");
+            messageCallback($"Save weekly prices {sw.ElapsedMilliseconds} ms elapsed.");
             sw.Restart();
 
             monthlyPrices.SetsFile($"{stock.Code}.{Contracts.Enums.StockAnalysisCycle.MONTHLY}")
                 .SaveFileOnDemand(monthlyPrices, out _);
 
             sw.Stop();
-            message.Add($"Save monthly prices {sw.ElapsedMilliseconds} ms elapsed.");
+            messageCallback($"Save monthly prices {sw.ElapsedMilliseconds} ms elapsed.");
             sw.Restart();
 
             var dailyLineOfPoint = prices.IndicatorLine(stock.Code);
@@ -68,7 +90,7 @@ public partial class Signalert
             .SaveFileOnDemand(dailyLineOfPoint, out _);
 
             sw.Stop();
-            message.Add($"Generate daily IndicatorLine,{sw.ElapsedMilliseconds} ms elapsed.=>{dailyLineOfPoint.EndPoints.Count}");
+            messageCallback($"Generate daily IndicatorLine,{sw.ElapsedMilliseconds} ms elapsed.=>{dailyLineOfPoint.EndPoints?.Count}");
             sw.Restart();
 
             var weeklyLineOfPoint = weeklyPrices.IndicatorLine(stock.Code);
@@ -77,7 +99,7 @@ public partial class Signalert
             .SaveFileOnDemand(weeklyLineOfPoint, out _);
 
             sw.Stop();
-            message.Add($"Generate weekly IndicatorLine,{sw.ElapsedMilliseconds} ms elapsed.=>{weeklyLineOfPoint.EndPoints.Count}");
+            messageCallback($"Generate weekly IndicatorLine,{sw.ElapsedMilliseconds} ms elapsed.=>{weeklyLineOfPoint.EndPoints?.Count}");
             sw.Restart();
 
             var monthlyLineOfPoint = monthlyPrices.IndicatorLine(stock.Code);
@@ -86,13 +108,13 @@ public partial class Signalert
             .SaveFileOnDemand(monthlyLineOfPoint, out _);
 
             sw.Stop();
-            message.Add($"Generate monthly IndicatorLine,{sw.ElapsedMilliseconds} ms elapsed.=>{monthlyLineOfPoint.EndPoints.Count}");
+            messageCallback($"Generate monthly IndicatorLine,{sw.ElapsedMilliseconds} ms elapsed.=>{monthlyLineOfPoint.EndPoints?.Count}");
             sw.Restart();
 
             var d = dailyLineOfPoint.LineToSets();
 
             sw.Stop();
-            message.Add($"Daily Indicators LineToSets,{sw.ElapsedMilliseconds} ms elapsed.=>{d.Count}");
+            messageCallback($"Daily Indicators LineToSets,{sw.ElapsedMilliseconds} ms elapsed.=>{d.Count}");
             sw.Restart();
 
             var w = weeklyLineOfPoint.LineToSets();
@@ -101,39 +123,20 @@ public partial class Signalert
 
             for (var index = 0; index < d.Count; index++)
             {
-                Console.WriteLine($"step 1:{d[index].MarkTime.ToYmd()}:{d[index].SetKeys.AggregateToString(",")}");
-                Console.WriteLine();
-
-                var keys = d[index].SetKeys.Select(o => $"{o}.{Contracts.Enums.StockAnalysisCycle.DAILY}");
-
-                Console.WriteLine($"step 2:{d[index].MarkTime.ToYmd()}:{keys.AggregateToString(",")}");
-                Console.WriteLine();
-
-
-                keys = keys.Union(w[index].SetKeys.Select(o => $"{o}.{Contracts.Enums.StockAnalysisCycle.WEEKLY}"));
-
-                Console.WriteLine($"step 3:{d[index].MarkTime.ToYmd()}:{keys.AggregateToString(",")}");
-                Console.WriteLine();
-
-
-                keys = keys.Union(m[index].SetKeys.Select(o => $"{o}.{Contracts.Enums.StockAnalysisCycle.MONTHLY}"));
-
-                Console.WriteLine($"step:4:{d[index].MarkTime.ToYmd()}:{keys.AggregateToString(",")}");
-                Console.WriteLine();
-
-
+                var keys = d[index].SetKeys!.Select(o => $"{o}.{Contracts.Enums.StockAnalysisCycle.DAILY}");
+                
+                keys = keys.Union(w[index].SetKeys!.Select(o => $"{o}.{Contracts.Enums.StockAnalysisCycle.WEEKLY}"));
+                
+                keys = keys.Union(m[index].SetKeys!.Select(o => $"{o}.{Contracts.Enums.StockAnalysisCycle.MONTHLY}"));
+                
                 d[index].SetKeys = keys;
-
-
-                //Console.WriteLine(d[index].MarkTime.ToYmd() + ":" + d[index].SetKeys.AggregateToString(","));
-                //Console.WriteLine();
             }
 
             stock.Code.DataFile<StockSets>()
                 .SaveFileOnDemand(d, out _);
 
             sw.Stop();
-            message.Add($"Merge LineToSets,{sw.ElapsedMilliseconds} elapsed.=>{d.Count}");
+            messageCallback($"Merge LineToSets,{sw.ElapsedMilliseconds} ms elapsed.=>{d.Count}");
             sw.Restart();
 
             $"{stock.Code}.{Contracts.Enums.StockAnalysisCycle.DAILY}"
@@ -144,12 +147,12 @@ public partial class Signalert
                 .DataFile<Diagram>()
                 .SaveFileOnDemand(Reportor.CreateOnesCandlestickDiagram(stock, weeklyPrices, weeklyLineOfPoint), out _);
 
-            $"{stock.Code}.{Contracts.Enums.StockAnalysisCycle.WEEKLY}"
+            $"{stock.Code}.{Contracts.Enums.StockAnalysisCycle.MONTHLY}"
                 .DataFile<Diagram>()
                 .SaveFileOnDemand(Reportor.CreateOnesCandlestickDiagram(stock, monthlyPrices, monthlyLineOfPoint), out _);
 
             sw.Stop();
-            message.Add($"Create Diagrams,{sw.ElapsedMilliseconds} elapsed.");
+            messageCallback($"Create Diagrams,{sw.ElapsedMilliseconds} ms elapsed.");
             sw.Restart();
 
             var dic = new Dictionary<string, List<StockOperate>>();
@@ -202,11 +205,11 @@ public partial class Signalert
                     .SaveFileOnDemand(kv.Value, out _);
 
                 var rs= kv.Value.ConvertOperates2Records(new Profile { Identity = kv.Key }, stock.Code);
-                message.Add($"Generate operates and records : {kv.Value.Count} -> {rs.Count}");
+                messageCallback($"Generate {kv.Key} operates and records : {kv.Value.Count} -> {rs.Count}");
             }
 
             sw.Stop();
-            message.Add($"Evaluate profiles,{sw.ElapsedMilliseconds} elapsed.");
+            messageCallback($"Evaluate profiles,{sw.ElapsedMilliseconds} ms elapsed.");
             sw.Restart();
 
             sw = null;
@@ -214,10 +217,9 @@ public partial class Signalert
         catch (Exception ex)
         {
             Logger.Error(ex);
-            message.Add($"ERROR:{ex.Message}");
+            messageCallback($"ERROR:{ex.Message}");
         }
 
         return true;
     }
-
 }

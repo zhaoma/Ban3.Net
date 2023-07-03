@@ -57,15 +57,6 @@ public class Latest
         if (Current?.Macd != null)
             result.AddRange(Current.Macd.Features(Prev?.Macd));
 
-        Console.WriteLine($"-----{Current?.MarkTime.ToYmd()}-----------------------------");
-        Console.WriteLine();
-        Console.WriteLine(this.ObjToJson());
-        Console.WriteLine();
-        Console.WriteLine(result.ObjToJson());
-        Console.WriteLine();
-
-
-
         return result;
     }
 }

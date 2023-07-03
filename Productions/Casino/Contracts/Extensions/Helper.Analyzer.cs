@@ -82,14 +82,6 @@ public static partial class Helper
         Profile profile,
         Infrastructures.Indicators.Enums.StockOperate prevOperation)
     {
-        var b = profile.MatchSelling(new StockSets { SetKeys = codeKeys });
-        var s = profile.MatchBuying(new StockSets { SetKeys = codeKeys });
-
-        Console.WriteLine($"{codeKeys.AggregateToString(",")}=>{profile.BuyingCondition.Include.AggregateToString(",")}");
-        Console.WriteLine($"B:{b};S:{s}");
-        Console.WriteLine();
-
-
         switch (prevOperation)
         {
             case Infrastructures.Indicators.Enums.StockOperate.Buy:
@@ -135,7 +127,7 @@ public static partial class Helper
     /// <param name="code"></param>
     /// <returns></returns>
     public static List<StockOperationRecord> ConvertOperates2Records(
-        this List<StockOperate>? stockOperates, Profile profile, string code)
+        this List<StockOperate> stockOperates, Profile profile, string code)
     {
         try
         {

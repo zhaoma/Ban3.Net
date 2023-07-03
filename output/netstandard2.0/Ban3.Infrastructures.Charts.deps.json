@@ -9,7 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "Ban3.Infrastructures.Charts/1.0.1": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.4",
+          "Ban3.Infrastructures.Common": "1.0.5",
           "Fody": "6.7.0",
           "NETStandard.Library": "2.0.3",
           "Rougamo.Fody": "1.4.1",
@@ -19,7 +19,7 @@
           "Ban3.Infrastructures.Charts.dll": {}
         }
       },
-      "Ban3.Infrastructures.Common/1.0.4": {
+      "Ban3.Infrastructures.Common/1.0.5": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
@@ -30,8 +30,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
-            "assemblyVersion": "1.0.3.4",
-            "fileVersion": "1.0.3.4"
+            "assemblyVersion": "1.0.3.5",
+            "fileVersion": "1.0.3.5"
           }
         }
       },
@@ -350,12 +350,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Ban3.Infrastructures.Common/1.0.4": {
+    "Ban3.Infrastructures.Common/1.0.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-n1dVdPa9rNa7BLpX7RzF+zu+84J+qDqBa8cGsJmXw+GnW+KJeWFtm08FW4vcyuJ0xTfyUUnjVHu9NS62xpwkYQ==",
-      "path": "ban3.infrastructures.common/1.0.4",
-      "hashPath": "ban3.infrastructures.common.1.0.4.nupkg.sha512"
+      "sha512": "sha512-mY6pNEBWOu28uyDTECT+wV2550oqpPjfwtpIBzj3osUzrWjyur0nNbBayr8lD9ZiQuDG0RgbU38anXxv1ID4Zg==",
+      "path": "ban3.infrastructures.common/1.0.5",
+      "hashPath": "ban3.infrastructures.common.1.0.5.nupkg.sha512"
     },
     "Fody/6.7.0": {
       "type": "package",

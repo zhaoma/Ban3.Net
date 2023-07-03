@@ -53,6 +53,49 @@ public static partial class Helper
     public static string GetStockNumPrefix(this string code)
         => code.GetStockPrefix() == "sz" ? "1" : "0";
 
+    public static void AppendLatest(
+        this List<StockPrice> prices,
+        StockPrice price,
+        StockAnalysisCycle cycle)
+    {
+        if (!prices.Any())
+        {
+            prices.Add(price);
+        }
+        else
+        {
+            var lastRecord = prices.Last();
+
+            var exists = lastRecord.TradeDate.ToDateTimeEx().NextDate(cycle).ToYmd();
+            var add = price.TradeDate.ToDateTimeEx().NextDate(cycle).ToYmd();
+            if (exists.ToInt().Equals(add.ToInt()))
+            {
+                var p = new StockPrice
+                {
+                    Code = price.Code,
+                    TradeDate = price.TradeDate,
+                    Open = price.Open,
+                    High = Math.Max(lastRecord.High, price.High),
+                    Low = Math.Min(lastRecord.Low, price.Low),
+                    Close = price.Close,
+                    PreClose = price.PreClose,
+                    Vol = lastRecord.Vol + price.Vol,
+                    Amount = lastRecord.Amount + price.Amount
+                };
+                p.Change = p.Close - p.PreClose;
+                p.ChangePercent = p.PreClose != 0
+                    ? (float)Math.Round((p.Close - p.PreClose) / p.PreClose * 100, 2)
+                    : 0F;
+
+                prices.Add(p);
+            }
+            else
+            {
+                prices.Add(price);
+            }
+        }
+    }
+
     /// <summary>
     /// 价格周期转换
     /// </summary>

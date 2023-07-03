@@ -1,14 +1,9 @@
 ﻿using System.Diagnostics;
-using System.Security.Cryptography;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
-using Ban3.Infrastructures.Indicators;
-using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.CcaAndReport;
-using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
-using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Labs.Casino.CcarAgent;
@@ -116,192 +111,39 @@ internal class Program
 
     private static void CheckSomething()
     {
-        var target = Signalert.Collector.LoadStock("688328.SH");
-        var success=Signalert.PrepareOne(target, out var messages);
+        /*
+        var stock = Signalert.Collector.LoadStock("600985.SH");
+        var success = Signalert.PrepareOne(
+            stock,
+            msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }
+        );
 
         if (success)
         {
             $"Success".WriteColorLine(ConsoleColor.Red);
         }
 
-        messages.ForEach(m =>
+        var codes = Signalert.Collector.ScopedCodes();
+        codes.ParallelExecute(stock =>
         {
-            m.WriteColorLine(ConsoleColor.DarkBlue);
-        });
+            var success = Signalert.PrepareOne(
+                stock,
+                msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }
+            );
 
-        /*
-
-        var latest=Signalert.Calculator.LoadAllLatestSets();
-
-        var dic = latest.Select(o =>
-        {
-                var macds = o.SetKeys.Where(x => x.StartsWith("MACD")).ToList();
-                var val = macds.Evaluation(out var notice);
-                return new Tuple<string, int, List<string>, List<string>>(o.Code, val, o.SetKeys.ToList(), notice);
-            
-        });
-
-        foreach (var keyValuePair in dic.OrderByDescending(o=>o.Item2).Take(20))
-        {
-            $"{keyValuePair.Item1}={keyValuePair.Item2}".WriteColorLine(ConsoleColor.Red);
-            $"{keyValuePair.Item4.AggregateToString(",")}".WriteColorLine(ConsoleColor.Blue);
-            $"{keyValuePair.Item3.AggregateToString(",")}".WriteColorLine(ConsoleColor.DarkYellow);
-        }
-        var prices = Signalert.Collector.LoadDailyPrices("301203.SZ");
-        var x = prices.ConvertCycle(StockAnalysisCycle.MONTHLY);
-
-        x.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
-
-        var stocks = Signalert.Collector.LoadAllCodes();
-
-        new Action(() =>
-            stocks.ParallelExecute((stock) =>
+            if (success)
             {
-                var sets = Signalert.Calculator.LoadSets(stock.Code);
-                if (sets != null && sets.Any())
-                {
-                    Infrastructures.Indicators.Helper.DefaultProfiles
-                        .Where(o => o.Persistence)
-                        .ParallelExecute((profile) =>
-                        {
-                            Signalert.Analyzer
-                                .OutputDailyOperates(profile, sets, stock.Code)
-                                .ConvertOperates2Records(profile, stock.Code);
-                        },
-                            Config.MaxParallelTasks);
-                }
-            }, Config.MaxParallelTasks)
-        ).ExecuteAndTiming("OutputDailyOperates");
-
-        var code = "688160.SH";
-        var indicatorValue = Signalert.Calculator.LoadIndicatorLine(code,Productions.Casino.Contracts.Enums.StockAnalysisCycle.DAILY);
-
-        var a = indicatorValue.LineToSets();
-        a.ObjToJson().WriteColorLine(ConsoleColor.Red);
-    var notices = a
-            .Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0")))
-            .Select(o => new object[] { o.Code, o.Close })
-            .ToList();
-
-        Console.WriteLine(notices.Count);
-
-
-        var ss = Signalert.Calculator.LoadSets(code);
-        var ns=ss.Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0.")))
-            .Select(o => new object[] { o.Code, o.Close })
-            .ToList();
-
-        Console.WriteLine(ns.Count);
-
-
-        var latest=Signalert.Calculator.LoadList().OrderBy(o=>o.Rank).ThenByDescending(o=>o.Code);
-        latest.Take(10).ToList()
-            .ForEach(
-            o =>
-            {
-                $"{o.Code} -> {o.Close}".WriteColorLine(ConsoleColor.DarkGreen);
-            });
-        return;
-
-
-        var dotsDic = Signalert.Reportor.LoadDots(Config.DefaultFilter);
-        Signalert.Collector.LoadAllCodes()
-            .Where(o=>dotsDic.ContainsKey(o.Code))
-            .ToList()
-            .ForEach(
-            target =>
-            {
-                target.Code.WriteColorLine(ConsoleColor.Green);
-                var dic = new Dictionary<string, List<KeyValuePair<string, ConsoleColor>>>();
-                var sets = Signalert.Calculator.LoadSets(target.Code);
-
-                var ss = sets.FindAll(o => o.SetKeys.Any(x => x.StartsWith("MACD.C0.")));
-                $"{ss.Count()} found.".WriteColorLine(ConsoleColor.Blue);
-                ss.ForEach(o =>
-                {
-                    if (dic.ContainsKey(o.MarkTime.ToYmd()))
-                    {
-
-
-                        if (Infrastructures.Indicators.Helper.DefaultProfile.Match(o))
-                        {
-                            dic[o.MarkTime.ToYmd()].Add(
-                                new KeyValuePair<string, ConsoleColor>(o.SetKeys.AggregateToString(","),
-                                ConsoleColor.Yellow));
-
-                            dic[o.MarkTime.ToYmd()]
-                                .Add(new KeyValuePair<string, ConsoleColor>(
-                                    "MATCH",
-                                    ConsoleColor.Blue));
-                        }
-                    }
-                    else
-                    {
-
-                        if (Infrastructures.Indicators.Helper.DefaultProfile.Match(o))
-                        {
-                            var nd = new List<KeyValuePair<string, ConsoleColor>>
-                            {
-                                new KeyValuePair<string, ConsoleColor>(
-                                    o.SetKeys.AggregateToString(","),
-                                    ConsoleColor.Yellow)
-                            };
-
-                            nd.Add(new KeyValuePair<string, ConsoleColor>("MATCH",
-                                ConsoleColor.Blue));
-
-                            dic.Add(o.MarkTime.ToYmd(),nd);
-                        }
-                    }
-                });
-
-                if (dotsDic.TryGetValue(target.Code, out var dots))
-                {
-                    dots.ForEach(o =>
-                    {
-                        var sks = sets.GetSets(o.TradeDate);
-
-                        if (dic.ContainsKey(o.TradeDate))
-                        {
-                            dic[o.TradeDate]
-                                .Add(new KeyValuePair<string, ConsoleColor>($"{o.Days}:{o.ChangePercent}{sks.OrderBy(y=>y).AggregateToString("\r\n")}",
-                                    ConsoleColor.Red));
-                            if (Infrastructures.Indicators.Helper.DefaultProfile.Match(new StockSets { SetKeys = sks }))
-                            dic[o.TradeDate]
-                                .Add(new KeyValuePair<string, ConsoleColor>(
-                                  "MATCH",
-                                    ConsoleColor.Blue));
-                        }
-                        else
-                        {
-                            var nc = new List<KeyValuePair<string, ConsoleColor>>
-                            {
-                                new KeyValuePair<string, ConsoleColor>(
-                                    $"{o.Days}:{o.ChangePercent}{sks.OrderBy(y => y).AggregateToString("\r\n")}",
-                                    ConsoleColor.Red)
-                            };
-
-                            if(Infrastructures.Indicators.Helper.DefaultProfile.Match(new StockSets { SetKeys = sks }))
-                                nc.Add(new KeyValuePair<string, ConsoleColor>(
-                                        "MATCH",
-                                        ConsoleColor.Blue));
-
-                            dic.Add(o.TradeDate,nc);
-                        }
-                    });
-                }
-
-                dic.OrderBy(o => o.Key)
-                    .ToList()
-                    .ForEach(o =>
-                    {
-                        foreach (var keyValuePair in o.Value)
-                        {
-                            $"{o.Key}:{keyValuePair.Key}".WriteColorLine(keyValuePair.Value);
-                        }
-                    });
-                Console.Read();
+                $"Success".WriteColorLine(ConsoleColor.Red);
             }
-        );*/
+
+        }, Config.MaxParallelTasks);
+
+        */
+        var codes = Signalert.Collector.ScopedCodes();
+        var pool = new TaskPool<Stock>(codes, Config.MaxParallelTasks,
+            stock => Signalert.PrepareOne(stock,
+                msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }));
+
+        pool.Execute();
     }
 }
