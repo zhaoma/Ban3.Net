@@ -12,16 +12,16 @@ public class TaskPool<T>
     public int MaxParallel { get; set; }
 
     public Action<T> Handle { get; set; }
-    
-    public TaskPool(){}
 
-    public TaskPool(List<T> args,int maxParallel,Action<T> handle)
+    public TaskPool() { }
+
+    public TaskPool(List<T> args, int maxParallel, Action<T> handle)
     {
-        Args=args;
-        MaxParallel=maxParallel;
+        Args = args;
+        MaxParallel = maxParallel;
         Handle = handle;
 
-        args.ForEach(a=> _queue.Enqueue(a));
+        args.ForEach(a => _queue.Enqueue(a));
     }
 
     public void Execute()
@@ -33,13 +33,14 @@ public class TaskPool<T>
             while (_parallelCounter < MaxParallel)
             {
                 Console.WriteLine($"parallelCounter={_parallelCounter};_taskList.Count={_taskList.Count}");
-                Counter(plus:true);
+                Counter(plus: true);
 
                 var a = _queue.Dequeue();
                 var one = Task.Run(() => { Handle(a); }).ContinueWith((task) =>
                 {
+                    Console.WriteLine($"continue:{_taskList.Count}");
                     _taskList.Remove(task);
-                    Console.WriteLine($"continue parallelCounter={_parallelCounter};_taskList.Count={_taskList.Count}");
+                    Console.WriteLine($"parallelCounter={_parallelCounter};_taskList.Count={_taskList.Count}/{task.Status}");
                     Counter(plus: false);
                     Execute();
                 });
@@ -59,8 +60,8 @@ public class TaskPool<T>
         }
     }
 
-    private List<Task> _taskList =new ();
+    private List<Task> _taskList = new();
     private static readonly object CounterLock = new();
     private int _parallelCounter = 0;
-    private readonly Queue<T> _queue=new ();
+    private readonly Queue<T> _queue = new();
 }

@@ -2,6 +2,7 @@
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Extensions;
@@ -140,10 +141,15 @@ internal class Program
 
         */
         var codes = Signalert.Collector.ScopedCodes();
-        var pool = new TaskPool<Stock>(codes, Config.MaxParallelTasks,
-            stock => Signalert.PrepareOne(stock,
-                msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }));
+        //var pool = new TaskPool<Stock>(codes, Config.MaxParallelTasks,
+        //    stock => Signalert.PrepareOne(stock,
+        //        msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }));
 
-        pool.Execute();
+        //pool.Execute();
+
+        //codes.ParallelExecute((stock) => { Signalert.PrepareOne(stock, msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }); },
+        //        Config.MaxParallelTasks);
+
+        Signalert.PrepareV2(codes);
     }
 }

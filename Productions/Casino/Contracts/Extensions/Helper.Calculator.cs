@@ -677,7 +677,7 @@ public static partial class Helper
         if (prices == null || !prices.Any()) return new List<DotInfo>();
 
         prices = prices
-            .Where(o => DateTime.Now.Subtract(o.TradeDate.ToDateTimeEx()).TotalDays <= 250)
+            .Where(o => DateTime.Now.Year - o.TradeDate.ToDateTimeEx().Year <= 1)
             .ToList();
 
         return prices.DotsOfBuyingOrSelling(filter);

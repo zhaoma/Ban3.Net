@@ -6,6 +6,7 @@ using Ban3.Infrastructures.Charts.Composites;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
+using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
@@ -15,6 +16,33 @@ namespace Ban3.Productions.Casino.CcaAndReport;
 
 public partial class Signalert
 {
+    public static void PrepareV2(List<Stock> stocks)
+    {
+        new Action(() => Collector.FixDailyPrices(stocks)).ExecuteAndTiming("FixDailyPrices");
+
+        new Action(() => ReinstateAllPrices(stocks)).ExecuteAndTiming("ReinstateAllPrices");
+
+        stocks.ParallelExecute((stock) => {
+	     Signalert.PrepareOne(stock, msg => { Logger.Debug($"{stock.Code}:{msg}"); }); },
+                Config.MaxParallelTasks);
+
+        var latestSets = new List<StockSets>();
+        stocks.ForEach(stock =>
+        {
+            var ones = Calculator.LoadSets(stock.Code);
+            if (ones != null && ones.Any())
+                latestSets.Add(ones.Last());
+        });
+        $"latest".DataFile<StockSets>()
+            .WriteFile(latestSets.ObjToJson());
+
+        latestSets.GenerateList(DateTime.Now.ToYmd());
+
+        new Action(() =>
+            PrepareDots(stocks, Config.DefaultFilter)
+        ).ExecuteAndTiming("PrepareDots");
+    }
+
     public static bool PrepareOne(Stock stock, Action<string> messageCallback)
     {
         try
@@ -160,6 +188,8 @@ public partial class Signalert
 
             for (var index = 0; index < d.Count; index++)
             {
+                if (d[index].MarkTime.Year <= DateTime.Now.Year - 2) continue;
+
                 profiles.ForEach(p =>
                 {
                     var so = dic.TryGetValue(p.Identity, out var stockOperates);
