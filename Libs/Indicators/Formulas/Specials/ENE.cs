@@ -107,17 +107,17 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( pv.ParamId == ParamIdENE )
                 {
-                    r.RefENE =(decimal) pv.Ref;
+                    r.RefENE =pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdUPPER )
                 {
-                    r.RefUPPER = (decimal)pv.Ref;
+                    r.RefUPPER = pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdLOWER )
                 {
-                    r.RefLOWER = (decimal)pv.Ref;
+                    r.RefLOWER = pv.Ref;
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         /// <summary>
         /// 计算最后的指标值
         /// </summary>
-        /// <param name="values"></param>
+        /// <param name="stockCode"></param>
         /// <param name="prices"></param>
         /// <returns></returns>
         public void CalculateLastValues( string stockCode, List<Inputs.Price> prices )
@@ -183,8 +183,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                 {
                     var ma = DescRangeCloseAverage( prices, i, N );
 
-                    Result[ i ].RefUPPER = Math.Round( (1 + M1 / 100M) * ma, 2 );
-                    Result[ i ].RefLOWER = Math.Round( (1 - M2 / 100M) * ma, 2 );
+                    Result[ i ].RefUPPER = Math.Round( (1 + M1 / 100D) * ma, 2 );
+                    Result[ i ].RefLOWER = Math.Round( (1 - M2 / 100D) * ma, 2 );
                     Result[ i ].RefENE = Math.Round( (Result[ i ].RefUPPER!.Value + Result[ i ].RefLOWER!.Value) / 2, 2 );
                 }
             }

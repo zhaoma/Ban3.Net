@@ -35,7 +35,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="days"></param>
         /// <param name="round"></param>
         /// <returns></returns>
-        public decimal MA( List<decimal> values, int position, int days, int round = 3 )
+        public double MA( List<double> values, int position, int days, int round = 3 )
         {
             var mas = DescRange( values, position, days );
 
@@ -51,7 +51,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="days"></param>
         /// <param name="round"></param>
         /// <returns></returns>
-        public decimal EMA( decimal current, decimal yest, int days, int round = 3 )
+        public double EMA( double current, double yest, int days, int round = 3 )
         {
             //var now = DateTime.Now;
             var result = (current * 2 + yest * (days - 1)) / (days + 1);
@@ -68,16 +68,16 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="values"></param>
         /// <param name="round"></param>
         /// <returns></returns>
-        public decimal AVEDEV( decimal current, List<decimal> values, int round = 3 )
+        public double AVEDEV( double current, List<double> values, int round = 3 )
         {
             var avg = values.Average();
 
             var avgAbs = values.Average( o => Math.Abs( o - avg ) );
 
             var result = avgAbs != 0
-                                 ? (current - avg) / (0.015M * avgAbs)
+                                 ? (current - avg) / (0.015D * avgAbs)
                                  : (current != 0
-                                            ? (current - avg) / (0.015M * current)
+                                            ? (current - avg) / (0.015D * current)
                                             : current);
 
             return Math.Round( result, round );
@@ -90,7 +90,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="position"></param>
         /// <param name="days"></param>
         /// <returns></returns>
-        public decimal LLV( List<decimal> values, int position, int days )
+        public double LLV( List<double> values, int position, int days )
         {
             var mas = values.Skip( position - days + 1 ).Take( days );
             return mas.Min( o => o );
@@ -103,7 +103,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="position"></param>
         /// <param name="days"></param>
         /// <returns></returns>
-        public decimal HHV( List<decimal> values, int position, int days )
+        public double HHV( List<double> values, int position, int days )
         {
             var mas = values.Skip( position - days + 1 ).Take( days );
             return mas.Max( o => o );
@@ -116,7 +116,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="position"></param>
         /// <param name="days"></param>
         /// <returns></returns>
-        public decimal SUM( List<decimal> values, int position, int days )
+        public double SUM( List<double> values, int position, int days )
         {
             var mas = values.Skip( position - days + 1 ).Take( days );
             return mas.Sum();
@@ -131,7 +131,7 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="N"></param>
         /// <param name="round"></param>
         /// <returns></returns>
-        public decimal SMA( decimal val, decimal valYest, int M, int N, int round = 3 )
+        public double SMA( double val, double valYest, int M, int N, int round = 3 )
         {
             return Math.Round( (N * val + (M - N) * valYest) / M, round );
         }
@@ -143,9 +143,9 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="start"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        public List<decimal> AscRange( List<decimal> source, int start, int length )
+        public List<double> AscRange( List<double> source, int start, int length )
         {
-            var result = new List<decimal>();
+            var result = new List<double>();
             for( int r = start; r < start + length; r++ )
             {
                 result.Add( source[ r ] );
@@ -161,9 +161,9 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="start"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        public List<decimal> DescRange( List<decimal> source, int start, int length )
+        public List<double> DescRange( List<double> source, int start, int length )
         {
-            var result = new List<decimal>();
+            var result = new List<double>();
             for( int r = start; r > start - length; r-- )
             {
                 result.Add( source[ r ] );
@@ -200,10 +200,10 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="current"></param>
         /// <param name="N"></param>
         /// <returns></returns>
-        public decimal DescRangeCloseAverage( List<Inputs.Price> prices, int current, int N )
+        public double DescRangeCloseAverage( List<Inputs.Price> prices, int current, int N )
         {
-            var d = 0M;
-            var m = 0;
+            var d = 0D;
+            var m = 0D;
 
             for( int r = 0; r < N; r++ )
             {
@@ -221,9 +221,9 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="current"></param>
         /// <param name="N"></param>
         /// <returns></returns>
-        public decimal LLV( List<Inputs.Price> prices, int current, int N )
+        public double LLV( List<Inputs.Price> prices, int current, int N )
         {
-            var mins = new List<decimal>();
+            var mins = new List<double>();
             for( int r = 0; r < N; r++ )
             {
                 mins.Add( prices[ Math.Max( 0, current - r ) ].CurrentLow!.Value );
@@ -239,9 +239,9 @@ namespace  Ban3.Infrastructures.Indicators.Formulas
         /// <param name="current"></param>
         /// <param name="N"></param>
         /// <returns></returns>
-        public decimal HHV( List<Inputs.Price> prices, int current, int N )
+        public double HHV( List<Inputs.Price> prices, int current, int N )
         {
-            var maxes = new List<decimal>();
+            var maxes = new List<double>();
             for( int r = 0; r < N; r++ )
             {
                 maxes.Add( prices[ Math.Max( 0, current - r ) ].CurrentHigh!.Value );

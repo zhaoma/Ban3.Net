@@ -16,13 +16,13 @@ public class CCI
     /// 
     /// </summary>
     [JsonProperty("refCCI", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal? RefCCI { get; set; }
+    public double? RefCCI { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
     [JsonProperty("refTYP", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal RefTYP { get; set; }
+    public double RefTYP { get; set; }
 
     /// <summary>
     /// 

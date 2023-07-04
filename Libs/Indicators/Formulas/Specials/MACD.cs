@@ -127,19 +127,19 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                 }
 
                 if( pv.ParamId == ParamIdDIF )
-                    r.RefDIF =(decimal) pv.Ref;
+                    r.RefDIF = pv.Ref;
 
                 if( pv.ParamId == ParamIdDEA )
-                    r.RefDEA = (decimal)pv.Ref;
+                    r.RefDEA = pv.Ref;
 
                 if( pv.ParamId == ParamIdMACD )
-                    r.RefMACD = (decimal)pv.Ref;
+                    r.RefMACD = pv.Ref;
 
                 if( pv.ParamId == ParamIdEMAShort )
-                    r.RefEMAShort = (decimal)pv.Ref;
+                    r.RefEMAShort = pv.Ref;
 
                 if( pv.ParamId == ParamIdEMALong )
-                    r.RefEMALong = (decimal)pv.Ref;
+                    r.RefEMALong = pv.Ref;
             }
         }
 
@@ -203,9 +203,9 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             Result.AddRange( new Outputs.Values.MACD[ prices.Count ] );
 
-            var emaShortYest = 0M;
-            var emaLongYest = 0M;
-            var deaYest = 0M;
+            var emaShortYest = 0D;
+            var emaLongYest = 0D;
+            var deaYest = 0D;
 
             for( var i = 0; i < prices.Count; i++ )
             {

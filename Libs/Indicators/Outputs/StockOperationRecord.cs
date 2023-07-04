@@ -32,7 +32,7 @@ public class StockOperationRecord
     /// B选择最高价
     /// </summary>
     [JsonProperty("buyPrice", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal BuyPrice { get; set; }
+    public double BuyPrice { get; set; }
 
     /// <summary>
     /// 卖出时间
@@ -45,7 +45,7 @@ public class StockOperationRecord
     /// S选择最低价
     /// </summary>
     [JsonProperty("sellPrice", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal? SellPrice { get; set; }
+    public double? SellPrice { get; set; }
 
     /// <summary>
     /// 交易量

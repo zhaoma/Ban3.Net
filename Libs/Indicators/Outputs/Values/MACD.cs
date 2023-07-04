@@ -16,31 +16,31 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal RefEMAShort { get; set; }
+        public double RefEMAShort { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal RefEMALong { get; set; }
+        public double RefEMALong { get; set; }
 
         /// <summary>
         /// 快线
         /// </summary>
         [JsonProperty("refDIF", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal RefDIF { get; set; }
+        public double RefDIF { get; set; }
 
         /// <summary>
         /// 加权移动均线
         /// </summary>
         [JsonProperty("refDEA", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal RefDEA { get; set; }
+        public double RefDEA { get; set; }
 
         /// <summary>
         /// MACD柱
         /// </summary>
         [JsonProperty("refMACD", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal RefMACD { get; set; }
+        public double RefMACD { get; set; }
 
         /// <summary>
         /// 
@@ -49,10 +49,12 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
 
         public List<string> Features(MACD? pre)
         {
-            var result = new List<string>();
+            var result = new List<string>
+            {
+                RefDIF > RefDEA ? "MACD.PDI" : "MACD.MDI",
+                RefDIF >= 0 ? "MACD.P" : "MACD.N"
+            };
 
-            result.Add(RefDIF > RefDEA ? "MACD.PDI" : "MACD.MDI");
-            result.Add(RefDIF >= 0 ? "MACD.P" : "MACD.N");
             //result.Add(RefMACD >= 0 ? "MACD.R" : "MACD.G");
 
             if (pre != null)

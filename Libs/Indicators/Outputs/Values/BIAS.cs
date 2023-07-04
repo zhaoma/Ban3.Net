@@ -15,13 +15,13 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
         /// 乖离
         /// </summary>
         [JsonProperty("refBIAS", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RefBIAS { get; set; }
+        public double? RefBIAS { get; set; }
 
         /// <summary>
         /// 平均乖离
         /// </summary>
         [JsonProperty("refBIASMA", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RefBIASMA { get; set; }
+        public double? RefBIASMA { get; set; }
 
         /// <summary>
         /// 
@@ -33,9 +33,7 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
 
         public List<string> Features(BIAS? pre)
         {
-            var result = new List<string>();
-
-            result.Add(RefBIAS > RefBIASMA ? "BIAS.GE" : "BIAS.LT");
+            var result = new List<string> { RefBIAS > RefBIASMA ? "BIAS.GE" : "BIAS.LT" };
 
             if (pre != null)
             {

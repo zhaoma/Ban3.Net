@@ -206,7 +206,7 @@ public partial class Signalert
                                 Code = stock.Code,
                                 Symbol = stock.Symbol,
                                 MarkTime = d[index].MarkTime,
-                                Close = (decimal)prices[index].Close,
+                                Close = prices[index].Close,
                                 Operate = currentOperate
                             });
                         }
@@ -219,7 +219,7 @@ public partial class Signalert
                                 Code=stock.Code,
                                 Symbol=stock.Symbol,
                                 MarkTime=d[index].MarkTime,
-                                Close=(decimal)prices[index].Close,
+                                Close=prices[index].Close,
                                 Operate=Infrastructures.Indicators.Enums.StockOperate.Left
                             }
                         });

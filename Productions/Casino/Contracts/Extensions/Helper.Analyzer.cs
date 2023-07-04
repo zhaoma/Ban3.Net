@@ -163,7 +163,7 @@ public static partial class Helper
                         {
                             latest.SellDate = op.MarkTime;
                             latest.SellPrice = op.Close;
-                            latest.Ratio=Math.Round((op.Close! -latest.BuyPrice!)/latest.BuyPrice!*100M,2);
+                            latest.Ratio=Math.Round((decimal)((op.Close! -latest.BuyPrice!)/latest.BuyPrice)!*100M,2);
                         }
                     }
                 }
@@ -231,7 +231,7 @@ public static partial class Helper
 
     public static decimal FinalProfit(this List<StockOperationRecord> records) 
         => records.Aggregate(1M,
-            (current, record) => current * (1 + (record.SellPrice - record.BuyPrice) / record.BuyPrice)!.Value);
+            (current, record) => current *(decimal) (1 + (record.SellPrice - record.BuyPrice) / record.BuyPrice)!.Value);
 
     public static void MergeSummary(this List<StockOperationRecord> records, Profile profile)
     {
@@ -246,8 +246,8 @@ public static partial class Helper
                 StockCount = 1,
                 RecordCount = validRecords.Count(),
                 RightCount = validRecords.Count(o => o.SellPrice > o.BuyPrice),
-                Best = validRecords.Max(o => (o.SellPrice - o.BuyPrice) / o.BuyPrice * 100M)!.Value,
-                Worst = validRecords.Min(o => (o.SellPrice - o.BuyPrice) / o.BuyPrice * 100M)!.Value,
+                Best =(decimal) validRecords.Max(o => (o.SellPrice - o.BuyPrice) / o.BuyPrice * 100D)!.Value,
+                Worst = (decimal)validRecords.Min(o => (o.SellPrice - o.BuyPrice) / o.BuyPrice * 100D)!.Value,
                 Average = validRecords.FinalProfit()
             };
             

@@ -19,32 +19,32 @@ namespace Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 
         /// </summary>
-        public decimal? CloseBefore { get; set; }
+        public double? CloseBefore { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal? CurrentOpen { get; set; }
+        public double? CurrentOpen { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal? CurrentClose { get; set; }
+        public double? CurrentClose { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal? CurrentHigh { get; set; }
+        public double? CurrentHigh { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal? CurrentLow { get; set; }
+        public double? CurrentLow { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal? TurnoverRate { get; set; }
+        public double? TurnoverRate { get; set; }
 
         /// <summary>
         /// 
@@ -59,23 +59,23 @@ namespace Ban3.Infrastructures.Indicators.Inputs
         /// <summary>
         /// 
         /// </summary>
-        public decimal? TotalValue { get; set; }
+        public double? TotalValue { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal? TradableValue { get; set; }
+        public double? TradableValue { get; set; }
 
         /// <summary>
         /// 涨幅
         /// </summary>
         [DataMember]
-        public decimal Increase { get; set; }
+        public double Increase { get; set; }
 
         /// <summary>
         /// 振幅
         /// </summary>
         [DataMember]
-        public decimal Amplitude { get; set; }
+        public double Amplitude { get; set; }
     }
 }

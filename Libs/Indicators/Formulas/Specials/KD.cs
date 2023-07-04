@@ -106,22 +106,22 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( pv.ParamId == ParamIdK )
                 {
-                    r.RefK = (decimal)pv.Ref;
+                    r.RefK = pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdD )
                 {
-                    r.RefD = (decimal)pv.Ref;
+                    r.RefD = pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdPSV )
                 {
-                    r.RefPSV = (decimal)pv.Ref;
+                    r.RefPSV = pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdDailyPSV )
                 {
-                    r.RefDailyPSV = (decimal)pv.Ref;
+                    r.RefDailyPSV = pv.Ref;
                 }
             }
         }
@@ -225,7 +225,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( Result[ i ].RefHHV - Result[ i ].RefLLV != 0 )
                 {
-                    Result[ i ].RefDailyPSV = Math.Round( (prices[ i ].CurrentClose!.Value - Result[ i ].RefLLV!.Value) * 100M / (Result[ i ].RefHHV!.Value - Result[ i ].RefLLV!.Value), 3 );
+                    Result[ i ].RefDailyPSV = Math.Round( (prices[ i ].CurrentClose!.Value - Result[ i ].RefLLV!.Value) * 100D / (Result[ i ].RefHHV!.Value - Result[ i ].RefLLV!.Value), 3 );
                 }
 
                 if( i > 0 )
@@ -248,7 +248,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( i >= M - 1 )
                 {
-                    var d = 0M;
+                    var d = 0D;
                     for( int r = 0; r < M; r++ )
                     {
                         d += Result[ i - r ].RefK!.Value;

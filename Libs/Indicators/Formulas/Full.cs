@@ -51,10 +51,10 @@ public class Full
                     Dmi = new Outputs.Values.DMI
                     {
                         MarkTime = o.MarkTime,
-                        RefADX = 0M,
-                        RefADXR = 0M,
-                        RefPDI = 0M,
-                        RefMDI = 0M
+                        RefADX = 0D,
+                        RefADXR = 0D,
+                        RefPDI = 0D,
+                        RefMDI = 0D
                     },
                     Ene = new Outputs.Values.ENE { MarkTime = o.MarkTime },
                     Kd = new Outputs.Values.KD
@@ -89,9 +89,9 @@ public class Full
                 Math.Abs(o.CurrentHigh.Value - o.CurrentLow.Value)
             }).ToList();
 
-        var emaShortYest = 0M;
-        var emaLongYest = 0M;
-        var deaYest = 0M;
+        var emaShortYest = 0D;
+        var emaLongYest = 0D;
+        var deaYest = 0D;
 
         for (var i = 0; i < prices.Count; i++)
         {
@@ -132,13 +132,13 @@ public class Full
                 if (biasMA != 0)
                 {
                     Result.EndPoints[i].Bias!.RefBIAS =
-                        Math.Round((prices[i].CurrentClose!.Value - biasMA) / biasMA * 100M, 3);
+                        Math.Round((prices[i].CurrentClose!.Value - biasMA) / biasMA * 100D, 3);
                 }
             }
 
             if (i >= bias.N + bias.M - 2)
             {
-                var biasSum = 0M;
+                var biasSum = 0D;
                 for (int j = 0; j < bias.M; j++)
                 {
                     if (Result.EndPoints[i - j].Bias!.RefBIAS != null)
@@ -156,7 +156,7 @@ public class Full
 
             if (i >= cci.N - 1)
             {
-                var rr = new List<decimal>();
+                var rr = new List<double>();
                 for (int r = i; r > i - cci.N; r--)
                 {
                     rr.Add(Result.EndPoints[r].Cci!.RefTYP);
@@ -180,19 +180,19 @@ public class Full
                         Result.EndPoints[i].Dmi!.RefHD!.Value > 0 && Result.EndPoints[i].Dmi!.RefHD!.Value >
                         Result.EndPoints[i].Dmi!.RefLD!.Value
                             ? Result.EndPoints[i].Dmi!.RefHD!.Value
-                            : 0M;
+                            : 0D;
                     middles[i][4] =
                         Result.EndPoints[i].Dmi!.RefLD!.Value > 0 && Result.EndPoints[i].Dmi!.RefLD!.Value >
                         Result.EndPoints[i].Dmi!.RefHD!.Value
                             ? Result.EndPoints[i].Dmi!.RefLD!.Value
-                            : 0M;
+                            : 0D;
 
                     middles[i][5] = Math.Max(middles[i][5], Math.Abs(middles[i][0] - middles[i - 1][2]));
                     middles[i][5] = Math.Max(middles[i][5], Math.Abs(middles[i][1] - middles[i - 1][2]));
 
-                    var dmp = 0M;
-                    var dmm = 0M;
-                    var mtr = 0M;
+                    var dmp = 0D;
+                    var dmm = 0D;
+                    var mtr = 0D;
                     for (int index = 0; index < dmi.N; index++)
                     {
                         if (index <= i)
@@ -217,23 +217,23 @@ public class Full
                 }
                 else
                 {
-                    Result.EndPoints[i].Dmi!.RefHD = 0M; // prices[i].CurrentClose;
-                    Result.EndPoints[i].Dmi!.RefLD = 0M; // -prices[i].CurrentOpenEx;
+                    Result.EndPoints[i].Dmi!.RefHD = 0D; // prices[i].CurrentClose;
+                    Result.EndPoints[i].Dmi!.RefLD = 0D; // -prices[i].CurrentOpenEx;
                     Result.EndPoints[i].Dmi!.RefMTR = middles[i][5];
                 }
 
                 if (i >= dmi.M - 1)
                 {
-                    var adx = 0M;
+                    var adx = 0D;
                     for (int r = i; r > i - dmi.M; r--)
                     {
-                        adx += Result.EndPoints[r].Dmi!.RefPDI + Result.EndPoints[r].Dmi!.RefMDI == 0M
-                            ? 0M
-                            : Math.Abs(Result.EndPoints[r].Dmi!.RefMDI!.ToDecimal() -
-                                       Result.EndPoints[r].Dmi!.RefPDI!.ToDecimal()) /
-                              (Result.EndPoints[r].Dmi!.RefPDI!.ToDecimal() +
-                               Result.EndPoints[r].Dmi!.RefMDI!.ToDecimal()) *
-                              100M;
+                        adx += Result.EndPoints[r].Dmi!.RefPDI + Result.EndPoints[r].Dmi!.RefMDI == 0D
+                            ? 0D
+                            : Math.Abs(Result.EndPoints[r].Dmi!.RefMDI!.Value -
+                                       Result.EndPoints[r].Dmi!.RefPDI!.Value) /
+                              (Result.EndPoints[r].Dmi!.RefPDI!.Value +
+                               Result.EndPoints[r].Dmi!.RefMDI!.Value) *
+                              100D;
                     }
 
                     Result.EndPoints[i].Dmi!.RefADX = adx / dmi.M;
@@ -241,16 +241,16 @@ public class Full
 
                 if (i >= 2 * dmi.M - 1)
                 {
-                    Result.EndPoints[i].Dmi!.RefADXR = (Result.EndPoints[i].Dmi!.RefADX!.ToDecimal() +
-                                                       Result.EndPoints[i - dmi.M].Dmi!.RefADX!.ToDecimal()) / 2;
+                    Result.EndPoints[i].Dmi!.RefADXR = (Result.EndPoints[i].Dmi!.RefADX!.Value +
+                                                       Result.EndPoints[i - dmi.M].Dmi!.RefADX!.Value) / 2;
                 }
 
-                Result.EndPoints[i].Dmi!.RefADX = Math.Round(Result.EndPoints[i].Dmi!.RefADX!.ToDecimal(), 3);
-                Result.EndPoints[i].Dmi!.RefADXR = Math.Round(Result.EndPoints[i].Dmi!.RefADXR!.ToDecimal(), 3);
-                Result.EndPoints[i].Dmi!.RefHD = Math.Round(Result.EndPoints[i].Dmi!.RefHD!.ToDecimal(), 3);
-                Result.EndPoints[i].Dmi!.RefLD = Math.Round(Result.EndPoints[i].Dmi!.RefLD!.ToDecimal(), 3);
-                Result.EndPoints[i].Dmi!.RefMDI = Math.Round(Result.EndPoints[i].Dmi!.RefMDI!.ToDecimal(), 3);
-                Result.EndPoints[i].Dmi!.RefPDI = Math.Round(Result.EndPoints[i].Dmi!.RefPDI!.ToDecimal(), 3);
+                Result.EndPoints[i].Dmi!.RefADX = Math.Round(Result.EndPoints[i].Dmi!.RefADX!.Value, 3);
+                Result.EndPoints[i].Dmi!.RefADXR = Math.Round(Result.EndPoints[i].Dmi!.RefADXR!.Value, 3);
+                Result.EndPoints[i].Dmi!.RefHD = Math.Round(Result.EndPoints[i].Dmi!.RefHD!.Value, 3);
+                Result.EndPoints[i].Dmi!.RefLD = Math.Round(Result.EndPoints[i].Dmi!.RefLD!.Value, 3);
+                Result.EndPoints[i].Dmi!.RefMDI = Math.Round(Result.EndPoints[i].Dmi!.RefMDI!.Value, 3);
+                Result.EndPoints[i].Dmi!.RefPDI = Math.Round(Result.EndPoints[i].Dmi!.RefPDI!.Value, 3);
             }
             catch (Exception ex)
             {
@@ -265,8 +265,8 @@ public class Full
             {
                 var eneMa = DescRangeCloseAverage(prices, i, ene.N);
 
-                Result.EndPoints[i].Ene!.RefUPPER = Math.Round((1 + ene.M1 / 100M) * eneMa, 2);
-                Result.EndPoints[i].Ene!.RefLOWER = Math.Round((1 - ene.M2 / 100M) * eneMa, 2);
+                Result.EndPoints[i].Ene!.RefUPPER = Math.Round((1 + ene.M1 / 100D) * eneMa, 2);
+                Result.EndPoints[i].Ene!.RefLOWER = Math.Round((1 - ene.M2 / 100D) * eneMa, 2);
                 Result.EndPoints[i].Ene!.RefENE =
                     Math.Round((Result.EndPoints[i].Ene!.RefUPPER!.Value + Result.EndPoints[i].Ene!.RefLOWER!.Value) / 2,
                         2);
@@ -284,7 +284,7 @@ public class Full
                 if (Result.EndPoints[i].Kd!.RefHHV - Result.EndPoints[i].Kd!.RefLLV != 0)
                 {
                     Result.EndPoints[i].Kd!.RefDailyPSV = Math.Round(
-                        (prices[i].CurrentClose!.Value - Result.EndPoints[i].Kd!.RefLLV!.Value) * 100M /
+                        (prices[i].CurrentClose!.Value - Result.EndPoints[i].Kd!.RefLLV!.Value) * 100D /
                         (Result.EndPoints[i].Kd!.RefHHV!.Value - Result.EndPoints[i].Kd!.RefLLV!.Value), 3);
                 }
                 else
@@ -312,7 +312,7 @@ public class Full
 
                 if (i >= kd.M - 1)
                 {
-                    var d = 0M;
+                    var d = 0D;
                     for (int r = 0; r < kd.M; r++)
                     {
                         d += Result.EndPoints[i - r].Kd!.RefK!.Value;

@@ -24,8 +24,8 @@
             @foreach (var point in Model.Where(o => o.SellDate == null).OrderBy(o => o.BuyDate))
             {
                 var close = StockRealtime.Close(point.Code);
-                var ratio = System.Math.Round(((decimal)close - point.BuyPrice) / point.BuyPrice * 100, 2);
-                var className = (decimal)close > point.BuyPrice ? "red" : "green";
+                var ratio =Math.Round((close - point.BuyPrice) / point.BuyPrice * 100, 2);
+                var className =close > point.BuyPrice ? "red" : "green";
                     <tr class="@className renderChartsButton"
                         renderElement="chartsContainer"
                         dataUrl="/data/macd/@point.Code"

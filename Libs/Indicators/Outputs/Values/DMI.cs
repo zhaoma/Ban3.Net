@@ -16,55 +16,55 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal? RefHD { get; set; }
+        public double? RefHD { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal? RefLD { get; set; }
+        public double? RefLD { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("refPDI", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RefPDI { get; set; }
+        public double? RefPDI { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("refMDI", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RefMDI { get; set; }
+        public double? RefMDI { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("refADX", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RefADX { get; set; }
+        public double? RefADX { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("refADXR", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RefADXR { get; set; }
+        public double? RefADXR { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal RefMTR { get; set; }
+        public double RefMTR { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal RefDMP { get; set; }
+        public double RefDMP { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal RefDMM { get; set; }
+        public double RefDMM { get; set; }
 
         /// <summary>
         /// 
@@ -73,9 +73,8 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
 
         public List<string> Features(DMI? pre)
         {
-            var result = new List<string>();
+            var result = new List<string> { RefPDI > RefMDI ? "DMI.PDI" : "DMI.MDI" };
 
-            result.Add(RefPDI > RefMDI ? "DMI.PDI" : "DMI.MDI");
             if(RefADX>=80)
                 result.Add("DMI.80");
 

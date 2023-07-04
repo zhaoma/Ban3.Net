@@ -51,5 +51,5 @@ public class ListRecord:Record
     /// 最新收盘价
     /// </summary>
     [JsonProperty("close", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal Close { get; set; }
+    public double Close { get; set; }
 }

@@ -16,37 +16,37 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
         /// 
         /// </summary>
         [JsonProperty("refK", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RefK { get; set; }
+        public double? RefK { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("refD", NullValueHandling = NullValueHandling.Ignore)]
-        public decimal? RefD { get; set; }
+        public double? RefD { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal? RefPSV { get; set; }
+        public double? RefPSV { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal? RefDailyPSV { get; set; }
+        public double? RefDailyPSV { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal? RefLLV { get; set; }
+        public double? RefLLV { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonIgnore]
-        public decimal? RefHHV { get; set; }
+        public double? RefHHV { get; set; }
 
         /// <summary>
         /// 
@@ -55,9 +55,8 @@ namespace Ban3.Infrastructures.Indicators.Outputs.Values
 
         public List<string> Features(KD? pre)
         {
-            var result = new List<string>();
+            var result = new List<string> { RefK > RefD ? "KD.PDI" : "KD.MDI" };
 
-            result.Add(RefK > RefD ? "KD.PDI" : "KD.MDI");
             if (RefK >= 80)
                 result.Add("KD.80");
             if(RefK<10)

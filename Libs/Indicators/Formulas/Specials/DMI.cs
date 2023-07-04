@@ -125,32 +125,32 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( pv.ParamId == ParamIdHD )
                 {
-                    r.RefHD = (decimal)pv.Ref;
+                    r.RefHD = pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdLD )
                 {
-                    r.RefLD = (decimal)pv.Ref;
+                    r.RefLD = pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdPDI )
                 {
-                    r.RefPDI = (decimal)pv.Ref;
+                    r.RefPDI = pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdMDI )
                 {
-                    r.RefMDI = (decimal)pv.Ref;
+                    r.RefMDI = pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdADX )
                 {
-                    r.RefADX = (decimal)pv.Ref;
+                    r.RefADX = pv.Ref;
                 }
 
                 if( pv.ParamId == ParamIdADXR )
                 {
-                    r.RefADXR =(decimal) pv.Ref;
+                    r.RefADXR = pv.Ref;
                 }
             }
         }
@@ -258,15 +258,15 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             Result = prices.Select( o => new Outputs.Values.DMI
             {
                     MarkTime = o.MarkTime,
-                    RefADX = 0M,
-                    RefADXR = 0M,
-                    RefPDI = 0M,
-                    RefMDI = 0M
+                    RefADX = 0D,
+                    RefADXR = 0D,
+                    RefPDI = 0D,
+                    RefMDI = 0D
             } ).ToList();
 
             /* high low close HD(high差) LD(low差) MTR dmps dmms */
             var middles = prices.Select( o =>
-                                                 new decimal[]
+                                                 new []
                                                  {
                                                          o.CurrentHigh!.Value,
                                                          o.CurrentLow!.Value,
@@ -283,15 +283,15 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     Result[ i ].RefHD = middles[ i ][ 0 ] - middles[ i - 1 ][ 0 ];
                     Result[ i ].RefLD = middles[ i - 1 ][ 1 ] - middles[ i ][ 1 ];
 
-                    middles[ i ][ 3 ] = Result[ i ].RefHD!.Value > 0 && Result[ i ].RefHD!.Value > Result[ i ].RefLD!.Value ? Result[ i ].RefHD!.Value : 0M;
-                    middles[ i ][ 4 ] = Result[ i ].RefLD!.Value > 0 && Result[ i ].RefLD!.Value > Result[ i ].RefHD!.Value ? Result[ i ].RefLD!.Value : 0M;
+                    middles[ i ][ 3 ] = Result[ i ].RefHD!.Value > 0 && Result[ i ].RefHD!.Value > Result[ i ].RefLD!.Value ? Result[ i ].RefHD!.Value : 0D;
+                    middles[ i ][ 4 ] = Result[ i ].RefLD!.Value > 0 && Result[ i ].RefLD!.Value > Result[ i ].RefHD!.Value ? Result[ i ].RefLD!.Value : 0D;
 
                     middles[ i ][ 5 ] = Math.Max( middles[ i ][ 5 ], Math.Abs( middles[ i ][ 0 ] - middles[ i - 1 ][ 2 ] ) );
                     middles[ i ][ 5 ] = Math.Max( middles[ i ][ 5 ], Math.Abs( middles[ i ][ 1 ] - middles[ i - 1 ][ 2 ] ) );
 
-                    var dmp = 0M;
-                    var dmm = 0M;
-                    var mtr = 0M;
+                    var dmp = 0D;
+                    var dmm = 0D;
+                    var mtr = 0D;
                     for( int index = 0; index < N; index++ )
                     {
                         if( index <= i )
@@ -316,20 +316,20 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                 }
                 else
                 {
-                    Result[ i ].RefHD = 0M; // prices[i].CurrentClose;
-                    Result[ i ].RefLD = 0M; // -prices[i].CurrentOpenEx;
+                    Result[ i ].RefHD = 0D; // prices[i].CurrentClose;
+                    Result[ i ].RefLD = 0D; // -prices[i].CurrentOpenEx;
                     Result[ i ].RefMTR = middles[ i ][ 5 ];
                 }
 
                 if( i >= M - 1 )
                 {
-                    var adx = 0M;
+                    var adx = 0D;
                     for( int r = i; r > i - M; r-- )
                     {
-                        adx += Result[ r ].RefPDI + Result[ r ].RefMDI == 0M
-                                       ? 0M
-                                       : Math.Abs( Result[ r ].RefMDI!.ToDecimal() - Result[ r ].RefPDI!.ToDecimal() ) /
-                                         (Result[ r ].RefPDI!.ToDecimal() + Result[ r ].RefMDI!.ToDecimal()) * 100M;
+                        adx += Result[ r ].RefPDI!.Value + Result[ r ].RefMDI!.Value == 0D
+                                       ? 0D
+                                       : Math.Abs( Result[ r ].RefMDI!.Value - Result[ r ].RefPDI!.Value ) /
+                                         (Result[ r ].RefPDI!.Value + Result[ r ].RefMDI!.Value) * 100D;
                     }
 
                     Result[ i ].RefADX = adx / M;
@@ -337,15 +337,15 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( i >= 2 * M - 1 )
                 {
-                    Result[ i ].RefADXR = (Result[ i ].RefADX!.ToDecimal() + Result[ i - M ].RefADX!.ToDecimal()) / 2;
+                    Result[ i ].RefADXR = (Result[ i ].RefADX! + Result[ i - M ].RefADX!) / 2;
                 }
 
-                Result[ i ].RefADX = Math.Round( Result[ i ].RefADX!.ToDecimal(), 3 );
-                Result[ i ].RefADXR = Math.Round( Result[ i ].RefADXR!.ToDecimal(), 3 );
-                Result[ i ].RefHD = Math.Round( Result[ i ].RefHD!.ToDecimal(), 3 );
-                Result[ i ].RefLD = Math.Round( Result[ i ].RefLD!.ToDecimal(), 3 );
-                Result[ i ].RefMDI = Math.Round( Result[ i ].RefMDI!.ToDecimal(), 3 );
-                Result[ i ].RefPDI = Math.Round( Result[ i ].RefPDI!.ToDecimal(), 3 );
+                Result[ i ].RefADX = Math.Round( Result[ i ].RefADX!.Value, 3 );
+                Result[ i ].RefADXR = Math.Round( Result[ i ].RefADXR!.Value, 3 );
+                Result[ i ].RefHD = Math.Round( Result[ i ].RefHD!.Value, 3 );
+                Result[ i ].RefLD = Math.Round( Result[ i ].RefLD!.Value, 3 );
+                Result[ i ].RefMDI = Math.Round( Result[ i ].RefMDI!.Value, 3 );
+                Result[ i ].RefPDI = Math.Round( Result[ i ].RefPDI!.Value, 3 );
             }
         }
     }

@@ -90,12 +90,12 @@ public class BIAS : Communal, IIndicatorFormula
 
             if (pv.ParamId == ParamIdBIAS)
             {
-                r.RefBIAS =(decimal) pv.Ref;
+                r.RefBIAS = pv.Ref;
             }
 
             if (pv.ParamId == ParamIdBIASMA)
             {
-                r.RefBIASMA =(decimal) pv.Ref;
+                r.RefBIASMA = pv.Ref;
             }
         }
     }
@@ -165,13 +165,13 @@ public class BIAS : Communal, IIndicatorFormula
 
                 if (ma != 0)
                 {
-                    Result[i].RefBIAS = Math.Round((prices[i].CurrentClose!.Value - ma) / ma * 100M, 3);
+                    Result[i].RefBIAS = Math.Round((prices[i].CurrentClose!.Value - ma) / ma * 100D, 3);
                 }
             }
 
             if (i >= N + M - 2)
             {
-                var biasSum = 0M;
+                var biasSum = 0D;
                 for (int j = 0; j < M; j++)
                 {
                     if (Result[i - j].RefBIAS != null)

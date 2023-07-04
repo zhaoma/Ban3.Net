@@ -17,19 +17,19 @@ public class ENE
     /// 上轨
     /// </summary>
     [JsonProperty("refUPPER", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal? RefUPPER { get; set; }
+    public double? RefUPPER { get; set; }
 
     /// <summary>
     /// 下轨
     /// </summary>
     [JsonProperty("refLOWER", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal? RefLOWER { get; set; }
+    public double? RefLOWER { get; set; }
 
     /// <summary>
     /// 中轨
     /// </summary>
     [JsonProperty("refENE", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal? RefENE { get; set; }
+    public double? RefENE { get; set; }
 
     /// <summary>
     /// 
@@ -38,7 +38,7 @@ public class ENE
     {
     }
 
-    public List<string> Features(decimal close)
+    public List<string> Features(double close)
     {
         var result = new List<string>();
 

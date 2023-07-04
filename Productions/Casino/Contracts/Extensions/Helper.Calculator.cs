@@ -219,13 +219,13 @@ public static partial class Helper
             return new Infrastructures.Indicators.Inputs.Price
             {
                 MarkTime = o.TradeDate.ToDateTimeEx(),
-                CloseBefore = (decimal)o.PreClose,
-                CurrentOpen = (decimal)o.Open,
-                CurrentClose = (decimal)o.Close,
-                CurrentHigh = (decimal)o.High,
-                CurrentLow = (decimal)o.Low,
-                Volume = (double)o.Vol,
-                Amount = (double)o.Amount
+                CloseBefore = o.PreClose,
+                CurrentOpen = o.Open,
+                CurrentClose = o.Close,
+                CurrentHigh = o.High,
+                CurrentLow = o.Low,
+                Volume = o.Vol,
+                Amount = o.Amount
             };
         }
         catch (Exception)
@@ -293,7 +293,7 @@ public static partial class Helper
             {
                 sets = prices.Select(o => new StockSets
                 {
-                    Close = (decimal)o.Close,
+                    Close = o.Close,
                     MarkTime = o.TradeDate.ToDateTimeEx(),
                     Code = stock.Code,
                     Symbol = stock.Symbol,

@@ -79,12 +79,12 @@ public class CCI : Communal, IIndicatorFormula
 
             if (pv.ParamId == ParamIdCCI)
             {
-                r.RefCCI =(decimal) pv.Ref;
+                r.RefCCI = pv.Ref;
             }
 
             if (pv.ParamId == ParamIdTYP)
             {
-                r.RefTYP =(decimal) pv.Ref;
+                r.RefTYP =pv.Ref;
             }
         }
     }
@@ -148,7 +148,7 @@ public class CCI : Communal, IIndicatorFormula
 
         for (var i = Math.Max(0, N - 1); i < Result.Count; i++)
         {
-            var rr = new List<decimal>();
+            var rr = new List<double>();
             for (int r = i; r > i - N; r--)
             {
                 rr.Add(Result[r].RefTYP);

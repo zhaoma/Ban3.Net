@@ -8,14 +8,15 @@
     <RootNamespace>Ban3.Infrastructures.Indicators</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Ban3.Infrastructures.Indicators</Title>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
     <Description>Indicators extension</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.0.4</AssemblyVersion>
+    <AssemblyVersion>1.0.0.5</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <BaseOutputPath>D:\GIT\output</BaseOutputPath>
+    <FileVersion>1.0.5</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
