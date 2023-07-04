@@ -239,6 +239,16 @@ public static partial class Helper
         return false;
     }
 
+    public static bool Save<T>(this T entity,Func<T,object> key){
+        var filePath=typeof(T).LocalFile(key(T));
+        return filePath.SaveFileOnDemand(entity,out _);
+    }
+
+    public static bool Save<T>(this List<T> entities,Func<T,object> key){
+var filePath=typeof(T).LocalFile(key(T));
+
+    }
+
     private static readonly Dictionary<string, string> FilesTimestampDic = new();
 
     /// <summary>

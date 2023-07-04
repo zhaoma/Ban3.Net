@@ -207,6 +207,13 @@ public static class Helper
         return false;
     }
 
+    /// <summary>
+    /// 是否升序
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="numbers"></param>
+    /// <param name="toDecimal"></param>
+    /// <returns></returns>
     public static bool IsAsc<T>(this List<T>? numbers, Func<T, double> toDecimal)
     {
         if (numbers is not { Count: > 1 }) return true;
@@ -221,6 +228,7 @@ public static class Helper
 
         return true;
     }
+
     #region Profiles
 
     /// <summary>
@@ -269,4 +277,83 @@ public static class Helper
     };
 
     #endregion
+
+    public static bool SplitAmount(this List<Price> prices, int days, out List<Price> amounts)
+    {
+        amounts = new List<Price>();
+
+        return false;
+    }
+
+    public static bool SplitWeeklyAndMonthly(this List<Price> prices,out List<Price> weekly,out List<Price> monthly)
+    {
+        weekly = new List<Price>();
+        monthly = new List<Price>();
+        try
+        {
+            for (var i = 1; i <= prices.Count; i++)
+            {
+                weekly.AppendLatest(prices[i - 1], StockAnalysisCycle.WEEKLY);
+                monthly.AppendLatest(prices[i - 1], StockAnalysisCycle.MONTHLY);
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+
+        return false;
+    }
+
+    static void AppendLatest(
+        this List<Price> prices,
+        Price price,
+        StockAnalysisCycle cycle)
+    {
+        if (!prices.Any())
+        {
+            prices.Add(price);
+        }
+        else
+        {
+            var lastRecord = prices.Last();
+
+            var exists = lastRecord.MarkTime.End(cycle).ToYmd();
+            var add = price.MarkTime.End(cycle).ToYmd();
+            if (exists.ToInt().Equals(add.ToInt()))
+            {
+                var p = new Price
+                {
+                //    Code = price.Code,
+                //    TradeDate = price.TradeDate,
+                //    Open = price.Open,
+                //    High = Math.Max(lastRecord.High, price.High),
+                //    Low = Math.Min(lastRecord.Low, price.Low),
+                //    Close = price.Close,
+                //    PreClose = price.PreClose,
+                //    Vol = lastRecord.Vol + price.Vol,
+                //    Amount = lastRecord.Amount + price.Amount
+                };
+                //p.Change = p.Close - p.PreClose;
+                //p.ChangePercent = p.PreClose != 0
+                //    ? (float)Math.Round((p.Close - p.PreClose) / p.PreClose * 100, 2)
+                //    : 0F;
+
+                prices.Add(p);
+            }
+            else
+            {
+                prices.Add(price);
+            }
+        }
+    }
+
+    static DateTime End(this DateTime begin, StockAnalysisCycle targetCycle)
+    {
+        return targetCycle == StockAnalysisCycle.WEEKLY
+            ? begin.FindWeekEnd()
+            : begin.FindMonthEnd();
+    }
 }
