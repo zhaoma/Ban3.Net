@@ -116,10 +116,10 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             foreach( var pv in paramValues )
             {
-                var r = Result.FindLast( o => o.MarkTime == pv.MarkTime );
+                var r = Result.FindLast( o => o.TradeDate == pv.TradeDate);
                 if( r == null )
                 {
-                    r = new Outputs.Values.DMI { MarkTime = pv.MarkTime };
+                    r = new Outputs.Values.DMI { TradeDate = pv.TradeDate };
                     Result.Add( r );
                 }
 
@@ -167,9 +167,9 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             /*
             var middles = prices.Select(o =>
                  new decimal[] {
-                            o.CurrentHigh.Value,
-                            o.CurrentLow.Value,
-                            o.CurrentClose.Value,
+                            o.High.Value,
+                            o.Low.Value,
+                            o.Close.Value,
                             0,0
                  }).ToList();
 
@@ -257,7 +257,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         {
             Result = prices.Select( o => new Outputs.Values.DMI
             {
-                    MarkTime = o.MarkTime,
+                TradeDate = o.TradeDate,
                     RefADX = 0D,
                     RefADXR = 0D,
                     RefPDI = 0D,
@@ -268,12 +268,12 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             var middles = prices.Select( o =>
                                                  new []
                                                  {
-                                                         o.CurrentHigh!.Value,
-                                                         o.CurrentLow!.Value,
-                                                         o.CurrentClose!.Value,
+                                                         o.High!.Value,
+                                                         o.Low!.Value,
+                                                         o.Close!.Value,
                                                          0,
                                                          0,
-                                                         Math.Abs( o.CurrentHigh.Value - o.CurrentLow.Value )
+                                                         Math.Abs( o.High.Value - o.Low.Value )
                                                  } ).ToList();
 
             for( var i = 0; i < prices.Count; i++ )
@@ -316,7 +316,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                 }
                 else
                 {
-                    Result[ i ].RefHD = 0D; // prices[i].CurrentClose;
+                    Result[ i ].RefHD = 0D; // prices[i].Close;
                     Result[ i ].RefLD = 0D; // -prices[i].CurrentOpenEx;
                     Result[ i ].RefMTR = middles[ i ][ 5 ];
                 }

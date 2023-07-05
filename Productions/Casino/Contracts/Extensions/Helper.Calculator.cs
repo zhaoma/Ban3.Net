@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Entries;
+using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Entities;
@@ -62,18 +64,7 @@ public static partial class Helper
 
         return result;
     }
-
-    /// <summary>
-    /// 加载复权因子
-    /// </summary>
-    /// <param name="_"></param>
-    /// <param name="symbol"></param>
-    /// <returns></returns>
-    public static List<StockSeed> LoadSeeds(this ICalculator _, string symbol)
-        => typeof(StockSeed)
-            .LocalFile(symbol)
-            .ReadFileAs<List<StockSeed>>();
-
+    
     #endregion
 
     #region 计算/加载复权价格
@@ -94,27 +85,23 @@ public static partial class Helper
     {
         if (prices == null || !prices.Any()) return false;
 
-        var seeds = _.LoadSeeds(symbol);
+        try
+        {
+            var seeds = symbol.LoadEntities<StockSeed>();
 
-        // if (seeds == null || !seeds.Any()) return false;
+            prices.Select(seeds.ReinstateOnePrice)
+                .ToList()
+                .SaveEntities($"{code}.{StockAnalysisCycle.DAILY}");
+            
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"ReinstatePrices {code}");
+            Logger.Error(ex);
+        }
 
-        var newPrices = prices.Select(seeds.ReinstateOnePrice)
-            .ToList();
-
-        var savedDaily = newPrices.SetsFile($"{code}.{StockAnalysisCycle.DAILY}")
-            .WriteFile(newPrices.ObjToJson());
-
-        var weeklyPrices = newPrices.ConvertCycle(StockAnalysisCycle.WEEKLY);
-        var savedWeekly = weeklyPrices.SetsFile($"{code}.{StockAnalysisCycle.WEEKLY}")
-            .WriteFile(weeklyPrices.ObjToJson());
-
-        var monthlyPrices = newPrices.ConvertCycle(StockAnalysisCycle.MONTHLY);
-        var savedMonthly = monthlyPrices.SetsFile($"{code}.{StockAnalysisCycle.MONTHLY}")
-            .WriteFile(monthlyPrices.ObjToJson());
-
-        return !string.IsNullOrEmpty(savedDaily)
-               && !string.IsNullOrEmpty(savedWeekly)
-               && !string.IsNullOrEmpty(savedMonthly);
+        return false;
     }
 
     static StockPrice ReinstateOnePrice(this List<StockSeed> seeds, StockPrice price)
@@ -168,9 +155,7 @@ public static partial class Helper
     /// <param name="cycle"></param>
     /// <returns></returns>
     public static List<StockPrice> LoadReinstatedPrices(this ICalculator _, string code, StockAnalysisCycle cycle)
-        => typeof(StockPrice)
-            .LocalFile($"{code}.{cycle}")
-            .ReadFileAs<List<StockPrice>>();
+        => $"{code}.{cycle}".LoadEntities<StockPrice>();
 
     #endregion
 
@@ -191,50 +176,20 @@ public static partial class Helper
 
     static bool GenerateIndicatorLine(this ICalculator _, string code, StockAnalysisCycle cycle)
     {
-        var prices = _.LoadReinstatedPrices(code, cycle);
-        if (prices == null || !prices.Any()) return false;
-
-        var line = prices.IndicatorLine(code);
-        var saved = typeof(LineOfPoint)
-            .LocalFile($"{code}.{cycle}")
-            .WriteFile(line.ObjToJson());
-        return !string.IsNullOrEmpty(saved);
-    }
-
-    public static LineOfPoint IndicatorLine(this List<StockPrice> prices,string code)
-    {
-        var inputsPrices = prices.PricesForIndicators();
-
-        var indicator = new Infrastructures.Indicators.Formulas.Full();
-
-        indicator.Calculate(inputsPrices, code);
-
-        return indicator.Result;
-    }
-
-    public static List<Infrastructures.Indicators.Inputs.Price> PricesForIndicators(this List<StockPrice> prices)
-    => prices.Select(o => {
         try
         {
-            return new Infrastructures.Indicators.Inputs.Price
-            {
-                MarkTime = o.TradeDate.ToDateTimeEx(),
-                CloseBefore = o.PreClose,
-                CurrentOpen = o.Open,
-                CurrentClose = o.Close,
-                CurrentHigh = o.High,
-                CurrentLow = o.Low,
-                Volume = o.Vol,
-                Amount = o.Amount
-            };
-        }
-        catch (Exception)
-        {
-            Console.WriteLine(o.ObjToJson());
+            var prices = typeof(StockPrice)
+                .LocalFile($"{code}.{cycle}")
+                .ReadFileAs<List<Price>>();
 
-        throw new Exception("-----------");
-        }
-    }).ToList();
+            if (prices == null || !prices.Any()) return false;
+
+            prices.CalculateIndicators()
+                .SaveEntity(_ => $"{code}.{cycle}");
+
+            return true;
+        }catch(Exception ex) { Logger.Error(ex); } return false;
+    }
 
     /// <summary>
     /// 加载指标曲线 
@@ -243,33 +198,9 @@ public static partial class Helper
     /// <param name="code"></param>
     /// <param name="cycle"></param>
     /// <returns></returns>
-    public static LineOfPoint LoadIndicatorLine(this ICalculator _, string code, StockAnalysisCycle cycle)
-        => typeof(LineOfPoint)
-            .LocalFile($"{code}.{cycle}")
-            .ReadFileAs<LineOfPoint>();
-
-    /// <summary>
-    /// 指标值线转换点
-    /// </summary>
-    /// <param name="line"></param>
-    /// <returns></returns>
-    public static List<Latest> LatestList(this LineOfPoint line)
-    {
-        if (line is { EndPoints: { } } && !line.EndPoints.Any()) return null;
-
-        var list = line?.EndPoints?.Select(o => new Latest
-        {
-            Current = o
-        }).ToList();
-
-        for (var i = 1; i < list?.Count; i++)
-        {
-            list[i].Prev = list[i - 1].Current;
-        }
-
-        return list;
-    }
-
+    public static LineOfPoint? LoadIndicatorLine(this ICalculator _, string code, StockAnalysisCycle cycle)
+        => $"{code}.{cycle}".LoadEntity<LineOfPoint>();
+    
     #endregion
 
     #region 计算/加载特征集合
@@ -288,25 +219,17 @@ public static partial class Helper
     {
         try
         {
-            var prices = _.LoadReinstatedPrices(stock.Code, StockAnalysisCycle.DAILY);
-            if (prices != null && prices.Any())
+            var d = _.LoadIndicatorLine(stock.Code, StockAnalysisCycle.DAILY);
+            if (d != null)
             {
-                sets = prices.Select(o => new StockSets
-                {
-                    Close = o.Close,
-                    MarkTime = o.TradeDate.ToDateTimeEx(),
-                    Code = stock.Code,
-                    Symbol = stock.Symbol,
-                    SetKeys = new List<string>()
-                }).ToList();
+                var w = _.LoadIndicatorLine(stock.Code, StockAnalysisCycle.WEEKLY);
+                var m = _.LoadIndicatorLine(stock.Code, StockAnalysisCycle.MONTHLY);
 
-                sets = _.Merge(sets, stock.Code);
+                sets = d.LineToSets()
+                    .MergeWeeklyAndMonthly(w.LineToSets(), m.LineToSets())
+                    .SaveEntities(stock.Code);
 
-                var saved = $"{stock.Code}"
-                    .DataFile<StockSets>()
-                    .WriteFile(sets.ObjToJson());
-
-                return !string.IsNullOrEmpty(saved);
+                return true;
             }
         }
         catch (Exception ex)
@@ -317,76 +240,7 @@ public static partial class Helper
         sets = new List<StockSets>();
         return false;
     }
-
-    static List<StockSets> Merge(
-        this ICalculator _, List<StockSets> sets, string code)
-    {
-        sets = _.Merge(sets, code, StockAnalysisCycle.DAILY);
-        sets = _.Merge(sets, code, StockAnalysisCycle.WEEKLY);
-        sets = _.Merge(sets, code, StockAnalysisCycle.MONTHLY);
-
-        return sets;
-    }
-
-    static List<StockSets> Merge(
-        this ICalculator _, List<StockSets> sets, string code, StockAnalysisCycle cycle)
-    {
-        return sets.Merge(_.LoadIndicatorLine(code, cycle), cycle);
-    }
-
-    /// <summary>
-    /// 指标特征集合并日/周/月指标特征集
-    /// </summary>
-    /// <param name="sets"></param>
-    /// <param name="indicatorValue"></param>
-    /// <param name="cycle"></param>
-    /// <returns></returns>
-    static List<StockSets> Merge(
-        this List<StockSets> sets,
-        LineOfPoint indicatorValue,
-        StockAnalysisCycle cycle)
-    {
-        try
-        {
-            if (!sets.Any()) return sets;
-
-            var setsList = indicatorValue.LineToSets();
-
-            sets.ForEach(o =>
-            {
-                var ss = setsList.FirstOrDefault(x => x.MarkTime.Subtract(o.MarkTime).TotalDays >= 0);
-                if (ss is { SetKeys: { } } && ss.SetKeys.Any())
-                {
-                    o.SetKeys = o.SetKeys?.Union(ss.SetKeys.Select(y => $"{y}.{cycle}"));
-                }
-            });
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-
-        return sets;
-    }
-
-    public static List<StockSets> LineToSets(this LineOfPoint indicatorValue)
-    {
-        var latestList = indicatorValue
-            .LatestList();
-
-        if (latestList == null || !latestList.Any()) return new List<StockSets>();
-
-        return latestList
-             .Select(o => new StockSets
-             {
-                 MarkTime = o.Current!.MarkTime,
-                 Close = o.Current.Close,
-                 SetKeys = o.Features()
-             })
-             .OrderBy(o => o.MarkTime)
-             .ToList();
-    }
-
+    
     /// <summary>
     /// 加载特征集合
     /// </summary>
@@ -394,9 +248,7 @@ public static partial class Helper
     /// <param name="code"></param>
     /// <returns></returns>
     public static List<StockSets> LoadSets(this ICalculator _, string code)
-        => code
-            .DataFile<StockSets>()
-            .ReadFileAs<List<StockSets>>();
+        => code.LoadEntities<StockSets>();
 
     #endregion
 
@@ -540,7 +392,7 @@ public static partial class Helper
             .LatestList()
             .Select(o => new StockSets
             {
-                MarkTime = o.Current!.MarkTime,
+                MarkTime = o.Current!.TradeDate,
                 Close = o.Current.Close,
                 SetKeys = o.Features().Select(y => $"{y}.{cycle}")
             })
@@ -915,11 +767,7 @@ public static partial class Helper
     }
 
     #endregion
-
-    static bool AllFound(this IEnumerable<string> pool, string[] keys) => keys.All(x => pool.Any(y => x == y));
-
-    static bool NotFound(this IEnumerable<string> pool, string[] keys) => keys.All(x => pool.All(y => x != y));
-
+    
     public static List<StockSets> LoadAllLatestSets(this ICalculator _)
     {
         var file = $"latest".DataFile<StockSets>();
@@ -939,12 +787,12 @@ public static partial class Helper
             {
                 if (!string.IsNullOrEmpty(request.IncludeKeys))
                 {
-                    targets = targets.Where(o => o.SetKeys.AllFound(request.IncludeKeys.Split(','))).ToList();
+                    targets = targets.Where(o => o.SetKeys.AllFoundIn(request.IncludeKeys.Split(','))).ToList();
                 }
 
                 if (!string.IsNullOrEmpty(request.ExcludeKeys))
                 {
-                    targets = targets.Where(o => o.SetKeys.NotFound(request.ExcludeKeys.Split(','))).ToList();
+                    targets = targets.Where(o => o.SetKeys.NotFoundIn(request.ExcludeKeys.Split(','))).ToList();
                 }
             }
 

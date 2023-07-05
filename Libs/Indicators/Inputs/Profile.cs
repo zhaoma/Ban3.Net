@@ -50,13 +50,7 @@ namespace Ban3.Infrastructures.Indicators.Inputs
         /// </summary>
         [JsonProperty("subject", NullValueHandling = NullValueHandling.Ignore)]
         public string Subject { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 投资限制（标的与投入方式）
-        /// </summary>
-        [JsonProperty("investorLimit", NullValueHandling = NullValueHandling.Ignore)]
-        public Limit? InvestorLimit { get; set; }
-
+        
         /// <summary>
         /// 买入条件
         /// </summary>

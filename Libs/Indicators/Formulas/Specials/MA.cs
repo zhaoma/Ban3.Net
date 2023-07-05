@@ -82,13 +82,13 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             {
                 if (Details.Any(o => o.ParamId == pv.ParamId))
                 {
-                    var r = Result.FindLast(o => o.MarkTime == pv.MarkTime);
+                    var r = Result.FindLast(o => o.TradeDate == pv.TradeDate);
 
                     if (r == null)
                     {
                         r = new Outputs.Values.MA
                         {
-                            MarkTime = pv.MarkTime,
+                            TradeDate = pv.TradeDate,
                             RefPrices = new List<LineWithValue>()
                         };
                         Result.Add(r);
@@ -139,7 +139,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                             var d = 0M;
                             for (int r = i; r > i - detail.Days; r--)
                             {
-                                d += prices[r].CurrentClose.Value;
+                                d += prices[r].Close.Value;
                             }
 
                             if (oneDay.RefPrices.All(o => o.ParamId != detail.ParamId))
@@ -178,7 +178,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         {
             Result = prices.Select(o => new Outputs.Values.MA
             {
-                MarkTime = o.MarkTime,
+                TradeDate = o.TradeDate,
                 RefPrices = new List<LineWithValue>()
             }).ToList();
 

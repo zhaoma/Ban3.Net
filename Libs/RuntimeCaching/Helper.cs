@@ -22,8 +22,8 @@ public static class Helper
         => key.LoadOrSetDefault(defaultValue, null, null, localFile);
 
     /// see LoadOrSetDefault below
-    public static T LoadOrSetDefault<T>(this string key, string localFile)
-        => key.LoadOrSetDefault(() => localFile.ReadFileAs<T>(), localFile);
+    public static T LoadOrSetDefault<T>(this string key, string localFile) 
+        => key.LoadOrSetDefault(() => localFile.ReadFileAs<T>() , localFile);
 
     /// <summary>
     /// 从缓存加载或是设置

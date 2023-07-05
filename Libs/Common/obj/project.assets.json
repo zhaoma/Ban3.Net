@@ -1768,7 +1768,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "1.0.5",
+    "version": "1.0.7",
     "restore": {
       "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj",
       "projectName": "Ban3.Infrastructures.Common",

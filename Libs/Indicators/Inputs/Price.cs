@@ -5,77 +5,74 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System.Runtime.Serialization;
 using Ban3.Infrastructures.Indicators.Entries;
+using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.Indicators.Inputs
+namespace Ban3.Infrastructures.Indicators.Inputs;
+
+/// <summary>
+/// 股票价格扩展
+/// </summary>
+public class Price
+    : Record
 {
     /// <summary>
-    /// 股票价格扩展
+    /// 编码
     /// </summary>
-    public class Price
-            : Record
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? CloseBefore { get; set; }
+    [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
+    public string Code { get; set; } = string.Empty;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? CurrentOpen { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("preClose", NullValueHandling = NullValueHandling.Ignore)]
+    public double? PreClose { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? CurrentClose { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("open", NullValueHandling = NullValueHandling.Ignore)]
+    public double? Open { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? CurrentHigh { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("close", NullValueHandling = NullValueHandling.Ignore)]
+    public double? Close { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? CurrentLow { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("high", NullValueHandling = NullValueHandling.Ignore)]
+    public double? High { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? TurnoverRate { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("low", NullValueHandling = NullValueHandling.Ignore)]
+    public double? Low { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? Volume { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("change", NullValueHandling = NullValueHandling.Ignore)]
+    public double? Change { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? Amount { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("changePercent", NullValueHandling = NullValueHandling.Ignore)]
+    public double? ChangePercent { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? TotalValue { get; set; }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("vol", NullValueHandling = NullValueHandling.Ignore)]
+    public double? Vol { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double? TradableValue { get; set; }
-
-        /// <summary>
-        /// 涨幅
-        /// </summary>
-        [DataMember]
-        public double Increase { get; set; }
-
-        /// <summary>
-        /// 振幅
-        /// </summary>
-        [DataMember]
-        public double Amplitude { get; set; }
-    }
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("amount", NullValueHandling = NullValueHandling.Ignore)]
+    public double? Amount { get; set; }
 }

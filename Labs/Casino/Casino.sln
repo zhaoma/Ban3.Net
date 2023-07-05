@@ -23,8 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indicators", "..\..\Libs\Indicators\Indicators.csproj", "{EDD5B199-43FB-4EE4-9E47-7AD333C4303B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charts", "..\..\Libs\Charts\Charts.csproj", "{CC9B8A2B-5086-4CC9-9AB6-CDAC9E205175}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,10 +49,6 @@ Global
 		{EDD5B199-43FB-4EE4-9E47-7AD333C4303B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDD5B199-43FB-4EE4-9E47-7AD333C4303B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDD5B199-43FB-4EE4-9E47-7AD333C4303B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC9B8A2B-5086-4CC9-9AB6-CDAC9E205175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC9B8A2B-5086-4CC9-9AB6-CDAC9E205175}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC9B8A2B-5086-4CC9-9AB6-CDAC9E205175}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC9B8A2B-5086-4CC9-9AB6-CDAC9E205175}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,7 +62,6 @@ Global
 		{FA2996CE-31E0-4AD9-9BC8-5C23DEA1B2CD} = {4B4AB00B-CC6F-4A7D-9034-01BEA7025A14}
 		{2C29C9BC-C44A-414D-93E5-574E42B0EFB9} = {C84FAEFA-D87B-4EB3-8D51-DC986595C3C0}
 		{EDD5B199-43FB-4EE4-9E47-7AD333C4303B} = {A4CF4C44-DA8E-4F5B-80CD-60BF57F19B1E}
-		{CC9B8A2B-5086-4CC9-9AB6-CDAC9E205175} = {A4CF4C44-DA8E-4F5B-80CD-60BF57F19B1E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D58FE182-81D2-4531-BAE9-9EB54144082D}

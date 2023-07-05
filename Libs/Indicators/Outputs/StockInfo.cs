@@ -43,8 +43,8 @@ public class StockInfo
     /// <summary>
     /// 当前价
     /// </summary>
-    [JsonProperty("currentClose", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal CurrentClose { get; set; }
+    [JsonProperty("Close", NullValueHandling = NullValueHandling.Ignore)]
+    public decimal Close { get; set; }
 
     /// <summary>
     /// 成交额

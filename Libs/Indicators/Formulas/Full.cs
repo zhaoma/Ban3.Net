@@ -20,51 +20,54 @@ namespace Ban3.Infrastructures.Indicators.Formulas;
 public class Full
     : Communal
 {
-    public LineOfPoint Result { get; set; } = new();
-
-    public void Calculate(List<Inputs.Price> prices,string code)
+    /// <summary>
+    /// 计算指标
+    /// </summary>
+    /// <param name="prices"></param>
+    /// <returns></returns>
+    public LineOfPoint? Calculate(List<Inputs.Price> prices)
     {
         if (!prices.Any())
         {
             Logger.Error("prices is empty.");
-            return;
+            return null;
         }
 
-        Result = new LineOfPoint
+        var line = new LineOfPoint
         {
             EndPoints = prices
                 .Select(o => new PointOfTime
                 {
-                    MarkTime = o.MarkTime,
-                    Close = o.CurrentClose!.Value,
+                    TradeDate = o.TradeDate,
+                    Close = o.Close!.Value,
                     Amount = new Outputs.Values.AMOUNT
                     {
-                        MarkTime = o.MarkTime,
+                        TradeDate = o.TradeDate,
                         RefAmounts = new List<LineWithValue>()
                     },
-                    Bias = new Outputs.Values.BIAS { MarkTime = o.MarkTime },
+                    Bias = new Outputs.Values.BIAS { TradeDate = o.TradeDate },
                     Cci = new Outputs.Values.CCI
                     {
-                        MarkTime = o.MarkTime,
-                        RefTYP = Math.Round((o.CurrentHigh!.Value + o.CurrentLow!.Value + o.CurrentClose.Value) / 3, 3)
+                        TradeDate = o.TradeDate,
+                        RefTYP = Math.Round((o.High!.Value + o.Low!.Value + o.Close.Value) / 3, 3)
                     },
                     Dmi = new Outputs.Values.DMI
                     {
-                        MarkTime = o.MarkTime,
+                        TradeDate = o.TradeDate,
                         RefADX = 0D,
                         RefADXR = 0D,
                         RefPDI = 0D,
                         RefMDI = 0D
                     },
-                    Ene = new Outputs.Values.ENE { MarkTime = o.MarkTime },
+                    Ene = new Outputs.Values.ENE { TradeDate = o.TradeDate },
                     Kd = new Outputs.Values.KD
                     {
-                        MarkTime = o.MarkTime,
-                        RefLLV = o.CurrentLow,
-                        RefHHV = o.CurrentHigh
+                        TradeDate = o.TradeDate,
+                        RefLLV = o.Low,
+                        RefHHV = o.High
                     },
-                    Ma = new Outputs.Values.MA { MarkTime = o.MarkTime, RefPrices = new List<LineWithValue>() },
-                    Macd = new Outputs.Values.MACD { MarkTime = o.MarkTime }
+                    Ma = new Outputs.Values.MA { TradeDate = o.TradeDate, RefPrices = new List<LineWithValue>() },
+                    Macd = new Outputs.Values.MACD { TradeDate = o.TradeDate }
                 })
                 .ToList()
         };
@@ -81,12 +84,12 @@ public class Full
         var middles = prices.Select(o =>
             new[]
             {
-                o.CurrentHigh!.Value,
-                o.CurrentLow!.Value,
-                o.CurrentClose!.Value,
+                o.High!.Value,
+                o.Low!.Value,
+                o.Close!.Value,
                 0,
                 0,
-                Math.Abs(o.CurrentHigh.Value - o.CurrentLow.Value)
+                Math.Abs(o.High.Value - o.Low.Value)
             }).ToList();
 
         var emaShortYest = 0D;
@@ -103,9 +106,9 @@ public class Full
                 {
                     if (i >= detail.Days - 1)
                     {
-                        if (Result.EndPoints[i].Amount!.RefAmounts.All(o => o.ParamId != detail.ParamId))
+                        if (line.EndPoints[i].Amount!.RefAmounts.All(o => o.ParamId != detail.ParamId))
                         {
-                            Result.EndPoints[i].Amount!.RefAmounts.Add(
+                            line.EndPoints[i].Amount!.RefAmounts.Add(
                                 new LineWithValue
                                 {
                                     ParamId = detail.ParamId,
@@ -131,8 +134,8 @@ public class Full
 
                 if (biasMA != 0)
                 {
-                    Result.EndPoints[i].Bias!.RefBIAS =
-                        Math.Round((prices[i].CurrentClose!.Value - biasMA) / biasMA * 100D, 3);
+                    line.EndPoints[i].Bias!.RefBIAS =
+                        Math.Round((prices[i].Close!.Value - biasMA) / biasMA * 100D, 3);
                 }
             }
 
@@ -141,13 +144,13 @@ public class Full
                 var biasSum = 0D;
                 for (int j = 0; j < bias.M; j++)
                 {
-                    if (Result.EndPoints[i - j].Bias!.RefBIAS != null)
+                    if (line.EndPoints[i - j].Bias!.RefBIAS != null)
                     {
-                        biasSum += Result.EndPoints[i - j].Bias!.RefBIAS!.Value;
+                        biasSum += line.EndPoints[i - j].Bias!.RefBIAS!.Value;
                     }
                 }
 
-                Result.EndPoints[i].Bias!.RefBIASMA = Math.Round(biasSum / bias.M, 3);
+                line.EndPoints[i].Bias!.RefBIASMA = Math.Round(biasSum / bias.M, 3);
             }
 
             #endregion
@@ -159,10 +162,10 @@ public class Full
                 var rr = new List<double>();
                 for (int r = i; r > i - cci.N; r--)
                 {
-                    rr.Add(Result.EndPoints[r].Cci!.RefTYP);
+                    rr.Add(line.EndPoints[r].Cci!.RefTYP);
                 }
 
-                Result.EndPoints[i].Cci!.RefCCI = AVEDEV(Result.EndPoints[i].Cci!.RefTYP, rr);
+                line.EndPoints[i].Cci!.RefCCI = AVEDEV(line.EndPoints[i].Cci!.RefTYP, rr);
             }
 
             #endregion
@@ -173,18 +176,18 @@ public class Full
             {
                 if (i > 0)
                 {
-                    Result.EndPoints[i].Dmi!.RefHD = middles[i][0] - middles[i - 1][0];
-                    Result.EndPoints[i].Dmi!.RefLD = middles[i - 1][1] - middles[i][1];
+                    line.EndPoints[i].Dmi!.RefHD = middles[i][0] - middles[i - 1][0];
+                    line.EndPoints[i].Dmi!.RefLD = middles[i - 1][1] - middles[i][1];
 
                     middles[i][3] =
-                        Result.EndPoints[i].Dmi!.RefHD!.Value > 0 && Result.EndPoints[i].Dmi!.RefHD!.Value >
-                        Result.EndPoints[i].Dmi!.RefLD!.Value
-                            ? Result.EndPoints[i].Dmi!.RefHD!.Value
+                        line.EndPoints[i].Dmi!.RefHD!.Value > 0 && line.EndPoints[i].Dmi!.RefHD!.Value >
+                        line.EndPoints[i].Dmi!.RefLD!.Value
+                            ? line.EndPoints[i].Dmi!.RefHD!.Value
                             : 0D;
                     middles[i][4] =
-                        Result.EndPoints[i].Dmi!.RefLD!.Value > 0 && Result.EndPoints[i].Dmi!.RefLD!.Value >
-                        Result.EndPoints[i].Dmi!.RefHD!.Value
-                            ? Result.EndPoints[i].Dmi!.RefLD!.Value
+                        line.EndPoints[i].Dmi!.RefLD!.Value > 0 && line.EndPoints[i].Dmi!.RefLD!.Value >
+                        line.EndPoints[i].Dmi!.RefHD!.Value
+                            ? line.EndPoints[i].Dmi!.RefLD!.Value
                             : 0D;
 
                     middles[i][5] = Math.Max(middles[i][5], Math.Abs(middles[i][0] - middles[i - 1][2]));
@@ -205,21 +208,21 @@ public class Full
                         }
                     }
 
-                    Result.EndPoints[i].Dmi!.RefMTR = mtr;
-                    Result.EndPoints[i].Dmi!.RefDMP = dmp;
-                    Result.EndPoints[i].Dmi!.RefDMM = dmm;
+                    line.EndPoints[i].Dmi!.RefMTR = mtr;
+                    line.EndPoints[i].Dmi!.RefDMP = dmp;
+                    line.EndPoints[i].Dmi!.RefDMM = dmm;
 
                     if (mtr != 0)
                     {
-                        Result.EndPoints[i].Dmi!.RefPDI = dmp * 100 / mtr;
-                        Result.EndPoints[i].Dmi!.RefMDI = dmm * 100 / mtr;
+                        line.EndPoints[i].Dmi!.RefPDI = dmp * 100 / mtr;
+                        line.EndPoints[i].Dmi!.RefMDI = dmm * 100 / mtr;
                     }
                 }
                 else
                 {
-                    Result.EndPoints[i].Dmi!.RefHD = 0D; // prices[i].CurrentClose;
-                    Result.EndPoints[i].Dmi!.RefLD = 0D; // -prices[i].CurrentOpenEx;
-                    Result.EndPoints[i].Dmi!.RefMTR = middles[i][5];
+                    line.EndPoints[i].Dmi!.RefHD = 0D; // prices[i].Close;
+                    line.EndPoints[i].Dmi!.RefLD = 0D; // -prices[i].CurrentOpenEx;
+                    line.EndPoints[i].Dmi!.RefMTR = middles[i][5];
                 }
 
                 if (i >= dmi.M - 1)
@@ -227,30 +230,30 @@ public class Full
                     var adx = 0D;
                     for (int r = i; r > i - dmi.M; r--)
                     {
-                        adx += Result.EndPoints[r].Dmi!.RefPDI + Result.EndPoints[r].Dmi!.RefMDI == 0D
+                        adx += line.EndPoints[r].Dmi!.RefPDI + line.EndPoints[r].Dmi!.RefMDI == 0D
                             ? 0D
-                            : Math.Abs(Result.EndPoints[r].Dmi!.RefMDI!.Value -
-                                       Result.EndPoints[r].Dmi!.RefPDI!.Value) /
-                              (Result.EndPoints[r].Dmi!.RefPDI!.Value +
-                               Result.EndPoints[r].Dmi!.RefMDI!.Value) *
+                            : Math.Abs(line.EndPoints[r].Dmi!.RefMDI!.Value -
+                                       line.EndPoints[r].Dmi!.RefPDI!.Value) /
+                              (line.EndPoints[r].Dmi!.RefPDI!.Value +
+                               line.EndPoints[r].Dmi!.RefMDI!.Value) *
                               100D;
                     }
 
-                    Result.EndPoints[i].Dmi!.RefADX = adx / dmi.M;
+                    line.EndPoints[i].Dmi!.RefADX = adx / dmi.M;
                 }
 
                 if (i >= 2 * dmi.M - 1)
                 {
-                    Result.EndPoints[i].Dmi!.RefADXR = (Result.EndPoints[i].Dmi!.RefADX!.Value +
-                                                       Result.EndPoints[i - dmi.M].Dmi!.RefADX!.Value) / 2;
+                    line.EndPoints[i].Dmi!.RefADXR = (line.EndPoints[i].Dmi!.RefADX!.Value +
+                                                      line.EndPoints[i - dmi.M].Dmi!.RefADX!.Value) / 2;
                 }
 
-                Result.EndPoints[i].Dmi!.RefADX = Math.Round(Result.EndPoints[i].Dmi!.RefADX!.Value, 3);
-                Result.EndPoints[i].Dmi!.RefADXR = Math.Round(Result.EndPoints[i].Dmi!.RefADXR!.Value, 3);
-                Result.EndPoints[i].Dmi!.RefHD = Math.Round(Result.EndPoints[i].Dmi!.RefHD!.Value, 3);
-                Result.EndPoints[i].Dmi!.RefLD = Math.Round(Result.EndPoints[i].Dmi!.RefLD!.Value, 3);
-                Result.EndPoints[i].Dmi!.RefMDI = Math.Round(Result.EndPoints[i].Dmi!.RefMDI!.Value, 3);
-                Result.EndPoints[i].Dmi!.RefPDI = Math.Round(Result.EndPoints[i].Dmi!.RefPDI!.Value, 3);
+                line.EndPoints[i].Dmi!.RefADX = Math.Round(line.EndPoints[i].Dmi!.RefADX!.Value, 3);
+                line.EndPoints[i].Dmi!.RefADXR = Math.Round(line.EndPoints[i].Dmi!.RefADXR!.Value, 3);
+                line.EndPoints[i].Dmi!.RefHD = Math.Round(line.EndPoints[i].Dmi!.RefHD!.Value, 3);
+                line.EndPoints[i].Dmi!.RefLD = Math.Round(line.EndPoints[i].Dmi!.RefLD!.Value, 3);
+                line.EndPoints[i].Dmi!.RefMDI = Math.Round(line.EndPoints[i].Dmi!.RefMDI!.Value, 3);
+                line.EndPoints[i].Dmi!.RefPDI = Math.Round(line.EndPoints[i].Dmi!.RefPDI!.Value, 3);
             }
             catch (Exception ex)
             {
@@ -265,10 +268,10 @@ public class Full
             {
                 var eneMa = DescRangeCloseAverage(prices, i, ene.N);
 
-                Result.EndPoints[i].Ene!.RefUPPER = Math.Round((1 + ene.M1 / 100D) * eneMa, 2);
-                Result.EndPoints[i].Ene!.RefLOWER = Math.Round((1 - ene.M2 / 100D) * eneMa, 2);
-                Result.EndPoints[i].Ene!.RefENE =
-                    Math.Round((Result.EndPoints[i].Ene!.RefUPPER!.Value + Result.EndPoints[i].Ene!.RefLOWER!.Value) / 2,
+                line.EndPoints[i].Ene!.RefUPPER = Math.Round((1 + ene.M1 / 100D) * eneMa, 2);
+                line.EndPoints[i].Ene!.RefLOWER = Math.Round((1 - ene.M2 / 100D) * eneMa, 2);
+                line.EndPoints[i].Ene!.RefENE =
+                    Math.Round((line.EndPoints[i].Ene!.RefUPPER!.Value + line.EndPoints[i].Ene!.RefLOWER!.Value) / 2,
                         2);
             }
 
@@ -278,36 +281,36 @@ public class Full
 
             try
             {
-                Result.EndPoints[i].Kd!.RefLLV = LLV(prices, i, kd.N);
-                Result.EndPoints[i].Kd!.RefHHV = HHV(prices, i, kd.N);
+                line.EndPoints[i].Kd!.RefLLV = LLV(prices, i, kd.N);
+                line.EndPoints[i].Kd!.RefHHV = HHV(prices, i, kd.N);
 
-                if (Result.EndPoints[i].Kd!.RefHHV - Result.EndPoints[i].Kd!.RefLLV != 0)
+                if (line.EndPoints[i].Kd!.RefHHV - line.EndPoints[i].Kd!.RefLLV != 0)
                 {
-                    Result.EndPoints[i].Kd!.RefDailyPSV = Math.Round(
-                        (prices[i].CurrentClose!.Value - Result.EndPoints[i].Kd!.RefLLV!.Value) * 100D /
-                        (Result.EndPoints[i].Kd!.RefHHV!.Value - Result.EndPoints[i].Kd!.RefLLV!.Value), 3);
+                    line.EndPoints[i].Kd!.RefDailyPSV = Math.Round(
+                        (prices[i].Close!.Value - line.EndPoints[i].Kd!.RefLLV!.Value) * 100D /
+                        (line.EndPoints[i].Kd!.RefHHV!.Value - line.EndPoints[i].Kd!.RefLLV!.Value), 3);
                 }
                 else
                 {
-                    Result.EndPoints[i].Kd!.RefDailyPSV = 0;
+                    line.EndPoints[i].Kd!.RefDailyPSV = 0;
                 }
 
                 if (i > 0)
                 {
-                    Result.EndPoints[i].Kd!.RefPSV = EMA(
-                        Result.EndPoints[i].Kd!.RefDailyPSV!.Value,
-                        Result.EndPoints[i - 1].Kd!.RefPSV!.Value,
+                    line.EndPoints[i].Kd!.RefPSV = EMA(
+                        line.EndPoints[i].Kd!.RefDailyPSV!.Value,
+                        line.EndPoints[i - 1].Kd!.RefPSV!.Value,
                         kd.M);
 
-                    Result.EndPoints[i].Kd!.RefK = EMA(
-                        Result.EndPoints[i].Kd!.RefPSV!.Value,
-                        Result.EndPoints[i - 1].Kd!.RefK!.Value,
+                    line.EndPoints[i].Kd!.RefK = EMA(
+                        line.EndPoints[i].Kd!.RefPSV!.Value,
+                        line.EndPoints[i - 1].Kd!.RefK!.Value,
                         kd.M);
                 }
                 else
                 {
-                    Result.EndPoints[i].Kd!.RefPSV = Result.EndPoints[i].Kd!.RefDailyPSV;
-                    Result.EndPoints[i].Kd!.RefK = Result.EndPoints[i].Kd!.RefDailyPSV;
+                    line.EndPoints[i].Kd!.RefPSV = line.EndPoints[i].Kd!.RefDailyPSV;
+                    line.EndPoints[i].Kd!.RefK = line.EndPoints[i].Kd!.RefDailyPSV;
                 }
 
                 if (i >= kd.M - 1)
@@ -315,15 +318,14 @@ public class Full
                     var d = 0D;
                     for (int r = 0; r < kd.M; r++)
                     {
-                        d += Result.EndPoints[i - r].Kd!.RefK!.Value;
+                        d += line.EndPoints[i - r].Kd!.RefK!.Value;
                     }
 
-                    Result.EndPoints[i].Kd!.RefD = Math.Round(d / kd.M, 3);
+                    line.EndPoints[i].Kd!.RefD = Math.Round(d / kd.M, 3);
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error($"Code={code}");
                 Logger.Error(ex);
             }
 
@@ -339,13 +341,13 @@ public class Full
                     {
                         var maMa = DescRangeCloseAverage(prices, i, detail.Days);
 
-                        if (Result.EndPoints[i].Ma!.RefPrices.All(o => o.ParamId != detail.ParamId))
+                        if (line.EndPoints[i].Ma!.RefPrices.All(o => o.ParamId != detail.ParamId))
                         {
-                            Result.EndPoints[i].Ma!.RefPrices.Add(
+                            line.EndPoints[i].Ma!.RefPrices.Add(
                                 new LineWithValue
                                 {
                                     ParamId = detail.ParamId,
-                                    Ref =(double) Math.Round(maMa, 2),
+                                    Ref = (double)Math.Round(maMa, 2),
                                     Days = detail.Days
                                 });
                         }
@@ -367,35 +369,35 @@ public class Full
 
                 if (i == 0)
                 {
-                    Result.EndPoints[i].Macd = new Outputs.Values.MACD
+                    line.EndPoints[i].Macd = new Outputs.Values.MACD
                     {
-                        MarkTime = prices[i].MarkTime,
-                        RefEMAShort = prices[i].CurrentClose!.Value,
-                        RefEMALong = prices[i].CurrentClose!.Value
+                        TradeDate = prices[i].TradeDate,
+                        RefEMAShort = prices[i].Close!.Value,
+                        RefEMALong = prices[i].Close!.Value
                     };
                 }
                 else
                 {
-                    Result.EndPoints[i].Macd = new Outputs.Values.MACD
+                    line.EndPoints[i].Macd = new Outputs.Values.MACD
                     {
-                        MarkTime = prices[i].MarkTime,
-                        RefEMAShort = EMA(prices[i].CurrentClose!.Value, emaShortYest, macd.SHORT),
-                        RefEMALong = EMA(prices[i].CurrentClose!.Value, emaLongYest, macd.LONG)
+                        TradeDate = prices[i].TradeDate,
+                        RefEMAShort = EMA(prices[i].Close!.Value, emaShortYest, macd.SHORT),
+                        RefEMALong = EMA(prices[i].Close!.Value, emaLongYest, macd.LONG)
                     };
 
-                    Result.EndPoints[i].Macd!.RefDIF =
-                        Math.Round(Result.EndPoints[i].Macd!.RefEMAShort - Result.EndPoints[i].Macd!.RefEMALong, 3);
-                    Result.EndPoints[i].Macd!.RefDEA =
+                    line.EndPoints[i].Macd!.RefDIF =
+                        Math.Round(line.EndPoints[i].Macd!.RefEMAShort - line.EndPoints[i].Macd!.RefEMALong, 3);
+                    line.EndPoints[i].Macd!.RefDEA =
                         Math.Round(
                             deaYest * (macd.MID - 1) / (macd.MID + 1) +
-                            Result.EndPoints[i].Macd!.RefDIF * 2 / (macd.MID + 1), 3);
-                    Result.EndPoints[i].Macd!.RefMACD =
-                        Math.Round(2 * (Result.EndPoints[i].Macd!.RefDIF - Result.EndPoints[i].Macd!.RefDEA), 3);
+                            line.EndPoints[i].Macd!.RefDIF * 2 / (macd.MID + 1), 3);
+                    line.EndPoints[i].Macd!.RefMACD =
+                        Math.Round(2 * (line.EndPoints[i].Macd!.RefDIF - line.EndPoints[i].Macd!.RefDEA), 3);
                 }
 
-                emaShortYest = Result.EndPoints[i].Macd!.RefEMAShort;
-                emaLongYest = Result.EndPoints[i].Macd!.RefEMALong;
-                deaYest = Result.EndPoints[i].Macd!.RefDEA;
+                emaShortYest = line.EndPoints[i].Macd!.RefEMAShort;
+                emaLongYest = line.EndPoints[i].Macd!.RefEMALong;
+                deaYest = line.EndPoints[i].Macd!.RefDEA;
 
                 #endregion
             }
@@ -406,5 +408,7 @@ public class Full
 
             #endregion
         }
+
+        return line;
     }
 }

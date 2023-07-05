@@ -249,42 +249,6 @@ public partial class Signalert
     }
 
     #endregion
-
-    /// <summary>
-    /// 临时方法，初始化one by one列表
-    /// </summary>
-    public static void InitFavorites()
-    {
-        var favorite=new Favorite();
-
-        var dots = Reportor.LoadDots(Config.DefaultFilter);
-        
-        var allCodes=Collector.LoadAllCodes();
-
-        allCodes.ForEach(o =>
-        {
-            if (o.Code.EndsWith(".BJ"))
-            {
-                favorite.ParseOne(StockFavoriteType.BlackList, o, StockRealtime.Close(o.Code), true);
-            }
-            else
-            {
-                if (new List<string> { "688004", "301047", "002855" }.Contains(o.Symbol))
-                {
-                    favorite.ParseOne(StockFavoriteType.Position, o, StockRealtime.Close(o.Code), true);
-                }
-                else
-                {
-                    favorite.ParseOne(dots.ContainsKey(o.Code)?StockFavoriteType.Focus: StockFavoriteType.Ignore
-                        , o, StockRealtime.Close(o.Code), true);
-                }
-            }
-        });
-        
-        favorite.Update();
-    }
-
+    
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
-
-
 }

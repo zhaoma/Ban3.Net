@@ -1,9 +1,7 @@
 ﻿using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Infrastructures.Indicators.Inputs;
-using Ban3.Infrastructures.Indicators.Outputs;
 using log4net;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Attributes;
@@ -11,8 +9,11 @@ using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Infrastructures.Indicators;
 
+/// <summary>
+/// 
+/// </summary>
 [TracingIt]
-public static class Helper
+public static partial class Helper
 {
     static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
 
@@ -153,83 +154,7 @@ public static class Helper
 
     #endregion
 
-    /// <summary>
-    /// 评估特征计分
-    /// </summary>
-    /// <param name="features"></param>
-    /// <param name="result"></param>
-    /// <returns></returns>
-    public static int Evaluation(this List<string> features, out List<string> result)
-    {
-        result = new List<string>();
-        var value = 0;
-
-        foreach (var f in features)
-        {
-            if (!AllFeatures.TryGetValue(f, out var sf)) continue;
-            value += sf.Value;
-            result.Add($"{sf.Subject}:[{sf.Value}]");
-        }
-
-        return value;
-    }
-
-    /// <summary>
-    /// 评估特征计分
-    /// </summary>
-    /// <param name="sets"></param>
-    /// <param name="result"></param>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public static bool Evaluation(this StockSets sets, out List<string> result, out int value)
-    {
-        result = new List<string>();
-        value = 0;
-        try
-        {
-            if (sets.SetKeys != null)
-            {
-                foreach (var set in sets.SetKeys)
-                {
-                    if (!AllFeatures.TryGetValue(set, out var sf)) continue;
-                    value += sf.Value;
-                    result.Add(sf.Subject);
-                }
-            }
-
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-
-        return false;
-    }
-
-    /// <summary>
-    /// 是否升序
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="numbers"></param>
-    /// <param name="toDecimal"></param>
-    /// <returns></returns>
-    public static bool IsAsc<T>(this List<T>? numbers, Func<T, double> toDecimal)
-    {
-        if (numbers is not { Count: > 1 }) return true;
-
-        for (var i = 1; i < numbers.Count; i++)
-        {
-            if (toDecimal(numbers[i - 1]) > toDecimal(numbers[i]))
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    #region Profiles
+    #region 策略定义
 
     /// <summary>
     /// 默认策略
@@ -278,82 +203,4 @@ public static class Helper
 
     #endregion
 
-    public static bool SplitAmount(this List<Price> prices, int days, out List<Price> amounts)
-    {
-        amounts = new List<Price>();
-
-        return false;
-    }
-
-    public static bool SplitWeeklyAndMonthly(this List<Price> prices,out List<Price> weekly,out List<Price> monthly)
-    {
-        weekly = new List<Price>();
-        monthly = new List<Price>();
-        try
-        {
-            for (var i = 1; i <= prices.Count; i++)
-            {
-                weekly.AppendLatest(prices[i - 1], StockAnalysisCycle.WEEKLY);
-                monthly.AppendLatest(prices[i - 1], StockAnalysisCycle.MONTHLY);
-            }
-
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logger.Error(ex);
-        }
-
-        return false;
-    }
-
-    static void AppendLatest(
-        this List<Price> prices,
-        Price price,
-        StockAnalysisCycle cycle)
-    {
-        if (!prices.Any())
-        {
-            prices.Add(price);
-        }
-        else
-        {
-            var lastRecord = prices.Last();
-
-            var exists = lastRecord.MarkTime.End(cycle).ToYmd();
-            var add = price.MarkTime.End(cycle).ToYmd();
-            if (exists.ToInt().Equals(add.ToInt()))
-            {
-                var p = new Price
-                {
-                //    Code = price.Code,
-                //    TradeDate = price.TradeDate,
-                //    Open = price.Open,
-                //    High = Math.Max(lastRecord.High, price.High),
-                //    Low = Math.Min(lastRecord.Low, price.Low),
-                //    Close = price.Close,
-                //    PreClose = price.PreClose,
-                //    Vol = lastRecord.Vol + price.Vol,
-                //    Amount = lastRecord.Amount + price.Amount
-                };
-                //p.Change = p.Close - p.PreClose;
-                //p.ChangePercent = p.PreClose != 0
-                //    ? (float)Math.Round((p.Close - p.PreClose) / p.PreClose * 100, 2)
-                //    : 0F;
-
-                prices.Add(p);
-            }
-            else
-            {
-                prices.Add(price);
-            }
-        }
-    }
-
-    static DateTime End(this DateTime begin, StockAnalysisCycle targetCycle)
-    {
-        return targetCycle == StockAnalysisCycle.WEEKLY
-            ? begin.FindWeekEnd()
-            : begin.FindMonthEnd();
-    }
 }

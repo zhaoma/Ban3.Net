@@ -7,8 +7,17 @@ namespace Ban3.Infrastructures.Indicators.Entries;
 /// </summary>
 public class SetsFeature
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public SetsFeature() { }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="subject"></param>
+    /// <param name="value"></param>
     public SetsFeature(string key, string subject,  int value)
     {
         Key = key;

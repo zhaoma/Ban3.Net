@@ -8,8 +8,10 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Linq;
+using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Enums;
+using Ban3.Sites.ViaNetease.Entries;
 
 namespace Ban3.Productions.Casino.CcaAndReport;
 
@@ -40,16 +42,15 @@ public partial class Signalert
         var prices = Collector.LoadDailyPrices(stock.Code);
         var events = Collector.LoadOnesEvents(stock.Symbol);
 
-        var seeds = Calculator.CalculateSeeds(prices, events);
-        var saved = seeds.SetsFile(stock.Symbol)
-            .WriteFile(seeds.ObjToJson());
+        var seeds = Calculator.CalculateSeeds(prices, events).SaveEntities(stock.Symbol);
 
-        return !string.IsNullOrEmpty(saved);
+        return true;
     }
 
     public static bool ReinstateAllPrices(List<Stock> allCodes = null)
     {
         allCodes ??= Collector.LoadAllCodes();
+
         var result = true;
 
         allCodes.ParallelExecute((stock) =>
@@ -93,7 +94,10 @@ public partial class Signalert
     {
         try
         {
-            var prices = Calculator.LoadReinstatedPrices(stock.Code, cycle);
+            var prices = //Calculator.LoadReinstatedPrices(stock.Code, cycle);
+                $"{stock.Code}.{cycle}"
+                    .DataFile<StockPrice>()
+                    .ReadFileAs<List<Price>>();
 
             if (prices == null || !prices.Any()) return false;
 
@@ -135,13 +139,14 @@ public partial class Signalert
         {
             if (Calculator.PrepareSets(stock, out var ones))
             {
-                aggregated.Append(ones.Last());
+                if (ones != null&&ones.Any())
+                {
+                    aggregated.Append(ones.Last());
+                }
             }
         }, Config.MaxParallelTasks);
 
-        $"latest"
-            .DataFile<StockSets>()
-            .WriteFile(aggregated.ObjToJson());
+        aggregated.SaveEntities($"latest");
     }
 
     #endregion

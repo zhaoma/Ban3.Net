@@ -98,10 +98,10 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             foreach( var pv in paramValues )
             {
-                var r = Result.FindLast( o => o.MarkTime == pv.MarkTime );
+                var r = Result.FindLast( o => o.TradeDate == pv.TradeDate);
                 if( r == null )
                 {
-                    r = new Outputs.Values.ENE { MarkTime = pv.MarkTime };
+                    r = new Outputs.Values.ENE { TradeDate = pv.TradeDate };
                     Result.Add( r );
                 }
 
@@ -137,7 +137,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                 var d = 0M;
                 for (int r = i; r > i - N; r--)
                 {
-                    d += prices[r].CurrentClose.Value;
+                    d += prices[r].Close.Value;
                 }
 
                 var ma = d / N;
@@ -171,7 +171,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         {
             Result = prices.Select( o => new Outputs.Values.ENE
             {
-                    MarkTime = o.MarkTime,
+                TradeDate = o.TradeDate,
                     RefUPPER = null,
                     RefLOWER = null,
                     RefENE = null

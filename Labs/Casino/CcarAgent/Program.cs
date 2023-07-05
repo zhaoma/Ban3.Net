@@ -84,6 +84,12 @@ internal class Program
                     .ExecuteAndTiming("CheckSomething.");
                 break;
 
+            case "--v2":
+                var codes = Signalert.Collector.ScopedCodes();
+                Signalert.PrepareV2(codes);
+
+                break;
+
             default:
                 $"--all:                     prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor
                     .DarkYellow);
@@ -112,44 +118,6 @@ internal class Program
 
     private static void CheckSomething()
     {
-        /*
-        var stock = Signalert.Collector.LoadStock("600985.SH");
-        var success = Signalert.PrepareOne(
-            stock,
-            msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }
-        );
 
-        if (success)
-        {
-            $"Success".WriteColorLine(ConsoleColor.Red);
-        }
-
-        var codes = Signalert.Collector.ScopedCodes();
-        codes.ParallelExecute(stock =>
-        {
-            var success = Signalert.PrepareOne(
-                stock,
-                msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }
-            );
-
-            if (success)
-            {
-                $"Success".WriteColorLine(ConsoleColor.Red);
-            }
-
-        }, Config.MaxParallelTasks);
-
-        */
-        var codes = Signalert.Collector.ScopedCodes();
-        //var pool = new TaskPool<Stock>(codes, Config.MaxParallelTasks,
-        //    stock => Signalert.PrepareOne(stock,
-        //        msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }));
-
-        //pool.Execute();
-
-        //codes.ParallelExecute((stock) => { Signalert.PrepareOne(stock, msg => { $"{stock.Code}:{msg}".WriteColorLine(ConsoleColor.DarkBlue); }); },
-        //        Config.MaxParallelTasks);
-
-        Signalert.PrepareV2(codes);
     }
 }

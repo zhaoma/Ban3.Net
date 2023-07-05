@@ -239,15 +239,29 @@ public static partial class Helper
         return false;
     }
 
-    public static bool Save<T>(this T entity,Func<T,object> key){
-        var filePath=typeof(T).LocalFile(key(T));
-        return filePath.SaveFileOnDemand(entity,out _);
+    public static T SaveEntity<T>(this T entity, Func<T, string> key)
+    {
+        if (entity == null) return entity;
+
+        var filePath = typeof(T).LocalFile(key(entity));
+        filePath.SaveFileOnDemand(entity, out _);
+
+        return entity;
     }
 
-    public static bool Save<T>(this List<T> entities,Func<T,object> key){
-var filePath=typeof(T).LocalFile(key(T));
+    public static T? LoadEntity<T>(this string key) => typeof(T).LocalFile(key).ReadFileAs<T>();
 
+    public static List<T>? SaveEntities<T>(this List<T>? entities, string key)
+    {
+        if (entities == null) return entities;
+
+        var filePath = typeof(T).LocalFile(key);
+        filePath.SaveFileOnDemand(entities, out _);
+
+        return entities;
     }
+
+    public static List<T>? LoadEntities<T>(this string key) => typeof(T).LocalFile(key).ReadFileAs<List<T>>();
 
     private static readonly Dictionary<string, string> FilesTimestampDic = new();
 

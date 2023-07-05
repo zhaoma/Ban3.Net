@@ -75,12 +75,12 @@ public class AMOUNT : Communal, IIndicatorFormula
         {
             if (Details.Any(o => o.ParamId == pv.ParamId))
             {
-                var r = Result.FindLast(o => o.MarkTime.DateEqual(pv.MarkTime));
+                var r = Result.FindLast(o => o.TradeDate.DateEqual(pv.TradeDate));
                 if (r == null)
                 {
                     r = new Outputs.Values.AMOUNT
                     {
-                        MarkTime = pv.MarkTime,
+                        TradeDate  = pv.TradeDate,
                         RefAmounts = new List<LineWithValue>()
                     };
                     Result.Add(r);
@@ -114,7 +114,7 @@ public class AMOUNT : Communal, IIndicatorFormula
         {
             var oneDay = new Outputs.Values.AMOUNT
             {
-                MarkTime = prices[i].MarkTime,
+                TradeDate = prices[i].TradeDate,
                 RefAmounts = new List<LineWithValue>()
             };
             foreach (var detail in Details!)
@@ -140,7 +140,7 @@ public class AMOUNT : Communal, IIndicatorFormula
                 }
             }
 
-            var exists = Result.FindLast(o => o.MarkTime.DateEqual(oneDay.MarkTime));
+            var exists = Result.FindLast(o => o.TradeDate.DateEqual(oneDay.TradeDate));
             if (exists == null)
             {
                 Result.Add(oneDay);
@@ -162,7 +162,7 @@ public class AMOUNT : Communal, IIndicatorFormula
     {
         Result = prices.Select(o => new Outputs.Values.AMOUNT
         {
-            MarkTime = o.MarkTime,
+            TradeDate = o.TradeDate,
             RefAmounts = new List<LineWithValue>()
         }).ToList();
 

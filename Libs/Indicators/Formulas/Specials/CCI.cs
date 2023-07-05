@@ -70,10 +70,10 @@ public class CCI : Communal, IIndicatorFormula
 
         foreach (var pv in paramValues)
         {
-            var r = Result.FindLast(o => o.MarkTime == pv.MarkTime);
+            var r = Result.FindLast(o => o.TradeDate == pv.TradeDate);
             if (r == null)
             {
-                r = new Outputs.Values.CCI { MarkTime = pv.MarkTime };
+                r = new Outputs.Values.CCI { TradeDate = pv.TradeDate };
                 Result.Add(r);
             }
 
@@ -105,7 +105,7 @@ public class CCI : Communal, IIndicatorFormula
             var oneDay = new Defines.Calc.Indexes.CCI
             {
                 MarkTime = prices[i].MarkTime,
-                RefTYP = (prices[i].CurrentHigh.Value + prices[i].CurrentLow.Value + prices[i].CurrentClose.Value) / 3
+                RefTYP = (prices[i].High.Value + prices[i].Low.Value + prices[i].Close.Value) / 3
             };
 
             var rr = new List<decimal>();
@@ -140,8 +140,8 @@ public class CCI : Communal, IIndicatorFormula
     {
         Result = prices.Select(o => new Outputs.Values.CCI
         {
-            MarkTime = o.MarkTime,
-            RefTYP = Math.Round((o.CurrentHigh!.Value + o.CurrentLow!.Value + o.CurrentClose!.Value) / 3, 3)
+            TradeDate = o.TradeDate,
+            RefTYP = Math.Round((o.High!.Value + o.Low!.Value + o.Close!.Value) / 3, 3)
         }).ToList();
 
         #region Calculate

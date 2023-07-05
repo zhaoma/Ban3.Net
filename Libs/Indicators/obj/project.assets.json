@@ -2,7 +2,21 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "Ban3.Infrastructures.Common/1.0.5": {
+      "Ban3.Infrastructures.Charts/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Ban3.Infrastructures.Common": "1.0.7",
+          "Rougamo.Fody": "1.4.1",
+          "log4net": "2.0.15"
+        },
+        "compile": {
+          "lib/netstandard2.0/Ban3.Infrastructures.Charts.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Ban3.Infrastructures.Charts.dll": {}
+        }
+      },
+      "Ban3.Infrastructures.Common/1.0.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
@@ -525,14 +539,27 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.Common/1.0.5": {
-      "sha512": "mY6pNEBWOu28uyDTECT+wV2550oqpPjfwtpIBzj3osUzrWjyur0nNbBayr8lD9ZiQuDG0RgbU38anXxv1ID4Zg==",
+    "Ban3.Infrastructures.Charts/1.0.2": {
+      "sha512": "4Yp3tpOVyZ609fP9UUZvzQNlZ0menRkuzwdAn8ib7h9N3Sg/9OUhvVJ0gi7RO7dD3Tlp8e7KZ1Pu1AG4onmVcQ==",
       "type": "package",
-      "path": "ban3.infrastructures.common/1.0.5",
+      "path": "ban3.infrastructures.charts/1.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.common.1.0.5.nupkg.sha512",
+        "ban3.infrastructures.charts.1.0.2.nupkg.sha512",
+        "ban3.infrastructures.charts.nuspec",
+        "icon.png",
+        "lib/netstandard2.0/Ban3.Infrastructures.Charts.dll"
+      ]
+    },
+    "Ban3.Infrastructures.Common/1.0.7": {
+      "sha512": "ne9qHM2E1Swu+SYdHe424H9O5QvMNWWfQmDO6Uq7cO3cpYEtMmZN5knL04JbMzHAG3vjLKxRbEyiMnfbGMIgPQ==",
+      "type": "package",
+      "path": "ban3.infrastructures.common/1.0.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ban3.infrastructures.common.1.0.7.nupkg.sha512",
         "ban3.infrastructures.common.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
@@ -1792,7 +1819,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.5",
+      "Ban3.Infrastructures.Charts >= 1.0.2",
+      "Ban3.Infrastructures.Common >= 1.0.7",
       "Fody >= 6.7.0",
       "NETStandard.Library >= 2.0.3",
       "Rougamo.Fody >= 1.4.1",
@@ -1800,30 +1828,33 @@
     ]
   },
   "packageFolders": {
-    "/Users/zhaoma/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.5",
     "restore": {
-      "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Libs/Indicators/Indicators.csproj",
+      "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\Indicators\\Indicators.csproj",
       "projectName": "Ban3.Infrastructures.Indicators",
-      "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Indicators/Indicators.csproj",
-      "packagesPath": "/Users/zhaoma/.nuget/packages/",
-      "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Libs/Indicators/obj/",
+      "projectPath": "D:\\GIT\\Ban3.Net\\Libs\\Indicators\\Indicators.csproj",
+      "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
+      "outputPath": "D:\\GIT\\Ban3.Net\\Libs\\Indicators\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
       },
       "frameworks": {
         "netstandard2.0": {
@@ -1841,9 +1872,13 @@
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
         "dependencies": {
+          "Ban3.Infrastructures.Charts": {
+            "target": "Package",
+            "version": "[1.0.2, )"
+          },
           "Ban3.Infrastructures.Common": {
             "target": "Package",
-            "version": "[1.0.5, )"
+            "version": "[1.0.7, )"
           },
           "Fody": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -1877,7 +1912,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

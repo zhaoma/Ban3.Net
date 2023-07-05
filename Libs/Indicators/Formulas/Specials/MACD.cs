@@ -115,13 +115,13 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             foreach( var pv in paramValues )
             {
-                var r = Result.FindLast( o => o.MarkTime == pv.MarkTime );
+                var r = Result.FindLast( o => o.TradeDate == pv.TradeDate);
 
                 if( r == null )
                 {
                     r = new Outputs.Values.MACD
                     {
-                            MarkTime = pv.MarkTime
+                        TradeDate = pv.TradeDate
                     };
                     Result.Add( r );
                 }
@@ -162,10 +162,10 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                         {
                             MarkTime = prices[i].MarkTime,
                             RefEMAShort =
-                                    EMA(prices[i].CurrentClose.Value,
+                                    EMA(prices[i].Close.Value,
                                         Result[i - 1].RefEMAShort, i, SHORT),
                             RefEMALong =
-                                    EMA(prices[i].CurrentClose.Value,
+                                    EMA(prices[i].Close.Value,
                                       Result[i - 1].RefEMALong, i, LONG)
                         };
 
@@ -207,34 +207,34 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
             var emaLongYest = 0D;
             var deaYest = 0D;
 
-            for( var i = 0; i < prices.Count; i++ )
+            for (var i = 0; i < prices.Count; i++)
             {
-                if( i == 0 )
+                if (i == 0)
                 {
-                    Result[ i ] = new Outputs.Values.MACD
+                    Result[i] = new Outputs.Values.MACD
                     {
-                            MarkTime = prices[ i ].MarkTime,
-                            RefEMAShort = prices[ i ].CurrentClose!.Value,
-                            RefEMALong = prices[ i ].CurrentClose!.Value
+                        TradeDate = prices[i].TradeDate,
+                        RefEMAShort = prices[i].Close!.Value,
+                        RefEMALong = prices[i].Close!.Value
                     };
                 }
                 else
                 {
-                    Result[ i ] = new Outputs.Values.MACD
+                    Result[i] = new Outputs.Values.MACD
                     {
-                            MarkTime = prices[ i ].MarkTime,
-                            RefEMAShort = EMA( prices[ i ].CurrentClose!.Value, emaShortYest, SHORT ),
-                            RefEMALong = EMA( prices[ i ].CurrentClose!.Value, emaLongYest, LONG )
+                        TradeDate = prices[i].TradeDate,
+                        RefEMAShort = EMA(prices[i].Close!.Value, emaShortYest, SHORT),
+                        RefEMALong = EMA(prices[i].Close!.Value, emaLongYest, LONG)
                     };
 
-                    Result[ i ].RefDIF = Math.Round( Result[ i ].RefEMAShort - Result[ i ].RefEMALong, 3 );
-                    Result[ i ].RefDEA = Math.Round( deaYest * (MID - 1) / (MID + 1) + Result[ i ].RefDIF * 2 / (MID + 1), 3 );
-                    Result[ i ].RefMACD = Math.Round( 2 * (Result[ i ].RefDIF - Result[ i ].RefDEA), 3 );
+                    Result[i].RefDIF = Math.Round(Result[i].RefEMAShort - Result[i].RefEMALong, 3);
+                    Result[i].RefDEA = Math.Round(deaYest * (MID - 1) / (MID + 1) + Result[i].RefDIF * 2 / (MID + 1), 3);
+                    Result[i].RefMACD = Math.Round(2 * (Result[i].RefDIF - Result[i].RefDEA), 3);
                 }
 
-                emaShortYest = Result[ i ].RefEMAShort;
-                emaLongYest = Result[ i ].RefEMALong;
-                deaYest = Result[ i ].RefDEA;
+                emaShortYest = Result[i].RefEMAShort;
+                emaLongYest = Result[i].RefEMALong;
+                deaYest = Result[i].RefDEA;
             }
         }
     }

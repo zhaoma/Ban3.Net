@@ -81,10 +81,10 @@ public class BIAS : Communal, IIndicatorFormula
 
         foreach (var pv in paramValues)
         {
-            var r = Result.FindLast(o => o.MarkTime == pv.MarkTime);
+            var r = Result.FindLast(o => o.TradeDate == pv.TradeDate);
             if (r == null)
             {
-                r = new Outputs.Values.BIAS { MarkTime = pv.MarkTime };
+                r = new Outputs.Values.BIAS { TradeDate = pv.TradeDate };
                 Result.Add(r);
             }
 
@@ -115,14 +115,14 @@ public class BIAS : Communal, IIndicatorFormula
             var maSum = 0M;
             for (int j = 0; j < N; j++)
             {
-                maSum += prices[i - j].CurrentClose.Value;
+                maSum += prices[i - j].Close.Value;
             }
             var ma = maSum / N;
 
             var oneDay = new Defines.Calc.Indexes.BIAS
             {
                 MarkTime = prices[i].MarkTime,
-                RefBIAS = Math.Round((prices[i].CurrentClose.Value - ma) / ma * 100M, 4)
+                RefBIAS = Math.Round((prices[i].Close.Value - ma) / ma * 100M, 4)
             };
 
             var biasSum = 0M;
@@ -152,7 +152,7 @@ public class BIAS : Communal, IIndicatorFormula
     {
         Result = prices.Select(o => new Outputs.Values.BIAS
         {
-            MarkTime = o.MarkTime,
+            TradeDate = o.TradeDate,
             RefBIAS = null,
             RefBIASMA = null
         }).ToList();
@@ -165,7 +165,7 @@ public class BIAS : Communal, IIndicatorFormula
 
                 if (ma != 0)
                 {
-                    Result[i].RefBIAS = Math.Round((prices[i].CurrentClose!.Value - ma) / ma * 100D, 3);
+                    Result[i].RefBIAS = Math.Round((prices[i].Close!.Value - ma) / ma * 100D, 3);
                 }
             }
 

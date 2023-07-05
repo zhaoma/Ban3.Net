@@ -97,10 +97,10 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
             foreach( var pv in paramValues )
             {
-                var r = result.FindLast( o => o.MarkTime == pv.MarkTime );
+                var r = result.FindLast( o => o.TradeDate == pv.TradeDate);
                 if( r == null )
                 {
-                    r = new Outputs.Values.KD { MarkTime = pv.MarkTime };
+                    r = new Outputs.Values.KD { TradeDate = pv.TradeDate };
                     result.Add( r );
                 }
 
@@ -136,8 +136,8 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         {
             CalculateAll( prices );
             /*
-            var lows = prices.Select(o => o.CurrentLow.Value).ToList();
-            var highs = prices.Select(o => o.CurrentHigh.Value).ToList();
+            var lows = prices.Select(o => o.Low.Value).ToList();
+            var highs = prices.Select(o => o.High.Value).ToList();
 
             for (int i = Math.Max(prices.Count-1, N - 1); i < prices.Count; i++)
             {
@@ -158,7 +158,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
                     oneDay.RefHHV = HHV(highs, i, Math.Min(i + 1, N));
                     if (oneDay.RefHHV - oneDay.RefLLV != 0)
                     {
-                        oneDay.RefDailyPSV = (prices[i].CurrentClose - oneDay.RefLLV) * 100M / (oneDay.RefHHV - oneDay.RefLLV);
+                        oneDay.RefDailyPSV = (prices[i].Close - oneDay.RefLLV) * 100M / (oneDay.RefHHV - oneDay.RefLLV);
                     }
 
                     if (i >= N - 1)
@@ -209,13 +209,13 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
         {
             Result = prices.Select( o => new Outputs.Values.KD
             {
-                    MarkTime = o.MarkTime,
+                TradeDate = o.TradeDate,
                     RefPSV = null,
                     RefK = null,
                     RefD = null,
                     RefDailyPSV = null,
-                    RefLLV = o.CurrentLow,
-                    RefHHV = o.CurrentHigh
+                    RefLLV = o.Low,
+                    RefHHV = o.High
             } ).ToList();
 
             for( var i = 0; i < prices.Count; i++ )
@@ -225,7 +225,7 @@ namespace Ban3.Infrastructures.Indicators.Formulas.Specials
 
                 if( Result[ i ].RefHHV - Result[ i ].RefLLV != 0 )
                 {
-                    Result[ i ].RefDailyPSV = Math.Round( (prices[ i ].CurrentClose!.Value - Result[ i ].RefLLV!.Value) * 100D / (Result[ i ].RefHHV!.Value - Result[ i ].RefLLV!.Value), 3 );
+                    Result[ i ].RefDailyPSV = Math.Round( (prices[ i ].Close!.Value - Result[ i ].RefLLV!.Value) * 100D / (Result[ i ].RefHHV!.Value - Result[ i ].RefLLV!.Value), 3 );
                 }
 
                 if( i > 0 )

@@ -8,14 +8,21 @@ namespace Ban3.Infrastructures.Indicators.Entries;
 /// </summary>
 public class ListRecord:Record
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public ListRecord(){}
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sets"></param>
     public ListRecord(StockSets sets)
     {
         Code = sets.Code;
         Symbol = sets.Symbol;
         Close = sets.Close;
-        MarkTime = sets.MarkTime;
+        TradeDate = sets.MarkTime;
 
         if (sets.Evaluation(out  _, out int value))
         {
