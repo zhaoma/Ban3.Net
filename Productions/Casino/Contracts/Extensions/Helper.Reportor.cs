@@ -150,56 +150,11 @@ public static partial class Helper
     /// <param name="title"></param>
     /// <returns></returns>
     public static Diagram CreateTreemapDiagram(
-        this IReportor _, 
+        this IReportor _,
         Dictionary<string, int> keysDic,
-	    string title)
-    {
-        var treemapData = Infrastructures.Indicators.Helper.FeatureGroups.Select(
-            g =>
-                new TreemapRecord
-                {
-                    Name = g,
-                    Value = keysDic.Where(o => o.Key.StartsWith($"{g}.")).Sum(o => o.Value),
-                    Children = Infrastructures.Indicators.Helper.Features
-                        .Where(f => f.Key.StartsWith($"{g}."))
-                        .Select(f => new TreemapRecord
-                        {
-                            Name = f.Key,
-                            Value = keysDic.Where(o => o.Key.StartsWith($"{f.Key}.")).Sum(o => o.Value),
-                            Children = keysDic.Where(o => o.Key.StartsWith($"{f.Key}."))
-                                .Select(d => new TreemapRecord
-                                {
-                                    Name = d.Key,
-                                    Value = d.Value
-                                }).ToList()
-                        })
-                        .ToList()
-                }).ToList();
+        string title)
+        => keysDic.CreateTreemapDiagram(title);
 
-        var diagram = Infrastructures.Charts.Helper.CreateDiagram();
-
-        diagram.SetTitle(new [] { new Title(title) {Show = false,Left = "center" } });
-
-        var series = SeriesType.Treemap.CreateSeries(treemapData);
-        series.Levels = new List<TreemapLevel>
-        {
-            new ()
-            {
-                ItemStyle = new ItemStyle { BorderColor = "#777", BorderWidth = 0, GapWidth = 1 },
-                UpperLabel = new Label { Show = false }
-            },
-            new()
-            {
-                ItemStyle = new ItemStyle { BorderColor = "#555", BorderWidth = 1, GapWidth =5 },
-                Emphasis = new Emphasis { ItemStyle = new ItemStyle{BorderColor = "#ddd"} }
-            }
-        };
-
-        diagram.AddSeries(series);
-        diagram.SetTooltip(new[] { new Tooltip { Formatter = "{b}:{c}" } });
-
-        return diagram;
-    }
 
     public static Dictionary<string, int> LoadDotsKey(
         this IReportor _,

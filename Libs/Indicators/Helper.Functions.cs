@@ -90,12 +90,45 @@ public static partial class Helper
         return false;
     }
 
-
     public static bool SplitAmount(this List<Price> prices, int days, out List<Price> amounts)
     {
         amounts = new List<Price>();
 
+        for (var index = 0; index < prices.Count; index++)
+        {
+            var tmpArray = prices.AmountRange(index, days);
+
+            var one = new Price
+            {
+                Code = prices[index].Code,
+                TradeDate = prices[index].TradeDate,
+                Open = tmpArray.First(),
+                Close = tmpArray.Last(),
+                High = tmpArray.Max(),
+                Low = tmpArray.Min()
+            };
+
+            if (amounts.Count > 1)
+                one.PreClose = amounts[amounts.Count - 1].Close;
+
+            amounts.Add(one);
+        }
+
         return false;
+    }
+
+    static List<double> AmountRange(this List<Price> prices, int index, int days)
+    {
+        var start = index;
+        var end = Math.Max(start - days, 0);
+
+        var result = new List<double>();
+        for (int r = start; r > end; r--)
+        {
+            result.Add(prices[r].Amount!.Value);
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -199,7 +232,7 @@ public static partial class Helper
         return list;
     }
 
-    static Enums.StockOperate GetOperate(
+    public static Enums.StockOperate GetOperate(
         this IEnumerable<string> codeKeys,
         Profile profile,
         Enums.StockOperate prevOperation)

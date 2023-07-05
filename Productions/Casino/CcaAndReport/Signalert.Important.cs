@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Charts.Composites;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Indicators.Outputs;
+using Ban3.Infrastructures.Indicators;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Enums;
@@ -53,7 +53,7 @@ public partial class Signalert
                 kv.Value.ForEach(x =>
                 {
                     x.Code = kv.Key;
-                    x.SetKeys = sets.GetSets(x.TradeDate);
+                    x.SetKeys = sets.GetSetKeys(x.TradeDate);
                 });
             }
 

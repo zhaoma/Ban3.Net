@@ -247,7 +247,7 @@ public static partial class Helper
     /// <param name="_"></param>
     /// <param name="code"></param>
     /// <returns></returns>
-    public static List<StockSets> LoadSets(this ICalculator _, string code)
+    public static List<StockSets>? LoadSets(this ICalculator _, string code)
         => code.LoadEntities<StockSets>();
 
     #endregion
@@ -385,18 +385,7 @@ public static partial class Helper
             .Where(o => DateTime.Now.Year-o.TradeDate.ToDateTimeEx().Year <= 1)
             .ToList();
 
-        var line = _.LoadIndicatorLine(stock.Code, cycle);
-        if (line?.EndPoints == null || !line.EndPoints.Any()) return null;
-
-        var sets = line
-            .LatestList()
-            .Select(o => new StockSets
-            {
-                MarkTime = o.Current!.TradeDate,
-                Close = o.Current.Close,
-                SetKeys = o.Features().Select(y => $"{y}.{cycle}")
-            })
-            .ToList();
+        var sets = stock.Code.LoadSets();
 
         data.Total = prices.Count;
         for (var i = 0; i < prices.Count; i++)
@@ -407,13 +396,13 @@ public static partial class Helper
                 {
                     data.Current.Add(new FocusRecord(prices[i])
                     {
-                        SetKeys = sets.GetSets(prices[i].TradeDate)
+                        SetKeys = sets.GetSetKeys(prices[i].TradeDate)
                     });
 
                     if (i > 0)
                         data.Previous.Add(new FocusRecord(prices[i - 1])
                         {
-                            SetKeys = sets.GetSets(prices[i - 1].TradeDate)
+                            SetKeys = sets.GetSetKeys(prices[i - 1].TradeDate)
                         });
                 }
             }
@@ -426,21 +415,6 @@ public static partial class Helper
         }
 
         return data;
-    }
-
-    /// <summary>
-    /// 获取指定日期的特征集合
-    /// </summary>
-    /// <param name="sets"></param>
-    /// <param name="tradeDate"></param>
-    /// <returns></returns>
-    public static List<string> GetSets(this List<StockSets> sets, string tradeDate)
-    {
-        var s = sets.Last(o => o.MarkTime.ToYmd() == tradeDate);
-        if (s is { SetKeys: { } })
-            return s.SetKeys.ToList();
-
-        return null;
     }
 
     public static Dictionary<string, FocusTarget> LoadFocus(this ICalculator _, FocusFilter filter)

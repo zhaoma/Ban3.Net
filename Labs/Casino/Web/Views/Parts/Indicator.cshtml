@@ -20,10 +20,10 @@
     <tbody>
         @if (Model.EndPoints != null)
         {
-            foreach (var point in Model.EndPoints.OrderByDescending(o => o.MarkTime))
+            foreach (var point in Model.EndPoints.OrderByDescending(o => o.TradeDate))
             {
                 <tr>
-                    <td>@point.MarkTime.ToYmd()</td>
+                    <td>@point.TradeDate.ToYmd()</td>
                     <td>@point.Bias.RefBIAS</td>
                     <td>@point.Bias.RefBIASMA</td>
                     <td>@point.Cci.RefCCI</td>

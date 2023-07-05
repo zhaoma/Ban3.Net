@@ -233,6 +233,14 @@ public static partial class Helper
             return evaluateSummary;
     }
 
+    /// <summary>
+    /// 个股K线以及指标图表
+    /// </summary>
+    /// <param name="prices"></param>
+    /// <param name="indicatorValue"></param>
+    /// <param name="marks"></param>
+    /// <param name="symbol"></param>
+    /// <returns></returns>
     public static Diagram CreateCandlestickDiagram(
         this List<Price> prices,
         LineOfPoint indicatorValue,
@@ -245,10 +253,10 @@ public static partial class Helper
             Records = prices.Select(o => new CandlestickRecord
             {
                 TradeDate = o.TradeDate.ToDateTimeEx(),
-                Close = (float)o.Close,
-                Open = (float)o.Open,
-                High = (float)o.High,
-                Low = (float)o.Low
+                Close = o.Close.ToFloat(),
+                Open = o.Open.ToFloat(),
+                High =o.High.ToFloat(),
+                Low = o.Low.ToFloat()
             }).ToList()
         };
 
@@ -399,6 +407,12 @@ public static partial class Helper
     public static Diagram BiasDiagram(this string code)
         => IndicatorDiagram(code, "BIAS");
 
+    /// <summary>
+    /// 指标图表
+    /// </summary>
+    /// <param name="code"></param>
+    /// <param name="indicator"></param>
+    /// <returns></returns>
     public static Diagram IndicatorDiagram(string code, string indicator)
     {
         var dailyDiagram =LoadDiagram($"{code}.{StockAnalysisCycle.DAILY}");
@@ -407,7 +421,7 @@ public static partial class Helper
 
         var candlestickSeries = dailyDiagram.Series!.FirstOrDefault(o => o.Type == SeriesType.Candlestick);
 
-        var dailySeries = dailyDiagram.Series.FindAll(o => o.Name!.StartsWith(indicator));
+        var dailySeries = dailyDiagram.Series!.FindAll(o => o.Name!.StartsWith(indicator));
 
         dailySeries.ForEach(o => {
             o.XAxisIndex = 1;
@@ -489,6 +503,159 @@ public static partial class Helper
                 TextStyle = new TextStyle(){Color = "#000"}
             }
         });
+        return diagram;
+    }
+
+    /// <summary>
+    /// 用特征字典创建treemap
+    /// </summary>
+    /// <param name="keysDic"></param>
+    /// <param name="title"></param>
+    /// <returns></returns>
+    public static Diagram CreateTreemapDiagram(
+    this Dictionary<string, int> keysDic,
+    string title)
+    {
+        var treemapData = Infrastructures.Indicators.Helper.FeatureGroups.Select(
+            g =>
+                new TreemapRecord
+                {
+                    Name = g,
+                    Value = keysDic.Where(o => o.Key.StartsWith($"{g}.")).Sum(o => o.Value),
+                    Children = Infrastructures.Indicators.Helper.Features
+                        .Where(f => f.Key.StartsWith($"{g}."))
+                        .Select(f => new TreemapRecord
+                        {
+                            Name = f.Key,
+                            Value = keysDic.Where(o => o.Key.StartsWith($"{f.Key}.")).Sum(o => o.Value),
+                            Children = keysDic.Where(o => o.Key.StartsWith($"{f.Key}."))
+                                .Select(d => new TreemapRecord
+                                {
+                                    Name = d.Key,
+                                    Value = d.Value
+                                }).ToList()
+                        })
+                        .ToList()
+                }).ToList();
+
+        var diagram = Infrastructures.Charts.Helper.CreateDiagram();
+
+        diagram.SetTitle(new[] { new Title(title) { Show = false, Left = "center" } });
+
+        var series = SeriesType.Treemap.CreateSeries(treemapData);
+        series.Levels = new List<TreemapLevel>
+        {
+            new ()
+            {
+                ItemStyle = new ItemStyle { BorderColor = "#777", BorderWidth = 0, GapWidth = 1 },
+                UpperLabel = new Label { Show = false }
+            },
+            new()
+            {
+                ItemStyle = new ItemStyle { BorderColor = "#555", BorderWidth = 1, GapWidth =5 },
+                Emphasis = new Emphasis { ItemStyle = new ItemStyle{BorderColor = "#ddd"} }
+            }
+        };
+
+        diagram.AddSeries(series);
+        diagram.SetTooltip(new[] { new Tooltip { Formatter = "{b}:{c}" } });
+
+        return diagram;
+    }
+
+    /// <summary>
+    /// 用特征集合创建桑基图
+    /// </summary>
+    /// <param name="records"></param>
+    /// <param name="title"></param>
+    /// <returns></returns>
+    public static Diagram CreateSankeyDiagram(
+        this List<StockSets> records,
+        string title
+    )
+    {
+        var data = new List<SankeyRecord>();
+        var links = new List<SankeyLink>();
+
+        var keys = records
+        .Where(o => o.SetKeys != null)
+        .Select(o => o.SetKeys!)
+            .MergeToDictionary();
+
+        var groups = Infrastructures.Indicators.Helper.FeatureGroups
+            .Where(o => new[] { "MACD", "DMI", "BIAS", "KD" }.Contains(o))
+            .ToList();
+
+        data.AddRange(groups.Select(o => new SankeyRecord
+        {
+            Name = o,
+            ItemStyle = new ItemStyle
+            {
+                Color = Infrastructures.Indicators.Helper.ColorsDic[o],
+                BorderColor = Infrastructures.Indicators.Helper.ColorsDic[o],
+            }
+        }));
+
+        var features = Infrastructures.Indicators.Helper.Features
+            .Where(o => o.Key.StartsWithIn(groups.Select(x => $"{x}.")))
+            .ToList();
+
+        data.AddRange(features.Select(o => new SankeyRecord { Name = o.Key }));
+        data.AddRange(keys
+            .Where(o => o.Key.StartsWithIn(groups.Select(x => $"{x}.")))
+            .Select(o => new SankeyRecord { Name = o.Key }));
+
+        groups
+            .ForEach(g =>
+            {
+                links.AddRange(
+                    features
+                    .Where(f => f.Key.StartsWith($"{g}."))
+                    .Select(f => new SankeyLink { Source = g, Target = f.Key, Value = keys.Where(o => o.Key.StartsWith($"{f.Key}.")).Sum(o => o.Value) }));
+            });
+
+        var allFeatureDetails = Infrastructures.Indicators.Helper.AllFeatures
+            .Where(o => o.Key.StartsWithIn(groups.Select(x => $"{x}.")) && keys.ContainsKey(o.Key))
+            .Where(o => records.Any(x => x.SetKeys.Any(y => y == o.Key)))
+            .ToList();
+
+        features
+            .ForEach(f =>
+            {
+                links.AddRange(allFeatureDetails
+                    .Where(a => a.Key.StartsWith($"{f.Key}."))
+                    .Select(a =>
+                    {
+                        var v = 1;
+                        if (keys.TryGetValue(a.Key, out var vv))
+                            v = vv;
+
+                        return new SankeyLink { Source = f.Key, Target = a.Key, Value = v };
+                    }));
+            });
+
+        records.ForEach(o =>
+        {
+            if (data.All(x => x.Name != o.Code))
+                data.Add(new SankeyRecord { Name = o.Code });
+
+            links.AddRange(o.SetKeys
+                .Where(x => x.StartsWithIn(groups.Select(y => $"{y}.")))
+                .Select(x => new SankeyLink { Source = x, Target = o.Code, Value = 1 }));
+        });
+
+        var diagram = Infrastructures.Charts.Helper.CreateDiagram();
+
+        diagram.SetTitle(new[] { new Title(title) });
+
+        data = data.Where(x => links.Any(y => y.Source + "" == x.Name || y.Target + "" == x.Name)).ToList();
+
+        var series = Infrastructures.Charts.Helper.SankeySeries(data, links);
+        series.NodeAlign = "left";
+
+        diagram.AddSeries(series);
+        diagram.SetTooltip(new[] { new Tooltip { Trigger = Trigger.Item, TriggerOn = TriggerOn.MouseoverOrClick } });
+
         return diagram;
     }
 }

@@ -54,7 +54,7 @@ public static partial class Helper
     /// <param name="profile"></param>
     /// <param name="code"></param>
     /// <returns></returns>
-    public static List<StockOperationRecord>? LoadOperationRecords(
+    public static List<StockOperationRecord> LoadOperationRecords(
         this IAnalyzer _,
         Profile profile,
         string code) 

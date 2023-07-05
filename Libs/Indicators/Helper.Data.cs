@@ -35,6 +35,13 @@ public static partial class Helper
     /// <returns></returns>
     public static List<StockSets>? Save(this List<StockSets>? sets, string saveName)
         => sets.SaveEntities(saveName);
+
+    public static List<StockSets>? LoadSets(this string code)
+        =>  code.LoadEntities<StockSets>();
+
+    public static List<string>? GetSetKeys(this List<StockSets>? sets, string tradeDate)
+        => sets.Last(o => o.MarkTime.ToYmd().Equals(tradeDate))?
+        .SetKeys?.ToList();
     
     #region indicators
 
