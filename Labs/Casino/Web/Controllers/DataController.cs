@@ -1,4 +1,6 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators;
+using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Productions.Casino.CcaAndReport;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts.Extensions;
@@ -26,13 +28,7 @@ public class DataController : Controller
 
         return Content(allCodes.ObjToJson());
     }
-
-    public ContentResult CurrentTreemap()
-        => Content(Signalert.LoadCurrentTreemap(Config.DefaultFilter).ObjToJson());
-
-    public ContentResult PreviousTreemap()
-        => Content(Signalert.LoadPreviousTreemap(Config.DefaultFilter).ObjToJson());
-
+    
     /// <summary>
     /// 买点（Config.）treemap
     /// </summary>
@@ -40,11 +36,13 @@ public class DataController : Controller
     /// <returns></returns>
     public ContentResult DotsTreemap(int id = 1)
     {
-        var dic = Signalert.Reportor.LoadDotsKey(Config.DefaultFilter, id == 1);
-        var diagram = Signalert.Reportor.CreateTreemapDiagram(dic, id == 1 ? "buying" : "selling");
+        var diagramName = id == 1
+            ? $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Treemap.Buying"
+            : $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Treemap.Selling";
+
+        var diagram = diagramName.LoadDiagram();
 
         return Content(diagram.ObjToJson());
-
     }
 
     public ContentResult Bias(string id) 
@@ -71,24 +69,21 @@ public class DataController : Controller
     public ContentResult Candlestick(string id, string cycle = "Daily")
     {
         cycle = cycle.ToUpper();
+
         var cycleEnum = cycle.StringToEnum<StockAnalysisCycle>();
-        var diagram = Signalert.LoadDiagramContent(new Stock { Code = id, }, cycleEnum);
+
+        var diagram = new Stock { Code = id, }.LoadDiagram( cycleEnum).ObjToJson();
 
         return Content(diagram);
     }
 
     public ContentResult Sankey(int id)
     {
-        var title = id == 1 ? "dots of buying sets sankey" : "dots of selling sets sankey";
+        var diagramName = id == 1
+            ? $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Sankey.Buying"
+            : $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Sankey.Selling";
 
-        var records = Signalert.Reportor
-            .LoadDotsSankey(Config.DefaultFilter)
-            .Where(o => (o.ChangePercent > 0) == (id == 1))
-            .ToList();
-
-        var dic = Signalert.Reportor.LoadDotsKey(Config.DefaultFilter, id == 1);
-
-        var diagram = Signalert.Reportor.CreateSankeyDiagram(title, records, dic);
+        var diagram = diagramName.LoadDiagram();
 
         return Content(diagram.ObjToJson());
     }

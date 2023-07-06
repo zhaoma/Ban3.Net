@@ -1,10 +1,7 @@
-﻿#nullable enable
-using System;
-using System.Collections.Generic;
-using Ban3.Productions.Casino.Contracts.Enums;
-using Ban3.Sites.ViaTushare.Entries;
+﻿using System.Collections.Generic;
+using Ban3.Infrastructures.Indicators.Enums;
 
-namespace Ban3.Productions.Casino.Contracts.Request;
+namespace Ban3.Infrastructures.Indicators.Entries;
 
 public class FocusFilter
 {
@@ -16,7 +13,7 @@ public class FocusFilter
 
     public Dictionary<StockAnalysisCycle, float>? SellingCondition { get; set; }
 
-    public bool IsMatch(float changePercent, StockAnalysisCycle cycle, out bool isDotOfBuying)
+    public bool IsMatch(double? changePercent, StockAnalysisCycle cycle, out bool isDotOfBuying)
     {
         isDotOfBuying = false;
         var result = false;

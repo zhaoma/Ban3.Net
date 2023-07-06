@@ -24,7 +24,7 @@ namespace Ban3.Productions.Casino.Contracts.Extensions;
 public static partial class Helper
 {
     #region icons
-
+    /*
     /// <summary>
     /// 云财经有防火墙规则
     /// </summary>
@@ -37,17 +37,6 @@ public static partial class Helper
         var result = true;
 
         var local = allCodes ?? _.LoadAllCodes();
-
-        /*
-        local.ParallelExecute((stock) =>
-        {
-            var t = _.DownloadOnesIcon(stock.Code);
-            var line =t ? "OK" : "FAILED";
-
-            result = result && t;
-            Logger.Debug($"download {stock.Code} icon : {line}");
-        },Config.MaxParallelTasks);
-        */
 
         local.ForEach(stock =>
         {
@@ -71,6 +60,7 @@ public static partial class Helper
         return !string.IsNullOrEmpty(result.Path);
     }
 
+    */
     #endregion
 
     #region codes
@@ -332,7 +322,7 @@ public static partial class Helper
     #endregion
 
     #region realtime prices
-
+    /*
     /// <summary>
     /// 网易实时接口失效后，暂无合适的实时行情接口
     /// </summary>
@@ -408,6 +398,6 @@ public static partial class Helper
 
         return false;
     }
-
+    */
     #endregion
 }

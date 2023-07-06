@@ -2,6 +2,7 @@
 using System.Security.Policy;
 using System.Text;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Newtonsoft.Json;
 

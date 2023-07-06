@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
@@ -16,10 +18,10 @@ public class FocusData
     public List<FocusRecord> Previous { get; set; }
 
     public Dictionary<string, int> PreviousKeys()
-        => Previous.KeysDictionary();
+        => Previous.Select(o=>o.SetKeys).MergeToDictionary();
 
     public List<FocusRecord> Current { get; set; }
 
     public Dictionary<string, int> CurrentKeys()
-        => Current.KeysDictionary();
+        => Current.Select(o => o.SetKeys).MergeToDictionary();
 }

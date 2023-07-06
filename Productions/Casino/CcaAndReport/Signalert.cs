@@ -4,7 +4,11 @@ using System.IO;
 using System.Linq;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators;
+using Ban3.Infrastructures.Indicators.Entries;
+using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Infrastructures.Indicators.Inputs;
+using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
@@ -13,6 +17,7 @@ using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using log4net;
+using Stock = Ban3.Productions.Casino.Contracts.Entities.Stock;
 
 namespace Ban3.Productions.Casino.CcaAndReport;
 
@@ -82,7 +87,7 @@ public partial class Signalert
     /// 指定标的集合
     /// </summary>
     /// <param name="stocks"></param>
-    public static void ExecuteDailyJob(List<Stock> stocks)
+    public static void ExecuteDailyJob(List<Contracts.Entities. Stock> stocks)
     {
         new Action(() => Collector.FixDailyPrices(stocks)).ExecuteAndTiming("FixDailyPrices");
 
@@ -92,7 +97,7 @@ public partial class Signalert
     #endregion
 
     #region 实时任务
-
+    /*
     public static void ExecuteRealtimeJob()
     {
         var allCodes = Collector.LoadAllCodes();
@@ -130,7 +135,7 @@ public partial class Signalert
 
         ExecutePrepare(stocks);
     }
-
+    */
     #endregion
 
     /// <summary>
@@ -141,55 +146,111 @@ public partial class Signalert
     /// 生成最新列表
     /// </summary>
     /// <param name="stocks"></param>
-    static void ExecutePrepare(List<Stock> stocks)
-    {
-        ReinstateData(stocks);
-
-        PrepareOutput(stocks);
-    }
-
-    /// <summary>
-    /// 价格复权，计算指标值
-    /// </summary>
-    /// <param name="stocks"></param>
-    public static void ReinstateData(List<Stock> stocks)
+    static void ExecutePrepare(List<Contracts.Entities.Stock> stocks)
     {
         new Action(() => ReinstateAllPrices(stocks)).ExecuteAndTiming("ReinstateAllPrices");
 
+        var filter = Infrastructures.Indicators.Helper.DefaultFilter;
+        var latestSets = new List<StockSets>();
+        var buyingDotsSets = new List<StockSets>();
+        var sellingDotsSets = new List<StockSets>();
+        var profileSummaries = new Dictionary<string, ProfileSummary>();
+        var dotsDic = new Dictionary<string, List<DotInfo>>();
+
         new Action(() =>
-            stocks.ParallelExecute((stock) => { Calculator.GenerateIndicatorLine(stock.Code); },
+            stocks.ParallelExecute(one =>
+                {
+                    var stock = new Infrastructures.Indicators.Entries.Stock
+                        { Code = one.Code, ListDate = one.ListDate, Name = one.Name, Symbol = one.Symbol };
+
+                    var dailyPrices = Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
+
+                    if (dailyPrices.SplitWeeklyAndMonthly(out var weeklyPrices, out var monthlyPrices))
+                    {
+                        var dots = dailyPrices.DotsOfBuyingOrSelling(filter);
+                        dotsDic.Add(stock.Code,dots);
+
+                        weeklyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.WEEKLY));
+
+                        monthlyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.MONTHLY));
+
+                        var dailyLine = dailyPrices.CalculateIndicators()
+                            .SaveFor(stock, StockAnalysisCycle.DAILY);
+                        var dailySets = dailyLine.LineToSets();
+
+                        var weeklyLine = weeklyPrices.CalculateIndicators()
+                            .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+                        var weeklySets = weeklyLine.LineToSets();
+
+                        var monthlyLine = monthlyPrices.CalculateIndicators()
+                            .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+                        var monthlySets = monthlyLine.LineToSets();
+
+                        dailySets.MergeWeeklyAndMonthly(weeklySets, monthlySets)
+                            .SaveFor(stock)
+                            .PushLatest(latestSets);
+
+                        buyingDotsSets = dailySets?
+                            .FindAll(o => dots!=null&& dots.Any(x =>x.IsDotOfBuying&& x.TradeDate == o.MarkTime.ToYmd()))
+                            .ToList();
+
+                        sellingDotsSets = dailySets?
+                            .FindAll(o => dots != null && dots.Any(x => !x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd()))
+                            .ToList();
+
+                        Profiles().ForEach(profile =>
+                        {
+                            var oneProfileSummary = profile.OutputDailyOperates(dailySets)
+                                .SaveFor(stock, profile)
+                                .ConvertToRecords()
+                                .SaveFor(stock, profile)
+                                .RecordsSummary(profile);
+
+                            profileSummaries.MergeSummary(oneProfileSummary);
+                        });
+
+                        dailyPrices.CreateCandlestickDiagram(dailyLine!, stock)
+                            .SaveFor(stock, StockAnalysisCycle.DAILY);
+
+                        weeklyPrices.CreateCandlestickDiagram(weeklyLine!, stock)
+                            .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+
+                        monthlyPrices.CreateCandlestickDiagram(monthlyLine!, stock)
+                            .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+                    }
+                },
                 Config.MaxParallelTasks)
-        ).ExecuteAndTiming("GenerateIndicatorLine");
-    }
+        ).ExecuteAndTiming($"everyOne");
 
-    /// <summary>
-    /// 准备输出数据(图表与统计结果)
-    /// </summary>
-    /// <param name="stocks"></param>
-    public static void PrepareOutput(List<Stock> stocks) { 
+        dotsDic.SaveFor(filter);
+        latestSets.SaveEntities("latest");
+        latestSets.GenerateList().Save();
+        profileSummaries.Save();
+
+        var allDots = dotsDic
+            .Select(o => o.Value)
+            .UnionAll()
+            .ToList();
+
+        allDots.Where(o => o.IsDotOfBuying)
+            .Select(o => o.SetKeys)
+            .MergeToDictionary()
+            .CreateTreemapDiagram("Dots Of Buying Treemap")
+            .SaveFor($"{filter.Identity}.Treemap.Buying");
+
+        allDots.Where(o => !o.IsDotOfBuying)
+            .Select(o => o.SetKeys)
+            .MergeToDictionary()
+            .CreateTreemapDiagram("Dots Of Selling Treemap")
+            .SaveFor($"{filter.Identity}.Treemap.Selling");
+        
+        buyingDotsSets.CreateSankeyDiagram("Dots Of Buying Sankey")
+            .SaveFor($"{filter.Identity}.Sankey.Buying");
+
+        sellingDotsSets.CreateSankeyDiagram("Dots Of Selling Sankey")
+            .SaveFor($"{filter.Identity}.Sankey.Selling");
+    }
     
-        new Action(() =>
-            PrepareAllSets(stocks)
-        ).ExecuteAndTiming("PrepareAllSets");
-
-        new Action(() =>
-                PrepareFocus(stocks,Config.DefaultFilter, out var _)
-        ).ExecuteAndTiming("PrepareFocus");
-
-        new Action(() =>
-            PrepareDots(stocks, Config.DefaultFilter)
-        ).ExecuteAndTiming("PrepareDots");
-
-        new Action(() =>
-            PrepareAllDiagrams(stocks)
-        ).ExecuteAndTiming("PrepareAllDiagrams");
-
-        new Action(() =>
-            PrepareLatestList()
-        ).ExecuteAndTiming("PrepareLatestList");
-
-    }
-
     public static List<Profile> Profiles()
     {
         var profileFile = typeof(Profile).LocalFile();
@@ -205,49 +266,7 @@ public partial class Signalert
                  return ps;
              }, profileFile);
     }
-
-
-    /// <summary>
-    /// 策略评估
-    /// 生成个股操作建议
-    /// 生成个股操作纪录
-    /// </summary>
-    /// <param name="stocks"></param>
-    public static void EvaluateProfiles(List<Stock> stocks)
-    {
-        var profiles = Profiles();
-        Analyzer.ClearSummary();
-
-        new Action(() =>
-            {
-                stocks.ParallelExecute((stock) =>
-                {
-                    var sets = Calculator.LoadSets(stock.Code);
-                    if (sets != null && sets.Any())
-                    {
-                        sets = sets
-                            .Where(o => DateTime.Now.Year - o.MarkTime.Year <= 1)
-                            .ToList();
-
-                        profiles
-                            .ParallelExecute((profile) =>
-                                {
-                                    Analyzer
-                                        .OutputDailyOperates(profile, sets, stock.Code)
-                                        .ConvertOperates2Records(profile, stock.Code)
-                                        .MergeSummary(profile);
-                                },
-                                Config.MaxParallelTasks);
-
-
-                    }
-                }, Config.MaxParallelTasks);
-
-                Analyzer.SaveSummary();
-            }
-        ).ExecuteAndTiming("OutputDailyOperates");
-    }
-
+    
     #endregion
     
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));

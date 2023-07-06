@@ -1,4 +1,5 @@
-﻿@model Ban3.Productions.Casino.Contracts.Response.RenderViewResult<Ban3.Productions.Casino.Contracts.Entities.DotInfo>
+﻿@using Ban3.Infrastructures.Common.Extensions
+@model Ban3.Productions.Casino.Contracts.Response.RenderViewResult<Ban3.Infrastructures.Indicators.Entries.DotInfo>
 @{
     Layout = null;
 }
@@ -29,7 +30,7 @@
             <td>@row.TradeDate</td>
             <td>@row.Cycle</td>
             <td>@row.Days</td>
-            <td>@Math.Round(row.ChangePercent, 2) %</td>
+            <td>@Math.Round(row.ChangePercent!.ToDecimal(), 2) %</td>
             <td>@row.Close</td>
         </tr>
     }

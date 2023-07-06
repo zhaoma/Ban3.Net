@@ -32,77 +32,30 @@ internal class Program
                 new Action(Signalert.ExecuteDailyJob)
                     .ExecuteAndTiming("daily(ExecuteDailyJob)");
                 break;
-
-            case "--realtime":
-                if (!Config.NeedSync())
-                {
-                    $"--realtime only run 9:15 - 15:00".WriteColorLine(ConsoleColor.Red);
-                    break;
-                }
-
-                if (args.Length <= 1)
-                {
-                    new Action(Signalert.ExecuteRealtimeJob)
-                        .ExecuteAndTiming("realtime(ExecuteRealtimeJob)");
-                }
-                else
-                {
-                    new Action(() => Signalert.ExecuteRealtimeJob(args[1]))
-                        .ExecuteAndTiming($"realtime(ExecuteRealtimeJob({args[1]}))");
-                }
-
-                break;
-
+                
             case "--one":
                 new Action(() => { Signalert.ExecuteDailyJob(args[1]); })
                     .ExecuteAndTiming($"one(PrepareOnesDailyPrices({args[1]}))");
 
                 break;
 
-            case "--realtimeOnly":
-                new Action(() => { Signalert.Collector.ReadRealtime(); })
-                    .ExecuteAndTiming("Prepare realtime prices only.");
-                break;
-
             case "--reinstate":
-                new Action(() => { Signalert.ReinstateData(Signalert.Collector.LoadAllCodes()); })
+                new Action(() => { Signalert.ReinstateAllPrices(Signalert.Collector.LoadAllCodes()); })
                     .ExecuteAndTiming("ReinstateData.");
-                break;
-
-            case "--output":
-                new Action(() => { Signalert.PrepareOutput(Signalert.Collector.LoadAllCodes()); })
-                    .ExecuteAndTiming("PrepareOutput.");
-                break;
-
-            case "--eva":
-                new Action(() => { Signalert.EvaluateProfiles(Signalert.Collector.ScopedCodes()); })
-                    .ExecuteAndTiming("EvaluateProfiles.");
                 break;
 
             case "--check":
                 new Action(CheckSomething)
                     .ExecuteAndTiming("CheckSomething.");
                 break;
-
-            case "--v2":
-                var codes = Signalert.Collector.ScopedCodes();
-                Signalert.PrepareV2(codes);
-
-                break;
-
+                
             default:
                 $"--all:                     prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor
                     .DarkYellow);
                 $"--prepare:                 prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--daily :                  prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--realtime [codes] :       refresh all realtime data(prices and reinstate etc.)".WriteColorLine(
-                    ConsoleColor.DarkYellow);
                 $"--one [code] :             prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--realtimeOnly :           refresh realtime prices only"
-                    .WriteColorLine(ConsoleColor.DarkYellow);
                 $"--reinstate :              reinstate prices and indicators data".WriteColorLine(ConsoleColor
-                    .DarkYellow);
-                $"--output :                 prepare charts or others output data".WriteColorLine(ConsoleColor
                     .DarkYellow);
                 $"--check :                  check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
 

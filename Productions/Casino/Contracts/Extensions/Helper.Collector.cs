@@ -95,6 +95,8 @@ public static partial class Helper
     /// <returns></returns>
     public static List<StockEvent> LoadOnesEvents(this ICollector _, string symbol) => _.Sites.LoadOnesEvents(symbol);
 
+    /*
+
     /// <summary>
     /// 刷新实时行情
     /// </summary>
@@ -102,4 +104,6 @@ public static partial class Helper
     /// <param name="allCodes"></param>
     /// <returns></returns>
     public static bool ReadRealtime(this ICollector _, List<Stock> allCodes = null) => _.Sites.ReadRealtime(allCodes).Result;
+
+    */
 }

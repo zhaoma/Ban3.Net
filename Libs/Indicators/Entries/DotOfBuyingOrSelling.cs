@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ban3.Productions.Casino.Contracts.Entities;
+namespace Ban3.Infrastructures.Indicators.Entries;
 
 /// <summary>
 /// 用FocusFilter 筛选买卖点

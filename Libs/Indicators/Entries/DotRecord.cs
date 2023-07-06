@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Ban3.Productions.Casino.Contracts.Entities;
+namespace Ban3.Infrastructures.Indicators.Entries;
 
 public class DotRecord
 {
@@ -20,15 +19,15 @@ public class DotRecord
     public string Code
     {
         get; set;
-    }
+    } = string.Empty;
 
     [JsonProperty("tradeDate", NullValueHandling = NullValueHandling.Ignore)]
-    public string TradeDate { get; set; }
+    public string TradeDate { get; set; } = string.Empty;
 
     [JsonProperty("changePercent", NullValueHandling = NullValueHandling.Ignore)]
-    public float ChangePercent { get; set; }
+    public double? ChangePercent { get; set; }
 
 
     [JsonProperty("setKeys", NullValueHandling = NullValueHandling.Ignore)]
-    public List<string> SetKeys { get; set; }
+    public List<string>? SetKeys { get; set; }
 }

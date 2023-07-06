@@ -7,6 +7,8 @@ using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Productions.Casino.Contracts.Response;
 using Ban3.Infrastructures.Indicators;
+using Ban3.Infrastructures.Indicators.Entries;
+using Ban3.Infrastructures.Indicators.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ban3.Labs.Casino.Web.Controllers;
@@ -25,7 +27,7 @@ public class PartsController : Controller
     /// <returns></returns>
     public IActionResult Dots(RenderView request)
     {
-        var dots = Signalert.Reportor.LoadDots(Config.DefaultFilter)
+        var dots = Signalert.Reportor.LoadDots(Infrastructures.Indicators.Helper.DefaultFilter)
             .ExtendedDots(request);
 
         request.Total = dots.Count;
@@ -46,7 +48,7 @@ public class PartsController : Controller
 
     public IActionResult DotsKey(int id)
     {
-        var dots = Signalert.Reportor.LoadDotsKey(Config.DefaultFilter, id == 1);
+        var dots = Signalert.Reportor.LoadDotsKey(Infrastructures.Indicators.Helper.DefaultFilter, id == 1);
         return View(dots);
     }
 
@@ -205,7 +207,7 @@ public class PartsController : Controller
 
     public IActionResult ProfileDetail(string id)
     {
-        var codes = Signalert.Collector.ScopedCodes();
+        var codes = Signalert.Collector.ScopedCodes().Select(o=>o.Code).ToList();
         var data = Signalert.Analyzer.LoadProfileDetails(codes, id);
 
         return View(data);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Sites.ViaTushare.Entries;
 
@@ -12,7 +13,7 @@ namespace Ban3.Productions.Casino.Contracts.Extensions;
 /// </summary>
 public static partial class Helper
 {
-
+    /*
     /// <summary>
     /// 
     /// </summary>
@@ -53,109 +54,5 @@ public static partial class Helper
     public static string GetStockNumPrefix(this string code)
         => code.GetStockPrefix() == "sz" ? "1" : "0";
 
-    public static void AppendLatest(
-        this List<StockPrice> prices,
-        StockPrice price,
-        StockAnalysisCycle cycle)
-    {
-        if (!prices.Any())
-        {
-            prices.Add(price);
-        }
-        else
-        {
-            var lastRecord = prices.Last();
-
-            var exists = lastRecord.TradeDate.ToDateTimeEx().NextDate(cycle).ToYmd();
-            var add = price.TradeDate.ToDateTimeEx().NextDate(cycle).ToYmd();
-            if (exists.ToInt().Equals(add.ToInt()))
-            {
-                var p = new StockPrice
-                {
-                    Code = price.Code,
-                    TradeDate = price.TradeDate,
-                    Open = price.Open,
-                    High = Math.Max(lastRecord.High, price.High),
-                    Low = Math.Min(lastRecord.Low, price.Low),
-                    Close = price.Close,
-                    PreClose = price.PreClose,
-                    Vol = lastRecord.Vol + price.Vol,
-                    Amount = lastRecord.Amount + price.Amount
-                };
-                p.Change = p.Close - p.PreClose;
-                p.ChangePercent = p.PreClose != 0
-                    ? (float)Math.Round((p.Close - p.PreClose) / p.PreClose * 100, 2)
-                    : 0F;
-
-                prices.Add(p);
-            }
-            else
-            {
-                prices.Add(price);
-            }
-        }
-    }
-
-    /// <summary>
-    /// 价格周期转换
-    /// </summary>
-    /// <param name="dailyPrices"></param>
-    /// <param name="targetCycle"></param>
-    /// <returns></returns>
-    public static List<StockPrice> ConvertCycle(
-        this List<StockPrice> dailyPrices,
-        StockAnalysisCycle targetCycle)
-    {
-        var result = new List<StockPrice>();
-
-        if (dailyPrices != null && dailyPrices.Any())
-        {
-            {
-                dailyPrices = dailyPrices.OrderBy(o => o.TradeDate).ToList();
-                var lastRecord = dailyPrices[0];
-                var endDate = lastRecord.TradeDate.ToDateTimeEx().NextDate(targetCycle);
-                for (var i = 0; i < dailyPrices.Count; i++)
-                {
-                    var price = dailyPrices[i];
-
-                    if (endDate.ToYmd().ToInt() > price.TradeDate.ToInt())
-                    {
-                        lastRecord.TradeDate = price.TradeDate;
-                        lastRecord.High = Math.Max(lastRecord.High, price.High);
-                        lastRecord.Low = Math.Min(lastRecord.Low, price.Low);
-                        lastRecord.Vol += price.Vol;
-                        lastRecord.Amount += price.Amount;
-                        lastRecord.Close = price.Close;
-
-                        if (i == dailyPrices.Count - 1)
-                        {
-                            result.Add(lastRecord);
-                        }
-                    }
-                    else
-                    {
-                        lastRecord.Change = lastRecord.Close - lastRecord.PreClose;
-                        lastRecord.ChangePercent = lastRecord.PreClose != 0
-                            ? (float)Math.Round((lastRecord.Close - lastRecord.PreClose) / lastRecord.PreClose * 100, 2)
-                            : 0F;
-                        result.Add(lastRecord);
-
-                        lastRecord = price;
-                        endDate = endDate.AddDays(1).NextDate(targetCycle);
-                        if ( i == dailyPrices.Count - 1)
-                            result.Add(lastRecord);
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-
-    static DateTime NextDate(this DateTime from, StockAnalysisCycle targetCycle)
-    {
-        return targetCycle == StockAnalysisCycle.WEEKLY
-            ? from.FindWeekEnd()
-            : from.FindMonthEnd();
-    }
+    */
 }

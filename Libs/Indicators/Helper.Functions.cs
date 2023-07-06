@@ -90,6 +90,13 @@ public static partial class Helper
         return false;
     }
 
+    /// <summary>
+    /// 用五日量尝试指标
+    /// </summary>
+    /// <param name="prices"></param>
+    /// <param name="days"></param>
+    /// <param name="amounts"></param>
+    /// <returns></returns>
     public static bool SplitAmount(this List<Price> prices, int days, out List<Price> amounts)
     {
         amounts = new List<Price>();
@@ -102,14 +109,20 @@ public static partial class Helper
             {
                 Code = prices[index].Code,
                 TradeDate = prices[index].TradeDate,
-                Open = tmpArray.First(),
-                Close = tmpArray.Last(),
-                High = tmpArray.Max(),
-                Low = tmpArray.Min()
+                Open = tmpArray.First()/10000D,
+                Close = tmpArray.Last()/10000D,
+                High = tmpArray.Max()/10000D,
+                Low = tmpArray.Min()/10000D,
+                Vol = prices[index].Vol,
+                Amount = prices[index].Amount
             };
 
             if (amounts.Count > 1)
-                one.PreClose = amounts[amounts.Count - 1].Close;
+            {
+                one.PreClose = amounts[amounts.Count - 1].Close/10000D;
+                one.Change = one.Close - one.PreClose;
+                one.ChangePercent = (one.Close - one.PreClose) / one.PreClose * 100D;
+            }
 
             amounts.Add(one);
         }

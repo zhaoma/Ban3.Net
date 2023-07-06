@@ -9,6 +9,7 @@ using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Productions.Casino.Contracts.Entities;
+using Stock = Ban3.Infrastructures.Indicators.Entries.Stock;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -44,7 +45,7 @@ public static partial class Helper
     /// <returns></returns>
     public static List<StockOperationRecord> ConvertOperates2Records(
         this List<StockOperate> stockOperates, Profile profile, string code)
-        => stockOperates.ConvertToRecords(code)
+        => stockOperates.ConvertToRecords()
             .SaveEntities($"{code}.{profile.Identity}");
 
     /// <summary>
@@ -128,22 +129,22 @@ public static partial class Helper
         }
     }
 
-    public static List<StockOperationRecord> LoadProfileDetails(this IAnalyzer _, List<Stock> stocks, string identity)
+    public static List<StockOperationRecord> LoadProfileDetails(this IAnalyzer _, List<string> codes, string identity)
         =>
             Config.CacheKey<StockOperationRecord>(identity)
                 .LoadOrSetDefault(
-                    () => _.PrepareProfileDetails(stocks, identity), typeof(ProfileSummary)
+                    () => _.PrepareProfileDetails(codes, identity), typeof(ProfileSummary)
                         .LocalFile()
                 );
 
-    static List<StockOperationRecord> PrepareProfileDetails(this IAnalyzer _, List<Stock> stocks, string identity)
+    static List<StockOperationRecord> PrepareProfileDetails(this IAnalyzer _, List<string> codes, string identity)
     {
         var result = new List<StockOperationRecord>();
 
-        stocks.AsParallel()
+        codes.AsParallel()
             .ForAll(s =>
             {
-                var rs = _.LoadOperationRecords(new Profile { Identity = identity }, s.Code);
+                var rs = _.LoadOperationRecords(new Profile { Identity = identity }, s);
                 if (rs != null && rs.Any())
                 {
                     lock (_lock)

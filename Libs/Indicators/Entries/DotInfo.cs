@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Ban3.Productions.Casino.Contracts.Enums;
+using Ban3.Infrastructures.Indicators.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Ban3.Productions.Casino.Contracts.Entities;
+namespace Ban3.Infrastructures.Indicators.Entries;
 
 public class DotInfo
 {
@@ -15,21 +15,21 @@ public class DotInfo
     public StockAnalysisCycle Cycle { get; set; }
 
     [JsonProperty("tradeDate", NullValueHandling = NullValueHandling.Ignore)]
-    public string TradeDate { get; set; }
+    public string TradeDate { get; set; } = string.Empty;
 
     [JsonProperty("days", NullValueHandling = NullValueHandling.Ignore)]
     public int Days { get; set; }
 
     [JsonProperty("changePercent", NullValueHandling = NullValueHandling.Ignore)]
-    public float ChangePercent { get; set; }
+    public double? ChangePercent { get; set; }
 
     [JsonProperty("close", NullValueHandling = NullValueHandling.Ignore)]
-    public float Close { get; set; }
+    public double? Close { get; set; }
 
     [JsonProperty("setKeys", NullValueHandling = NullValueHandling.Ignore)]
-    public IEnumerable<string> SetKeys { get; set; }
+    public List<string>? SetKeys { get; set; }
 
     [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
-    public string Code { get; set; }
-    
+    public string Code { get; set; } = string.Empty;
+
 }
