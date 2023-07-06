@@ -12,12 +12,9 @@ using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
-using Ban3.Productions.Casino.Contracts.Entities;
-using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using log4net;
-using Stock = Ban3.Productions.Casino.Contracts.Entities.Stock;
 
 namespace Ban3.Productions.Casino.CcaAndReport;
 
@@ -87,7 +84,7 @@ public partial class Signalert
     /// 指定标的集合
     /// </summary>
     /// <param name="stocks"></param>
-    public static void ExecuteDailyJob(List<Contracts.Entities. Stock> stocks)
+    public static void ExecuteDailyJob(List<Contracts.Entities.Stock> stocks)
     {
         new Action(() => Collector.FixDailyPrices(stocks)).ExecuteAndTiming("FixDailyPrices");
 
@@ -173,15 +170,15 @@ public partial class Signalert
 
                         var dailyLine = dailyPrices.CalculateIndicators()
                             .SaveFor(stock, StockAnalysisCycle.DAILY);
-                        var dailySets = dailyLine.LineToSets();
+                        var dailySets = dailyLine.LineToSets(stock);
 
                         var weeklyLine = weeklyPrices.CalculateIndicators()
                             .SaveFor(stock, StockAnalysisCycle.WEEKLY);
-                        var weeklySets = weeklyLine.LineToSets();
+                        var weeklySets = weeklyLine.LineToSets(stock);
 
                         var monthlyLine = monthlyPrices.CalculateIndicators()
                             .SaveFor(stock, StockAnalysisCycle.MONTHLY);
-                        var monthlySets = monthlyLine.LineToSets();
+                        var monthlySets = monthlyLine.LineToSets(stock);
 
                         dailySets.MergeWeeklyAndMonthly(weeklySets, monthlySets)
                             .SaveFor(stock)

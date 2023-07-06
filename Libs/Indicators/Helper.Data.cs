@@ -14,10 +14,15 @@ namespace Ban3.Infrastructures.Indicators;
 public static partial class Helper
 {
     public static Dictionary<string, ProfileSummary>? Save(this Dictionary<string, ProfileSummary>? ps)
-        => ps.SaveEntity(_ => "ps");
+    {
+        "ps".DataFile<ProfileSummary>()
+        .SaveFileOnDemand(ps, out _);
+        return ps;
+	}
 
     public static Dictionary<string, ProfileSummary>? LoadProfileSummaries()
-        => "ps".LoadEntity<Dictionary<string, ProfileSummary>>();
+        => "ps".DataFile< ProfileSummary >()
+	.ReadFileAs<Dictionary<string, ProfileSummary>>();
 
     public static Dictionary<string, List<DotInfo>>? SaveFor(this Dictionary<string, List<DotInfo>>? dots, FocusFilter filter)
         => dots.SaveEntity(_=>filter.Identity);

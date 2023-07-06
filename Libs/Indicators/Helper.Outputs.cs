@@ -230,7 +230,7 @@ public static partial class Helper
     /// </summary>
     /// <param name="line"></param>
     /// <returns></returns>
-    public static List<StockSets>? LineToSets(this LineOfPoint? line)
+    public static List<StockSets>? LineToSets(this LineOfPoint? line,Stock stock)
     {
         var latestList = line.LatestList();
         if (latestList == null) return null;
@@ -238,6 +238,8 @@ public static partial class Helper
         return latestList
             .Select(o => new StockSets
             {
+                Code=stock.Code,
+                Symbol=stock.Symbol,
                 MarkTime = o.Current!.TradeDate,
                 Close = o.Current.Close,
                 SetKeys = o.Features()

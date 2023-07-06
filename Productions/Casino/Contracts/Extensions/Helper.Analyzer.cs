@@ -63,71 +63,8 @@ public static partial class Helper
 
     #endregion
 
-    private static Dictionary<string, ProfileSummary> _evaluateSummary;
-
-    public static void ClearSummary(this IAnalyzer _)
-    {
-        lock (_lock)
-        {
-            _evaluateSummary = new();
-        }
-    }
-
-    public static void SaveSummary(this IAnalyzer _)
-    {
-        lock (_lock)
-        {
-            typeof(ProfileSummary)
-                .LocalFile()
-                .WriteFile(_evaluateSummary.ObjToJson());
-        }
-    }
-
     public static Dictionary<string, ProfileSummary> LoadSummary(this IAnalyzer _)
-        => typeof(ProfileSummary)
-            .LocalFile()
-            .ReadFileAs<Dictionary<string, ProfileSummary>>();
-
-    public static decimal FinalProfit(this List<StockOperationRecord> records) 
-        => records.Aggregate(1M,
-            (current, record) => current *(decimal) (1 + (record.SellPrice - record.BuyPrice) / record.BuyPrice)!.Value);
-
-    public static void MergeSummary(this List<StockOperationRecord> records, Profile profile)
-    {
-        var validRecords = records.Where(o => o.SellDate != null && o.BuyPrice > 0).ToList();
-        if (!validRecords.Any()) return;
-        lock (_lock)
-        {
-
-            var newSummary = new ProfileSummary
-            {
-                Identity = profile.Identity,
-                StockCount = 1,
-                RecordCount = validRecords.Count(),
-                RightCount = validRecords.Count(o => o.SellPrice > o.BuyPrice),
-                Best =(decimal) validRecords.Max(o => (o.SellPrice - o.BuyPrice) / o.BuyPrice * 100D)!.Value,
-                Worst = (decimal)validRecords.Min(o => (o.SellPrice - o.BuyPrice) / o.BuyPrice * 100D)!.Value,
-                Average = validRecords.FinalProfit()
-            };
-            
-            if (_evaluateSummary.TryGetValue(profile.Identity, out var summary))
-            {
-                summary.Best = Math.Max(summary.Best, newSummary.Best);
-                summary.Worst = Math.Min(summary.Worst, newSummary.Worst);
-                summary.Average = (summary.StockCount * summary.Average + newSummary.Average) /
-                                  (summary.StockCount + 1);
-                summary.StockCount += 1;
-                summary.RecordCount += newSummary.RecordCount;
-                summary.RightCount+= newSummary.RightCount;
-
-                _evaluateSummary[profile.Identity] = summary;
-            }
-            else
-            {
-                _evaluateSummary.Add(profile.Identity,newSummary);
-            }
-        }
-    }
+        => Infrastructures.Indicators.Helper.LoadProfileSummaries();
 
     public static List<StockOperationRecord> LoadProfileDetails(this IAnalyzer _, List<string> codes, string identity)
         =>

@@ -189,7 +189,7 @@ public static partial class Helper
        new Profile(
            "rebound",
            "Rebound CK",
-           new ProfileCondition(new List<string>{"CCI.-200.DAILY","KD.GC.DAILY","KD.10.DAILY"},new List<string>()),
+           new ProfileCondition(new List<string>{"CCI.-200.DAILY","ENE.LOWER.DAILY","KD.GC.DAILY","KD.10.DAILY"},new List<string>()),
            new ProfileCondition(new List<string>{"KD.DC.DAILY"},new List<string>())
        )
     };
