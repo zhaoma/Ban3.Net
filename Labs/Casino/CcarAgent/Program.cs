@@ -58,7 +58,7 @@ internal class Program
                 $"--reinstate :              reinstate prices and indicators data".WriteColorLine(ConsoleColor
                     .DarkYellow);
                 $"--check :                  check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
-
+                CheckSomething();
                 break;
         }
 
@@ -71,6 +71,6 @@ internal class Program
 
     private static void CheckSomething()
     {
-
+        Signalert.ExecuteDailyJob("688004.SH");
     }
 }

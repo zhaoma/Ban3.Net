@@ -16,6 +16,7 @@ using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Productions.Casino.Contracts.Response;
 using Ban3.Sites.ViaTushare.Entries;
+using Outputs = Ban3.Infrastructures.Indicators.Outputs;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -159,11 +160,10 @@ public static partial class Helper
         => $"{code}.{cycle}".LoadEntities<StockPrice>();
 
     public static List<Price> LoadPricesForIndicators(this ICalculator _, string code, StockAnalysisCycle cycle)
-        => $"{code}.{cycle}".DataFile<StockPrice>()
-            .ReadFileAs<List<Price>>();
+        => $"{code}.{cycle}".DataFile<StockPrice>().ReadFileAs<List<Price>>();
 
     #endregion
-    
+
     /// <summary>
     /// 加载指标曲线 
     /// </summary>

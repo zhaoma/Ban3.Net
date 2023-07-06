@@ -192,20 +192,20 @@ public static partial class Helper
             {
                 var p = new Price
                 {
-                    //    Code = price.Code,
-                    //    TradeDate = price.TradeDate,
-                    //    Open = price.Open,
-                    //    High = Math.Max(lastRecord.High, price.High),
-                    //    Low = Math.Min(lastRecord.Low, price.Low),
-                    //    Close = price.Close,
-                    //    PreClose = price.PreClose,
-                    //    Vol = lastRecord.Vol + price.Vol,
-                    //    Amount = lastRecord.Amount + price.Amount
+                        Code = price.Code,
+                        TradeDate = price.TradeDate,
+                        Open = price.Open,
+                        High = Math.Max(lastRecord.High!.Value, price.High!.Value),
+                        Low = Math.Min(lastRecord.Low!.Value, price.Low!.Value),
+                        Close = price.Close,
+                        PreClose = price.PreClose,
+                        Vol = lastRecord.Vol + price.Vol,
+                        Amount = lastRecord.Amount + price.Amount
                 };
-                //p.Change = p.Close - p.PreClose;
-                //p.ChangePercent = p.PreClose != 0
-                //    ? (float)Math.Round((p.Close - p.PreClose) / p.PreClose * 100, 2)
-                //    : 0F;
+                p.Change = p.Close - p.PreClose;
+                p.ChangePercent = p.PreClose != 0
+                    ? (float)Math.Round((p.Close!.Value - p.PreClose!.Value) / p.PreClose.Value * 100D, 2)
+                    : 0F;
 
                 prices.Add(p);
             }

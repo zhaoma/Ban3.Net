@@ -167,9 +167,6 @@ public partial class Signalert
 
                     if (dailyPrices.SplitWeeklyAndMonthly(out var weeklyPrices, out var monthlyPrices))
                     {
-                        var dots = dailyPrices.DotsOfBuyingOrSelling(filter);
-                        dotsDic.Add(stock.Code,dots);
-
                         weeklyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.WEEKLY));
 
                         monthlyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.MONTHLY));
@@ -189,6 +186,17 @@ public partial class Signalert
                         dailySets.MergeWeeklyAndMonthly(weeklySets, monthlySets)
                             .SaveFor(stock)
                             .PushLatest(latestSets);
+
+
+                        var dots = dailyPrices.DotsOfBuyingOrSelling(filter);
+
+                        dots.ForEach(dot =>
+                        {
+                            dot.SetKeys = dailySets.GetSetKeys(dot.TradeDate);
+                        });
+
+                        dotsDic.Add(stock.Code, dots);
+
 
                         buyingDotsSets = dailySets?
                             .FindAll(o => dots!=null&& dots.Any(x =>x.IsDotOfBuying&& x.TradeDate == o.MarkTime.ToYmd()))
@@ -233,22 +241,23 @@ public partial class Signalert
             .ToList();
 
         allDots.Where(o => o.IsDotOfBuying)
-            .Select(o => o.SetKeys)
-            .MergeToDictionary()
-            .CreateTreemapDiagram("Dots Of Buying Treemap")
-            .SaveFor($"{filter.Identity}.Treemap.Buying");
+                      .Select(o => o.SetKeys)
+              .MergeToDictionary()
+                      .CreateTreemapDiagram("Dots Of Buying Treemap")
+                      .SaveFor($"{filter.Identity}.Treemap.Buying");
 
         allDots.Where(o => !o.IsDotOfBuying)
-            .Select(o => o.SetKeys)
-            .MergeToDictionary()
-            .CreateTreemapDiagram("Dots Of Selling Treemap")
-            .SaveFor($"{filter.Identity}.Treemap.Selling");
-        
-        buyingDotsSets.CreateSankeyDiagram("Dots Of Buying Sankey")
-            .SaveFor($"{filter.Identity}.Sankey.Buying");
+                .Select(o => o.SetKeys).MergeToDictionary()
+                .CreateTreemapDiagram("Dots Of Selling Treemap")
+                .SaveFor($"{filter.Identity}.Treemap.Selling");
+     
 
-        sellingDotsSets.CreateSankeyDiagram("Dots Of Selling Sankey")
-            .SaveFor($"{filter.Identity}.Sankey.Selling");
+            buyingDotsSets.CreateSankeyDiagram("Dots Of Buying Sankey")
+                .SaveFor($"{filter.Identity}.Sankey.Buying");
+
+            sellingDotsSets.CreateSankeyDiagram("Dots Of Selling Sankey")
+                .SaveFor($"{filter.Identity}.Sankey.Selling");
+        
     }
     
     public static List<Profile> Profiles()
