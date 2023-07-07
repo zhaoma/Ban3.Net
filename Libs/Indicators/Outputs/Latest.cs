@@ -5,9 +5,7 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System;
 using System.Collections.Generic;
-using Ban3.Infrastructures.Common.Extensions;
 using Newtonsoft.Json;
 
 namespace  Ban3.Infrastructures.Indicators.Outputs;

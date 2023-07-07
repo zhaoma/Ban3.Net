@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
+using Ban3.Infrastructures.Indicators.Entries;
+using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Productions.Casino.CcaAndReport;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Extensions;
+using Ban3.Infrastructures.Indicators;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -32,7 +35,7 @@ internal class Program
                 new Action(Signalert.ExecuteDailyJob)
                     .ExecuteAndTiming("daily(ExecuteDailyJob)");
                 break;
-                
+
             case "--one":
                 new Action(() => { Signalert.ExecuteDailyJob(args[1]); })
                     .ExecuteAndTiming($"one(PrepareOnesDailyPrices({args[1]}))");
@@ -48,7 +51,7 @@ internal class Program
                 new Action(CheckSomething)
                     .ExecuteAndTiming("CheckSomething.");
                 break;
-                
+
             default:
                 $"--all:                 prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--prepare:             prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
@@ -56,7 +59,7 @@ internal class Program
                 $"--one [code] :         prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--reinstate :          reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--check :              check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
-                CheckSomething();
+
                 break;
         }
 
@@ -69,6 +72,19 @@ internal class Program
 
     private static void CheckSomething()
     {
-        Signalert.ExecuteDailyJob("300580.SZ");
+        //Signalert.ExecuteDailyJob();
+        var code = "300580.SZ";
+
+        var dailyPrices = Signalert.Calculator.LoadPricesForIndicators(code, StockAnalysisCycle.DAILY);
+        var dots = dailyPrices.DotsOfBuyingOrSelling(Infrastructures.Indicators.Helper.DefaultFilter);
+
+        if (dots != null)
+        {
+            dots.ForEach(d =>
+            {
+                d.ObjToJson().WriteColorLine(ConsoleColor.Red);
+                Console.WriteLine();
+            });
+        }
     }
 }

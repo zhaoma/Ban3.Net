@@ -12,33 +12,15 @@ namespace  Ban3.Infrastructures.Indicators.Outputs;
 /// <summary>
 /// 标的
 /// </summary>
-public class StockInfo
+public class StockInfo:Entries.Stock
 {
     public StockInfo() { }
-
-    /// <summary>
-    /// 代码
-    /// </summary>
-    [JsonProperty("stockCode", NullValueHandling = NullValueHandling.Ignore)]
-    public string StockCode { get; set; } = string.Empty;
-
-    /// <summary>
-    /// 名称
-    /// </summary>
-    [JsonProperty("stockName", NullValueHandling = NullValueHandling.Ignore)]
-    public string StockName { get; set; } = string.Empty;
 
     /// <summary>
     /// 图标
     /// </summary>
     [JsonProperty("stockIcon", NullValueHandling = NullValueHandling.Ignore)]
     public string StockIcon { get; set; } = string.Empty;
-
-    /// <summary>
-    /// 板块
-    /// </summary>
-    [JsonProperty("stockGroup", NullValueHandling = NullValueHandling.Ignore)]
-    public int StockGroup { get; set; }
 
     /// <summary>
     /// 当前价

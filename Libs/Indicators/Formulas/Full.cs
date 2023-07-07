@@ -28,7 +28,7 @@ public class Full
     {
         if (prices==null||!prices.Any())
         {
-            Logger.Error("prices is empty.");
+            Logger.Error("Prices is empty now,Skip.");
             return null;
         }
 

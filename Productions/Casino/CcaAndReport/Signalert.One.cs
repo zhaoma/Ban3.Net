@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators;
@@ -13,6 +14,19 @@ namespace Ban3.Productions.Casino.CcaAndReport;
 
 public partial class Signalert
 {
+
+    public static void CheckDots(Stock stock) 
+    {
+        var dailyPrices = Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
+        var dots = dailyPrices.DotsOfBuyingOrSelling(Infrastructures.Indicators.Helper.DefaultFilter);
+
+        if (dots != null)
+        {
+
+        }
+
+    }
+
     /// <summary>
     /// 
     /// </summary>

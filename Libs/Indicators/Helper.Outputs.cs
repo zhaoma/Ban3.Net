@@ -28,6 +28,7 @@ public static partial class Helper
                 if (dotForDay != null)
                 {
                     result.Add(dotForDay);
+                    i += dotForDay.Days;
                 }
             }
 
@@ -36,7 +37,7 @@ public static partial class Helper
                 if (dotForWeek != null)
                 {
                     result.Add(dotForWeek);
-                    i = i + dotForWeek.Days;
+                    i += dotForWeek.Days;
                 }
             }
 
@@ -45,7 +46,7 @@ public static partial class Helper
                 if (dotForMonth != null)
                 {
                     result.Add(dotForMonth);
-                    i = i + dotForMonth.Days;
+                    i += dotForMonth.Days;
                 }
             }
         }
@@ -156,8 +157,8 @@ public static partial class Helper
     /// <summary>
     /// 行情数据集转指标结果线
     /// </summary>
-    /// <param name="prices"></param>
-    /// <param name="formulas"></param>
+    /// <param name="prices">复权后价格</param>
+    /// <param name="formulas">采用的计算公式，默认参数</param>
     /// <returns></returns>
     public static LineOfPoint? CalculateIndicators(this List<Price>? prices, Full? formulas = null)
         => (formulas ?? new Full()).Calculate(prices);

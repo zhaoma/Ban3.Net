@@ -22,17 +22,17 @@ public static partial class Helper
     /// <returns></returns>
     public static Dictionary<string, ProfileSummary>? Save(this Dictionary<string, ProfileSummary>? ps)
     {
-        "ps".DataFile<ProfileSummary>()
-        .SaveFileOnDemand(ps, out _);
+        typeof(ProfileSummary).LocalFile()
+         .SaveFileOnDemand(ps, out _);
         return ps;
-	}
+    }
 
     /// <summary>
     /// 加载策略汇总
     /// </summary>
     /// <returns></returns>
     public static Dictionary<string, ProfileSummary>? LoadProfileSummaries()
-        => "ps".DataFile<ProfileSummary>()
+        => typeof(ProfileSummary).LocalFile()
             .ReadFileAs<Dictionary<string, ProfileSummary>>();
 
     /// <summary>
@@ -58,7 +58,7 @@ public static partial class Helper
     public static Dictionary<string, List<DotInfo>>? LoadDots(this FocusFilter filter)
         => filter.Identity.DataFile<DotInfo>()
             .ReadFileAs<Dictionary<string, List<DotInfo>>>();
-    
+
     /// <summary>
     /// LineOfPoint 保存
     /// </summary>
@@ -113,14 +113,18 @@ public static partial class Helper
     /// <param name="list"></param>
     /// <returns></returns>
     public static List<ListRecord>? Save(this List<ListRecord>? list)
-        => list.SaveEntities("latest");
+    {
+        typeof(ListRecord).LocalFile()
+            .SaveFileOnDemand(list, out _);
+        return list;
+    }
 
     /// <summary>
     /// 加载榜单
     /// </summary>
     /// <returns></returns>
     public static List<ListRecord>? LoadList()
-        => "latest".LoadEntities<ListRecord>();
+        => typeof(ListRecord).LocalFile().ReadFileAs<List<ListRecord>>();
 
     /// <summary>
     /// StockOperate 保存

@@ -397,12 +397,12 @@ public static partial class Helper
             Name = o,
             ItemStyle = new ItemStyle
             {
-                Color = Infrastructures.Indicators.Helper.ColorsDic[o],
-                BorderColor = Infrastructures.Indicators.Helper.ColorsDic[o],
+                Color = ColorsDic[o],
+                BorderColor = ColorsDic[o],
             }
         }));
 
-        var features = Infrastructures.Indicators.Helper.Features
+        var features = Features
             .Where(o => o.Key.StartsWithIn(groups.Select(x => $"{x}.")))
             .ToList();
 
@@ -420,7 +420,7 @@ public static partial class Helper
                     .Select(f => new SankeyLink { Source = g, Target = f.Key, Value = keys.Where(o => o.Key.StartsWith($"{f.Key}.")).Sum(o => o.Value) }));
             });
 
-        var allFeatureDetails = Infrastructures.Indicators.Helper.AllFeatures
+        var allFeatureDetails = AllFeatures
             .Where(o => o.Key.StartsWithIn(groups.Select(x => $"{x}.")) && keys.ContainsKey(o.Key))
             .Where(o => records.Any(x => x.SetKeys!.Any(y => y == o.Key)))
             .ToList();
