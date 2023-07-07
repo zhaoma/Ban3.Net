@@ -1,8 +1,4 @@
-﻿/* -------------------------------------------------------------------------------------------------
-   Copyright (C) Siemens Healthcare GmbH 2023, All rights reserved. Restricted.
-   ------------------------------------------------------------------------------------------------- */
-   
-using Ban3.Infrastructures.Charts.Components;
+﻿using Ban3.Infrastructures.Charts.Components;
 using Ban3.Infrastructures.Charts.Elements;
 using Ban3.Infrastructures.Charts.Enums;
 using Ban3.Infrastructures.Charts.Styles;
@@ -22,6 +18,9 @@ using Ban3.Infrastructures.Indicators.Entries;
 
 namespace Ban3.Infrastructures.Indicators;
 
+/// <summary>
+/// 图表创建
+/// </summary>
 public static partial class Helper
 {
     /// <summary>
@@ -32,16 +31,21 @@ public static partial class Helper
     /// <param name="stock"></param>
     /// <returns></returns>
     public static Diagram CreateCandlestickDiagram(
-        this List<Price> prices,
+        this List<Price>? prices,
         LineOfPoint indicatorValue,
         Stock stock
     )
     {
+        if (prices == null||!prices.Any())
+        {
+            return new Diagram();
+        }
+
         var candlestickData = new CandlestickData()
         {
             Records = prices.Select(o => new CandlestickRecord
             {
-                TradeDate = o.TradeDate.ToDateTimeEx(),
+                TradeDate = o.TradeDate,
                 Close = o.Close.ToFloat(),
                 Open = o.Open.ToFloat(),
                 High = o.High.ToFloat(),
@@ -120,7 +124,7 @@ public static partial class Helper
             }
         }
 
-        var notices = indicatorValue.LineToSets()!
+        var notices = indicatorValue.LineToSets(stock)!
             .Where(o => o.SetKeys != null && o.SetKeys.Any(x => x.StartsWith("MACD.C0")))
             .Select(o => new object[] { o.MarkTime.ToYmd(), o.Close })
             .ToList();
@@ -370,10 +374,12 @@ public static partial class Helper
     /// <param name="title"></param>
     /// <returns></returns>
     public static Diagram CreateSankeyDiagram(
-        this List<StockSets> records,
+        this List<StockSets>? records,
         string title
     )
     {
+        if(records==null||!records.Any())return new Diagram();
+
         var data = new List<SankeyRecord>();
         var links = new List<SankeyLink>();
 

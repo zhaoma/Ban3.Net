@@ -16,13 +16,13 @@ public class ProfileCondition
     }
 
     /// <summary>
-    /// 包含特征
+    /// 包含特征(Complex)
     /// </summary>
     [JsonProperty("include")]
     public List<string> Include { get; set; } = new();
 
     /// <summary>
-    /// 不包含特征
+    /// 不包含特征(任一)
     /// </summary>
     [JsonProperty("exclude")]
     public List<string> Exclude { get; set; } = new();

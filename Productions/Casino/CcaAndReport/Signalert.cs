@@ -52,9 +52,7 @@ public partial class Signalert
 
         ExecutePrepare(allCodes);
     }
-
-    #region 日常任务
-
+    
     /// <summary>
     /// 日常任务
     /// 无参数，全市场
@@ -153,83 +151,97 @@ public partial class Signalert
         var sellingDotsSets = new List<StockSets>();
         var profileSummaries = new Dictionary<string, ProfileSummary>();
         var dotsDic = new Dictionary<string, List<DotInfo>>();
+        var total = stocks.Count;
+        var current = 0;
 
         new Action(() =>
             stocks.ParallelExecute(one =>
                 {
-                    var stock = new Infrastructures.Indicators.Entries.Stock
-                        { Code = one.Code, ListDate = one.ListDate, Name = one.Name, Symbol = one.Symbol };
-
-                    var dailyPrices = Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
-
-                    if (dailyPrices.SplitWeeklyAndMonthly(out var weeklyPrices, out var monthlyPrices))
+                    try
                     {
-                        weeklyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.WEEKLY));
+                        var now = DateTime.Now;
+                        var stock = new Stock
+                            { Code = one.Code, ListDate = one.ListDate, Name = one.Name, Symbol = one.Symbol };
 
-                        monthlyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.MONTHLY));
+                        var dailyPrices = Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
 
-                        var dailyLine = dailyPrices.CalculateIndicators()
-                            .SaveFor(stock, StockAnalysisCycle.DAILY);
-                        var dailySets = dailyLine.LineToSets(stock);
-
-                        var weeklyLine = weeklyPrices.CalculateIndicators()
-                            .SaveFor(stock, StockAnalysisCycle.WEEKLY);
-                        var weeklySets = weeklyLine.LineToSets(stock);
-
-                        var monthlyLine = monthlyPrices.CalculateIndicators()
-                            .SaveFor(stock, StockAnalysisCycle.MONTHLY);
-                        var monthlySets = monthlyLine.LineToSets(stock);
-
-                        dailySets.MergeWeeklyAndMonthly(weeklySets, monthlySets)
-                            .SaveFor(stock)
-                            .PushLatest(latestSets);
-
-
-                        var dots = dailyPrices.DotsOfBuyingOrSelling(filter);
-
-                        dots.ForEach(dot =>
+                        if (dailyPrices.SplitWeeklyAndMonthly(out var weeklyPrices, out var monthlyPrices))
                         {
-                            dot.SetKeys = dailySets.GetSetKeys(dot.TradeDate);
-                        });
+                            weeklyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.WEEKLY));
 
-                        dotsDic.Add(stock.Code, dots);
+                            monthlyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.MONTHLY));
 
+                            var dailyLine = dailyPrices.CalculateIndicators()
+                                .SaveFor(stock, StockAnalysisCycle.DAILY);
+                            var dailySets = dailyLine.LineToSets(stock);
 
-                        buyingDotsSets = dailySets?
-                            .FindAll(o => dots!=null&& dots.Any(x =>x.IsDotOfBuying&& x.TradeDate == o.MarkTime.ToYmd()))
-                            .ToList();
+                            var weeklyLine = weeklyPrices.CalculateIndicators()
+                                .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+                            var weeklySets = weeklyLine.LineToSets(stock);
 
-                        sellingDotsSets = dailySets?
-                            .FindAll(o => dots != null && dots.Any(x => !x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd()))
-                            .ToList();
+                            var monthlyLine = monthlyPrices.CalculateIndicators()
+                                .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+                            var monthlySets = monthlyLine.LineToSets(stock);
 
-                        Profiles().ForEach(profile =>
-                        {
-                            var oneProfileSummary = profile.OutputDailyOperates(dailySets)
-                                .SaveFor(stock, profile)
-                                .ConvertToRecords()
-                                .SaveFor(stock, profile)
-                                .RecordsSummary(profile);
+                            dailySets.MergeWeeklyAndMonthly(weeklySets, monthlySets)
+                                .SaveFor(stock)
+                                .PushLatest(latestSets);
 
-                            profileSummaries.MergeSummary(oneProfileSummary);
-                        });
+                            var dots = dailyPrices.DotsOfBuyingOrSelling(filter);
 
-                        dailyPrices.CreateCandlestickDiagram(dailyLine!, stock)
-                            .SaveFor(stock, StockAnalysisCycle.DAILY);
+                            if (dots != null)
+                            {
+                                dots.ForEach(dot => { dot.SetKeys = dailySets.GetSetKeys(dot.TradeDate); });
+                                dotsDic.Add(stock.Code, dots);
+                            }
 
-                        weeklyPrices.CreateCandlestickDiagram(weeklyLine!, stock)
-                            .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+                            buyingDotsSets = dailySets?
+                                .FindAll(o =>
+                                    dots != null && dots.Any(x => x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd()))
+                                .ToList();
 
-                        monthlyPrices.CreateCandlestickDiagram(monthlyLine!, stock)
-                            .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+                            sellingDotsSets = dailySets?
+                                .FindAll(o =>
+                                    dots != null && dots.Any(x =>
+                                        !x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd()))
+                                .ToList();
+
+                            Profiles().ForEach(profile =>
+                            {
+                                var oneProfileSummary = profile.OutputDailyOperates(dailySets)
+                                    .SaveFor(stock, profile)
+                                    .ConvertToRecords()
+                                    .SaveFor(stock, profile)
+                                    .RecordsSummary(profile);
+
+                                profileSummaries.MergeSummary(oneProfileSummary);
+                            });
+
+                            dailyPrices.CreateCandlestickDiagram(dailyLine!, stock)
+                                .SaveFor(stock, StockAnalysisCycle.DAILY);
+
+                            weeklyPrices.CreateCandlestickDiagram(weeklyLine!, stock)
+                                .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+
+                            monthlyPrices.CreateCandlestickDiagram(monthlyLine!, stock)
+                                .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+                        }
+
+                        current++;
+                        Logger.Debug(
+                            $"parse {current}/{total} : {one.Code} over,{DateTime.Now.Subtract(now).TotalMilliseconds} ms elapsed.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Error($"fault when parse {one.Code}");
+                        Logger.Error(ex);
                     }
                 },
                 Config.MaxParallelTasks)
-        ).ExecuteAndTiming($"everyOne");
+        ).ExecuteAndTiming($"Stocks Completed,Next is summaries.");
 
         dotsDic.SaveFor(filter);
-        latestSets.SaveEntities("latest");
-        latestSets.GenerateList().Save();
+        latestSets.SaveEntities("latest").GenerateList().Save();
         profileSummaries.Save();
 
         var allDots = dotsDic
@@ -238,25 +250,25 @@ public partial class Signalert
             .ToList();
 
         allDots.Where(o => o.IsDotOfBuying)
-                      .Select(o => o.SetKeys)
-              .MergeToDictionary()
-                      .CreateTreemapDiagram("Dots Of Buying Treemap")
-                      .SaveFor($"{filter.Identity}.Treemap.Buying");
+            .Select(o => o.SetKeys)
+            .MergeToDictionary()
+            .CreateTreemapDiagram("Dots Of Buying Treemap")
+            .SaveFor($"{filter.Identity}.Treemap.Buying");
 
         allDots.Where(o => !o.IsDotOfBuying)
-                .Select(o => o.SetKeys).MergeToDictionary()
-                .CreateTreemapDiagram("Dots Of Selling Treemap")
-                .SaveFor($"{filter.Identity}.Treemap.Selling");
-     
+            .Select(o => o.SetKeys).MergeToDictionary()
+            .CreateTreemapDiagram("Dots Of Selling Treemap")
+            .SaveFor($"{filter.Identity}.Treemap.Selling");
 
-            buyingDotsSets.CreateSankeyDiagram("Dots Of Buying Sankey")
-                .SaveFor($"{filter.Identity}.Sankey.Buying");
 
-            sellingDotsSets.CreateSankeyDiagram("Dots Of Selling Sankey")
-                .SaveFor($"{filter.Identity}.Sankey.Selling");
-        
+        buyingDotsSets.CreateSankeyDiagram("Dots Of Buying Sankey")
+            .SaveFor($"{filter.Identity}.Sankey.Buying");
+
+        sellingDotsSets.CreateSankeyDiagram("Dots Of Selling Sankey")
+            .SaveFor($"{filter.Identity}.Sankey.Selling");
+
     }
-    
+
     public static List<Profile> Profiles()
     {
         var profileFile = typeof(Profile).LocalFile();
@@ -272,8 +284,6 @@ public partial class Signalert
                  return ps;
              }, profileFile);
     }
-    
-    #endregion
     
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
 }

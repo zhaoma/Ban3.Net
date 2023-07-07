@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Charts.Composites;
-using Ban3.Infrastructures.Common;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Enums;
@@ -11,8 +10,16 @@ using StockOperate = Ban3.Infrastructures.Indicators.Outputs.StockOperate;
 
 namespace Ban3.Infrastructures.Indicators;
 
+/// <summary>
+/// 数据保存与加载
+/// </summary>
 public static partial class Helper
 {
+    /// <summary>
+    /// 保存策略汇总
+    /// </summary>
+    /// <param name="ps"></param>
+    /// <returns></returns>
     public static Dictionary<string, ProfileSummary>? Save(this Dictionary<string, ProfileSummary>? ps)
     {
         "ps".DataFile<ProfileSummary>()
@@ -20,15 +27,37 @@ public static partial class Helper
         return ps;
 	}
 
+    /// <summary>
+    /// 加载策略汇总
+    /// </summary>
+    /// <returns></returns>
     public static Dictionary<string, ProfileSummary>? LoadProfileSummaries()
-        => "ps".DataFile< ProfileSummary >()
-	.ReadFileAs<Dictionary<string, ProfileSummary>>();
+        => "ps".DataFile<ProfileSummary>()
+            .ReadFileAs<Dictionary<string, ProfileSummary>>();
 
-    public static Dictionary<string, List<DotInfo>>? SaveFor(this Dictionary<string, List<DotInfo>>? dots, FocusFilter filter)
-        => dots.SaveEntity(_=>filter.Identity);
+    /// <summary>
+    /// 保存买卖点
+    /// </summary>
+    /// <param name="dots"></param>
+    /// <param name="filter"></param>
+    /// <returns></returns>
+    public static Dictionary<string, List<DotInfo>>? SaveFor(this Dictionary<string, List<DotInfo>>? dots,
+        FocusFilter filter)
+    {
+        filter.Identity.DataFile<DotInfo>()
+            .SaveFileOnDemand(dots, out _);
 
+        return dots;
+    }
+
+    /// <summary>
+    /// 加载买卖点
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns></returns>
     public static Dictionary<string, List<DotInfo>>? LoadDots(this FocusFilter filter)
-        => filter.Identity.LoadEntity<Dictionary<string, List<DotInfo>>>();
+        => filter.Identity.DataFile<DotInfo>()
+            .ReadFileAs<Dictionary<string, List<DotInfo>>>();
     
     /// <summary>
     /// LineOfPoint 保存
@@ -78,9 +107,18 @@ public static partial class Helper
             .SetKeys?
             .ToList();
 
+    /// <summary>
+    /// 保存榜单
+    /// </summary>
+    /// <param name="list"></param>
+    /// <returns></returns>
     public static List<ListRecord>? Save(this List<ListRecord>? list)
         => list.SaveEntities("latest");
 
+    /// <summary>
+    /// 加载榜单
+    /// </summary>
+    /// <returns></returns>
     public static List<ListRecord>? LoadList()
         => "latest".LoadEntities<ListRecord>();
 
@@ -125,7 +163,6 @@ public static partial class Helper
     public static List<StockOperationRecord>? LoadOperateRecords(this Stock stock, Profile profile)
         => stock.FileNameWithProfile(profile).LoadEntities<StockOperationRecord>();
 
-
     /// <summary>
     /// 图表保存
     /// </summary>
@@ -145,9 +182,20 @@ public static partial class Helper
     public static Diagram LoadDiagram(this Stock stock, StockAnalysisCycle cycle)
         => stock.FileNameWithCycle(cycle).LoadEntity<Diagram>()!;
 
+    /// <summary>
+    /// 起名保存Diagram
+    /// </summary>
+    /// <param name="diagram"></param>
+    /// <param name="diagramName"></param>
+    /// <returns></returns>
     public static Diagram SaveFor(this Diagram diagram, string diagramName)
         => diagram.SaveEntity(_ => diagramName);
 
+    /// <summary>
+    /// 获取Diagram
+    /// </summary>
+    /// <param name="diagramName"></param>
+    /// <returns></returns>
     public static Diagram LoadDiagram(this string diagramName)
         => diagramName.LoadEntity<Diagram>()!;
 }

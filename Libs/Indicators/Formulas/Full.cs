@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Formulas.Specials;
 using Ban3.Infrastructures.Indicators.Outputs;
 
@@ -25,9 +24,9 @@ public class Full
     /// </summary>
     /// <param name="prices"></param>
     /// <returns></returns>
-    public LineOfPoint? Calculate(List<Inputs.Price> prices)
+    public LineOfPoint? Calculate(List<Inputs.Price>? prices)
     {
-        if (!prices.Any())
+        if (prices==null||!prices.Any())
         {
             Logger.Error("prices is empty.");
             return null;
@@ -335,21 +334,24 @@ public class Full
 
             try
             {
-                foreach (var detail in ma.Details)
+                if (ma.Details != null)
                 {
-                    if (i >= detail.Days - 1)
+                    foreach (var detail in ma.Details)
                     {
-                        var maMa = DescRangeCloseAverage(prices, i, detail.Days);
-
-                        if (line.EndPoints[i].Ma!.RefPrices.All(o => o.ParamId != detail.ParamId))
+                        if (i >= detail.Days - 1)
                         {
-                            line.EndPoints[i].Ma!.RefPrices.Add(
-                                new LineWithValue
-                                {
-                                    ParamId = detail.ParamId,
-                                    Ref = (double)Math.Round(maMa, 2),
-                                    Days = detail.Days
-                                });
+                            var maMa = DescRangeCloseAverage(prices, i, detail.Days);
+
+                            if (line.EndPoints[i].Ma!.RefPrices.All(o => o.ParamId != detail.ParamId))
+                            {
+                                line.EndPoints[i].Ma!.RefPrices.Add(
+                                    new LineWithValue
+                                    {
+                                        ParamId = detail.ParamId,
+                                        Ref = Math.Round(maMa, 2),
+                                        Days = detail.Days
+                                    });
+                            }
                         }
                     }
                 }

@@ -177,7 +177,7 @@ public static partial class Helper
     /// <summary>
     /// 默认策略池
     /// </summary>
-    public static readonly List<Profile> DefaultProfiles = new List<Profile>
+    public static readonly List<Profile> DefaultProfiles = new()
     {
        DefaultProfile,
        new Profile(
@@ -199,10 +199,10 @@ public static partial class Helper
     /// <summary>
     /// 默认买点筛选规则
     /// </summary>
-    public static FocusFilter DefaultFilter = new FocusFilter
+    public static FocusFilter DefaultFilter = new()
     {
-        Identity = "FF752",
-        Subject = "日7周25月40",
+        Identity = "D5_25",
+        Subject = "5日涨超25+",
         BuyingCondition = new Dictionary<StockAnalysisCycle, float>
         {
             //{ StockAnalysisCycle.DAILY, 7F },

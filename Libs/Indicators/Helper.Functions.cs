@@ -1,8 +1,4 @@
-﻿/* -------------------------------------------------------------------------------------------------
-   Copyright (C) Siemens Healthcare GmbH 2023, All rights reserved. Restricted.
-   ------------------------------------------------------------------------------------------------- */
-   
-using Ban3.Infrastructures.Indicators.Outputs;
+﻿using Ban3.Infrastructures.Indicators.Outputs;
 using System.Collections.Generic;
 using System;
 using Ban3.Infrastructures.Common.Extensions;
@@ -12,6 +8,9 @@ using System.Linq;
 
 namespace Ban3.Infrastructures.Indicators;
 
+/// <summary>
+/// 常用处理扩展
+/// </summary>
 public static partial class Helper
 {
     /// <summary>
@@ -151,16 +150,19 @@ public static partial class Helper
     /// <param name="weekly"></param>
     /// <param name="monthly"></param>
     /// <returns></returns>
-    public static bool SplitWeeklyAndMonthly(this List<Price> prices, out List<Price> weekly, out List<Price> monthly)
+    public static bool SplitWeeklyAndMonthly(this List<Price>? prices, out List<Price> weekly, out List<Price> monthly)
     {
         weekly = new List<Price>();
         monthly = new List<Price>();
         try
         {
-            for (var i = 1; i <= prices.Count; i++)
+            if (prices != null && prices.Any())
             {
-                weekly.AppendLatest(prices[i - 1], StockAnalysisCycle.WEEKLY);
-                monthly.AppendLatest(prices[i - 1], StockAnalysisCycle.MONTHLY);
+                for (var i = 1; i <= prices.Count; i++)
+                {
+                    weekly.AppendLatest(prices[i - 1], StockAnalysisCycle.WEEKLY);
+                    monthly.AppendLatest(prices[i - 1], StockAnalysisCycle.MONTHLY);
+                }
             }
 
             return true;
@@ -175,9 +177,22 @@ public static partial class Helper
 
     static void AppendLatest(
         this List<Price> prices,
-        Price price,
+        Price addPrice,
         StockAnalysisCycle cycle)
     {
+        var price = new Price
+        {
+            Code = addPrice.Code,
+            TradeDate = addPrice.TradeDate,
+            Open = addPrice.Open,
+            High = addPrice.High,
+            Low = addPrice.Low,
+            Close = addPrice.Close,
+            PreClose = addPrice.PreClose,
+            Vol = addPrice.Vol ,
+            Amount = addPrice.Amount
+        };
+
         if (!prices.Any())
         {
             prices.Add(price);
@@ -190,6 +205,7 @@ public static partial class Helper
             var add = price.TradeDate.End(cycle).ToYmd();
             if (exists.ToInt().Equals(add.ToInt()))
             {
+                /*
                 var p = new Price
                 {
                         Code = price.Code,
@@ -208,6 +224,16 @@ public static partial class Helper
                     : 0F;
 
                 prices.Add(p);
+                */
+                lastRecord.Close = price.Close;
+                lastRecord.High = Math.Max(lastRecord.High!.Value, price.High!.Value);
+                lastRecord.Low = Math.Min(lastRecord.Low!.Value, price.Low!.Value);
+                lastRecord.Vol += price.Vol;
+                lastRecord.Amount += price.Amount;
+                lastRecord.Change = lastRecord.Close - lastRecord.PreClose;
+                lastRecord.ChangePercent = lastRecord.PreClose != 0
+                    ? (float)Math.Round((lastRecord.Close!.Value - lastRecord.PreClose!.Value) / lastRecord.PreClose.Value * 100D, 2)
+                    : 0F;
             }
             else
             {
@@ -216,6 +242,12 @@ public static partial class Helper
         }
     }
 
+    /// <summary>
+    /// 找期末时间（周末、月末）
+    /// </summary>
+    /// <param name="begin"></param>
+    /// <param name="targetCycle"></param>
+    /// <returns></returns>
     static DateTime End(this DateTime begin, StockAnalysisCycle targetCycle)
     {
         return targetCycle == StockAnalysisCycle.WEEKLY
@@ -223,6 +255,11 @@ public static partial class Helper
             : begin.FindMonthEnd();
     }
 
+    /// <summary>
+    /// 指标值曲线转点集合
+    /// </summary>
+    /// <param name="line"></param>
+    /// <returns></returns>
     static List<Latest>? LatestList(this LineOfPoint? line)
     {
         switch (line)
@@ -232,7 +269,7 @@ public static partial class Helper
                 return null;
         }
 
-        var list = line?.EndPoints?.Select(o => new Latest
+        var list = line.EndPoints?.Select(o => new Latest
         {
             Current = o
         }).ToList();
@@ -245,6 +282,13 @@ public static partial class Helper
         return list;
     }
 
+    /// <summary>
+    /// 根据指标与上一操作获取当前操作建议
+    /// </summary>
+    /// <param name="codeKeys"></param>
+    /// <param name="profile"></param>
+    /// <param name="prevOperation"></param>
+    /// <returns></returns>
     public static Enums.StockOperate GetOperate(
         this IEnumerable<string> codeKeys,
         Profile profile,
@@ -254,14 +298,14 @@ public static partial class Helper
         {
             case Enums.StockOperate.Buy:
             case Enums.StockOperate.Keep:
-                return //codeKeys.AllFoundIn(filterSell)
+                return 
                     profile.MatchSelling(new StockSets { SetKeys = codeKeys })
                         ? Enums.StockOperate.Sell
                         : Enums.StockOperate.Keep;
 
             case Enums.StockOperate.Sell:
             case Enums.StockOperate.Left:
-                return //codeKeys.AllFoundIn(filterBuy)
+                return 
                     profile.MatchBuying(new StockSets { SetKeys = codeKeys })
                         ? Enums.StockOperate.Buy
                         : Enums.StockOperate.Left;
@@ -270,6 +314,11 @@ public static partial class Helper
         return Enums.StockOperate.Left;
     }
 
+    /// <summary>
+    /// 策略收益计算
+    /// </summary>
+    /// <param name="records"></param>
+    /// <returns></returns>
     static decimal FinalProfit(this List<StockOperationRecord> records)
         => (records.Aggregate(1M,
             (current, record) =>

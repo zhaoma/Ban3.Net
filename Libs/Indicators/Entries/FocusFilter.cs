@@ -13,7 +13,10 @@ public class FocusFilter
 
     public Dictionary<StockAnalysisCycle, float>? SellingCondition { get; set; }
 
-    public bool IsMatch(double? changePercent, StockAnalysisCycle cycle, out bool isDotOfBuying)
+    public bool IsMatch(
+        double? changePercent, 
+        StockAnalysisCycle cycle, 
+        out bool isDotOfBuying)
     {
         isDotOfBuying = false;
         var result = false;

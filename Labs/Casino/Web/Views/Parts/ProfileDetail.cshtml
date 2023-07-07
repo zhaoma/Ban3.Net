@@ -21,7 +21,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var point in Model.Where(o => o.SellDate == null).OrderBy(o => o.BuyDate))
+            @foreach (var point in Model.Where(o => o.SellDate == null).OrderByDescending(o => o.BuyDate).Take(50))
             {
                 var close = StockRealtime.Close(point.Code);
                 var ratio =Math.Round((close - point.BuyPrice) / point.BuyPrice * 100, 2);
@@ -57,7 +57,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var point in Model.Where(o=>o.SellDate!=null).OrderBy(o => o.BuyDate))
+    @foreach (var point in Model.Where(o=>o.SellDate!=null).OrderByDescending(o => o.BuyDate).Take(50))
     {
         var className = point.SellPrice > point.BuyPrice? "red" :  "green";
         <tr class="@className renderChartsButton"

@@ -96,10 +96,7 @@ public class PartsController : Controller
 
     public IActionResult Sets(RenderView request)
     {
-        var cycle = request.CycleEnum();
-        var sets = cycle == StockAnalysisCycle.DAILY
-                        ? Signalert.Calculator.LoadSets(request.Id)
-                        : Signalert.Calculator.LoadIndicatorLine(request.Id, cycle).LineToSets();
+        var sets = new Infrastructures.Indicators.Entries.Stock { Code = request.Id }.LoadStockSets();
         return string.IsNullOrEmpty(request.ViewName)
             ? View(sets)
             : View(request.ViewName, sets);

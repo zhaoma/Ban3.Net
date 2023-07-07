@@ -42,7 +42,7 @@ public static class Helper
 
         if (cached != null) return cached;
 
-        cached = defaultValue();
+        cached =  defaultValue();
 
         if (absoluteTime != null)
             AppendToMemoryCache(key, cached.ObjToJson(), absoluteTime.Value);
