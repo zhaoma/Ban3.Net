@@ -1,73 +1,109 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Infrastructures.Indicators.Formulas;
 using Ban3.Infrastructures.Indicators.Inputs;
+using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Extensions;
+using Ban3.Sites.ViaTushare.Entries;
 
 namespace Ban3.Productions.Casino.CcaAndReport;
 
+/// <summary>
+/// 单标的处置
+/// </summary>
 public partial class Signalert
 {
-
-    public static void CheckDots(Stock stock) 
-    {
-        var dailyPrices = Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
-        var dots = dailyPrices.DotsOfBuyingOrSelling(Infrastructures.Indicators.Helper.DefaultFilter);
-
-        if (dots != null)
-        {
-
-        }
-
-    }
-
     /// <summary>
     /// 
     /// </summary>
     /// <param name="stock"></param>
     /// <param name="prices"></param>
     /// <param name="formulas"></param>
-    public static void SpecialParse(Stock stock, List<Price>? prices,Full? formulas)
+    public static bool ParseOne(
+        Stock stock,
+        List<Price>? prices,
+        Full? formulas,
+        out List<StockSets>? dailySets)
     {
-        var dailyPrices = prices
-                          ?? Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
-
-        if (dailyPrices.SplitWeeklyAndMonthly(out var weeklyPrices, out var monthlyPrices))
+        dailySets = null;
+        try
         {
-            weeklyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.WEEKLY));
+            CreateAmountDiagram(stock);
 
-            monthlyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.MONTHLY));
+            var dailyPrices = prices
+                              ?? Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
 
-            var dailyLine = dailyPrices.CalculateIndicators(formulas)
-                .SaveFor(stock, StockAnalysisCycle.DAILY);
+            if (dailyPrices.SplitWeeklyAndMonthly(out var weeklyPrices, out var monthlyPrices))
+            {
+                weeklyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.WEEKLY));
 
-            var dailySets = dailyLine.LineToSets(stock);
+                monthlyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.MONTHLY));
 
-            var weeklyLine = weeklyPrices.CalculateIndicators()
-                .SaveFor(stock, StockAnalysisCycle.WEEKLY);
-            var weeklySets = weeklyLine.LineToSets(stock);
+                var dailyLine = dailyPrices.CalculateIndicators(formulas)
+                    .SaveFor(stock, StockAnalysisCycle.DAILY);
 
-            var monthlyLine = monthlyPrices.CalculateIndicators()
-                .SaveFor(stock, StockAnalysisCycle.MONTHLY);
-            var monthlySets = monthlyLine.LineToSets(stock);
+                dailySets = dailyLine.LineToSets(stock);
 
-            dailySets.MergeWeeklyAndMonthly(weeklySets, monthlySets)
-                .SaveFor(stock);
-            
-            dailyPrices.CreateCandlestickDiagram(dailyLine!, stock)
-                .SaveFor(stock, StockAnalysisCycle.DAILY);
+                var weeklyLine = weeklyPrices.CalculateIndicators()
+                    .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+                var weeklySets = weeklyLine.LineToSets(stock);
 
-            weeklyPrices.CreateCandlestickDiagram(weeklyLine!, stock)
-                .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+                var monthlyLine = monthlyPrices.CalculateIndicators()
+                    .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+                var monthlySets = monthlyLine.LineToSets(stock);
 
-            monthlyPrices.CreateCandlestickDiagram(monthlyLine!, stock)
-                .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+                dailySets.MergeWeeklyAndMonthly(weeklySets, monthlySets)
+                    .SaveFor(stock);
+
+                dailyPrices.CreateCandlestickDiagram(dailyLine!, stock)
+                    .SaveFor(stock, StockAnalysisCycle.DAILY);
+
+                weeklyPrices.CreateCandlestickDiagram(weeklyLine!, stock)
+                    .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+
+                monthlyPrices.CreateCandlestickDiagram(monthlyLine!, stock)
+                    .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"Parser one :{stock.Code} fault.");
+            Logger.Error(ex);
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <param name="days"></param>
+    public static void CreateAmountDiagram(Stock stock, int days = 5)
+    {
+        var dailyPrices = typeof(StockPrice).LocalFile(stock.Code).ReadFileAs<List<Price>>();
+
+        if (dailyPrices != null && dailyPrices.SplitAmount(days, out var dailyAmounts))
+        {
+            var fileName = $"{stock.Code}.Amount";
+            var line = dailyAmounts.CalculateIndicators()
+                .SaveEntity(_ => fileName);
+            Console.WriteLine(dailyAmounts.ObjToJson());
+            if (line != null)
+            {
+                var sets = line.LineToSets(stock)
+                    .SaveEntities(fileName);
+
+                var diagram = dailyAmounts.CreateCandlestickDiagram(line, stock)
+                    .SaveFor(fileName);
+            }
         }
     }
 }

@@ -201,20 +201,19 @@ public static partial class Helper
     /// </summary>
     public static FocusFilter DefaultFilter = new()
     {
-        Identity = "D5_25",
-        Subject = "5日涨超25+",
+        Identity = "D5_30",
+        Subject = "5日涨超30+",
         BuyingCondition = new Dictionary<StockAnalysisCycle, float>
         {
             //{ StockAnalysisCycle.DAILY, 7F },
-            { StockAnalysisCycle.WEEKLY, 25F },
+            { StockAnalysisCycle.WEEKLY, 30F },
             //{ StockAnalysisCycle.MONTHLY, 40F }
         },
         SellingCondition = new Dictionary<StockAnalysisCycle, float>
         {
             //{ StockAnalysisCycle.DAILY, -7F },
-            { StockAnalysisCycle.WEEKLY, -25F },
+            { StockAnalysisCycle.WEEKLY, -30F },
             //{ StockAnalysisCycle.MONTHLY, -40F }
         }
     };
-
 }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Indicators.Entries;
-using Ban3.Productions.Casino.Contracts.Enums;
-using Ban3.Productions.Casino.Contracts.Request;
 
 namespace Ban3.Productions.Casino.Contracts;
 

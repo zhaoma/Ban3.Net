@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.Common.Extensions;
@@ -303,9 +304,18 @@ public static partial class Helper
 
         allCodes.ForEach(o =>
         {
-            Console.WriteLine(o.Code);
-            result = result && _.PrepareOnesEvents(o.Symbol);
-            (3, 7).RandomDelay();
+            var targetFileInfo = new FileInfo(typeof(StockEvent).LocalFile(o.Symbol));
+
+            if (DateTime.Now.ToYmd().ToInt() - targetFileInfo.LastWriteTime.ToYmd().ToInt() >= 2)
+            {
+                Console.WriteLine(o.Code);
+                result = result && _.PrepareOnesEvents(o.Symbol);
+                (3, 7).RandomDelay();
+            }
+            else
+            {
+                Console.WriteLine($"{o.Code} Skipped.");
+            }
         });
 
         return result;

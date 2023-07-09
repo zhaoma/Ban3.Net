@@ -14,7 +14,11 @@ using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
+using Ban3.Productions.Casino.Contracts.Request;
+using Ban3.Sites.ViaTushare.Entries;
 using log4net;
+
+#nullable enable
 
 namespace Ban3.Productions.Casino.CcaAndReport;
 
@@ -165,28 +169,8 @@ public partial class Signalert
 
                         var dailyPrices = Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
 
-                        if (dailyPrices.SplitWeeklyAndMonthly(out var weeklyPrices, out var monthlyPrices))
+                        if (ParseOne(stock, dailyPrices, null, out var dailySets))
                         {
-                            weeklyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.WEEKLY));
-
-                            monthlyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.MONTHLY));
-
-                            var dailyLine = dailyPrices.CalculateIndicators()
-                                .SaveFor(stock, StockAnalysisCycle.DAILY);
-                            var dailySets = dailyLine.LineToSets(stock);
-
-                            var weeklyLine = weeklyPrices.CalculateIndicators()
-                                .SaveFor(stock, StockAnalysisCycle.WEEKLY);
-                            var weeklySets = weeklyLine.LineToSets(stock);
-
-                            var monthlyLine = monthlyPrices.CalculateIndicators()
-                                .SaveFor(stock, StockAnalysisCycle.MONTHLY);
-                            var monthlySets = monthlyLine.LineToSets(stock);
-
-                            dailySets.MergeWeeklyAndMonthly(weeklySets, monthlySets)
-                                .SaveFor(stock)
-                                .PushLatest(latestSets);
-
                             var dots = dailyPrices.DotsOfBuyingOrSelling(filter);
 
                             if (dots != null)
@@ -195,16 +179,20 @@ public partial class Signalert
                                 dotsDic.Add(stock.Code, dots);
                             }
 
-                            buyingDotsSets = dailySets?
-                                .FindAll(o =>
-                                    dots != null && dots.Any(x => x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd()))
-                                .ToList();
+                            if (dailySets != null)
+                            {
+                                dailySets.PushLatest(latestSets);
 
-                            sellingDotsSets = dailySets?
-                                .FindAll(o =>
-                                    dots != null && dots.Any(x =>
-                                        !x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd()))
-                                .ToList();
+                                buyingDotsSets.AppendDistinct(
+				                    dailySets
+                                        .FindAll(o =>
+                                            dots != null && dots.Any(x => x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd())));
+
+                                sellingDotsSets.AppendDistinct(
+                                    dailySets
+                                        .FindAll(o =>
+                                            dots != null && dots.Any(x => x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd())));
+                            }
 
                             Profiles().ForEach(profile =>
                             {
@@ -216,15 +204,6 @@ public partial class Signalert
 
                                 profileSummaries.MergeSummary(oneProfileSummary);
                             });
-
-                            dailyPrices.CreateCandlestickDiagram(dailyLine!, stock)
-                                .SaveFor(stock, StockAnalysisCycle.DAILY);
-
-                            weeklyPrices.CreateCandlestickDiagram(weeklyLine!, stock)
-                                .SaveFor(stock, StockAnalysisCycle.WEEKLY);
-
-                            monthlyPrices.CreateCandlestickDiagram(monthlyLine!, stock)
-                                .SaveFor(stock, StockAnalysisCycle.MONTHLY);
                         }
 
                         current++;
@@ -250,16 +229,16 @@ public partial class Signalert
             .ToList();
 
         allDots.Where(o => o.IsDotOfBuying)
-            .Select(o => o.SetKeys)
+            .Select(o => o.SetKeys)!
             .MergeToDictionary()
             .CreateTreemapDiagram("Dots Of Buying Treemap")
             .SaveFor($"{filter.Identity}.Treemap.Buying");
 
         allDots.Where(o => !o.IsDotOfBuying)
-            .Select(o => o.SetKeys).MergeToDictionary()
+            .Select(o => o.SetKeys)!
+	        .MergeToDictionary()
             .CreateTreemapDiagram("Dots Of Selling Treemap")
             .SaveFor($"{filter.Identity}.Treemap.Selling");
-
 
         buyingDotsSets.CreateSankeyDiagram("Dots Of Buying Sankey")
             .SaveFor($"{filter.Identity}.Sankey.Buying");
@@ -286,4 +265,80 @@ public partial class Signalert
     }
     
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
+
+    public static List<DotInfo>? GetDots(RenderView request)
+    {
+        return Reportor
+        .LoadDots(Infrastructures.Indicators.Helper.DefaultFilter)
+        .ExtendedDots(request);
+    }
+
+    public static Dictionary<string, int>? GetDotsKey(bool forBuying)
+        => Reportor.LoadDotsKey(Infrastructures.Indicators.Helper.DefaultFilter, forBuying);
+
+    public static LineOfPoint? GetLineOfPoint(RenderView request)
+        => new Stock { Code = request.Id }.LoadLineOfPoint(
+            request.CycleEnum()
+            );
+
+    public static List<ListRecord>? GetListRecords(string listName = "latest")
+        => Config.CacheKey<ListRecord>(listName)
+            .LoadOrSetDefault<List<ListRecord>>(listName.DataFile<ListRecord>());
+
+    public static List<StockPrice> GetStockPrices(RenderView request)
+        => Calculator.LoadReinstatedPrices(request.Id, request.CycleEnum());
+
+    public static List<StockSets>? GetStockSets(RenderView request)
+        => new Stock { Code = request.Id }.LoadStockSets();
+
+    public static List<StockSets>? GetLatestStockSets()
+        => typeof(StockSets)
+            .LocalFile("latest")
+            .ReadFileAs<List<StockSets>>();
+
+    public static string GetTreemapDiagram(int id = 1)
+    {
+        var diagramName = id == 1
+            ? $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Treemap.Buying"
+            : $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Treemap.Selling";
+
+        var diagram = diagramName.LoadDiagram();
+
+        return diagram.ObjToJson();
+    }
+
+    public static string GetSankeyDiagram(int id = 1)
+    {
+        var diagramName = id == 1
+            ? $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Sankey.Buying"
+            : $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Sankey.Selling";
+
+        var diagram = diagramName.LoadDiagram();
+
+        return diagram.ObjToJson();
+    }
+
+    public static string GetCandlestickDiagram(string code, string cycle = "DAILY")
+    {
+        cycle = cycle.ToUpper();
+
+        var cycleEnum = cycle.StringToEnum<StockAnalysisCycle>();
+
+        return new Stock { Code = code, }.LoadDiagram(cycleEnum).ObjToJson();
+    }
+
+    public static string GetAmountDiagram(string code)
+        => Infrastructures.Indicators.Helper.LoadDiagram($"{code}.Amount").ObjToJson();
+
+    public static string GetBiasDiagram(string code)
+        => code.BiasDiagram().ObjToJson();
+
+    public static string GetDmiDiagram(string code)
+        => code.DmiDiagram().ObjToJson();
+
+    public static string GetKdDiagram(string code)
+        => code.KdDiagram().ObjToJson();
+
+    public static string GetMacdDiagram(string code)
+        => code.MacdDiagram().ObjToJson();
 }

@@ -1,9 +1,7 @@
-﻿using System;
-namespace Ban3.Productions.Casino.Contracts.Interfaces
+﻿namespace Ban3.Productions.Casino.Contracts.Interfaces;
+
+public interface ICollector
 {
-	public interface ICollector
-	{
-		ISites Sites { get; set; }
-	}
+	ISites Sites { get; set; }
 }
 

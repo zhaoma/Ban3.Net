@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ban3.Labs.Casino.Web.Controllers;
 
-
 public class DataController : Controller
 {
     public IActionResult Index()
@@ -29,62 +28,24 @@ public class DataController : Controller
         return Content(allCodes.ObjToJson());
     }
     
-    /// <summary>
-    /// 买点（Config.）treemap
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
     public ContentResult DotsTreemap(int id = 1)
-    {
-        var diagramName = id == 1
-            ? $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Treemap.Buying"
-            : $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Treemap.Selling";
+        => Content(Signalert.GetTreemapDiagram(id));
 
-        var diagram = diagramName.LoadDiagram();
+    public ContentResult Bias(string id)
+        => Content(Signalert.GetBiasDiagram(id));
 
-        return Content(diagram.ObjToJson());
-    }
-
-    public ContentResult Bias(string id) 
-    {
-        var stock = Signalert.Collector.LoadStock(id);
-        return Content(Signalert.Reportor.BiasDiagram(stock).ObjToJson());
-    }
     public ContentResult Dmi(string id)
-    {
-        var stock = Signalert.Collector.LoadStock(id);
-        return Content(Signalert.Reportor.DmiDiagram(stock).ObjToJson());
-    }
+        => Content(Signalert.GetDmiDiagram(id));
+
     public ContentResult Kd(string id)
-    {
-        var stock = Signalert.Collector.LoadStock(id);
-        return Content(Signalert.Reportor.KdDiagram(stock).ObjToJson());
-    }
+        => Content(Signalert.GetKdDiagram(id));
+    
     public ContentResult Macd(string id)
-    {
-        var stock = Signalert.Collector.LoadStock(id);
-        return Content(Signalert.Reportor.MacdDiagram(stock).ObjToJson());
-    }
+        => Content(Signalert.GetMacdDiagram(id));
 
     public ContentResult Candlestick(string id, string cycle = "Daily")
-    {
-        cycle = cycle.ToUpper();
-
-        var cycleEnum = cycle.StringToEnum<StockAnalysisCycle>();
-
-        var diagram = new Stock { Code = id, }.LoadDiagram( cycleEnum).ObjToJson();
-
-        return Content(diagram);
-    }
+        => Content(Signalert.GetCandlestickDiagram(id, cycle));
 
     public ContentResult Sankey(int id)
-    {
-        var diagramName = id == 1
-            ? $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Sankey.Buying"
-            : $"{Infrastructures.Indicators.Helper.DefaultFilter.Identity}.Sankey.Selling";
-
-        var diagram = diagramName.LoadDiagram();
-
-        return Content(diagram.ObjToJson());
-    }
+        => Content(Signalert.GetSankeyDiagram(id));
 }

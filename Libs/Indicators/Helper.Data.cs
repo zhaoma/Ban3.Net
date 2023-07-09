@@ -75,7 +75,7 @@ public static partial class Helper
     /// <param name="stock"></param>
     /// <param name="cycle"></param>
     /// <returns></returns>
-    public static LineOfPoint? LoadLineOfPoint(Stock stock, StockAnalysisCycle cycle)
+    public static LineOfPoint? LoadLineOfPoint(this Stock stock, StockAnalysisCycle cycle)
         => stock.FileNameWithCycle(cycle).LoadEntity<LineOfPoint>();
 
     /// <summary>
@@ -164,7 +164,7 @@ public static partial class Helper
     /// <param name="stock"></param>
     /// <param name="profile"></param>
     /// <returns></returns>
-    public static List<StockOperationRecord>? LoadOperateRecords(this Stock stock, Profile profile)
+    public static List<StockOperationRecord>? LoadStockOperationRecords(this Stock stock, Profile profile)
         => stock.FileNameWithProfile(profile).LoadEntities<StockOperationRecord>();
 
     /// <summary>

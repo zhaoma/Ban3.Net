@@ -99,31 +99,39 @@ public static partial class Helper
     public static bool SplitAmount(this List<Price> prices, int days, out List<Price> amounts)
     {
         amounts = new List<Price>();
-
-        for (var index = 0; index < prices.Count; index++)
+        try
         {
-            var tmpArray = prices.AmountRange(index, days);
-
-            var one = new Price
+            for (var index = 0; index < prices.Count; index++)
             {
-                Code = prices[index].Code,
-                TradeDate = prices[index].TradeDate,
-                Open = tmpArray.First()/10000D,
-                Close = tmpArray.Last()/10000D,
-                High = tmpArray.Max()/10000D,
-                Low = tmpArray.Min()/10000D,
-                Vol = prices[index].Vol,
-                Amount = prices[index].Amount
-            };
+                var tmpArray = prices.AmountRange(index, days);
 
-            if (amounts.Count > 1)
-            {
-                one.PreClose = amounts[amounts.Count - 1].Close/10000D;
-                one.Change = one.Close - one.PreClose;
-                one.ChangePercent = (one.Close - one.PreClose) / one.PreClose * 100D;
+                var one = new Price
+                {
+                    Code = prices[index].Code,
+                    TradeDate = prices[index].TradeDate,
+                    Open = tmpArray.First() / 10000D,
+                    Close = tmpArray.Last() / 10000D,
+                    High = tmpArray.Max() / 10000D,
+                    Low = tmpArray.Min() / 10000D,
+                    Vol = prices[index].Vol,
+                    Amount = prices[index].Amount
+                };
+
+                if (amounts.Count > 1)
+                {
+                    one.PreClose = amounts[amounts.Count - 1].Close / 10000D;
+                    one.Change = one.Close - one.PreClose;
+                    one.ChangePercent = (one.Close - one.PreClose) / one.PreClose * 100D;
+                }
+
+                amounts.Add(one);
             }
 
-            amounts.Add(one);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
         }
 
         return false;
@@ -135,7 +143,7 @@ public static partial class Helper
         var end = Math.Max(start - days, 0);
 
         var result = new List<double>();
-        for (int r = start; r > end; r--)
+        for (int r = start; r >= end; r--)
         {
             result.Add(prices[r].Amount!.Value);
         }

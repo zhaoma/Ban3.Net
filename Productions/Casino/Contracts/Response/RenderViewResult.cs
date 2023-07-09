@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ban3.Productions.Casino.Contracts.Request;
 
 namespace Ban3.Productions.Casino.Contracts.Response;

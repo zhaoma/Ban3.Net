@@ -159,16 +159,6 @@ public static partial class Helper
     #endregion
 
     /// <summary>
-    /// 加载指标曲线 
-    /// </summary>
-    /// <param name="_"></param>
-    /// <param name="code"></param>
-    /// <param name="cycle"></param>
-    /// <returns></returns>
-    public static LineOfPoint? LoadIndicatorLine(this ICalculator _, string code, StockAnalysisCycle cycle)
-        => $"{code}.{cycle}".LoadEntity<LineOfPoint>();
-
-    /// <summary>
     /// 加载特征集合
     /// </summary>
     /// <param name="_"></param>
@@ -176,16 +166,6 @@ public static partial class Helper
     /// <returns></returns>
     public static List<StockSets>? LoadSets(this ICalculator _, string code)
         => code.LoadEntities<StockSets>();
-
-    /// <summary>
-    /// 加载个股榜单
-    /// </summary>
-    /// <param name="_"></param>
-    /// <param name="listName"></param>
-    /// <returns></returns>
-    public static List<ListRecord> LoadList(this ICalculator _, string listName = "latest")
-        => Config.CacheKey<ListRecord>(listName)
-            .LoadOrSetDefault<List<ListRecord>>(listName.DataFile<ListRecord>());
 
     /// <summary>
     /// 对dots of buying or selling main table按照RenderView筛选

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
 

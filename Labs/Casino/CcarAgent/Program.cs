@@ -73,18 +73,24 @@ internal class Program
     private static void CheckSomething()
     {
         //Signalert.ExecuteDailyJob();
-        var code = "300580.SZ";
+         var code = "300580.SZ";
 
-        var dailyPrices = Signalert.Calculator.LoadPricesForIndicators(code, StockAnalysisCycle.DAILY);
-        var dots = dailyPrices.DotsOfBuyingOrSelling(Infrastructures.Indicators.Helper.DefaultFilter);
+         var stock = new Infrastructures.Indicators.Entries.Stock { Code = code };
 
-        if (dots != null)
-        {
-            dots.ForEach(d =>
-            {
-                d.ObjToJson().WriteColorLine(ConsoleColor.Red);
-                Console.WriteLine();
-            });
-        }
+        Signalert.CreateAmountDiagram(stock,3);
+        var d = Signalert.LoadAmountDiagram(stock);
+        //d.ObjToJson().WriteColorLine(ConsoleColor.DarkYellow);    
+	// d.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
+
+        /*
+        var dotKeys =  Signalert.Reportor.LoadDotsKey(Infrastructures.Indicators.Helper.DefaultFilter, true);
+
+        $"{dotKeys.Count}".WriteColorLine(ConsoleColor.DarkBlue);
+
+        var dots=Signalert.Reportor.LoadDots(Infrastructures.Indicators.Helper.DefaultFilter)
+          .ExtendedDots(new Productions.Casino.Contracts.Request.RenderView { RedOnly=0});
+
+        $"{dots.Count}".WriteColorLine(ConsoleColor.DarkRed);
+        */
     }
 }

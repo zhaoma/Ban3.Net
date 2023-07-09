@@ -27,8 +27,7 @@ public class PartsController : Controller
     /// <returns></returns>
     public IActionResult Dots(RenderView request)
     {
-        var dots = Signalert.Reportor.LoadDots(Infrastructures.Indicators.Helper.DefaultFilter)
-            .ExtendedDots(request);
+        var dots = Signalert.GetDots(request);
 
         request.Total = dots.Count;
         var result = new RenderViewResult<DotInfo>
@@ -48,8 +47,8 @@ public class PartsController : Controller
 
     public IActionResult DotsKey(int id)
     {
-        var dots = Signalert.Reportor.LoadDotsKey(Infrastructures.Indicators.Helper.DefaultFilter, id == 1);
-        return View(dots);
+        var dotsKey = Signalert.GetDotsKey(id == 1);
+        return View(dotsKey);
     }
 
     public IActionResult Events(RenderView request)
@@ -62,7 +61,7 @@ public class PartsController : Controller
 
     public IActionResult Indicator(RenderView request)
     {
-        var lineOfPoint = Signalert.Calculator.LoadIndicatorLine(request.Id, request.CycleEnum());
+        var lineOfPoint = Signalert.GetLineOfPoint(request);
         return string.IsNullOrEmpty(request.ViewName)
             ? View(lineOfPoint)
             : View(request.ViewName, lineOfPoint);
@@ -70,7 +69,7 @@ public class PartsController : Controller
 
     public IActionResult List(RenderView request)
     {
-        var listData = Signalert.Calculator.LoadList();
+        var listData = Signalert.GetListRecords();
 
         listData = listData
         .Where(o =>
@@ -88,7 +87,7 @@ public class PartsController : Controller
 
     public IActionResult Prices(RenderView request)
     {
-        var prices = Signalert.Calculator.LoadReinstatedPrices(request.Id, request.CycleEnum());
+        var prices = Signalert.GetStockPrices(request);
         return string.IsNullOrEmpty(request.ViewName)
             ? View(prices)
             : View(request.ViewName, prices);
@@ -96,7 +95,7 @@ public class PartsController : Controller
 
     public IActionResult Sets(RenderView request)
     {
-        var sets = new Infrastructures.Indicators.Entries.Stock { Code = request.Id }.LoadStockSets();
+        var sets =Signalert.GetStockSets(request);
         return string.IsNullOrEmpty(request.ViewName)
             ? View(sets)
             : View(request.ViewName, sets);
