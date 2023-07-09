@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charts", "..\..\Libs\Charts
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformInvoke", "..\..\Libs\PlatformInvoke\PlatformInvoke.csproj", "{30EBA88C-483E-47E5-9275-CE8880864815}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMail", "..\..\Libs\NetMail\NetMail.csproj", "{82346004-E9B1-45D6-9217-850998E8531C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{30EBA88C-483E-47E5-9275-CE8880864815}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30EBA88C-483E-47E5-9275-CE8880864815}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30EBA88C-483E-47E5-9275-CE8880864815}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82346004-E9B1-45D6-9217-850998E8531C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82346004-E9B1-45D6-9217-850998E8531C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82346004-E9B1-45D6-9217-850998E8531C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82346004-E9B1-45D6-9217-850998E8531C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +127,7 @@ Global
 		{60E9A549-8DE8-427B-B1BC-ED6F42141F35} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
 		{E2F68C72-224F-4B16-BA9C-944CA46A8714} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
 		{30EBA88C-483E-47E5-9275-CE8880864815} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
+		{82346004-E9B1-45D6-9217-850998E8531C} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0411A79E-D9D7-4686-8190-6E05F219E28D}

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.Common;
 
+
+
 public class TaskPool<T>
 {
     public List<T>? Args { get; set; }

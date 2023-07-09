@@ -226,7 +226,7 @@ public static partial class Helper
     /// <param name="numbers"></param>
     /// <param name="toDecimal">用来排序的取值函数</param>
     /// <returns></returns>
-    public static bool IsAsc<T>(this List<T>? numbers, Func<T, decimal> toDecimal)
+    public static bool IsAsc<T>(this List<T>? numbers, Func<T, double> toDecimal)
     {
         if(numbers is not { Count: > 1 })return true;
 
@@ -248,13 +248,13 @@ public static partial class Helper
     /// <param name="numbers"></param>
     /// <param name="toDecimal">用来排序的取值函数</param>
     /// <returns></returns>
-    public static bool IsDesc<T>(this List<T>? numbers, Func<T, decimal> toDecimal)
+    public static bool IsDesc<T>(this List<T>? numbers, Func<T, IComparable<object>> toDecimal)
     {
         if (numbers is not { Count: > 1 }) return true;
 
         for (var i = 1; i < numbers.Count; i++)
         {
-            if (toDecimal(numbers[i ]) > toDecimal(numbers[i-1]))
+            if (toDecimal(numbers[i ]).CompareTo( toDecimal(numbers[i-1]))>0)
             {
                 return false;
             }
