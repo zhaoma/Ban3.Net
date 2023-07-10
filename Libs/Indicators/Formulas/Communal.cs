@@ -25,23 +25,7 @@ public class Communal
     /// </summary>
     [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
     public string Title { get; set; } = string.Empty;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="values"></param>
-    /// <param name="position"></param>
-    /// <param name="days"></param>
-    /// <param name="round"></param>
-    /// <returns></returns>
-    public double MA( List<double> values, int position, int days, int round = 3 )
-    {
-        var mas = DescRange( values, position, days );
-
-        //values.Skip(position - days + 1).Take(days).ToList();
-        return Math.Round( mas.Average(), round );
-    }
-
+    
     /// <summary>
     /// EMA(C,N)=2*C/(N+1)+(N-1)/(N+1)*昨天的指数收盘平均值
     /// </summary>
@@ -81,100 +65,7 @@ public class Communal
 
         return Math.Round( result, round );
     }
-
-    /*
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="values"></param>
-    /// <param name="position"></param>
-    /// <param name="days"></param>
-    /// <returns></returns>
-    public double LLV( List<double> values, int position, int days )
-    {
-        var mas = values.Skip( position - days + 1 ).Take( days );
-        return mas.Min( o => o );
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="values"></param>
-    /// <param name="position"></param>
-    /// <param name="days"></param>
-    /// <returns></returns>
-    public double HHV( List<double> values, int position, int days )
-    {
-        var mas = values.Skip( position - days + 1 ).Take( days );
-        return mas.Max( o => o );
-    }
-
-    */
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="values"></param>
-    /// <param name="position"></param>
-    /// <param name="days"></param>
-    /// <returns></returns>
-    public double SUM( List<double> values, int position, int days )
-    {
-        var mas = values.Skip( position - days + 1 ).Take( days );
-        return mas.Sum();
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="val"></param>
-    /// <param name="valYest"></param>
-    /// <param name="M"></param>
-    /// <param name="N"></param>
-    /// <param name="round"></param>
-    /// <returns></returns>
-    public double SMA( double val, double valYest, int M, int N, int round = 3 )
-    {
-        return Math.Round( (N * val + (M - N) * valYest) / M, round );
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="source"></param>
-    /// <param name="start"></param>
-    /// <param name="length"></param>
-    /// <returns></returns>
-    public List<double> AscRange( List<double> source, int start, int length )
-    {
-        var result = new List<double>();
-        for( int r = start; r < start + length; r++ )
-        {
-            result.Add( source[ r ] );
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="source"></param>
-    /// <param name="start"></param>
-    /// <param name="length"></param>
-    /// <returns></returns>
-    public List<double> DescRange( List<double> source, int start, int length )
-    {
-        var result = new List<double>();
-        for( int r = start; r > start - length; r-- )
-        {
-            result.Add( source[ r ] );
-        }
-
-        return result;
-    }
-
+    
     /// <summary>
     /// 
     /// </summary>

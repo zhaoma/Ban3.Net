@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "Ban3.Infrastructures.Common/1.0.7": {
+      "Ban3.Infrastructures.Common/1.0.8": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
@@ -26,10 +26,10 @@
           }
         }
       },
-      "Fody/6.7.0": {
+      "Fody/6.2.5": {
         "type": "package",
         "build": {
-          "build/Fody.targets": {}
+          "build/_._": {}
         }
       },
       "log4net/2.0.15": {
@@ -264,7 +264,7 @@
           }
         },
         "build": {
-          "build/Rougamo.Fody.props": {}
+          "build/_._": {}
         }
       },
       "System.Buffers/4.5.1": {
@@ -525,31 +525,32 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.Common/1.0.7": {
-      "sha512": "ne9qHM2E1Swu+SYdHe424H9O5QvMNWWfQmDO6Uq7cO3cpYEtMmZN5knL04JbMzHAG3vjLKxRbEyiMnfbGMIgPQ==",
+    "Ban3.Infrastructures.Common/1.0.8": {
+      "sha512": "bPpAaiN8UlErEvr2FhtqctvvlxAOnfKy5J9ZVjIJRgCibn+3CTycMiCkAyYjGWULSvbkXeTT9hMsYSzaU7NOdQ==",
       "type": "package",
-      "path": "ban3.infrastructures.common/1.0.7",
+      "path": "ban3.infrastructures.common/1.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.common.1.0.7.nupkg.sha512",
+        "ban3.infrastructures.common.1.0.8.nupkg.sha512",
         "ban3.infrastructures.common.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
         "icon.png",
-        "lib/netstandard2.0/Ban3.Infrastructures.Common.dll"
+        "lib/netstandard2.0/Ban3.Infrastructures.Common.dll",
+        "readme.md"
       ]
     },
-    "Fody/6.7.0": {
-      "sha512": "apsA8Hp9sAuOVmn9byPnCuqiQEjhAApqwNfEG+Gu0OyHUZfjHhLwvNQnAaONDdHWDXP/pBgpGXuscVwfEym8zQ==",
+    "Fody/6.2.5": {
+      "sha512": "wI34APXhZYWlDC9PmA/op+rq0aSB8say00dbNv4PfJIgWEktbmbwmgPflSGN48kJ+Jd5jl682shnW7IUXmKcYw==",
       "type": "package",
-      "path": "fody/6.7.0",
+      "path": "fody/6.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "License.txt",
         "build/Fody.targets",
-        "fody.6.7.0.nupkg.sha512",
+        "fody.6.2.5.nupkg.sha512",
         "fody.nuspec",
         "netclassictask/Fody.dll",
         "netclassictask/FodyCommon.dll",
@@ -1792,10 +1793,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.7",
-      "Fody >= 6.7.0",
+      "Ban3.Infrastructures.Common >= 1.0.8",
       "NETStandard.Library >= 2.0.3",
-      "Rougamo.Fody >= 1.4.1",
       "log4net >= 2.0.15"
     ]
   },
@@ -1804,7 +1803,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "1.0.2",
+    "version": "1.0.3",
     "restore": {
       "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\Charts\\Charts.csproj",
       "projectName": "Ban3.Infrastructures.Charts",
@@ -1846,23 +1845,13 @@
         "dependencies": {
           "Ban3.Infrastructures.Common": {
             "target": "Package",
-            "version": "[1.0.7, )"
-          },
-          "Fody": {
-            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-            "suppressParent": "All",
-            "target": "Package",
-            "version": "[6.7.0, )"
+            "version": "[1.0.8, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
             "version": "[2.0.3, )",
             "autoReferenced": true
-          },
-          "Rougamo.Fody": {
-            "target": "Package",
-            "version": "[1.4.1, )"
           },
           "log4net": {
             "target": "Package",

@@ -157,16 +157,7 @@ public static partial class Helper
         => $"{code}.{cycle}".DataFile<StockPrice>().ReadFileAs<List<Price>>();
 
     #endregion
-
-    /// <summary>
-    /// 加载特征集合
-    /// </summary>
-    /// <param name="_"></param>
-    /// <param name="code"></param>
-    /// <returns></returns>
-    public static List<StockSets>? LoadSets(this ICalculator _, string code)
-        => code.LoadEntities<StockSets>();
-
+    
     /// <summary>
     /// 对dots of buying or selling main table按照RenderView筛选
     /// </summary>

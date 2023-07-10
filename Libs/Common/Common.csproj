@@ -9,14 +9,15 @@
     <AssemblyName>Ban3.Infrastructures.Common</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Ban3.Infrastructures.Common</Title>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
     <Description>Common,Extensions,Indicators and Echarts</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.3.7</AssemblyVersion>
+    <AssemblyVersion>1.0.3.8</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <BaseOutputPath>D:\GIT\output</BaseOutputPath>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -43,6 +44,13 @@
 
   <ItemGroup>
     <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="readme.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

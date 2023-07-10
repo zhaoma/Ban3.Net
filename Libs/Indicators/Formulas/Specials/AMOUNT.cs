@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Interfaces;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Newtonsoft.Json;
@@ -36,10 +35,10 @@ public class AMOUNT : Communal, IIndicatorFormula
     {
         Title = "AMOUNT(5,10)";
         Details = new List<Line>
-            {
-                    new Line { ParamId = 30, Days = 5 },
-                    new Line { ParamId = 31, Days = 10 }
-            };
+        {
+            new Line(5),
+            new Line(10)
+        };
         Result = new List<Outputs.Values.AMOUNT>();
     }
 
@@ -53,56 +52,15 @@ public class AMOUNT : Communal, IIndicatorFormula
         Title = $"AMOUNT({s},{l})";
         Details = new List<Line>
             {
-                    new Line { ParamId = 30, Days = s },
-                    new Line { ParamId = 31, Days = l }
+                    new Line(s ),
+                    new Line(l)
             };
         Result = new List<Outputs.Values.AMOUNT>();
     }
 
     [JsonIgnore]
     public List<Outputs.Values.AMOUNT> Result { get; set; }
-
-    /// <summary>
-    /// 把计算好的指标值列表，按日填充成每日指标组
-    /// </summary>
-    /// <param name="paramValues"></param>
-    /// <returns></returns>
-    public void ConvertFrom(List<RecordWithValue> paramValues)
-    {
-        Result = new List<Outputs.Values.AMOUNT>();
-
-        foreach (var pv in paramValues)
-        {
-            if (Details.Any(o => o.ParamId == pv.ParamId))
-            {
-                var r = Result.FindLast(o => o.TradeDate.DateEqual(pv.TradeDate));
-                if (r == null)
-                {
-                    r = new Outputs.Values.AMOUNT
-                    {
-                        TradeDate  = pv.TradeDate,
-                        RefAmounts = new List<LineWithValue>()
-                    };
-                    Result.Add(r);
-                }
-
-                var line = r.RefAmounts.FindLast(o => o.ParamId == pv.ParamId);
-                if (line == null)
-                {
-                    r.RefAmounts.Add(new LineWithValue
-                    {
-                        ParamId = pv.ParamId,
-                        Ref = pv.Ref
-                    });
-                }
-                else
-                {
-                    line.Ref = pv.Ref;
-                }
-            }
-        }
-    }
-
+    
     /// <summary>
     /// 计算最后的指标值
     /// </summary>
@@ -127,12 +85,11 @@ public class AMOUNT : Communal, IIndicatorFormula
                         d += prices[r].Amount!.Value;
                     }
 
-                    if (oneDay.RefAmounts.All(o => o.ParamId != detail.ParamId))
+                    if (oneDay.RefAmounts.All(o => o.Days != detail.Days))
                     {
                         oneDay.RefAmounts.Add(
                                               new LineWithValue
                                               {
-                                                  ParamId = detail.ParamId,
                                                   Ref = Math.Round(d / detail.Days, 0),
                                                   Days = detail.Days
                                               });
@@ -172,12 +129,11 @@ public class AMOUNT : Communal, IIndicatorFormula
             {
                 if (i >= detail.Days - 1)
                 {
-                    if (Result[i].RefAmounts.All(o => o.ParamId != detail.ParamId))
+                    if (Result[i].RefAmounts.All(o => o.Days != detail.Days))
                     {
                         Result[i].RefAmounts.Add(
                                                    new LineWithValue
                                                    {
-                                                       ParamId = detail.ParamId,
                                                        Ref = DescRangeAmountAverage(prices, i, detail.Days),
                                                        Days = detail.Days
                                                    });

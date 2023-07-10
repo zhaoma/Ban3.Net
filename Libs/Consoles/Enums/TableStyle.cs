@@ -5,32 +5,30 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-namespace Ban3.Infrastructures.Consoles.Enums
+namespace Ban3.Infrastructures.Consoles.Enums;
+
+/// <summary>
+/// 表格显示样式
+/// </summary>
+public enum TableStyle
 {
     /// <summary>
-    /// 表格显示样式
+    /// 默认格式的表格
     /// </summary>
-    public enum TableStyle
-    {
-        /// <summary>
-        /// 默认格式的表格
-        /// </summary>
-        Default = 0,
+    Default = 0,
 
-        /// <summary>
-        /// Markdwon格式的表格
-        /// </summary>
-        MarkDown = 1,
+    /// <summary>
+    /// Markdwon格式的表格
+    /// </summary>
+    MarkDown = 1,
 
-        /// <summary>
-        /// 交替格式的表格
-        /// </summary>
-        Alternative = 2,
+    /// <summary>
+    /// 交替格式的表格
+    /// </summary>
+    Alternative = 2,
 
-        /// <summary>
-        /// 最简格式的表格
-        /// </summary>
-        Minimal = 3
-    }
-
+    /// <summary>
+    /// 最简格式的表格
+    /// </summary>
+    Minimal = 3
 }

@@ -20,7 +20,7 @@ public static partial class Helper
         =>
             Config.CacheKey<ProfileSummary>("all")
                 .LoadOrSetDefault(
-                () => Infrastructures.Indicators.Helper.LoadProfileSummaries(),typeof(ProfileSummary).LocalFile()
+                Infrastructures.Indicators.Helper.LoadProfileSummaries,typeof(ProfileSummary).LocalFile()
                 ); 
 
     public static List<StockOperationRecord> LoadProfileDetails(this IAnalyzer _, List<string> codes, string identity)

@@ -26,8 +26,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Productions\Casino\CcaAndReport\CcaAndReport.csproj" />
-    <ProjectReference Include="..\..\..\Libs\Indicators\Indicators.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
   </ItemGroup>
 </Project>

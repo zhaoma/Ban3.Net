@@ -10,18 +10,6 @@ namespace Ban3.Infrastructures.RuntimeCaching;
 public static class Helper
 {
     /// see LoadOrSetDefault below
-    public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, DateTime absoluteTime)
-        => key.LoadOrSetDefault(defaultValue, absoluteTime, null, null);
-
-    /// see LoadOrSetDefault below
-    public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, int minutes)
-        => key.LoadOrSetDefault(defaultValue, null, minutes, null);
-
-    /// see LoadOrSetDefault below
-    public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, string localFile)
-        => key.LoadOrSetDefault(defaultValue, null, null, localFile);
-
-    /// see LoadOrSetDefault below
     public static T LoadOrSetDefault<T>(this string key, string localFile) 
         => key.LoadOrSetDefault(() => localFile.ReadFileAs<T>() , localFile);
 
@@ -42,7 +30,8 @@ public static class Helper
 
         if (cached != null) return cached;
 
-        cached =  defaultValue();
+        cached = localFile.ReadFileAs<T>()
+                 ?? defaultValue();
 
         if (absoluteTime != null)
             AppendToMemoryCache(key, cached.ObjToJson(), absoluteTime.Value);
@@ -55,6 +44,18 @@ public static class Helper
 
         return cached;
     }
+
+    /// see LoadOrSetDefault below
+    public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, DateTime absoluteTime)
+        => key.LoadOrSetDefault(defaultValue, absoluteTime, null, null);
+
+    /// see LoadOrSetDefault below
+    public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, int minutes)
+        => key.LoadOrSetDefault(defaultValue, null, minutes, null);
+
+    /// see LoadOrSetDefault below
+    public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, string localFile)
+        => key.LoadOrSetDefault(defaultValue, null, null, localFile);
 
     /// <summary>
     /// 读取

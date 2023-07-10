@@ -13,7 +13,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Interfaces;
 using Newtonsoft.Json;
 
@@ -35,31 +34,7 @@ public class KD : Communal, IIndicatorFormula
     /// </summary>
     [JsonProperty("m", NullValueHandling = NullValueHandling.Ignore)]
     public int M { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdK { get; set; } = 18;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdD { get; set; } = 19;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdPSV { get; set; } = 29;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdDailyPSV { get; set; } = 32;
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -87,49 +62,9 @@ public class KD : Communal, IIndicatorFormula
     public List<Outputs.Values.KD> Result { get; set; }
 
     /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="paramValues"></param>
-    /// <returns></returns>
-    public void ConvertFrom( List<RecordWithValue> paramValues )
-    {
-        var result = new List<Outputs.Values.KD>();
-
-        foreach( var pv in paramValues )
-        {
-            var r = result.FindLast( o => o.TradeDate == pv.TradeDate);
-            if( r == null )
-            {
-                r = new Outputs.Values.KD { TradeDate = pv.TradeDate };
-                result.Add( r );
-            }
-
-            if( pv.ParamId == ParamIdK )
-            {
-                r.RefK = pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdD )
-            {
-                r.RefD = pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdPSV )
-            {
-                r.RefPSV = pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdDailyPSV )
-            {
-                r.RefDailyPSV = pv.Ref;
-            }
-        }
-    }
-
-    /// <summary>
     /// 计算最后的指标值
     /// </summary>
-    /// <param name="values"></param>
+    /// <param name="stockCode"></param>
     /// <param name="prices"></param>
     /// <returns></returns>
     public void CalculateLastValues( string stockCode, List<Inputs.Price> prices )

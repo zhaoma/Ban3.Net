@@ -1,14 +1,9 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.CcaAndReport;
-using Ban3.Productions.Casino.Contracts;
-using Ban3.Productions.Casino.Contracts.Entities;
-using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Productions.Casino.Contracts.Response;
-using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Entries;
-using Ban3.Infrastructures.Indicators.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ban3.Labs.Casino.Web.Controllers;
@@ -29,6 +24,11 @@ public class PartsController : Controller
     {
         var dots = Signalert.GetDots(request);
 
+        if (dots == null)
+        {
+            return Content("dots is empty");
+        }
+
         request.Total = dots.Count;
         var result = new RenderViewResult<DotInfo>
         {
@@ -36,14 +36,11 @@ public class PartsController : Controller
             Counter = new Dictionary<string, int>(),
             ShowData = dots.Skip((request.Page - 1) * request.PageSize).Take(request.PageSize).ToList()
         };
-
         result.Counter.Add("total", dots.Count());
-
         return string.IsNullOrEmpty(request.ViewName)
             ? View(result)
             : View(request.ViewName, result);
     }
-
 
     public IActionResult DotsKey(int id)
     {
@@ -71,7 +68,7 @@ public class PartsController : Controller
     {
         var listData = Signalert.GetListRecords();
 
-        listData = listData
+        listData = listData?
         .Where(o =>
             (string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
             &&

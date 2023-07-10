@@ -292,9 +292,7 @@ public partial class Signalert
         => new Stock { Code = request.Id }.LoadStockSets();
 
     public static List<StockSets>? GetLatestStockSets()
-        => typeof(StockSets)
-            .LocalFile("latest")
-            .ReadFileAs<List<StockSets>>();
+        => Calculator.LoadAllLatestSets();
 
     public static string GetTreemapDiagram(int id = 1)
     {
@@ -328,7 +326,7 @@ public partial class Signalert
     }
 
     public static string GetAmountDiagram(string code)
-        => Infrastructures.Indicators.Helper.LoadDiagram($"{code}.Amount").ObjToJson();
+        => $"{code}.Amount".LoadDiagram().ObjToJson();
 
     public static string GetBiasDiagram(string code)
         => code.BiasDiagram().ObjToJson();

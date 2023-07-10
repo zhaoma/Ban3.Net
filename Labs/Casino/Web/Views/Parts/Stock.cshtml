@@ -9,17 +9,17 @@
     <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-daily"
             renderElement="chartsDaysContainer"
             dataUrl="@($"/data/Candlestick/{@Model.Code}?cycle=DAILY")">
-        DAILY
+        DAY
     </button>
     <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-weekly"
             renderElement="chartsDaysContainer"
             dataUrl="@($"/data/Candlestick/{@Model.Code}?cycle=WEEKLY")">
-        WEEKLY
+        WEEK
     </button>
     <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-monthly"
             renderElement="chartsDaysContainer"
             dataUrl="@($"/data/Candlestick/{@Model.Code}?cycle=MONTHLY")">
-        MONTHLY
+        MONTH
     </button>
     <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-bias"
             renderElement="chartsDaysContainer"
@@ -31,15 +31,20 @@
             dataUrl="@($"/data/dmi/{@Model.Code}")">
         DMI
     </button>
-    <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-dmi"
+    <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-kd"
             renderElement="chartsDaysContainer"
             dataUrl="@($"/data/kd/{@Model.Code}")">
         KD
     </button>
-    <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-dmi"
+    <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-macd"
             renderElement="chartsDaysContainer"
             dataUrl="@($"/data/macd/{@Model.Code}")">
         MACD
+    </button>
+    <button class="btn btn-outline-secondary renderChartsButton" type="button" id="button-ac"
+            renderElement="chartsDaysContainer"
+            dataUrl="@($"/data/amountCandlestick/{@Model.Code}")">
+        AC
     </button>
 </div>
 <div id="chartsDaysContainer"

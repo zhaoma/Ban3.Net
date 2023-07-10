@@ -131,13 +131,13 @@ public class Diagram
     /// 平行坐标系（Parallel Coordinates） 是一种常用的可视化高维数据的图表。
     /// </summary>
     [JsonProperty("parallelAxis", NullValueHandling = NullValueHandling.Ignore)]
-    public ParallelAxis? ParallelAxis { get; set; }
+    public List<ParallelAxis>? ParallelAxis { get; set; }
 
     /// <summary>
     /// 单轴。可以被应用到散点图中展现一维数据
     /// </summary>
     [JsonProperty("singleAxis", NullValueHandling = NullValueHandling.Ignore)]
-    public Elements.IAxis? SingleAxis { get; set; }
+    public List<SingleAxis>? SingleAxis { get; set; }
 
     /// <summary>
     /// timeline 组件，提供了在多个 ECharts option 间进行切换、播放等操作的功能。
@@ -150,21 +150,21 @@ public class Diagram
     /// image, text, circle, sector, ring, polygon, polyline, rect, line, bezierCurve, arc, group,
     /// </summary>
     [JsonProperty("graphic", NullValueHandling = NullValueHandling.Ignore)]
-    public Graphic? Graphic { get; set; }
+    public List<Graphic>? Graphic { get; set; }
 
     /// <summary>
     /// 日历坐标系组件。
     /// 可以在热力图、散点图、关系图中使用日历坐标系。
     /// </summary>
     [JsonProperty("calendar", NullValueHandling = NullValueHandling.Ignore)]
-    public Calendar? Calendar { get; set; }
+    public List<Calendar>? Calendar { get; set; }
 
     /// <summary>
     /// ECharts 4 开始支持了 数据集（dataset）组件用于单独的数据集声明，
     /// 从而数据可以单独管理，被多个组件复用，并且可以自由指定数据到视觉的映射。
     /// </summary>
     [JsonProperty("dataset", NullValueHandling = NullValueHandling.Ignore)]
-    public DataSet[]? DataSet { get; set; }
+    public DataSet? DataSet { get; set; }
 
     /// <summary>
     /// 无障碍富互联网应用规范集（WAI-ARIA，the Accessible Rich Internet Applications Suite）

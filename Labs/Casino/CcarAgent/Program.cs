@@ -53,12 +53,12 @@ internal class Program
                 break;
 
             default:
-                $"--all:                 prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--prepare:             prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--daily :              prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--one [code] :         prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--reinstate :          reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--check :              check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--all :            prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--prepare :        prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--daily :          prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--one [code] :     prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--reinstate :      reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--check :          check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
 
                 break;
         }
@@ -78,7 +78,7 @@ internal class Program
          var stock = new Infrastructures.Indicators.Entries.Stock { Code = code };
 
         Signalert.CreateAmountDiagram(stock,3);
-        var d = Signalert.LoadAmountDiagram(stock);
+        var d = Signalert.GetAmountDiagram(code);
         //d.ObjToJson().WriteColorLine(ConsoleColor.DarkYellow);    
 	// d.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
 

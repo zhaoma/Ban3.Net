@@ -14,11 +14,13 @@ namespace  Ban3.Infrastructures.Indicators.Outputs;
 /// </summary>
 public class Line
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamId { get; set; }
+    public Line(){}
+
+    public Line(int days)
+    {
+        Days = days;
+    }
+
 
     /// <summary>
     /// 

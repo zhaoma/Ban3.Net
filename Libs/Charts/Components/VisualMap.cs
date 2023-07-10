@@ -19,10 +19,6 @@ namespace  Ban3.Infrastructures.Charts.Components;
 public class VisualMap
     : GeneralComponent
 {
-    public VisualMap()
-    {
-    }
-
     /// <summary>
     /// 
     /// </summary>

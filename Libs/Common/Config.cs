@@ -72,10 +72,9 @@ public class Config
         => (AppConfiguration[key] + "").SafeCast<T>();
 }
 
-
 /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="data"></param>
-    public delegate void DataHandle<in T>(T data);
+/// 
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="data"></param>
+public delegate void DataHandle<in T>(T data);

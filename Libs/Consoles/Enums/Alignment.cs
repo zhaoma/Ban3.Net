@@ -5,12 +5,10 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-namespace Ban3.Infrastructures.Consoles.Enums
-{
-    public enum Alignment
-    {
-        Left,
-        Right
-    }
-}
+namespace Ban3.Infrastructures.Consoles.Enums;
 
+public enum Alignment
+{
+    Left,
+    Right
+}

@@ -11,7 +11,7 @@ namespace Ban3.Infrastructures.Consoles
 {
     public static class Helper
     {
-         static readonly object _objLock = new object();
+         static readonly object ObjLock = new ();
 
         /// <summary>
         /// 在控制台输出
@@ -20,7 +20,7 @@ namespace Ban3.Infrastructures.Consoles
         /// <param name="color">前颜色</param>
         public static void WriteColorLine(this string str, ConsoleColor color)
         {
-            lock (_objLock)
+            lock (ObjLock)
             {
                 ConsoleColor currentForeColor = Console.ForegroundColor;
                 Console.ForegroundColor = color;

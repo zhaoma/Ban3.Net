@@ -10,7 +10,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Interfaces;
 using Newtonsoft.Json;
 
@@ -26,19 +25,7 @@ public class CCI : Communal, IIndicatorFormula
     /// </summary>
     [JsonProperty("n", NullValueHandling = NullValueHandling.Ignore)]
     public int N { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdCCI { get; set; } = 20;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdTYP { get; set; } = 26;
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -60,40 +47,10 @@ public class CCI : Communal, IIndicatorFormula
     public List<Outputs.Values.CCI> Result { get; set; }
 
     /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="paramValues"></param>
-    /// <returns></returns>
-    public void ConvertFrom(List<RecordWithValue> paramValues)
-    {
-        Result = new List<Outputs.Values.CCI>();
-
-        foreach (var pv in paramValues)
-        {
-            var r = Result.FindLast(o => o.TradeDate == pv.TradeDate);
-            if (r == null)
-            {
-                r = new Outputs.Values.CCI { TradeDate = pv.TradeDate };
-                Result.Add(r);
-            }
-
-            if (pv.ParamId == ParamIdCCI)
-            {
-                r.RefCCI = pv.Ref;
-            }
-
-            if (pv.ParamId == ParamIdTYP)
-            {
-                r.RefTYP =pv.Ref;
-            }
-        }
-    }
-
-    /// <summary>
     /// 计算最后的指标值
     /// 先把历史数据给Result
     /// </summary>
-    /// <param name="values"></param>
+    /// <param name="stockCode"></param>
     /// <param name="prices"></param>
     /// <returns></returns>
     public void CalculateLastValues(string stockCode, List<Inputs.Price> prices)

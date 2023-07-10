@@ -67,7 +67,7 @@ public static class Helper
     {
         try
         {
-            var smtpclient = new SmtpClient(server.ServerEndpoint, server.ServerPort)
+            var smtpClient = new SmtpClient(server.ServerEndpoint, server.ServerPort)
             {
                 Credentials = new NetworkCredential(server.UserName, server.Password)
             };
@@ -76,16 +76,16 @@ public static class Helper
 
             if (!string.IsNullOrEmpty(server.TagName))
             {
-                smtpclient.TargetName = server.TagName;
+                smtpClient.TargetName = server.TagName;
             }
 
-            smtpclient.EnableSsl = server.EnableSsl;
+            smtpClient.EnableSsl = server.EnableSsl;
 
             //ServicePointManager.Expect100Continue = true;
             //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             //ServicePointManager.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-            smtpclient.Send(message);
+            smtpClient.Send(message);
 
             return true;
         }

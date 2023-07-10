@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "z1zw6T0t3SOdsGfEkdMFJD28C9nt8b3wXXrl+PQzL4nfR6y76Ri0cesmuWOpzLbgMBD7BxRHEYIr7CSyuRZoYQ==",
+  "dgSpecHash": "0aaxZ8FY6XQboay4TEWqrW6tqynnguJjGIGwu13ntPfFeoIE9g+imlse4PKNWaKqmIt5FOAJ80dZSNyjTpMf/Q==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Libs\\Charts\\Charts.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.7\\ban3.infrastructures.common.1.0.7.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.7.0\\fody.6.7.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.8\\ban3.infrastructures.common.1.0.8.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.2.5\\fody.6.2.5.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",

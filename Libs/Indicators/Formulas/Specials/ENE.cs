@@ -42,25 +42,7 @@ public class ENE
     /// </summary>
     [JsonProperty("m2", NullValueHandling = NullValueHandling.Ignore)]
     public int M2 { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdUPPER { get; set; } = 23;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdLOWER { get; set; } = 24;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdENE { get; set; } = 25;
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -86,42 +68,7 @@ public class ENE
 
     [JsonIgnore]
     public List<Outputs.Values.ENE> Result { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="paramValues"></param>
-    /// <returns></returns>
-    public void ConvertFrom( List<RecordWithValue> paramValues )
-    {
-        Result = new List<Outputs.Values.ENE>();
-
-        foreach( var pv in paramValues )
-        {
-            var r = Result.FindLast( o => o.TradeDate == pv.TradeDate);
-            if( r == null )
-            {
-                r = new Outputs.Values.ENE { TradeDate = pv.TradeDate };
-                Result.Add( r );
-            }
-
-            if( pv.ParamId == ParamIdENE )
-            {
-                r.RefENE =pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdUPPER )
-            {
-                r.RefUPPER = pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdLOWER )
-            {
-                r.RefLOWER = pv.Ref;
-            }
-        }
-    }
-
+    
     /// <summary>
     /// 计算最后的指标值
     /// </summary>
@@ -165,7 +112,7 @@ public class ENE
     /// LOWER:(1-M2/100)* MA(CLOSE, N);
     /// ENE:(UPPER+LOWER)/2;
     /// </summary>
-    /// <param name="data"></param>
+    /// <param name="prices"></param>
     /// <returns></returns>
     public void CalculateAll( List<Inputs.Price> prices )
     {

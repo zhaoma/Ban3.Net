@@ -35,10 +35,10 @@ public class MA : Communal, IIndicatorFormula
         Details = new List<Line>
         {
             //new MALine {ParamId=1,Days=3 },
-            new Line { ParamId = 2, Days = 5 },
-            new Line { ParamId = 3, Days = 10 },
-            new Line { ParamId = 4, Days = 20 },
-            new Line { ParamId = 5, Days = 30 },
+            new (5),
+            new (10),
+            new (20),
+            new (30),
             //new MALine {ParamId=6,Days=60 },
             //new MALine {ParamId=7,Days=120 },
             //new MALine {ParamId=8,Days=250 }
@@ -51,10 +51,10 @@ public class MA : Communal, IIndicatorFormula
         this.Title = $"MA({d1},{d2},{d3},{d4})";
         Details = new List<Line>
         {
-            new() { ParamId = 2, Days = d1 },
-            new() { ParamId = 3, Days = d2 },
-            new() { ParamId = 4, Days = d3 },
-            new() { ParamId = 5, Days = d4 }
+            new(d1),
+            new(d2),
+            new(d3),
+            new(d4)
         };
         Result = new List<Outputs.Values.MA>();
     }
@@ -142,12 +142,11 @@ public class MA : Communal, IIndicatorFormula
                 {
                     var ma = DescRangeCloseAverage(prices, i, detail.Days);
 
-                    if (Result[i].RefPrices.All(o => o.ParamId != detail.ParamId))
+                    if (Result[i].RefPrices.All(o => o.Days != detail.Days))
                     {
                         Result[i].RefPrices.Add(
                             new LineWithValue
                             {
-                                ParamId = detail.ParamId,
                                 Ref = Math.Round(ma, 2),
                                 Days = detail.Days
                             });

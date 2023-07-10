@@ -5,7 +5,7 @@
   },
   "projects": {
     "D:\\GIT\\Ban3.Net\\Libs\\Charts\\Charts.csproj": {
-      "version": "1.0.2",
+      "version": "1.0.3",
       "restore": {
         "projectUniqueName": "D:\\GIT\\Ban3.Net\\Libs\\Charts\\Charts.csproj",
         "projectName": "Ban3.Infrastructures.Charts",
@@ -47,23 +47,13 @@
           "dependencies": {
             "Ban3.Infrastructures.Common": {
               "target": "Package",
-              "version": "[1.0.7, )"
-            },
-            "Fody": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[6.7.0, )"
+              "version": "[1.0.8, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
-            },
-            "Rougamo.Fody": {
-              "target": "Package",
-              "version": "[1.4.1, )"
             },
             "log4net": {
               "target": "Package",

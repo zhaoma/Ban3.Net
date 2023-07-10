@@ -16,8 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Interfaces;
 using Newtonsoft.Json;
 
@@ -45,37 +43,7 @@ public class MACD : Communal, IIndicatorFormula
     /// </summary>
     [JsonProperty("mid", NullValueHandling = NullValueHandling.Ignore)]
     public int MID { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdDIF { get; set; } = 9;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdDEA { get; set; } = 10;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdMACD { get; set; } = 11;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdEMAShort { get; set; } = 21;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdEMALong { get; set; } = 22;
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -103,46 +71,7 @@ public class MACD : Communal, IIndicatorFormula
 
     [JsonIgnore]
     public List<Outputs.Values.MACD> Result { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="paramValues"></param>
-    /// <returns></returns>
-    public void ConvertFrom( List<RecordWithValue> paramValues )
-    {
-        Result = new List<Outputs.Values.MACD>();
-
-        foreach( var pv in paramValues )
-        {
-            var r = Result.FindLast( o => o.TradeDate == pv.TradeDate);
-
-            if( r == null )
-            {
-                r = new Outputs.Values.MACD
-                {
-                    TradeDate = pv.TradeDate
-                };
-                Result.Add( r );
-            }
-
-            if( pv.ParamId == ParamIdDIF )
-                r.RefDIF = pv.Ref;
-
-            if( pv.ParamId == ParamIdDEA )
-                r.RefDEA = pv.Ref;
-
-            if( pv.ParamId == ParamIdMACD )
-                r.RefMACD = pv.Ref;
-
-            if( pv.ParamId == ParamIdEMAShort )
-                r.RefEMAShort = pv.Ref;
-
-            if( pv.ParamId == ParamIdEMALong )
-                r.RefEMALong = pv.Ref;
-        }
-    }
-
+    
     /// <summary>
     /// 计算最后的指标值
     /// </summary>

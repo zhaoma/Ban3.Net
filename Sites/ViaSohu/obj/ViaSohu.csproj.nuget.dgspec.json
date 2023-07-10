@@ -47,7 +47,7 @@
           "dependencies": {
             "Ban3.Infrastructures.Common": {
               "target": "Package",
-              "version": "[1.0.4, )"
+              "version": "[1.0.8, )"
             },
             "Ban3.Infrastructures.NetHttp": {
               "target": "Package",

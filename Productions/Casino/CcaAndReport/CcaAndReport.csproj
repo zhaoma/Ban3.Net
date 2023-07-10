@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -14,6 +14,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <BaseOutputPath>D:\GIT\output</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,16 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.15" />
-    <PackageReference Include="Fody" Version="6.7.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Rougamo.Fody" Version="1.4.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Contracts\Contracts.csproj" />
-    <ProjectReference Include="..\..\..\Libs\Indicators\Indicators.csproj" />
+    <PackageReference Include="Ban3.Productions.Casino.Contracts" Version="1.0.0" />
   </ItemGroup>
 </Project>

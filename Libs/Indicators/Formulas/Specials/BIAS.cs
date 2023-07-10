@@ -33,19 +33,7 @@ public class BIAS : Communal, IIndicatorFormula
     /// </summary>
     [JsonProperty("m", NullValueHandling = NullValueHandling.Ignore)]
     public int M { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdBIAS { get; set; } = 16;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdBIASMA { get; set; } = 17;
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -69,37 +57,7 @@ public class BIAS : Communal, IIndicatorFormula
 
     [JsonIgnore]
     public List<Outputs.Values.BIAS> Result { get; set; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="paramValues"></param>
-    /// <returns></returns>
-    public void ConvertFrom(List<RecordWithValue> paramValues)
-    {
-        Result = new List<Outputs.Values.BIAS>();
-
-        foreach (var pv in paramValues)
-        {
-            var r = Result.FindLast(o => o.TradeDate == pv.TradeDate);
-            if (r == null)
-            {
-                r = new Outputs.Values.BIAS { TradeDate = pv.TradeDate };
-                Result.Add(r);
-            }
-
-            if (pv.ParamId == ParamIdBIAS)
-            {
-                r.RefBIAS = pv.Ref;
-            }
-
-            if (pv.ParamId == ParamIdBIASMA)
-            {
-                r.RefBIASMA = pv.Ref;
-            }
-        }
-    }
-
+    
     /// <summary>
     /// 计算最后的指标值
     /// </summary>

@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Interfaces;
 using Newtonsoft.Json;
 
@@ -43,43 +42,7 @@ public class DMI : Communal, IIndicatorFormula
     /// </summary>
     [JsonProperty("m", NullValueHandling = NullValueHandling.Ignore)]
     public int M { get; set; }
-
-    /// <summary>
-    /// 上升方向线
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdPDI { get; set; } = 12;
-
-    /// <summary>
-    /// 下降方向线
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdMDI { get; set; } = 13;
-
-    /// <summary>
-    /// 趋向平均值
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdADX { get; set; } = 14;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdADXR { get; set; } = 15;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdHD { get; set; } = 27;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [JsonIgnore]
-    public int ParamIdLD { get; set; } = 28;
-
+    
     /// <summary>
     /// 
     /// </summary>
@@ -106,59 +69,9 @@ public class DMI : Communal, IIndicatorFormula
     public List<Outputs.Values.DMI> Result { get; set; }
 
     /// <summary>
-    /// StockIndexValue列表转成DMI列表
-    /// </summary>
-    /// <param name="paramValues"></param>
-    /// <returns></returns>
-    public void ConvertFrom( List<RecordWithValue> paramValues )
-    {
-        Result = new List<Outputs.Values.DMI>();
-
-        foreach( var pv in paramValues )
-        {
-            var r = Result.FindLast( o => o.TradeDate == pv.TradeDate);
-            if( r == null )
-            {
-                r = new Outputs.Values.DMI { TradeDate = pv.TradeDate };
-                Result.Add( r );
-            }
-
-            if( pv.ParamId == ParamIdHD )
-            {
-                r.RefHD = pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdLD )
-            {
-                r.RefLD = pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdPDI )
-            {
-                r.RefPDI = pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdMDI )
-            {
-                r.RefMDI = pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdADX )
-            {
-                r.RefADX = pv.Ref;
-            }
-
-            if( pv.ParamId == ParamIdADXR )
-            {
-                r.RefADXR = pv.Ref;
-            }
-        }
-    }
-
-    /// <summary>
     /// 计算最后的指标值
     /// </summary>
-    /// <param name="values"></param>
+    /// <param name="stockCode"></param>
     /// <param name="prices"></param>
     /// <returns></returns>
     public void CalculateLastValues( string stockCode, List<Inputs.Price> prices )

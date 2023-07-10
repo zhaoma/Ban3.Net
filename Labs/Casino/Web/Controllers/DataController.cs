@@ -48,4 +48,7 @@ public class DataController : Controller
 
     public ContentResult Sankey(int id)
         => Content(Signalert.GetSankeyDiagram(id));
+
+    public ContentResult AmountCandlestick(string id)
+        => Content(Signalert.GetAmountDiagram(id));
 }

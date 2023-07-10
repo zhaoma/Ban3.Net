@@ -6,14 +6,14 @@
  */
 
 using System.Collections.Generic;
-using  Ban3.Infrastructures.Charts.Cogs;
-using  Ban3.Infrastructures.Charts.Elements;
-using  Ban3.Infrastructures.Charts.Styles;
-using  Ban3.Infrastructures.Charts.Labels;
-using  Ban3.Infrastructures.Charts.Lines;
+using Ban3.Infrastructures.Charts.Cogs;
+using Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Labels;
+using Ban3.Infrastructures.Charts.Lines;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
 namespace  Ban3.Infrastructures.Charts.Components;
 

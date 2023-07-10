@@ -105,12 +105,11 @@ public class Full
                 {
                     if (i >= detail.Days - 1)
                     {
-                        if (line.EndPoints[i].Amount!.RefAmounts.All(o => o.ParamId != detail.ParamId))
+                        if (line.EndPoints[i].Amount!.RefAmounts.All(o => o.Days != detail.Days))
                         {
                             line.EndPoints[i].Amount!.RefAmounts.Add(
                                 new LineWithValue
                                 {
-                                    ParamId = detail.ParamId,
                                     Ref = DescRangeAmountAverage(prices, i, detail.Days),
                                     Days = detail.Days
                                 });
@@ -342,12 +341,11 @@ public class Full
                         {
                             var maMa = DescRangeCloseAverage(prices, i, detail.Days);
 
-                            if (line.EndPoints[i].Ma!.RefPrices.All(o => o.ParamId != detail.ParamId))
+                            if (line.EndPoints[i].Ma!.RefPrices.All(o => o.Days != detail.Days))
                             {
                                 line.EndPoints[i].Ma!.RefPrices.Add(
                                     new LineWithValue
                                     {
-                                        ParamId = detail.ParamId,
                                         Ref = Math.Round(maMa, 2),
                                         Days = detail.Days
                                     });
