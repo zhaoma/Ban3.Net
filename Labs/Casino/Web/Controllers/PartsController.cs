@@ -201,7 +201,7 @@ public class PartsController : Controller
     public IActionResult ProfileDetail(string id)
     {
         var codes = Signalert.Collector.ScopedCodes().Select(o=>o.Code).ToList();
-        var data = Signalert.Analyzer.LoadProfileDetails(codes, id);
+        var data = Signalert.GetProfileDetails(codes, id);
 
         return View(data);
     }

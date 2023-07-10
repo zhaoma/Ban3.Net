@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators;
@@ -12,11 +13,13 @@ using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
+using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Sites.ViaTushare.Entries;
 using log4net;
+using Stock = Ban3.Infrastructures.Indicators.Entries.Stock;
 
 #nullable enable
 
@@ -339,4 +342,26 @@ public partial class Signalert
 
     public static string GetMacdDiagram(string code)
         => code.MacdDiagram().ObjToJson();
+
+    public static List<StockOperationRecord> GetProfileDetails(List<string> codes,string profileId)
+    {
+        var result = new List<StockOperationRecord>();
+        codes.AsParallel()
+        .ForAll(s =>
+        {
+                var rs = new Infrastructures.Indicators.Entries.Stock { Code = s }
+		            .LoadStockOperationRecords(new Profile { Identity = profileId });
+                if (rs != null && rs.Any())
+                {
+                    lock (_lock)
+                    {
+                        result.AddRange(rs.Where(o => o.SellDate != null));
+                    }
+                }
+            });
+
+        return result;
+    }
+
+    static object _lock = new();
 }

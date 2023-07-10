@@ -6,6 +6,7 @@
  */
 
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.PlatformInvoke.Handles;
 
@@ -17,11 +18,13 @@ public class ProcessHandler
     /// <summary>
     /// 命令文件
     /// </summary>
-    public string CommandFileName { get; set; }
+    [JsonProperty("commandFileName", NullValueHandling = NullValueHandling.Ignore)]
+    public string CommandFileName { get; set; } = string.Empty;
 
     /// <summary>
     /// 命令参数
     /// </summary>
+    [JsonProperty("commandArguments", NullValueHandling = NullValueHandling.Ignore)]
     public string[] CommandArguments { get; set; }
 
     /// ctor
@@ -84,11 +87,20 @@ public class ProcessHandler
     private Process _exe;
 
     /// <summary>
-    /// 
+    /// 退出代码
     /// </summary>
+    [JsonIgnore]
     public int ExitCode { get; set; }
 
+    /// <summary>
+    /// 输出
+    /// </summary>
+    [JsonIgnore]
     public string Output { get; set; }
 
+    /// <summary>
+    /// 错误提示
+    /// </summary>
+    [JsonIgnore]
     public string Error { get; set; }
 }

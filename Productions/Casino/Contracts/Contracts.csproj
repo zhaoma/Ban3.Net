@@ -37,9 +37,4 @@
     <PackageReference Include="System.IO" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Request\" />
-    <Folder Include="Response\" />
-  </ItemGroup>
 </Project>

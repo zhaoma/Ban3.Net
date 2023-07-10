@@ -95,7 +95,7 @@ public partial class Signalert
             var fileName = $"{stock.Code}.Amount";
             var line = dailyAmounts.CalculateIndicators()
                 .SaveEntity(_ => fileName);
-            Console.WriteLine(dailyAmounts.ObjToJson());
+
             if (line != null)
             {
                 var sets = line.LineToSets(stock)

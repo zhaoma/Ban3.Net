@@ -39,12 +39,16 @@ internal class Program
             case "--one":
                 new Action(() => { Signalert.ExecuteDailyJob(args[1]); })
                     .ExecuteAndTiming($"one(PrepareOnesDailyPrices({args[1]}))");
-
                 break;
 
             case "--reinstate":
                 new Action(() => { Signalert.ReinstateAllPrices(Signalert.Collector.LoadAllCodes()); })
                     .ExecuteAndTiming("ReinstateData.");
+                break;
+
+            case "--eva":
+                new Action(Signalert.EvaluateProfiles)
+                    .ExecuteAndTiming("EvaluateProfiles.");
                 break;
 
             case "--check":
@@ -58,6 +62,7 @@ internal class Program
                 $"--daily :          prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one [code] :     prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--reinstate :      reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--eva :            evaluate profiles(/files/profile/all)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--check :          check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
 
                 break;
