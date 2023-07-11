@@ -1,77 +1,122 @@
 ﻿@using Ban3.Infrastructures.Common.Extensions
-@using Ban3.Productions.Casino.Contracts.Entities
-@model IEnumerable<Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord> 
+@model Ban3.Productions.Casino.CcaAndReport.Models.CompositeRecords
 @{
     Layout = null;
 }
 
-@if (Model.Any(o => o.SellDate == null))
+@if (Model.RightKeys.Any())
 {
     <div class="roundBox grayBox pb-3">
         <table data-pagination="true" class="table table-hover table-dark  table-bordered  caption-top">
-            <caption>@Model.Count(o => o.SellDate == null) still there.</caption>
+            <caption>@Model.RightKeys.Count() right keys.</caption>
             <thead>
-            <tr>
-                <th class="col-2">Code</th>
-                <th class="col-2">BuyDate</th>
-                <th class="col-2">BuyPrice</th>
-                <th class="col-2">SellDate</th>
-                <th class="col-2">SellPrice</th>
-                <th class="col-2">Ratio</th>
-            </tr>
+                <tr>
+                    <th class="col-9">Code</th>
+                    <th class="col-3">Count</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var point in Model.Where(o => o.SellDate == null).OrderByDescending(o => o.BuyDate).Take(50))
-            {
-                var close = StockRealtime.Close(point.Code);
-                var ratio =Math.Round((close - point.BuyPrice) / point.BuyPrice * 100, 2);
-                var className =close > point.BuyPrice ? "red" : "green";
-                    <tr class="@className renderChartsButton"
-                        renderElement="chartsContainer"
-                        dataUrl="/data/macd/@point.Code"
-                        renderContainer="chartsSection">
-                    <td>@point.Code</td>
-                    <td>@point.BuyDate.ToYmd()</td>
-                    <td>@point.BuyPrice</td>
-                    <td>&nbsp;</td>
-                    <td>@close</td>
-                    <td>@ratio %</td>
-                </tr>
-            }
+                @foreach (var point in Model.RightKeys.OrderByDescending(o => o.Value))
+                {
+                    <tr class="red">
+                        <td>@point.Key</td>
+                        <td>@point.Value</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 }
 
-<div class="roundBox grayBox">
-    <table data-pagination="true" class="table table-hover table-dark  table-bordered  caption-top">
-        <caption>@Model.Count(o => o.SellDate != null) record.</caption>
-    <thead>
-    <tr>
-        <th class="col-2">Code</th>
-        <th class="col-2">BuyDate</th>
-        <th class="col-2">BuyPrice</th>
-        <th class="col-2">SellDate</th>
-        <th class="col-2">SellPrice</th>
-        <th class="col-2">Ratio</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var point in Model.Where(o=>o.SellDate!=null).OrderByDescending(o => o.BuyDate).Take(50))
-    {
-        var className = point.SellPrice > point.BuyPrice? "red" :  "green";
-        <tr class="@className renderChartsButton"
-            renderElement="chartsContainer"
-            dataUrl="/data/macd/@point.Code"
-            renderContainer="chartsSection">
-            <td>@point.Code</td>
-            <td>@point.BuyDate.ToYmd()</td>
-            <td>@point.BuyPrice</td>
-            <td>@point.SellDate?.ToYmd()</td>
-            <td>@point.SellPrice</td>
-            <td>@point.Ratio %</td>
-        </tr>
-    }
-    </tbody>
-    </table>
-</div>
+@if (Model.WrongKeys.Any())
+{
+    <div class="roundBox grayBox pb-3">
+        <table data-pagination="true" class="table table-hover table-dark  table-bordered  caption-top">
+            <caption>@Model.WrongKeys.Count() wrong keys.</caption>
+            <thead>
+                <tr>
+                    <th class="col-9">Code</th>
+                    <th class="col-3">Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var point in Model.WrongKeys.OrderByDescending(o => o.Value))
+                {
+                    <tr class="red">
+                        <td>@point.Key</td>
+                        <td>@point.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (Model.Records.Any(o => o.SellDate == null))
+{
+    <div class="roundBox grayBox pb-3">
+        <table data-pagination="true" class="table table-hover table-dark  table-bordered  caption-top">
+            <caption>@Model.Records.Count(o => o.SellDate == null) still there.</caption>
+            <thead>
+                <tr>
+                    <th class="col-2">Code</th>
+                    <th class="col-2">BuyDate</th>
+                    <th class="col-2">BuyPrice</th>
+                    <th class="col-6">Nearly Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var point in Model.Records.Where(o => o.SellDate == null).OrderByDescending(o => o.BuyDate).Take(50))
+                {
+                    var nearly = Ban3.Productions.Casino.CcaAndReport.Signalert.UnsellRecord(point, out var c);
+                    var className = c > point.BuyPrice ? "red" : "green";
+                    <tr class="@className renderChartsButton"
+                        renderElement="chartsContainer"
+                        dataUrl="/data/macd/@point.Code"
+                        renderContainer="chartsSection">
+                        <td>@point.Code</td>
+                        <td>@point.BuyDate.ToYmd()</td>
+                        <td>@point.BuyPrice</td>
+                        <td>@nearly</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@if (Model.Records.Any(o => o.SellDate != null))
+{
+    <div class="roundBox grayBox">
+        <table data-pagination="true" class="table table-hover table-dark  table-bordered  caption-top">
+            <caption>@Model.Records.Count(o => o.SellDate != null) record.</caption>
+            <thead>
+                <tr>
+                    <th class="col-2">Code</th>
+                    <th class="col-2">BuyDate</th>
+                    <th class="col-2">BuyPrice</th>
+                    <th class="col-2">SellDate</th>
+                    <th class="col-2">SellPrice</th>
+                    <th class="col-2">Ratio</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var point in Model.Records.Where(o => o.SellDate != null).OrderByDescending(o => o.BuyDate).Take(50))
+                {
+                    var className = point.SellPrice > point.BuyPrice ? "red" : "green";
+                    <tr class="@className renderChartsButton"
+                        renderElement="chartsContainer"
+                        dataUrl="/data/macd/@point.Code"
+                        renderContainer="chartsSection">
+                        <td>@point.Code</td>
+                        <td>@point.BuyDate.ToYmd()</td>
+                        <td>@point.BuyPrice</td>
+                        <td>@point.SellDate?.ToYmd()</td>
+                        <td>@point.SellPrice</td>
+                        <td>@point.Ratio %</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -18,6 +18,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Models\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="..\..\..\icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -26,5 +29,8 @@
 
   <ItemGroup>
     <PackageReference Include="Ban3.Productions.Casino.Contracts" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

@@ -59,7 +59,7 @@ public partial class Signalert
 
         ExecutePrepare(allCodes);
     }
-    
+
     /// <summary>
     /// 日常任务
     /// 无参数，全市场
@@ -168,7 +168,7 @@ public partial class Signalert
                     {
                         var now = DateTime.Now;
                         var stock = new Stock
-                            { Code = one.Code, ListDate = one.ListDate, Name = one.Name, Symbol = one.Symbol };
+                        { Code = one.Code, ListDate = one.ListDate, Name = one.Name, Symbol = one.Symbol };
 
                         var dailyPrices = Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
 
@@ -187,7 +187,7 @@ public partial class Signalert
                                 dailySets.PushLatest(latestSets);
 
                                 buyingDotsSets.AppendDistinct(
-				                    dailySets
+                                    dailySets
                                         .FindAll(o =>
                                             dots != null && dots.Any(x => x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd())));
 
@@ -239,7 +239,7 @@ public partial class Signalert
 
         allDots.Where(o => !o.IsDotOfBuying)
             .Select(o => o.SetKeys)!
-	        .MergeToDictionary()
+            .MergeToDictionary()
             .CreateTreemapDiagram("Dots Of Selling Treemap")
             .SaveFor($"{filter.Identity}.Treemap.Selling");
 
@@ -266,7 +266,7 @@ public partial class Signalert
                  return ps;
              }, profileFile);
     }
-    
+
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
 
     public static List<DotInfo>? GetDots(RenderView request)
@@ -295,7 +295,21 @@ public partial class Signalert
         => new Stock { Code = request.Id }.LoadStockSets();
 
     public static List<StockSets>? GetLatestStockSets()
-        => Calculator.LoadAllLatestSets();
+        => Config.CacheKey<StockSets>("latest")
+            .LoadOrSetDefault<List<StockSets>>("latest".DataFile<StockSets>());
+
+    public static string UnsellRecord(StockOperationRecord r, out double c)
+    {
+        var l = GetLatestStockSets()?.FindLast(o => o.Code == r.Code);
+        if (l != null)
+        {
+            c = l.Close;
+            return $"{l.Close} : {Math.Round((l.Close - r.BuyPrice) / r.BuyPrice * 100D, 2)} %";
+        }
+
+        c = 0;
+        return string.Empty;
+    }
 
     public static string GetTreemapDiagram(int id = 1)
     {
@@ -343,25 +357,69 @@ public partial class Signalert
     public static string GetMacdDiagram(string code)
         => code.MacdDiagram().ObjToJson();
 
-    public static List<StockOperationRecord> GetProfileDetails(List<string> codes,string profileId)
+    public static List<StockOperationRecord> GetProfileDetails(List<string> codes, string profileId)
     {
         var result = new List<StockOperationRecord>();
         codes.AsParallel()
         .ForAll(s =>
         {
-                var rs = new Infrastructures.Indicators.Entries.Stock { Code = s }
-		            .LoadStockOperationRecords(new Profile { Identity = profileId });
-                if (rs != null && rs.Any())
+            var rs = new Infrastructures.Indicators.Entries.Stock { Code = s }
+                .LoadStockOperationRecords(new Profile { Identity = profileId });
+            if (rs != null && rs.Any())
+            {
+                lock (_lock)
                 {
-                    lock (_lock)
-                    {
-                        result.AddRange(rs.Where(o => o.SellDate != null));
-                    }
+                    result.AddRange(rs);
                 }
-            });
+            }
+        });
 
         return result;
     }
+
+    public static Models.CompositeRecords PrepareCompositeRecords(List<string> codes, string profileId)
+    {
+        var result = new Models.CompositeRecords
+        {
+            Profile = Profiles().Last(o => o.Identity == profileId),
+            Records = GetProfileDetails(codes, profileId)
+        };
+
+        var rightSets = new List<List<string>>();
+        var wrongSets = new List<List<string>>();
+
+        result.Records.ForEach(r =>
+        {
+            if (r.SellDate != null)
+            {
+                var sets = GetStockSets(new RenderView { Id = r.Code })
+                    .GetSetKeys(r.BuyDate.ToYmd());
+		    //.Except(result.Profile.BuyingCondition.);
+
+                if (sets != null)
+                {
+                    if (r.SellPrice > r.BuyPrice)
+                    {
+                        rightSets.Add(sets);
+                    }
+                    else
+                    {
+                        wrongSets.Add(sets);
+                    }
+                }
+            }
+        });
+
+        result.RightKeys = rightSets.MergeToDictionary();
+        result.WrongKeys = wrongSets.MergeToDictionary();
+
+        result.SaveEntity(_ => profileId);
+
+        return result;
+    }
+
+    public static Models.CompositeRecords? LoadCompositeRecords(string profileId)
+    => profileId.LoadEntity<Models.CompositeRecords>();
 
     static object _lock = new();
 }

@@ -7,6 +7,7 @@ using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Entries;
+using System.Linq;
 
 namespace Ban3.Productions.Casino.CcaAndReport;
 
@@ -50,11 +51,6 @@ public partial class Signalert
     public static void EvaluateProfiles()
     {
         var stocks = Collector.ScopedCodes();
-        var profiles =Config.CacheKey<Profile>("all")
-            .LoadOrSetDefault(
-                () => Infrastructures.Indicators.Helper.DefaultProfiles,
-		        typeof(Profile).LocalFile()
-	        );
 
         var total = stocks.Count;
         var current = 0;
@@ -84,5 +80,7 @@ public partial class Signalert
         },Config.MaxParallelTasks);
 
         profileSummaries.Save();
+
+        Profiles().ForEach(profile => { Signalert.PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity); });
     }
 }

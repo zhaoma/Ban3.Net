@@ -1,0 +1,47 @@
+﻿[
+  {
+    "identity": "default",
+    "subject": "MACD MWD C0",
+    "buyingCondition": {
+      "include": [ "MACD.C0.MONTHLY", "MACD.C0.WEEKLY", "MACD.C0.DAILY|MACD.P.DAILY;MACD.GC.DAILY" ],
+      "exclude": [ "KD.MDI.DAILY" ]
+    },
+    "sellingCondition": {
+      "include": [ "KD.DC.DAILY" ],
+      "exclude": []
+    },
+    "digRecordCount": 0,
+    "persistence": true,
+    "isDefault": true
+  },
+  {
+    "identity": "harsh",
+    "subject": "MACD 3C0",
+    "buyingCondition": {
+      "include": [ "MACD.C0.DAILY", "MACD.C0.WEEKLY", "MACD.C0.MONTHLY", "DMI.PDI.MONTHLY" ],
+      "exclude": [ "MACD.MDI.DAILY" ]
+    },
+    "sellingCondition": {
+      "include": [ "MACD.DC.DAILY" ],
+      "exclude": []
+    },
+    "digRecordCount": 0,
+    "persistence": false,
+    "isDefault": false
+  },
+  {
+    "identity": "rebound",
+    "subject": "Rebound CK",
+    "buyingCondition": {
+      "include": [ "CCI.-200.DAILY", "ENE.LOWER.DAILY", "KD.10.DAILY","MACD.P.MONTHLY" ],
+      "exclude": []
+    },
+    "sellingCondition": {
+      "include": [ "KD.DC.DAILY" ],
+      "exclude": []
+    },
+    "digRecordCount": 0,
+    "persistence": false,
+    "isDefault": false
+  }
+]

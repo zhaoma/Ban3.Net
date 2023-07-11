@@ -98,9 +98,7 @@ function bindButton(ele) {
 
     $("#" + renderElement).load(dataUrl);
     $.get(dataUrl, function (html) {
-        console.log("#" + renderElement +"->"+html);
         $("#" + renderElement).html(html);
-        console.log($("#" + renderElement));
 
         initContainer($("#" + renderElement));
         if ($("#" + renderElement).parent().hasClass("hide")) {
@@ -155,9 +153,7 @@ function bindCharts(elementId, dataUrl) {
 
     if (currentChart == null) {
         currentChart = echarts.init(chartDom);
-    } else {
-        //currentChart.dispose();
-    }
+    } 
        
     currentChart.setOption({}, true);
     //currentChart.showLoading();

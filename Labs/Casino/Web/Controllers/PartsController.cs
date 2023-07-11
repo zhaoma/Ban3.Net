@@ -200,8 +200,13 @@ public class PartsController : Controller
 
     public IActionResult ProfileDetail(string id)
     {
-        var codes = Signalert.Collector.ScopedCodes().Select(o=>o.Code).ToList();
-        var data = Signalert.GetProfileDetails(codes, id);
+        var data = Signalert.LoadCompositeRecords(id)
+        ?? new Productions.Casino.CcaAndReport.Models.CompositeRecords
+        {
+            Records = new List<Infrastructures.Indicators.Outputs.StockOperationRecord>(),
+            RightKeys = new Dictionary<string, int>(),
+            WrongKeys = new Dictionary<string, int>()
+        };
 
         return View(data);
     }
