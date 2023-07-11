@@ -33,8 +33,6 @@ public partial class Signalert
         dailySets = null;
         try
         {
-            CreateAmountDiagram(stock);
-
             var dailyPrices = prices
                               ?? Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
 

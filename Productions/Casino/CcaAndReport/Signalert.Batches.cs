@@ -3,8 +3,6 @@ using Ban3.Productions.Casino.Contracts.Extensions;
 using System.Collections.Generic;
 using System;
 using Ban3.Productions.Casino.Contracts;
-using Ban3.Infrastructures.Indicators.Inputs;
-using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Entries;
 using System.Linq;
@@ -13,6 +11,10 @@ namespace Ban3.Productions.Casino.CcaAndReport;
 
 public partial class Signalert
 {
+    /// <summary>
+    /// 下载事件，计算复权价格
+    /// </summary>
+    /// <param name="allCodes"></param>
     public static void PrepareEventsAndSeeds(List<Contracts.Entities.Stock> allCodes = null)
     {
         allCodes ??= Collector.LoadAllCodes();
@@ -20,7 +22,12 @@ public partial class Signalert
 
         ReinstateAllPrices(allCodes);
     }
-    
+
+    /// <summary>
+    /// 计算复权价格
+    /// </summary>
+    /// <param name="allCodes"></param>
+    /// <returns></returns>
     public static bool ReinstateAllPrices(List<Contracts.Entities.Stock> allCodes = null)
     {
         allCodes ??= Collector.LoadAllCodes();
@@ -48,6 +55,30 @@ public partial class Signalert
         return result;
     }
 
+    public static void CreateAmountDiagrams(int days=3)
+    {
+        var stocks = Collector.ScopedCodes();
+
+        var total = stocks.Count;
+        var current = 0;
+
+        stocks.ParallelExecute(one =>
+        {
+            var now = DateTime.Now;
+            var stock = new Stock
+                { Code = one.Code, ListDate = one.ListDate, Name = one.Name, Symbol = one.Symbol };
+
+            CreateAmountDiagram(stock, days);
+
+            current++;
+            Logger.Debug(
+                $"parse {current}/{total} : {one.Code} over,{DateTime.Now.Subtract(now).TotalMilliseconds} ms elapsed.");
+        }, Config.MaxParallelTasks);
+    }
+
+    /// <summary>
+    /// 评估策略，生成汇总
+    /// </summary>
     public static void EvaluateProfiles()
     {
         var stocks = Collector.ScopedCodes();
@@ -60,7 +91,7 @@ public partial class Signalert
         {
             var now = DateTime.Now;
             var stock = new Stock
-            { Code = one.Code, ListDate = one.ListDate, Name = one.Name, Symbol = one.Symbol };
+                { Code = one.Code, ListDate = one.ListDate, Name = one.Name, Symbol = one.Symbol };
 
             var dailySets = stock.LoadStockSets();
 
@@ -77,7 +108,7 @@ public partial class Signalert
             current++;
             Logger.Debug(
                 $"parse {current}/{total} : {one.Code} over,{DateTime.Now.Subtract(now).TotalMilliseconds} ms elapsed.");
-        },Config.MaxParallelTasks);
+        }, Config.MaxParallelTasks);
 
         profileSummaries.Save();
 

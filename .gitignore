@@ -367,3 +367,5 @@ Labs/Casino/CcarAgent/appsettings.json
 Labs/Casino/Web/appsettings.json
 Labs/Casino/CcarAgent/appsettings.json
 Labs/Casino/Web/appsettings.json
+*.pdb
+*.pdb
