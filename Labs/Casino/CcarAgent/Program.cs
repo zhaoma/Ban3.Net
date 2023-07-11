@@ -1,14 +1,7 @@
 ﻿using System.Diagnostics;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
-using Ban3.Infrastructures.Indicators.Entries;
-using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Productions.Casino.CcaAndReport;
-using Ban3.Productions.Casino.CcaAndReport.Implements;
-using Ban3.Productions.Casino.Contracts;
-using Ban3.Productions.Casino.Contracts.Entities;
-using Ban3.Productions.Casino.Contracts.Extensions;
-using Ban3.Infrastructures.Indicators;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -42,12 +35,19 @@ internal class Program
                 break;
 
             case "--reinstate":
-                new Action(() => { Signalert.ReinstateAllPrices(Signalert.Collector.LoadAllCodes()); })
+                new Action(() => { Signalert.ReinstateAllPrices(); })
                     .ExecuteAndTiming("ReinstateData.");
                 break;
 
             case "--eva":
                 new Action(Signalert.EvaluateProfiles)
+                    .ExecuteAndTiming("EvaluateProfiles.");
+                break;
+
+
+            case "--mc":
+                var days = args.Length > 1 ? args[1].ToInt() : 3;
+                new Action(() => Signalert.CreateAmountDiagrams(days))
                     .ExecuteAndTiming("EvaluateProfiles.");
                 break;
 
@@ -57,7 +57,8 @@ internal class Program
                 break;
 
             default:
-                $"--all :            prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--all :            prepare all data(exclude events and seeds)"
+                    .WriteColorLine(ConsoleColor.DarkYellow);
                 $"--prepare :        prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--daily :          prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one [code] :     prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
@@ -77,25 +78,6 @@ internal class Program
 
     private static void CheckSomething()
     {
-        //Signalert.ExecuteDailyJob();
-         var code = "300580.SZ";
 
-         var stock = new Infrastructures.Indicators.Entries.Stock { Code = code };
-
-        Signalert.CreateAmountDiagram(stock,3);
-        var d = Signalert.GetAmountDiagram(code);
-        //d.ObjToJson().WriteColorLine(ConsoleColor.DarkYellow);    
-	// d.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
-
-        /*
-        var dotKeys =  Signalert.Reportor.LoadDotsKey(Infrastructures.Indicators.Helper.DefaultFilter, true);
-
-        $"{dotKeys.Count}".WriteColorLine(ConsoleColor.DarkBlue);
-
-        var dots=Signalert.Reportor.LoadDots(Infrastructures.Indicators.Helper.DefaultFilter)
-          .ExtendedDots(new Productions.Casino.Contracts.Request.RenderView { RedOnly=0});
-
-        $"{dots.Count}".WriteColorLine(ConsoleColor.DarkRed);
-        */
     }
 }
