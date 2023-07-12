@@ -39,6 +39,10 @@ public partial class Signalert
 
     public static IReportor Reportor = new Reportor();
 
+
+    public static List<Contracts.Entities.Stock> TargetCodes()
+        => Collector.LoadAllCodes().Where(o => o.Code.EndsWith(".SH") || o.Code.EndsWith(".SZ")).ToList();
+
     #region 批量作业
 
     /// <summary>
@@ -66,7 +70,7 @@ public partial class Signalert
     /// </summary>
     public static void ExecuteDailyJob()
     {
-        var allCodes = Collector.LoadAllCodes();
+        var allCodes = TargetCodes();
 
         ExecuteDailyJob(allCodes);
     }
@@ -212,6 +216,8 @@ public partial class Signalert
             PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity);
         });
     }
+
+
 
     /// <summary>
     /// 当前策略集合

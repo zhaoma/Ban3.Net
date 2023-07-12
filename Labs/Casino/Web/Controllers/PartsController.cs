@@ -109,7 +109,7 @@ public class PartsController : Controller
 
     public IActionResult Stocks(RenderView request)
     {
-        var stocks = Signalert.Collector.LoadAllCodes()
+        var stocks = Signalert.TargetCodes()
             .Where(o =>
                 (string.IsNullOrEmpty(request.Id) || o.Code.Contains(request.Id))
                 &&

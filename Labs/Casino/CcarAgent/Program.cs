@@ -2,6 +2,8 @@
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.CcaAndReport.Implements;
+using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -77,6 +79,9 @@ internal class Program
 
     private static void CheckSomething()
     {
+        var rs = Signalert.TargetCodes();
+        Console.WriteLine(rs.Count);
 
+        Console.WriteLine(Signalert.Collector.LoadAllCodes().Count());
     }
 }

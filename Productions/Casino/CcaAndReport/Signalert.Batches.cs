@@ -61,7 +61,7 @@ public partial class Signalert
     /// <param name="days"></param>
     public static void CreateAmountDiagrams(int days=3)
     {
-        var stocks = Collector.ScopedCodes();
+        var stocks = TargetCodes();
 
         var total = stocks.Count;
         var current = 0;
@@ -85,7 +85,7 @@ public partial class Signalert
     /// </summary>
     public static void EvaluateProfiles()
     {
-        var stocks = Collector.ScopedCodes();
+        var stocks = TargetCodes();
 
         var total = stocks.Count;
         var current = 0;
