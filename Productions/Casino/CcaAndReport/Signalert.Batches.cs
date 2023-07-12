@@ -55,6 +55,10 @@ public partial class Signalert
         return result;
     }
 
+    /// <summary>
+    /// 建流量图
+    /// </summary>
+    /// <param name="days"></param>
     public static void CreateAmountDiagrams(int days=3)
     {
         var stocks = Collector.ScopedCodes();
@@ -112,6 +116,6 @@ public partial class Signalert
 
         profileSummaries.Save();
 
-        Profiles().ForEach(profile => { Signalert.PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity); });
+        Profiles().ForEach(profile => { PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity); });
     }
 }

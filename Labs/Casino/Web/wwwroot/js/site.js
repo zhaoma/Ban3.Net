@@ -190,8 +190,3 @@ function onesCodes() {
     });
     return false;
 }
-
-var casino = (function () {
-
-
-});

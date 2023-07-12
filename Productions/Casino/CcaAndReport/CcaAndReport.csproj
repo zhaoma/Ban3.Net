@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Productions.Casino.Contracts" Version="1.0.0" />
+    <PackageReference Include="Ban3.Productions.Casino.Contracts" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

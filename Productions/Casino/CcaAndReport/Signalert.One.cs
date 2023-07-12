@@ -24,6 +24,7 @@ public partial class Signalert
     /// <param name="stock"></param>
     /// <param name="prices"></param>
     /// <param name="formulas"></param>
+    /// <param name="dailySets"></param>
     public static bool ParseOne(
         Stock stock,
         List<Price>? prices,
@@ -96,10 +97,10 @@ public partial class Signalert
 
             if (line != null)
             {
-                var sets = line.LineToSets(stock)
+                line.LineToSets(stock)
                     .SaveEntities(fileName);
 
-                var diagram = dailyAmounts.CreateCandlestickDiagram(line, stock)
+                dailyAmounts.CreateCandlestickDiagram(line, stock)
                     .SaveFor(fileName);
             }
         }

@@ -30,7 +30,7 @@ namespace Ban3.Labs.Casino.Web
         }
 
         /// <summary>
-        /// �����
+        /// create timer for schedule sync process
         /// Operation is not supported on this platform.
         /// </summary>
         static void ScheduleTimer()
@@ -39,10 +39,11 @@ namespace Ban3.Labs.Casino.Web
             _jobTimer = new System.Timers.Timer
             {
                 AutoReset = true,
-                Interval = 1000 * 60 * 1,
+                Interval = 1000 * 60 * 60 * 3,
                 Enabled = true
             };
-            _jobTimer.Elapsed += (s, e) =>
+
+            _jobTimer.Elapsed += (_, _) =>
             {
                 _jobTimer.Enabled = false;
                 var cmd = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ca.exe");
@@ -52,17 +53,17 @@ namespace Ban3.Labs.Casino.Web
                 {
                     var args = Infrastructures.Common.Config.AppConfiguration["Ca:Args"] + "";
                     if (args == "")
-                        args = "--realtime";
+                        args = "--daily";
                     _handler = new Infrastructures.PlatformInvoke.Handles.ProcessHandlerAsync(cmd,
                         args.Split(' '));
 
-                    _handler.ReceivedData += (s) => { Console.WriteLine($"info:{s}"); };
-                    _handler.ReceivedError += (s) => { Console.WriteLine($"error:{s}"); };
+                    _handler.ReceivedData += info => { Console.WriteLine($"info:{info}"); };
+                    _handler.ReceivedError += error => { Console.WriteLine($"error:{error}"); };
 
                     _handler.Exited += JobCallback;
                 }
 
-                _handler?.Execute();
+                _handler.Execute();
             };
         }
 

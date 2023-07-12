@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Principal;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators;
@@ -13,7 +12,6 @@ using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts;
-using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Productions.Casino.Contracts.Request;
@@ -31,6 +29,8 @@ namespace Ban3.Productions.Casino.CcaAndReport;
 [TracingIt]
 public partial class Signalert
 {
+    private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
+
     public static ICollector Collector = new Collector();
 
     public static ICalculator Calculator = new Calculator();
@@ -97,49 +97,7 @@ public partial class Signalert
     }
 
     #endregion
-
-    #region 实时任务
-    /*
-    public static void ExecuteRealtimeJob()
-    {
-        var allCodes = Collector.LoadAllCodes();
-
-        ExecuteRealtimeJob(allCodes);
-    }
-
-    public static void ExecuteRealtimeJob(string startsWith, string endsWith)
-    {
-        var allCodes = Collector.LoadAllCodes()
-            .Where(o => (string.IsNullOrEmpty(startsWith) || o.Code.StartsWith(startsWith)
-                && (string.IsNullOrEmpty(endsWith) || o.Code.EndsWith(endsWith))))
-            .ToList();
-
-        ExecuteRealtimeJob(allCodes);
-    }
-
-    public static void ExecuteRealtimeJob(string codes)
-    {
-        var cs = codes.Split(',');
-        var allCodes = Collector.LoadAllCodes()
-            .Where(x => cs.Contains(x.Code))
-            .ToList();
-
-        ExecuteRealtimeJob(allCodes);
-    }
-
-    /// <summary>
-    /// 实时刷新数据
-    /// </summary>
-    /// <param name="stocks"></param>
-    public static void ExecuteRealtimeJob(List<Stock> stocks)
-    {
-        new Action(() => Collector.ReadRealtime(stocks)).ExecuteAndTiming("ReadRealtime");
-
-        ExecutePrepare(stocks);
-    }
-    */
-    #endregion
-
+    
     /// <summary>
     /// 计算复权价格
     /// 计算指标值
@@ -249,8 +207,16 @@ public partial class Signalert
         sellingDotsSets.CreateSankeyDiagram("Dots Of Selling Sankey")
             .SaveFor($"{filter.Identity}.Sankey.Selling");
 
+        Profiles().ForEach(profile =>
+        {
+            PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity);
+        });
     }
 
+    /// <summary>
+    /// 当前策略集合
+    /// </summary>
+    /// <returns></returns>
     public static List<Profile> Profiles()
     {
         var profileFile = typeof(Profile).LocalFile();
@@ -266,8 +232,6 @@ public partial class Signalert
                  return ps;
              }, profileFile);
     }
-
-    private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
 
     public static List<DotInfo>? GetDots(RenderView request)
     {
@@ -363,7 +327,7 @@ public partial class Signalert
         codes.AsParallel()
         .ForAll(s =>
         {
-            var rs = new Infrastructures.Indicators.Entries.Stock { Code = s }
+            var rs = new Stock { Code = s }
                 .LoadStockOperationRecords(new Profile { Identity = profileId });
             if (rs != null && rs.Any())
             {

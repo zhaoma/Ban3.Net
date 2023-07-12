@@ -21,17 +21,17 @@ internal class Program
 
             case "--prepare":
                 new Action(() => Signalert.ExecuteFullyJob())
-                    .ExecuteAndTiming("prepare(ExecuteFullyJob exclude events and seeds)");
+                    .ExecuteAndTiming("Prepare(ExecuteFullyJob exclude events and seeds)");
                 break;
 
             case "--daily":
                 new Action(Signalert.ExecuteDailyJob)
-                    .ExecuteAndTiming("daily(ExecuteDailyJob)");
+                    .ExecuteAndTiming("Daily Job (ExecuteDailyJob)");
                 break;
 
             case "--one":
                 new Action(() => { Signalert.ExecuteDailyJob(args[1]); })
-                    .ExecuteAndTiming($"one(PrepareOnesDailyPrices({args[1]}))");
+                    .ExecuteAndTiming($"One(PrepareOnesDailyPrices({args[1]}))");
                 break;
 
             case "--reinstate":
@@ -43,17 +43,16 @@ internal class Program
                 new Action(Signalert.EvaluateProfiles)
                     .ExecuteAndTiming("EvaluateProfiles.");
                 break;
-
-
+                
             case "--mc":
                 var days = args.Length > 1 ? args[1].ToInt() : 3;
                 new Action(() => Signalert.CreateAmountDiagrams(days))
-                    .ExecuteAndTiming("EvaluateProfiles.");
+                    .ExecuteAndTiming("CreateAmountDiagrams.");
                 break;
 
             case "--check":
                 new Action(CheckSomething)
-                    .ExecuteAndTiming("CheckSomething.");
+                    .ExecuteAndTiming("CheckSomething(temp func).");
                 break;
 
             default:

@@ -42,7 +42,7 @@
             <tbody>
                 @foreach (var point in Model.WrongKeys.OrderByDescending(o => o.Value))
                 {
-                    <tr class="red">
+                    <tr class="green">
                         <td>@point.Key</td>
                         <td>@point.Value</td>
                     </tr>
@@ -66,7 +66,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var point in Model.Records.Where(o => o.SellDate == null).OrderByDescending(o => o.BuyDate).Take(50))
+                @foreach (var point in Model.Records.Where(o => o.SellDate == null)
+                    .OrderByDescending(o => o.BuyDate))
                 {
                     var nearly = Ban3.Productions.Casino.CcaAndReport.Signalert.UnsellRecord(point, out var c);
                     var className = c > point.BuyPrice ? "red" : "green";
@@ -101,7 +102,8 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var point in Model.Records.Where(o => o.SellDate != null).OrderByDescending(o => o.BuyDate).Take(50))
+                @foreach (var point in Model.Records.Where(o => o.SellDate != null)
+                    .OrderByDescending(o => o.BuyDate))
                 {
                     var className = point.SellPrice > point.BuyPrice ? "red" : "green";
                     <tr class="@className renderChartsButton"

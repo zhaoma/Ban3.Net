@@ -230,7 +230,7 @@ public static partial class Helper
                         var exists = _.LoadOnesDailyPrices(code) ?? new List<StockPrice>();
 
                         var newList = ps.Data.FindAll(o => o.Code == code);
-
+                        /*
                         newList = newList.Where(x => exists.All(y => y.TradeDate != x.TradeDate)).ToList();
 
                         exists = exists.Union(newList)
@@ -238,6 +238,20 @@ public static partial class Helper
                             .Distinct(o => o)
                             .OrderBy(o => o.TradeDate)
                             .ToList();
+                        */
+
+                        newList.ForEach(p =>
+                        {
+                            var r = exists.FindLast(o => o.TradeDate.Equals(p.TradeDate));
+                            if (r != null)
+                            {
+                                r = p;
+                            }
+                            else
+                            {
+                                exists.Add(p);
+                            }
+                        });
 
                         var savedPath = exists.SetsFile(code)
                             .WriteFile(exists.OrderBy(o => o.TradeDate).ObjToJson());
