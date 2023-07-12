@@ -8,6 +8,7 @@
     <RootNamespace>Ban3.Sites.ViaTushare</RootNamespace>
     <AssemblyName>Ban3.Sites.ViaTushare</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Sites.ViaTushare</Title>
     <Version>1.0.3</Version>
     <Authors>zhaoma</Authors>

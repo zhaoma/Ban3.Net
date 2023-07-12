@@ -8,6 +8,7 @@
     <RootNamespace>Ban3.Sites.ViaSohu</RootNamespace>
     <AssemblyName>Ban3.Sites.ViaSohu</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Sites.ViaSina</Title>
     <Version>1.0.1</Version>
     <Authors>zhaoma</Authors>

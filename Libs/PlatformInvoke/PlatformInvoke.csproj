@@ -6,6 +6,7 @@
     <RootNamespace>Ban3.Infrastructures.PlatformInvoke</RootNamespace>
     <AssemblyName>Ban3.Infrastructures.PlatformInvoke</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.PlatformInvoke</Title>
     <Version>1.0.2</Version>
     <Authors>zhaoma</Authors>

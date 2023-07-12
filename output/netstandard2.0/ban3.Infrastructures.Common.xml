@@ -786,6 +786,14 @@
             <param name="targetKeys">目标集</param>
             <returns></returns>
         </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AllFoundInComplex(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary>
+            全包含，包括复合条件
+            </summary>
+            <param name="keys"></param>
+            <param name="setKeys"></param>
+            <returns></returns>
+        </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NotFoundIn``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
             <summary>
             [checked] 集合未发现
@@ -819,7 +827,7 @@
             <param name="length">新长度</param>
             <returns>新长度，从头填充原数组，超出部分截断</returns>
         </member>
-        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsAsc``1(System.Collections.Generic.List{``0},System.Func{``0,System.Decimal})">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsAsc``1(System.Collections.Generic.List{``0},System.Func{``0,System.Double})">
             <summary>
             [checked] 集合是否为升序
             </summary>
@@ -828,7 +836,7 @@
             <param name="toDecimal">用来排序的取值函数</param>
             <returns></returns>
         </member>
-        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsDesc``1(System.Collections.Generic.List{``0},System.Func{``0,System.Decimal})">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsDesc``1(System.Collections.Generic.List{``0},System.Func{``0,System.IComparable{System.Object}})">
             <summary>
             [checked] 集合是否为降序
             </summary>

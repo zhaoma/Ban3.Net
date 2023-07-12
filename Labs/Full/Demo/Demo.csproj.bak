@@ -16,7 +16,6 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <PublishSingleFile>true</PublishSingleFile>
-    <DebugType>embedded</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

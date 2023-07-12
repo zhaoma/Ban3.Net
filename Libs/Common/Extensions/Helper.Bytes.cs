@@ -27,7 +27,7 @@ public static partial class Helper
     }
 
     /// <summary>
-    /// byte[]转字符串
+    /// byte[2]转字符串
     /// </summary>
     /// <param name="arr"></param>
     /// <param name="isReverse"></param>

@@ -7,6 +7,7 @@
     <AssemblyName>Ban3.Infrastructures.Indicators</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.Indicators</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.Indicators</Title>
     <Version>1.0.6</Version>
     <Authors>zhaoma</Authors>

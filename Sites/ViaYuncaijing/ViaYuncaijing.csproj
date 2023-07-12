@@ -8,6 +8,7 @@
     <RootNamespace>Ban3.Sites.ViaYuncaijing</RootNamespace>
     <AssemblyName>Ban3.Sites.ViaYuncaijing</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Sites.ViaYuncaijing</Title>
     <Version>1.0.1</Version>
     <Authors>zhaoma</Authors>

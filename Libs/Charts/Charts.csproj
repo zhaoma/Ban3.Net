@@ -7,6 +7,7 @@
     <RootNamespace>Ban3.Infrastructures.Charts</RootNamespace>
     <AssemblyName>Ban3.Infrastructures.Charts</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.Charts</Title>
     <Version>1.0.3</Version>
     <Authors>zhaoma</Authors>

@@ -6,6 +6,7 @@
     <AssemblyName>Ban3.Infrastructures.Consoles</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.Consoles</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.Consoles</Title>
     <Version>1.0.1</Version>
     <Authors>zhaoma</Authors>

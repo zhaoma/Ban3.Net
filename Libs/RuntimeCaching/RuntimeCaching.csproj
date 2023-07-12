@@ -6,6 +6,7 @@
     <AssemblyName>Ban3.Infrastructures.RuntimeCaching</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.RuntimeCaching</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.RuntimeCaching</Title>
     <Version>1.0.5</Version>
     <Authors>zhaoma</Authors>

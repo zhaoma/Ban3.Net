@@ -8,6 +8,7 @@
     <RootNamespace>Ban3.Sites.ViaNetease</RootNamespace>
     <AssemblyName>Ban3.Sites.ViaNetease</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Sites.ViaNetease</Title>
     <Version>1.0.1</Version>
     <Authors>zhaoma</Authors>

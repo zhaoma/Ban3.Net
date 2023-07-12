@@ -8,6 +8,7 @@
     <RootNamespace>Ban3.Infrastructures.Common</RootNamespace>
     <AssemblyName>Ban3.Infrastructures.Common</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.Common</Title>
     <Version>1.0.8</Version>
     <Authors>zhaoma</Authors>

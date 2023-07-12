@@ -8,6 +8,7 @@
     <RootNamespace>Ban3.Sites.ViaEastmoney</RootNamespace>
     <AssemblyName>Ban3.Sites.ViaEastmoney</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Sites.ViaEastmoney</Title>
     <Version>1.0.1</Version>
     <Authors>zhaoma</Authors>

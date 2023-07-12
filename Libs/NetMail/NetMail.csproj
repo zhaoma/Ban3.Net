@@ -7,6 +7,7 @@
     <AssemblyName>Ban3.Infrastructures.NetMail</AssemblyName>
     <RootNamespace>Ban3.Infrastructures.NetMail</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.NetMail</Title>
     <Version>1.0.1</Version>
     <Authors>zhaoma</Authors>

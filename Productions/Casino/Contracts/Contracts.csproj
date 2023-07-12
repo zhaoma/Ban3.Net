@@ -6,6 +6,7 @@
     <AssemblyName>Ban3.Productions.Casino.Contracts</AssemblyName>
     <RootNamespace>Ban3.Productions.Casino.Contracts</RootNamespace>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
     <Title>Ban3.Productions.Casino.Contracts</Title>
     <Version>1.0.1</Version>
     <Authors>zhaoma</Authors>

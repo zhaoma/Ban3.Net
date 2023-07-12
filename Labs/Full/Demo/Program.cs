@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Consoles;
 
 namespace Demo
 {
@@ -11,22 +15,27 @@ namespace Demo
     {
         static void Main(string[] args)
         {
-            var a = new List<int> { 1, 2, 3, 4, 5, 6 };
-            var b = new List<int> { 4, 5, 6, 7, 8, 9 };
+            var f = "D:\\DayData_SH_V43.dat";
 
-            // Act
-            var c = new List<List<int>> { a, b }.UnionAll();
+            var length = 1024;
+            var arr = new byte[length];
+            var p = 0;
 
-            Console.WriteLine(c.ObjToJson());
+            using (var fs = new FileStream(f, FileMode.Open))
+            {
+                Console.WriteLine($"fs.Length={fs.Length}");
 
-            Console.WriteLine(a.ObjToJson());
-            a.AppendDistinct(a.RandomResortList());
-            Console.WriteLine(a.ObjToJson());
+                int readBytes;
+                while ((readBytes = fs.Read(arr, 0, length)) > 0)
+                {
+                    //Console.WriteLine($"{readed}--{arr.Length}");
+                    p++; //Console.WriteLine(p);
 
-            a.AppendDistinct(100);
-            Console.WriteLine(a.ObjToJson());
-
-            Console.ReadKey();
+                    $"page {p}:".WriteColorLine(ConsoleColor.DarkRed);
+                    Encoding.UTF8.GetString(arr).WriteColorLine(ConsoleColor.DarkYellow);
+                    Console.ReadKey();
+                }
+            }
         }
     }
 }
