@@ -63,13 +63,14 @@ internal class Program
                 break;
 
             default:
-                $"--all :            prepare all data(exclude events and seeds)"
-                    .WriteColorLine(ConsoleColor.DarkYellow);
+                $"--all :            prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--prepare :        prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--daily :          prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one [code] :     prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--reinstate :      reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--eva :            evaluate profiles(/files/profile/all)".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--mc :             generate macd diagrams(/files/profile/all)".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--trs :            generate macd tracing records(/files/profile/all)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--check :          check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
                 
                 break;
@@ -84,8 +85,27 @@ internal class Program
 
     private static void CheckSomething()
     {
-        var code = "688004.SH";
+        var profile = new Infrastructures.Indicators.Inputs.Profile
+        {
+            BuyingCondition = new Infrastructures.Indicators.Inputs.ProfileCondition
+            {
+                Include=new List<string> {"DMI.PDI.DAILY","DMI.PDI.WEEKLY","DMI.PDI.MONTHLY" }
+            }
+        };
 
-        Signalert.ExecuteDailyJob(code);
+        var dots = Signalert.Reportor
+        .LoadDots(Infrastructures.Indicators.Helper.DefaultFilter);
+
+        var buys = dots.Select(o => o.Value.Where(x => x.IsDotOfBuying))
+            .UnionAll();
+
+        var sells= dots.Select(o => o.Value.Where(x => !x.IsDotOfBuying))
+            .UnionAll();
+
+        var buyCounter = buys.Count(x => profile.BuyingCondition.Include.AllFoundIn(x.SetKeys!));
+
+        var sellCounter=sells.Count(x => profile.BuyingCondition.Include.AllFoundIn(x.SetKeys!));
+
+        $"dots:{dots.Count};buyCounter:{buyCounter}/{buys.Count()};sellCounter:{sellCounter}/{sells.Count()}".WriteColorLine(ConsoleColor.DarkBlue);
     }
 }
