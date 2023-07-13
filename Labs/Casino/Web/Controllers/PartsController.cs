@@ -69,13 +69,13 @@ public class PartsController : Controller
         var listData = Signalert.GetListRecords();
 
         listData = listData?
-        .Where(o =>
-            (string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
-            &&
-            (string.IsNullOrEmpty(request.EndsWith) || o.Code.EndsWith(request.EndsWith))
-        )
-        .Take(request.PageSize)
-        .ToList();
+            .Where(o =>
+                (string.IsNullOrEmpty(request.StartsWith) || o.Code.StartsWithIn(request.StartsWith.Split(',')))
+                &&
+                (string.IsNullOrEmpty(request.EndsWith) || o.Code.EndsWith(request.EndsWith))
+            )
+            .Take(request.PageSize)
+            .ToList();
 
         return string.IsNullOrEmpty(request.ViewName)
             ? View(listData)
@@ -92,7 +92,7 @@ public class PartsController : Controller
 
     public IActionResult Sets(RenderView request)
     {
-        var sets =Signalert.GetStockSets(request);
+        var sets = Signalert.GetStockSets(request);
         return string.IsNullOrEmpty(request.ViewName)
             ? View(sets)
             : View(request.ViewName, sets);
@@ -139,7 +139,7 @@ public class PartsController : Controller
 
         return View(result);
     }
-    
+
     public IActionResult OnesCodes(IFormCollection form)
     {
         var request = new RenderView
@@ -147,8 +147,8 @@ public class PartsController : Controller
             StartsWith = form["startsWith"],
             EndsWith = form["to"]
         };
-        
-        var includes = form["include"]+"";
+
+        var includes = form["include"] + "";
         if (!string.IsNullOrEmpty(includes))
         {
             var includeKeys = new List<string>();
@@ -185,15 +185,15 @@ public class PartsController : Controller
 
             request.ExcludeKeys = excludeKeys.AggregateToString(",");
         }
-        
+
         return RedirectToAction("Codes", request);
     }
 
     public IActionResult Summaries()
     {
         var data = Signalert.Analyzer.LoadSummary()
-            .Select(o=>o.Value)
-            .OrderBy(o=>o.RecordCount)
+            .Select(o => o.Value)
+            .OrderBy(o => o.RecordCount)
             .ToList();
         return View(data);
     }
@@ -201,13 +201,34 @@ public class PartsController : Controller
     public IActionResult ProfileDetail(string id)
     {
         var data = Signalert.LoadCompositeRecords(id)
-        ?? new Productions.Casino.CcaAndReport.Models.CompositeRecords
-        {
-            Records = new List<Infrastructures.Indicators.Outputs.StockOperationRecord>(),
-            RightKeys = new Dictionary<string, int>(),
-            WrongKeys = new Dictionary<string, int>()
-        };
+                   ?? new Productions.Casino.CcaAndReport.Models.CompositeRecords
+                   {
+                       Records = new List<Infrastructures.Indicators.Outputs.StockOperationRecord>(),
+                       RightKeys = new Dictionary<string, int>(),
+                       WrongKeys = new Dictionary<string, int>()
+                   };
 
         return View(data);
+    }
+
+    public IActionResult Timeline()
+    {
+        var ts = Signalert.GetTimelineRecords()?
+            .Where(o => o is { WeeklyRecord: { }, MonthlyRecord: { } });
+        return View(ts);
+    }
+
+    public IActionResult Timeline2()
+    {
+        var ts = Signalert.GetTimelineRecords()?
+            .Where(o => o is { WeeklyRecord: { }, MonthlyRecord: null });
+        return View("Timeline", ts);
+    }
+
+    public IActionResult Timeline3()
+    {
+        var ts = Signalert.GetTimelineRecords()?
+            .Where(o => o is { WeeklyRecord: null, MonthlyRecord: null });
+        return View("Timeline", ts);
     }
 }

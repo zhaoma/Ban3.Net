@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Ban3.Productions.Casino.CcaAndReport.Models.TimelineRecord>
+@{
+    Layout = null;
+}
+
+<div class="col-12">
+    <div class="roundBox grayBox pd-3">
+        <table data-pagination="true" class="table table-hover table-dark  table-bordered caption-top">
+            <caption>@Model.Count() found.</caption>
+            <thead>
+            <tr>
+                <th class="col-1">Identity</th>
+                <th class="col-1">Daily</th>
+                <th class="col">Weekly</th>
+                <th class="col">Monthly</th>
+                <th class="col">High</th>
+                <th class="col">Low</th>
+                <th class="col-1">DC/GC</th>
+                <th class="col-1">Stat</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var point in Model.OrderByDescending(o => o.DailyRecord.Date).ThenByDescending(o=>o.Code))
+            {
+                var className = point.NearlyRecord.Close > point.DailyRecord.Close ? "red" : "green";
+                <tr class="@className renderChartsButton" dataUrl="/data/macd/@point.Code" renderElement="chartsSection">
+                    <td>@point.Code</td>
+                        <td>@Html.Raw(point.DailyRecord.Html(null))</td>
+                        <td>@Html.Raw(point.WeeklyRecord?.Html(point.DailyRecord.Close))</td>
+                        <td>@Html.Raw(point.MonthlyRecord?.Html(point.DailyRecord.Close))</td>
+                    <td>@Html.Raw(point.High?.Html(point.DailyRecord.Close))</td>
+                        <td>@Html.Raw(point.Low?.Html(point.DailyRecord.Close))</td>
+                        <td>@($"{point.GcPoints?.Count} / {point.DcPoints?.Count}")</td>
+                    <td>@Math.Round((point.NearlyRecord.Close-point.DailyRecord.Close)/point.DailyRecord.Close*100D,2) %</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

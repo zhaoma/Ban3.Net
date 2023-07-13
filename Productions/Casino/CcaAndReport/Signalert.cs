@@ -11,6 +11,7 @@ using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
+using Ban3.Productions.Casino.CcaAndReport.Models;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
@@ -215,6 +216,8 @@ public partial class Signalert
         {
             PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity);
         });
+
+        GenerateTimelineRecords();
     }
 
 
@@ -391,5 +394,8 @@ public partial class Signalert
     public static Models.CompositeRecords? LoadCompositeRecords(string profileId)
     => profileId.LoadEntity<Models.CompositeRecords>();
 
-    static object _lock = new();
+    private static object _lock = new();
+
+    public static List<TimelineRecord>? GetTimelineRecords()
+        => "all".LoadEntities<TimelineRecord>();
 }

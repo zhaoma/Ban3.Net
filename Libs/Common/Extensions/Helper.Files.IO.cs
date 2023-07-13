@@ -73,7 +73,7 @@ public static partial class Helper
         var rootPath = Config.LocalStorage.RootPath;
 
         if (string.IsNullOrEmpty(rootPath))
-            rootPath = Environment.CurrentDirectory;
+            rootPath = AppDomain.CurrentDomain.BaseDirectory;
 
         var fullPath = Path.Combine(rootPath, resource);
 
@@ -95,9 +95,13 @@ public static partial class Helper
         return temp;
     }
 
-    /// 
+    /// <summary>
+    /// 当前工作目录
+    /// </summary>
+    /// <param name="addition"></param>
+    /// <returns></returns>
     public static string WorkPath(this string addition)
-        => Path.Combine(Environment.CurrentDirectory, addition);
+        => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, addition);
 
     /// 
     public static string Check(this string path)

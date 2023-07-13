@@ -134,6 +134,7 @@ html {
 .whiteBox {
     background-color: #FFF;
     margin-bottom: 1rem !important;
+    opacity: 0.7;
 }
 
 .grayBox {
@@ -275,4 +276,17 @@ html {
     100% {
         transform: scale(1);
     }
+}
+
+#bellIcon {
+    font-size: 7em;
+    color: white;
+}
+#bellIcon2 {
+    font-size: 5em;
+    color: white;
+}
+#bellIcon3 {
+    font-size: 3em;
+    color: white;
 }

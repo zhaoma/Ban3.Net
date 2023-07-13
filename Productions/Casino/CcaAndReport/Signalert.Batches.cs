@@ -6,6 +6,9 @@ using Ban3.Productions.Casino.Contracts;
 using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Entries;
 using System.Linq;
+using System.Net;
+using Ban3.Productions.Casino.CcaAndReport.Models;
+using Ban3.Productions.Casino.Contracts.Request;
 
 namespace Ban3.Productions.Casino.CcaAndReport;
 
@@ -117,5 +120,43 @@ public partial class Signalert
         profileSummaries.Save();
 
         Profiles().ForEach(profile => { PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity); });
+    }
+
+    public static void GenerateTimelineRecords()
+    {
+        var stocks = TargetCodes();
+        var result = new List<TimelineRecord>();
+
+        //stocks.ForEach(one =>
+        //{
+        //    var sets = GetStockSets(new RenderView { Id = one.Code });
+        //    if (sets != null && sets.Any())
+        //    {
+        //        var tm = new TimelineRecord(sets, out var selected);
+        //        if (selected)
+        //        {
+        //            result.Add(tm);
+        //        }
+        //    }
+        //});
+
+        stocks.ParallelExecute(one =>
+        {
+            var sets = GetStockSets(new RenderView { Id = one.Code });
+            if (sets != null && sets.Any())
+            {
+                var tm = new TimelineRecord(sets, out var selected);
+                if (selected)
+                {
+                    lock (_lock)
+                    {
+                        result.Add(tm);
+                    }
+                }
+            }
+        }, Config.MaxParallelTasks);
+
+        Console.WriteLine($"result.count={result.Count}");
+        result.SaveEntities("all");
     }
 }

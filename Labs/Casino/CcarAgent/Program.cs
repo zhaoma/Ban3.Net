@@ -52,6 +52,11 @@ internal class Program
                     .ExecuteAndTiming("CreateAmountDiagrams.");
                 break;
 
+            case "--trs":
+                new Action(Signalert.GenerateTimelineRecords)
+                    .ExecuteAndTiming("GenerateTimelineRecords.");
+                break;
+
             case "--check":
                 new Action(CheckSomething)
                     .ExecuteAndTiming("CheckSomething(temp func).");
@@ -66,7 +71,7 @@ internal class Program
                 $"--reinstate :      reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--eva :            evaluate profiles(/files/profile/all)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--check :          check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
-
+                
                 break;
         }
 
@@ -79,9 +84,8 @@ internal class Program
 
     private static void CheckSomething()
     {
-        var rs = Signalert.TargetCodes();
-        Console.WriteLine(rs.Count);
+        var code = "688004.SH";
 
-        Console.WriteLine(Signalert.Collector.LoadAllCodes().Count());
+        Signalert.ExecuteDailyJob(code);
     }
 }

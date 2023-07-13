@@ -1,10 +1,4 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    
-//  reference:
-//  ————————————————————————————————————————————————————————————————————————————
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace  Ban3.Infrastructures.Charts.Cogs;
 

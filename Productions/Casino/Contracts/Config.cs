@@ -5,7 +5,7 @@ namespace Ban3.Productions.Casino.Contracts;
 
 public class Config
 {
-    public static int MaxParallelTasks =Infrastructures.Common.Config.GetValue<int>("Config:MaxParallelTasks") ;
+    public static int MaxParallelTasks =(Infrastructures.Common.Config.AppConfiguration["Config:MaxParallelTasks"]).ToInt(30) ;
     public const int FixDailyPrices = 10;
     public const int FixPageSize = 100;
 
