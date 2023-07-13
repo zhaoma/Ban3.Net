@@ -542,7 +542,7 @@
         </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.BytesToString(System.Byte[],System.Boolean)">
             <summary>
-            byte[]转字符串
+            byte[2]转字符串
             </summary>
             <param name="arr"></param>
             <param name="isReverse"></param>
@@ -943,7 +943,11 @@
             
         </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WorkPath(System.String)">
-            
+            <summary>
+            当前工作目录
+            </summary>
+            <param name="addition"></param>
+            <returns></returns>
         </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Check(System.String)">
             

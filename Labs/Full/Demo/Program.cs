@@ -17,7 +17,7 @@ namespace Demo
         {
             var f = "D:\\DayData_SH_V43.dat";
 
-            var length = 1024;
+            var length = 516;
             var arr = new byte[length];
             var p = 0;
 
@@ -26,16 +26,22 @@ namespace Demo
                 Console.WriteLine($"fs.Length={fs.Length}");
 
                 int readBytes;
-                while ((readBytes = fs.Read(arr, 0, length)) > 0)
-                {
-                    //Console.WriteLine($"{readed}--{arr.Length}");
-                    p++; //Console.WriteLine(p);
 
-                    $"page {p}:".WriteColorLine(ConsoleColor.DarkRed);
-                    Encoding.UTF8.GetString(arr).WriteColorLine(ConsoleColor.DarkYellow);
-                    Console.ReadKey();
+                while ((readBytes = fs.Read(arr,0, p==0?40:length)) > 0)
+                {
+                    p++; 
+
+                    $"page {p}:{readBytes}".WriteColorLine(ConsoleColor.DarkRed);
+                    Convert(arr).WriteColorLine(ConsoleColor.DarkYellow);
+                    //Console.ReadKey();
+                    
                 }
             }
+        }
+
+        static string Convert(byte[] bytes)
+        {
+            return string.Join( "-", bytes);
         }
     }
 }

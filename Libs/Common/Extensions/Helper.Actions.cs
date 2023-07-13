@@ -53,6 +53,8 @@ public static partial class Helper
             queue.Enqueue(item);
         }
 
+        if (taskCount <= 0) taskCount = 32;
+
         while (queue.Any())
         {
             var tasks = new List<Task>();
@@ -82,6 +84,8 @@ public static partial class Helper
         Action<T> action,
         int taskCount)
     {
+        if (taskCount <= 0) taskCount = 32;
+
         Semaphore ??= new SemaphoreSlim(taskCount);
         var tasks = new List<Task>();
 
