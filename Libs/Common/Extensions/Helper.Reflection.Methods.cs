@@ -8,7 +8,9 @@ namespace Ban3.Infrastructures.Common.Extensions;
 
 public static partial class Helper
 {
-    private const BindingFlags BindingFlags = System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic;
+    private const BindingFlags BindingFlags = System.Reflection.BindingFlags.Instance 
+                                              | System.Reflection.BindingFlags.Public 
+                                              | System.Reflection.BindingFlags.NonPublic;
 
     private static volatile Dictionary<int, CompiledMethodInfo> _cachedMembers = new ();
 

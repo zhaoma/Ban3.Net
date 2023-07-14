@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
     <LangVersion>10.0</LangVersion>
     <AssemblyName>Ban3.Productions.Casino.Contracts</AssemblyName>
     <RootNamespace>Ban3.Productions.Casino.Contracts</RootNamespace>

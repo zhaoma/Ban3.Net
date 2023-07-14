@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable </NullableContextOptions>
@@ -10,20 +11,23 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.Common</Title>
-    <Version>1.0.8</Version>
+    <Version>1.0.9</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
     <Description>Common,Extensions,Indicators and Echarts</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.3.8</AssemblyVersion>
+    <AssemblyVersion>1.0.3.9</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <BaseOutputPath>D:\GIT\output</BaseOutputPath>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\..\output\</OutputPath>
     <DocumentationFile>..\..\output\Ban3.Infrastructures.Common.xml</DocumentationFile>
+    <AllowedReferenceRelatedFileExtensions>
+      .allowedextension
+    </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fody" Version="6.7.0">
+    <PackageReference Include="Fody" Version="6.8.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -39,6 +43,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Rougamo.Fody" Version="1.4.1" />
+    <PackageReference Include="System.CodeDom" Version="7.0.0" />
     <PackageReference Include="System.IO" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
   </ItemGroup>

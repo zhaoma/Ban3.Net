@@ -79,7 +79,7 @@ public static partial class Helper
 
                 using var reader = new StreamReader(path, absoluteEncoding);
 
-                while ((reader.ReadLine() ?? throw new InvalidOperationException()) is { } line)
+                while (reader.ReadLine() is { } line)
                 {
                     result.Add(line);
                 }

@@ -16,19 +16,22 @@ public class TracingItAttribute : MoAttribute
     /// <summary>
     /// 记录所有方法
     /// </summary>
-    public override AccessFlags Flags { get; } = Config.TraceSetting.BindFlags;
+    public override AccessFlags Flags { get; } =
+        Config.TraceSetting != null
+            ? Config.TraceSetting.BindFlags
+            : AccessFlags.All;
     static readonly ILog Logger = LogManager.GetLogger(typeof(TracingItAttribute));
     readonly Stopwatch _stopwatch = new ();
-    
+
     /// 
     public override void OnEntry(MethodContext context)
     {
-        if (Config.TraceSetting.Timing)
+        if (Config.TraceSetting is { Timing: true })
             _stopwatch.Start();
 
-        var debugInfo =$"ENTRY:{context.Method.DeclaringType}.{context.Method.Name}";
+        var debugInfo = $"ENTRY:{context.Method.DeclaringType}.{context.Method.Name}";
 
-        if (Config.TraceSetting.LoggingArguments)
+        if (Config.TraceSetting is { LoggingArguments: true })
             debugInfo += $"{context.Arguments.ObjToJson()}.";
 
         Logger.Debug(debugInfo);
@@ -44,7 +47,7 @@ public class TracingItAttribute : MoAttribute
     /// 
     public override void OnExit(MethodContext context)
     {
-        if (Config.TraceSetting.Timing)
+        if (Config.TraceSetting is { Timing: true })
         {
             _stopwatch.Stop();
             Logger.Debug($"EXIT: {context.Method.DeclaringType}.{context.Method.Name}:{_stopwatch.ElapsedMilliseconds} ms");

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
     <LangVersion>10.0</LangVersion>
     <RootNamespace>Ban3.Infrastructures.PlatformInvoke</RootNamespace>
     <AssemblyName>Ban3.Infrastructures.PlatformInvoke</AssemblyName>

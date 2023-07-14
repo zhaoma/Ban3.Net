@@ -70,7 +70,7 @@ public static partial class Helper
     /// 
     public static string DataPath(this string resource)
     {
-        var rootPath = Config.LocalStorage.RootPath;
+        var rootPath = Config.LocalStorage?.RootPath;
 
         if (string.IsNullOrEmpty(rootPath))
             rootPath = AppDomain.CurrentDomain.BaseDirectory;
@@ -82,7 +82,7 @@ public static partial class Helper
 
         var fullPathSplit = resource.Split('\\');
 
-        var temp = rootPath;
+        var temp = rootPath!;
         foreach (var s in fullPathSplit)
         {
             temp = string.IsNullOrEmpty(temp)

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "RYRU4XKO3Ikz5VovbjY2ONu/IDNKQol8OLHhZSkKvUHeKyhevXykNVIlAg3hxgg1EpkkP7hpSNLO/7VHKTPtiw==",
+  "dgSpecHash": "3bEKt0witNNwcd718XT9Q1KLNalF/hVnkc+BkpgMdqcpvdmzB6nGj+0Zpp5ViBKA5SL3UWutpn9RulV2nLpZ2A==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Libs\\Common\\Common.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.7.0\\fody.6.7.0.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.8.0\\fody.6.8.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",
@@ -21,6 +21,7 @@
     "C:\\Users\\z004k7zb\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\rougamo.fody\\1.4.1\\rougamo.fody.1.4.1.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\system.codedom\\7.0.0\\system.codedom.7.0.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.configuration.configurationmanager\\4.5.0\\system.configuration.configurationmanager.4.5.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",

@@ -22,54 +22,63 @@ public class Config
     /// <summary>
     /// 
     /// </summary>
-    public static readonly IConfiguration AppConfiguration;
+    public static readonly IConfiguration? AppConfiguration;
 
     /// <summary>
     /// 静态构造
     /// </summary>
     static Config()
     {
-        AppConfiguration = new ConfigurationBuilder()
-            .AddJsonFile("appSettings.json", false, true)
-            .Build();
-
-        log4net.Config.XmlConfigurator.Configure(new FileInfo(Path.Combine(Environment.CurrentDirectory,
-            "log4net.config")));
-
-        LocalStorage = new LocalStorage
+        if (SettingsStandby)
         {
-            RootPath = AppConfiguration["FilesStorage:RootPath"] + "",
-            RootUrl = AppConfiguration["FilesStorage:RootUrl"] + ""
-        };
+            AppConfiguration = new ConfigurationBuilder()
+                .AddJsonFile("appSettings.json", false, true)
+                .Build();
 
-        TraceSetting = new TraceSetting
+            LocalStorage = new LocalStorage
+            {
+                RootPath = AppConfiguration["FilesStorage:RootPath"] + "",
+                RootUrl = AppConfiguration["FilesStorage:RootUrl"] + ""
+            };
+
+            TraceSetting = new TraceSetting
+            {
+                BindFlags = AppConfiguration["TraceSetting:BindFlags"] + "" == "all"
+                    ? AccessFlags.All
+                    : AccessFlags.Public,
+                Timing = AppConfiguration["TraceSetting:Timing"] + "" != "false",
+                LoggingArguments = AppConfiguration["TraceSetting:LoggingArguments"] + "" == "true"
+            };
+        }
+
+        if (LoggerStandby)
         {
-            BindFlags = AppConfiguration["TraceSetting:BindFlags"] + "" == "all"
-                ? AccessFlags.All
-                : AccessFlags.Public,
-            Timing = AppConfiguration["TraceSetting:Timing"] + "" != "false",
-            LoggingArguments = AppConfiguration["TraceSetting:LoggingArguments"] + "" == "true"
-        };
+            log4net.Config.XmlConfigurator
+                .Configure(new FileInfo(Path.Combine(Environment.CurrentDirectory, "log4net.config")));
+        }
     }
+
+    public static bool SettingsStandby => File.Exists("appSettings.json".WorkPath());
+
+    public static bool LoggerStandby => File.Exists("log4net.config".WorkPath());
 
     /// <summary>
     /// 本地文件存储配置
     /// </summary>
-    public static LocalStorage LocalStorage { get; set; }
+    public static LocalStorage? LocalStorage { get; set; }
 
     /// <summary>
     /// 跟踪配置
     /// </summary>
-    public static TraceSetting TraceSetting { get; set; }
+    public static TraceSetting? TraceSetting { get; set; }
 
     /// <summary>
     /// 获取配置值
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static T? GetValue<T>(string key)
-        => (AppConfiguration[key] + "").SafeCast<T>();
+    public static string? GetValue(string key)
+        => AppConfiguration?[key];
 }
 
 /// <summary>

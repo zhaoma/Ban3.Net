@@ -179,11 +179,10 @@
             跟踪配置
             </summary>
         </member>
-        <member name="M:Ban3.Infrastructures.Common.Config.GetValue``1(System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Config.GetValue(System.String)">
             <summary>
             获取配置值
             </summary>
-            <typeparam name="T"></typeparam>
             <param name="key"></param>
             <returns></returns>
         </member>
@@ -586,6 +585,14 @@
             <param name="crc"></param>
             <param name="polynomials"></param>
             <param name="reversal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.CompileSourceCodes(System.String[],System.Collections.Generic.List{System.String})">
+            <summary>
+            编译源码
+            </summary>
+            <param name="codeFiles">源码(每文件)</param>
+            <param name="references">引用/依赖库(.dll)</param>
             <returns></returns>
         </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Delay(System.TimeSpan,System.Action)">
