@@ -1,33 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GIT\\Ban3.Net\\Sites\\ViaSohu\\ViaSohu.csproj": {}
+    "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaSohu/ViaSohu.csproj": {}
   },
   "projects": {
-    "D:\\GIT\\Ban3.Net\\Sites\\ViaSohu\\ViaSohu.csproj": {
+    "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaSohu/ViaSohu.csproj": {
       "version": "1.0.1",
       "restore": {
-        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Sites\\ViaSohu\\ViaSohu.csproj",
+        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaSohu/ViaSohu.csproj",
         "projectName": "Ban3.Sites.ViaSohu",
-        "projectPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaSohu\\ViaSohu.csproj",
-        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-        "outputPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaSohu\\obj\\",
+        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaSohu/ViaSohu.csproj",
+        "packagesPath": "/Users/zhaoma/.nuget/packages/",
+        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaSohu/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -47,11 +44,11 @@
           "dependencies": {
             "Ban3.Infrastructures.Common": {
               "target": "Package",
-              "version": "[1.0.8, )"
+              "version": "[1.0.9, )"
             },
             "Ban3.Infrastructures.NetHttp": {
               "target": "Package",
-              "version": "[1.0.4, )"
+              "version": "[1.0.5, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",
@@ -79,7 +76,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.304/RuntimeIdentifierGraph.json"
         }
       }
     }

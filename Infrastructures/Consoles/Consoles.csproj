@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Ban3.Infrastructures.Consoles</AssemblyName>
+    <RootNamespace>Ban3.Infrastructures.Consoles</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
+    <Title>Ban3.Infrastructures.Consoles</Title>
+    <Version>1.0.1</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>Console extension</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\output\</OutputPath>
+    <DocumentationFile>..\..\..\output\Ban3.Infrastructures.Consoles.xml</DocumentationFile>
+    <AllowedReferenceRelatedFileExtensions>
+      .allowedextension
+    </AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+</Project>

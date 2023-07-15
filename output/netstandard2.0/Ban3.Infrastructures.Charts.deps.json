@@ -7,35 +7,34 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Infrastructures.Charts/1.0.1": {
+      "Ban3.Infrastructures.Charts/1.0.3": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.5",
-          "Fody": "6.7.0",
+          "Ban3.Infrastructures.Common": "1.0.9",
           "NETStandard.Library": "2.0.3",
-          "Rougamo.Fody": "1.4.1",
           "log4net": "2.0.15"
         },
         "runtime": {
           "Ban3.Infrastructures.Charts.dll": {}
         }
       },
-      "Ban3.Infrastructures.Common/1.0.5": {
+      "Ban3.Infrastructures.Common/1.0.9": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
           "Rougamo.Fody": "1.4.1",
+          "System.CodeDom": "7.0.0",
           "System.IO": "4.3.0",
           "System.Threading.Tasks": "4.3.0",
           "log4net": "2.0.15"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
-            "assemblyVersion": "1.0.3.5",
-            "fileVersion": "1.0.3.5"
+            "assemblyVersion": "1.0.3.9",
+            "fileVersion": "1.0.3.9"
           }
         }
       },
-      "Fody/6.7.0": {},
+      "Fody/6.2.5": {},
       "log4net/2.0.15": {
         "dependencies": {
           "System.Configuration.ConfigurationManager": "4.5.0"
@@ -172,7 +171,7 @@
       },
       "Rougamo.Fody/1.4.1": {
         "dependencies": {
-          "Fody": "6.7.0",
+          "Fody": "6.2.5",
           "System.Threading.Tasks.Extensions": "4.5.4"
         },
         "runtime": {
@@ -187,6 +186,14 @@
           "lib/netstandard2.0/System.Buffers.dll": {
             "assemblyVersion": "4.0.3.0",
             "fileVersion": "4.6.28619.1"
+          }
+        }
+      },
+      "System.CodeDom/7.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.CodeDom.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
           }
         }
       },
@@ -345,24 +352,24 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.Charts/1.0.1": {
+    "Ban3.Infrastructures.Charts/1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Ban3.Infrastructures.Common/1.0.5": {
+    "Ban3.Infrastructures.Common/1.0.9": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-mY6pNEBWOu28uyDTECT+wV2550oqpPjfwtpIBzj3osUzrWjyur0nNbBayr8lD9ZiQuDG0RgbU38anXxv1ID4Zg==",
-      "path": "ban3.infrastructures.common/1.0.5",
-      "hashPath": "ban3.infrastructures.common.1.0.5.nupkg.sha512"
+      "sha512": "sha512-KCxhoAeS8lrR4Qq1czywlh0Cr9hHK03saj+GyXF8iYLQoetpv5ROoyMaN3sackglfh40TeJL8hmI/Mn48WEahw==",
+      "path": "ban3.infrastructures.common/1.0.9",
+      "hashPath": "ban3.infrastructures.common.1.0.9.nupkg.sha512"
     },
-    "Fody/6.7.0": {
+    "Fody/6.2.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-apsA8Hp9sAuOVmn9byPnCuqiQEjhAApqwNfEG+Gu0OyHUZfjHhLwvNQnAaONDdHWDXP/pBgpGXuscVwfEym8zQ==",
-      "path": "fody/6.7.0",
-      "hashPath": "fody.6.7.0.nupkg.sha512"
+      "sha512": "sha512-wI34APXhZYWlDC9PmA/op+rq0aSB8say00dbNv4PfJIgWEktbmbwmgPflSGN48kJ+Jd5jl682shnW7IUXmKcYw==",
+      "path": "fody/6.2.5",
+      "hashPath": "fody.6.2.5.nupkg.sha512"
     },
     "log4net/2.0.15": {
       "type": "package",
@@ -475,6 +482,13 @@
       "sha512": "sha512-Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg==",
       "path": "system.buffers/4.5.1",
       "hashPath": "system.buffers.4.5.1.nupkg.sha512"
+    },
+    "System.CodeDom/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GLltyqEsE5/3IE+zYRP5sNa1l44qKl9v+bfdMcwg+M9qnQf47wK3H0SUR/T+3N4JEQXF3vV4CSuuo0rsg+nq2A==",
+      "path": "system.codedom/7.0.0",
+      "hashPath": "system.codedom.7.0.0.nupkg.sha512"
     },
     "System.Configuration.ConfigurationManager/4.5.0": {
       "type": "package",

@@ -20,34 +20,34 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageId>Ban3.Sites.ViaTushare</PackageId>
-    <BaseOutputPath>D:\GIT\output</BaseOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\..\..\output\</OutputPath>
     <DocumentationFile>..\..\..\output\Ban3.Sites.ViaTushare.xml</DocumentationFile>
+    <AllowedReferenceRelatedFileExtensions>
+      .allowedextension
+    </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
-
+  
   <ItemGroup>
+    <Content Include="favicon.ico" />
     <None Include="..\..\icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.8" />
-    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.4" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="log4net" Version="2.0.15" />
-    <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="readme.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.9" />
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

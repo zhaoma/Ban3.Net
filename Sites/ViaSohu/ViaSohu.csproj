@@ -18,28 +18,31 @@
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <BaseOutputPath>D:\GIT\output</BaseOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\..\..\output\</OutputPath>
     <DocumentationFile>..\..\..\output\Ban3.Sites.ViaSohu.xml</DocumentationFile>
+    <AllowedReferenceRelatedFileExtensions>
+      .allowedextension
+    </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <Content Remove="C:\Users\z004k7zb\.nuget\packages\ban3.infrastructures.common\1.0.4\contentFiles\any\netstandard2.0\favicon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Content Include="favicon.ico" />
     <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="readme.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.8" />
-    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.4" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.9" />
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.5" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>

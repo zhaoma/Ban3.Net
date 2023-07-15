@@ -16,18 +16,30 @@
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.2</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <BaseOutputPath>D:\GIT\output</BaseOutputPath>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\output\</OutputPath>
+    <DocumentationFile>..\..\output\Ban3.Infrastructures.Common.xml</DocumentationFile>
+    <AllowedReferenceRelatedFileExtensions>
+      .allowedextension
+    </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="favicon.ico" />
     <None Include="..\..\..\icon.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Update="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.8" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.9" />
     <PackageReference Include="Ban3.Infrastructures.Indicators" Version="1.0.6" />
     <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.5" />
     <PackageReference Include="Ban3.Infrastructures.RuntimeCaching" Version="1.0.5" />

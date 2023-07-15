@@ -1,25 +1,25 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{C7ACADA2-BA6C-4260-AD55-62823CCA6814}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructures", "Infrastructures", "{C7ACADA2-BA6C-4260-AD55-62823CCA6814}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuntimeCaching", "..\..\Libs\RuntimeCaching\RuntimeCaching.csproj", "{7675A898-4F47-4273-A9B7-431CC378BC34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuntimeCaching", "..\..\Infrastructures\RuntimeCaching\RuntimeCaching.csproj", "{7675A898-4F47-4273-A9B7-431CC378BC34}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sites", "Sites", "{A1CCF12E-F3DA-4A4F-9FD3-56B20DB9728B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaTushare", "..\..\Sites\ViaTushare\ViaTushare.csproj", "{70E3C88E-8BA7-404F-B801-E23B55DBAD4F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\..\Libs\Common\Common.csproj", "{88705B55-292E-45B1-AEE1-18EE034588C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\..\Infrastructures\Common\Common.csproj", "{88705B55-292E-45B1-AEE1-18EE034588C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{EDB28AE2-1B3F-4492-8AD4-945F18B2DDCA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Full.NUnitTest", "Full.NUnitTest\Full.NUnitTest.csproj", "{D8C5A979-8774-45D1-8702-CD08782838BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHttp", "..\..\Libs\NetHttp\NetHttp.csproj", "{FCBCF3AA-2123-4618-A77B-257D93EF2D22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetHttp", "..\..\Infrastructures\NetHttp\NetHttp.csproj", "{FCBCF3AA-2123-4618-A77B-257D93EF2D22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indicators", "..\..\Libs\Indicators\Indicators.csproj", "{F8F2A1C7-4F5B-44D6-8260-7F1F211EFE33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Indicators", "..\..\Infrastructures\Indicators\Indicators.csproj", "{F8F2A1C7-4F5B-44D6-8260-7F1F211EFE33}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaNetease", "..\..\Sites\ViaNetease\ViaNetease.csproj", "{0C54C9EE-DEDA-4189-BA6B-AE819A998CD5}"
 EndProject
@@ -31,19 +31,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaSina", "..\..\Sites\ViaS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaSohu", "..\..\Sites\ViaSohu\ViaSohu.csproj", "{021A1FDF-B25D-4D82-8EDB-A89738773E1F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consoles", "..\..\Libs\Consoles\Consoles.csproj", "{60E9A549-8DE8-427B-B1BC-ED6F42141F35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consoles", "..\..\Infrastructures\Consoles\Consoles.csproj", "{60E9A549-8DE8-427B-B1BC-ED6F42141F35}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charts", "..\..\Libs\Charts\Charts.csproj", "{E2F68C72-224F-4B16-BA9C-944CA46A8714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charts", "..\..\Infrastructures\Charts\Charts.csproj", "{E2F68C72-224F-4B16-BA9C-944CA46A8714}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformInvoke", "..\..\Libs\PlatformInvoke\PlatformInvoke.csproj", "{30EBA88C-483E-47E5-9275-CE8880864815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformInvoke", "..\..\Infrastructures\PlatformInvoke\PlatformInvoke.csproj", "{30EBA88C-483E-47E5-9275-CE8880864815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMail", "..\..\Libs\NetMail\NetMail.csproj", "{82346004-E9B1-45D6-9217-850998E8531C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMail", "..\..\Infrastructures\NetMail\NetMail.csproj", "{82346004-E9B1-45D6-9217-850998E8531C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Productions", "Productions", "{08CD8597-BABF-44A5-BD79-E74D6A469005}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Casino", "Casino", "{66712823-0C8C-4FF7-A85E-9BE4A82BDFF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "..\..\Productions\Casino\Contracts\Contracts.csproj", "{D51D9D1C-FD15-462F-8175-622D5EFA34AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRClient", "..\..\Infrastructures\SignalRClient\SignalRClient.csproj", "{2B4E95F8-B077-45B0-AEBA-312984169CFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +121,10 @@ Global
 		{D51D9D1C-FD15-462F-8175-622D5EFA34AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D51D9D1C-FD15-462F-8175-622D5EFA34AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D51D9D1C-FD15-462F-8175-622D5EFA34AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B4E95F8-B077-45B0-AEBA-312984169CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B4E95F8-B077-45B0-AEBA-312984169CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B4E95F8-B077-45B0-AEBA-312984169CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B4E95F8-B077-45B0-AEBA-312984169CFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +146,7 @@ Global
 		{82346004-E9B1-45D6-9217-850998E8531C} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
 		{66712823-0C8C-4FF7-A85E-9BE4A82BDFF8} = {08CD8597-BABF-44A5-BD79-E74D6A469005}
 		{D51D9D1C-FD15-462F-8175-622D5EFA34AA} = {66712823-0C8C-4FF7-A85E-9BE4A82BDFF8}
+		{2B4E95F8-B077-45B0-AEBA-312984169CFE} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0411A79E-D9D7-4686-8190-6E05F219E28D}
