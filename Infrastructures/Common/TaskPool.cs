@@ -41,7 +41,11 @@ public class TaskPool<T>
             }
         }
 
-        Task.WaitAll(Tasks);
+        //Task.WaitAll(Tasks);
+        while (_queue.Count > 0)
+        {
+            //Console.WriteLine($"queue remain {_queue.Count}");
+        }
     }
 
     bool LoadOne(int index,out Task? t) 
@@ -56,7 +60,7 @@ public class TaskPool<T>
                     Console.WriteLine("continue");
                     if (LoadOne(index,out var q))
                     {
-                        Tasks[index] = q!;
+                        Tasks![index] = q!;
 
                     }
 	            });
@@ -67,6 +71,6 @@ public class TaskPool<T>
         return false;
     }
 
-    private static Task[] Tasks;
+    private Task[]? Tasks;
     private readonly Queue<T> _queue = new();
 }
