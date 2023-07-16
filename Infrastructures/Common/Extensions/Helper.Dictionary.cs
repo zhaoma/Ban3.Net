@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Ban3.Infrastructures.Common.Models;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
@@ -60,6 +61,83 @@ public static partial class Helper
         }
 
         return dict;
+    }
+
+    /// <summary>
+    /// 字典中添加到Dictionary-MultiResult
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    /// <param name="result"></param>
+    /// <param name="key"></param>
+    /// <param name="val"></param>
+    /// <returns></returns>
+    public static Dictionary<TKey, MultiResult<TValue>> AppendInMultiResult<TKey, TValue>(
+        this Dictionary<TKey, MultiResult<TValue>> result,
+        TKey key,
+        TValue val)
+    {
+        if (result.TryGetValue(key, out var mr))
+        {
+            mr ??= new MultiResult<TValue>();
+            if (!mr.Data!.Contains(val))
+            {
+                mr.RecordCount++;
+                mr.Data.Add(val);
+
+                lock (ObjLock)
+                {
+                    result[key] = mr;
+                }
+            }
+        }
+        else
+        {
+            lock (ObjLock)
+            {
+                result.Add(key, new MultiResult<TValue> { RecordCount = 1, Data = new List<TValue> { val } });
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// 字典中添加到Dictionary-List
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    /// <param name="result"></param>
+    /// <param name="key"></param>
+    /// <param name="val"></param>
+    /// <returns></returns>
+    public static Dictionary<TKey, List<TValue>> AppendInList<TKey, TValue>(
+        this Dictionary<TKey, List<TValue>> result,
+        TKey key,
+        TValue val)
+    {
+        if (result.TryGetValue(key, out var mr))
+        {
+            mr ??= new List<TValue>();
+            if (!mr!.Contains(val))
+            {
+                mr.Add(val);
+
+                lock (ObjLock)
+                {
+                    result[key] = mr;
+                }
+            }
+        }
+        else
+        {
+            lock (ObjLock)
+            {
+                result.Add(key, new List<TValue> { val } );
+            }
+        }
+
+        return result;
     }
 
     /// <summary>

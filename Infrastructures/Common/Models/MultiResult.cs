@@ -17,6 +17,7 @@ public class MultiResult<T>
     /// <summary>
     /// 记录总数
     /// </summary>
+
     public int RecordCount { get; set; }
 
     /// <summary>

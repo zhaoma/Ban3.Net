@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using log4net;
 
 namespace Ban3.Infrastructures.Common;
 
-
-
 public class TaskPool<T>
 {
+    static readonly ILog Logger = LogManager.GetLogger($"TaskPool.{typeof(T)}");
+
     public List<T>? Args { get; set; }
 
     public int MaxParallel { get; set; }
@@ -30,40 +32,41 @@ public class TaskPool<T>
     {
         if (Handle == null || Args == null || !Args.Any()) return;
 
-        while (_queue.Count > 0)
+        Tasks = new Task[Math.Min(_queue.Count, MaxParallel)];
+        for (var i = 0; i < Tasks.Length; i++)
         {
-            while (_parallelCounter < MaxParallel)
+            if (LoadOne(i,out var t))
             {
-                Console.WriteLine($"parallelCounter={_parallelCounter};_taskList.Count={_taskList.Count}");
-                Counter(plus: true);
-
-                var a = _queue.Dequeue();
-                var one = Task.Run(() => { Handle(a); }).ContinueWith((task) =>
-                {
-                    Console.WriteLine($"continue:{_taskList.Count}");
-                    _taskList.Remove(task);
-                    Console.WriteLine($"parallelCounter={_parallelCounter};_taskList.Count={_taskList.Count}/{task.Status}");
-                    Counter(plus: false);
-                    Execute();
-                });
-
-                _taskList.Add(one);
+                Tasks[i] = t!;
             }
-
-            Task.WaitAll(_taskList.ToArray());
         }
+
+        Task.WaitAll(Tasks);
     }
 
-    void Counter(bool plus)
+    bool LoadOne(int index,out Task? t) 
     {
-        lock (CounterLock)
+        if (_queue.Count > 0&&Handle!=null)
         {
-            _parallelCounter = plus ? _parallelCounter + 1 : _parallelCounter - 1;
+            var q = _queue.Dequeue();
+            t = Task.Run(() => {
+                    Console.WriteLine($"CurrentThread:[{Thread.CurrentThread.ManagedThreadId}],Queue remain [{_queue.Count}]");
+                    Handle(q); })
+                .ContinueWith((task) =>{
+                    Console.WriteLine("continue");
+                    if (LoadOne(index,out var q))
+                    {
+                        Tasks[index] = q!;
+
+                    }
+	            });
+            return true;
         }
+
+        t = null;
+        return false;
     }
 
-    private readonly List<Task> _taskList = new();
-    private static readonly object CounterLock = new();
-    private int _parallelCounter = 0;
+    private static Task[] Tasks;
     private readonly Queue<T> _queue = new();
 }

@@ -20,7 +20,9 @@ public class TracingItAttribute : MoAttribute
         Config.TraceSetting != null
             ? Config.TraceSetting.BindFlags
             : AccessFlags.All;
+
     static readonly ILog Logger = LogManager.GetLogger(typeof(TracingItAttribute));
+
     readonly Stopwatch _stopwatch = new ();
 
     /// 

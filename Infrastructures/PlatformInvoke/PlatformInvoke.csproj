@@ -16,6 +16,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.2</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
