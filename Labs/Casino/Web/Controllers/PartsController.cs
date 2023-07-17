@@ -201,7 +201,7 @@ public class PartsController : Controller
     public IActionResult ProfileDetail(string id)
     {
         var data = Signalert.LoadCompositeRecords(id)
-                   ?? new Productions.Casino.CcaAndReport.Models.CompositeRecords
+                   ?? new Productions.Casino.Contracts.Entities.CompositeRecords
                    {
                        Records = new List<Infrastructures.Indicators.Outputs.StockOperationRecord>(),
                        RightKeys = new Dictionary<string, int>(),

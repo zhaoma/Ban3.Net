@@ -12,7 +12,6 @@ using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
-using Ban3.Productions.Casino.CcaAndReport.Models;
 using Ban3.Productions.Casino.Contracts;
 using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Interfaces;
@@ -103,7 +102,7 @@ public partial class Signalert
     }
 
     #endregion
-    
+
     /// <summary>
     /// 计算复权价格
     /// 计算指标值
@@ -334,9 +333,9 @@ public partial class Signalert
     public static List<StockOperationRecord> GetProfileDetails(List<string> codes, string profileId)
         => Analyzer.LoadProfileDetails(codes, profileId);
 
-    public static Models.CompositeRecords PrepareCompositeRecords(List<string> codes, string profileId)
+    public static Contracts.Entities.CompositeRecords PrepareCompositeRecords(List<string> codes, string profileId)
     {
-        var result = new Models.CompositeRecords
+        var result = new Contracts.Entities.CompositeRecords
         {
             Profile = Profiles().Last(o => o.Identity == profileId),
             Records = GetProfileDetails(codes, profileId)
@@ -351,7 +350,7 @@ public partial class Signalert
             {
                 var sets = GetStockSets(new RenderView { Id = r.Code })
                     .GetSetKeys(r.BuyDate.ToYmd());
-		    //.Except(result.Profile.BuyingCondition.);
+                //.Except(result.Profile.BuyingCondition.);
 
                 if (sets != null)
                 {
@@ -375,18 +374,37 @@ public partial class Signalert
         return result;
     }
 
-    public static Models.CompositeRecords? LoadCompositeRecords(string profileId)
-        => profileId.LoadEntity<Models.CompositeRecords>();
+    public static Contracts.Entities.CompositeRecords? LoadCompositeRecords(string profileId)
+        => profileId.LoadEntity<Contracts.Entities.CompositeRecords>();
 
     private static object _lock = new();
 
-    public static List<TimelineRecord>? GetTimelineRecords()
-        => "all".LoadEntities<TimelineRecord>();
+    public static List<Contracts.Entities.TimelineRecord>? GetTimelineRecords()
+        => "all".LoadEntities<Contracts.Entities.TimelineRecord>();
 
-    public static Dictionary<DistributeCondition, MultiResult<TimelineRecord>> DistributeRecords()
+    public static Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>> PrepareDistributeRecords()
     {
+        var all = GetTimelineRecords();
+        var result = new Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>();
 
+        if (all != null && all.Any())
+        {
+            Config.DistributeConditions().ForEach(condition =>
+            {
+                all.FindAll(o => condition.IsTarget(o)).ToList()
+                    .ForEach(o => result.AppendInMultiResult(condition, o));
 
+            });
+        }
+
+        typeof(Contracts.Entities.DistributeCondition)
+        .LocalFile()
+        .WriteFile(result.ObjToJson());
+        return result;
     }
 
+    public static Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>? GetDistributeRecords()
+        => typeof(Contracts.Entities.DistributeCondition)
+        .LocalFile()
+        .ReadFileAs<Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>>();
 }
