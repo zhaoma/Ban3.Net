@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Common.Models;
 using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Enums;
@@ -331,24 +332,7 @@ public partial class Signalert
         => code.MacdDiagram().ObjToJson();
 
     public static List<StockOperationRecord> GetProfileDetails(List<string> codes, string profileId)
-    {
-        var result = new List<StockOperationRecord>();
-        codes.AsParallel()
-        .ForAll(s =>
-        {
-            var rs = new Stock { Code = s }
-                .LoadStockOperationRecords(new Profile { Identity = profileId });
-            if (rs != null && rs.Any())
-            {
-                lock (_lock)
-                {
-                    result.AddRange(rs);
-                }
-            }
-        });
-
-        return result;
-    }
+        => Analyzer.LoadProfileDetails(codes, profileId);
 
     public static Models.CompositeRecords PrepareCompositeRecords(List<string> codes, string profileId)
     {
@@ -392,10 +376,17 @@ public partial class Signalert
     }
 
     public static Models.CompositeRecords? LoadCompositeRecords(string profileId)
-    => profileId.LoadEntity<Models.CompositeRecords>();
+        => profileId.LoadEntity<Models.CompositeRecords>();
 
     private static object _lock = new();
 
     public static List<TimelineRecord>? GetTimelineRecords()
         => "all".LoadEntities<TimelineRecord>();
+
+    public static Dictionary<DistributeCondition, MultiResult<TimelineRecord>> DistributeRecords()
+    {
+
+
+    }
+
 }

@@ -8,6 +8,7 @@ namespace Ban3.Productions.Casino.Contracts.Entities;
 
 public class FavoriteRecord
 {
+
     [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
     [JsonConverter(typeof(StringEnumConverter))]
     public StockFavoriteType Type { get; set; }

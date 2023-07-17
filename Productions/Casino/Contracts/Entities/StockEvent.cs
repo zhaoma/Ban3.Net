@@ -1,5 +1,4 @@
 ﻿using System;
-using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Sites.ViaSina.Entries;
 using Newtonsoft.Json;
 

@@ -49,7 +49,6 @@ public class Favorite
                 {
                     _records[code].Logs ??= new List<FavoriteLog>();
                     _records[code].Logs.Add(new FavoriteLog { MarkTime = er.MarkTime, Type = er.Type });
-
                     _records[code].Type = fr.Type;
                     _records[code].MarkTime = DateTime.Now;
                     _records[code].Close = fr.Close;

@@ -1,11 +1,11 @@
 ﻿using System;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Productions.Casino.Contracts.Request;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+
 #nullable enable
 
-namespace Ban3.Productions.Casino.CcaAndReport.Models;
+namespace Ban3.Productions.Casino.Contracts.Entities;
 
 public class DistributeCondition
 {
@@ -18,10 +18,13 @@ public class DistributeCondition
         Request = request;
     }
 
+    [JsonProperty("rank", NullValueHandling = NullValueHandling.Ignore)]
     public int Rank { get; set; }
 
+    [JsonProperty("subject", NullValueHandling = NullValueHandling.Ignore)]
     public string Subject { get; set; } = string.Empty;
 
+    [JsonProperty("request", NullValueHandling = NullValueHandling.Ignore)]
     public DistributeExpression Request { get; set; } = new DistributeExpression();
 
     public bool IsTarget(TimelineRecord record)
@@ -56,67 +59,9 @@ public class DistributeCondition
         if (Request.MinPrice != null)
             result = result && record.NearlyRecord.Close >= Request.MinPrice.Value;
 
-
+        if (Request.MaxDays != null)
+            result = result && record.DurationDays() <= Request.MaxDays.Value;
 
         return result;
     }
-}
-
-public class DistributeExpression
-{
-    public DistributeExpression() { }
-
-    [JsonProperty("startsWith", NullValueHandling = NullValueHandling.Ignore)]
-    public string? StartsWith { get; set; }
-
-    [JsonProperty("indicatorHas", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public IndicatorHas IndicatorHas { get; set; }
-
-    [JsonProperty("sorter", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public RecordsSorter Sorter { get; set; }
-
-    [JsonProperty("maxIncrease", NullValueHandling = NullValueHandling.Ignore)]
-    public double? MaxIncrease { get; set; }
-
-    [JsonProperty("minIncrease", NullValueHandling = NullValueHandling.Ignore)]
-    public double? MinIncrease { get; set; }
-
-    [JsonProperty("maxAmplitude", NullValueHandling = NullValueHandling.Ignore)]
-    public double? MaxAmplitude { get; set; }
-
-    [JsonProperty("minAmplitude", NullValueHandling = NullValueHandling.Ignore)]
-    public double? MinAmplitude { get; set; }
-
-    [JsonProperty("maxPrice", NullValueHandling = NullValueHandling.Ignore)]
-    public double? MaxPrice { get; set; }
-
-    [JsonProperty("minPrice", NullValueHandling = NullValueHandling.Ignore)]
-    public double? MinPrice { get; set; }
-
-    [JsonProperty("page", NullValueHandling = NullValueHandling.Ignore)]
-    public int? Page { get; set; } = 1;
-
-    [JsonProperty("pageSize", NullValueHandling = NullValueHandling.Ignore)]
-    public int? PageSize { get; set; } = 10;
-}
-
-[Flags]
-public enum IndicatorHas
-{
-    Daily,
-    Weekly,
-    Monthly
-}
-
-[Flags]
-public enum RecordsSorter
-{
-    Code,
-    Increase,
-    Amplitude,
-    Price,
-    Asc,
-    Desc
 }

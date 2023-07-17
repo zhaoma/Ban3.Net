@@ -23,6 +23,13 @@ public static partial class Helper
                 Infrastructures.Indicators.Helper.LoadProfileSummaries,typeof(ProfileSummary).LocalFile()
                 ); 
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="codes"></param>
+    /// <param name="identity"></param>
+    /// <returns></returns>
     public static List<StockOperationRecord> LoadProfileDetails(this IAnalyzer _, List<string> codes, string identity)
         =>
             Config.CacheKey<StockOperationRecord>(identity)
@@ -43,7 +50,7 @@ public static partial class Helper
                 {
                     lock (_lock)
                     {
-                        result.AddRange(rs.Where(o => o.SellDate != null));
+                        result.AddRange(rs);
                     }
                 }
             });

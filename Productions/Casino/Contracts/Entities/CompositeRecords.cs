@@ -4,7 +4,7 @@ using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Newtonsoft.Json;
 
-namespace Ban3.Productions.Casino.CcaAndReport.Models;
+namespace Ban3.Productions.Casino.Contracts.Entities;
 
 public class CompositeRecords
 {
