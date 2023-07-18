@@ -7,9 +7,9 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Productions.Casino.CcaAndReport/1.0.1": {
+      "Ban3.Productions.Casino.CcaAndReport/1.0.3": {
         "dependencies": {
-          "Ban3.Productions.Casino.Contracts": "1.0.5",
+          "Ban3.Productions.Casino.Contracts": "1.0.6",
           "NETStandard.Library": "2.0.3"
         },
         "runtime": {
@@ -85,7 +85,7 @@
           }
         }
       },
-      "Ban3.Productions.Casino.Contracts/1.0.5": {
+      "Ban3.Productions.Casino.Contracts/1.0.6": {
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.10",
           "Ban3.Infrastructures.Indicators": "1.0.6",
@@ -101,8 +101,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Productions.Casino.Contracts.dll": {
-            "assemblyVersion": "1.0.0.5",
-            "fileVersion": "1.0.0.5"
+            "assemblyVersion": "1.0.0.6",
+            "fileVersion": "1.0.0.6"
           }
         }
       },
@@ -937,7 +937,7 @@
     }
   },
   "libraries": {
-    "Ban3.Productions.Casino.CcaAndReport/1.0.1": {
+    "Ban3.Productions.Casino.CcaAndReport/1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -977,12 +977,12 @@
       "path": "ban3.infrastructures.runtimecaching/1.0.5",
       "hashPath": "ban3.infrastructures.runtimecaching.1.0.5.nupkg.sha512"
     },
-    "Ban3.Productions.Casino.Contracts/1.0.5": {
+    "Ban3.Productions.Casino.Contracts/1.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-bmIJwWU8/gNhnXD0dsB10vwPRNdCaayytoLcAWxAe7dcINrJucgZXKAQCbl+Ct5DpNdD9h2GqOc+Z1Q2ZL4Oiw==",
-      "path": "ban3.productions.casino.contracts/1.0.5",
-      "hashPath": "ban3.productions.casino.contracts.1.0.5.nupkg.sha512"
+      "sha512": "sha512-ieTAiT6bUYwKwXcd6bQlXsVhfH3Nb36/w+gLxqijbR5IawxQezWx/lVkK3P9ZltlNX4ZPTwt97G3iuZHVe77Zg==",
+      "path": "ban3.productions.casino.contracts/1.0.6",
+      "hashPath": "ban3.productions.casino.contracts.1.0.6.nupkg.sha512"
     },
     "Ban3.Sites.ViaEastmoney/1.0.1": {
       "type": "package",

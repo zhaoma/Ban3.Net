@@ -128,8 +128,7 @@ public static partial class Helper
         =>
             Config.CacheKey<StockOperationRecord>(identity)
                 .LoadOrSetDefault(
-                    () => _.PrepareProfileDetails(codes, identity), typeof(ProfileSummary)
-                        .LocalFile()
+                    () => _.PrepareProfileDetails(codes, identity),60
                 );
 
     private static List<StockOperationRecord> PrepareProfileDetails(this IAnalyzer _, List<string> codes, string identity)

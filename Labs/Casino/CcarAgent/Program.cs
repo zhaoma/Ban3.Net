@@ -1,7 +1,18 @@
 ﻿using System.Diagnostics;
+using System.Security.Principal;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
+using Ban3.Infrastructures.Indicators;
+using Ban3.Infrastructures.Indicators.Entries;
+using Ban3.Infrastructures.Indicators.Inputs;
+using Ban3.Infrastructures.Indicators.Outputs;
+using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.Contracts;
+using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Extensions;
+using Ban3.Productions.Casino.Contracts.Interfaces;
+using Stock = Ban3.Infrastructures.Indicators.Entries.Stock;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -65,5 +76,38 @@ internal class Program
     private static void CheckSomething()
     {
         Console.WriteLine("NOTHING IN QUEUE.");
+
+        var stocks = Signalert.TargetCodes()
+            .Select(o=>new Infrastructures.Indicators.Entries.Stock
+            {
+                Code=o.Code,
+                Symbol=o.Symbol,
+                Name = o.Name,
+                ListDate=o.ListDate
+            })
+            .ToList();
+
+        var codes = stocks.Select(o => o.Code).ToList();
+
+        //Signalert.Analyzer.EvaluateProfiles(codes);
+        Config.Profiles().ForEach(profile =>
+        {
+            Signalert.Analyzer.LoadProfileDetails(codes, profile.Identity);
+        });
+
+        //Config.Profiles().ForEach(profile =>
+        //{
+        //    codes.AsParallel()
+        //        .ForAll(s =>
+        //        {
+        //            Console.WriteLine(s.Code);
+        //            var rs = s.LoadStockOperationRecords(new Profile { Identity =profile.Identity });
+        //            if (rs != null && rs.Any())
+        //            {
+                        
+        //            }
+        //        });
+        //});
     }
+    
 }

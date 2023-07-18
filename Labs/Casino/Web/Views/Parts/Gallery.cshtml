@@ -1,0 +1,48 @@
+﻿@model Dictionary<Ban3.Productions.Casino.Contracts.Entities.DistributeCondition, Ban3.Infrastructures.Common.Models.MultiResult<Ban3.Productions.Casino.Contracts.Entities.TimelineRecord>>
+@{
+    Layout = null;
+}
+
+<div class="row grid" data-masonry='{"percentPosition": true }'>
+    
+    @foreach (var kv in Model)
+    {
+        if (kv.Value is {Data: { } })
+        {
+            <div class="col-sm-4 col-lg-4 mb-4" id="dic_@kv.Key.Rank">
+                <div class="card">
+                    <div class="card-header">@kv.Key.Subject @kv.Value.RecordCount</div>
+                    <div class="card-body col">
+                        <table data-pagination="true" class="table table-hover  table-bordered">
+                            <thead>
+                            <tr>
+                                <th class="col-3">Symbol</th>
+                                <th class="col-6">Close</th>
+                                <th class="col-3">Rank</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var point in kv.Value.Data)
+                            {
+                                var changePercent = point.Increase();
+                                var className = changePercent > 0
+                                    ? "red"
+                                    : (changePercent == 0 ? "gray" : "green");
+
+                                <tr class="@className renderChartsButton"
+                                    renderElement="chartsContainer"
+                                    dataUrl="/data/macd/@point.Code"
+                                    renderContainer="chartsSection">
+                                    <td>@point.Code</td>
+                                    <td>@point.DailyRecord.Close <span class="badge">@Math.Round(changePercent, 2) %</span></td>
+                                    <td>@($"{point.NearlyRecord.Close}") <span class="badge">@point.DurationDays()</span></td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

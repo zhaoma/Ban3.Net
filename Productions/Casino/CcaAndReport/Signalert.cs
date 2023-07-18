@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
@@ -8,7 +7,6 @@ using Ban3.Infrastructures.Common.Models;
 using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Enums;
-using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport.Implements;
@@ -32,14 +30,22 @@ public class Signalert
 {
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
 
+    /// 
     public static ICollector Collector = new Collector();
 
+    /// 
     public static ICalculator Calculator = new Calculator();
 
+    /// 
     public static IAnalyzer Analyzer = new Analyzer();
 
+    /// 
     public static IReportor Reportor = new Reportor();
     
+    /// <summary>
+    /// 关注标的池
+    /// </summary>
+    /// <returns></returns>
     public static List<Contracts.Entities.Stock> TargetCodes()
         => Collector.LoadAllCodes().Where(o => o.Code.EndsWith(".SH") || o.Code.EndsWith(".SZ")).ToList();
 
@@ -171,36 +177,44 @@ public class Signalert
         
         Analyzer.PrepareDistributeRecords();
     }
-    
-    public static List<DotInfo>? GetDots(RenderView request)
+
+    /// 
+    public static List<DotInfo> GetDots(RenderView request)
     {
         return Reportor
             .LoadDots(Infrastructures.Indicators.Helper.DefaultFilter)
             .ExtendedDots(request);
     }
 
+    /// 
     public static Dictionary<string, int>? GetDotsKey(bool forBuying)
         => Reportor.LoadDotsKey(Infrastructures.Indicators.Helper.DefaultFilter, forBuying);
 
+    /// 
     public static LineOfPoint? GetLineOfPoint(RenderView request)
         => new Stock { Code = request.Id }.LoadLineOfPoint(
             request.CycleEnum()
         );
 
+    /// 
     public static List<ListRecord>? GetListRecords(string listName = "latest")
         => Config.CacheKey<ListRecord>(listName)
             .LoadOrSetDefault<List<ListRecord>>(listName.DataFile<ListRecord>());
 
+    /// 
     public static List<StockPrice>? GetStockPrices(RenderView request)
         => Calculator.LoadReinstatedPrices(request.Id, request.CycleEnum());
 
+    /// 
     public static List<StockSets>? GetStockSets(RenderView request)
         => new Stock { Code = request.Id }.LoadStockSets();
 
+    /// 
     public static List<StockSets>? GetLatestStockSets()
         => Config.CacheKey<StockSets>("latest")
             .LoadOrSetDefault<List<StockSets>>("latest".DataFile<StockSets>());
 
+    /// 
     public static string UnsellRecord(StockOperationRecord r, out double c)
     {
         var l = GetLatestStockSets()?.FindLast(o => o.Code == r.Code);
@@ -214,6 +228,7 @@ public class Signalert
         return string.Empty;
     }
 
+    /// 
     public static string GetTreemapDiagram(int id = 1)
     {
         var diagramName = id == 1
@@ -225,6 +240,7 @@ public class Signalert
         return diagram.ObjToJson();
     }
 
+    /// 
     public static string GetSankeyDiagram(int id = 1)
     {
         var diagramName = id == 1
@@ -236,6 +252,7 @@ public class Signalert
         return diagram.ObjToJson();
     }
 
+    /// 
     public static string GetCandlestickDiagram(string code, string cycle = "DAILY")
     {
         cycle = cycle.ToUpper();
@@ -245,21 +262,27 @@ public class Signalert
         return new Stock { Code = code, }.LoadDiagram(cycleEnum).ObjToJson();
     }
 
+    /// 
     public static string GetAmountDiagram(string code)
         => $"{code}.Amount".LoadDiagram().ObjToJson();
 
+    /// 
     public static string GetBiasDiagram(string code)
         => code.BiasDiagram().ObjToJson();
 
+    /// 
     public static string GetDmiDiagram(string code)
         => code.DmiDiagram().ObjToJson();
 
+    /// 
     public static string GetKdDiagram(string code)
         => code.KdDiagram().ObjToJson();
 
+    /// 
     public static string GetMacdDiagram(string code)
         => code.MacdDiagram().ObjToJson();
 
+    /// 
     public static List<StockOperationRecord>? GetProfileDetails(List<string> codes, string profileId)
     {
         try
@@ -269,14 +292,16 @@ public class Signalert
 
         return null;
     }
-
-
+    
+    /// 
     public static Contracts.Entities.CompositeRecords? GetCompositeRecords(string profileId)
         => profileId.LoadEntity<Contracts.Entities.CompositeRecords>();
-    
+
+    /// 
     public static List<Contracts.Entities.TimelineRecord>? GetTimelineRecords()
         => "all".LoadEntities<Contracts.Entities.TimelineRecord>();
 
+    /// 
     public static Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>?
         GetDistributeRecords()
         => typeof(Contracts.Entities.DistributeCondition)

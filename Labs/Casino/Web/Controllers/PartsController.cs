@@ -232,5 +232,9 @@ public class PartsController : Controller
         return View("Timeline", ts);
     }
 
-
+    public IActionResult Gallery()
+    {
+        var dic = Signalert.GetDistributeRecords();
+        return View(dic);
+    }
 }

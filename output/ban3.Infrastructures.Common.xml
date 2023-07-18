@@ -9,6 +9,24 @@
             
             </summary>
         </member>
+        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Collector">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Calculator">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Analyzer">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Reportor">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.TargetCodes">
+            <summary>
+            关注标的池
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.PrepareEventsAndSeeds(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
             <summary>
             下载事件，计算复权价格
@@ -56,6 +74,66 @@
             生成最新列表
             </summary>
             <param name="stocks"></param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDots(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDotsKey(System.Boolean)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetLineOfPoint(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetListRecords(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetStockPrices(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetStockSets(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetLatestStockSets">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.UnsellRecord(Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord,System.Double@)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetTreemapDiagram(System.Int32)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetSankeyDiagram(System.Int32)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetCandlestickDiagram(System.String,System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetAmountDiagram(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetBiasDiagram(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDmiDiagram(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetKdDiagram(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetMacdDiagram(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetProfileDetails(System.Collections.Generic.List{System.String},System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetCompositeRecords(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetTimelineRecords">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDistributeRecords">
+            
         </member>
     </members>
 </doc>
