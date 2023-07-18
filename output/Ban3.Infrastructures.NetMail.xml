@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Infrastructures.NetMail</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Infrastructures.NetMail.Entries.TargetServer">
+            <summary>
+            目标服务器
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.NetMail.Helper">
+            <summary>
+            邮件扩展
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.NetMail.Helper.Send(Ban3.Infrastructures.NetMail.Entries.TargetServer,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String,System.String)">
+            <summary>
+            发送邮件
+            </summary>
+            <param name="server"></param>
+            <param name="to"></param>
+            <param name="cc"></param>
+            <param name="subject"></param>
+            <param name="mailHtml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.NetMail.Helper.SendByOffice365(Ban3.Infrastructures.NetMail.Entries.TargetServer,System.Net.Mail.MailMessage)">
+            <summary>
+            用smtp服务器发送邮件
+            </summary>
+            <param name="server"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.NetMail.Helper.SendByOutlook(Ban3.Infrastructures.NetMail.Entries.TargetServer,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String,System.String)">
+            <summary>
+            用outlook发送邮件
+            </summary>
+            <param name="server"></param>
+            <param name="to"></param>
+            <param name="cc"></param>
+            <param name="subject"></param>
+            <param name="mailHtml"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

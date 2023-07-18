@@ -66,8 +66,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="68",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly&IndicatorHas.Monthly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+HasWeek=true,HasMonth=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -76,8 +76,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="68",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                           HasWeek=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -86,8 +86,7 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="68",
-                            IndicatorHas=IndicatorHas.Daily,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
 
@@ -97,8 +96,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="30",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly&IndicatorHas.Monthly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+HasWeek=true,HasMonth=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -107,8 +106,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="30",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                           HasWeek=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -117,8 +116,7 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="30",
-                            IndicatorHas=IndicatorHas.Daily,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
 
@@ -128,8 +126,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="002,003",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly&IndicatorHas.Monthly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+HasWeek=true,HasMonth=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -138,8 +136,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="002,003",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                           HasWeek=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -148,8 +146,7 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="002,003",
-                            IndicatorHas=IndicatorHas.Daily,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
 
@@ -159,8 +156,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="60",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly&IndicatorHas.Monthly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+HasWeek=true,HasMonth=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -169,8 +166,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="60",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                           HasWeek=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -179,8 +176,7 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="60",
-                            IndicatorHas=IndicatorHas.Daily,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
 
@@ -190,8 +186,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="000,001",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly&IndicatorHas.Monthly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+HasWeek=true,HasMonth=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -200,8 +196,8 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="000,001",
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                           HasWeek=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -210,8 +206,7 @@ public class Config
                         new DistributeExpression
                         {
                             StartsWith="000,001",
-                            IndicatorHas=IndicatorHas.Daily,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
 
@@ -221,8 +216,8 @@ public class Config
                         new DistributeExpression
                         {
                             MinPrice=100,
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                           HasWeek=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                      new DistributeCondition(
@@ -231,8 +226,8 @@ public class Config
                         new DistributeExpression
                         {
                             MaxPrice=5,
-                            IndicatorHas=IndicatorHas.Daily&IndicatorHas.Weekly,
-                            Sorter=RecordsSorter.Increase&RecordsSorter.Asc
+                           HasWeek=true,
+                            Sorter=RecordsSorter.Increase
                         }
                      ),
                  };

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CcarAgent", "CcarAgent\CcarAgent.csproj", "{F2A02887-68B4-438A-93D1-B14C2D79F613}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Presentation", "1.Presentation", "{C84FAEFA-D87B-4EB3-8D51-DC986595C3C0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Labs", "Labs", "{C84FAEFA-D87B-4EB3-8D51-DC986595C3C0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{2C29C9BC-C44A-414D-93E5-574E42B0EFB9}"
 EndProject

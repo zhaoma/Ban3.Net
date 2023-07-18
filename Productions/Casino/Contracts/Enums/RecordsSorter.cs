@@ -4,7 +4,6 @@ namespace Ban3.Productions.Casino.Contracts.Enums;
 /// <summary>
 /// 排序方式枚举
 /// </summary>
-[Flags]
 public enum RecordsSorter
 {
     /// <summary>

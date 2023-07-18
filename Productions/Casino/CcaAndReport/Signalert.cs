@@ -41,7 +41,7 @@ public class Signalert
 
     /// 
     public static IReportor Reportor = new Reportor();
-    
+
     /// <summary>
     /// 关注标的池
     /// </summary>
@@ -174,7 +174,7 @@ public class Signalert
         {
             Analyzer.PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity);
         });
-        
+
         Analyzer.PrepareDistributeRecords();
     }
 
@@ -288,11 +288,11 @@ public class Signalert
         try
         {
             return Analyzer.LoadProfileDetails(codes, profileId);
-        }catch(Exception e) { Logger.Error(e);}
+        } catch (Exception e) { Logger.Error(e); }
 
         return null;
     }
-    
+
     /// 
     public static Contracts.Entities.CompositeRecords? GetCompositeRecords(string profileId)
         => profileId.LoadEntity<Contracts.Entities.CompositeRecords>();
@@ -304,8 +304,22 @@ public class Signalert
     /// 
     public static Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>?
         GetDistributeRecords()
-        => typeof(Contracts.Entities.DistributeCondition)
-            .LocalFile()
-            .ReadFileAs<Dictionary<Contracts.Entities.DistributeCondition,
-                MultiResult<Contracts.Entities.TimelineRecord>>>();
+    {
+        var dic = typeof(Contracts.Entities.DistributeCondition)
+                .LocalFile()
+                .ReadFileAs<Dictionary<string,
+                    MultiResult<Contracts.Entities.TimelineRecord>>>();
+
+        if (dic != null)
+        {
+            var result = new Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>();
+            result.AddRange(
+                dic.Select(o => new KeyValuePair<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>(
+                    o.Key.JsonToObj<Contracts.Entities.DistributeCondition>()!, o.Value)));
+
+            return result;
+        }
+
+        return null;
+    }
 }

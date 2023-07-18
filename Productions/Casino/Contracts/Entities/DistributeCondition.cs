@@ -1,5 +1,4 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Productions.Casino.Contracts.Enums;
 using Newtonsoft.Json;
 
 #nullable enable
@@ -49,11 +48,11 @@ public class DistributeCondition
     {
         var result = (string.IsNullOrEmpty(Request.StartsWith)
             || record.Code.StartsWithIn(Request.StartsWith!.Split(',')));
-        
-        if (Request.IndicatorHas.HasFlag(IndicatorHas.Weekly))
+
+        if (Request.HasWeek != null && Request.HasWeek.Value)
             result = result && record.WeeklyRecord != null;
 
-        if (Request.IndicatorHas.HasFlag(IndicatorHas.Monthly))
+        if (Request.HasMonth != null && Request.HasMonth.Value)
             result = result && record.MonthlyRecord != null;
 
         if (Request.MaxAmplitude != null)
@@ -79,4 +78,13 @@ public class DistributeCondition
 
         return result;
     }
+
+    public override string ToString()
+        => this.ObjToJson();
+
+    public override int GetHashCode()
+        => Rank;
+
+    public override bool Equals(object obj)
+        => Rank == ((DistributeCondition)obj).Rank;
 }

@@ -19,12 +19,23 @@ public class DistributeExpression
     public string? StartsWith { get; set; }
 
     /// <summary>
-    /// 指标包含
+    /// 指标包含周线
     /// </summary>
-    [JsonProperty("indicatorHas", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public IndicatorHas IndicatorHas { get; set; }
+    [JsonProperty("hasWeek", NullValueHandling = NullValueHandling.Ignore)]
+    public bool? HasWeek  { get; set; }
 
+    /// <summary>
+    /// 指标包含月线
+    /// </summary>
+    [JsonProperty("hasMonth", NullValueHandling = NullValueHandling.Ignore)]
+    public bool? HasMonth { get; set; }
+
+    /// <summary>
+    /// 指标包含月线
+    /// </summary>
+    [JsonProperty("sortDesc", NullValueHandling = NullValueHandling.Ignore)]
+    public bool? SortDesc { get; set; }
+    
     /// <summary>
     /// 排序方式
     /// </summary>
