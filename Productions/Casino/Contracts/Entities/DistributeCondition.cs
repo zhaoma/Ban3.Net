@@ -1,5 +1,4 @@
-﻿using System;
-using Ban3.Infrastructures.Common.Extensions;
+﻿using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Productions.Casino.Contracts.Enums;
 using Newtonsoft.Json;
 
@@ -7,10 +6,15 @@ using Newtonsoft.Json;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
 
+/// <summary>
+/// 分发条件
+/// </summary>
 public class DistributeCondition
 {
+    /// 
     public DistributeCondition() { }
 
+    /// 
     public DistributeCondition(int rank, string subject, DistributeExpression request)
     {
         Rank = rank;
@@ -18,23 +22,34 @@ public class DistributeCondition
         Request = request;
     }
 
+    /// <summary>
+    /// 序号/标识
+    /// </summary>
     [JsonProperty("rank", NullValueHandling = NullValueHandling.Ignore)]
     public int Rank { get; set; }
 
+    /// <summary>
+    /// 主题
+    /// </summary>
     [JsonProperty("subject", NullValueHandling = NullValueHandling.Ignore)]
     public string Subject { get; set; } = string.Empty;
 
+    /// <summary>
+    /// 条件
+    /// </summary>
     [JsonProperty("request", NullValueHandling = NullValueHandling.Ignore)]
     public DistributeExpression Request { get; set; } = new DistributeExpression();
 
+    /// <summary>
+    /// 对时间记录判定
+    /// </summary>
+    /// <param name="record"></param>
+    /// <returns></returns>
     public bool IsTarget(TimelineRecord record)
     {
         var result = (string.IsNullOrEmpty(Request.StartsWith)
             || record.Code.StartsWithIn(Request.StartsWith!.Split(',')));
-
-        if (Request.IndicatorHas.HasFlag(IndicatorHas.Daily))
-            result = result && record.DailyRecord != null;
-
+        
         if (Request.IndicatorHas.HasFlag(IndicatorHas.Weekly))
             result = result && record.WeeklyRecord != null;
 

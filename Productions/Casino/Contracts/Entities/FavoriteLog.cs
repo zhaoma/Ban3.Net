@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
 
+/// <summary>
+/// 收藏日志
+/// </summary>
 public class FavoriteLog
 {
     /// <summary>

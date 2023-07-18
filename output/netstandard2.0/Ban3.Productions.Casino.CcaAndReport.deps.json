@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Productions.Casino.CcaAndReport/1.0.0": {
+      "Ban3.Productions.Casino.CcaAndReport/1.0.1": {
         "dependencies": {
           "Ban3.Productions.Casino.Contracts": "1.0.5",
           "NETStandard.Library": "2.0.3"
@@ -937,7 +937,7 @@
     }
   },
   "libraries": {
-    "Ban3.Productions.Casino.CcaAndReport/1.0.0": {
+    "Ban3.Productions.Casino.CcaAndReport/1.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

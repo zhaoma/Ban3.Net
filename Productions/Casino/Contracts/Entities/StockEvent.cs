@@ -4,10 +4,15 @@ using Newtonsoft.Json;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
 
+/// <summary>
+/// 财务事件
+/// </summary>
 public class StockEvent
 {
+    /// 
     public StockEvent(){}
 
+    /// 
     public StockEvent(ShareBonus o)
     {
         MarkTime=o.MarkTime;

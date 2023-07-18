@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Enums;
+using Ban3.Infrastructures.Indicators.Formulas;
 using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
@@ -11,7 +13,7 @@ using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Sites.ViaTushare.Entries;
-
+#nullable enable
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
 /// <summary>
@@ -77,7 +79,7 @@ public static partial class Helper
         this ICalculator _,
         string code,
         string symbol,
-        List<StockPrice> prices)
+        List<StockPrice>? prices)
     {
         if (prices == null || !prices.Any()) return false;
 
@@ -85,7 +87,7 @@ public static partial class Helper
         {
             var seeds = symbol.LoadEntities<StockSeed>();
 
-            prices.Select(seeds.ReinstateOnePrice)
+            prices.Select(seeds!.ReinstateOnePrice)
                 .ToList()
                 .SaveEntities($"{code}.{StockAnalysisCycle.DAILY}");
             
@@ -100,7 +102,7 @@ public static partial class Helper
         return false;
     }
 
-    static StockPrice ReinstateOnePrice(this List<StockSeed> seeds, StockPrice price)
+    static StockPrice ReinstateOnePrice(this List<StockSeed>? seeds, StockPrice price)
     {
         var newPrice = new StockPrice
         {
@@ -150,10 +152,17 @@ public static partial class Helper
     /// <param name="code"></param>
     /// <param name="cycle"></param>
     /// <returns></returns>
-    public static List<StockPrice> LoadReinstatedPrices(this ICalculator _, string code, StockAnalysisCycle cycle)
+    public static List<StockPrice>? LoadReinstatedPrices(this ICalculator _, string code, StockAnalysisCycle cycle)
         => $"{code}.{cycle}".LoadEntities<StockPrice>();
 
-    public static List<Price> LoadPricesForIndicators(this ICalculator _, string code, StockAnalysisCycle cycle)
+    /// <summary>
+    /// 加载复权价格(用于指标计算)
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="code"></param>
+    /// <param name="cycle"></param>
+    /// <returns></returns>
+    public static List<Price>? LoadPricesForIndicators(this ICalculator _, string code, StockAnalysisCycle cycle)
         => $"{code}.{cycle}".DataFile<StockPrice>().ReadFileAs<List<Price>>();
 
     #endregion
@@ -166,7 +175,7 @@ public static partial class Helper
     /// <returns></returns>
     public static List<DotInfo> ExtendedDots(
         this Dictionary<string, List<DotInfo>> dots,
-        RenderView request)
+        RenderView? request)
     {
         var result = new List<DotInfo>();
 
@@ -188,6 +197,11 @@ public static partial class Helper
         return result;
     }
     
+    /// <summary>
+    /// Latest Sets
+    /// </summary>
+    /// <param name="_"></param>
+    /// <returns></returns>
     public static List<StockSets> LoadAllLatestSets(this ICalculator _)
     {
         var file = $"latest".DataFile<StockSets>();
@@ -196,9 +210,15 @@ public static partial class Helper
             .LoadOrSetDefault<List<StockSets>>(file);
     }
 
+    /// <summary>
+    /// 筛选
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="request"></param>
+    /// <returns></returns>
     public static List<StockSets> ScopedByRenderView(
         this ICalculator _,
-        RenderView request)
+        RenderView? request)
     {
         var targets= _.LoadAllLatestSets();
         if (request != null)
@@ -225,4 +245,278 @@ public static partial class Helper
 
         return targets;
     }
+
+    /// <summary>
+    /// 准备基础数据
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="stocks"></param>
+    /// <returns></returns>
+    public static bool GenerateBasisData(this ICalculator _, List<Entities.Stock> stocks)
+    {
+        try
+        {
+            var filter = Infrastructures.Indicators.Helper.DefaultFilter;
+            var latestSets = new List<StockSets>();
+            var buyingDotsSets = new List<StockSets>();
+            var sellingDotsSets = new List<StockSets>();
+            var profileSummaries = new Dictionary<string, ProfileSummary>();
+            var dotsDic = new Dictionary<string, List<DotInfo>>();
+            var total = stocks.Count;
+            var current = 0;
+
+            new Action(() =>
+                stocks.ParallelExecute(one =>
+                    {
+                        try
+                        {
+                            Logger.Debug($"GenerateBasisData:[{one.Code}]");
+                            var now = DateTime.Now;
+
+                            var dailyPrices = _.LoadPricesForIndicators(one.Code, StockAnalysisCycle.DAILY);
+
+                            if (_.GenerateOneBasisData(one, dailyPrices, null, out var dailySets))
+                            {
+                                var dots = dailyPrices.DotsOfBuyingOrSelling(filter);
+
+                                if (dots != null)
+                                {
+                                    dots.ForEach(dot => { dot.SetKeys = dailySets.GetSetKeys(dot.TradeDate); });
+                                    dotsDic.Add(one.Code, dots);
+                                }
+
+                                if (dailySets != null)
+                                {
+                                    dailySets.PushLatest(latestSets);
+
+                                    buyingDotsSets.AppendDistinct(
+                                        dailySets
+                                            .FindAll(o =>
+                                                dots != null && dots.Any(x =>
+                                                    x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd())));
+
+                                    sellingDotsSets.AppendDistinct(
+                                        dailySets
+                                            .FindAll(o =>
+                                                dots != null && dots.Any(x =>
+                                                    x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd())));
+                                }
+
+                                Config.Profiles().ForEach(profile =>
+                                {
+                                    var oneProfileSummary = profile.OutputDailyOperates(dailySets)
+                                        .SaveFor(one, profile)
+                                        .ConvertToRecords()
+                                        .SaveFor(one, profile)
+                                        .RecordsSummary(profile);
+
+                                    profileSummaries.MergeSummary(oneProfileSummary);
+                                });
+                            }
+
+                            current++;
+                            Logger.Debug(
+                                $"parse {current}/{total} : {one.Code} over,{DateTime.Now.Subtract(now).TotalMilliseconds} ms elapsed.");
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Error($"fault when parse {one.Code}");
+                            Logger.Error(ex);
+                        }
+                    },
+                    Config.MaxParallelTasks)
+            ).ExecuteAndTiming($"Stocks Completed,Next is summaries.");
+
+            dotsDic.SaveFor(filter);
+            latestSets.SaveEntities("latest").GenerateList().Save();
+            profileSummaries.Save();
+
+            var allDots = dotsDic
+                .Select(o => o.Value)
+                .UnionAll()
+                .ToList();
+
+            allDots.Where(o => o.IsDotOfBuying)
+                .Select(o => o.SetKeys)!
+                .MergeToDictionary()
+                .CreateTreemapDiagram("Dots Of Buying Treemap")
+                .SaveFor($"{filter.Identity}.Treemap.Buying");
+
+            allDots.Where(o => !o.IsDotOfBuying)
+                .Select(o => o.SetKeys)!
+                .MergeToDictionary()
+                .CreateTreemapDiagram("Dots Of Selling Treemap")
+                .SaveFor($"{filter.Identity}.Treemap.Selling");
+
+            buyingDotsSets.CreateSankeyDiagram("Dots Of Buying Sankey")
+                .SaveFor($"{filter.Identity}.Sankey.Buying");
+
+            sellingDotsSets.CreateSankeyDiagram("Dots Of Selling Sankey")
+                .SaveFor($"{filter.Identity}.Sankey.Selling");
+
+            _.GenerateTimelineRecords(stocks);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 准备个股基础数据
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="stock"></param>
+    /// <param name="prices"></param>
+    /// <param name="formulas"></param>
+    /// <param name="dailySets"></param>
+    /// <returns></returns>
+    public static bool GenerateOneBasisData(
+        this ICalculator _,
+        Infrastructures.Indicators.Entries.Stock stock,
+        List<Price>? prices,
+        Full? formulas,
+        out List<StockSets>? dailySets)
+    {
+        dailySets = null;
+        try
+        {
+            var dailyPrices = prices
+                              ?? _.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
+
+            if (dailyPrices.SplitWeeklyAndMonthly(out var weeklyPrices, out var monthlyPrices))
+            {
+                weeklyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.WEEKLY));
+
+                monthlyPrices.SaveEntities(stock.FileNameWithCycle(StockAnalysisCycle.MONTHLY));
+
+                var dailyLine = dailyPrices.CalculateIndicators(formulas)
+                    .SaveFor(stock, StockAnalysisCycle.DAILY);
+
+                dailySets = dailyLine.LineToSets(stock);
+
+                var weeklyLine = weeklyPrices.CalculateIndicators()
+                    .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+                var weeklySets = weeklyLine.LineToSets(stock);
+
+                var monthlyLine = monthlyPrices.CalculateIndicators()
+                    .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+                var monthlySets = monthlyLine.LineToSets(stock);
+
+                dailySets.MergeWeeklyAndMonthly(weeklySets, monthlySets)
+                    .SaveFor(stock);
+
+                dailyPrices.CreateCandlestickDiagram(dailyLine!, stock)
+                    .SaveFor(stock, StockAnalysisCycle.DAILY);
+
+                weeklyPrices.CreateCandlestickDiagram(weeklyLine!, stock)
+                    .SaveFor(stock, StockAnalysisCycle.WEEKLY);
+
+                monthlyPrices.CreateCandlestickDiagram(monthlyLine!, stock)
+                    .SaveFor(stock, StockAnalysisCycle.MONTHLY);
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($"Parser one :{stock.Code} fault.");
+            Logger.Error(ex);
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// 成交额图表
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="stocks"></param>
+    /// <param name="days"></param>
+    public static void GenerateAmountDiagrams(
+        this ICalculator _,
+        List<Entities.Stock> stocks,
+        int days = 3)
+    {
+        var total = stocks.Count;
+        var current = 0;
+
+        stocks.ParallelExecute(one =>
+        {
+            var now = DateTime.Now;
+
+            _.GenerateAmountDiagram(one, days);
+
+            current++;
+            Logger.Debug(
+                $"parse {current}/{total} : {one.Code} over,{DateTime.Now.Subtract(now).TotalMilliseconds} ms elapsed.");
+        }, Config.MaxParallelTasks);
+    }
+
+    /// <summary>
+    /// 单个成交额图表
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="stock"></param>
+    /// <param name="days"></param>
+    public static void GenerateAmountDiagram(
+        this ICalculator _,
+        Infrastructures.Indicators.Entries.Stock stock, 
+        int days = 5)
+    {
+        var dailyPrices = typeof(StockPrice).LocalFile(stock.Code).ReadFileAs<List<Price>>();
+
+        if (dailyPrices != null && dailyPrices.SplitAmount(days, out var dailyAmounts))
+        {
+            var fileName = $"{stock.Code}.Amount";
+            var line = dailyAmounts.CalculateIndicators()
+                .SaveEntity(_ => fileName);
+
+            if (line != null)
+            {
+                line.LineToSets(stock)
+                    .SaveEntities(fileName);
+
+                dailyAmounts.CreateCandlestickDiagram(line, stock)
+                    .SaveFor(fileName);
+            }
+        }
+    }
+
+    /// <summary>
+    /// MACD时间线
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="stocks"></param>
+    public static void GenerateTimelineRecords(
+        this ICalculator _,
+        List<Entities.Stock> stocks)
+    {
+        var result = new List<TimelineRecord>();
+
+        stocks.ParallelExecute(one =>
+        {
+            var sets = one.LoadStockSets();
+            if (sets != null && sets.Any())
+            {
+                var tm = new TimelineRecord(sets, out var selected);
+                if (selected)
+                {
+                    lock (_lock)
+                    {
+                        result.Add(tm);
+                    }
+                }
+            }
+        }, Config.MaxParallelTasks);
+
+        Console.WriteLine($"result.count={result.Count}");
+        result.SaveEntities("all");
+    }
+
+
 }

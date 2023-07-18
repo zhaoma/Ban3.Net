@@ -28,7 +28,7 @@ namespace Ban3.Productions.Casino.CcaAndReport;
 /// 
 /// </summary>
 [TracingIt]
-public partial class Signalert
+public class Signalert
 {
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Signalert));
 
@@ -39,10 +39,57 @@ public partial class Signalert
     public static IAnalyzer Analyzer = new Analyzer();
 
     public static IReportor Reportor = new Reportor();
-
-
+    
     public static List<Contracts.Entities.Stock> TargetCodes()
         => Collector.LoadAllCodes().Where(o => o.Code.EndsWith(".SH") || o.Code.EndsWith(".SZ")).ToList();
+
+    #region 复权
+
+    /// <summary>
+    /// 下载事件，计算复权价格
+    /// </summary>
+    /// <param name="allCodes"></param>
+    public static void PrepareEventsAndSeeds(List<Contracts.Entities.Stock>? allCodes = null)
+    {
+        allCodes ??= Collector.LoadAllCodes();
+        Collector.PrepareAllEvents(allCodes);
+
+        ReinstateAllPrices(allCodes);
+    }
+
+    /// <summary>
+    /// 计算复权价格
+    /// </summary>
+    /// <param name="allCodes"></param>
+    /// <returns></returns>
+    public static bool ReinstateAllPrices(List<Contracts.Entities.Stock>? allCodes = null)
+    {
+        allCodes ??= Collector.LoadAllCodes();
+
+        var result = true;
+
+        allCodes.ParallelExecute((stock) =>
+            {
+                try
+                {
+                    var ps = Collector.LoadDailyPrices(stock.Code);
+
+                    var reinstateOne = Calculator.ReinstatePrices(stock.Code, stock.Symbol, ps);
+
+                    result = result && reinstateOne;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(stock.Code);
+                    Logger.Error(ex);
+                }
+            },
+            Config.MaxParallelTasks);
+
+        return result;
+    }
+
+    #endregion
 
     #region 批量作业
 
@@ -115,138 +162,21 @@ public partial class Signalert
     {
         new Action(() => ReinstateAllPrices(stocks)).ExecuteAndTiming("ReinstateAllPrices");
 
-        var filter = Infrastructures.Indicators.Helper.DefaultFilter;
-        var latestSets = new List<StockSets>();
-        var buyingDotsSets = new List<StockSets>();
-        var sellingDotsSets = new List<StockSets>();
-        var profileSummaries = new Dictionary<string, ProfileSummary>();
-        var dotsDic = new Dictionary<string, List<DotInfo>>();
-        var total = stocks.Count;
-        var current = 0;
+        new Action(() => Calculator.GenerateBasisData(stocks)).ExecuteAndTiming("GenerateBasisData");
 
-        new Action(() =>
-            stocks.ParallelExecute(one =>
-                {
-                    try
-                    {
-                        var now = DateTime.Now;
-                        var stock = new Stock
-                        { Code = one.Code, ListDate = one.ListDate, Name = one.Name, Symbol = one.Symbol };
-
-                        var dailyPrices = Calculator.LoadPricesForIndicators(stock.Code, StockAnalysisCycle.DAILY);
-
-                        if (ParseOne(stock, dailyPrices, null, out var dailySets))
-                        {
-                            var dots = dailyPrices.DotsOfBuyingOrSelling(filter);
-
-                            if (dots != null)
-                            {
-                                dots.ForEach(dot => { dot.SetKeys = dailySets.GetSetKeys(dot.TradeDate); });
-                                dotsDic.Add(stock.Code, dots);
-                            }
-
-                            if (dailySets != null)
-                            {
-                                dailySets.PushLatest(latestSets);
-
-                                buyingDotsSets.AppendDistinct(
-                                    dailySets
-                                        .FindAll(o =>
-                                            dots != null && dots.Any(x => x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd())));
-
-                                sellingDotsSets.AppendDistinct(
-                                    dailySets
-                                        .FindAll(o =>
-                                            dots != null && dots.Any(x => x.IsDotOfBuying && x.TradeDate == o.MarkTime.ToYmd())));
-                            }
-
-                            Profiles().ForEach(profile =>
-                            {
-                                var oneProfileSummary = profile.OutputDailyOperates(dailySets)
-                                    .SaveFor(stock, profile)
-                                    .ConvertToRecords()
-                                    .SaveFor(stock, profile)
-                                    .RecordsSummary(profile);
-
-                                profileSummaries.MergeSummary(oneProfileSummary);
-                            });
-                        }
-
-                        current++;
-                        Logger.Debug(
-                            $"parse {current}/{total} : {one.Code} over,{DateTime.Now.Subtract(now).TotalMilliseconds} ms elapsed.");
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.Error($"fault when parse {one.Code}");
-                        Logger.Error(ex);
-                    }
-                },
-                Config.MaxParallelTasks)
-        ).ExecuteAndTiming($"Stocks Completed,Next is summaries.");
-
-        dotsDic.SaveFor(filter);
-        latestSets.SaveEntities("latest").GenerateList().Save();
-        profileSummaries.Save();
-
-        var allDots = dotsDic
-            .Select(o => o.Value)
-            .UnionAll()
-            .ToList();
-
-        allDots.Where(o => o.IsDotOfBuying)
-            .Select(o => o.SetKeys)!
-            .MergeToDictionary()
-            .CreateTreemapDiagram("Dots Of Buying Treemap")
-            .SaveFor($"{filter.Identity}.Treemap.Buying");
-
-        allDots.Where(o => !o.IsDotOfBuying)
-            .Select(o => o.SetKeys)!
-            .MergeToDictionary()
-            .CreateTreemapDiagram("Dots Of Selling Treemap")
-            .SaveFor($"{filter.Identity}.Treemap.Selling");
-
-        buyingDotsSets.CreateSankeyDiagram("Dots Of Buying Sankey")
-            .SaveFor($"{filter.Identity}.Sankey.Buying");
-
-        sellingDotsSets.CreateSankeyDiagram("Dots Of Selling Sankey")
-            .SaveFor($"{filter.Identity}.Sankey.Selling");
-
-        Profiles().ForEach(profile =>
+        Config.Profiles().ForEach(profile =>
         {
-            PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity);
+            Analyzer.PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity);
         });
-
-        GenerateTimelineRecords();
+        
+        Analyzer.PrepareDistributeRecords();
     }
-
-
-
-    /// <summary>
-    /// 当前策略集合
-    /// </summary>
-    /// <returns></returns>
-    public static List<Profile> Profiles()
-    {
-        var profileFile = typeof(Profile).LocalFile();
-        return Config.CacheKey<Profile>("all")
-             .LoadOrSetDefault(() =>
-             {
-                 var ps = Infrastructures.Indicators.Helper.DefaultProfiles;
-                 if (!File.Exists(profileFile))
-                 {
-                     profileFile.WriteFile(ps.ObjToJson());
-                 }
-
-                 return ps;
-             }, profileFile);
-    }
-
+    
     public static List<DotInfo>? GetDots(RenderView request)
     {
         return Reportor
-        .LoadDots(Infrastructures.Indicators.Helper.DefaultFilter)
-        .ExtendedDots(request);
+            .LoadDots(Infrastructures.Indicators.Helper.DefaultFilter)
+            .ExtendedDots(request);
     }
 
     public static Dictionary<string, int>? GetDotsKey(bool forBuying)
@@ -255,13 +185,13 @@ public partial class Signalert
     public static LineOfPoint? GetLineOfPoint(RenderView request)
         => new Stock { Code = request.Id }.LoadLineOfPoint(
             request.CycleEnum()
-            );
+        );
 
     public static List<ListRecord>? GetListRecords(string listName = "latest")
         => Config.CacheKey<ListRecord>(listName)
             .LoadOrSetDefault<List<ListRecord>>(listName.DataFile<ListRecord>());
 
-    public static List<StockPrice> GetStockPrices(RenderView request)
+    public static List<StockPrice>? GetStockPrices(RenderView request)
         => Calculator.LoadReinstatedPrices(request.Id, request.CycleEnum());
 
     public static List<StockSets>? GetStockSets(RenderView request)
@@ -330,81 +260,27 @@ public partial class Signalert
     public static string GetMacdDiagram(string code)
         => code.MacdDiagram().ObjToJson();
 
-    public static List<StockOperationRecord> GetProfileDetails(List<string> codes, string profileId)
-        => Analyzer.LoadProfileDetails(codes, profileId);
-
-    public static Contracts.Entities.CompositeRecords PrepareCompositeRecords(List<string> codes, string profileId)
+    public static List<StockOperationRecord>? GetProfileDetails(List<string> codes, string profileId)
     {
-        var result = new Contracts.Entities.CompositeRecords
+        try
         {
-            Profile = Profiles().Last(o => o.Identity == profileId),
-            Records = GetProfileDetails(codes, profileId)
-        };
+            return Analyzer.LoadProfileDetails(codes, profileId);
+        }catch(Exception e) { Logger.Error(e);}
 
-        var rightSets = new List<List<string>>();
-        var wrongSets = new List<List<string>>();
-
-        result.Records.ForEach(r =>
-        {
-            if (r.SellDate != null)
-            {
-                var sets = GetStockSets(new RenderView { Id = r.Code })
-                    .GetSetKeys(r.BuyDate.ToYmd());
-                //.Except(result.Profile.BuyingCondition.);
-
-                if (sets != null)
-                {
-                    if (r.SellPrice > r.BuyPrice)
-                    {
-                        rightSets.Add(sets);
-                    }
-                    else
-                    {
-                        wrongSets.Add(sets);
-                    }
-                }
-            }
-        });
-
-        result.RightKeys = rightSets.MergeToDictionary();
-        result.WrongKeys = wrongSets.MergeToDictionary();
-
-        result.SaveEntity(_ => profileId);
-
-        return result;
+        return null;
     }
 
-    public static Contracts.Entities.CompositeRecords? LoadCompositeRecords(string profileId)
+
+    public static Contracts.Entities.CompositeRecords? GetCompositeRecords(string profileId)
         => profileId.LoadEntity<Contracts.Entities.CompositeRecords>();
-
-    private static object _lock = new();
-
+    
     public static List<Contracts.Entities.TimelineRecord>? GetTimelineRecords()
         => "all".LoadEntities<Contracts.Entities.TimelineRecord>();
 
-    public static Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>> PrepareDistributeRecords()
-    {
-        var all = GetTimelineRecords();
-        var result = new Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>();
-
-        if (all != null && all.Any())
-        {
-            Config.DistributeConditions().ForEach(condition =>
-            {
-                all.FindAll(o => condition.IsTarget(o)).ToList()
-                    .ForEach(o => result.AppendInMultiResult(condition, o));
-
-            });
-        }
-
-        typeof(Contracts.Entities.DistributeCondition)
-        .LocalFile()
-        .WriteFile(result.ObjToJson());
-        return result;
-    }
-
-    public static Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>? GetDistributeRecords()
+    public static Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>?
+        GetDistributeRecords()
         => typeof(Contracts.Entities.DistributeCondition)
-        .LocalFile()
-        .ReadFileAs<Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>>();
+            .LocalFile()
+            .ReadFileAs<Dictionary<Contracts.Entities.DistributeCondition,
+                MultiResult<Contracts.Entities.TimelineRecord>>>();
 }

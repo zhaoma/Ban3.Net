@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
@@ -7,14 +6,30 @@ using Ban3.Sites.ViaNetease.Entries;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
 
+/// <summary>
+/// 实时行情
+/// </summary>
 public class StockRealtime
 {
-    public static Dictionary<string, StockRuntimeRecord> Records =>
-        Config.CacheKey<StockRealtime>("all")
+    /// 
+    public StockRealtime()
+    {
+        _records= Config.CacheKey<StockRealtime>("all")
             .LoadOrSetDefault<Dictionary<string, StockRuntimeRecord>>(
                 typeof(StockRealtime).LocalFile()
             );
+    }
 
+    /// <summary>
+    /// 实时行情
+    /// </summary>
+    public static Dictionary<string, StockRuntimeRecord> Records =>_records;
+
+    /// <summary>
+    /// 最新收盘价
+    /// </summary>
+    /// <param name="code"></param>
+    /// <returns></returns>
     public static float Close(string code)
     {
         if (Records.TryGetValue(code, out var r))
@@ -25,27 +40,22 @@ public class StockRealtime
         return 0;
     }
 
-    protected static object Lock=new ();
-    protected static Dictionary<string, StockRuntimeRecord> _records;
+    private static Dictionary<string, StockRuntimeRecord> _records;
     
+    /// <summary>
+    /// 添加
+    /// </summary>
+    /// <param name="sr"></param>
     public static void Append(StockRecord sr)
     {
         var r=new StockRuntimeRecord(sr);
-        lock (Lock)
-        {
-            _records ??= new Dictionary<string, StockRuntimeRecord>();
-
-            if (_records.ContainsKey(r.Code))
-            {
-                _records[r.Code] = r;
-            }
-            else
-            {
-                _records.Add(r.Code,r);
-            }
-        }
+        _records.AddOrReplace(r.Code, r);
     }
 
+    /// <summary>
+    /// 添加
+    /// </summary>
+    /// <param name="dic"></param>
     public static void Append(Dictionary<string, StockRecord> dic)
     {
         dic.AsParallel()

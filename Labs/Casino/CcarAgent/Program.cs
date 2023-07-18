@@ -2,8 +2,6 @@
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Productions.Casino.CcaAndReport;
-using Ban3.Productions.Casino.CcaAndReport.Implements;
-using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -41,22 +39,6 @@ internal class Program
                     .ExecuteAndTiming("ReinstateData.");
                 break;
 
-            case "--eva":
-                new Action(Signalert.EvaluateProfiles)
-                    .ExecuteAndTiming("EvaluateProfiles.");
-                break;
-                
-            case "--mc":
-                var days = args.Length > 1 ? args[1].ToInt() : 3;
-                new Action(() => Signalert.CreateAmountDiagrams(days))
-                    .ExecuteAndTiming("CreateAmountDiagrams.");
-                break;
-
-            case "--trs":
-                new Action(Signalert.GenerateTimelineRecords)
-                    .ExecuteAndTiming("GenerateTimelineRecords.");
-                break;
-
             case "--check":
                 new Action(CheckSomething)
                     .ExecuteAndTiming("CheckSomething(temp func).");
@@ -68,9 +50,6 @@ internal class Program
                 $"--daily :          prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one [code] :     prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--reinstate :      reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--eva :            evaluate profiles(/files/profile/all)".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--mc :             generate macd diagrams(/files/profile/all)".WriteColorLine(ConsoleColor.DarkYellow);
-                $"--trs :            generate macd tracing records(/files/profile/all)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--check :          check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
                 
                 break;
@@ -85,27 +64,6 @@ internal class Program
 
     private static void CheckSomething()
     {
-        var profile = new Infrastructures.Indicators.Inputs.Profile
-        {
-            BuyingCondition = new Infrastructures.Indicators.Inputs.ProfileCondition
-            {
-                Include=new List<string> {"DMI.PDI.DAILY","DMI.PDI.WEEKLY","DMI.PDI.MONTHLY" }
-            }
-        };
-
-        var dots = Signalert.Reportor
-        .LoadDots(Infrastructures.Indicators.Helper.DefaultFilter);
-
-        var buys = dots.Select(o => o.Value.Where(x => x.IsDotOfBuying))
-            .UnionAll();
-
-        var sells= dots.Select(o => o.Value.Where(x => !x.IsDotOfBuying))
-            .UnionAll();
-
-        var buyCounter = buys.Count(x => profile.BuyingCondition.Include.AllFoundIn(x.SetKeys!));
-
-        var sellCounter=sells.Count(x => profile.BuyingCondition.Include.AllFoundIn(x.SetKeys!));
-
-        $"dots:{dots.Count};buyCounter:{buyCounter}/{buys.Count()};sellCounter:{sellCounter}/{sells.Count()}".WriteColorLine(ConsoleColor.DarkBlue);
+        Console.WriteLine("NOTHING IN QUEUE.");
     }
 }

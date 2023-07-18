@@ -50,6 +50,10 @@ public class Config
              }, profileFile);
     }
 
+    /// <summary>
+    /// 当前分拣条件集合
+    /// </summary>
+    /// <returns></returns>
     public static List<DistributeCondition> DistributeConditions()
     {
         var profileFile = typeof(DistributeCondition).LocalFile();

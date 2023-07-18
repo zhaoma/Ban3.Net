@@ -6,29 +6,56 @@ using Ban3.Productions.Casino.Contracts.Enums;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
 
+/// <summary>
+/// 收藏夹
+/// </summary>
 public class Favorite
 {
-    private string Identity="all";
+    /// <summary>
+    /// 标识
+    /// </summary>
+    private readonly string _identity="all";
 
+    ///
     public Favorite(){}
 
+    ///
     public Favorite(string identity)
     {
-        Identity = identity;
+        _identity = identity;
     }
 
+    /// <summary>
+    /// 运行时缓存收藏夹
+    /// </summary>
     public Dictionary<string, FavoriteRecord> Records =>
-        Config.CacheKey<FavoriteRecord>(Identity)
+        Config.CacheKey<FavoriteRecord>(_identity)
             .LoadOrSetDefault<Dictionary<string, FavoriteRecord>>(
                 typeof(Favorite).LocalFile()
             );
 
-    protected static object Lock = new();
-    protected Dictionary<string, FavoriteRecord> _records;
+    static readonly object Lock = new();
+    Dictionary<string, FavoriteRecord> _records;
 
+    /// <summary>
+    /// 操作一个标的
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="stock"></param>
+    /// <param name="price"></param>
+    /// <param name="withoutUpdate"></param>
     public void ParseOne(StockFavoriteType type, Stock stock, float price, bool withoutUpdate = false)
         => ParseOne(type, stock.Code, stock.Symbol, stock.Name, price, withoutUpdate);
 
+    /// <summary>
+    /// 操作一个标的
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="code"></param>
+    /// <param name="symbol"></param>
+    /// <param name="name"></param>
+    /// <param name="price"></param>
+    /// <param name="withoutUpdate"></param>
     public void ParseOne(StockFavoriteType type, string code, string symbol, string name, float price, bool withoutUpdate = false)
         => Append(code, new FavoriteRecord { Type = type, Close = price, Symbol = symbol, Name = name }, withoutUpdate);
 
@@ -68,10 +95,13 @@ public class Favorite
         }
     }
 
+    /// <summary>
+    /// 更新收藏夹
+    /// </summary>
     public void Update()
     {
         typeof(Favorite)
-            .LocalFile(Identity)
+            .LocalFile(_identity)
             .WriteFile(_records.ObjToJson());
     }
 }

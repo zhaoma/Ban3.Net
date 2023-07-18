@@ -1,60 +1,111 @@
 ﻿using System;
-using System.Security.Policy;
 using System.Text;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Enums;
-using Ban3.Productions.Casino.Contracts.Enums;
 using Newtonsoft.Json;
 
 namespace Ban3.Productions.Casino.Contracts.Request;
 
+/// <summary>
+/// 视图输出条件
+/// </summary>
 public class RenderView
 {
+    /// <summary>
+    /// 主键/标的代码
+    /// </summary>
     [JsonProperty("id",NullValueHandling = NullValueHandling.Ignore)]
     public string Id { get; set; }
 
+    /// <summary>
+    /// 周期
+    /// </summary>
     [JsonProperty("cycle", NullValueHandling = NullValueHandling.Ignore)]
     public string Cycle { get; set; }
 
+    /// <summary>
+    /// 上涨
+    /// </summary>
     [JsonProperty("redOnly", NullValueHandling = NullValueHandling.Ignore)]
     public int? RedOnly { get; set; }
 
+    /// <summary>
+    /// 下跌
+    /// </summary>
     [JsonProperty("greenOnly", NullValueHandling = NullValueHandling.Ignore)]
     public int? GreenOnly { get; set; }
 
+    /// <summary>
+    /// 周期枚举
+    /// </summary>
+    /// <returns></returns>
     public StockAnalysisCycle CycleEnum()
        => Cycle.ToUpper().StringToEnum<StockAnalysisCycle>();
 
+    /// <summary>
+    /// 代码前缀
+    /// </summary>
     [JsonProperty("startsWith", NullValueHandling = NullValueHandling.Ignore)]
     public string StartsWith { get; set; }
 
+    /// <summary>
+    /// 代码后缀
+    /// </summary>
     [JsonProperty("endsWith", NullValueHandling = NullValueHandling.Ignore)]
     public string EndsWith { get; set; }
 
+    /// <summary>
+    /// 包含特征
+    /// </summary>
     [JsonProperty("includeKeys", NullValueHandling = NullValueHandling.Ignore)]
     public string IncludeKeys { get; set; }
 
+    /// <summary>
+    /// 不包含特征
+    /// </summary>
     [JsonProperty("excludeKeys", NullValueHandling = NullValueHandling.Ignore)]
     public string ExcludeKeys { get; set; }
 
+    /// <summary>
+    /// 视图名
+    /// </summary>
     [JsonProperty("viewName", NullValueHandling = NullValueHandling.Ignore)]
     public string ViewName { get; set; }
 
+    /// <summary>
+    /// 页码
+    /// </summary>
     [JsonProperty("page", NullValueHandling = NullValueHandling.Ignore)]
     public int Page { get; set; } = 1;
 
+    /// <summary>
+    /// 页尺寸
+    /// </summary>
     [JsonProperty("pageSize", NullValueHandling = NullValueHandling.Ignore)]
     public int PageSize { get; set; } = 50;
 
+    /// <summary>
+    /// 记录总数
+    /// </summary>
     [JsonProperty("total", NullValueHandling = NullValueHandling.Ignore)]
     public int Total { get; set; }
 
+    /// <summary>
+    /// 输出目的元素
+    /// </summary>
     [JsonProperty("renderElement", NullValueHandling = NullValueHandling.Ignore)]
     public string RenderElement { get; set; }
 
+    /// <summary>
+    /// 数据地址
+    /// </summary>
     [JsonProperty("dataUrl", NullValueHandling = NullValueHandling.Ignore)]
     public string DataUrl { get; set; }
 
+    /// <summary>
+    /// 分页HTML
+    /// </summary>
+    /// <returns></returns>
     public string Pagination()
     {
         if (Total <= PageSize || PageSize == 0) return "";

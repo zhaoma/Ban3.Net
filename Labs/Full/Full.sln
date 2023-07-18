@@ -1,4 +1,3 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
@@ -12,8 +11,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaTushare", "..\..\Sites\ViaTushare\ViaTushare.csproj", "{70E3C88E-8BA7-404F-B801-E23B55DBAD4F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\..\Infrastructures\Common\Common.csproj", "{88705B55-292E-45B1-AEE1-18EE034588C2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{EDB28AE2-1B3F-4492-8AD4-945F18B2DDCA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Full.NUnitTest", "Full.NUnitTest\Full.NUnitTest.csproj", "{D8C5A979-8774-45D1-8702-CD08782838BF}"
 EndProject
@@ -37,17 +34,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charts", "..\..\Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformInvoke", "..\..\Infrastructures\PlatformInvoke\PlatformInvoke.csproj", "{30EBA88C-483E-47E5-9275-CE8880864815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMail", "..\..\Infrastructures\NetMail\NetMail.csproj", "{82346004-E9B1-45D6-9217-850998E8531C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetMail", "..\..\Infrastructures\NetMail\NetMail.csproj", "{82346004-E9B1-45D6-9217-850998E8531C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Productions", "Productions", "{08CD8597-BABF-44A5-BD79-E74D6A469005}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Casino", "Casino", "{66712823-0C8C-4FF7-A85E-9BE4A82BDFF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "..\..\Productions\Casino\Contracts\Contracts.csproj", "{D51D9D1C-FD15-462F-8175-622D5EFA34AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "..\..\Productions\Casino\Contracts\Contracts.csproj", "{D51D9D1C-FD15-462F-8175-622D5EFA34AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRClient", "..\..\Infrastructures\SignalRClient\SignalRClient.csproj", "{2B4E95F8-B077-45B0-AEBA-312984169CFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRClient", "..\..\Infrastructures\SignalRClient\SignalRClient.csproj", "{2B4E95F8-B077-45B0-AEBA-312984169CFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D7", "D7\D7.csproj", "{FB7882B2-E0AA-4447-A58C-F375E42736A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "D7", "D7\D7.csproj", "{FB7882B2-E0AA-4447-A58C-F375E42736A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CcaAndReport", "..\..\Productions\Casino\CcaAndReport\CcaAndReport.csproj", "{5D966B57-A497-4670-A33F-9B87BFFF711D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,10 +66,6 @@ Global
 		{88705B55-292E-45B1-AEE1-18EE034588C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88705B55-292E-45B1-AEE1-18EE034588C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88705B55-292E-45B1-AEE1-18EE034588C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDB28AE2-1B3F-4492-8AD4-945F18B2DDCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDB28AE2-1B3F-4492-8AD4-945F18B2DDCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDB28AE2-1B3F-4492-8AD4-945F18B2DDCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDB28AE2-1B3F-4492-8AD4-945F18B2DDCA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D8C5A979-8774-45D1-8702-CD08782838BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D8C5A979-8774-45D1-8702-CD08782838BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8C5A979-8774-45D1-8702-CD08782838BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -131,6 +126,10 @@ Global
 		{FB7882B2-E0AA-4447-A58C-F375E42736A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB7882B2-E0AA-4447-A58C-F375E42736A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB7882B2-E0AA-4447-A58C-F375E42736A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D966B57-A497-4670-A33F-9B87BFFF711D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D966B57-A497-4670-A33F-9B87BFFF711D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D966B57-A497-4670-A33F-9B87BFFF711D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D966B57-A497-4670-A33F-9B87BFFF711D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,6 +152,7 @@ Global
 		{66712823-0C8C-4FF7-A85E-9BE4A82BDFF8} = {08CD8597-BABF-44A5-BD79-E74D6A469005}
 		{D51D9D1C-FD15-462F-8175-622D5EFA34AA} = {66712823-0C8C-4FF7-A85E-9BE4A82BDFF8}
 		{2B4E95F8-B077-45B0-AEBA-312984169CFE} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
+		{5D966B57-A497-4670-A33F-9B87BFFF711D} = {66712823-0C8C-4FF7-A85E-9BE4A82BDFF8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0411A79E-D9D7-4686-8190-6E05F219E28D}

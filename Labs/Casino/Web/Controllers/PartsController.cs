@@ -200,7 +200,7 @@ public class PartsController : Controller
 
     public IActionResult ProfileDetail(string id)
     {
-        var data = Signalert.LoadCompositeRecords(id)
+        var data = Signalert.GetCompositeRecords(id)
                    ?? new Productions.Casino.Contracts.Entities.CompositeRecords
                    {
                        Records = new List<Infrastructures.Indicators.Outputs.StockOperationRecord>(),
@@ -231,4 +231,6 @@ public class PartsController : Controller
             .Where(o => o is { WeeklyRecord: null, MonthlyRecord: null });
         return View("Timeline", ts);
     }
+
+
 }

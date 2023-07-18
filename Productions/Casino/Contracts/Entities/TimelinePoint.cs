@@ -4,13 +4,18 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Ban3.Infrastructures.Indicators.Outputs;
 using System.Linq;
-
+#nullable enable
 namespace Ban3.Productions.Casino.Contracts.Entities;
 
+/// <summary>
+/// 时间点
+/// </summary>
 public class TimelinePoint
 {
+    /// 
     public TimelinePoint() { }
 
+    /// 
     public TimelinePoint(StockSets sets)
     {
         Date = sets.MarkTime.ToYmd();
@@ -18,15 +23,29 @@ public class TimelinePoint
         SetKeys = sets.SetKeys!.ToList();
     }
 
+    /// <summary>
+    /// 日期
+    /// </summary>
     [JsonProperty("date", NullValueHandling = NullValueHandling.Ignore)]
     public string Date { get; set; } = string.Empty;
 
+    /// <summary>
+    /// 收盘价
+    /// </summary>
     [JsonProperty("close", NullValueHandling = NullValueHandling.Ignore)]
     public double Close { get; set; }
 
+    /// <summary>
+    /// 特征集
+    /// </summary>
     [JsonIgnore]
     public List<string>? SetKeys { get; set; }
 
+    /// <summary>
+    /// 简要输出
+    /// </summary>
+    /// <param name="preClose"></param>
+    /// <returns></returns>
     public string Html(double? preClose)
     {
         var result = "";
