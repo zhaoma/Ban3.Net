@@ -54,8 +54,11 @@ public static partial class Helper
     /// <param name="methodName"></param>
     /// <param name="argTypes"></param>
     /// <returns></returns>
-    public static string GetImplementationNameOfInterfaceMethod(this Type implementation, Type @interface,
-        string methodName, params Type[] argTypes)
+    public static string GetImplementationNameOfInterfaceMethod(
+        this Type implementation, 
+        Type @interface,
+        string methodName, 
+        params Type[] argTypes)
     {
         var map = implementation.GetInterfaceMap(@interface);
         var method = map.InterfaceMethods.Single(x =>

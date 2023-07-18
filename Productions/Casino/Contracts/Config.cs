@@ -11,12 +11,11 @@ namespace Ban3.Productions.Casino.Contracts;
 
 public class Config
 {
-    public static int MaxParallelTasks =(Infrastructures.Common.Config.AppConfiguration["Config:MaxParallelTasks"]).ToInt(30) ;
+    public static int MaxParallelTasks =Infrastructures.Common.Config.GetValue("Config:MaxParallelTasks").ToInt(30) ;
     public const int FixDailyPrices = 10;
     public const int FixPageSize = 100;
 
-    public static string CacheKey<T>(string key)
-        => $"{typeof(T).Name}.{key}";
+    public static string CacheKey<T>(string key) => $"{typeof(T).Name}.{key}";
 
     /// <summary>
     /// 只在交易时间运行ca --realtime
@@ -28,8 +27,7 @@ public class Config
         //and <= 1130 or >= 1300
         return now is >= 915  and <= 1500;
     }
-
-
+    
     /// <summary>
     /// 当前策略集合
     /// </summary>

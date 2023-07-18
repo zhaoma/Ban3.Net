@@ -41,6 +41,11 @@ public class ProcessHandlerAsync
         CommandArguments = arguments.Split(' ');
     }
 
+    /// <summary>
+    /// 异步调用
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <param name="arguments"></param>
     public ProcessHandlerAsync(string fileName, string[] arguments)
     {
         CommandFileName = fileName;
@@ -95,6 +100,9 @@ public class ProcessHandlerAsync
     /// </summary>
     public int ExitCode { get; set; }
 
+    /// <summary>
+    /// 已结束
+    /// </summary>
     public bool Ended;
 
     /// <summary>

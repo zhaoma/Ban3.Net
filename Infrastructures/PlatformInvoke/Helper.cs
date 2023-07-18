@@ -11,6 +11,9 @@ using log4net;
 
 namespace Ban3.Infrastructures.PlatformInvoke;
 
+/// <summary>
+/// 分析程序集的静态扩展
+/// </summary>
 [TracingIt]
 public static class Helper
 {
@@ -20,6 +23,10 @@ public static class Helper
     private static readonly string AssembliesRootFolder = Common.Config.AppConfiguration?["Assemblies:RootFolder"] + "";
     private static readonly string AssembliesPattern = Common.Config.AppConfiguration?["Assemblies:Pattern"] + "";
 
+    /// <summary>
+    /// 分析程序集目录
+    /// </summary>
+    /// <returns></returns>
     public static bool Prepare()
     {
         try
@@ -87,16 +94,25 @@ public static class Helper
         return false;
     }
 
+    /// <summary>
+    /// 加载程序集分析结果
+    /// </summary>
+    /// <returns></returns>
     public static List<AssemblyFile> Load()
     {
         return typeof(AssemblyFile)
             .LocalFile()
             .ReadFileAs<List<AssemblyFile>>();
     }
-
-
+    
     #region Assembly HighLevel Roads
 
+    /// <summary>
+    /// 被引用路径
+    /// </summary>
+    /// <param name="currentAssemblyFileName"></param>
+    /// <param name="all"></param>
+    /// <returns></returns>
     public static List<string[]> AllHighLevels(
         string currentAssemblyFileName, List<AssemblyFile> all = null)
     {
@@ -147,7 +163,7 @@ public static class Helper
             }
             else
             {
-                allRoads.AddRoad(result);
+                allRoads.AppendDistinct(result);
             }
         }
     }
@@ -155,8 +171,8 @@ public static class Helper
     static List<string> HighLevels(List<AssemblyFile> assemblies, AssemblyFile assemblyFile)
     {
         var ups = assemblies
-            .FindAll(o => o.ReferencesOrDependencies
-                    .Any(x => x.Name.AssemblyName().TextEqual(assemblyFile.Name)));
+            .FindAll(o => o.ReferencesOrDependencies!=null
+                          &&o.ReferencesOrDependencies.Any(x => x.Name.AssemblyName().StringEquals(assemblyFile.Name)));
 
         return ups
             .Select(o => o.Name)
@@ -167,6 +183,12 @@ public static class Helper
 
     #region Assembly LowerLevel Roads
 
+    /// <summary>
+    /// 引用路径
+    /// </summary>
+    /// <param name="currentAssemblyFilePath"></param>
+    /// <param name="all"></param>
+    /// <returns></returns>
     public static List<string[]> AllLowerLevels(
         string currentAssemblyFilePath,
         List<AssemblyFile> all = null)
@@ -180,11 +202,14 @@ public static class Helper
             return new List<string[]>();
 
         var rds = LowerLevels(a);
-        foreach (var r in rds)
+        if (rds.Any())
         {
-            var oneRoad = new string[0];
+            foreach (var r in rds)
+            {
+                var oneRoad = new string[0];
 
-            FetchLowerLevels(oneRoad, r, all, list, 1);
+                FetchLowerLevels(oneRoad, r, all, list, 1);
+            }
         }
 
         return list;
@@ -216,13 +241,15 @@ public static class Helper
             }
             else
             {
-                allRoads.AddRoad(result);
+                allRoads.AppendDistinct(result);
             }
         }
     }
 
     static List<string> LowerLevels(AssemblyFile assemblyFile)
     {
+        if (assemblyFile.ReferencesOrDependencies == null) return new List<string>();
+
         var rds = assemblyFile.ReferencesOrDependencies.Select(o => o.Name.AssemblyName());
 
         return rds.Where(o => o.InLimitedScope()).ToList();
@@ -230,7 +257,13 @@ public static class Helper
 
     #endregion
 
+    #region GetAssemblyReferencedAndDependencies
 
+    /// <summary>
+    /// 托管库的引用
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
     public static AssemblyName[] GetAssemblyReferenced(this Request.ParseAssembly request)
     {
         try
@@ -245,7 +278,7 @@ public static class Helper
 
             return assembly.GetReferencedAssemblies();
         }
-        catch (Exception ex)
+        catch
         {
             //Logger.Error(ex);
             Logger.Error($"{request.DllPath} NOT MANAGED");
@@ -254,6 +287,11 @@ public static class Helper
         return null;
     }
 
+    /// <summary>
+    /// 非托管库的依赖
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
     public static AssemblyName[] GetDependencies(this Request.ParseAssembly request)
     {
         try
@@ -310,7 +348,7 @@ public static class Helper
             if (found)
             {
                 if (!string.IsNullOrEmpty(lines[i]))
-                    result.Append(lines[i]);
+                    result.AppendDistinct(lines[i]);
                 else
                     found = false;
             }
@@ -319,23 +357,19 @@ public static class Helper
         return result;
     }
     
-    static void AddRoad(this List<string[]> allRoads, string[] road)
-    {
-        //if (!allRoads.Any(x => string.Join(",", x) == string.Join(",", road)))
-        allRoads.Add(road);
-    }
-
-
-    static bool TextEqual(this string a, string b)
-    {
-        return a.ToUpper() == b.Trim().Replace(" ", "").ToUpper();
-    }
-
-
+    /// <summary>
+    /// 限定程序集范围
+    /// </summary>
+    /// <param name="checkNamespace"></param>
+    /// <returns></returns>
     public static bool InLimitedScope(this string checkNamespace)
     {
         var limitPrefixes = new List<string> { "H.", "CT.", "MI." };
         return limitPrefixes.Any(checkNamespace.StartsWith);
     }
+
+    #endregion
+
+
 }
 

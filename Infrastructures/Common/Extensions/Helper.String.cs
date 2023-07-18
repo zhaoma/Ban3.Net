@@ -500,7 +500,7 @@ public static partial class Helper
     /// 
     public static bool StringEquals(this string a, string b)
     {
-        if (string.IsNullOrEmpty(a)) return true;
+        if (string.IsNullOrEmpty(a)||string.IsNullOrEmpty(b)) return true;
 
         return a.Trim().ToUpper() == b.Trim().ToUpper();
     }

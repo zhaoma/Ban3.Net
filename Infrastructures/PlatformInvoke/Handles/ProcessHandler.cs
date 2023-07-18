@@ -43,6 +43,11 @@ public class ProcessHandler
         CommandArguments = arguments.Split(' ');
     }
 
+    /// <summary>
+    /// 同步调用
+    /// </summary>
+    /// <param name="fileName"></param>
+    /// <param name="arguments"></param>
     public ProcessHandler(string fileName, string[] arguments)
     {
         CommandFileName = fileName;
