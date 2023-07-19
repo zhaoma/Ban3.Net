@@ -9,25 +9,32 @@ using Ban3.Productions.Casino.Contracts.Enums;
 
 namespace Ban3.Productions.Casino.Contracts;
 
+/// 
 public class Config
 {
-    public static int MaxParallelTasks =Infrastructures.Common.Config.GetValue("Config:MaxParallelTasks").ToInt(30) ;
+    /// 
+    public static int MaxParallelTasks = Infrastructures.Common.Config.GetValue("Config:MaxParallelTasks").ToInt(30);
+
+    ///
     public const int FixDailyPrices = 10;
+
+    /// 
     public const int FixPageSize = 100;
 
+    /// 
     public static string CacheKey<T>(string key) => $"{typeof(T).Name}.{key}";
 
     /// <summary>
     /// 只在交易时间运行ca --realtime
     /// </summary>
     /// <returns></returns>
-    public static bool NeedSync() 
+    public static bool NeedSync()
     {
         var now = DateTime.Now.ToString("HHmm").ToInt();
         //and <= 1130 or >= 1300
-        return now is >= 915  and <= 1500;
+        return now is >= 915 and <= 1500;
     }
-    
+
     /// <summary>
     /// 当前策略集合
     /// </summary>
@@ -36,16 +43,16 @@ public class Config
     {
         var profileFile = typeof(Profile).LocalFile();
         return Config.CacheKey<Profile>("all")
-             .LoadOrSetDefault(() =>
-             {
-                 var ps = Infrastructures.Indicators.Helper.DefaultProfiles;
-                 if (!File.Exists(profileFile))
-                 {
-                     profileFile.WriteFile(ps.ObjToJson());
-                 }
+            .LoadOrSetDefault(() =>
+            {
+                var ps = Infrastructures.Indicators.Helper.DefaultProfiles;
+                if (!File.Exists(profileFile))
+                {
+                    profileFile.WriteFile(ps.ObjToJson());
+                }
 
-                 return ps;
-             }, profileFile);
+                return ps;
+            }, profileFile);
     }
 
     /// <summary>
@@ -56,189 +63,189 @@ public class Config
     {
         var profileFile = typeof(DistributeCondition).LocalFile();
         return Config.CacheKey<DistributeCondition>("all")
-             .LoadOrSetDefault(() =>
-             {
-                 var ps = new List<DistributeCondition>
-                 {
-                     new DistributeCondition(
+            .LoadOrSetDefault(() =>
+            {
+                var ps = new List<DistributeCondition>
+                {
+                    new (
                         1,
                         "科创板三周期",
                         new DistributeExpression
                         {
-                            StartsWith="68",
-HasWeek=true,HasMonth=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "68",
+                            HasWeek = true, HasMonth = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         2,
                         "科创板日与周",
                         new DistributeExpression
                         {
-                            StartsWith="68",
-                           HasWeek=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "68",
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         3,
                         "科创板日周期",
                         new DistributeExpression
                         {
-                            StartsWith="68",
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "68",
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
+                    ),
 
-                     new DistributeCondition(
+                    new (
                         11,
                         "创业板三周期",
                         new DistributeExpression
                         {
-                            StartsWith="30",
-HasWeek=true,HasMonth=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "30",
+                            HasWeek = true, HasMonth = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         12,
                         "创业板日与周",
                         new DistributeExpression
                         {
-                            StartsWith="30",
-                           HasWeek=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "30",
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         13,
                         "创业板日周期",
                         new DistributeExpression
                         {
-                            StartsWith="30",
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "30",
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
+                    ),
 
-                     new DistributeCondition(
+                    new (
                         21,
                         "中小板三周期",
                         new DistributeExpression
                         {
-                            StartsWith="002,003",
-HasWeek=true,HasMonth=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "002,003",
+                            HasWeek = true, HasMonth = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         22,
                         "中小板日与周",
                         new DistributeExpression
                         {
-                            StartsWith="002,003",
-                           HasWeek=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "002,003",
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         23,
                         "中小板日周期",
                         new DistributeExpression
                         {
-                            StartsWith="002,003",
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "002,003",
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
+                    ),
 
-                     new DistributeCondition(
+                    new (
                         31,
                         "沪主板三周期",
                         new DistributeExpression
                         {
-                            StartsWith="60",
-HasWeek=true,HasMonth=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "60",
+                            HasWeek = true, HasMonth = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         32,
                         "沪主板日与周",
                         new DistributeExpression
                         {
-                            StartsWith="60",
-                           HasWeek=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "60",
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         33,
                         "沪主板日周期",
                         new DistributeExpression
                         {
-                            StartsWith="60",
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "60",
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
+                    ),
 
-                     new DistributeCondition(
+                    new (
                         41,
                         "深主板三周期",
                         new DistributeExpression
                         {
-                            StartsWith="000,001",
-HasWeek=true,HasMonth=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "000,001",
+                            HasWeek = true, HasMonth = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         42,
                         "深主板日与周",
                         new DistributeExpression
                         {
-                            StartsWith="000,001",
-                           HasWeek=true,
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "000,001",
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         43,
                         "深主板日周期",
                         new DistributeExpression
                         {
-                            StartsWith="000,001",
-                            Sorter=RecordsSorter.Increase
+                            StartsWith = "000,001",
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
+                    ),
 
-                     new DistributeCondition(
+                    new (
                         51,
                         "100+",
                         new DistributeExpression
                         {
-                            MinPrice=100,
-                           HasWeek=true,
-                            Sorter=RecordsSorter.Increase
+                            MinPrice = 100,
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                     new DistributeCondition(
+                    ),
+                    new (
                         52,
                         "5-",
                         new DistributeExpression
                         {
-                            MaxPrice=5,
-                           HasWeek=true,
-                            Sorter=RecordsSorter.Increase
+                            MaxPrice = 5,
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
                         }
-                     ),
-                 };
+                    ),
+                };
 
-                 if (!File.Exists(profileFile))
-                 {
-                     profileFile.WriteFile(ps.ObjToJson());
-                 }
+                if (!File.Exists(profileFile))
+                {
+                    profileFile.WriteFile(ps.ObjToJson());
+                }
 
-                 return ps;
-             }, profileFile);
+                return ps;
+            }, profileFile);
     }
 
 }

@@ -27,6 +27,7 @@ public static partial class Helper
     /// <returns></returns>
     public static List<Stock> LoadAllCodes(this ICollector _) => _.Sites.LoadAllCodes();
 
+    /// 
     public static List<Stock> ScopedCodes(this ICollector _)
         => _.LoadAllCodes().Where(o => o.Code.EndsWith(".SH") || o.Code.EndsWith(".SZ")).ToList();
 

@@ -9,7 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "Ban3.Productions.Casino.CcaAndReport/1.0.4": {
         "dependencies": {
-          "Ban3.Productions.Casino.Contracts": "1.0.7",
+          "Ban3.Productions.Casino.Contracts": "1.0.10",
           "NETStandard.Library": "2.0.3"
         },
         "runtime": {
@@ -85,7 +85,7 @@
           }
         }
       },
-      "Ban3.Productions.Casino.Contracts/1.0.7": {
+      "Ban3.Productions.Casino.Contracts/1.0.10": {
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.10",
           "Ban3.Infrastructures.Indicators": "1.0.6",
@@ -101,8 +101,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Productions.Casino.Contracts.dll": {
-            "assemblyVersion": "1.0.0.7",
-            "fileVersion": "1.0.0.7"
+            "assemblyVersion": "1.0.0.10",
+            "fileVersion": "1.0.0.10"
           }
         }
       },
@@ -977,12 +977,12 @@
       "path": "ban3.infrastructures.runtimecaching/1.0.5",
       "hashPath": "ban3.infrastructures.runtimecaching.1.0.5.nupkg.sha512"
     },
-    "Ban3.Productions.Casino.Contracts/1.0.7": {
+    "Ban3.Productions.Casino.Contracts/1.0.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-84VsvGMMlspjLX6mVK0Ji8yeB5pP5ATd/24KNRd+8xqxJ0kHQq0D/BxFQJLDyrx2riiOz2I3X9pVldx8TSJsnw==",
-      "path": "ban3.productions.casino.contracts/1.0.7",
-      "hashPath": "ban3.productions.casino.contracts.1.0.7.nupkg.sha512"
+      "sha512": "sha512-9PZN6hvyOw4r5DlTdu0MH5sSBtIxUOweYkM9mwMSNPbrYf8UjgLdPdex8U2EySvUyyjnKiOBGD0gjE1ee8DlTg==",
+      "path": "ban3.productions.casino.contracts/1.0.10",
+      "hashPath": "ban3.productions.casino.contracts.1.0.10.nupkg.sha512"
     },
     "Ban3.Sites.ViaEastmoney/1.0.1": {
       "type": "package",
@@ -1162,7 +1162,7 @@
     "runtime.native.System.Net.Http/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-guqHgQOK2eUgtJae2VKjNawBn1xjC0hfOt5wASHa60XHbIdCsQlqtvMsFG+3hy7yp88V+gi9fZCjubuDkeakcQ==",
+      "sha512": "sha512-ZVuZJqnnegJhd2k/PtAbbIcZ3aZeITq3sj06oKfMBSfphW3HDmk/t4ObvbOk/JA/swGR0LNqMksAh/f7gpTROg==",
       "path": "runtime.native.system.net.http/4.3.0",
       "hashPath": "runtime.native.system.net.http.4.3.0.nupkg.sha512"
     },
@@ -1197,7 +1197,7 @@
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Kh9W4agE0r/hK8AX1LvyQI2NrKHBL8pO0gRoDTdDb0LL6Ta1Z2OtFx3lOaAE0ZpCUc/dt9Wzs3rA7a3IsKdOVA==",
+      "sha512": "sha512-kVXCuMTrTlxq4XOOMAysuNwsXWpYeboGddNGpIgNSZmv1b6r/s/DPk0fYMB7Q5Qo4bY68o48jt4T4y5BVecbCQ==",
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0",
       "hashPath": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512"
     },

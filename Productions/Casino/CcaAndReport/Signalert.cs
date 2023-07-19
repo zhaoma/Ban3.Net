@@ -170,12 +170,18 @@ public class Signalert
 
         new Action(() => Calculator.GenerateBasisData(stocks)).ExecuteAndTiming("GenerateBasisData");
 
-        Config.Profiles().ForEach(profile =>
+        new Action(() =>
         {
-            Analyzer.PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity);
-        });
+            Config.Profiles().ForEach(profile =>
+            {
+                Analyzer.PrepareCompositeRecords(stocks.Select(o => o.Code).ToList(), profile.Identity);
+            });
+        }).ExecuteAndTiming("PrepareCompositeRecords");
 
-        Analyzer.PrepareDistributeRecords();
+        new Action(() =>
+        {
+            Analyzer.PrepareDistributeRecords();
+        }).ExecuteAndTiming("PrepareDistributeRecords");
     }
 
     /// 
@@ -199,7 +205,7 @@ public class Signalert
     /// 
     public static List<ListRecord>? GetListRecords(string listName = "latest")
         => Config.CacheKey<ListRecord>(listName)
-            .LoadOrSetDefault<List<ListRecord>>(listName.DataFile<ListRecord>());
+            .LoadOrSetDefault<List<ListRecord>>(typeof(ListRecord).LocalFile());
 
     /// 
     public static List<StockPrice>? GetStockPrices(RenderView request)
@@ -304,22 +310,5 @@ public class Signalert
     /// 
     public static Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>?
         GetDistributeRecords()
-    {
-        var dic = typeof(Contracts.Entities.DistributeCondition)
-                .LocalFile()
-                .ReadFileAs<Dictionary<string,
-                    MultiResult<Contracts.Entities.TimelineRecord>>>();
-
-        if (dic != null)
-        {
-            var result = new Dictionary<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>();
-            result.AddRange(
-                dic.Select(o => new KeyValuePair<Contracts.Entities.DistributeCondition, MultiResult<Contracts.Entities.TimelineRecord>>(
-                    o.Key.JsonToObj<Contracts.Entities.DistributeCondition>()!, o.Value)));
-
-            return result;
-        }
-
-        return null;
-    }
+        => Reportor.LoadDistributeRecords();
 }

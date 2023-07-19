@@ -270,7 +270,7 @@ public static partial class Helper
                     {
                         try
                         {
-                            Logger.Debug($"GenerateBasisData:[{one.Code}]");
+                            //Logger.Debug($"GenerateBasisData:[{one.Code}]");
                             var now = DateTime.Now;
 
                             var dailyPrices = _.LoadPricesForIndicators(one.Code, StockAnalysisCycle.DAILY);
@@ -327,9 +327,13 @@ public static partial class Helper
                     Config.MaxParallelTasks)
             ).ExecuteAndTiming($"Stocks Completed,Next is summaries.");
 
+            Logger.Debug("save dotsDic,latestSets,profileSummaries.");
+
             dotsDic.SaveFor(filter);
             latestSets.SaveEntities("latest").GenerateList().Save();
             profileSummaries.Save();
+            
+            Logger.Info("save dotsDic,latestSets,profileSummaries success.");
 
             var allDots = dotsDic
                 .Select(o => o.Value)
@@ -514,7 +518,7 @@ public static partial class Helper
             }
         }, Config.MaxParallelTasks);
 
-        Console.WriteLine($"result.count={result.Count}");
+        Logger.Debug($"TimelineRecords count={result.Count},success");
         result.SaveEntities("all");
     }
 

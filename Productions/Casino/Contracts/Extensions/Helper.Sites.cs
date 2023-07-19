@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
-using Ban3.Sites.ViaNetease.Request;
 using Ban3.Sites.ViaSina;
 using Ban3.Sites.ViaSina.Request;
 using Ban3.Sites.ViaTushare;
 using Ban3.Sites.ViaTushare.Entries;
 using Ban3.Sites.ViaTushare.Request;
 using Ban3.Sites.ViaTushare.Response;
-using Ban3.Sites.ViaYuncaijing.Request;
 using StockPrice = Ban3.Sites.ViaTushare.Entries.StockPrice;
 
 namespace Ban3.Productions.Casino.Contracts.Extensions;
@@ -66,6 +63,12 @@ public static partial class Helper
 
     #region codes
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="allCodes"></param>
+    /// <returns></returns>
     [Obsolete("tushare 数据更有用些,use PrepareAllCodesFromTushare")]
     public static bool PrepareAllCodesFromEastmoney(this ISites _, List<Stock> allCodes = null)
     {
@@ -95,6 +98,12 @@ public static partial class Helper
                 .WriteFile(local.ObjToJson()));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="allCodes"></param>
+    /// <returns></returns>
     public static bool PrepareAllCodesFromTushare(this ISites _, List<Stock> allCodes = null)
     {
         var result = new GetStockBasic().GetResult();
@@ -127,6 +136,11 @@ public static partial class Helper
         );
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <returns></returns>
     public static List<Stock> LoadAllCodes(this ISites _)
         => Config.CacheKey<Stock>("all").LoadOrSetDefault<List<Stock>>(typeof(Stock).LocalFile());
 
@@ -134,6 +148,14 @@ public static partial class Helper
 
     #region daily prices
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="tsCodes"></param>
+    /// <param name="startDate"></param>
+    /// <param name="endDate"></param>
+    /// <returns></returns>
     public static GetStockPriceResult GetDailyPrices(this ISites _, List<string> tsCodes, string startDate, string endDate)
     {
         var getDailyParams = new GetDailyParams(tsCodes)
@@ -145,9 +167,22 @@ public static partial class Helper
         return new GetStockPrice(getDailyParams).GetResult();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="tsCodes"></param>
+    /// <param name="dateRange"></param>
+    /// <returns></returns>
     public static GetStockPriceResult GetDailyPrices(this ISites _, List<string> tsCodes, DateRange dateRange)
         => _.GetDailyPrices(tsCodes, dateRange.StartDate, dateRange.EndDate);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="code"></param>
+    /// <returns></returns>
     public static bool PrepareOnesDailyPrices(this ISites _, string code)
     {
         var result = false;
@@ -174,6 +209,12 @@ public static partial class Helper
         return result;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="allCodes"></param>
+    /// <returns></returns>
     public static bool PrepareAllDailyPrices(this ISites _, List<Stock> allCodes = null)
     {
         allCodes ??= _.LoadAllCodes();
@@ -183,6 +224,12 @@ public static partial class Helper
         return result;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="allCodes"></param>
+    /// <returns></returns>
     public static bool FixAllDailyPrices(this ISites _, List<Stock> allCodes = null)
     {
         allCodes ??= _.LoadAllCodes();
@@ -209,6 +256,12 @@ public static partial class Helper
         return result;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="codes"></param>
+    /// <returns></returns>
     public static bool FixAllDailyPrices(this ISites _, List<string> codes)
     {
         var result = true;
@@ -274,6 +327,12 @@ public static partial class Helper
         return result;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="code"></param>
+    /// <returns></returns>
     public static List<StockPrice> LoadOnesDailyPrices(this ISites _, string code)
     {
         return typeof(StockPrice)
@@ -285,6 +344,7 @@ public static partial class Helper
 
     #region events
 
+    /// 
     public static bool PrepareOnesEvents(this ISites _, string symbol)
     {
         var result = false;
@@ -311,6 +371,12 @@ public static partial class Helper
         return result;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="allCodes"></param>
+    /// <returns></returns>
     public static bool PrepareAllEvents(this ISites _, List<Stock> allCodes = null)
     {
         allCodes ??= _.LoadAllCodes();
@@ -335,6 +401,12 @@ public static partial class Helper
         return result;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="symbol"></param>
+    /// <returns></returns>
     public static List<StockEvent> LoadOnesEvents(this ISites _, string symbol)
     {
         return typeof(StockEvent)

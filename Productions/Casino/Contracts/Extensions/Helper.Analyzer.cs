@@ -170,7 +170,7 @@ public static partial class Helper
         }
 
         typeof(Entities.DistributeCondition)
-            .LocalFile()
+            .LocalFile("result")
             .WriteFile(result.ObjToJson());
     }
 

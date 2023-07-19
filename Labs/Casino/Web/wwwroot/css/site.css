@@ -101,11 +101,13 @@ html {
         font-size: 3em;
     }
 
-.partsNav i:hover {
+.iconsBox svg{ width: 48px;height: 48px;}
+
+.partsNav i:hover,.partsNav svg:hover {
     color: red;
 }
 
-.partsNav.active i {
+.partsNav.active i, .partsNav.active svg {
     color: darkred;
 }
 
@@ -281,12 +283,18 @@ html {
 #bellIcon {
     font-size: 7em;
     color: white;
+    width: 64px;
+    height: 64px;
 }
 #bellIcon2 {
     font-size: 5em;
     color: white;
+    width: 48px;
+    height: 48px;
 }
 #bellIcon3 {
     font-size: 3em;
     color: white;
+    width: 32px;
+    height: 32px;
 }

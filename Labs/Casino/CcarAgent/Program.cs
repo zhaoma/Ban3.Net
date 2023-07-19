@@ -18,6 +18,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using Stock = Ban3.Infrastructures.Indicators.Entries.Stock;
 using System.Linq;
+using Ban3.Productions.Casino.CcaAndReport.Implements;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -82,6 +83,15 @@ internal class Program
     {
         Console.WriteLine("NOTHING IN QUEUE.");
 
+        //Signalert.Analyzer.PrepareDistributeRecords();
+        var d = Signalert.GetLatestStockSets().GenerateList().Save();
+        Console.WriteLine(d.Count);
+        
+        //var drs = Signalert.GetDistributeRecords();
+        //drs.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
+        //var x = DistributeConditions();
+        //d.ObjToJson().WriteColorLine(ConsoleColor.DarkYellow);
+
+        //Console.WriteLine("PrepareDistributeRecords");
     }
-    
 }

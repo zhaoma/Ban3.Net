@@ -235,6 +235,7 @@ public class PartsController : Controller
     public IActionResult Gallery()
     {
         var dic = Signalert.GetDistributeRecords();
+        
         return View(dic);
     }
 }

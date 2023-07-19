@@ -79,12 +79,21 @@ public class DistributeCondition
         return result;
     }
 
+    /// 
     public override string ToString()
         => this.ObjToJson();
 
+    /// 
     public override int GetHashCode()
-        => Rank;
+    {
+        return Rank * 23;
+    }
 
-    public override bool Equals(object obj)
-        => Rank == ((DistributeCondition)obj).Rank;
+    /// 
+    public override bool Equals(object? obj)
+    {
+        if (obj == null) return false;
+
+        return Rank == (obj as DistributeCondition)?.Rank;
+    }
 }

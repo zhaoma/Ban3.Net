@@ -157,5 +157,5 @@ public class TimelineRecord
     /// </summary>
     /// <returns></returns>
     public int DurationDays()
-        => DateTime.Now.Subtract(DailyRecord.Date.FromYmd()).TotalDays.ToInt();
+        => (int)DateTime.Now.Subtract(DailyRecord.Date.FromYmd()).TotalDays;
 }

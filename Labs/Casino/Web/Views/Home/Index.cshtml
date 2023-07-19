@@ -8,13 +8,23 @@
             <form action="/data/findanything" method="get" onsubmit="return findAny();">
                 <div class="input-group  input-group-lg indexBoxSize">
                     <span class="input-group-text lazyLoadButton" dataUrl="/parts/gallery" renderElement="partsContainer" id="addon-gallery">
-                        <i class="bi bi-clipboard2-data"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
+                            <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                        </svg>
                     </span>
                     <span class="input-group-text lazyLoadButton" dataUrl="/parts/summaries" renderElement="partsContainer" id="addon-wrapping">
-                        <i class="bi bi-heart-pulse scaleIcon"></i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-clipboard-pulse" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm-2 0h1v1H3a1 1 0 0 0-1 1V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1 1 0 0 0-1-1h-1v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Zm6.979 3.856a.5.5 0 0 0-.968.04L7.92 10.49l-.94-3.135a.5.5 0 0 0-.895-.133L4.232 10H3.5a.5.5 0 0 0 0 1h1a.5.5 0 0 0 .416-.223l1.41-2.115 1.195 3.982a.5.5 0 0 0 .968-.04L9.58 7.51l.94 3.135A.5.5 0 0 0 11 11h1.5a.5.5 0 0 0 0-1h-1.128L9.979 5.356Z"/>
+                        </svg>
                     </span>
                     <input type="text" id="id" name="id" class="form-control form-control-lg col-10" placeholder="code here" aria-label="code here" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary btn-lg" type="submit" id="button-addon2">PinG !</button>
+                    <button class="btn btn-outline-secondary btn-lg" type="submit" id="button-addon2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </button>
 
                 </div>
             </form>
@@ -26,7 +36,9 @@
                         renderElement="partsContainer"
 		                dataUrl="/home/index/dotsOfBuying">
                         <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                            <i class="bi bi-box-arrow-in-right"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-arrow-up-right-square" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z"/>
+                            </svg>
                         </div>
                         <div class="name text-muted text-decoration-none text-center pt-1">dots of buying</div>
                     </a>
@@ -36,7 +48,9 @@
                         renderElement="partsContainer"
 		                dataUrl="/home/index/one">
                         <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                            <i class="bi bi-eye-fill"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-egg" viewBox="0 0 16 16">
+                                <path d="M8 15a5 5 0 0 1-5-5c0-1.956.69-4.286 1.742-6.12.524-.913 1.112-1.658 1.704-2.164C7.044 1.206 7.572 1 8 1c.428 0 .956.206 1.554.716.592.506 1.18 1.251 1.704 2.164C12.31 5.714 13 8.044 13 10a5 5 0 0 1-5 5zm0 1a6 6 0 0 0 6-6c0-4.314-3-10-6-10S2 5.686 2 10a6 6 0 0 0 6 6z"/>
+                            </svg>
                         </div>
                         <div class="name text-muted text-decoration-none text-center pt-1">one by one</div>
                     </a>
@@ -46,7 +60,9 @@
                         renderElement="partsContainer" 
 		                dataUrl="/home/index/market">
                         <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                            <i class="bi bi-dice-6"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-box" viewBox="0 0 16 16">
+                                <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+                            </svg>
                         </div>
                         <div class="name text-muted text-decoration-none text-center pt-1">m@rket</div>
                     </a>
@@ -56,7 +72,9 @@
                         renderElement="partsContainer"
 		                dataUrl="/home/index/dotsOfSelling">
                         <div class="p-3 py-4 mb-2 bg-light text-center rounded">
-                            <i class="bi bi-box-arrow-right"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-arrow-down-right-square" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 3.146a.5.5 0 1 0-.708.708L9.243 9.95H6.475a.5.5 0 1 0 0 1h3.975a.5.5 0 0 0 .5-.5V6.475a.5.5 0 1 0-1 0v2.768L5.854 5.146z"/>
+                            </svg>
                         </div>
                         <div class="name text-muted text-decoration-none text-center pt-1">dots of selling</div>
                     </a>
@@ -66,4 +84,4 @@
     </main>
 </div>
 
-<div class="container lazyLoad" dataUrl="/parts/summaries" id="partsContainer"></div>
+<div class="container lazyLoad" dataUrl="/parts/gallery" id="partsContainer"></div>
