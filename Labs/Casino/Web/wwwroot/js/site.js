@@ -13,33 +13,6 @@ function clearNav() {
     });
 }
 
-function initDragdrop() {
-    console.log('initDragdrop');
-
-    var draggableElements = document.querySelector('.draggable');
-    console.log(draggableElements);
-    var oneByOne = document.getElementById("one");
-
-    draggableElements.ondragstart = (e) => {
-        e.dataTransfer.effectAllowed = e.target.dataset.effect;
-        console.log(e);
-        source = e.target;
-
-        console.log('ondragstart');
-        console.log(e.target);
-    };
-
-    oneByOne.ondragover = function (e) {
-        e.preventDefault();
-    }
-    oneByOne.ondragenter = function (e) {
-        e.preventDefault();
-    }
-    oneByOne.ondrop = (e) => {
-        console.log(e.source);
-    };
-}
-
 function initContainer(ele) {
     var renderCharts = $(ele).find('.renderCharts');
     if (renderCharts.length > 0) {
@@ -68,9 +41,8 @@ function initContainer(ele) {
             $.get(dataUrl, function (html) {
                 $(box).html(html);
 
-                initGrid();
-
                 initContainer($(box));
+                initGrid();
             });
             $(box).delay(200).fadeIn(300);
         });
@@ -99,8 +71,10 @@ function bindButton(ele) {
     $("#" + renderElement).load(dataUrl);
     $.get(dataUrl, function (html) {
         $("#" + renderElement).html(html);
-
+        $("#" + renderElement).delay(200).fadeIn(300);
         initContainer($("#" + renderElement));
+        initGrid();
+
         if ($("#" + renderElement).parent().hasClass("hide")) {
             $("#" + renderElement).parent().removeClass("hide")
         }
@@ -158,7 +132,6 @@ function bindCharts(elementId, dataUrl) {
     currentChart.setOption({}, true);
     //currentChart.showLoading();
     $.get(dataUrl, function (rawData) {
-
         var diagramOption = eval("(" + rawData + ")");
         diagramOption && currentChart.setOption(diagramOption);
 
@@ -177,7 +150,6 @@ function findAny() {
 }
 
 function onesCodes() {
-    console.log($("#latestSetsForm").serialize());
     $.ajax({
         type: "post",
         data: $("#latestSetsForm").serialize(),

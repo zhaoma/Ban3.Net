@@ -2,6 +2,13 @@
 @{
     Layout = null;
 }
+<div class="pb-3 hide" id="chartsSection">
+    <div class="col-12 roundBox grayBox">
+        <div id="chartsContainer"
+             style="height: 600px; width: 100%;">
+        </div>
+    </div>
+</div>
 
 <div class="row grid" data-masonry='{"percentPosition": true }'>
     
@@ -10,10 +17,10 @@
         if (kv.Value is {Data: { } })
         {
             <div class="col-sm-4 col-lg-4 mb-4" id="dic_@kv.Key.Rank">
-                <div class="card">
+                <div class="card grayBox">
                     <div class="card-header">@kv.Key.Subject @kv.Value.RecordCount</div>
                     <div class="card-body col">
-                        <table data-pagination="true" class="table table-hover  table-bordered">
+                        <table data-pagination="true" class="table table-hover table-dark table-bordered">
                             <thead>
                             <tr>
                                 <th class="col-3">Symbol</th>
@@ -40,8 +47,8 @@
                                         @point.DailyRecord.Close <span class="badge">
                                             @point.DailyRecord.Date
                                         </span>
-                                        <sub title="涨幅">@Math.Round(changePercent, 2) %</sub>
-                                            <sup title="振幅">@amplitude %</sup>
+                                        <sub title="涨幅">@Math.Round(changePercent, 2)</sub>
+                                            <sup title="振幅">@amplitude</sup>
                                         </td>
                                     <td>@($"{point.NearlyRecord.Close}") <span class="badge" title="天数">@point.DurationDays()</span></td>
                                 </tr>

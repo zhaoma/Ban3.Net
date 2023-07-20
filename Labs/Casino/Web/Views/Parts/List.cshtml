@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-<table data-pagination="true" class="table table-hover  table-bordered">
+<table data-pagination="true" class="table table-hover table-dark table-bordered">
     <thead>
     <tr>
         <th class="col-3">Symbol</th>
@@ -13,13 +13,13 @@
     <tbody>
     @foreach (var point in Model.OrderBy(o => o.Rank))
     {
-            <tr class="renderChartsButton"
-                renderElement="chartsContainer"
-                dataUrl="/data/macd/@point.Code"
-                renderContainer="chartsSection">
+        <tr class="renderChartsButton"
+            renderElement="chartsContainer"
+            dataUrl="/data/macd/@point.Code"
+            renderContainer="chartsSection">
             <td>@point.Symbol</td>
-                <td>@point.Close </td>
-                <td>@($"{point.Rank}")  <span class="badge">@point.Value</span></td>
+            <td>@point.Close </td>
+            <td>@($"{point.Rank}")  <span class="badge">@point.Value</span></td>
         </tr>
     }
     </tbody>
