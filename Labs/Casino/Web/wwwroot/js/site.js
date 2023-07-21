@@ -13,6 +13,25 @@ function clearNav() {
     });
 }
 
+function bindCheckBox() {
+    if ($(".selectList").length > 0) {
+        $(".selectList").each(function () {
+            var chk = $(this);
+            chk.bind('change', function () {
+                var list = $("#dic_" + chk.attr("value"));
+                if (chk.is(":checked")) {
+                    list.show(300);
+                } else {
+                    list.hide(300);
+                }
+                initGrid();
+            });
+        });
+    }
+
+    return false;
+}
+
 function initContainer(ele) {
     var renderCharts = $(ele).find('.renderCharts');
     if (renderCharts.length > 0) {
@@ -55,6 +74,8 @@ function initContainer(ele) {
             button.bind('click', function () { return bindButton(button); });
         });
     }
+
+    bindCheckBox();
 }
 
 function initGrid() {
@@ -136,6 +157,7 @@ function bindCharts(elementId, dataUrl) {
         diagramOption && currentChart.setOption(diagramOption);
 
         window.onresize = currentChart.resize;
+        initGrid();
     });
 }
 

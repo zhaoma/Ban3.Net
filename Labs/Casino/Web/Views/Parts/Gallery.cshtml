@@ -2,21 +2,37 @@
 @{
     Layout = null;
 }
-<div class="pb-3 hide" id="chartsSection">
-    <div class="col-12 roundBox grayBox">
-        <div id="chartsContainer"
-             style="height: 600px; width: 100%;">
-        </div>
-    </div>
-</div>
 
 <div class="row grid" data-masonry='{"percentPosition": true }'>
-    
+    <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+        <div class="card grayBox">
+            <div class="card-header">@Model.Count</div>
+            <div class="card-body col">
+                @foreach (var kv in Model)
+                {
+                    if (kv.Value is {Data: { } })
+                    {
+                        <div class="btn-group pb-3" role="group" aria-label="Basic checkbox toggle button group">
+
+                            <input type="checkbox" class="btn-check selectList" id="chk_@kv.Key.Rank" autocomplete="off" value="@kv.Key.Rank">
+                            <label class="btn btn-outline-primary" for="chk_@kv.Key.Rank">@kv.Key.Subject</label>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="hide" id="chartsSection">
+                <div class="col-12 pb-3">
+                    <div id="chartsContainer" style="height: 600px; width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
     @foreach (var kv in Model)
     {
         if (kv.Value is {Data: { } })
         {
-            <div class="col-sm-4 col-lg-4 mb-4" id="dic_@kv.Key.Rank">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 hide" id="dic_@kv.Key.Rank">
                 <div class="card grayBox">
                     <div class="card-header">@kv.Key.Subject @kv.Value.RecordCount</div>
                     <div class="card-body col">
@@ -31,7 +47,7 @@
                             <tbody>
                             @foreach (var point in kv.Value.Data.Take(10))
                             {
-                                var changePercent = Math.Round(point.Increase(),2);
+                                var changePercent = Math.Round(point.Increase(), 2);
                                 var amplitude = Math.Round(point.Amplitude(), 2);
 
                                 var className = changePercent > 0
@@ -44,12 +60,13 @@
                                     renderContainer="chartsSection">
                                     <td>@point.Code</td>
                                     <td>
-                                        @point.DailyRecord.Close <span class="badge">
+                                        @point.DailyRecord.Close
+                                        <span class="badge">
                                             @point.DailyRecord.Date
                                         </span>
                                         <sub title="涨幅">@Math.Round(changePercent, 2)</sub>
-                                            <sup title="振幅">@amplitude</sup>
-                                        </td>
+                                        <sup title="振幅">@amplitude</sup>
+                                    </td>
                                     <td>@($"{point.NearlyRecord.Close}") <span class="badge" title="天数">@point.DurationDays()</span></td>
                                 </tr>
                             }
@@ -60,4 +77,6 @@
             </div>
         }
     }
+
+
 </div>
