@@ -9,12 +9,12 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugType>embedded</DebugType>
     <Title>Ban3.Productions.Casino.Contracts</Title>
-    <Version>1.0.10</Version>
+    <Version>1.0.11</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
     <Description>Casino Contracts</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.0.10</AssemblyVersion>
+    <AssemblyVersion>1.0.0.11</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Configurations>Release;Debug</Configurations>
   </PropertyGroup>

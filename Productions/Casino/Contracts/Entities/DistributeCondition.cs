@@ -14,11 +14,12 @@ public class DistributeCondition
     public DistributeCondition() { }
 
     /// 
-    public DistributeCondition(int rank, string subject, DistributeExpression request)
+    public DistributeCondition(int rank, string subject, DistributeExpression request,bool show=false)
     {
         Rank = rank;
         Subject = subject;
         Request = request;
+        Show = show;
     }
 
     /// <summary>
@@ -38,6 +39,12 @@ public class DistributeCondition
     /// </summary>
     [JsonProperty("request", NullValueHandling = NullValueHandling.Ignore)]
     public DistributeExpression Request { get; set; } = new DistributeExpression();
+
+    /// <summary>
+    /// 默认显示
+    /// </summary>
+    [JsonProperty("show", NullValueHandling = NullValueHandling.Ignore)]
+    public bool Show { get; set; }
 
     /// <summary>
     /// 对时间记录判定

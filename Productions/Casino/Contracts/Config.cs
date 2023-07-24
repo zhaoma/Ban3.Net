@@ -67,6 +67,19 @@ public class Config
             {
                 var ps = new List<DistributeCondition>
                 {
+		            new (
+                        0,
+                        "次新横盘",
+                        new DistributeExpression
+                        {
+                            StartsWith = "68,002,003,30",
+                            HasWeek = true, 
+                            MaxIncrease=5,
+                            MaxDays=250,
+                            Sorter = RecordsSorter.Increase
+                        },
+                        true
+                    ),
                     new (
                         1,
                         "科创板三周期",
@@ -75,7 +88,8 @@ public class Config
                             StartsWith = "68",
                             HasWeek = true, HasMonth = true,
                             Sorter = RecordsSorter.Increase
-                        }
+                        },
+                        true
                     ),
                     new (
                         2,
@@ -85,7 +99,8 @@ public class Config
                             StartsWith = "68",
                             HasWeek = true,
                             Sorter = RecordsSorter.Increase
-                        }
+                        },
+                        true
                     ),
                     new (
                         3,
@@ -105,7 +120,8 @@ public class Config
                             StartsWith = "30",
                             HasWeek = true, HasMonth = true,
                             Sorter = RecordsSorter.Increase
-                        }
+                        },
+                        true
                     ),
                     new (
                         12,
@@ -115,7 +131,8 @@ public class Config
                             StartsWith = "30",
                             HasWeek = true,
                             Sorter = RecordsSorter.Increase
-                        }
+                        },
+                        true
                     ),
                     new (
                         13,
@@ -135,7 +152,8 @@ public class Config
                             StartsWith = "002,003",
                             HasWeek = true, HasMonth = true,
                             Sorter = RecordsSorter.Increase
-                        }
+                        },
+                        true
                     ),
                     new (
                         22,
@@ -225,7 +243,8 @@ public class Config
                             MinPrice = 100,
                             HasWeek = true,
                             Sorter = RecordsSorter.Increase
-                        }
+                        },
+                        true
                     ),
                     new (
                         52,
@@ -233,6 +252,41 @@ public class Config
                         new DistributeExpression
                         {
                             MaxPrice = 5,
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
+                        },
+                        true
+                    ),
+                    new (
+                        53,
+                        "5-30",
+                        new DistributeExpression
+                        {
+                            MinPrice=5,
+                            MaxPrice = 30,
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
+                        },
+                        true
+                    ),
+                    new (
+                        54,
+                        "30-60",
+                        new DistributeExpression
+                        {
+                            MinPrice=30,
+                            MaxPrice = 60,
+                            HasWeek = true,
+                            Sorter = RecordsSorter.Increase
+                        }
+                    ),
+                    new (
+                        55,
+                        "60-100",
+                        new DistributeExpression
+                        {
+                            MinPrice=60,
+                            MaxPrice = 100,
                             HasWeek = true,
                             Sorter = RecordsSorter.Increase
                         }
