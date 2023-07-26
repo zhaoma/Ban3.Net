@@ -56,17 +56,25 @@ internal class Program
                     .ExecuteAndTiming("ReinstateData.");
                 break;
 
+            case "--dr":
+                new Action(() =>
+                {
+                    Signalert.Analyzer.PrepareDistributeRecords();
+                }).ExecuteAndTiming("PrepareDistributeRecords");
+                break;
+
             case "--check":
                 new Action(CheckSomething)
                     .ExecuteAndTiming("CheckSomething(temp func).");
                 break;
-
+                
             default:
                 $"--all :            prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--prepare :        prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--daily :          prepare all daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--one [code] :     prepare ones daily data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--reinstate :      reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
+                $"--dr :             distribute records data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--check :          check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
     
                 break;

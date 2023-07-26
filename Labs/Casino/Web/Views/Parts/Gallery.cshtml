@@ -12,17 +12,17 @@
                 {
                     if (kv.Value is {Data: { } })
                     {
-<div class="btn-group pb-3" role="group" aria-label="Basic checkbox toggle button group">
-    @if (kv.Key.Show)
-    {
-        <input type="checkbox" class="btn-check selectList" id="chk_@kv.Key.Rank" autocomplete="off" checked="checked" value="@kv.Key.Rank">
-    }
-    else
-    {
-        <input type="checkbox" class="btn-check selectList" id="chk_@kv.Key.Rank" autocomplete="off" value="@kv.Key.Rank">
-    }
-    <label class="btn btn-outline-primary" for="chk_@kv.Key.Rank">@kv.Key.Subject <span class="badge bg-warning">@kv.Value.RecordCount</span></label>
-</div>
+                        <div class="btn-group pb-3" role="group" aria-label="Basic checkbox toggle button group">
+                            @if (kv.Key.Show)
+                            {
+                                <input type="checkbox" class="btn-check selectList" id="chk_@kv.Key.Rank" autocomplete="off" checked="checked" value="@kv.Key.Rank">
+                            }
+                            else
+                            {
+                                <input type="checkbox" class="btn-check selectList" id="chk_@kv.Key.Rank" autocomplete="off" value="@kv.Key.Rank">
+                            }
+                            <label class="btn btn-outline-primary" for="chk_@kv.Key.Rank">@kv.Key.Subject <span class="badge bg-primary">@kv.Value.RecordCount</span></label>
+                        </div>
                     }
                 }
             </div>
@@ -35,11 +35,11 @@
         </div> 
     </div>
     @foreach (var kv in Model)
+    {
+        var tableClass = kv.Key.Show ? "" : "hide";
+        if (kv.Value is {Data: { } })
         {
-            var tableClass = kv.Key.Show ? "" : "hide";
-            if (kv.Value is {Data: { } })
-            {
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-4 @tableClass" id="dic_@kv.Key.Rank">
+            <div class="galleryList col-sm-12 col-md-6 col-lg-4 mb-4 @tableClass" id="dic_@kv.Key.Rank">
                 <div class="card grayBox">
                     <div class="card-header">@kv.Key.Subject @kv.Value.RecordCount</div>
                     <div class="card-body col">
@@ -84,6 +84,4 @@
             </div>
         }
     }
-
-
 </div>

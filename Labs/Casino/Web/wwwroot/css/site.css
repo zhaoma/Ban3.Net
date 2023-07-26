@@ -223,7 +223,7 @@ html {
 }
 
 #codesContainer .badge,
-.card-body .badge {
+.galleryList .card-body .badge {
     color: #BBB;
     font-size: 9px;
     padding: 0 3px;

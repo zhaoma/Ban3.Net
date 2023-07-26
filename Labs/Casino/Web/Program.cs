@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.StaticFiles;
+
 namespace Ban3.Labs.Casino.Web
 {
     public class Program
@@ -11,12 +13,28 @@ namespace Ban3.Labs.Casino.Web
             var builder = WebApplication.CreateBuilder(args);
             
             builder.Services.AddControllersWithViews();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("allAllow", policy =>
+                {
+                    policy
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+
+            });
 
             var app = builder.Build();
-            
             app.UseStaticFiles();
+            var extSupports = new Dictionary<string, string> { { ".lr", "application/json" } };  
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = new FileExtensionContentTypeProvider(extSupports)
+            });
 
             app.UseRouting();
+            app.UseCors("allAllow");
 
             //app.UseAuthorization();
 
