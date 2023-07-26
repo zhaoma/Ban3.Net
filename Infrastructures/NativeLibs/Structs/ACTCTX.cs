@@ -20,7 +20,7 @@ namespace Ban3.Infrastructures.NativeLibs.Structs
         /// <summary>
         /// Flags that indicate how the values included in this structure are to be used.
         /// </summary>
-        public ActCtxFlag dwFlags;
+        public ACTCTX_FLAG dwFlags;
 
         /// <summary>
         /// Null-terminated string specifying the path of the manifest file or PE image to be used to create the activation context. 
@@ -89,7 +89,7 @@ namespace Ban3.Infrastructures.NativeLibs.Structs
         /// <summary>
         /// Flags that indicate how the values included in this structure are to be used.
         /// </summary>
-        public ActCtxFlag dwFlags;
+        public ACTCTX_FLAG dwFlags;
 
         /// <summary>
         /// Null-terminated string specifying the path of the manifest file or PE image to be used to create the activation context. 
