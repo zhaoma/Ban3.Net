@@ -8,12 +8,12 @@ namespace Ban3.Infrastructures.Common.Extensions;
 public static partial class Helper
 {
     /// 
-    public static List<PropertyInfo>? GetPublicProperties(this Type tp)
+    public static List<PropertyInfo>? GetPublicProperties(this Type tp,BindingFlags bindingFlags=BindingFlags.Public | BindingFlags.Instance)
     {
         try
         {
             return tp
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .GetProperties(bindingFlags)
                 .ToList();
         }
         catch (Exception ex)

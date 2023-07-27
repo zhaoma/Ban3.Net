@@ -24,6 +24,7 @@ function bindCheckBox() {
                 } else {
                     list.hide(300);
                 }
+                $(list).delay(400).fadeIn(300);
                 initGrid();
             });
         });

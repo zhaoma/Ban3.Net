@@ -292,5 +292,5 @@ public static partial class Helper
     /// <param name="dt"></param>
     /// <param name="inVal"></param>
     /// <returns></returns>
-    public static bool DateEqual(this DateTime dt, DateTime inVal) => inVal.ToYmd() == dt.ToYmd();
+    public static bool DateEqual(this DateTime dt, DateTime inVal) => inVal.ToYmd().Equals(dt.ToYmd());
 }

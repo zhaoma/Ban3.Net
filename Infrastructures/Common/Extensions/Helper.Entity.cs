@@ -23,39 +23,8 @@ public static partial class Helper
     /// <param name="obj"></param>
     /// <param name="source"></param>
     /// <returns></returns>
-    public static T FillFrom<T>(this T obj, object? source) where T : class, new()
-    {
-        if (source != null)
-        {
-            PropertyInfo[] pis = typeof(T).GetProperties();
-            PropertyInfo[] pisSource = source.GetType().GetProperties();
-
-            foreach (PropertyInfo pi in pis)
-            {
-                try
-                {
-                    foreach (var propertyInfo in pisSource)
-                    {
-                        if (propertyInfo.Name == pi.Name)
-                        {
-                            object value = propertyInfo.GetValue(source, null);
-                            pi.SetValue(obj, value, null);
-
-                            break;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                }
-            }
-
-            return obj;
-        }
-
-        return new T();
-    }
+    public static T? FillFrom<T>(this T obj, object? source) where T : class, new()
+        => source?.ObjToJson().JsonToObj<T>();
 
     /// <summary>
     /// 从FormCollection填充

@@ -8,14 +8,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace Ban3.Infrastructures.Common.Extensions.Comparers;
+namespace Ban3.Infrastructures.Common.Models;
 
 /// <summary>
 /// 对象比较
 /// </summary>
 /// <typeparam name="T"></typeparam>
 /// <typeparam name="TV">The type of the V.</typeparam>
-public class CurrentEqualityComparer<T, TV> : IEqualityComparer<T>
+public class EqualityComparer<T, TV> : IEqualityComparer<T>
 {
     private readonly Func<T, TV> _keySelector;
     private readonly IEqualityComparer<TV> _comparer;
@@ -25,17 +25,17 @@ public class CurrentEqualityComparer<T, TV> : IEqualityComparer<T>
     /// </summary>
     /// <param name="keySelector"></param>
     /// <param name="comparer"></param>
-    public CurrentEqualityComparer(Func<T, TV> keySelector, IEqualityComparer<TV> comparer)
+    public EqualityComparer(Func<T, TV> keySelector, IEqualityComparer<TV> comparer)
     {
-        this._keySelector = keySelector;
-        this._comparer = comparer;
+        _keySelector = keySelector;
+        _comparer = comparer;
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="keySelector"></param>
-    public CurrentEqualityComparer(Func<T, TV> keySelector)
+    public EqualityComparer(Func<T, TV> keySelector)
         : this(keySelector, EqualityComparer<TV>.Default)
     {
     }

@@ -32,7 +32,7 @@ namespace Ban3.Infrastructures.NativeLibs.Extensions
                 {
                     for (int i = 0; i < rst.Errors.Count; i++)
                     {
-                        MessageBox.Show(rst.Errors[i].FileName + ":\n" + rst.Errors[i].ErrorText);
+                        //MessageBox.Show(rst.Errors[i].FileName + ":\n" + rst.Errors[i].ErrorText);
                     }
                 }
                 else
@@ -47,13 +47,13 @@ namespace Ban3.Infrastructures.NativeLibs.Extensions
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("实例化应用时出错：\r\n" + ex.Message);
+                        //MessageBox.Show("实例化应用时出错：\r\n" + ex.Message);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("编译出错：\r\n" + ex.Message);
+                //MessageBox.Show("编译出错：\r\n" + ex.Message);
             }
         }
 

@@ -131,7 +131,10 @@ public static partial class Helper
                     () => _.PrepareProfileDetails(codes, identity),60
                 );
 
-    private static List<StockOperationRecord> PrepareProfileDetails(this IAnalyzer _, List<string> codes, string identity)
+    private static List<StockOperationRecord> PrepareProfileDetails(
+        this IAnalyzer _, 
+        IEnumerable<string> codes,
+        string identity)
     {
         var result = new List<StockOperationRecord>();
 

@@ -14,10 +14,10 @@ namespace Ban3.Infrastructures.NativeLibs.Undocumented
         [MethodImpl(MethodImplOptions.InternalCall)]
         [DllImport(Documented.NTOSKRNL.Dll, SetLastError = true, CharSet = CharSet.Auto)]
         public static extern NTSTATUS ZwQuerySystemInformation(
-            SYSTEM_INFORMATION_CLASS SystemInformationClass, 
+            SYSTEM_INFORMATION_CLASS systemInformationClass, 
             void* systemInformation, 
             uint systemInformationLength, 
-            uint* ReturnLength
+            uint* returnLength
             );
 
         [MethodImpl(MethodImplOptions.InternalCall)]

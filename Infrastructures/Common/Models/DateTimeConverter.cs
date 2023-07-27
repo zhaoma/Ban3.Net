@@ -2,7 +2,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.Common.Extensions.Converters;
+namespace Ban3.Infrastructures.Common.Models;
 
 /// <summary>
 /// Newtonsoft DateTime Converter
@@ -11,7 +11,7 @@ public class DateTimeConverter
     : DateTimeConverterBase
 {
     private readonly IsoDateTimeConverter _dtConvertor;
-    
+
     /// 
     public DateTimeConverter()
     {
@@ -47,5 +47,18 @@ public class DateTimeConverter
     {
         if (existingValue == null) return null;
         return _dtConvertor.ReadJson(reader, objectType, existingValue, serializer);
+    }
+}
+
+/// <summary>
+/// 
+/// </summary>
+public class DateOnlyConverter
+    : DateTimeConverter
+{
+    /// 
+    public DateOnlyConverter()
+        : base("yyyy-MM-dd")
+    {
     }
 }

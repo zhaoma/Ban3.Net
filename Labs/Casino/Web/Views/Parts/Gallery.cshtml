@@ -1,4 +1,5 @@
-﻿@model Dictionary<Ban3.Productions.Casino.Contracts.Entities.DistributeCondition, Ban3.Infrastructures.Common.Models.MultiResult<Ban3.Productions.Casino.Contracts.Entities.TimelineRecord>>
+﻿@using Ban3.Infrastructures.Common.Extensions
+@model Dictionary<Ban3.Productions.Casino.Contracts.Entities.DistributeCondition, Ban3.Infrastructures.Common.Models.MultiResult<Ban3.Productions.Casino.Contracts.Entities.TimelineRecord>>
 @{
     Layout = null;
 }
@@ -6,7 +7,7 @@
 <div class="row grid" data-masonry='{"percentPosition": true }'>
     <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
         <div class="card grayBox">
-            <div class="card-header">@Model.Count</div>
+            <div class="card-header">@Model.Count collections</div>
             <div class="card-body col">
                 @foreach (var kv in Model)
                 {
@@ -39,7 +40,7 @@
         var tableClass = kv.Key.Show ? "" : "hide";
         if (kv.Value is {Data: { } })
         {
-            <div class="galleryList col-sm-12 col-md-6 col-lg-4 mb-4 @tableClass" id="dic_@kv.Key.Rank">
+            <div class="galleryList col-sm-12 col-md-6 col-lg-4 mb-4 @tableClass" id="dic_@kv.Key.Rank" condition="@kv.Key.ObjToJson()">
                 <div class="card grayBox">
                     <div class="card-header">@kv.Key.Subject @kv.Value.RecordCount</div>
                     <div class="card-body col">

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-using Ban3.Infrastructures.Common.Extensions.Comparers;
+using Ban3.Infrastructures.Common.Models;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
@@ -142,7 +142,7 @@ public static partial class Helper
     /// <returns></returns>
     public static IEnumerable<T> Distinct<T, TV>(this IEnumerable<T> source, Func<T, TV> keySelector)
     {
-        return source.Distinct(new CurrentEqualityComparer<T, TV>(keySelector));
+        return source.Distinct(new EqualityComparer<T, TV>(keySelector));
     }
 
     /// <summary>
@@ -157,7 +157,7 @@ public static partial class Helper
     public static IEnumerable<T> Distinct<T, TV>(this IEnumerable<T> source, Func<T, TV> keySelector,
         IEqualityComparer<TV> comparer)
     {
-        return source.Distinct(new CurrentEqualityComparer<T, TV>(keySelector, comparer));
+        return source.Distinct(new EqualityComparer<T, TV>(keySelector, comparer));
     }
 
     /// <summary>

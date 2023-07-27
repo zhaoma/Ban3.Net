@@ -9,20 +9,14 @@ namespace Ban3.Infrastructures.NativeLibs.Structs
     [StructLayout(LayoutKind.Sequential)]
     public struct HTTP_PROPERTY_FLAGS
     {
+        /// val
+        public uint bit;
 
         /// Present : 1
-        public uint bitvector1;
-
         public uint Present
         {
-            get
-            {
-                return ((uint)((this.bitvector1 & 1u)));
-            }
-            set
-            {
-                this.bitvector1 = ((uint)((value | this.bitvector1)));
-            }
+            get => ((uint)((bit & 1u)));
+            set => bit = ((uint)((value | this.bit)));
         }
     }
 }

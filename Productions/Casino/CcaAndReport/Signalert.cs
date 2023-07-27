@@ -178,6 +178,9 @@ public class Signalert
             });
         }).ExecuteAndTiming("PrepareCompositeRecords");
 
+        new Action(() => Calculator.GenerateAmountDiagrams(stocks))
+            .ExecuteAndTiming("GenerateAmountDiagrams");
+
         new Action(() =>
         {
             Analyzer.PrepareDistributeRecords();
