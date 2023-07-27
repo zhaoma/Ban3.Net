@@ -284,7 +284,7 @@ public static partial class Helper
     public static string ToYmd(this DateTime val) => val.ToString("yyyyMMdd");
 
     /// 
-    public static DateTime FromYmd(this string val) => val.ToDateTimeEx("yyyyMMdd");
+    public static DateTime FromYmd(this string val) => val.ToDateTimeEx();
     
     /// <summary>
     /// 相同日期

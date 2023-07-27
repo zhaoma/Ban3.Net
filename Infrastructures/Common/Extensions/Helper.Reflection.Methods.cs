@@ -14,7 +14,18 @@ public static partial class Helper
 
     private static volatile Dictionary<int, CompiledMethodInfo> _cachedMembers = new ();
 
+    /// <summary>
     /// 
+    /// </summary>
+    /// <typeparam name="T">
+    /// 
+    /// </typeparam>
+    /// <param name="obj">
+    /// assembly / module
+    /// </param>
+    /// <param name="methodName"></param>
+    /// <param name="args"></param>
+    /// <returns></returns>
     public static object? Invoke<T>(this T obj, string methodName, params object[] args)
     {
         if (obj == null) return null;

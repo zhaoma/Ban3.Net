@@ -57,7 +57,7 @@ public static partial class Helper
     /// <returns></returns>
     public static byte[] Serialize(this object value)
     {
-        var ms = new MemoryStream();
+        using var ms = new MemoryStream();
 
         var bf1 = new BinaryFormatter();
 
@@ -79,7 +79,7 @@ public static partial class Helper
 
         ns.Add("", "");
 
-        var stream = new MemoryStream();
+        using var stream = new MemoryStream();
 
         var setting = new XmlWriterSettings { Encoding = new UTF8Encoding(false), Indent = true };
 
