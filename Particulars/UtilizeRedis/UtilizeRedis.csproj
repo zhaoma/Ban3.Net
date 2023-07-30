@@ -1,26 +1,56 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>9.0</LangVersion>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+    <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable </NullableContextOptions>
-    <RootNamespace>Ban3.Infrastructures.Particulars.UtilizeRedis</RootNamespace>
-    <AssemblyName>ban3.Infrastructures.Particulars.UtilizeRedis</AssemblyName>
+    <RootNamespace>Ban3.Particulars.UtilizeRedis</RootNamespace>
+    <AssemblyName>Ban3.Particulars.UtilizeRedis</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
+    <Title>Ban3.Particulars.UtilizeRedis</Title>
+    <Version>1.0.10</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>Redis Client</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.3.10</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\..\..\output\ban3.Infrastructures.Particulars.UtilizeRedis.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\output\Ban3.Particulars.UtilizeRedis.xml</DocumentationFile>
     <OutputPath>..\..\..\output\</OutputPath>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.csproj" />
-    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj" />
+    <None Remove="Interfaces\" />
+    <None Remove="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="StackExchange.Redis" Version="2.6.80" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.9" />
+    <PackageReference Include="log4net" Version="2.0.15" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
 </Project>

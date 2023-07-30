@@ -36,6 +36,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CcaAndReport", "..\..\Produ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NativeLibs", "..\..\Infrastructures\NativeLibs\NativeLibs.csproj", "{78448B65-C3FB-4AFF-954B-24A0C5E4E566}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Particulars", "Particulars", "{329E0323-1C65-4566-A092-6C707258ACB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilizeRedis", "..\..\Particulars\UtilizeRedis\UtilizeRedis.csproj", "{B3EB6C50-DEC3-46E1-BB1B-4320BCEF6317}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +102,10 @@ Global
 		{78448B65-C3FB-4AFF-954B-24A0C5E4E566}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78448B65-C3FB-4AFF-954B-24A0C5E4E566}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78448B65-C3FB-4AFF-954B-24A0C5E4E566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3EB6C50-DEC3-46E1-BB1B-4320BCEF6317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3EB6C50-DEC3-46E1-BB1B-4320BCEF6317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3EB6C50-DEC3-46E1-BB1B-4320BCEF6317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3EB6C50-DEC3-46E1-BB1B-4320BCEF6317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +124,7 @@ Global
 		{2B4E95F8-B077-45B0-AEBA-312984169CFE} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
 		{5D966B57-A497-4670-A33F-9B87BFFF711D} = {66712823-0C8C-4FF7-A85E-9BE4A82BDFF8}
 		{78448B65-C3FB-4AFF-954B-24A0C5E4E566} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
+		{B3EB6C50-DEC3-46E1-BB1B-4320BCEF6317} = {329E0323-1C65-4566-A092-6C707258ACB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0411A79E-D9D7-4686-8190-6E05F219E28D}
