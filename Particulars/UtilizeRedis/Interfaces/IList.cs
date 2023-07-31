@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Ban3.Particulars.UtilizeRedis.Interfaces;
 
+/// <summary>
+/// 
+/// </summary>
 public interface IList
 {
     /// <summary>
@@ -27,7 +29,7 @@ public interface IList
     /// <typeparam name="T"></typeparam>
     /// <param name="listKey"></param>
     /// <param name="value"></param>
-     void ListRightPush<T>(string listKey, T value);
+    void ListRightPush<T>(string listKey, T value);
 
     /// <summary>
     /// 
@@ -35,14 +37,14 @@ public interface IList
     /// <typeparam name="T"></typeparam>
     /// <param name="listKey"></param>
     /// <returns></returns>
-     T ListRightPop<T>(string listKey);
+    T ListRightPop<T>(string listKey);
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="listKey"></param>
     /// <returns></returns>
-     int ListLength(string listKey);
+    int ListLength(string listKey);
 
     /// <summary>
     /// 
@@ -52,7 +54,7 @@ public interface IList
     /// <param name="start"></param>
     /// <param name="stop"></param>
     /// <returns></returns>
-     List<T> ListRange<T>(string listKey, int start = 0, int stop = -1);
+    List<T> ListRange<T>(string listKey, int start = 0, int stop = -1);
 
     /// <summary>
     /// 
@@ -61,7 +63,7 @@ public interface IList
     /// <param name="listKey"></param>
     /// <param name="index"></param>
     /// <returns></returns>
-     T ListGetByIndex<T>(string listKey, int index);
+    T ListGetByIndex<T>(string listKey, int index);
 
     /// <summary>
     /// 
@@ -70,7 +72,7 @@ public interface IList
     /// <param name="listKey"></param>
     /// <param name="pivot"></param>
     /// <param name="value"></param>
-     void ListInsertAfter<T>(string listKey, T pivot, T value);
+    void ListInsertAfter<T>(string listKey, T pivot, T value);
 
     /// <summary>
     /// 
@@ -79,7 +81,7 @@ public interface IList
     /// <param name="listKey"></param>
     /// <param name="pivot"></param>
     /// <param name="value"></param>
-     void ListInsertBefore<T>(string listKey, T pivot, T value);
+    void ListInsertBefore<T>(string listKey, T pivot, T value);
 
     /// <summary>
     /// 
@@ -88,7 +90,7 @@ public interface IList
     /// <param name="listKey"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-     bool ListRemove<T>(string listKey, T value);
+    bool ListRemove<T>(string listKey, T value);
 
     /// <summary>
     /// 
@@ -107,4 +109,3 @@ public interface IList
     /// <param name="stop"></param>
     void ListTrim(string listKey, int start = 0, int stop = -1);
 }
-

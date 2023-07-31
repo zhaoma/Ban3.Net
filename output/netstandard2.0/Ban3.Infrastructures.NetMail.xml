@@ -25,7 +25,7 @@
             <param name="mailHtml"></param>
             <returns></returns>
         </member>
-        <member name="M:Ban3.Infrastructures.NetMail.Helper.SendByOffice365(Ban3.Infrastructures.NetMail.Entries.TargetServer,System.Net.Mail.MailMessage)">
+        <member name="M:Ban3.Infrastructures.NetMail.Helper.SendBySmtp(Ban3.Infrastructures.NetMail.Entries.TargetServer,System.Net.Mail.MailMessage)">
             <summary>
             用smtp服务器发送邮件
             </summary>
@@ -35,7 +35,7 @@
         </member>
         <member name="M:Ban3.Infrastructures.NetMail.Helper.SendByOutlook(Ban3.Infrastructures.NetMail.Entries.TargetServer,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String,System.String)">
             <summary>
-            用outlook发送邮件
+            用本机outlook发送邮件
             </summary>
             <param name="server"></param>
             <param name="to"></param>

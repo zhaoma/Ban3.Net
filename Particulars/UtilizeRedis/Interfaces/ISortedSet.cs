@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Ban3.Particulars.UtilizeRedis.Interfaces;
 
+/// <summary>
+/// 
+/// </summary>
 public interface ISortedSet
 {
     /// <summary>
@@ -34,7 +36,7 @@ public interface ISortedSet
     /// <param name="destination"></param>
     /// <returns></returns>
     long SortedSetIntersect<T>(string first, string second, string destination);
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -44,14 +46,14 @@ public interface ISortedSet
     /// <param name="destination"></param>
     /// <returns></returns>
     long SortedSetUnion<T>(string first, string second, string destination);
-    
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="setKey"></param>
     /// <returns></returns>
     int SortedSetLength(string setKey);
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -59,7 +61,7 @@ public interface ISortedSet
     /// <param name="setKey"></param>
     /// <returns></returns>
     T SortedSetPop<T>(string setKey);
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -69,7 +71,7 @@ public interface ISortedSet
     /// <param name="stop"></param>
     /// <returns></returns>
     List<T> SortedSetRangeByRank<T>(string setKey, int start, int stop);
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -79,7 +81,7 @@ public interface ISortedSet
     /// <param name="stop"></param>
     /// <returns></returns>
     List<T> SortedSetRangeByScore<T>(string setKey, int start, int stop);
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -88,7 +90,7 @@ public interface ISortedSet
     /// <param name="value"></param>
     /// <returns></returns>
     long? SortedSetRank<T>(string setKey, T value);
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -97,7 +99,7 @@ public interface ISortedSet
     /// <param name="value"></param>
     /// <returns></returns>
     bool SortedSetRemove<T>(string setKey, T value);
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -106,7 +108,7 @@ public interface ISortedSet
     /// <param name="value"></param>
     /// <returns></returns>
     double? SortedSetScore<T>(string setKey, T value);
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -118,4 +120,3 @@ public interface ISortedSet
     /// <returns></returns>
     List<T> SortedSetScan<T>(string setKey, string pattern, int pageSize, int pageNo);
 }
-

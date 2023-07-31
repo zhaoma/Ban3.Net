@@ -1,8 +1,10 @@
 ﻿using System;
-using StackExchange.Redis;
 
 namespace Ban3.Particulars.UtilizeRedis.Interfaces;
 
+/// <summary>
+/// 
+/// </summary>
 public interface IKeyAndString
 {
     /// <summary>
@@ -45,7 +47,7 @@ public interface IKeyAndString
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-     bool KeyDelete(string key);
+    bool KeyDelete(string key);
 
     /// <summary>
     /// 读取
@@ -72,4 +74,3 @@ public interface IKeyAndString
     /// <returns></returns>
     bool StringDelete(string key);
 }
-

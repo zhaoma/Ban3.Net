@@ -10,5 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Infrastructures\Common\Common.csproj" />
     <ProjectReference Include="..\..\..\Infrastructures\Consoles\Consoles.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructures\NetMail\NetMail.csproj" />
   </ItemGroup>
 </Project>

@@ -1,12 +1,12 @@
-﻿using System;
-using StackExchange.Redis;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Ban3.Particulars.UtilizeRedis.Interfaces;
 
+/// <summary>
+/// 
+/// </summary>
 public interface ISet
 {
-
     /// <summary>
     /// 
     /// </summary>
@@ -49,7 +49,7 @@ public interface ISet
     /// <typeparam name="T"></typeparam>
     /// <param name="setKeys"></param>
     /// <returns></returns>
-    List<T> SetMerge<T>(List<string> setKeys);
+    List<T> SetMerge<T>(List<string>? setKeys);
 
     /// <summary>
     /// 
@@ -147,4 +147,3 @@ public interface ISet
     /// <returns></returns>
     List<T> SetScan<T>(string setKey, string pattern, int pageSize, int pageNo);
 }
-
