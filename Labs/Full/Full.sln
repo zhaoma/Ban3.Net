@@ -36,6 +36,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CcaAndReport", "..\..\Produ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NativeLibs", "..\..\Infrastructures\NativeLibs\NativeLibs.csproj", "{78448B65-C3FB-4AFF-954B-24A0C5E4E566}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataPersist", "..\..\Libs\DataPersist\DataPersist.csproj", "{B01939C1-96EB-41B2-AB7C-761E812A81A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,10 @@ Global
 		{78448B65-C3FB-4AFF-954B-24A0C5E4E566}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78448B65-C3FB-4AFF-954B-24A0C5E4E566}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78448B65-C3FB-4AFF-954B-24A0C5E4E566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B01939C1-96EB-41B2-AB7C-761E812A81A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B01939C1-96EB-41B2-AB7C-761E812A81A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B01939C1-96EB-41B2-AB7C-761E812A81A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B01939C1-96EB-41B2-AB7C-761E812A81A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +122,7 @@ Global
 		{2B4E95F8-B077-45B0-AEBA-312984169CFE} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
 		{5D966B57-A497-4670-A33F-9B87BFFF711D} = {66712823-0C8C-4FF7-A85E-9BE4A82BDFF8}
 		{78448B65-C3FB-4AFF-954B-24A0C5E4E566} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
+		{B01939C1-96EB-41B2-AB7C-761E812A81A7} = {C7ACADA2-BA6C-4260-AD55-62823CCA6814}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0411A79E-D9D7-4686-8190-6E05F219E28D}
