@@ -17,6 +17,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.2</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
   

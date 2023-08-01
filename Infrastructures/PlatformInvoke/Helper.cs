@@ -94,17 +94,8 @@ public static class Helper
         return false;
     }
 
-    /// <summary>
-    /// 加载程序集分析结果
-    /// </summary>
-    /// <returns></returns>
-    public static List<AssemblyFile> Load()
-    {
-        return typeof(AssemblyFile)
-            .LocalFile()
-            .ReadFileAs<List<AssemblyFile>>();
-    }
-    
+    #region Prepare
+
     #region Assembly HighLevel Roads
 
     /// <summary>
@@ -370,6 +361,18 @@ public static class Helper
 
     #endregion
 
+    #endregion
+
+    /// <summary>
+    /// 加载程序集分析结果
+    /// </summary>
+    /// <returns></returns>
+    public static List<AssemblyFile> Load()
+    {
+        return typeof(AssemblyFile)
+            .LocalFile()
+            .ReadFileAs<List<AssemblyFile>>();
+    }
 
 }
 

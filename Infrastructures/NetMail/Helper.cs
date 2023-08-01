@@ -15,7 +15,7 @@ public static class Helper
 {
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
 
-    private static Entries.TargetServer Server = new TargetServer
+    private static readonly TargetServer Server = new()
     {
         ServerEndpoint=Common.Config.GetValue("Email:Server")+"",
         ServerPort=(Common.Config.GetValue("Email:Port") + "").ToInt(),
@@ -25,7 +25,12 @@ public static class Helper
         TagName = Common.Config.GetValue("Email:TagName") + "",
     };
 
-    public static bool Send(this Entries.Mail mail)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="mail"></param>
+    /// <returns></returns>
+    public static bool Send(this Mail mail)
     {
         return string.IsNullOrEmpty(Server.ServerEndpoint)
             ? Server.SendByOutlook(mail.To, mail.CC, mail.Subject, mail.HtmlBody)
@@ -42,7 +47,7 @@ public static class Helper
     /// <param name="mailHtml"></param>
     /// <returns></returns>
     public static bool Send(
-	    this Entries.TargetServer server, 
+	    this TargetServer server, 
         List<string>? to, 
         List<string>? cc, 
         string subject,
@@ -81,7 +86,7 @@ public static class Helper
     /// <param name="message"></param>
     /// <returns></returns>
     public static bool SendBySmtp(
-	    this Entries.TargetServer server, 
+	    this TargetServer server, 
         MailMessage message)
     {
         try
@@ -103,7 +108,7 @@ public static class Helper
             
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            ServicePointManager.ServerCertificateValidationCallback = (s, c, h, e) => true;
+            ServicePointManager.ServerCertificateValidationCallback = (_, _, _, _)=> true;
 
             smtpClient.Send(message);
 
@@ -127,7 +132,7 @@ public static class Helper
     /// <param name="mailHtml"></param>
     /// <returns></returns>
     public static bool SendByOutlook(
-        this Entries.TargetServer server,
+        this TargetServer server,
         List<string>? to,
         List<string>? cc,
         string? subject,

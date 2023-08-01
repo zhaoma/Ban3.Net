@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Caching;
 using System;
+using System.IO;
 using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Infrastructures.RuntimeCaching;
@@ -40,7 +41,12 @@ public static class Helper
             AppendToMemoryCache(key, cached.ObjToJson(), minutes.Value);
 
         if (!string.IsNullOrEmpty(localFile))
+        {
+            if (!File.Exists(localFile))
+                localFile.WriteFile(cached.ObjToJson());
+
             AppendToMemoryCache(key, cached.ObjToJson(), localFile);
+        }
 
         return cached;
     }

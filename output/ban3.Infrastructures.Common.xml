@@ -1,138 +1,1936 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Ban3.Productions.Casino.CcaAndReport</name>
+        <name>Ban3.Infrastructures.Common</name>
     </assembly>
     <members>
-        <member name="T:Ban3.Productions.Casino.CcaAndReport.Signalert">
+        <member name="T:Ban3.Infrastructures.Common.Attributes.EnumAttachedAttribute">
+            <summary>
+            枚举类型关联属性
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.EnumAttachedAttribute.TagType">
+            <summary>
+            标签类型 样式
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.EnumAttachedAttribute.Description">
+            <summary>
+            中文描述
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.EnumAttachedAttribute.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.EnumAttachedAttribute.IconColor">
+            <summary>
+            图标颜色
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Attributes.FieldAttribute">
+            <summary>
+            字段属性
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.TypeId">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Collector">
-            
-        </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Calculator">
-            
-        </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Analyzer">
-            
-        </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Reportor">
-            
-        </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.TargetCodes">
+        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.SupportSearch">
             <summary>
-            关注标的池
+            字段支持检索
             </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.ColIndex">
+            <summary>
+            列表显示列序
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.FormatPattern">
+            <summary>
+            转字符格式
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.TypeName">
+            <summary>
+            属性数据类型
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.FieldAttribute.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.FieldAttribute.#ctor(System.Boolean,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="supportSearch"></param>
+            <param name="colIndex"></param>
+            <param name="formatPattern"></param>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Attributes.ForeignKeyAttribute">
+            <summary>
+            外键字段属性
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.ForeignKeyAttribute.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.ForeignKeyAttribute.Referer">
+            <summary>
+            转字符格式
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.ForeignKeyAttribute.#ctor(System.Type)">
+            <summary>
+            
+            </summary>
+            <param name="referer"></param>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute">
+            <summary>
+            表策略属性
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.#ctor">
+            ctor
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="tableName"></param>
+            <param name="cacheAll"></param>
+            <param name="needRecord"></param>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.TableName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.NeedRecord">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.CacheAll">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Attributes.TracingItAttribute">
+            <summary>
+            用Rougamo 记录方法(方法的执行耗时)
+            配置在appsettings.json: TraceSetting:BindFlags/Timing/LoggingArguments
+            默认(未设置) public/true/false
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Attributes.TracingItAttribute.Flags">
+            <summary>
+            记录所有方法
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TracingItAttribute.OnEntry(Rougamo.Context.MethodContext)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TracingItAttribute.OnException(Rougamo.Context.MethodContext)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TracingItAttribute.OnExit(Rougamo.Context.MethodContext)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Attributes.TracingItAttribute.OnSuccess(Rougamo.Context.MethodContext)">
+            
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Config">
+            <summary>
+            配置获取
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Config.AppConfiguration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Config.#cctor">
+            <summary>
+            静态构造
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Config.LocalStorage">
+            <summary>
+            本地文件存储配置
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Config.TraceSetting">
+            <summary>
+            跟踪配置
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Config.GetValue(System.String)">
+            <summary>
+            获取配置值
+            </summary>
+            <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.PrepareEventsAndSeeds(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="T:Ban3.Infrastructures.Common.DataHandle`1">
             <summary>
-            下载事件，计算复权价格
+            
             </summary>
-            <param name="allCodes"></param>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ReinstateAllPrices(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="T:Ban3.Infrastructures.Common.Enums.EntityOperate">
             <summary>
-            计算复权价格
+            实体操作
             </summary>
-            <param name="allCodes"></param>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.EntityOperate.Create">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.EntityOperate.Update">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.EntityOperate.Retrieve">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.EntityOperate.Delete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.EntityOperate.Query">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Enums.HashType">
+            <summary>
+            哈希算法枚举
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.HashType.MD5">
+            <summary>
+            MD5
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.HashType.SHA1">
+            <summary>
+            SHA1
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.HashType.SHA256">
+            <summary>
+            SHA256
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.HashType.SHA384">
+            <summary>
+            SHA384
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.HashType.SHA512">
+            <summary>
+            SHA512
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Enums.ResponseStatusCode">
+            <summary>
+            响应状态码
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.ResponseStatusCode.Code200">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.ResponseStatusCode.Code401">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.ResponseStatusCode.Code404">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.ResponseStatusCode.Code500">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Enums.Sort">
+            <summary>
+            排序方式
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.Sort.Ascending">
+            <summary>
+            升序
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Enums.Sort.Descending">
+            <summary>
+            降序
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Extensions.Helper">
+            
+            <summary>
+            位操作
+            </summary>
+            <summary>
+            字节组相关
+            </summary>
+            
+            <summary>
+            字典扩展
+            </summary>
+            <summary>
+            POCO相关
+            </summary>
+            <summary>
+            枚举操作
+            </summary>
+            <summary>
+            列表扩展
+            </summary>
+            <summary>
+            文件相关扩展方法
+            </summary>
+            <summary>
+            文件相关扩展方法
+            </summary>
+            <summary>
+            扩展方法定义（泛型）
+            </summary>
+            <summary>
+            哈希方法
+            </summary>
+            <summary>
+            对对象异步调用
+            </summary>
+            <summary>
+            空值扩展方法
+            </summary>
+            <summary>
+            汉语拼音扩展方法
+            </summary>
+            <summary>
+            可查询列表扩展方法
+            </summary>
+            <summary>
+            随机值生成
+            </summary>
+            <summary>
+            序列化
+            </summary>
+            <summary>
+            排序
+            </summary>
+            <summary>
+            字符串扩展方法
+            </summary>
+            <summary>
+            变量相关
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ExecuteAndTiming(System.Action,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="action"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ParallelExecute``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0},System.Int32)">
+            <summary>
+            并发运行
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="all"></param>
+            <param name="action"></param>
+            <param name="taskCount"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ParallelExecuteAsync``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0},System.Int32)">
+            <summary>
+            实际使用中发现，信号量会增加些开销
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="all"></param>
+            <param name="action"></param>
+            <param name="taskCount"></param>
             <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteFullyJob(System.Boolean)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.CreateTimer(System.Action,System.DateTime)">
             <summary>
-            完整任务
-            下载历史行情数据（分红配股事件及计算复权因子）
+            给任务创建一个定时时钟
             </summary>
-            <param name="reCalculateSeeds"></param>
+            <param name="action"></param>
+            <param name="dailyTime"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteDailyJob">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.CreateTimer(System.Action,System.Int32)">
             <summary>
-            日常任务
-            无参数，全市场
+            给任务创建一个频发时钟
             </summary>
+            <param name="action"></param>
+            <param name="interval"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteDailyJob(System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.CreateAsyncTimer(System.Action,System.Action{System.IAsyncResult},System.Int32)">
             <summary>
-            指定codes，","分割
+            给异步任务创建一个频发时钟
             </summary>
-            <param name="codes"></param>
+            <param name="action"></param>
+            <param name="callbackAction"></param>
+            <param name="interval"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteDailyJob(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.TimesParallel(System.Action,System.Int32)">
             <summary>
-            指定标的集合
+            并发任务
             </summary>
-            <param name="stocks"></param>
+            <param name="action"></param>
+            <param name="count"></param>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecutePrepare(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Times(System.Action,System.Int32)">
             <summary>
-            计算复权价格
-            计算指标值
-            准备指标图表数据
-            准备指标特征数据
-            生成最新列表
+            重发任务
             </summary>
-            <param name="stocks"></param>
+            <param name="action"></param>
+            <param name="count"></param>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDots(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetBit(System.Byte,System.Int32)">
+            <summary>
+            Gets the bit.获取取第index是否为1,index从0开始
+            </summary>
+            <param name="b">The b.</param>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SetBit(System.Byte,System.Int32)">
+            <summary>
+            Sets the bit.将第index位设为1
+            </summary>
+            <param name="b">The b.</param>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ClearBit(System.Byte,System.Int32)">
+            <summary>
+            将第index位设为0
+            Clears the bit.
+            </summary>
+            <param name="b">The b.</param>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ReverseBit(System.Byte,System.Int32)">
+            <summary>
+            Reverses the bit.
+            将第index位取反
+            </summary>
+            <param name="b">The b.</param>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StringToBinary(System.String)">
+            <summary>
+            String to Binary
+            </summary>
+            <param name="str">String</param>
+            <returns>Binary</returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StringToBytes(System.String)">
+            <summary>
+            UTF8转字符串为byte[]
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.BytesToString(System.Byte[],System.Boolean)">
+            <summary>
+            byte[2]转字符串
+            </summary>
+            <param name="arr"></param>
+            <param name="isReverse"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ByteToHex(System.Byte)">
+            <summary>
+            字节转16进制
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.BytesToHexString(System.Collections.Generic.IEnumerable{System.Byte})">
+            <summary>
+            字节组转16进制
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StringToHexString(System.String,System.Boolean)">
+            <summary>
+            字符串转16进制
+            </summary>
+            <param name="str"></param>
+            <param name="ignoreChinese"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.HexStringToBytes(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="str"></param>
+            <param name="ignoreChinese"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.CRC16(System.Byte[],System.UInt16,System.UInt16,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <param name="crc"></param>
+            <param name="polynomials"></param>
+            <param name="reversal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.CompileSourceCodes(System.String[],System.Collections.Generic.List{System.String})">
+            <summary>
+            编译源码
+            </summary>
+            <param name="codeFiles">源码(每文件)</param>
+            <param name="references">引用/依赖库(.dll)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Delay(System.TimeSpan,System.Action)">
+            <summary>
+            not correct
+            </summary>
+            <param name="ts"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.RandomDelayAsync(System.ValueTuple{System.Int32,System.Int32})">
+            <summary>
+            随机异步延时
+            </summary>
+            <param name="range"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.RandomDelay(System.ValueTuple{System.Int32,System.Int32})">
+            <summary>
+            随机延时
+            </summary>
+            <param name="range"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetValue``2(System.Collections.Generic.Dictionary{``0,``1},``0,``1)">
+            <summary>
+            字典取值
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dict">字典</param>
+            <param name="key">键</param>
+            <param name="defaultValue">默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AddOrReplace``2(System.Collections.Generic.Dictionary{``0,``1},``0,``1,System.Boolean)">
+            <summary>
+            字典添加项(可以保留原有项)
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dict"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <param name="replaceExisted"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendInMultiResult``2(System.Collections.Generic.Dictionary{``0,Ban3.Infrastructures.Common.Models.MultiResult{``1}},``0,``1)">
+            <summary>
+            字典中添加到Dictionary-MultiResult
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="result"></param>
+            <param name="key"></param>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendInList``2(System.Collections.Generic.Dictionary{``0,System.Collections.Generic.List{``1}},``0,``1)">
+            <summary>
+            字典中添加到Dictionary-List
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="result"></param>
+            <param name="key"></param>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AddRange``2(System.Collections.Generic.Dictionary{``0,``1},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}},System.Boolean)">
+            <summary>
+            字典添加键值对列表(可以保留原有项)
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="dict">字典</param>
+            <param name="values">键值对列表</param>
+            <param name="replaceExisted">替换原有项</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendKeys(System.Collections.Generic.Dictionary{System.String,System.Int32},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            字典键计数
+            </summary>
+            <param name="dic">字典</param>
+            <param name="keys">键集合</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.MergeToDictionary(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{System.String}})">
+            <summary>
+            键集合列表合并成键字典
+            </summary>
+            <param name="keys">键集合列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Merge(System.Collections.Generic.Dictionary{System.String,System.Int32},System.Collections.Generic.Dictionary{System.String,System.Int32})">
+            <summary>
+            键字典合并
+            </summary>
+            <param name="dic">目标字典</param>
+            <param name="addDic">新增字典</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Append``2(System.Collections.Generic.Dictionary{``0,System.Collections.Generic.List{``1}},``0,System.Collections.Generic.List{``1})">
+            <summary>
+            字典追加值集合
+            </summary>
+            <typeparam name="TK"></typeparam>
+            <typeparam name="TV"></typeparam>
+            <param name="result">字典</param>
+            <param name="key">键</param>
+            <param name="values">值集合</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Append(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            字典追加键集合
+            </summary>
+            <param name="result">字典</param>
+            <param name="keys">键集合</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.FillFrom``1(``0,System.Object)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.FillFromCollection``1(``0,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            从FormCollection填充
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="formCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.EnumDescription(System.Enum)">
+            <summary>
+            获取到对应枚举的描述-没有描述信息，返回枚举值
+            </summary>
+            <param name="enum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.EnumOptions``1">
+            <summary>
+            枚举转列表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.EnumOptions(System.Type)">
+            <summary>
+            枚举转列表
+            </summary>
+            <param name="enumType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StringToEnum``1(System.String)">
+            <summary>
+            定义值转枚举(大小写敏感)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.EnumToEnum``2(``0)">
+            <summary>
+            枚举转枚举
+            </summary>
+            <typeparam name="TOld"></typeparam>
+            <typeparam name="TNew"></typeparam>
+            <param name="inVal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AllChildren(System.Collections.Generic.List{Ban3.Infrastructures.Common.Models.RecursionNode},System.Int32)">
+            <summary>
+            遍历下级
+            </summary>
+            <param name="allNodes"></param>
+            <param name="specialNodeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AggregateToString(System.Collections.Generic.IEnumerable{System.Object},System.String)">
+            <summary>
+            列表串串(string.Join改写扩展而已)
+            </summary>
+            <param name="names"></param>
+            <param name="seq"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendDistinct``1(System.Collections.Generic.List{``0},``0)">
+            <summary>
+            [checked] 查重添加
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="all"></param>
+            <param name="one"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendDistinct``1(System.Collections.Generic.List{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            [checked] 查重添加
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="all"></param>
+            <param name="add">新集合</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.UnionAll``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            [checked] 合并集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">集合列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AllFoundIn``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            [checked] 集合发现
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="keys">待查找</param>
+            <param name="targetKeys">目标集</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AllFoundInComplex(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+            <summary>
+            全包含，包括复合条件
+            </summary>
+            <param name="keys"></param>
+            <param name="setKeys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NotFoundIn``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            [checked] 集合未发现
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="keys">待查找</param>
+            <param name="targetKeys">目标集</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.RandomResortList``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            [checked] 集合随机排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="oriList">源集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Matches(System.Type[],System.Type[])">
+            <summary>
+            类型数组一致
+            </summary>
+            <param name="arr"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Redim``1(``0[],System.Int32)">
+            <summary>
+            [checked] 重新定义数组长度
+            </summary>
+            <param name="arr">原数组</param>
+            <param name="length">新长度</param>
+            <returns>新长度，从头填充原数组，超出部分截断</returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsAsc``1(System.Collections.Generic.List{``0},System.Func{``0,System.Double})">
+            <summary>
+            [checked] 集合是否为升序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="numbers"></param>
+            <param name="toDecimal">用来排序的取值函数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsDesc``1(System.Collections.Generic.List{``0},System.Func{``0,System.IComparable{System.Object}})">
+            <summary>
+            [checked] 集合是否为降序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="numbers"></param>
+            <param name="toDecimal">用来排序的取值函数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ReadFileAs``1(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="path"></param>
+            <param name="charset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ReadFile(System.String,System.String)">
+            <summary>
+            读文件(ReadToEnd)
+            </summary>
+            <param name="path"></param>
+            <param name="charset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ReadFile2Rows(System.String)">
+            <summary>
+            按行读文件
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ReadBytes(System.String)">
+            <summary>
+            读成字节数组(ReadAllBytes)
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WriteRows2File(System.String,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            写入行数组
+            </summary>
+            <param name="path"></param>
+            <param name="lines"></param>
+            <param name="charset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WriteFile(System.String,System.String,System.String)">
+            <summary>
+            写字符串
+            </summary>
+            <param name="path"></param>
+            <param name="content"></param>
+            <param name="charset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WriteBytes(System.String,System.Byte[],System.String)">
+            <summary>
+            写字节组
+            </summary>
+            <param name="path"></param>
+            <param name="bytes"></param>
+            <param name="charset"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SaveFileOnDemand``1(System.String,``0,System.String@)">
+            <summary>
+            文件是否需要更新(根据内容摘要比较结果)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="filePath"></param>
+            <param name="content"></param>
+            <param name="timestamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AssemblyName(System.String)">
+            <summary>
+            程序集文件名检查
+            </summary>
+            <param name="assembly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetFiles(System.String,System.String,System.Boolean)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDotsKey(System.Boolean)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetFilesByPattern(System.String,System.String,System.Boolean)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetLineOfPoint(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetDirectories(System.String,System.String,System.Boolean)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetListRecords(System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DataFile``1(System.Object)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetStockPrices(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SetsFile``1(System.Collections.Generic.List{``0},System.String)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetStockSets(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.LocalFile(System.Type,System.String,System.String)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetLatestStockSets">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DataPath(System.String)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.UnsellRecord(Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord,System.Double@)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WorkPath(System.String)">
+            <summary>
+            当前工作目录
+            </summary>
+            <param name="addition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Check(System.String)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetTreemapDiagram(System.Int32)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetGenericTypeName(System.Type)">
+            <summary>
+            获取类型名
+            </summary>
+            <param name="type">类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetGenericTypeName(System.Object)">
+            <summary>
+            获取对象类型名
+            </summary>
+            <param name="object">对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.UnsafeCast``1(System.Object)">
+            <summary>
+            Unsafes the cast.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SafeCast``1(System.Object)">
+            <summary>
+            Safes the cast.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.InstanceOf``1(System.Object)">
+            <summary>
+            Instances the of.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.MD5String(System.String)">
+            <summary>
+            获取字符串MD5摘要
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetHashedString(Ban3.Infrastructures.Common.Enums.HashType,System.Byte[],System.Byte[],System.Boolean)">
+            <summary>
+            获取哈希之后的字符串
+            </summary>
+            <param name="type">哈希类型</param>
+            <param name="source">源</param>
+            <param name="key">key</param>
+            <param name="isLower">是否是小写</param>
+            <returns>哈希算法处理之后的字符串</returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetHashedBytes(Ban3.Infrastructures.Common.Enums.HashType,System.String)">
+            <summary>
+            计算字符串Hash值
+            </summary>
+            <param name="type">hash类型</param>
+            <param name="str">要hash的字符串</param>
+            <returns>hash过的字节数组</returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetHashedBytes(Ban3.Infrastructures.Common.Enums.HashType,System.String,System.Text.Encoding)">
+            <summary>
+            计算字符串Hash值
+            </summary>
+            <param name="type">hash类型</param>
+            <param name="str">要hash的字符串</param>
+            <param name="encoding">编码类型</param>
+            <returns>hash过的字节数组</returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetHashedBytes(Ban3.Infrastructures.Common.Enums.HashType,System.Byte[],System.Byte[])">
+            <summary>
+            获取Hash后的字节数组
+            </summary>
+            <param name="type">哈希类型</param>
+            <param name="key">key</param>
+            <param name="bytes">原字节数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.InvokeMethod``1(System.Object,System.String)">
+            <summary>
+            Invokes the method.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj">The obj.</param>
+            <param name="methodName">Name of the method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.InvokeMethod(System.Object,System.String,System.Object[])">
+            <summary>
+            Invokes the method.
+            </summary>
+            <param name="obj">The obj.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.InvokeMethod``1(System.Object,System.String,System.Object[])">
+            <summary>
+            Invokes the method.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj">The obj.</param>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsAsyncMethod(System.Reflection.MethodInfo)">
+            <summary>
+            判断是否异步方法
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.CheckOnNull(System.Object,System.String)">
+            <summary>
+            Checks the on null.
+            </summary>
+            <param name="this">The @this.</param>
+            <param name="parameterName">Name of the parameter.</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.CheckOnNull(System.Object,System.String,System.String)">
+            <summary>
+            Checks the on null.
+            </summary>
+            <param name="this">The @this.</param>
+            <param name="parameterName">Name of the parameter.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsNull(System.Object)">
+            <summary>
+            Determines whether the specified @this is null.
+            </summary>
+            <param name="this">The @this.</param>
+            <returns>
+              <c>true</c> if the specified @this is null; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsNotNull(System.Object)">
+            <summary>
+            Determines whether [is not null] [the specified @this].
+            </summary>
+            <param name="this">The @this.</param>
+            <returns>
+              <c>true</c> if [is not null] [the specified @this]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Extensions.Helper.PinyinHash">
+            <summary>
+            拼音哈希表
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetPinyin(System.Int32)">
+            <summary>
+            Gets the pinyin.
+            </summary>
+            <param name="charValue">The char value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetPinyin(System.String)">
+            <summary>
+            Gets the pinyin.
+            </summary>
+            <param name="chineseChars">The chinese chars.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetShortPinyin(System.String)">
+            <summary>
+            Gets the short pinyin.
+            </summary>
+            <param name="chineseChars">The chinese chars.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WhereIf``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean)">
+            <summary>
+            Wheres if.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">The source.</param>
+            <param name="predicate">The predicate.</param>
+            <param name="condition">if set to <c>true</c> [condition].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WhereIf``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Int32,System.Boolean}},System.Boolean)">
+            <summary>
+            Wheres if.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">The source.</param>
+            <param name="predicate">The predicate.</param>
+            <param name="condition">if set to <c>true</c> [condition].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WhereIf``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Boolean)">
+            <summary>
+            Wheres if.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">The source.</param>
+            <param name="predicate">The predicate.</param>
+            <param name="condition">if set to <c>true</c> [condition].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.WhereIf``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,System.Boolean},System.Boolean)">
+            <summary>
+            Wheres if.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source">The source.</param>
+            <param name="predicate">The predicate.</param>
+            <param name="condition">if set to <c>true</c> [condition].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsBetween``1(``0,``0,``0,System.Boolean,System.Boolean)">
+            <summary>
+            Determines whether the specified t is between.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t">The t.</param>
+            <param name="lowerBound">The lower bound.</param>
+            <param name="upperBound">The upper bound.</param>
+            <param name="includeLowerBound">if set to <c>true</c> [include lower bound].</param>
+            <param name="includeUpperBound">if set to <c>true</c> [include upper bound].</param>
+            <returns>
+              <c>true</c> if the specified t is between; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsBetween``1(``0,``0,``0,System.Collections.Generic.IComparer{``0},System.Boolean,System.Boolean)">
+            <summary>
+            Determines whether the specified t is between.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t">The t.</param>
+            <param name="lowerBound">The lower bound.</param>
+            <param name="upperBound">The upper bound.</param>
+            <param name="comparer">The comparer.</param>
+            <param name="includeLowerBound">if set to <c>true</c> [include lower bound].</param>
+            <param name="includeUpperBound">if set to <c>true</c> [include upper bound].</param>
+            <returns>
+              <c>true</c> if the specified t is between; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Distinct``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Distincts the specified source.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TV"></typeparam>
+            <param name="source">The source.</param>
+            <param name="keySelector">The key selector.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Distinct``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IEqualityComparer{``1})">
+            <summary>
+            Distincts the specified source.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TV">The type of the V.</typeparam>
+            <param name="source">The source.</param>
+            <param name="keySelector">The key selector.</param>
+            <param name="comparer">The comparer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AndAlso(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Call(System.Linq.Expressions.Expression,System.String,System.Linq.Expressions.Expression[])">
+            <summary>
+            
+            </summary>
+            <param name="instance"></param>
+            <param name="methodName"></param>
+            <param name="arguments"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Property(System.Linq.Expressions.Expression,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GreaterThan(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToLambda``1(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])">
+            <summary>
+            
+            </summary>
+            <typeparam name="TDelegate"></typeparam>
+            <param name="body"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NextBool(System.Random)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetSankeyDiagram(System.Int32)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NextEnum``1(System.Random)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetCandlestickDiagram(System.String,System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NextBytes(System.Random,System.Int32)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetAmountDiagram(System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NextUInt16(System.Random)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetBiasDiagram(System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NextInt16(System.Random)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDmiDiagram(System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NextFloat(System.Random)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetKdDiagram(System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NextDateTime(System.Random,System.DateTime,System.DateTime)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetMacdDiagram(System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.NextDateTime(System.Random)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetProfileDetails(System.Collections.Generic.List{System.String},System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetAssembly(System.String)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetCompositeRecords(System.String)">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetReferencedAssemblies(System.String)">
+            获取dll引用(managed dll)
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetAttributes``1(System.Object,System.Boolean)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetTimelineRecords">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetFirstAttribute``1(System.Object,System.Boolean)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDistributeRecords">
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Invoke``1(``0,System.String,System.Object[])">
+            <summary>
+            
+            </summary>
+            <typeparam name="T">
+            
+            </typeparam>
+            <param name="obj">
+            assembly / module
+            </param>
+            <param name="methodName"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetImplementationNameOfInterfaceMethod(System.Type,System.Type,System.String,System.Type[])">
+            <summary>
+            获取接口的实现方法
+            </summary>
+            <param name="implementation"></param>
+            <param name="interface"></param>
+            <param name="methodName"></param>
+            <param name="argTypes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetPublicProperties(System.Type,System.Reflection.BindingFlags)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetProperty(System.Object,System.String)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.GetPropertyValue``1(System.Object,System.String,``0)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SetPropertyValue(System.Object,System.String,System.Object)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ObjToJson(System.Object)">
+            <summary>
+            命名约束
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.JsonToObj``1(System.String)">
+            <summary>
+            json转实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.JsonpParse(System.String,System.String)">
+            <summary>
+            jsonp
+            </summary>
+            <param name="inVal"></param>
+            <param name="callback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Serialize(System.Object)">
+            <summary>
+            Serializes the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SerializeXml(System.Object)">
+            <summary>
+            Serializes the XML.
+            </summary>
+            <param name="o">The o.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DeserializeXml``1(System.String)">
+            <summary>
+            Deserializes the XML.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="xml">The XML.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Deserialize(System.String,System.Type)">
+            <summary>
+            Deserializes the specified XML.
+            </summary>
+            <param name="xml">The XML.</param>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.TryGetAttribute(System.Xml.XmlNode,System.String)">
+            <summary>
+            尝试读取属性值
+            </summary>
+            <param name="node"></param>
+            <param name="attributeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.BucketSort``1(``0[],System.Int32)">
+            <summary>
+            桶排序
+            </summary>
+            <param name="array">数据源</param>
+            <param name="bucketSize">桶大小</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.FindMaxAndMin``1(``0[])">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.BubbleSort``1(``0[])">
+            <summary>
+            冒泡排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ReverseArray``1(``0[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="array"></param>
+            <param name="index"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToCamel(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToPascal(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToSBC(System.String)">
+            <summary>
+            转全角(SBC case)
+            </summary>
+            <param name="input">任意字符串</param>
+            <returns>
+            全角字符串
+            </returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToDBC(System.String)">
+            <summary>
+            转半角(DBC case)
+            </summary>
+            <param name="input">任意字符串</param>
+            <returns>
+            半角字符串
+            </returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Match(System.String,System.String)">
+            <summary>
+            Matches the specified s.
+            </summary>
+            <param name="s">The s.</param>
+            <param name="pattern">The pattern.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToBase64String(System.Byte[])">
+            <summary>
+            
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsEmail(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.HasChinese(System.String)">
+            <summary>
+            判断有无中文
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ConvertJapan(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="inVal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SQLParse(System.String)">
+            <summary>
+            防止注入
+            </summary>
+            <param name="text">The text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StripDenyWord(System.String,System.String)">
+            <summary>
+            Strips the deny word.
+            </summary>
+            <param name="content">The content.</param>
+            <param name="denyWords">The deny words.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StripBadWord(System.String,System.String,System.String)">
+            <summary>
+            Strips the bad word.
+            </summary>
+            <param name="content">The content.</param>
+            <param name="badWords">The bad words.</param>
+            <param name="fixWord">The fix word.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StripHTML(System.String)">
+            <summary>
+            清理HTML
+            </summary>
+            <param name="html">The HTML.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StripHTMLButImage(System.String)">
+            <summary>
+            Strips the HTML but image.
+            </summary>
+            <param name="html">The HTML.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ObjToString(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsMatch(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="input"></param>
+            <param name="pattern"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.FirstMatchValue(System.String,System.String)">
+            <summary>
+            第一个匹配项
+            </summary>
+            <param name="input"></param>
+            <param name="pattern"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.FirstHtmlImage(System.String,System.String)">
+            <summary>
+            第一张图片
+            </summary>
+            <param name="input"></param>
+            <param name="imgSymbol"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.FindHtmlTd(System.String,System.String)">
+            <summary>
+            查找表格单元格
+            </summary>
+            <param name="input"></param>
+            <param name="tdSymbol"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.Substr(System.String,System.String,System.String)">
+            <summary>
+            截取字符串
+            </summary>
+            <param name="input"></param>
+            <param name="prefix"></param>
+            <param name="suffix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.RemoveJsonpTags(System.String,System.String)">
+            <summary>
+            移出jsonp标签
+            </summary>
+            <param name="input"></param>
+            <param name="jsonp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SplitFix(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="inVal"></param>
+            <param name="prefix"></param>
+            <param name="suffix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SplitTbody(System.String,System.String,System.String)">
+            <summary>
+            抽取表格Tbody里的tr与td
+            </summary>
+            <param name="val"></param>
+            <param name="tdStart"></param>
+            <param name="tdEnd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendQuery(System.Text.StringBuilder,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sb"></param>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendQuery(System.Text.StringBuilder,System.String,System.Enum)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendQuery(System.Text.StringBuilder,System.String,System.Nullable{System.Int32})">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AppendQuery(System.Text.StringBuilder,System.String,System.Nullable{System.Boolean})">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DateGe(System.String,System.String)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DateLe(System.String,System.String)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StringExists(System.String,System.String)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StartsWithIn(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.StringEquals(System.String,System.String)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsType(System.Object,System.Type)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToType``1(System.Object)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsArray(System.Object)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.IsDBNull(System.Object)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToInt(System.Object,System.Int32)">
+            <summary>
+            Toes the int.
+            </summary>
+            <param name="strValue">The STR value.</param>
+            <param name="defValue">The def value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToByte(System.Object,System.Byte)">
+            <summary>
+            Toes the tiny int.
+            </summary>
+            <param name="strValue">The STR value.</param>
+            <param name="defValue">The def value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToShort(System.Object,System.Int16)">
+            <summary>
+            Toes the small int.
+            </summary>
+            <param name="strValue">The STR value.</param>
+            <param name="defValue">The def value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToDecimal(System.Object,System.Decimal)">
+            <summary>
+            Toes the decimal.
+            </summary>
+            <param name="strValue">The STR value.</param>
+            <param name="defValue">The def value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToFloat(System.Object,System.Single)">
+            <summary>
+            Toes the float.
+            </summary>
+            <param name="strValue">The STR value.</param>
+            <param name="defValue">The def value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToDouble(System.Object,System.Double)">
+            <summary>
+            Toes the double.
+            </summary>
+            <param name="strValue"></param>
+            <param name="defValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToInt64(System.Object,System.Int64)">
+            <summary>
+            Toes the big int.
+            </summary>
+            <param name="strValue">The STR value.</param>
+            <param name="defValue">The def value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToBool(System.Object,System.Boolean)">
+            <summary>
+            Toes the bool.
+            </summary>
+            <param name="expression">The expression.</param>
+            <param name="defValue">if set to <c>true</c> [def value].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToDateTime(System.Object,System.DateTime)">
+            <summary>
+            Toes the date time.
+            </summary>
+            <param name="strValue">The STR value.</param>
+            <param name="defValue">The def value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToDateTime(System.Object,System.DateTime,System.String)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToDateTime(System.Object)">
+            <summary>
+            转日期
+            </summary>
+            <param name="strValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToDateTimeEx(System.Object,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="strValue"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DatetimeToTimestamp(System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="inVal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.TimeGe(System.DateTime,System.DateTime)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.FindWeekEnd(System.DateTime)">
+            <summary>
+            找到周末
+            </summary>
+            <param name="day"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.FindMonthEnd(System.DateTime)">
+            <summary>
+            找到月末
+            </summary>
+            <param name="day"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToMoney(System.Decimal)">
+            <summary>
+            金额（币种）
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToAmount(System.Decimal)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToAmount(System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToCapital(System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToCapitalInt(System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.ToYmd(System.DateTime)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.FromYmd(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.DateEqual(System.DateTime,System.DateTime)">
+            <summary>
+            相同日期
+            </summary>
+            <param name="dt"></param>
+            <param name="inVal"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Interfaces.ITraceIt">
+            <summary>
+            用Rougamo.Fody记录程序运行过程
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Models.DateTimeConverter">
+            <summary>
+            Newtonsoft DateTime Converter
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.DateTimeConverter.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.DateTimeConverter.#ctor(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.DateTimeConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="serializer"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.DateTimeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="objectType"></param>
+            <param name="existingValue"></param>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Models.DateOnlyConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.DateOnlyConverter.#ctor">
+            
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Models.EnumOption">
+            <summary>
+            枚举转选项定义
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.EnumOption.TagType">
+            <summary>
+            标签类型
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.EnumOption.Description">
+            <summary>
+            枚举描述
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.EnumOption.Name">
+            <summary>
+            枚举名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.EnumOption.Value">
+            <summary>
+            枚举值
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.EnumOption.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.EnumOption.IconColor">
+            <summary>
+            图标颜色
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Models.EqualityComparer`2">
+            <summary>
+            对象比较
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TV">The type of the V.</typeparam>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.EqualityComparer`2.#ctor(System.Func{`0,`1},System.Collections.Generic.IEqualityComparer{`1})">
+            <summary>
+            
+            </summary>
+            <param name="keySelector"></param>
+            <param name="comparer"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.EqualityComparer`2.#ctor(System.Func{`0,`1})">
+            <summary>
+            
+            </summary>
+            <param name="keySelector"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.EqualityComparer`2.Equals(`0,`0)">
+            <summary>
+            
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.EqualityComparer`2.GetHashCode(`0)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Models.LocalStorage">
+            
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.LocalStorage.RootPath">
+            
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.LocalStorage.RootUrl">
+            
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Models.MultiResult`1">
+            <summary>
+            实体结果集
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.MultiResult`1.#ctor">
+            ctor
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.MultiResult`1.RecordCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.MultiResult`1.Data">
+            <summary>
+            分页记录集
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Models.RecursionNode">
+            <summary>
+            递归节点
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Models.RecursionNode.#ctor">
+            ctor
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.RecursionNode.Id">
+            <summary>
+            key
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.RecursionNode.ParentId">
+            <summary>
+            上级key
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Models.TraceSetting">
+            
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.TraceSetting.Timing">
+            
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.TraceSetting.LoggingArguments">
+            
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Models.TraceSetting.BindFlags">
             
         </member>
     </members>

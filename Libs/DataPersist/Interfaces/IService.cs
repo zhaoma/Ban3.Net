@@ -14,6 +14,11 @@ public interface IService
     /// <summary>
     /// 
     /// </summary>
+    IDbConnection Connection { get;}
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="id"></param>
     /// <param name="t"></param>

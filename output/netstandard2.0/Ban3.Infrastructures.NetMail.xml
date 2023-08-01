@@ -4,15 +4,111 @@
         <name>Ban3.Infrastructures.NetMail</name>
     </assembly>
     <members>
+        <member name="T:Ban3.Infrastructures.NetMail.Entries.Mail">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.Mail.To">
+            <summary>
+            收件人
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.Mail.CC">
+            <summary>
+            抄送
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.Mail.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.Mail.HtmlBody">
+            <summary>
+            邮件正文
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.Mail.From">
+            <summary>
+            发件人
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.NetMail.Entries.Mail.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.NetMail.Entries.Mail.#ctor(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="from"></param>
+            <param name="to"></param>
+            <param name="cc"></param>
+            <param name="subject"></param>
+            <param name="htmlBody"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.NetMail.Entries.Mail.#ctor(System.String,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="from"></param>
+            <param name="to"></param>
+            <param name="cc"></param>
+            <param name="subject"></param>
+            <param name="htmlBody"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.NetMail.Entries.Mail.MailMessage">
+            <summary>
+            转MailMessage
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Ban3.Infrastructures.NetMail.Entries.TargetServer">
             <summary>
             目标服务器
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.TargetServer.ServerEndpoint">
+            <summary>
+            服务器地址
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.TargetServer.ServerPort">
+            <summary>
+            服务器端口
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.TargetServer.EnableSsl">
+            <summary>
+            SSL
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.TargetServer.UserName">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.TargetServer.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.NetMail.Entries.TargetServer.TagName">
+            <summary>
+            office365 企业服务？
             </summary>
         </member>
         <member name="T:Ban3.Infrastructures.NetMail.Helper">
             <summary>
             邮件扩展
             </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.NetMail.Helper.Send(Ban3.Infrastructures.NetMail.Entries.Mail)">
+            <summary>
+            
+            </summary>
+            <param name="mail"></param>
+            <returns></returns>
         </member>
         <member name="M:Ban3.Infrastructures.NetMail.Helper.Send(Ban3.Infrastructures.NetMail.Entries.TargetServer,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String,System.String)">
             <summary>
