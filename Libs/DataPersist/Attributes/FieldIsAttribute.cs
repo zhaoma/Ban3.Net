@@ -53,10 +53,16 @@ public class FieldIsAttribute
     public bool SupportSearch { get; set; }
 
     /// <summary>
+    /// 列名
+    /// </summary>
+    [JsonProperty("columnName", NullValueHandling = NullValueHandling.Ignore)]
+    public string ColumnName { get; set; } = string.Empty;
+    
+    /// <summary>
     /// 列表显示列序
     /// </summary>
-    [JsonProperty("colIndex", NullValueHandling = NullValueHandling.Ignore)]
-    public int ColIndex { get; set; }
+    [JsonProperty("columnIndex", NullValueHandling = NullValueHandling.Ignore)]
+    public int ColumnIndex { get; set; }
 
     /// <summary>
     /// 转字符格式

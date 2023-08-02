@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Threading;
+using Ban3.Infrastructures.DataPersist.Attributes;
 using Ban3.Infrastructures.DataPersist.Entities;
 using Ban3.Infrastructures.DataPersist.Enums;
 using Microsoft.Data.Sqlite;
@@ -138,4 +139,10 @@ public static partial class Helper
 
         return list;
     }
+
+    public static TableIsAttribute? Table(this BaseEntity entity)
+        => Config.Table(entity);
+
+    public static List<FieldIsAttribute>? Fields(this BaseEntity entity)
+        => Config.Fields(entity);
 }
