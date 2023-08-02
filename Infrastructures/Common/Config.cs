@@ -58,8 +58,14 @@ public class Config
         }
     }
 
+    /// <summary>
+    /// 检查 appSettings.json 存在
+    /// </summary>
     public static bool SettingsStandby => File.Exists("appSettings.json".WorkPath());
 
+    /// <summary>
+    /// 检查 log4net.config 存在
+    /// </summary>
     public static bool LoggerStandby => File.Exists("log4net.config".WorkPath());
 
     /// <summary>

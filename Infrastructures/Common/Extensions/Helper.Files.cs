@@ -239,6 +239,13 @@ public static partial class Helper
         return false;
     }
 
+    /// <summary>
+    /// 保存实体
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public static T SaveEntity<T>(this T entity, Func<T, string> key)
     {
         if (entity == null) return entity;
@@ -249,8 +256,21 @@ public static partial class Helper
         return entity;
     }
 
+    /// <summary>
+    /// 用主键从文件反序列化实体
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public static T? LoadEntity<T>(this string key) => typeof(T).LocalFile(key).ReadFileAs<T>();
 
+    /// <summary>
+    /// 保存实体列表
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entities"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public static List<T>? SaveEntities<T>(this List<T>? entities, string key)
     {
         if (entities == null) return entities;
@@ -261,6 +281,12 @@ public static partial class Helper
         return entities;
     }
 
+    /// <summary>
+    /// 用主键从文件反序列化实体列表
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public static List<T>? LoadEntities<T>(this string key) => typeof(T).LocalFile(key).ReadFileAs<List<T>>();
 
     private static readonly Dictionary<string, string> FilesTimestampDic = new();

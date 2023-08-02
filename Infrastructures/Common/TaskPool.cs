@@ -7,18 +7,38 @@ using log4net;
 
 namespace Ban3.Infrastructures.Common;
 
+/// <summary>
+/// 任务池
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class TaskPool<T>
 {
     static readonly ILog Logger = LogManager.GetLogger($"TaskPool.{typeof(T)}");
 
+    /// <summary>
+    /// 参数
+    /// </summary>
     public List<T>? Args { get; set; }
 
+    /// <summary>
+    /// 并发数
+    /// </summary>
     public int MaxParallel { get; set; }
 
+    /// <summary>
+    /// 行为动作
+    /// </summary>
     public Action<T>? Handle { get; set; }
 
+    /// 
     public TaskPool() { }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="args"></param>
+    /// <param name="maxParallel"></param>
+    /// <param name="handle"></param>
     public TaskPool(List<T> args, int maxParallel, Action<T> handle)
     {
         Args = args;
@@ -28,16 +48,19 @@ public class TaskPool<T>
         args.ForEach(a => _queue.Enqueue(a));
     }
 
+    /// <summary>
+    /// 启动
+    /// </summary>
     public void Execute()
     {
         if (Handle == null || Args == null || !Args.Any()) return;
 
-        Tasks = new Task[Math.Min(_queue.Count, MaxParallel)];
-        for (var i = 0; i < Tasks.Length; i++)
+        _tasks = new Task[Math.Min(_queue.Count, MaxParallel)];
+        for (var i = 0; i < _tasks.Length; i++)
         {
             if (LoadOne(i,out var t))
             {
-                Tasks[i] = t!;
+                _tasks[i] = t!;
             }
         }
 
@@ -60,7 +83,7 @@ public class TaskPool<T>
                     Console.WriteLine("continue");
                     if (LoadOne(index,out var q))
                     {
-                        Tasks![index] = q!;
+                        _tasks![index] = q!;
 
                     }
 	            });
@@ -70,7 +93,7 @@ public class TaskPool<T>
         t = null;
         return false;
     }
-
-    private Task[]? Tasks;
+    
+    private Task[]? _tasks;
     private readonly Queue<T> _queue = new();
 }

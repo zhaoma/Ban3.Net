@@ -1,8 +1,4 @@
-﻿/* -------------------------------------------------------------------------------------------------
-   Copyright (C) Siemens Healthcare GmbH 2023, All rights reserved. Restricted.
-   ------------------------------------------------------------------------------------------------- */
-
-using Ban3.Infrastructures.Common.Attributes;
+﻿using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Infrastructures.DataPersist.Entities;

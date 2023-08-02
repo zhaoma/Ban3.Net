@@ -29,107 +29,6 @@
             图标颜色
             </summary>
         </member>
-        <member name="T:Ban3.Infrastructures.Common.Attributes.FieldAttribute">
-            <summary>
-            字段属性
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.TypeId">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.SupportSearch">
-            <summary>
-            字段支持检索
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.ColIndex">
-            <summary>
-            列表显示列序
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.FormatPattern">
-            <summary>
-            转字符格式
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.FieldAttribute.TypeName">
-            <summary>
-            属性数据类型
-            </summary>
-        </member>
-        <member name="M:Ban3.Infrastructures.Common.Attributes.FieldAttribute.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Ban3.Infrastructures.Common.Attributes.FieldAttribute.#ctor(System.Boolean,System.Int32,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="supportSearch"></param>
-            <param name="colIndex"></param>
-            <param name="formatPattern"></param>
-        </member>
-        <member name="T:Ban3.Infrastructures.Common.Attributes.ForeignKeyAttribute">
-            <summary>
-            外键字段属性
-            </summary>
-        </member>
-        <member name="M:Ban3.Infrastructures.Common.Attributes.ForeignKeyAttribute.#ctor">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.ForeignKeyAttribute.Referer">
-            <summary>
-            转字符格式
-            </summary>
-        </member>
-        <member name="M:Ban3.Infrastructures.Common.Attributes.ForeignKeyAttribute.#ctor(System.Type)">
-            <summary>
-            
-            </summary>
-            <param name="referer"></param>
-        </member>
-        <member name="T:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute">
-            <summary>
-            表策略属性
-            </summary>
-        </member>
-        <member name="M:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.#ctor">
-            ctor
-        </member>
-        <member name="M:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.#ctor(System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="name"></param>
-            <param name="tableName"></param>
-            <param name="cacheAll"></param>
-            <param name="needRecord"></param>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.Name">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.TableName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.NeedRecord">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Ban3.Infrastructures.Common.Attributes.TableStrategyAttribute.CacheAll">
-            <summary>
-            
-            </summary>
-        </member>
         <member name="T:Ban3.Infrastructures.Common.Attributes.TracingItAttribute">
             <summary>
             用Rougamo 记录方法(方法的执行耗时)
@@ -167,6 +66,16 @@
         <member name="M:Ban3.Infrastructures.Common.Config.#cctor">
             <summary>
             静态构造
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Config.SettingsStandby">
+            <summary>
+            检查 appSettings.json 存在
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Config.LoggerStandby">
+            <summary>
+            检查 log4net.config 存在
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Common.Config.LocalStorage">
@@ -869,6 +778,40 @@
             <param name="filePath"></param>
             <param name="content"></param>
             <param name="timestamp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SaveEntity``1(``0,System.Func{``0,System.String})">
+            <summary>
+            保存实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.LoadEntity``1(System.String)">
+            <summary>
+            用主键从文件反序列化实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.SaveEntities``1(System.Collections.Generic.List{``0},System.String)">
+            <summary>
+            保存实体列表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entities"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.LoadEntities``1(System.String)">
+            <summary>
+            用主键从文件反序列化实体列表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
             <returns></returns>
         </member>
         <member name="M:Ban3.Infrastructures.Common.Extensions.Helper.AssemblyName(System.String)">
@@ -1932,6 +1875,43 @@
         </member>
         <member name="P:Ban3.Infrastructures.Common.Models.TraceSetting.BindFlags">
             
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.TaskPool`1">
+            <summary>
+            任务池
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.TaskPool`1.Args">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.TaskPool`1.MaxParallel">
+            <summary>
+            并发数
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.TaskPool`1.Handle">
+            <summary>
+            行为动作
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.TaskPool`1.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.TaskPool`1.#ctor(System.Collections.Generic.List{`0},System.Int32,System.Action{`0})">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <param name="maxParallel"></param>
+            <param name="handle"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.TaskPool`1.Execute">
+            <summary>
+            启动
+            </summary>
         </member>
     </members>
 </doc>
