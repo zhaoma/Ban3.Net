@@ -10,5 +10,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Infrastructures\Consoles\Consoles.csproj" />
     <ProjectReference Include="..\..\..\Infrastructures\NetMail\NetMail.csproj" />
+    <ProjectReference Include="..\..\..\Libs\DataPersist\DataPersist.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

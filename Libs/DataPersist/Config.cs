@@ -2,16 +2,23 @@
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.DataPersist.Attributes;
-using Ban3.Infrastructures.DataPersist.Enums;
 using Ban3.Infrastructures.DataPersist.Models;
 using Microsoft.Extensions.Configuration;
 
 namespace Ban3.Infrastructures.DataPersist;
 
+/// <summary>
+/// 
+/// </summary>
 public class Config
 {
-    private static Dictionary<string, DB> DBDic = new Dictionary<string, DB>();
+    private static readonly Dictionary<string, DB> DBDic = new ();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public static DB DB(string key)
     {
         if (DBDic.TryGetValue(key, out var db))
@@ -29,8 +36,14 @@ public class Config
         return target;
     }
 
-    private static Dictionary<string, TableIsAttribute> TableDic = new Dictionary<string, TableIsAttribute>();
+    private static readonly Dictionary<string, TableIsAttribute> TableDic = new ();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     public static TableIsAttribute? Table<T>(T obj)
     {
         var key = typeof(T).FullName;
@@ -39,31 +52,44 @@ public class Config
             return table;
         }
 
-        var target = obj!.GetFirstAttribute<TableIsAttribute>();
+        var target = obj!.GetAttributes<TableIsAttribute>()?.First();
         if (target != null)
             TableDic.Add(key, target);
 
         return target;
     }
 
-    private static Dictionary<string, List<FieldIsAttribute>> FieldsDic = new Dictionary<string, List<FieldIsAttribute>>();
+    private static readonly Dictionary<string, Dictionary<string,FieldIsAttribute>> FieldsDic = new ();
 
-    public static List<FieldIsAttribute>? Fields<T>(T obj)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="_"></param>
+    /// <returns></returns>
+    public static Dictionary<string, FieldIsAttribute>? Fields<T>(T _)
     {
         var key = typeof(T).FullName;
+
         if (FieldsDic.TryGetValue(key, out var fields))
         {
             return fields;
         }
 
-        var target = typeof(T).GetPublicProperties()
-            .Select(o => o.GetFirstAttribute<FieldIsAttribute>())
-            .Where(o => o != null)
-            .Select(o => o!)
-            .ToList();
+        var properties = typeof(T).GetPublicProperties();
 
-        if (target != null)
-            FieldsDic.Add(key, target);
+        if (properties == null) return null;
+
+        var target = new Dictionary<string, FieldIsAttribute>();
+
+        properties.ForEach(o =>
+        {
+            var propertyAttribute = o.GetPropertyAttributes<FieldIsAttribute>()?.First();
+            if (propertyAttribute != null)
+                target.Add(o.Name, propertyAttribute);
+        });
+
+        FieldsDic.Add(key, target);
 
         return target;
     }

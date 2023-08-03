@@ -26,7 +26,7 @@ public static partial class Helper
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public static string ObjToJson(this object obj) 
+    public static string ObjToJson(this object? obj) 
         => JsonConvert.SerializeObject(obj);
 
     /// <summary>

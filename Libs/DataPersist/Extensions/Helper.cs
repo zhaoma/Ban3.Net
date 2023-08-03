@@ -4,12 +4,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.DataPersist.Attributes;
 using Ban3.Infrastructures.DataPersist.Entities;
 using Ban3.Infrastructures.DataPersist.Enums;
+using Ban3.Infrastructures.DataPersist.Models;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.Data.Sqlite;
 using MySql.Data.MySqlClient;
+// ReSharper disable CoVariantArrayConversion
 
 namespace Ban3.Infrastructures.DataPersist.Extensions;
 
@@ -99,9 +106,11 @@ public static partial class Helper
 
     private static DbCommand AddParameters(
         this DbCommand command, 
-        DbParameter[] paramList)
+        DbParameter[]? paramList)
     {
-        command.Parameters.AddRange(paramList);
+        if(paramList!=null)
+            command.Parameters.AddRange(paramList);
+
         return command;
     }
 
@@ -140,9 +149,149 @@ public static partial class Helper
         return list;
     }
 
-    public static TableIsAttribute? Table(this BaseEntity entity)
-        => Config.Table(entity);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public static DB? DB<T>(this T obj)
+    {
+        var tableAttribute = obj.Table();
+        if (tableAttribute != null)
+        {
+            return Config.DB(tableAttribute.DbName);
+        }
 
-    public static List<FieldIsAttribute>? Fields(this BaseEntity entity)
-        => Config.Fields(entity);
+        return null;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public static TableIsAttribute? Table<T>(this T obj)
+        => Config.Table(obj);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public static Dictionary<string, FieldIsAttribute>? Fields<T>(this T obj)
+        => Config.Fields(obj);
+
+    public static string KeyValue<T>(this T obj)
+    {
+        var keys = obj.Fields()?.Where(o => o.Value.Key).ToList();
+
+        if (keys != null && keys.Any())
+        {
+            return keys.Select(o => obj!.GetProperty(o.Key)?.GetValue(obj)!)
+                .AggregateToString("_");
+        }
+
+        return string.Empty;
+    }
+
+    public static string SqlForInsert<T>(this T obj)
+    {
+        var table = obj.Table();
+
+        var fields = obj.Fields();
+
+        if (table == null || fields == null) return string.Empty;
+
+        var sb = new StringBuilder();
+
+        var fieldsItems = fields
+            .Where(o => !o.Value.NotForInsert)
+            .ToList();
+
+        var fieldsString = fieldsItems
+            .Select(o => $"[{o.Value.ColumnName}]")
+            .AggregateToString(",");
+        var valuesString= fieldsItems
+            .Select(o => $"@{o.Value.ColumnName}")
+            .AggregateToString(",");
+
+        sb.Append($"INSERT INTO [{table.TableName}] ({fieldsString}) VALUES ({valuesString});");
+
+        return sb.ToString();
+    }
+
+    public static DbParameter[]? ParametersForInsert<T>(this T obj)
+    {
+        var ps = obj.Fields()?.Where(o => !o.Value.NotForInsert);
+
+        if(ps==null)return null;
+
+        return obj.DB()!.Database switch
+        {
+            Database.Sqlite => ps.Select(o =>
+                new SqliteParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
+            Database.MSSQL => ps.Select(o =>
+                new SqlParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
+            Database.mysql => ps.Select(o =>
+                new MySqlParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
+            _ => throw new NotImplementedException()
+        };
+    }
+
+    public static string SqlForUpdate<T>(this T obj)
+    {
+        var table = obj.Table();
+
+        var fields = obj.Fields();
+
+        if (table == null || fields == null) return string.Empty;
+
+        var sb = new StringBuilder();
+
+        var fieldsItems = fields
+            .Where(o => !o.Value.NotForUpdate)
+            .ToList();
+
+        var fieldsString = fieldsItems
+            .Select(o => $"[{o.Value.ColumnName}]=@{o.Value.ColumnName}")
+            .AggregateToString(" AND ");
+        var keysString = fields
+            .Where( o=>o.Value.Key)
+            .Select(o => $"[{o.Value.ColumnName}]=@{o.Value.ColumnName}")
+            .AggregateToString(" AND ");
+
+        sb.Append($"UPDATE [{table.TableName}] SET {fieldsString} WHERE {keysString}");
+        
+        return sb.ToString();
+    }
+
+    public static DbParameter[]? ParametersForUpdate<T>(this T obj)
+    {
+        var fs = obj.Fields();
+        var ps = fs?.Where(o => !o.Value.NotForUpdate)
+            .Union(fs?.Where(o=>o.Value.Key)!);
+
+        if (ps == null) return null;
+
+        return obj.DB()!.Database switch
+        {
+            Database.Sqlite => ps.Select(o =>
+                new SqliteParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
+            Database.MSSQL => ps.Select(o =>
+                new SqlParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
+            Database.mysql => ps.Select(o =>
+                new MySqlParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
+            _ => throw new NotImplementedException()
+        };
+    }
+
+    public static T FulfillKeyValue<T>(this T obj, object? keyValue)
+    {
+        var keyField = obj.Fields()?
+            .Where(o => o.Value.Key)
+            .First();
+
+        obj.SetPropertyValue(keyField.Value.Key,keyValue);
+
+        return obj;
+    }
 }

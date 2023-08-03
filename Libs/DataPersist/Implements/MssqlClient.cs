@@ -10,14 +10,14 @@ namespace Ban3.Infrastructures.DataPersist.Implements;
 /// <summary>
 /// 数据访问层的基类(MSSQL)
 /// </summary>
-public class MssqlClient<T> : IBaseHelper<T> where T : BaseEntity, new()
+public class MssqlClient
 {
     /// <summary>
     /// 
     /// </summary>
     private static readonly log4net.ILog Logger =
         log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
+    /*
     #region 实例属性
 
     /// <summary>
@@ -759,4 +759,6 @@ public class MssqlClient<T> : IBaseHelper<T> where T : BaseEntity, new()
     }
 
     #endregion
+
+    */
 }

@@ -31,18 +31,20 @@ public static partial class Helper
         return type.GetProperty(propertyName);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
+    public static object? GetPropertyValue(this object obj, string propertyName)
+        => obj.GetProperty(propertyName)?.GetValue(obj, null);
+
     ///
     public static T? GetPropertyValue<T>(this object obj, string propertyName, T defaultValue)
     {
-        var property = obj.GetProperty(propertyName);
-
-        if (property != null)
-        {
-            var value = property.GetValue(obj, null);
-            return (value is T result ? result : defaultValue);
-        }
-
-        return default(T);
+        var value = obj.GetPropertyValue(propertyName);
+        return (value is T result ? result : defaultValue);
     }
 
     ///

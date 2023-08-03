@@ -12,10 +12,10 @@ using Microsoft.Data.Sqlite;
 namespace Ban3.Infrastructures.DataPersist.Implements;
 
 public class SqliteClient
-    : Interfaces.IService
+    //: Interfaces.IService
 {
     private static readonly ILog Logger = LogManager.GetLogger(typeof(SqliteClient));
-
+    /*
     /// <summary>
     /// 
     /// </summary>
@@ -255,4 +255,6 @@ public class SqliteClient
             Logger.Error(ex);
         }
     }
+
+    */
 }
