@@ -16,6 +16,8 @@ using Ban3.Infrastructures.DataPersist.Models;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.Data.Sqlite;
 using MySql.Data.MySqlClient;
+using ZstdSharp.Unsafe;
+
 // ReSharper disable CoVariantArrayConversion
 
 namespace Ban3.Infrastructures.DataPersist.Extensions;
@@ -39,16 +41,36 @@ public static partial class Helper
     /// <param name="db"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public static IDbConnection Connection(
+    private static IDbConnection PrepareConnection(
         this Models.DB db)
-        =>
-            db.Database switch
-            {
-                Database.Sqlite=>new SqliteConnection(db.ConnectionString),
-                Database.MSSQL=>new SqlConnection(db.ConnectionString),
-                Database.mysql=>new MySqlConnection(db.ConnectionString),
-                _=>throw new ArgumentOutOfRangeException()
-            };
+    {
+        switch (db.Database)
+        {
+            case Database.Sqlite:
+                var c1 = new SqliteConnection(db.ConnectionString);
+                c1.Open();
+                return c1;
+            case Database.MSSQL:
+                var c2=new SqlConnection(db.ConnectionString);
+                c2.Open();
+                return c2;
+            case Database.mysql:
+                var c3=new MySqlConnection(db.ConnectionString);
+                c3.Open(); 
+                return c3;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+    private static IDbConnection _connection
+
+    public static IDbConnection Connection
+    {
+        get
+        {
+
+        }
+    }
 
     /// <summary>
     /// 开始事务
@@ -72,6 +94,7 @@ public static partial class Helper
         string sql,
         IDbTransaction? transaction = null)
     {
+        Logger.Debug($"SQL:{sql}");
         IDbConnection connection;
         if (transaction == null)
         {
@@ -208,13 +231,25 @@ public static partial class Helper
             .ToList();
 
         var fieldsString = fieldsItems
-            .Select(o => $"[{o.Value.ColumnName}]")
+            .Select(o => $"{o.Value.ColumnName}")
             .AggregateToString(",");
-        var valuesString= fieldsItems
+        var valuesString = fieldsItems
             .Select(o => $"@{o.Value.ColumnName}")
             .AggregateToString(",");
 
-        sb.Append($"INSERT INTO [{table.TableName}] ({fieldsString}) VALUES ({valuesString});");
+        sb.Append($"INSERT INTO {table.TableName} ({fieldsString}) VALUES ({valuesString});");
+        switch (obj.DB()?.Database)
+        {
+            case Database.Sqlite:
+                sb.Append("SELECT last_insert_rowid();");
+                break;
+            case Database.MSSQL:
+                sb.Append("SELECT SCOPE_IDENTITY();");
+                break;
+            case Database.mysql:
+                sb.Append("SELECT LAST_INSERT_ID();");
+                break;
+        }
 
         return sb.ToString();
     }
@@ -289,8 +324,8 @@ public static partial class Helper
         var keyField = obj.Fields()?
             .Where(o => o.Value.Key)
             .First();
-
-        obj.SetPropertyValue(keyField.Value.Key,keyValue);
+        var keyType = obj.GetProperty(keyField.Value.Key).PropertyType;
+        obj.SetPropertyValue(keyField.Value.Key,Convert.ChangeType( keyValue , keyType));
 
         return obj;
     }

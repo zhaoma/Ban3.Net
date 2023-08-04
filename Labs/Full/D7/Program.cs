@@ -1,4 +1,6 @@
-﻿using System.Net.Mail;
+﻿using System.Configuration.Internal;
+using System.Diagnostics;
+using System.Net.Mail;
 using Ban3.Infrastructures.Common.Models;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
@@ -47,23 +49,28 @@ x.KeyValue().ToString().WriteColorLine(ConsoleColor.DarkYellow);
  *
  */
 
-var x=new Demo{Id=1,Identity = "ABC",Name="AQ"};
+    var x = new Demo
+    {
+        Id = 1,
+        Subject = "THIS IS SUBJECT",
+        Note = "I'm Note.",
+        UpdateTime = DateTime.Now,
+        CreateTime = DateTime.Now
+    };
 
 // direct c
 
-x=x.Insert();
+    var sw = new Stopwatch();
+    sw.Start();
 
-// insert in transaction
-
-using var tran= x.DB()!.Transaction();
-
-try
+new Action(() =>
 {
-    x.Insert(tran);
+    x = x.Insert();
 
-    tran.Commit();
-}
-catch (Exception)
-{
-    tran.Rollback();
-}
+    x.ObjToJson().WriteColorLine(ConsoleColor.DarkRed);
+
+}).TimesParallel(300000);
+
+sw.Stop();
+    $"{sw.Elapsed.Seconds} s elapsed.".WriteColorLine(ConsoleColor.DarkBlue);
+    

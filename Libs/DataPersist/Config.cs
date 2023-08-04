@@ -14,6 +14,7 @@ public class Config
 {
     private static readonly Dictionary<string, DB> DBDic = new ();
 
+
     /// <summary>
     /// 
     /// </summary>
@@ -32,7 +33,7 @@ public class Config
             ConnectionString = Common.Config.AppConfiguration?.GetConnectionString(key) + ""
         };
 
-        DBDic.Add(key, target);
+        DBDic.AddOrReplace(key, target,false);
         return target;
     }
 
@@ -54,7 +55,7 @@ public class Config
 
         var target = obj!.GetAttributes<TableIsAttribute>()?.First();
         if (target != null)
-            TableDic.Add(key, target);
+            TableDic.AddOrReplace(key, target,false);
 
         return target;
     }
@@ -86,10 +87,10 @@ public class Config
         {
             var propertyAttribute = o.GetPropertyAttributes<FieldIsAttribute>()?.First();
             if (propertyAttribute != null)
-                target.Add(o.Name, propertyAttribute);
+                target.AddOrReplace(o.Name, propertyAttribute,false);
         });
 
-        FieldsDic.Add(key, target);
+        FieldsDic.AddOrReplace(key, target,false);
 
         return target;
     }
