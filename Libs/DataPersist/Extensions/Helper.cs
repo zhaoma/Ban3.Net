@@ -47,29 +47,31 @@ public static partial class Helper
         switch (db.Database)
         {
             case Database.Sqlite:
-                var c1 = new SqliteConnection(db.ConnectionString);
-                c1.Open();
-                return c1;
+                return new SqliteConnection(db.ConnectionString);
             case Database.MSSQL:
-                var c2=new SqlConnection(db.ConnectionString);
-                c2.Open();
-                return c2;
+                return new SqlConnection(db.ConnectionString);
             case Database.mysql:
-                var c3=new MySqlConnection(db.ConnectionString);
-                c3.Open(); 
-                return c3;
+                return new MySqlConnection(db.ConnectionString);
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
-    private static IDbConnection _connection
 
-    public static IDbConnection Connection
+    private static Dictionary<string, IDbConnection> ConnectionDic=new Dictionary<string, IDbConnection>();
+
+    public static IDbConnection Connection(this Models.DB db)
     {
-        get
+        if (ConnectionDic.TryGetValue(db.ConnectionString, out var dbConnection))
         {
+            if (dbConnection.State != ConnectionState.Open)
+                dbConnection.Open();
 
+            return dbConnection;
         }
+
+        dbConnection = db.PrepareConnection();
+        ConnectionDic.AddOrReplace(db.ConnectionString, dbConnection);
+        return dbConnection;
     }
 
     /// <summary>
