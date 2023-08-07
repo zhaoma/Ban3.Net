@@ -95,8 +95,6 @@ public class EntityStrategy
 
     public string UpdateCommand() 
     {
-        var sb = new StringBuilder();
-
         var fieldsItems = Fields
             .Where(o => !o.Value.NotForUpdate)
             .ToList();
@@ -109,29 +107,24 @@ public class EntityStrategy
             .Select(o => $"{o.Value.ColumnName}=@{o.Value.ColumnName}")
             .AggregateToString(" AND ");
 
-        sb.Append($"UPDATE {Table!.TableName} SET {fieldsString} WHERE {keysString}");
-
-        return sb.ToString();
+        return $"UPDATE {Table!.TableName} SET {fieldsString} WHERE {keysString}";
     }
 
     public string DeleteCommand()
     {
-        var sb = new StringBuilder();
-
         var keysString = Fields
             .Where(o => o.Value.Key)
             .Select(o => $"{o.Value.ColumnName}=@{o.Value.ColumnName}")
             .AggregateToString(" AND ");
 
-        sb.Append($"DELETE FROM {Table!.TableName} WHERE {keysString}");
-
-        return sb.ToString();
+        return DeleteCommand(keysString);
     }
+
+    public string DeleteCommand(string condition)
+    => $"DELETE FROM {Table!.TableName} WHERE {condition}";
 
     public string SelectCommand()
     {
-        var sb = new StringBuilder();
-
         var fieldsString = Fields
             .Select(o => $"{o.Value.ColumnName}")
             .AggregateToString(",");
@@ -140,8 +133,15 @@ public class EntityStrategy
             .Select(o => $"{o.Value.ColumnName}=@{o.Value.ColumnName}")
         .AggregateToString(" AND ");
 
-        sb.Append($"SELECT {fieldsString} FROM {Table!.TableName} SET WHERE {keysString}");
+        return SelectCommand(keysString);
+    }
 
-        return sb.ToString();
+    public string SelectCommand(string condition)
+    {
+        var fieldsString = Fields
+            .Select(o => $"{o.Value.ColumnName}")
+            .AggregateToString(",");
+
+        return $"SELECT {fieldsString} FROM {Table!.TableName} SET WHERE {condition}";
     }
 }

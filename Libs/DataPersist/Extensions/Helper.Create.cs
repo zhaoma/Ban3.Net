@@ -59,10 +59,9 @@ public static partial class Helper
     /// <returns></returns>
     public static async Task<T> CreateAsync<T>(this T entity, IDbTransaction? transaction = null) where T : class
     {
-        var keyValue = await
-                typeof(T)
-            .DB()!
-            .Command(typeof(T).SqlForInsert(), transaction)
+        var strategy = entity.Strategy();
+        var keyValue = await strategy.DB!
+            .Command(strategy.InsertCommand(), transaction)
             .AddParameters(entity.ParametersForInsert())
             .ExecuteScalarAsync(CancellationTokenSource.Token);
 
