@@ -57,20 +57,28 @@ public static partial class Helper
         }
     }
 
-    private static Dictionary<string, IDbConnection> ConnectionDic=new Dictionary<string, IDbConnection>();
+    private static readonly Dictionary<string, IDbConnection> ConnectionDic=new ();
 
     public static IDbConnection Connection(this Models.DB db)
     {
         if (ConnectionDic.TryGetValue(db.ConnectionString, out var dbConnection))
         {
+            Logger.Debug($"load connection from pool");
             if (dbConnection.State != ConnectionState.Open)
+            {
+                Logger.Debug("OPEN CONN");
                 dbConnection.Open();
+            }
 
             return dbConnection;
         }
 
+        Logger.Debug("PREPARE CONN");
         dbConnection = db.PrepareConnection();
+        dbConnection.Open();
+        
         ConnectionDic.AddOrReplace(db.ConnectionString, dbConnection);
+
         return dbConnection;
     }
 
@@ -133,7 +141,7 @@ public static partial class Helper
         this DbCommand command, 
         DbParameter[]? paramList)
     {
-        if(paramList!=null)
+        if (paramList!=null)
             command.Parameters.AddRange(paramList);
 
         return command;
@@ -177,12 +185,10 @@ public static partial class Helper
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="obj"></param>
+    /// <param name="tableAttribute"></param>
     /// <returns></returns>
-    public static DB? DB<T>(this T obj)
+    public static DB? DB(this TableIsAttribute? tableAttribute)
     {
-        var tableAttribute = obj.Table();
         if (tableAttribute != null)
         {
             return Config.DB(tableAttribute.DbName);
@@ -191,23 +197,22 @@ public static partial class Helper
         return null;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public static TableIsAttribute? Table<T>(this T obj)
-        => Config.Table(obj);
+    public static DB? DB(this System.Type tp)
+        => tp.Table().DB();
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    public static Dictionary<string, FieldIsAttribute>? Fields<T>(this T obj)
-        => Config.Fields(obj);
+    public static TableIsAttribute? Table(this System.Type tp)
+        => Config.Table(tp);
+    
+    public static Dictionary<string, FieldIsAttribute>? Fields(this System.Type tp)
+        => Config.Fields(tp);
 
     public static string KeyValue<T>(this T obj)
     {
-        var keys = obj.Fields()?.Where(o => o.Value.Key).ToList();
+        var keys = obj!.GetType().Fields()?.Where(o => o.Value.Key).ToList();
 
         if (keys != null && keys.Any())
         {
@@ -218,51 +223,25 @@ public static partial class Helper
         return string.Empty;
     }
 
-    public static string SqlForInsert<T>(this T obj)
-    {
-        var table = obj.Table();
+    public static string SqlForInsert(this System.Type entityType)
+        => Config.InsertCommand(entityType);
 
-        var fields = obj.Fields();
+    public static string SqlForUpdate(this System.Type entityType)
+        => Config.UpdateCommand(entityType);
 
-        if (table == null || fields == null) return string.Empty;
-
-        var sb = new StringBuilder();
-
-        var fieldsItems = fields
-            .Where(o => !o.Value.NotForInsert)
-            .ToList();
-
-        var fieldsString = fieldsItems
-            .Select(o => $"{o.Value.ColumnName}")
-            .AggregateToString(",");
-        var valuesString = fieldsItems
-            .Select(o => $"@{o.Value.ColumnName}")
-            .AggregateToString(",");
-
-        sb.Append($"INSERT INTO {table.TableName} ({fieldsString}) VALUES ({valuesString});");
-        switch (obj.DB()?.Database)
-        {
-            case Database.Sqlite:
-                sb.Append("SELECT last_insert_rowid();");
-                break;
-            case Database.MSSQL:
-                sb.Append("SELECT SCOPE_IDENTITY();");
-                break;
-            case Database.mysql:
-                sb.Append("SELECT LAST_INSERT_ID();");
-                break;
-        }
-
-        return sb.ToString();
-    }
+    public static string SqlForDelete(this System.Type entityType)
+        => Config.DeleteCommand(entityType);
+    
+    public static string SqlForSelect(this System.Type entityType)
+        => Config.SelectCommand(entityType);
 
     public static DbParameter[]? ParametersForInsert<T>(this T obj)
     {
-        var ps = obj.Fields()?.Where(o => !o.Value.NotForInsert);
+        var ps = obj!.GetType().Fields()?.Where(o => !o.Value.NotForInsert);
 
         if(ps==null)return null;
 
-        return obj.DB()!.Database switch
+        return obj!.GetType().DB()!.Database switch
         {
             Database.Sqlite => ps.Select(o =>
                 new SqliteParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
@@ -274,42 +253,33 @@ public static partial class Helper
         };
     }
 
-    public static string SqlForUpdate<T>(this T obj)
-    {
-        var table = obj.Table();
-
-        var fields = obj.Fields();
-
-        if (table == null || fields == null) return string.Empty;
-
-        var sb = new StringBuilder();
-
-        var fieldsItems = fields
-            .Where(o => !o.Value.NotForUpdate)
-            .ToList();
-
-        var fieldsString = fieldsItems
-            .Select(o => $"[{o.Value.ColumnName}]=@{o.Value.ColumnName}")
-            .AggregateToString(" AND ");
-        var keysString = fields
-            .Where( o=>o.Value.Key)
-            .Select(o => $"[{o.Value.ColumnName}]=@{o.Value.ColumnName}")
-            .AggregateToString(" AND ");
-
-        sb.Append($"UPDATE [{table.TableName}] SET {fieldsString} WHERE {keysString}");
-        
-        return sb.ToString();
-    }
-
     public static DbParameter[]? ParametersForUpdate<T>(this T obj)
     {
-        var fs = obj.Fields();
-        var ps = fs?.Where(o => !o.Value.NotForUpdate)
-            .Union(fs?.Where(o=>o.Value.Key)!);
+        var fs = obj!.GetType().Fields();
+        var ps = fs?.Where(o => !o.Value.NotForUpdate);
 
         if (ps == null) return null;
 
-        return obj.DB()!.Database switch
+        return obj.GetType().DB()!.Database switch
+        {
+            Database.Sqlite => ps.Select(o =>
+                new SqliteParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
+            Database.MSSQL => ps.Select(o =>
+                new SqlParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
+            Database.mysql => ps.Select(o =>
+                new MySqlParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
+            _ => throw new NotImplementedException()
+        };
+    }
+
+    public static DbParameter[]? ParametersForKeys<T>(this T obj)
+    {
+        var fs = obj!.GetType().Fields();
+        var ps = fs?.Where(o => o.Value.Key);
+
+        if (ps == null) return null;
+
+        return obj.GetType().DB()!.Database switch
         {
             Database.Sqlite => ps.Select(o =>
                 new SqliteParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
@@ -323,12 +293,17 @@ public static partial class Helper
 
     public static T FulfillKeyValue<T>(this T obj, object? keyValue)
     {
-        var keyField = obj.Fields()?
+        var keyField = obj!.GetType().Fields()?
             .Where(o => o.Value.Key)
             .First();
         var keyType = obj.GetProperty(keyField.Value.Key).PropertyType;
         obj.SetPropertyValue(keyField.Value.Key,Convert.ChangeType( keyValue , keyType));
 
         return obj;
+    }
+
+    public static string Sql(this Enums.Operate operate, System.Type entityType, string condition = "")
+    {
+
     }
 }

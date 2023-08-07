@@ -58,19 +58,35 @@ x.KeyValue().ToString().WriteColorLine(ConsoleColor.DarkYellow);
         CreateTime = DateTime.Now
     };
 
-// direct c
 
-    var sw = new Stopwatch();
-    sw.Start();
+var sw = new Stopwatch();
+sw.Start();
 
-new Action(() =>
-{
-    x = x.Insert();
+  var xx=  Enumerable.Range(1, 20)
+        .Select(o => new Demo
+        {
+            Subject = $"{o}:sub",
+            Note = "NNOO",
+            UpdateTime = DateTime.Now,
+            CreateTime = DateTime.Now
+        })
+        .ToList();
 
-    x.ObjToJson().WriteColorLine(ConsoleColor.DarkRed);
+    //var r=xx.Insert(out var yy,false);
+    //$"{r}:".WriteColorLine(ConsoleColor.Red);
 
-}).TimesParallel(300000);
+    xx.ForEach(x =>
+    {
+        x.Insert();
+    });
+
+//new Action(() =>
+//{
+//    x = x.Insert();
+
+//    x.ObjToJson().WriteColorLine(ConsoleColor.DarkRed);
+
+//}).Times(30000);
 
 sw.Stop();
-    $"{sw.Elapsed.Seconds} s elapsed.".WriteColorLine(ConsoleColor.DarkBlue);
-    
+$"{sw.Elapsed.Seconds} s elapsed.".WriteColorLine(ConsoleColor.DarkBlue);
