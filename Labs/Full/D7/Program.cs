@@ -58,9 +58,10 @@ x.KeyValue().ToString().WriteColorLine(ConsoleColor.DarkYellow);
         CreateTime = DateTime.Now
     };
 
-
+    
 var sw = new Stopwatch();
 sw.Start();
+
 
   var xx=  Enumerable.Range(1, 20)
         .Select(o => new Demo
@@ -75,10 +76,9 @@ sw.Start();
     //var r=xx.Insert(out var yy,false);
     //$"{r}:".WriteColorLine(ConsoleColor.Red);
 
-    xx.ForEach(x =>
-    {
-        x.Insert();
-    });
+    var a = await x.CreateAsync();
+    a.Subject.WriteColorLine(ConsoleColor.Red);
+
 
 //new Action(() =>
 //{

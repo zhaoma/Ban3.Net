@@ -4,19 +4,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.DataPersist.Attributes;
 using Ban3.Infrastructures.DataPersist.Entities;
 using Ban3.Infrastructures.DataPersist.Enums;
 using Ban3.Infrastructures.DataPersist.Models;
-using Google.Protobuf.WellKnownTypes;
 using Microsoft.Data.Sqlite;
 using MySql.Data.MySqlClient;
-using ZstdSharp.Unsafe;
 
 // ReSharper disable CoVariantArrayConversion
 
@@ -42,7 +36,7 @@ public static partial class Helper
     /// <returns></returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     private static IDbConnection PrepareConnection(
-        this Models.DB db)
+        this DB db)
     {
         switch (db.Database)
         {
@@ -59,7 +53,7 @@ public static partial class Helper
 
     private static readonly Dictionary<string, IDbConnection> ConnectionDic = new();
 
-    public static IDbConnection Connection(this Models.DB db)
+    public static IDbConnection Connection(this DB db)
     {
         if (ConnectionDic.TryGetValue(db.ConnectionString, out var dbConnection))
         {
@@ -88,7 +82,7 @@ public static partial class Helper
     /// <param name="db"></param>
     /// <returns></returns>
     public static IDbTransaction Transaction(
-        this Models.DB db)
+        this DB db)
         => db.Connection().BeginTransaction();
 
     /// <summary>
@@ -100,7 +94,7 @@ public static partial class Helper
     /// <returns></returns>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public static DbCommand Command(
-        this Models.DB db,
+        this DB db,
         string sql,
         IDbTransaction? transaction = null)
     {
@@ -137,7 +131,39 @@ public static partial class Helper
         };
     }
 
+    public static DbCommand? Command<T>(
+        this T obj, 
+        Operate operate,
+        IDbTransaction? transaction = null,
+        string conditionOrSql = "") where T : BaseEntity
+    {
+        var strategy = obj.EntityStrategy();
+        if (strategy.Viable())
+        {
+            return operate switch
+            {
+                Operate.Create => 
+                    strategy.DB!.Command(strategy.InsertCommand(), transaction),
+                Operate.Delete => 
+                    strategy.DB!.Command(strategy.DeleteCommand(), transaction),
+                Operate.DeleteByCondition => 
+                    strategy.DB!.Command(strategy.DeleteCommand(conditionOrSql), transaction),
+                Operate.Retrieve =>
+                    strategy.DB!.Command(strategy.SelectCommand(), transaction),
+                Operate.RetrieveByCondition =>
+                    strategy.DB!.Command(strategy.SelectCommand(conditionOrSql), transaction),
+                Operate.Update => 
+                    strategy.DB!.Command(strategy.UpdateCommand(), transaction),
+                Operate.UpdateByCondition => 
+                    strategy.DB!.Command(strategy.UpdateCommand(conditionOrSql), transaction),
+                Operate.Sql => 
+                    strategy.DB!.Command(conditionOrSql, transaction),
+                _ => throw new ArgumentOutOfRangeException(nameof(operate), operate, null)
+            };
+        }
 
+        return null;
+    }
 
     private static DbCommand AddParameters(
         this DbCommand command,
@@ -183,56 +209,6 @@ public static partial class Helper
 
         return list;
     }
+    
 
-    public static EntityStrategy Strategy<T>(this T obj)
-        => Config.Strategy(obj!.GetType());
-
-    public static string KeyValue<T>(this T obj)
-    {
-        var keys = obj.Strategy().Fields?.Where(o => o.Value.Key).ToList();
-
-        if (keys != null && keys.Any())
-        {
-            return keys.Select(o => obj!.GetProperty(o.Key)?.GetValue(obj)!)
-                .AggregateToString("_");
-        }
-
-        return string.Empty;
-    }
-
-    public static DbParameter[]? ParametersForInsert<T>(this T obj) => obj.ParametersForCommand(fa => !fa.NotForInsert);
-
-    public static DbParameter[]? ParametersForUpdate<T>(this T obj) => obj.ParametersForCommand(fa => !fa.NotForUpdate);
-
-    public static DbParameter[]? ParametersForKeys<T>(this T obj) => obj.ParametersForCommand(fa => fa.Key);
-
-    public static DbParameter[]? ParametersForCommand<T>(this T obj,Func<FieldIsAttribute ,bool> func)
-    {
-        var strategy = obj.Strategy();
-        if (strategy.Viable()) return null;
-
-        var ps = strategy.Fields.Where(o => func(o.Value));
-
-        return strategy.DB!.Database switch
-        {
-            Database.Sqlite => ps.Select(o =>
-                new SqliteParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
-            Database.MSSQL => ps.Select(o =>
-                new SqlParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
-            Database.mysql => ps.Select(o =>
-                new MySqlParameter($"@{o.Value.ColumnName}", obj!.GetProperty(o.Key)?.GetValue(obj)!)).ToArray(),
-            _ => throw new NotImplementedException()
-        };
-    }
-
-    public static T FulfillKeyValue<T>(this T obj, object? keyValue)
-    {
-        var keyField = obj!.Strategy().Fields?
-            .Where(o => o.Value.Key)
-            .First();
-        var keyType = obj!.GetProperty(keyField!.Value.Key)!.PropertyType;
-        obj!.SetPropertyValue(keyField.Value.Key, Convert.ChangeType(keyValue, keyType));
-
-        return obj;
-    }
 }

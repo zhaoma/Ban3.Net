@@ -51,7 +51,7 @@ public class TableIsAttribute
     public string TableName { get; set; } = string.Empty;
 
     /// <summary>
-    /// 缓存集合
+    /// 缓存全集合
     /// </summary>
     [JsonProperty("cacheAll", NullValueHandling = NullValueHandling.Ignore)]
     public bool CacheAll { get; set; }

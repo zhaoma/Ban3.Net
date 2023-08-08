@@ -10,14 +10,30 @@ using Microsoft.Extensions.Configuration;
 
 namespace Ban3.Infrastructures.DataPersist.Models;
 
+/// <summary>
+/// 实体策略定义
+/// </summary>
 public class EntityStrategy
 {
+    /// <summary>
+    /// 库申明
+    /// </summary>
     public DB? DB { get; set; }
 
+    /// <summary>
+    /// 表申明
+    /// </summary>
     public TableIsAttribute? Table { get; set; }
 
+    /// <summary>
+    /// 字段申明
+    /// </summary>
     public Dictionary<string, FieldIsAttribute>? Fields { get; set; }
 
+    /// <summary>
+    /// 实体有效
+    /// </summary>
+    /// <returns></returns>
     public bool Viable() => DB != null && Table != null && Fields != null;
 
     public EntityStrategy() { }
@@ -29,8 +45,8 @@ public class EntityStrategy
         DB = Table != null ? GetDB(Table.DbName) : null;
     }
 
-    static DB? GetDB(string key)
-        => new DB
+    static DB GetDB(string key)
+        => new ()
         {
             Database = (Common.Config.GetValue($"DBS:{key}") + "").StringToEnum<Database>(),
             ConnectionString = Common.Config.AppConfiguration?.GetConnectionString(key) + ""
@@ -57,11 +73,15 @@ public class EntityStrategy
         return target;
     }
 
+    /// <summary>
+    /// 新建记录命令
+    /// </summary>
+    /// <returns></returns>
     public string InsertCommand()
     {
         var sb = new StringBuilder();
 
-        var fieldsItems = Fields
+        var fieldsItems = Fields!
             .Where(o => !o.Value.NotForInsert)
             .ToList();
 
@@ -74,7 +94,7 @@ public class EntityStrategy
 
         sb.Append($"INSERT INTO {Table!.TableName} ({fieldsString}) VALUES ({valuesString});");
 
-        var requestInsertedId = Fields.Any(x => x.Value.Key && x.Value.Increment);
+        var requestInsertedId = Fields!.Any(x => x.Value.Key && x.Value.Increment);
         if (requestInsertedId)
         {
             switch (DB!.Database)
@@ -93,52 +113,66 @@ public class EntityStrategy
         return sb.ToString();
     }
 
-    public string UpdateCommand() 
+    /// <summary>
+    /// 更新命令(用主键)
+    /// </summary>
+    /// <returns></returns>
+    public string UpdateCommand()
+        => UpdateCommand(Fields!
+            .Where(o => o.Value.Key)
+            .Select(o => $"{o.Value.ColumnName}=@{o.Value.ColumnName}")
+            .AggregateToString(" AND "));
+
+    /// <summary>
+    /// 更新命令(按条件)
+    /// </summary>
+    /// <param name="condition"></param>
+    /// <returns></returns>
+    public string UpdateCommand(string condition)
     {
-        var fieldsItems = Fields
+        var fieldsString = Fields!
             .Where(o => !o.Value.NotForUpdate)
-            .ToList();
-
-        var fieldsString = fieldsItems
             .Select(o => $"{o.Value.ColumnName}=@{o.Value.ColumnName}")
             .AggregateToString(" AND ");
-        var keysString = Fields
-            .Where(o => o.Value.Key)
-            .Select(o => $"{o.Value.ColumnName}=@{o.Value.ColumnName}")
-            .AggregateToString(" AND ");
-
-        return $"UPDATE {Table!.TableName} SET {fieldsString} WHERE {keysString}";
+        return $"UPDATE {Table!.TableName}  SET {fieldsString} WHERE {condition}";
     }
 
+    /// <summary>
+    /// 删除命令(用主键)
+    /// </summary>
+    /// <returns></returns>
     public string DeleteCommand()
-    {
-        var keysString = Fields
+        => DeleteCommand(Fields!
             .Where(o => o.Value.Key)
             .Select(o => $"{o.Value.ColumnName}=@{o.Value.ColumnName}")
-            .AggregateToString(" AND ");
+            .AggregateToString(" AND "));
 
-        return DeleteCommand(keysString);
-    }
-
+    /// <summary>
+    /// 删除命令(按条件)
+    /// </summary>
+    /// <param name="condition"></param>
+    /// <returns></returns>
     public string DeleteCommand(string condition)
-    => $"DELETE FROM {Table!.TableName} WHERE {condition}";
+        => $"DELETE FROM {Table!.TableName} WHERE {condition}";
 
+    /// <summary>
+    /// 检索命令(用主键)
+    /// </summary>
+    /// <returns></returns>
     public string SelectCommand()
-    {
-        var fieldsString = Fields
-            .Select(o => $"{o.Value.ColumnName}")
-            .AggregateToString(",");
-        var keysString = Fields
+        => SelectCommand(Fields!
             .Where(o => o.Value.Key)
             .Select(o => $"{o.Value.ColumnName}=@{o.Value.ColumnName}")
-        .AggregateToString(" AND ");
+            .AggregateToString(" AND "));
 
-        return SelectCommand(keysString);
-    }
-
+    /// <summary>
+    /// 检索命令(用条件)
+    /// </summary>
+    /// <param name="condition"></param>
+    /// <returns></returns>
     public string SelectCommand(string condition)
     {
-        var fieldsString = Fields
+        var fieldsString = Fields!
             .Select(o => $"{o.Value.ColumnName}")
             .AggregateToString(",");
 

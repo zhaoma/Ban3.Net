@@ -6,6 +6,4 @@
 public class ForeignKey
 {
     public System.Type Referer { get; set; }
-
-
 }
