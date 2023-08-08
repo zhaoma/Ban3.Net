@@ -1,16 +1,13 @@
-﻿/* -------------------------------------------------------------------------------------------------
-   Copyright (C) Siemens Healthcare GmbH 2023, All rights reserved. Restricted.
-   ------------------------------------------------------------------------------------------------- */
-   
-using System;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.DataPersist.Attributes;
 
 /// <summary>
 /// 表策略属性
+/// 目前只做单目标库
 /// </summary>
-[AttributeUsage(AttributeTargets.Class)]
+[AttributeUsage(AttributeTargets.Class,AllowMultiple = true)]
 public class TableIsAttribute
     : Attribute
 {

@@ -10,7 +10,13 @@ namespace Ban3.Infrastructures.DataPersist.Extensions;
 /// </summary>
 public static partial class Helper
 {
+    /// <summary>
     /// 删除记录
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     public static int Delete<T>(this T entity, IDbTransaction? transaction = null)
         where T : BaseEntity, new()
         => entity
@@ -18,27 +24,45 @@ public static partial class Helper
             .AddParameters(entity.ParametersForKeys())
             .ExecuteNonQuery();
 
-    /// 异步删除记录
+    /// <summary>
+    /// 异步删除记录(按条件)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="conditionOrSql"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     public static int Delete<T>(this T entity, string conditionOrSql, IDbTransaction? transaction = null)
         where T : BaseEntity, new()
         => entity
             .Command(Operate.DeleteByCondition, transaction, conditionOrSql)!
-            .AddParameters(entity.ParametersForKeys())
             .ExecuteNonQuery();
 
-    /// 删除记录
-    public static Task<int> DeleteAsync<T>(this T entity, IDbTransaction? transaction = null)
+    /// <summary>
+    /// 异步删除记录
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
+    public static async Task<int> DeleteAsync<T>(this T entity, IDbTransaction? transaction = null)
         where T : BaseEntity, new()
-        => entity
+        => await entity
             .Command(Operate.Delete, transaction)!
             .AddParameters(entity.ParametersForKeys())
             .ExecuteNonQueryAsync(CancellationTokenSource.Token);
 
-    /// 异步删除记录
-    public static Task<int> DeleteAsync<T>(this T entity, string conditionOrSql, IDbTransaction? transaction = null)
+    /// <summary>
+    /// 异步删除记录(按条件)
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="conditionOrSql"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
+    public static async Task<int> DeleteAsync<T>(this T entity, string conditionOrSql, IDbTransaction? transaction = null)
         where T : BaseEntity, new()
-        => entity
+        => await entity
             .Command(Operate.Delete, transaction, conditionOrSql)!
-            .AddParameters(entity.ParametersForKeys())
             .ExecuteNonQueryAsync(CancellationTokenSource.Token);
 }

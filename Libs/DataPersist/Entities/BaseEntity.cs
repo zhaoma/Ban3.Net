@@ -14,10 +14,14 @@ namespace Ban3.Infrastructures.DataPersist.Entities;
 /// <summary>
 /// 
 /// </summary>
-public class BaseEntity
+public abstract class BaseEntity
 {
-    public BaseEntity(){}
+    protected BaseEntity(){}
 
+    /// <summary>
+    /// 读取实体策略信息
+    /// </summary>
+    /// <returns></returns>
     public virtual EntityStrategy EntityStrategy() => Config.Strategy(GetType());
 
     public virtual DbParameter[]? ParametersForCommand(Func<FieldIsAttribute, bool> func)
@@ -39,15 +43,31 @@ public class BaseEntity
         };
     }
 
+    /// <summary>
+    /// 主键参数数组
+    /// </summary>
+    /// <returns></returns>
     public virtual DbParameter[]? ParametersForKeys()
         => ParametersForCommand(fa => fa.Key);
 
+    /// <summary>
+    /// 创建的参数数组
+    /// </summary>
+    /// <returns></returns>
     public virtual DbParameter[]? ParametersForInsert()
         => ParametersForCommand(fa => !fa.NotForInsert);
 
+    /// <summary>
+    /// 更新的参数数组
+    /// </summary>
+    /// <returns></returns>
     public DbParameter[]? ParametersForUpdate()
         => ParametersForCommand(fa => !fa.NotForUpdate);
 
+    /// <summary>
+    /// 主键取值(字符串)
+    /// </summary>
+    /// <returns></returns>
     public virtual string KeyValue()
     {
         var strategy = EntityStrategy();
@@ -58,6 +78,10 @@ public class BaseEntity
             .AggregateToString("_");
     }
 
+    /// <summary>
+    /// 填回主键
+    /// </summary>
+    /// <param name="keyValue"></param>
     public virtual void FulfillKeyValue(object? keyValue)
     {
         var strategy = EntityStrategy();

@@ -6,7 +6,7 @@ namespace Ban3.Infrastructures.DataPersist.Attributes;
 /// <summary>
 /// 字段属性
 /// </summary>
-[AttributeUsage(AttributeTargets.Property)]
+[AttributeUsage(AttributeTargets.Property,AllowMultiple = true)]
 public class FieldIsAttribute
     : Attribute
 {

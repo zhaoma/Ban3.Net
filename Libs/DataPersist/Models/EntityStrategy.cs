@@ -133,7 +133,7 @@ public class EntityStrategy
         var fieldsString = Fields!
             .Where(o => !o.Value.NotForUpdate)
             .Select(o => $"{o.Value.ColumnName}=@{o.Value.ColumnName}")
-            .AggregateToString(" AND ");
+            .AggregateToString(",");
         return $"UPDATE {Table!.TableName}  SET {fieldsString} WHERE {condition}";
     }
 
@@ -176,6 +176,6 @@ public class EntityStrategy
             .Select(o => $"{o.Value.ColumnName}")
             .AggregateToString(",");
 
-        return $"SELECT {fieldsString} FROM {Table!.TableName} SET WHERE {condition}";
+        return $"SELECT {fieldsString} FROM {Table!.TableName} WHERE {condition}";
     }
 }

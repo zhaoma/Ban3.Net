@@ -53,6 +53,11 @@ public static partial class Helper
 
     private static readonly Dictionary<string, IDbConnection> ConnectionDic = new();
 
+    /// <summary>
+    /// 获取连接
+    /// </summary>
+    /// <param name="db"></param>
+    /// <returns></returns>
     public static IDbConnection Connection(this DB db)
     {
         if (ConnectionDic.TryGetValue(db.ConnectionString, out var dbConnection))
@@ -131,6 +136,16 @@ public static partial class Helper
         };
     }
 
+    /// <summary>
+    /// 实体的操作命令
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="obj"></param>
+    /// <param name="operate">Enums.Operate</param>
+    /// <param name="transaction"></param>
+    /// <param name="conditionOrSql"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     public static DbCommand? Command<T>(
         this T obj, 
         Operate operate,
@@ -144,18 +159,18 @@ public static partial class Helper
             {
                 Operate.Create => 
                     strategy.DB!.Command(strategy.InsertCommand(), transaction),
-                Operate.Delete => 
-                    strategy.DB!.Command(strategy.DeleteCommand(), transaction),
-                Operate.DeleteByCondition => 
-                    strategy.DB!.Command(strategy.DeleteCommand(conditionOrSql), transaction),
-                Operate.Retrieve =>
-                    strategy.DB!.Command(strategy.SelectCommand(), transaction),
-                Operate.RetrieveByCondition =>
-                    strategy.DB!.Command(strategy.SelectCommand(conditionOrSql), transaction),
                 Operate.Update => 
                     strategy.DB!.Command(strategy.UpdateCommand(), transaction),
                 Operate.UpdateByCondition => 
                     strategy.DB!.Command(strategy.UpdateCommand(conditionOrSql), transaction),
+                Operate.Retrieve =>
+                    strategy.DB!.Command(strategy.SelectCommand(), transaction),
+                Operate.RetrieveByCondition =>
+                    strategy.DB!.Command(strategy.SelectCommand(conditionOrSql), transaction),
+                Operate.Delete => 
+                    strategy.DB!.Command(strategy.DeleteCommand(), transaction),
+                Operate.DeleteByCondition => 
+                    strategy.DB!.Command(strategy.DeleteCommand(conditionOrSql), transaction),
                 Operate.Sql => 
                     strategy.DB!.Command(conditionOrSql, transaction),
                 _ => throw new ArgumentOutOfRangeException(nameof(operate), operate, null)
@@ -176,21 +191,37 @@ public static partial class Helper
     }
 
     /// <summary>
-    /// 
+    /// 快速填充实体
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="dr"></param>
     /// <returns></returns>
-    public static T DataReaderToEntity<T>(this IDataReader dr)
+    public static T? DataReaderToEntity<T>(this IDataReader dr)
     {
-        var builder = DynamicBuilder<T>.CreateBuilder(dr);
-        var instance = builder.Build(dr);
+        try
+        {
+            if (dr.Read())
+            {
+                var builder = DynamicBuilder<T>.CreateBuilder(dr);
+                var instance = builder.Build(dr);
+                return instance;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+        finally
+        {
+            dr.Close();
+            dr.Dispose();
+        }
 
-        return instance;
+        return default(T);
     }
 
     /// <summary>
-    /// 
+    /// 快速填充实体集合
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="dr"></param>
@@ -198,17 +229,27 @@ public static partial class Helper
     public static List<T> DataReaderToList<T>(this IDataReader dr)
     {
         var list = new List<T>();
-        var builder = DynamicBuilder<T>.CreateBuilder(dr);
-
-        while (dr.Read())
+        try
         {
-            var instance = builder.Build(dr);
-            if (!list.Contains(instance))
-                list.Add(instance);
+            var builder = DynamicBuilder<T>.CreateBuilder(dr);
+            
+            while (dr.Read())
+            {
+                var instance = builder.Build(dr);
+                if (!list.Contains(instance))
+                    list.Add(instance);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+        finally
+        {
+            dr.Close();
+            dr.Dispose();
         }
 
         return list;
     }
-    
-
 }

@@ -3,7 +3,7 @@ using Ban3.Infrastructures.DataPersist.Entities;
 
 namespace D7;
 
-[TableIs("demo表","Demo",DbName = "Usemysql")]
+[TableIs("demo表","Demo",DbName = "UseSqlite")]
 public class Demo
     : BaseEntity
 {
