@@ -36,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CcaAndReport", "..\..\Produ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NativeLibs", "..\..\Infrastructures\NativeLibs\NativeLibs.csproj", "{78448B65-C3FB-4AFF-954B-24A0C5E4E566}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataPersist", "..\..\Libs\DataPersist\DataPersist.csproj", "{B01939C1-96EB-41B2-AB7C-761E812A81A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataPersist", "..\..\Infrastructures\DataPersist\DataPersist.csproj", "{B01939C1-96EB-41B2-AB7C-761E812A81A7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Particulars", "Particulars", "{D99C8F59-E3D0-41B9-AD87-5013FE9D5C0D}"
 EndProject
