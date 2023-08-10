@@ -8,47 +8,10 @@ using Ban3.Infrastructures.Common;
 using Ban3.Infrastructures.DataPersist.Attributes;
 using Ban3.Infrastructures.DataPersist.Extensions;
 using Ban3.Infrastructures.NetMail;
-using D7;
-using Org.BouncyCastle.Asn1.Cms;
 
-//Console.WriteLine($"SettingsStandby={Ban3.Infrastructures.Common.Config.SettingsStandby}");
 
-//var ints = Enumerable.Range(1, 1000).ToList();
-
-////ints.ObjToJson().WriteColorLine(ConsoleColor.DarkGreen);
-//Console.WriteLine();
-
-//var tp = new TaskPool<int>(
-//    ints,
-//    20,
-//    (i) =>
-//    {
-//        $"{i}".WriteColorLine(ConsoleColor.DarkYellow);
-//        (2, 4).RandomDelay();
-//    });
-
-//tp.Execute();
 
 /*
- *
- *
-x.Table().ObjToJson().WriteColorLine(ConsoleColor.DarkRed);
-
-x.Fields().ObjToJson().WriteColorLine(ConsoleColor.DarkCyan);
-
-x.DB().ObjToJson().WriteColorLine(ConsoleColor.DarkMagenta);
-
-x.SqlForInsert().WriteColorLine(ConsoleColor.DarkRed);
-
-x.SqlForUpdate().WriteColorLine(ConsoleColor.DarkBlue);
-
-
-x.KeyValue().ToString().WriteColorLine(ConsoleColor.DarkYellow);
-
- *
- *
- */
-
 var x = new Demo
 {
     Id = 1,
@@ -82,8 +45,8 @@ var xx = Enumerable.Range(1, 20)
 var a = await x.CreateAsync();
 (a.Id + "").WriteColorLine(ConsoleColor.Red);
 
-var r = new Demo { Id = 124156 }.Delete();
-Console.WriteLine(r + "affected");
+var r1 = new Demo { Id = 124156 }.Delete();
+Console.WriteLine(r1 + "affected");
 
 var r2 = new Demo().Delete("Id<=10000");
 Console.WriteLine(r2 + "affected");
@@ -108,3 +71,5 @@ if (r158 != null)
 
 sw.Stop();
 $"{sw.Elapsed.Seconds} s elapsed.".WriteColorLine(ConsoleColor.DarkBlue);
+
+ */

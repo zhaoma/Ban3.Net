@@ -238,4 +238,9 @@ public class PartsController : Controller
         
         return View(dic);
     }
+
+    public IActionResult Decide()
+    {
+        return View();
+    }
 }

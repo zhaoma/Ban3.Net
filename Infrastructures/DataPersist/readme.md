@@ -2,28 +2,67 @@
 我与小孩们常呆在三班，所以用了这么个名字，只是个代号不是么：）
 
 ## _最后修改_
-2023-07-23
--- 尝试了下简单的CompileSourceCodes
--- 发现ReadFile2Rows 的一个小问题，修理了
+2023-08-08
+-- 检查了同步与异步的CRUD, 看起来还好
 
 ## Features
 
-- 常用基础定义
--- 属性
--- 接口
-- 常用扩展方法
--- Action的几个尝试，并发、计时、异步等
--- 字典、集合的常见操作及排序
--- 文本文件的读写操作
--- 反射相关常用方法
--- 序列化
--- 变量转换与处置，位、字节、日期、数值等
-- 其他各种小尝试
--- Rougamo.Fody的静态织入
+- CRUD
+-- 同步
+-- 异步
+- 示例脚本
+
+[TableIs("demo表","Demo",DbName = "UseSqlite")]
+public class Demo
+    : BaseEntity
+{
+    [FieldIs(ColumnIndex = 1,Increment=true,ColumnName = "Id",Key=true,NotForInsert = true,NotForUpdate = true)]
+    public int Id { get; set; }
+    
+    [FieldIs(ColumnIndex = 2,ColumnName = "Subject",SupportSearch = true)]
+    public string Subject { get; set; }
+
+    [FieldIs(ColumnIndex = 3, ColumnName = "Note", SupportSearch = true)]
+    public string Note { get; set; }
+
+    [FieldIs(ColumnIndex =11, ColumnName = "UpdateTime")]
+    public DateTime UpdateTime { get; set; }
+    
+    [FieldIs(ColumnIndex = 12, ColumnName = "CreateTime",NotForUpdate = true)]
+    public DateTime CreateTime { get; set; }
+}
+
+var x = new Demo
+{
+    Id = 1,
+    Subject = "THIS IS SUBJECT",
+    Note = "I'm Note.",
+    UpdateTime = DateTime.Now,
+    CreateTime = DateTime.Now
+};
+
+var y=x.Create();
+
+//var a = await x.CreateAsync();
+//(a.Id + "").WriteColorLine(ConsoleColor.Red);
+
+var r158 = new Demo { Id = 124158 }.Retrieve();
+r158.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
+
+y.UpdateTime = DateTime.Now;
+Console.WriteLine($"{r158.Update()} affected.");
+
+var r1 = new Demo { Id = 124156 }.Delete();
+Console.WriteLine(r1 + "affected");
+
+var r2 = new Demo().Delete("Id<=10000");
+Console.WriteLine(r2 + "affected");
+
+etc.
 
 ## 为何来费空间
 
-少一些重复，多一些持续更新
+少一些重复，多一些持续更新或是清理:)
 
 ## License
 
