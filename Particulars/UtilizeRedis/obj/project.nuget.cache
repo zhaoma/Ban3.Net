@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "n5op6SFY399FtassHl5bfo6aBCnOo/y8pYhi7yPVIoN9VsnDTwQ8VdeQRbWXqlqRviszE5ud5ELboX+sfDUWsw==",
+  "dgSpecHash": "BNZ/nDs3LhCzt0HmLErlyjkFK1bw8ehPoHUqt+HhC268ax+GMm3w0vYMurVvMDwXU+hx4K7gZaDhqS1MzAJxnQ==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Particulars\\UtilizeRedis\\UtilizeRedis.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.9\\ban3.infrastructures.common.1.0.9.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.12\\ban3.infrastructures.common.1.0.12.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.2.5\\fody.6.2.5.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

@@ -1,6 +1,7 @@
 ﻿using System.Configuration.Internal;
 using System.Diagnostics;
 using System.Net.Mail;
+using System.Reflection;
 using Ban3.Infrastructures.Common.Models;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
@@ -8,68 +9,21 @@ using Ban3.Infrastructures.Common;
 using Ban3.Infrastructures.DataPersist.Attributes;
 using Ban3.Infrastructures.DataPersist.Extensions;
 using Ban3.Infrastructures.NetMail;
+using Ban3.Infrastructures.PlatformInvoke;
+using Ban3.Infrastructures.PlatformInvoke.Entries;
 
-
-
-/*
-var x = new Demo
+AppDomain.CurrentDomain.AssemblyResolve += delegate(object sender, ResolveEventArgs e)
 {
-    Id = 1,
-    Subject = "THIS IS SUBJECT",
-    Note = "I'm Note.",
-    UpdateTime = DateTime.Now,
-    CreateTime = DateTime.Now
+    $"request {e.Name}".WriteColorLine(ConsoleColor.Red);
+    return Assembly.LoadFile($"{Config.GetValue("Assemblies:RootFolder")}\\{e.Name.Split(',').First().AssemblyName()}");
 };
 
-
-var sw = new Stopwatch();
-sw.Start();
-
-var xxx = new Demo2();
-xxx.EntityStrategy().ObjToJson().WriteColorLine(ConsoleColor.DarkCyan);
-
-
-var xx = Enumerable.Range(1, 20)
-    .Select(o => new Demo
-    {
-        Subject = $"{o}:sub",
-        Note = "NNOO",
-        UpdateTime = DateTime.Now,
-        CreateTime = DateTime.Now
-    })
-    .ToList();
-
-//var r=xx.Insert(out var yy,false);
-//$"{r}:".WriteColorLine(ConsoleColor.Red);
-
-var a = await x.CreateAsync();
-(a.Id + "").WriteColorLine(ConsoleColor.Red);
-
-var r1 = new Demo { Id = 124156 }.Delete();
-Console.WriteLine(r1 + "affected");
-
-var r2 = new Demo().Delete("Id<=10000");
-Console.WriteLine(r2 + "affected");
-
-var r158 = new Demo { Id = 124158 }.Retrieve();
-r158.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
-if (r158 != null)
+var af = new AssemblyFile
 {
-    r158.Subject = "NEW SUBJETC HERE";
-    r158.UpdateTime = DateTime.Now;
-    Console.WriteLine($"{r158.Update()} affected.");
-}
+    FullPath = "D:\\CTS\\Development\\ICS\\SHA.SERV\\bin\\Debug\\CT.Serv.Tst.BE.Algorithms.Impl.dll"
+};
 
+var r = af.Analyze(out var cs);
 
-//new Action(() =>
-//{
-//    x = x.Insert();
+cs.ObjToJson().WriteColorLine(ConsoleColor.DarkYellow);
 
-//    x.ObjToJson().WriteColorLine(ConsoleColor.DarkRed);
-
-//}).Times(30000);
-
-sw.Stop();
-$"{sw.Elapsed.Seconds} s elapsed.".WriteColorLine(ConsoleColor.DarkBlue);
-
- */

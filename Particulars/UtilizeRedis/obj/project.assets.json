@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "Ban3.Infrastructures.Common/1.0.9": {
+      "Ban3.Infrastructures.Common/1.0.12": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
@@ -14,10 +14,14 @@
           "log4net": "2.0.15"
         },
         "compile": {
-          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
+            "related": ".xml"
+          }
         },
         "contentFiles": {
           "contentFiles/any/netstandard2.0/favicon.ico": {
@@ -607,19 +611,20 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.Common/1.0.9": {
-      "sha512": "KCxhoAeS8lrR4Qq1czywlh0Cr9hHK03saj+GyXF8iYLQoetpv5ROoyMaN3sackglfh40TeJL8hmI/Mn48WEahw==",
+    "Ban3.Infrastructures.Common/1.0.12": {
+      "sha512": "gQ3VLL1mtygyOROSGrM4oKQrrz1VWQmUIMBOAjMv5Oq+rUa04gHEC0LMqQNqkf0BA7BoceXGDhIsEn/04c1JoQ==",
       "type": "package",
-      "path": "ban3.infrastructures.common/1.0.9",
+      "path": "ban3.infrastructures.common/1.0.12",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.common.1.0.9.nupkg.sha512",
+        "ban3.infrastructures.common.1.0.12.nupkg.sha512",
         "ban3.infrastructures.common.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
         "icon.png",
         "lib/netstandard2.0/Ban3.Infrastructures.Common.dll",
+        "lib/netstandard2.0/Ban3.Infrastructures.Common.xml",
         "readme.md"
       ]
     },
@@ -1998,7 +2003,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.9",
+      "Ban3.Infrastructures.Common >= 1.0.12",
       "NETStandard.Library >= 2.0.3",
       "StackExchange.Redis >= 2.6.122",
       "log4net >= 2.0.15"
@@ -2051,7 +2056,7 @@
         "dependencies": {
           "Ban3.Infrastructures.Common": {
             "target": "Package",
-            "version": "[1.0.9, )"
+            "version": "[1.0.12, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",

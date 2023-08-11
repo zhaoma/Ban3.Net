@@ -15,7 +15,7 @@ namespace Ban3.Infrastructures.PlatformInvoke;
 /// 分析程序集的静态扩展
 /// </summary>
 [TracingIt]
-public static class Helper
+public static partial class Helper
 {
     private static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
 

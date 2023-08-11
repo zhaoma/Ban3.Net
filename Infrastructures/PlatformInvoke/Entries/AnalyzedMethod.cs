@@ -1,5 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Reflection;
+
 #nullable enable
 namespace Ban3.Infrastructures.PlatformInvoke.Entries;
 
@@ -11,11 +13,15 @@ public class AnalyzedMethod
     [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
     public string Name { get; set; } = string.Empty;
 
+
+    [JsonProperty("isConstructor", NullValueHandling = NullValueHandling.Ignore)]
+    public bool IsConstructor { get; set; }
+
     /// <summary>
     /// ÐÞÊÎ·û
     /// </summary>
     [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)]
-    public string Modifier { get; set; } = string.Empty;
+    public List<string>? Modifier { get; set; }
 
     /// <summary>
     /// ²ÎÊý
@@ -28,4 +34,39 @@ public class AnalyzedMethod
     /// </summary>
     [JsonProperty("returnType", NullValueHandling = NullValueHandling.Ignore)]
     public string? ReturnType { get; set; }
+
+    public AnalyzedMethod(){}
+
+    public AnalyzedMethod(MethodInfo methodInfo)
+    {
+        Name=methodInfo.Name;
+        IsConstructor= methodInfo.IsConstructor;
+        Modifier = new List<string>();
+
+        if(methodInfo.IsPrivate)
+            Modifier.Add("private");
+
+        if(methodInfo.IsPublic)
+            Modifier.Add("public");
+
+        if(methodInfo.IsAbstract)
+            Modifier.Add("abstract");
+
+        if(methodInfo.IsFamily)
+            Modifier.Add("internal");
+
+        if(methodInfo.IsGenericMethod)
+            Modifier.Add("generic");
+
+        if(methodInfo.IsFinal)
+            Modifier.Add("final");
+
+        if(methodInfo.IsStatic)
+            Modifier.Add("static");
+
+        if(methodInfo.IsVirtual)
+            Modifier.Add("virtual");
+
+        ReturnType = methodInfo.ReturnType.FullName;
+    }
 }

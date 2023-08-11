@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 #nullable enable
@@ -12,7 +13,10 @@ public class AnalyzedClass
     /// 
     /// </summary>
     [JsonProperty("fullName", NullValueHandling = NullValueHandling.Ignore)]
-    public string FullName { get; set; } = string.Empty;
+    public string? FullName { get; set; }
+
+    [JsonProperty("namespace", NullValueHandling = NullValueHandling.Ignore)]
+    public string? Namespace { get; set; }
 
     /// <summary>
     /// 
@@ -24,17 +28,58 @@ public class AnalyzedClass
     /// 修饰符
     /// </summary>
     [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)]
-    public string Modifier { get; set; } = string.Empty;
-
-    /// <summary>
-    /// 构造函数
-    /// </summary>
-    [JsonProperty("constructors",NullValueHandling = NullValueHandling.Ignore)]
-    public List<AnalyzedMethod>? Constructors{ get; set; }
-
+    public List<string>? Modifier { get; set; } 
+    
     /// <summary>
     /// 方法
     /// </summary>
     [JsonProperty("methods", NullValueHandling = NullValueHandling.Ignore)]
     public List<AnalyzedMethod>? Methods { get; set; }
+
+    public AnalyzedClass(){}
+
+    public AnalyzedClass(Type currentType)
+    {
+        FullName = currentType.FullName;
+        Name = currentType.Name;
+        Namespace=currentType.Namespace;
+        Modifier = new List<string>();
+        
+        if (currentType.IsPublic)
+            Modifier.Add("public");
+
+        if(currentType.IsNotPublic)
+            Modifier.Add("private");
+
+        if(currentType.IsInterface)
+            Modifier.Add("interface");
+
+        if(currentType.IsClass)
+            Modifier.Add("class");
+
+        if(currentType.IsAbstract)
+            Modifier.Add("abstract");
+
+        if(currentType.IsSealed)
+            Modifier.Add("sealed");
+
+        if(currentType.IsPointer)
+            Modifier.Add("unsafe");
+
+        if (currentType.IsNested)
+        {
+            Modifier.Add("nested");
+
+            if(currentType.IsNestedPrivate) Modifier.Add("private");
+
+            if(currentType.IsNestedPublic) Modifier.Add("public");
+
+            if(currentType.IsNestedFamily) Modifier.Add("protected");
+        }
+        
+        if(currentType.IsVisible)
+            Modifier.Add("internal");
+        
+    }
+    
 }

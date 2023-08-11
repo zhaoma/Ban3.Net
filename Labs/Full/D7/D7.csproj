@@ -9,8 +9,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Infrastructures\Consoles\Consoles.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructures\DataPersist\DataPersist.csproj" />
     <ProjectReference Include="..\..\..\Infrastructures\NetMail\NetMail.csproj" />
-    <ProjectReference Include="..\..\..\Libs\DataPersist\DataPersist.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructures\PlatformInvoke\PlatformInvoke.csproj" />
   </ItemGroup>
 
   <ItemGroup>
