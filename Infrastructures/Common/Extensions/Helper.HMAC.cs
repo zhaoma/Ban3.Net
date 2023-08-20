@@ -23,14 +23,24 @@ public static partial class Helper
     /// <param name="plainText"></param>
     /// <returns></returns>
     public static string MD5String(this string plainText)
-    {
-        using var md5 = MD5.Create();
-        var bytes = md5.ComputeHash(Encoding.UTF8.GetBytes(plainText));
-
-        return BitConverter.ToString(bytes).Replace("-", "");
-    }
+        => HashType.MD5.GetHashedString(Encoding.UTF8.GetBytes(plainText),null);
 
     /// <summary>
+    /// 获取哈希之后的字符串
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="source"></param>
+    /// <param name="key"></param>
+    /// <param name="isLower"></param>
+    /// <returns></returns>
+    public static string GetHashedString(this HashType type, string source, string key = "", bool isLower = false)
+    => type
+    .GetHashedString(
+    Encoding.UTF8.GetBytes(source),
+        string.IsNullOrEmpty(key) ? null : Encoding.UTF8.GetBytes(key),
+        isLower);
+
+	/// <summary>
     /// 获取哈希之后的字符串
     /// </summary>
     /// <param name="type">哈希类型</param>
@@ -38,7 +48,7 @@ public static partial class Helper
     /// <param name="key">key</param>
     /// <param name="isLower">是否是小写</param>
     /// <returns>哈希算法处理之后的字符串</returns>
-    public static string GetHashedString(this HashType type, byte[]? source, byte[] key, bool isLower = false)
+    public static string GetHashedString(this HashType type, byte[]? source, byte[]? key, bool isLower = false)
     {
         if (source == null || source.Length == 0)
         {

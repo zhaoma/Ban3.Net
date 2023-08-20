@@ -10,7 +10,7 @@
       "Ban3.Infrastructures.DataPersist/1.0.10": {
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.12",
-          "Microsoft.Data.Sqlite": "7.0.9",
+          "Microsoft.Data.Sqlite": "7.0.10",
           "MySql.Data": "8.1.0",
           "NETStandard.Library": "2.0.3",
           "Newtonsoft.Json": "13.0.3",
@@ -116,20 +116,20 @@
           }
         }
       },
-      "Microsoft.Data.Sqlite/7.0.9": {
+      "Microsoft.Data.Sqlite/7.0.10": {
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "7.0.9",
+          "Microsoft.Data.Sqlite.Core": "7.0.10",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.4"
         }
       },
-      "Microsoft.Data.Sqlite.Core/7.0.9": {
+      "Microsoft.Data.Sqlite.Core/7.0.10": {
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.4"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {
-            "assemblyVersion": "7.0.9.0",
-            "fileVersion": "7.0.923.31909"
+            "assemblyVersion": "7.0.10.0",
+            "fileVersion": "7.0.1023.36204"
           }
         }
       },
@@ -719,19 +719,19 @@
       "path": "microsoft.bcl.asyncinterfaces/7.0.0",
       "hashPath": "microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512"
     },
-    "Microsoft.Data.Sqlite/7.0.9": {
+    "Microsoft.Data.Sqlite/7.0.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-XZ/7gpAP3EFlaDkLqv21Ro1ZHMtkh7UpBImyLcv0x+G5qt2J9vvrAk1g5qYL2ykwzpzf7Stc6Xt1MSkv5YmdPg==",
-      "path": "microsoft.data.sqlite/7.0.9",
-      "hashPath": "microsoft.data.sqlite.7.0.9.nupkg.sha512"
+      "sha512": "sha512-Ajn0QXUDNKHTXhSUbGLyoetmcEyqx66ScStWBuK4Q/EOvpW9bPNCItSSFX6VhbwzIlgDrQRPNkIjjNEd5JXj0Q==",
+      "path": "microsoft.data.sqlite/7.0.10",
+      "hashPath": "microsoft.data.sqlite.7.0.10.nupkg.sha512"
     },
-    "Microsoft.Data.Sqlite.Core/7.0.9": {
+    "Microsoft.Data.Sqlite.Core/7.0.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ow2PPoeW0yFc7NhexacQUw/LVjkO1mLK3VZAxhVIVjmQWlgYl/4mo9/U7uz+z75I+ZN6LUvq9M0ftU3IE75Ilg==",
-      "path": "microsoft.data.sqlite.core/7.0.9",
-      "hashPath": "microsoft.data.sqlite.core.7.0.9.nupkg.sha512"
+      "sha512": "sha512-SA6LOen490YTforjaNfVDClYpwiG3LmHJM8objq6KwIIFP0fq9Eulhbu6zBl6AduMefQqUA3pllrFFVQpwPoqw==",
+      "path": "microsoft.data.sqlite.core/7.0.10",
+      "hashPath": "microsoft.data.sqlite.core.7.0.10.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/7.0.0": {
       "type": "package",

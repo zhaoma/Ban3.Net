@@ -9,7 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "Ban3.Infrastructures.NetMail/1.0.2": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.10",
+          "Ban3.Infrastructures.Common": "1.0.12",
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Office.Interop.Outlook": "15.0.4797.1004",
           "NETStandard.Library": "2.0.3",
@@ -20,7 +20,7 @@
           "Ban3.Infrastructures.NetMail.dll": {}
         }
       },
-      "Ban3.Infrastructures.Common/1.0.10": {
+      "Ban3.Infrastructures.Common/1.0.12": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
@@ -32,8 +32,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
-            "assemblyVersion": "1.0.3.10",
-            "fileVersion": "1.0.3.10"
+            "assemblyVersion": "1.0.0.12",
+            "fileVersion": "1.0.0.12"
           }
         }
       },
@@ -171,7 +171,7 @@
         "runtime": {
           "lib/netstandard2.0/Microsoft.Office.Interop.Outlook.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.4797.1003"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -376,12 +376,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Ban3.Infrastructures.Common/1.0.10": {
+    "Ban3.Infrastructures.Common/1.0.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3e03zbIwMWj45aH/jc16B+J15uN8QVJehH2zJf7cZ3jGYBG1ihqc9u4aMUtoUJsnir6Rb+zi76vjYRxHW2tyUw==",
-      "path": "ban3.infrastructures.common/1.0.10",
-      "hashPath": "ban3.infrastructures.common.1.0.10.nupkg.sha512"
+      "sha512": "sha512-gQ3VLL1mtygyOROSGrM4oKQrrz1VWQmUIMBOAjMv5Oq+rUa04gHEC0LMqQNqkf0BA7BoceXGDhIsEn/04c1JoQ==",
+      "path": "ban3.infrastructures.common/1.0.12",
+      "hashPath": "ban3.infrastructures.common.1.0.12.nupkg.sha512"
     },
     "Fody/6.2.5": {
       "type": "package",

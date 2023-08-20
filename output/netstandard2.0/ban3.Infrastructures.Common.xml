@@ -1,139 +1,664 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Ban3.Productions.Casino.CcaAndReport</name>
+        <name>Ban3.Infrastructures.DataPersist</name>
     </assembly>
     <members>
-        <member name="T:Ban3.Productions.Casino.CcaAndReport.Signalert">
+        <member name="T:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute">
+            <summary>
+            字段属性
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.Key">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.Increment">
+            <summary>
+            自增/自动生成字段
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.NotForInsert">
+            <summary>
+            插入所需
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.NotForUpdate">
+            <summary>
+            更新所需
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.ForeignKey">
+            <summary>
+            外键信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.Subject">
+            <summary>
+            显示主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.SupportSearch">
+            <summary>
+            字段支持检索
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.ColumnName">
+            <summary>
+            列名
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.ColumnIndex">
+            <summary>
+            列表显示列序
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.FieldIsAttribute.FormatPattern">
+            <summary>
+            转字符格式
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.DataPersist.Attributes.TableIsAttribute">
+            <summary>
+            表策略属性
+            目前只做单目标库
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Attributes.TableIsAttribute.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Attributes.TableIsAttribute.#ctor(System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="tableName"></param>
+            <param name="cacheAll"></param>
+            <param name="dbName"></param>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.TableIsAttribute.Name">
+            <summary>
+            表逻辑名
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.TableIsAttribute.TableName">
+            <summary>
+            数据表名
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.TableIsAttribute.CacheAll">
+            <summary>
+            缓存全集合
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Attributes.TableIsAttribute.DbName">
+            <summary>
+            配置节中Db节点名称
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.DataPersist.Config">
+            <summary>
+            配置，存储对象策略到字典
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Config.Strategy(System.Type)">
+            <summary>
+            用类名获取策略(库申明，表申明，字段申明)
+            </summary>
+            <param name="entityType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.DataPersist.Entities.BaseEntity">
             <summary>
             
             </summary>
         </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Collector">
-            
-        </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Calculator">
-            
-        </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Analyzer">
-            
-        </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Reportor">
-            
-        </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.TargetCodes">
+        <member name="M:Ban3.Infrastructures.DataPersist.Entities.BaseEntity.EntityStrategy">
             <summary>
-            关注标的池
+            读取实体策略信息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.PrepareEventsAndSeeds(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="M:Ban3.Infrastructures.DataPersist.Entities.BaseEntity.ParametersForKeys">
             <summary>
-            下载事件，计算复权价格
+            主键参数数组
             </summary>
-            <param name="allCodes"></param>
-        </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ReinstateAllPrices(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
-            <summary>
-            计算复权价格
-            </summary>
-            <param name="allCodes"></param>
             <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteFullyJob(System.Boolean)">
+        <member name="M:Ban3.Infrastructures.DataPersist.Entities.BaseEntity.ParametersForInsert">
             <summary>
-            完整任务
-            下载历史行情数据（分红配股事件及计算复权因子）
+            创建的参数数组
             </summary>
-            <param name="reCalculateSeeds"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteDailyJob">
+        <member name="M:Ban3.Infrastructures.DataPersist.Entities.BaseEntity.ParametersForUpdate">
             <summary>
-            日常任务
-            无参数，全市场
+            更新的参数数组
             </summary>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteDailyJob(System.String)">
+        <member name="M:Ban3.Infrastructures.DataPersist.Entities.BaseEntity.KeyValue">
             <summary>
-            指定codes，","分割
+            主键取值(字符串)
             </summary>
-            <param name="codes"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteDailyJob(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="M:Ban3.Infrastructures.DataPersist.Entities.BaseEntity.FulfillKeyValue(System.Object)">
             <summary>
-            指定标的集合
+            填回主键
             </summary>
-            <param name="stocks"></param>
+            <param name="keyValue"></param>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecutePrepare(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="T:Ban3.Infrastructures.DataPersist.Entities.DynamicBuilder`1">
             <summary>
-            计算复权价格
-            计算指标值
-            准备指标图表数据
-            准备指标特征数据
-            生成最新列表
+            快速实例填充
             </summary>
-            <param name="stocks"></param>
+            <typeparam name="T"></typeparam>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDots(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+        <member name="M:Ban3.Infrastructures.DataPersist.Entities.DynamicBuilder`1.#ctor">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDotsKey(System.Boolean)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Entities.DynamicBuilder`1.Build(System.Data.IDataRecord)">
+            <summary>
+            Builds the specified data record.
+            </summary>
+            <param name="dataRecord">The data record.</param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetLineOfPoint(Ban3.Productions.Casino.Contracts.Request.RenderView)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Entities.DynamicBuilder`1.CreateBuilder(System.Data.IDataRecord)">
+            <summary>
+            Creates the builder.
+            </summary>
+            <param name="dataRecord">The data record.</param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetListRecords(System.String)">
-            
+        <member name="T:Ban3.Infrastructures.DataPersist.Entities.ForeignKey">
+            <summary>
+            外键设置
+            </summary>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetStockPrices(Ban3.Productions.Casino.Contracts.Request.RenderView)">
-            
+        <member name="T:Ban3.Infrastructures.DataPersist.Enums.Database">
+            <summary>
+            数据库类型
+            </summary>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetStockSets(Ban3.Productions.Casino.Contracts.Request.RenderView)">
-            
+        <member name="T:Ban3.Infrastructures.DataPersist.Enums.Operate">
+            <summary>
+            记录操作类型
+            </summary>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetLatestStockSets">
+        <member name="T:Ban3.Infrastructures.DataPersist.Extensions.Helper">
+            <summary>
+            创建
+            </summary>
+            <summary>
             
+            </summary>
+            <summary>
+            删除
+            </summary>
+            <summary>
+            检索
+            </summary>
+            <summary>
+            更新
+            </summary>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.UnsellRecord(Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord,System.Double@)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Create``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0}@,System.Data.IDbTransaction)">
+            <summary>
+            批量创建记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entities"></param>
+            <param name="result"></param>
+            <param name="transaction"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetTreemapDiagram(System.Int32)">
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Create``1(``0,System.Data.IDbTransaction)">
+            <summary>
             
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="transaction"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetSankeyDiagram(System.Int32)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.CreateAsync``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            异步创建记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="transaction"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetCandlestickDiagram(System.String,System.String)">
+        <member name="F:Ban3.Infrastructures.DataPersist.Extensions.Helper.CancellationTokenSource">
+            <summary>
             
+            </summary>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetAmountDiagram(System.String)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.PrepareConnection(Ban3.Infrastructures.DataPersist.Models.DB)">
+            <summary>
+            建立连接
+            </summary>
+            <param name="db"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetBiasDiagram(System.String)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Connection(Ban3.Infrastructures.DataPersist.Models.DB)">
+            <summary>
+            获取连接
+            </summary>
+            <param name="db"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDmiDiagram(System.String)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Transaction(Ban3.Infrastructures.DataPersist.Models.DB)">
+            <summary>
+            开始事务
+            </summary>
+            <param name="db"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetKdDiagram(System.String)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Command(Ban3.Infrastructures.DataPersist.Models.DB,System.String,System.Data.IDbTransaction)">
+            <summary>
+            创建命令
+            </summary>
+            <param name="db"></param>
+            <param name="sql"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetMacdDiagram(System.String)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Command``1(``0,Ban3.Infrastructures.DataPersist.Enums.Operate,System.Data.IDbTransaction,System.String)">
+            <summary>
+            实体的操作命令
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="operate">Enums.Operate</param>
+            <param name="transaction"></param>
+            <param name="conditionOrSql"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetProfileDetails(System.Collections.Generic.List{System.String},System.String)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.DataReaderToEntity``1(System.Data.IDataReader)">
+            <summary>
+            快速填充实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dr"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetCompositeRecords(System.String)">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.DataReaderToList``1(System.Data.IDataReader)">
+            <summary>
+            快速填充实体集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dr"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetTimelineRecords">
-            
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Delete``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            删除记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="transaction"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDistributeRecords">
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Delete``1(``0,System.String,System.Data.IDbTransaction)">
+            <summary>
+            异步删除记录(按条件)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="conditionOrSql"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.DeleteAsync``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            异步删除记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.DeleteAsync``1(``0,System.String,System.Data.IDbTransaction)">
+            <summary>
+            异步删除记录(按条件)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="conditionOrSql"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Retrieve``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            检索单个记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Retrieve``1(``0,System.String,System.Data.IDbTransaction)">
+            <summary>
+            检索单个记录(按条件)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="conditionOrSql"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.RetrieveList``1(``0,System.String,System.Data.IDbTransaction)">
+            <summary>
+            检索记录集合(按条件)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="conditionOrSql"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.RetrieveAsync``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            异步检索单个记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.RetrieveAsync``1(``0,System.String,System.Data.IDbTransaction)">
+            <summary>
+            异步检索单个记录(按条件)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="conditionOrSql"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.RetrieveListAsync``1(``0,System.String,System.Data.IDbTransaction)">
+            <summary>
+            异步检索记录集合(按条件)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="conditionOrSql"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Update``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            更新记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.Update``1(``0,System.String,System.Data.IDbTransaction)">
+            <summary>
+            更新记录(按条件)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="conditionOrSql"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.UpdateAsync``1(``0,System.Data.IDbTransaction)">
+            <summary>
+            异步更新记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Extensions.Helper.UpdateAsync``1(``0,System.String,System.Data.IDbTransaction)">
+            <summary>
+            异步更新记录(按条件)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="entity"></param>
+            <param name="conditionOrSql"></param>
+            <param name="transaction"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.DataPersist.Implements.MssqlClient">
+            <summary>
+            数据访问层的基类(MSSQL)
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.DataPersist.Implements.MssqlClient.Logger">
+            <summary>
             
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Interfaces.IService.Connection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.Save``1(System.Object,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.BulkSave``1(System.Collections.Generic.Dictionary{System.String,``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.TupleSave``1(System.Collections.Generic.IEnumerable{System.Tuple{System.String,System.String,``0}})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.Insert``1(System.Object,``0)">
+            <summary>
+            插入记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.Get``1(System.Object)">
+            <summary>
+            获取记录（用主键）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.Exists``1(System.Object)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.Update``1(System.Object,``0)">
+            <summary>
+            更新记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.Delete``1(System.Object)">
+            <summary>
+            删除记录（用主键）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.Set``1">
+            <summary>
+            获取全部数据集
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.Set``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.QueryMultiple``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.MultiResult``1(System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="condition"></param>
+            <param name="pageSize"></param>
+            <param name="pageNo"></param>
+            <param name="orderField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Interfaces.IService.QueryMultipleReader(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.DataPersist.Models.DB">
+            <summary>
+            数据库配置
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Models.DB.Database">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Models.DB.ConnectionString">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.DataPersist.Models.EntityStrategy">
+            <summary>
+            实体策略定义
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.DB">
+            <summary>
+            库申明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.Table">
+            <summary>
+            表申明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.Fields">
+            <summary>
+            字段申明
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.Viable">
+            <summary>
+            实体有效
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.InsertCommand">
+            <summary>
+            新建记录命令
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.UpdateCommand">
+            <summary>
+            更新命令(用主键)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.UpdateCommand(System.String)">
+            <summary>
+            更新命令(按条件)
+            </summary>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.DeleteCommand">
+            <summary>
+            删除命令(用主键)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.DeleteCommand(System.String)">
+            <summary>
+            删除命令(按条件)
+            </summary>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.SelectCommand">
+            <summary>
+            检索命令(用主键)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Models.EntityStrategy.SelectCommand(System.String)">
+            <summary>
+            检索命令(用条件)
+            </summary>
+            <param name="condition"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.DataPersist.Models.MultiResult`1">
+            <summary>
+            带总数，和分页集合的结果
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Ban3.Infrastructures.DataPersist.Models.MultiResult`1.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Models.MultiResult`1.RecordCount">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.DataPersist.Models.MultiResult`1.Data">
+            <summary>
+            分页记录集
+            </summary>
         </member>
     </members>
 </doc>

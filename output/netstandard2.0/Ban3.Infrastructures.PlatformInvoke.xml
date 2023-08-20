@@ -4,6 +4,76 @@
         <name>Ban3.Infrastructures.PlatformInvoke</name>
     </assembly>
     <members>
+        <member name="T:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedArgument">
+            <summary>
+            ����
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedArgument.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedArgument.Modifier">
+            <summary>
+            ���η�
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedArgument.Position">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedArgument.DeclaredType">
+            <summary>
+            ��������
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass">
+            <summary>
+            ����
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass.FullName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass.Modifier">
+            <summary>
+            ���η�
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass.Methods">
+            <summary>
+            ����
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod.Modifier">
+            <summary>
+            ���η�
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod.Arguments">
+            <summary>
+            ����
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod.ReturnType">
+            <summary>
+            ����ֵ����
+            </summary>
+        </member>
         <member name="T:Ban3.Infrastructures.PlatformInvoke.Entries.AssemblyFile">
             <summary>
             程序集信息
@@ -203,12 +273,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Ban3.Infrastructures.PlatformInvoke.Helper.Load">
-            <summary>
-            加载程序集分析结果
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:Ban3.Infrastructures.PlatformInvoke.Helper.AllHighLevels(System.String,System.Collections.Generic.List{Ban3.Infrastructures.PlatformInvoke.Entries.AssemblyFile})">
             <summary>
             被引用路径
@@ -244,6 +308,12 @@
             限定程序集范围
             </summary>
             <param name="checkNamespace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Helper.Load">
+            <summary>
+            加载程序集分析结果
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Ban3.Infrastructures.PlatformInvoke.Request.ParseAssembly">

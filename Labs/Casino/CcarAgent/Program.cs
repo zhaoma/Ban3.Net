@@ -67,7 +67,7 @@ internal class Program
                 new Action(CheckSomething)
                     .ExecuteAndTiming("CheckSomething(temp func).");
                 break;
-                
+
             default:
                 $"--all :            prepare all data(exclude events and seeds)".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--prepare :        prepare all data".WriteColorLine(ConsoleColor.DarkYellow);
@@ -76,7 +76,7 @@ internal class Program
                 $"--reinstate :      reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--dr :             distribute records data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--check :          check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
-    
+                Signalert.ExecuteFullyJob();
                 break;
         }
 
@@ -94,7 +94,7 @@ internal class Program
         //Signalert.Analyzer.PrepareDistributeRecords();
         var d = Signalert.GetLatestStockSets().GenerateList().Save();
         Console.WriteLine(d.Count);
-        
+
         //var drs = Signalert.GetDistributeRecords();
         //drs.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
         //var x = DistributeConditions();
