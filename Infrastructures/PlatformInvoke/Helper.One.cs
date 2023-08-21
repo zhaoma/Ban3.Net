@@ -7,8 +7,10 @@ using System.Reflection;
 
 namespace Ban3.Infrastructures.PlatformInvoke;
 
+/// 
 public static partial class Helper
 {
+    /// 
     public static bool Analyze(this AssemblyFile assemblyFile,out List<AnalyzedClass> result)
     {
         result=new ();
@@ -42,6 +44,7 @@ public static partial class Helper
         return false;
     }
 
+    /// 
     public static bool Analyze(this Type type, out List<AnalyzedMethod> methods)
     {
         methods=new ();
@@ -68,6 +71,7 @@ public static partial class Helper
         return false;
     }
 
+    /// 
     public static bool Analyze(this MethodInfo method, out List<AnalyzedArgument> argumentList)
     {
         argumentList = new();

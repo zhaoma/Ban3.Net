@@ -5,6 +5,7 @@ using System.Reflection;
 #nullable enable
 namespace Ban3.Infrastructures.PlatformInvoke.Entries;
 
+/// 
 public class AnalyzedMethod
 {
     /// <summary>
@@ -14,57 +15,62 @@ public class AnalyzedMethod
     public string Name { get; set; } = string.Empty;
 
 
+    /// 
     [JsonProperty("isConstructor", NullValueHandling = NullValueHandling.Ignore)]
     public bool IsConstructor { get; set; }
 
     /// <summary>
-    /// ÐÞÊÎ·û
+    /// ï¿½ï¿½ï¿½Î·ï¿½
     /// </summary>
     [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)]
     public List<string>? Modifier { get; set; }
 
     /// <summary>
-    /// ²ÎÊý
+    /// ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     [JsonProperty("arguments", NullValueHandling = NullValueHandling.Ignore)]
     public List<AnalyzedArgument>? Arguments { get; set; }
 
     /// <summary>
-    /// ·µ»ØÖµÀàÐÍ
+    /// ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
     /// </summary>
     [JsonProperty("returnType", NullValueHandling = NullValueHandling.Ignore)]
     public string? ReturnType { get; set; }
 
-    public AnalyzedMethod(){}
+    /// 
+    public AnalyzedMethod()
+    {
+    }
 
+    /// 
     public AnalyzedMethod(MethodInfo methodInfo)
     {
-        Name=methodInfo.Name;
-        IsConstructor= methodInfo.IsConstructor;
+        Name = methodInfo.Name;
+        IsConstructor = methodInfo.IsConstructor;
         Modifier = new List<string>();
 
-        if(methodInfo.IsPrivate)
+        if (methodInfo.IsPrivate)
             Modifier.Add("private");
 
-        if(methodInfo.IsPublic)
+        if (methodInfo.IsPublic)
             Modifier.Add("public");
 
-        if(methodInfo.IsAbstract)
+        if (methodInfo.IsAbstract)
             Modifier.Add("abstract");
 
-        if(methodInfo.IsFamily)
+        if (methodInfo.IsFamily)
             Modifier.Add("internal");
 
-        if(methodInfo.IsGenericMethod)
+        if (methodInfo.IsGenericMethod)
             Modifier.Add("generic");
 
-        if(methodInfo.IsFinal)
+        if (methodInfo.IsFinal)
             Modifier.Add("final");
 
-        if(methodInfo.IsStatic)
+        if (methodInfo.IsStatic)
             Modifier.Add("static");
 
-        if(methodInfo.IsVirtual)
+        if (methodInfo.IsVirtual)
             Modifier.Add("virtual");
 
         ReturnType = methodInfo.ReturnType.FullName;

@@ -29,6 +29,12 @@
             ��������
             </summary>
         </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedArgument.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedArgument.#ctor(System.Reflection.ParameterInfo)">
+            
+        </member>
         <member name="T:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass">
             <summary>
             ����
@@ -38,6 +44,9 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass.Namespace">
+            
         </member>
         <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass.Name">
             <summary>
@@ -54,10 +63,22 @@
             ����
             </summary>
         </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass.#ctor(System.Type)">
+            
+        </member>
+        <member name="T:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod">
+            
+        </member>
         <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod.Name">
             <summary>
             
             </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod.IsConstructor">
+            
         </member>
         <member name="P:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod.Modifier">
             <summary>
@@ -73,6 +94,12 @@
             <summary>
             ����ֵ����
             </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod.#ctor(System.Reflection.MethodInfo)">
+            
         </member>
         <member name="T:Ban3.Infrastructures.PlatformInvoke.Entries.AssemblyFile">
             <summary>
@@ -266,6 +293,7 @@
             <summary>
             分析程序集的静态扩展
             </summary>
+            
         </member>
         <member name="M:Ban3.Infrastructures.PlatformInvoke.Helper.Prepare">
             <summary>
@@ -315,6 +343,15 @@
             加载程序集分析结果
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Helper.Analyze(Ban3.Infrastructures.PlatformInvoke.Entries.AssemblyFile,System.Collections.Generic.List{Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedClass}@)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Helper.Analyze(System.Type,System.Collections.Generic.List{Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedMethod}@)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.PlatformInvoke.Helper.Analyze(System.Reflection.MethodInfo,System.Collections.Generic.List{Ban3.Infrastructures.PlatformInvoke.Entries.AnalyzedArgument}@)">
+            
         </member>
         <member name="T:Ban3.Infrastructures.PlatformInvoke.Request.ParseAssembly">
             <summary>

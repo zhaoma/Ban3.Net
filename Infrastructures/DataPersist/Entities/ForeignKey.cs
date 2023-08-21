@@ -5,5 +5,6 @@
 /// </summary>
 public class ForeignKey
 {
-    public System.Type Referer { get; set; }
+    /// 
+    public System.Type? Referer { get; set; }
 }

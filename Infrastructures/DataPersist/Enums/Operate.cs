@@ -5,12 +5,20 @@
 /// </summary>
 public enum Operate
 {
+    /// 
     Create,
-    Update, 
+    /// 
+    Update,
+    /// 
     UpdateByCondition,
+    /// 
     Retrieve,
+    /// 
     RetrieveByCondition,
+    /// 
     Delete,
+    /// 
     DeleteByCondition,
+    /// 
     Sql
 }

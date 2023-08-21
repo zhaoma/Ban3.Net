@@ -37,5 +37,33 @@ public static partial class Helper
 
         return null;
     }
-    
+
+    /// <summary>
+    /// 从程序集获取资源
+    /// </summary>
+    /// <param name="assembly"></param>
+    /// <param name="resourceName"></param>
+    /// <param name="result"></param>
+    /// <returns></returns>
+    public static bool GetResourceBytes(this Assembly assembly, string resourceName, out byte[]? result)
+    {
+        try
+        {
+            using var stream = assembly.GetManifestResourceStream(resourceName);
+            if (stream != null)
+            {
+                var length = (int)stream.Length;
+                result = new byte[length];
+
+                return stream.Read(result, 0, length) > 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex);
+        }
+
+        result = null;
+        return false;
+    }
 }

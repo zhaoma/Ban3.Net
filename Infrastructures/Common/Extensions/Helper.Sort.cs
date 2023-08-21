@@ -23,29 +23,25 @@ public static partial class Helper
     public static T[] BucketSort<T>(T[] array, int bucketSize = 4)
         where T : IComparable
     {
-        // 获取数组最大值与最小值
         (T max, T min) = array.FindMaxAndMin();
-
-        // 分配的桶数量
-        int bucketnum = (int)Math.Round(max.ToFloat() - min.ToFloat()) / bucketSize + 1;
-        var buckets = new List<T>[bucketnum];
-
-        // 将数据放在对应的桶里
-        for (int i = 0; i < array.Length; i++)
+        
+        var bucketNum = (int)Math.Round(max.ToFloat() - min.ToFloat()) / bucketSize + 1;
+        var buckets = new List<T>[bucketNum];
+        
+        foreach (var t in array)
         {
-            // 寻桶位置
-            int bucketIndex = (int)Math.Round(array[i].ToFloat() - min.ToFloat()) / bucketSize;
-            buckets[bucketIndex].Add(array[i]);
+            var bucketIndex = (int)Math.Round(t.ToFloat() - min.ToFloat()) / bucketSize;
+            buckets[bucketIndex].Add(t);
         }
 
         int index = 0;
-        for (int i = 0; i < buckets.Length; i++)
+        foreach (var t in buckets)
         {
             // 对每个桶排序(可以使用其它排序，例如快排)
-            buckets[i].Sort();
-            for (int j = 0; j < buckets[i].Count; j++)
+            t.Sort();
+            foreach (var t1 in t)
             {
-                array[index++] = buckets[i][j];
+                array[index++] = t1;
             }
         }
 
@@ -57,7 +53,7 @@ public static partial class Helper
         where T : IComparable
     {
         (T max, T min) = (array[0], array[0]);
-        for (int i = 1; i < array.Length; i++)
+        for (var i = 1; i < array.Length; i++)
         {
             max = max.CompareTo(array[i]) > 0 ? max : array[i];
             min = min.CompareTo(array[i]) > 0 ? array[i] : min;

@@ -12,6 +12,13 @@ using Ban3.Infrastructures.NetMail;
 using Ban3.Infrastructures.PlatformInvoke;
 using Ban3.Infrastructures.PlatformInvoke.Entries;
 
+for (var i = 1; i < 100; i++)
+{
+    $"{i}:{new Random().NextDateTime(DateTime.Now, DateTime.Now.AddYears(3))}".WriteColorLine(ConsoleColor.Red);
+}
+
+/*
+
 var plainText = "admin888";
 
 var key = System.Text.Encoding.UTF8.GetBytes("pswdKEY23##@@1977");
@@ -49,8 +56,6 @@ $"e[HASHMD7]={e}.{e.Length}".WriteColorLine(ConsoleColor.Red);
 
 
 Console.ReadKey();
-/*
-
 AppDomain.CurrentDomain.AssemblyResolve += delegate(object sender, ResolveEventArgs e)
 {
     $"request {e.Name}".WriteColorLine(ConsoleColor.Red);

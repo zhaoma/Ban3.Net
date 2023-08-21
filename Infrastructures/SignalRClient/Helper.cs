@@ -3,6 +3,9 @@ using Ban3.Infrastructures.SignalRClient.Entries;
 
 namespace Ban3.Infrastructures.SignalRClient;
 
+/// <summary>
+/// 
+/// </summary>
 public static class Helper
 {
     /// <summary>

@@ -37,17 +37,17 @@ public class Config
 
             LocalStorage = new LocalStorage
             {
-                RootPath = AppConfiguration["FilesStorage:RootPath"] + "",
-                RootUrl = AppConfiguration["FilesStorage:RootUrl"] + ""
+                RootPath = GetValue("FilesStorage:RootPath"),
+                RootUrl = GetValue("FilesStorage:RootUrl")
             };
 
             TraceSetting = new TraceSetting
             {
-                BindFlags = AppConfiguration["TraceSetting:BindFlags"] + "" == "all"
+                BindFlags = GetValue("TraceSetting:BindFlags").ToLower() == "all"
                     ? AccessFlags.All
                     : AccessFlags.Public,
-                Timing = AppConfiguration["TraceSetting:Timing"] + "" != "false",
-                LoggingArguments = AppConfiguration["TraceSetting:LoggingArguments"] + "" == "true"
+                Timing = GetValue("TraceSetting:Timing") != "false",
+                LoggingArguments = GetValue("TraceSetting:LoggingArguments").ToLower() == "true"
             };
         }
 
@@ -83,8 +83,8 @@ public class Config
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static string? GetValue(string key)
-        => AppConfiguration?[key];
+    public static string GetValue(string key)
+        => AppConfiguration?[key]+"";
 }
 
 /// <summary>

@@ -23,7 +23,7 @@ public static partial class Helper
     /// <param name="plainText"></param>
     /// <returns></returns>
     public static string MD5String(this string plainText)
-        => HashType.MD5.GetHashedString(Encoding.UTF8.GetBytes(plainText),null);
+        => HashType.MD5.GetHashedString(Encoding.UTF8.GetBytes(plainText), null);
 
     /// <summary>
     /// 获取哈希之后的字符串
@@ -34,13 +34,13 @@ public static partial class Helper
     /// <param name="isLower"></param>
     /// <returns></returns>
     public static string GetHashedString(this HashType type, string source, string key = "", bool isLower = false)
-    => type
-    .GetHashedString(
-    Encoding.UTF8.GetBytes(source),
-        string.IsNullOrEmpty(key) ? null : Encoding.UTF8.GetBytes(key),
-        isLower);
+        => type
+            .GetHashedString(
+                Encoding.UTF8.GetBytes(source),
+                string.IsNullOrEmpty(key) ? null : Encoding.UTF8.GetBytes(key),
+                isLower);
 
-	/// <summary>
+    /// <summary>
     /// 获取哈希之后的字符串
     /// </summary>
     /// <param name="type">哈希类型</param>

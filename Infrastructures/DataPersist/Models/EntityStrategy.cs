@@ -36,8 +36,10 @@ public class EntityStrategy
     /// <returns></returns>
     public bool Viable() => DB != null && Table != null && Fields != null;
 
+    /// 
     public EntityStrategy() { }
 
+    /// 
     public EntityStrategy(Type entityType)
     {
         Table = GetTable(entityType);

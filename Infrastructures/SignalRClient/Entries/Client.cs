@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.SignalR.Client;
 #nullable enable
 namespace Ban3.Infrastructures.SignalRClient.Entries;
 
+/// <summary>
+/// 
+/// </summary>
 public class Client
 {
     static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));
@@ -34,6 +37,9 @@ public class Client
         });
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static async Task Send(Notify notify)
     {
         try
@@ -49,6 +55,9 @@ public class Client
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static Action<Notify>? ReceivedNotify;
 }
 

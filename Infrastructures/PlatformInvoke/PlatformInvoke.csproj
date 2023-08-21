@@ -16,7 +16,8 @@
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.2</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <Configurations>Release;Debug</Configurations>
+      <PackageReadmeFile>readme.md</PackageReadmeFile>
+      <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -40,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.12" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.13" />
     <PackageReference Include="System.Reflection.Metadata" Version="7.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>

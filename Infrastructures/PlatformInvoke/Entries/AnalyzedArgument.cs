@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Ban3.Infrastructures.PlatformInvoke.Entries;
 
 /// <summary>
-/// ²ÎÊý
+/// ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public class AnalyzedArgument
 {
@@ -16,7 +16,7 @@ public class AnalyzedArgument
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// ÐÞÊÎ·û
+    /// ï¿½ï¿½ï¿½Î·ï¿½
     /// </summary>
     [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)]
     public List<string>? Modifier { get; set; }
@@ -28,29 +28,31 @@ public class AnalyzedArgument
     public int Position { get; set; }
 
     /// <summary>
-    /// ÉùÃ÷ÀàÐÍ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     [JsonProperty("declaredType", NullValueHandling = NullValueHandling.Ignore)]
     public string DeclaredType { get; set; } = string.Empty;
 
+    /// 
     public AnalyzedArgument(){}
 
+    /// 
     public AnalyzedArgument(ParameterInfo parameterInfo)
     {
         Name = parameterInfo.Name;
         DeclaredType = parameterInfo.ParameterType.Name;
         Modifier = new();
 
-        if(parameterInfo.IsIn)
+        if (parameterInfo.IsIn)
             Modifier.Add("in");
 
-        if(parameterInfo.IsOut)
+        if (parameterInfo.IsOut)
             Modifier.Add("out");
 
-        if(parameterInfo.IsRetval)
+        if (parameterInfo.IsRetval)
             Modifier.Add("retval");
 
-        if(parameterInfo.IsOptional)
+        if (parameterInfo.IsOptional)
             Modifier.Add("optional");
 
         Position = parameterInfo.Position;

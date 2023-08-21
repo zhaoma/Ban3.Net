@@ -17,6 +17,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+      <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
   
@@ -41,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.12" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

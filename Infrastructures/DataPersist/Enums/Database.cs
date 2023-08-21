@@ -5,9 +5,12 @@
 /// </summary>
 public enum Database
 {
+    /// 
     Sqlite,
 
+    /// 
     mysql,
 
+    /// 
     MSSQL
 }

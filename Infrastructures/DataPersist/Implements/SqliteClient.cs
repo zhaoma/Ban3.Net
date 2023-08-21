@@ -1,16 +1,8 @@
-﻿/* -------------------------------------------------------------------------------------------------
-   Copyright (C) Siemens Healthcare GmbH 2023, All rights reserved. Restricted.
-   ------------------------------------------------------------------------------------------------- */
-
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using log4net;
-using Microsoft.Data.Sqlite;
+﻿using log4net;
 
 namespace Ban3.Infrastructures.DataPersist.Implements;
 
+/// 
 public class SqliteClient
     //: Interfaces.IService
 {

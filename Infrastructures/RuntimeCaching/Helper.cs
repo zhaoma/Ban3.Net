@@ -18,11 +18,11 @@ public static class Helper
     /// 从缓存加载或是设置
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="key"></param>
-    /// <param name="defaultValue"></param>
-    /// <param name="absoluteTime"></param>
-    /// <param name="minutes"></param>
-    /// <param name="localFile"></param>
+    /// <param name="key">键名</param>
+    /// <param name="defaultValue">默认值函数</param>
+    /// <param name="absoluteTime">绝对时间过期</param>
+    /// <param name="minutes">相对过期分钟数</param>
+    /// <param name="localFile">依赖文件过期</param>
     /// <returns></returns>
     public static T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, DateTime? absoluteTime, int? minutes,
         string localFile)

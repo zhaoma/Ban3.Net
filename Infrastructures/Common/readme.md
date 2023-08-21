@@ -3,6 +3,9 @@
 
 ## _最后修改_
 
+2023-08-21
+-- 检查HMAC，摘要算法结果，与简化扩展
+
 2023-08-03
 -- PropertyInfo.GetPropertyAttributes<T>()
 

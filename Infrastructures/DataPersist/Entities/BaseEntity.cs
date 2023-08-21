@@ -16,6 +16,7 @@ namespace Ban3.Infrastructures.DataPersist.Entities;
 /// </summary>
 public abstract class BaseEntity
 {
+    /// 
     protected BaseEntity(){}
 
     /// <summary>
@@ -24,6 +25,7 @@ public abstract class BaseEntity
     /// <returns></returns>
     public virtual EntityStrategy EntityStrategy() => Config.Strategy(GetType());
 
+    /// 
     public virtual DbParameter[]? ParametersForCommand(Func<FieldIsAttribute, bool> func)
     {
         var strategy = EntityStrategy();

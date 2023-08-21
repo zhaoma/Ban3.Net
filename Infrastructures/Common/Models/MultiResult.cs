@@ -15,10 +15,21 @@ public class MultiResult<T>
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="recordCount"></param>
+    public MultiResult( List<T>? data, int? recordCount=null)
+    {
+        RecordCount =recordCount ?? data?.Count;
+        Data = data;
+    }
+    
+    /// <summary>
     /// 记录总数
     /// </summary>
 
-    public int RecordCount { get; set; }
+    public int? RecordCount { get; set; }
 
     /// <summary>
     /// 分页记录集

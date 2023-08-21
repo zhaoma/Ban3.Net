@@ -18,7 +18,7 @@ public class RecursionNode
     }
 
     /// <summary>
-    /// key
+    /// 当前key
     /// </summary>
     public int Id { get; set; }
 

@@ -260,9 +260,9 @@ public static partial class Helper
     {
         if (string.IsNullOrEmpty(input)) return false;
         return Regex.IsMatch(input, pattern,
-            RegexOptions.IgnoreCase |
-            RegexOptions.IgnorePatternWhitespace |
-            RegexOptions.Multiline
+            options: RegexOptions.IgnoreCase |
+                     RegexOptions.IgnorePatternWhitespace |
+                     RegexOptions.Multiline
         ) || (input + "").ToUpper().Contains((pattern + "").ToUpper());
     }
 

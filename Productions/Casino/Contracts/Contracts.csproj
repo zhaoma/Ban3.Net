@@ -16,6 +16,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.11</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+      <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
   
@@ -40,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.12" />
+    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.13" />
     <PackageReference Include="Ban3.Infrastructures.Indicators" Version="1.0.6" />
     <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.5" />
     <PackageReference Include="Ban3.Infrastructures.RuntimeCaching" Version="1.0.5" />

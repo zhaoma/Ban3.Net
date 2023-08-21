@@ -1,14 +1,11 @@
-﻿/* -------------------------------------------------------------------------------------------------
-   Copyright (C) Siemens Healthcare GmbH 2023, All rights reserved. Restricted.
-   ------------------------------------------------------------------------------------------------- */
-   
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Data;
 
 namespace Ban3.Infrastructures.DataPersist.Interfaces;
 
+/// 
 public interface IService
 {
     /// <summary>
@@ -64,6 +61,7 @@ public interface IService
     /// <returns></returns>
     bool Exists<T>(object id) where T : Entities.BaseEntity;
 
+    /// 
     bool NotExists<T>(string condition) where T : Entities.BaseEntity;
 
     /// <summary>
@@ -129,5 +127,6 @@ public interface IService
     /// <returns></returns>
     DataSet QueryMultipleReader(string sql);
 
+    /// 
     void Execute(string sql);
 }

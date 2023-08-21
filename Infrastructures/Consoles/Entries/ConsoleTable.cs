@@ -26,18 +26,14 @@ public class ConsoleTable
     /// <summary>
     /// 表格头部字符串
     /// </summary>
-    public string TitleString { get; set; }
+    public string TitleString { get; set; } = string.Empty;
 
     /// <summary>
     /// 表格的列
     /// </summary>
     public IList<string> Columns
     {
-        get
-        {
-            if (_columns == null) _columns = new List<string>();
-            return _columns;
-        }
+        get => _columns = _columns ?? new List<string>();
         set
         {
             _columns = value;
@@ -76,7 +72,7 @@ public class ConsoleTable
     /// </summary>
     public TableStyle TableStyle
     {
-        get { return _tableStyle; }
+        get => _tableStyle;
         set
         {
             if (_tableStyle == value) return;
@@ -89,9 +85,9 @@ public class ConsoleTable
 
     #region 私有信息
 
-    private IList<string> _columns;
+    private IList<string>? _columns;
     private TableStyle _tableStyle;
-    private StyleInfo _formatInfo;
+    private StyleInfo? _formatInfo;
     private readonly List<ColumnShowFormat> _columnShowFormats = new();
     private List<int> _finalColumnWides = new();
 
@@ -107,12 +103,12 @@ public class ConsoleTable
     {
         get
         {
-            if (_finalColumnWides is null || _finalColumnWides.Count < 1)
+            if (_finalColumnWides.Count < 1)
             {
                 // 得到每一列最大的宽度
                 List<int> columnWidth = Columns.GetColumnWides(Rows);
                 // 替换用户输入长度
-                ColumnWides = ColumnWides ?? new List<int>();
+                ColumnWides = ColumnWides ?? new ();
                 for (int i = 0; i < ColumnWides.Count; i++) columnWidth[i] = ColumnWides[i];
                 _finalColumnWides = columnWidth;
             }
@@ -273,7 +269,7 @@ public class ConsoleTable
     /// </summary>
     /// <param name="row"></param>
     /// <returns></returns>
-    public string GetNewRow(string[] row)
+    public string GetNewRow(string[]? row)
     {
         if (row is null) return "";
 

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Ban3.Infrastructures.PlatformInvoke.Entries;
 
 /// <summary>
-/// ¶ÔÏó
+/// ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public class AnalyzedClass
 {
@@ -15,6 +15,7 @@ public class AnalyzedClass
     [JsonProperty("fullName", NullValueHandling = NullValueHandling.Ignore)]
     public string? FullName { get; set; }
 
+    /// 
     [JsonProperty("namespace", NullValueHandling = NullValueHandling.Ignore)]
     public string? Namespace { get; set; }
 
@@ -25,61 +26,64 @@ public class AnalyzedClass
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
-    /// ÐÞÊÎ·û
+    /// ï¿½ï¿½ï¿½Î·ï¿½
     /// </summary>
     [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)]
-    public List<string>? Modifier { get; set; } 
-    
+    public List<string>? Modifier { get; set; }
+
     /// <summary>
-    /// ·½·¨
+    /// ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     [JsonProperty("methods", NullValueHandling = NullValueHandling.Ignore)]
     public List<AnalyzedMethod>? Methods { get; set; }
 
-    public AnalyzedClass(){}
+    /// 
+    public AnalyzedClass()
+    {
+    }
 
+    /// 
     public AnalyzedClass(Type currentType)
     {
         FullName = currentType.FullName;
         Name = currentType.Name;
-        Namespace=currentType.Namespace;
+        Namespace = currentType.Namespace;
         Modifier = new List<string>();
-        
+
         if (currentType.IsPublic)
             Modifier.Add("public");
 
-        if(currentType.IsNotPublic)
+        if (currentType.IsNotPublic)
             Modifier.Add("private");
 
-        if(currentType.IsInterface)
+        if (currentType.IsInterface)
             Modifier.Add("interface");
 
-        if(currentType.IsClass)
+        if (currentType.IsClass)
             Modifier.Add("class");
 
-        if(currentType.IsAbstract)
+        if (currentType.IsAbstract)
             Modifier.Add("abstract");
 
-        if(currentType.IsSealed)
+        if (currentType.IsSealed)
             Modifier.Add("sealed");
 
-        if(currentType.IsPointer)
+        if (currentType.IsPointer)
             Modifier.Add("unsafe");
 
         if (currentType.IsNested)
         {
             Modifier.Add("nested");
 
-            if(currentType.IsNestedPrivate) Modifier.Add("private");
+            if (currentType.IsNestedPrivate) Modifier.Add("private");
 
-            if(currentType.IsNestedPublic) Modifier.Add("public");
+            if (currentType.IsNestedPublic) Modifier.Add("public");
 
-            if(currentType.IsNestedFamily) Modifier.Add("protected");
+            if (currentType.IsNestedFamily) Modifier.Add("protected");
         }
-        
-        if(currentType.IsVisible)
+
+        if (currentType.IsVisible)
             Modifier.Add("internal");
-        
+
     }
-    
 }
