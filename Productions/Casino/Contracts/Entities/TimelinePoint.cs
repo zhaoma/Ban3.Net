@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Ban3.Infrastructures.Indicators.Outputs;
 using System.Linq;
+
 #nullable enable
 namespace Ban3.Productions.Casino.Contracts.Entities;
 
@@ -21,7 +22,39 @@ public class TimelinePoint
         Date = sets.MarkTime.ToYmd();
         Close = sets.Close;
         SetKeys = sets.SetKeys!.ToList();
+        Subject = "";
+
+        if (SetKeys!.Contains("MACD.C0.DAILY"))
+        {
+            Subject = "日穿零";
+        }
+        
+        if (SetKeys!.Contains("MACD.C0.WEEKLY"))
+        {
+            Subject = "周穿零";
+        }
+
+        if (SetKeys!.Contains("MACD.C0.MONTHLY"))
+        {
+            Subject = "月穿零";
+        }
+
+        if (SetKeys!.Contains("MACD.DC.DAILY"))
+        {
+            Subject = "日死叉";
+        }
+
+        if (SetKeys!.Contains("MACD.GC.DAILY"))
+        {
+            Subject = "日金叉";
+        }
     }
+
+    /// <summary>
+    /// 主题
+    /// </summary>
+    [JsonProperty("subject", NullValueHandling = NullValueHandling.Ignore)]
+    public string Subject { get; set; } = string.Empty;
 
     /// <summary>
     /// 日期
