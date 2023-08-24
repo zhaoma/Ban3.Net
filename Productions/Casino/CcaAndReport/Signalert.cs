@@ -196,7 +196,7 @@ public class Signalert
     }
 
     /// 
-    public static Dictionary<string, int>? GetDotsKey(bool forBuying)
+    public static Dictionary<string, int> GetDotsKey(bool forBuying)
         => Reportor.LoadDotsKey(Infrastructures.Indicators.Helper.DefaultFilter, forBuying);
 
     /// 
