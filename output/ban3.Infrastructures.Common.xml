@@ -553,6 +553,11 @@
         <member name="M:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.#ctor(Ban3.Infrastructures.Indicators.Outputs.StockSets)">
             
         </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
         <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.Date">
             <summary>
             日期
@@ -999,6 +1004,13 @@
             <param name="_"></param>
             <param name="stocks"></param>
         </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.GenerateTargets(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            生成Decide
+            </summary>
+            <param name="_"></param>
+            <param name="stocks"></param>
+        </member>
         <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareAllCodes(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
             <summary>
             准备标的数据
@@ -1253,6 +1265,79 @@
             <summary>
             Sites Access
             </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Models.Target">
+            <summary>
+            标的
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.Stock">
+            <summary>
+            标的信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.Ignore">
+            <summary>
+            忽略该标的
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.Points">
+            <summary>
+            事件点
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.LatestPrice">
+            <summary>
+            价格信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.LatestSets">
+            <summary>
+            特征信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.LastAccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Models.Targets">
+            <summary>
+            标的
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Targets.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.AppendTarget(Ban3.Productions.Casino.Contracts.Entities.Stock,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.TimelinePoint},Ban3.Sites.ViaTushare.Entries.StockPrice,Ban3.Infrastructures.Indicators.Outputs.StockSets)">
+            <summary>
+            
+            </summary>
+            <param name="stock"></param>
+            <param name="points"></param>
+            <param name="price"></param>
+            <param name="sets"></param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.Save">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.Ignore(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.Skip(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.PopOne">
+            
         </member>
         <member name="T:Ban3.Productions.Casino.Contracts.Request.RenderView">
             <summary>

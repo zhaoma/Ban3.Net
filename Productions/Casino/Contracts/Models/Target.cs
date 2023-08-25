@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Sites.ViaTushare.Entries;
 using Newtonsoft.Json;
@@ -10,6 +12,23 @@ namespace Ban3.Productions.Casino.Contracts.Models;
 /// </summary>
 public class Target
 {
+    public Target(){}
+
+    public Target(
+        Stock stock, 
+        List<TimelinePoint> points, 
+        StockPrice price, 
+        StockSets sets)
+    {
+        Stock = stock;
+        Points = points;
+        LatestPrice = price;
+        LatestSets = sets;
+        LastAccess = DateTime.Now;
+
+
+    }
+
     /// <summary>
     /// 标的信息
     /// </summary>
@@ -31,6 +50,18 @@ public class Target
     /// <summary>
     /// 价格信息
     /// </summary>
-    [JsonProperty("price", NullValueHandling = NullValueHandling.Ignore)]
-    public StockPrice Price { get; set; }
+    [JsonProperty("latestPrice", NullValueHandling = NullValueHandling.Ignore)]
+    public StockPrice LatestPrice { get; set; }
+
+    /// <summary>
+    /// 特征信息
+    /// </summary>
+    [JsonProperty("latestSets", NullValueHandling = NullValueHandling.Ignore)]
+    public StockSets LatestSets { get; set; }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("lastAccess", NullValueHandling = NullValueHandling.Ignore)]
+    public DateTime LastAccess { get; set; }
 }

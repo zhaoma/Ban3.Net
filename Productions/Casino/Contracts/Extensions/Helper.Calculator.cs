@@ -11,8 +11,11 @@ using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Productions.Casino.Contracts.Interfaces;
+using Ban3.Productions.Casino.Contracts.Models;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Sites.ViaTushare.Entries;
+using Stock = Ban3.Productions.Casino.Contracts.Entities.Stock;
+
 #nullable enable
 namespace Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -522,5 +525,51 @@ public static partial class Helper
         result.SaveEntities("all");
     }
 
+    /// <summary>
+    /// 生成Decide
+    /// </summary>
+    /// <param name="_"></param>
+    /// <param name="stocks"></param>
+    public static void GenerateTargets(
+        this ICalculator _,
+        List<Stock> stocks)
+    {
+        var targets = new Models.Targets();
 
+        stocks.ParallelExecute(one =>
+        {
+            var prices = typeof(StockPrice).LocalFile(one.Code).ReadFileAs<List<StockPrice>>();
+            var sets = one.LoadStockSets();
+            if (sets != null && sets.Any())
+            {
+                targets.AppendTarget(one,  sets.GetPoints(), prices!.Last(),sets.Last());
+            }
+        }, Config.MaxParallelTasks);
+
+        targets.Save();
+        Logger.Debug($"GenerateTargets {targets.Data.Count},success");
+    }
+
+    static List<TimelinePoint> GetPoints(this List<StockSets> sets)
+    {
+        var result=new List<TimelinePoint>();
+
+        var latestDaily = sets.Last(o => o.SetKeys!=null&& o.SetKeys.Contains("MACD.C0.DAILY"));
+
+        if (latestDaily != null)
+        {
+            result.Add(new TimelinePoint(latestDaily));
+
+            var afterC0 = sets.Where(o => o.MarkTime.ToYmd().ToInt() > latestDaily.MarkTime.ToYmd().ToInt()).ToList();
+
+            if (!afterC0.Any()) return result;
+
+            foreach (var p in afterC0.Select(s => new TimelinePoint(s)).Where(p => result.All(x => x.Subject != p.Subject)))
+            {
+                result.Add(p);
+            }
+        }
+
+        return result;
+    }
 }
