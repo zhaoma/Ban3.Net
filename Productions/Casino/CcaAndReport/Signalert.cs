@@ -185,6 +185,11 @@ public class Signalert
         {
             Analyzer.PrepareDistributeRecords();
         }).ExecuteAndTiming("PrepareDistributeRecords");
+
+        new Action(() =>
+        {
+            Calculator.GenerateTargets(stocks);
+        }).ExecuteAndTiming("GenerateTargets");
     }
 
     /// 

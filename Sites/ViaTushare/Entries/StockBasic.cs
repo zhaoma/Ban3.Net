@@ -18,22 +18,22 @@ public class StockBasic
     /// <summary>
     /// TS代码
     /// </summary>
-    public string Code { get; set; }
+    public string Code { get; set; } = string.Empty;
 
     /// <summary>
     /// 股票代码
     /// </summary>
-    public string Symbol { get; set; }
+    public string Symbol { get; set; } = string.Empty;
 
     /// <summary>
     /// 股票名称
     /// </summary>
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// 上市日期
     /// </summary>
-    public string ListDate { get; set; }
+    public string ListDate { get; set; } = string.Empty;
 
     public StockBasic(){}
 

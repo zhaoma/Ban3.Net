@@ -2,6 +2,6 @@
 {
     public class DownloadOneIconResult
     {
-        public string Path { get; set; }
+        public string Path { get; set; } = string.Empty;
     }
 }

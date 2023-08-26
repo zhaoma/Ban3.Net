@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "Ban3.Infrastructures.Common/1.0.9": {
+      "Ban3.Infrastructures.Common/1.0.13": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
@@ -14,10 +14,14 @@
           "log4net": "2.0.15"
         },
         "compile": {
-          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
+            "related": ".xml"
+          }
         },
         "contentFiles": {
           "contentFiles/any/netstandard2.0/favicon.ico": {
@@ -1292,19 +1296,20 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.Common/1.0.9": {
-      "sha512": "KCxhoAeS8lrR4Qq1czywlh0Cr9hHK03saj+GyXF8iYLQoetpv5ROoyMaN3sackglfh40TeJL8hmI/Mn48WEahw==",
+    "Ban3.Infrastructures.Common/1.0.13": {
+      "sha512": "+Ko4ThwnlxsHxBLrPzy70WXb0RMmax9a5mgcmKYgn7qlVrLmLgE+enhXjiaJ6m1ZMRAoxWU8pyVO8TSXF1ckeQ==",
       "type": "package",
-      "path": "ban3.infrastructures.common/1.0.9",
+      "path": "ban3.infrastructures.common/1.0.13",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.common.1.0.9.nupkg.sha512",
+        "ban3.infrastructures.common.1.0.13.nupkg.sha512",
         "ban3.infrastructures.common.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
         "icon.png",
         "lib/netstandard2.0/Ban3.Infrastructures.Common.dll",
+        "lib/netstandard2.0/Ban3.Infrastructures.Common.xml",
         "readme.md"
       ]
     },
@@ -1885,12 +1890,11 @@
       ]
     },
     "runtime.native.System.Net.Http/4.3.0": {
-      "sha512": "ZVuZJqnnegJhd2k/PtAbbIcZ3aZeITq3sj06oKfMBSfphW3HDmk/t4ObvbOk/JA/swGR0LNqMksAh/f7gpTROg==",
+      "sha512": "guqHgQOK2eUgtJae2VKjNawBn1xjC0hfOt5wASHa60XHbIdCsQlqtvMsFG+3hy7yp88V+gi9fZCjubuDkeakcQ==",
       "type": "package",
       "path": "runtime.native.system.net.http/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -1955,12 +1959,11 @@
       ]
     },
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {
-      "sha512": "kVXCuMTrTlxq4XOOMAysuNwsXWpYeboGddNGpIgNSZmv1b6r/s/DPk0fYMB7Q5Qo4bY68o48jt4T4y5BVecbCQ==",
+      "sha512": "Kh9W4agE0r/hK8AX1LvyQI2NrKHBL8pO0gRoDTdDb0LL6Ta1Z2OtFx3lOaAE0ZpCUc/dt9Wzs3rA7a3IsKdOVA==",
       "type": "package",
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512",
@@ -4320,7 +4323,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.9",
+      "Ban3.Infrastructures.Common >= 1.0.13",
       "Ban3.Infrastructures.NetHttp >= 1.0.5",
       "NETStandard.Library >= 2.0.3",
       "Newtonsoft.Json >= 13.0.3",
@@ -4328,33 +4331,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/zhaoma/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.1",
     "restore": {
-      "projectUniqueName": "D:\\GIT\\Ban3.Net\\Sites\\ViaSohu\\ViaSohu.csproj",
+      "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaSohu/ViaSohu.csproj",
       "projectName": "Ban3.Sites.ViaSohu",
-      "projectPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaSohu\\ViaSohu.csproj",
-      "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-      "outputPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaSohu\\obj\\",
+      "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaSohu/ViaSohu.csproj",
+      "packagesPath": "/Users/zhaoma/.nuget/packages/",
+      "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaSohu/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
+        "/usr/local/share/dotnet/library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
@@ -4374,7 +4374,7 @@
         "dependencies": {
           "Ban3.Infrastructures.Common": {
             "target": "Package",
-            "version": "[1.0.9, )"
+            "version": "[1.0.13, )"
           },
           "Ban3.Infrastructures.NetHttp": {
             "target": "Package",
@@ -4406,7 +4406,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.304/RuntimeIdentifierGraph.json"
       }
     }
   }

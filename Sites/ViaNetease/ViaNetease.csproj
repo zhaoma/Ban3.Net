@@ -17,6 +17,7 @@
     <Description>Via Netease.com</Description>
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
@@ -41,9 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.9" />
     <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.5" />
-    <PackageReference Include="log4net" Version="2.0.15" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>

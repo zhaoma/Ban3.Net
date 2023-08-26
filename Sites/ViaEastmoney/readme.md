@@ -8,7 +8,8 @@ No site , private symbol only.
 
 ## Features
 
-- [Obsolete("网易已关闭股票行情数据接口")]
+- Helper
+-- DownloadAllCodes()
 
 ## License
 

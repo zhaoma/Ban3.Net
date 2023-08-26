@@ -19,12 +19,12 @@ public class StockPrice
     /// <summary>
     /// 股票代码
     /// </summary>
-    public string Code { get; set; }
+    public string Code { get; set; } = string.Empty;
 
     /// <summary>
     /// 交易日期
     /// </summary>
-    public string TradeDate { get; set; }
+    public string TradeDate { get; set; } = string.Empty;
 
     /// <summary>
     /// 开盘价
@@ -71,6 +71,9 @@ public class StockPrice
     /// </summary>
     public float Amount { get; set; }
     
+    /// <summary>
+    /// 
+    /// </summary>
     public StockPrice(){}
 
     public StockPrice(List<string> row)

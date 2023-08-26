@@ -17,6 +17,7 @@
     <Description>Via Eastmoney.com</Description>
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
@@ -42,8 +43,5 @@
 
   <ItemGroup>
     <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.5" />
-    <PackageReference Include="log4net" Version="2.0.15" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
   </ItemGroup>
 </Project>

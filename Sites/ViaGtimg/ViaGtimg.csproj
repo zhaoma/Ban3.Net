@@ -2,24 +2,52 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable </NullableContextOptions>
     <RootNamespace>Ban3.Sites.ViaGtimg</RootNamespace>
     <AssemblyName>Ban3.Sites.ViaGtimg</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
+    <Title>Ban3.Sites.ViaGtimg</Title>
+    <Version>1.0.1</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>Via Gting.com</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>../../../output/</OutputPath>
     <DocumentationFile>../../../output/ban3.Infrastructures.Platforms.ViaGtimg.xml</DocumentationFile>
+    <AllowedReferenceRelatedFileExtensions>
+      .allowedextension
+    </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.15" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <None Remove="Response\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Libs\NetHttp\NetHttp.csproj" />
-    <ProjectReference Include="..\..\Libs\Common\Common.csproj" />
+    <Content Include="favicon.ico" />
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Response\" />
   </ItemGroup>
 </Project>

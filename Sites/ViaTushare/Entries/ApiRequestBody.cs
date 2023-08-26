@@ -19,7 +19,7 @@ public class ApiRequestBody
 
     public ApiRequestBody()
     {
-        var token = Infrastructures.Common.Config.AppConfiguration["Sites:TushareToken"]??string.Empty;
+        var token = Infrastructures.Common.Config.GetValue("Sites:TushareToken");
         if(string.IsNullOrEmpty(token))
             token= @"dac6b901ec28c2fd99e62afd8b250f8c171e4d3a474ae1b0633903d0";
 
