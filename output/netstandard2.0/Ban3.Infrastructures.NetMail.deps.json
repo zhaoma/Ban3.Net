@@ -7,14 +7,12 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Infrastructures.NetMail/1.0.2": {
+      "Ban3.Infrastructures.NetMail/1.0.3": {
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.13",
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.Office.Interop.Outlook": "15.0.4797.1004",
-          "NETStandard.Library": "2.0.3",
-          "Newtonsoft.Json": "13.0.3",
-          "log4net": "2.0.15"
+          "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "Ban3.Infrastructures.NetMail.dll": {}
@@ -371,7 +369,7 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.NetMail/1.0.2": {
+    "Ban3.Infrastructures.NetMail/1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

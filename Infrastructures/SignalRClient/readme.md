@@ -6,7 +6,9 @@
 
 ## Features
 
-- 
+- Helper
+-- async void SendBySignalR(this Notify notify)
+-- void BindToSignalR(this Action<Notify> action)
 
 ## 为何来费空间
 

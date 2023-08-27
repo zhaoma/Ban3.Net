@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "JgYfOPnSCcAabrfEKHe5mRNoQq83tjUUDjOFiBP8pNeFwC1Az2XcZ6oeQfIQReWhaEtdvXp3UsMIsWq2FbY7+Q==",
+  "dgSpecHash": "8pnnXuf2BVz/jYp0pPPaDzB6n3lXTbzmMdekAvN5R9Wng5Pk7zxjIakdfNAbnl+cfbusRJNUNn/HzOzf0voLDA==",
   "success": true,
   "projectFilePath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaNetease/ViaNetease.csproj",
   "expectedPackageFiles": [
-    "/Users/zhaoma/.nuget/packages/ban3.infrastructures.common/1.0.13/ban3.infrastructures.common.1.0.13.nupkg.sha512",
+    "/Users/zhaoma/.nuget/packages/ban3.infrastructures.common/1.0.8/ban3.infrastructures.common.1.0.8.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/ban3.infrastructures.nethttp/1.0.5/ban3.infrastructures.nethttp.1.0.5.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/fody/6.2.5/fody.6.2.5.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/log4net/2.0.15/log4net.2.0.15.nupkg.sha512",
@@ -38,7 +38,6 @@
     "/Users/zhaoma/.nuget/packages/runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl/4.3.2/runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.2/runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
-    "/Users/zhaoma/.nuget/packages/system.codedom/7.0.0/system.codedom.7.0.0.nupkg.sha512",
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder/system.collections.concurrent/4.3.0/system.collections.concurrent.4.3.0.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/system.configuration.configurationmanager/4.5.0/system.configuration.configurationmanager.4.5.0.nupkg.sha512",

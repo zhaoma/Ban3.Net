@@ -11,9 +11,34 @@ namespace Ban3.Sites.ViaSohu
 {
     public static partial class Helper
     {
+        static List<Mapping> Mappings
+        {
+            get
+            {
+                return new List<Mapping>
+                {
+                        new Mapping
+                        {
+                                GroupName = "行业",
+                                SohuId = 1631
+                        },
+                        new Mapping
+                        {
+                                GroupName = "地域",
+                                SohuId = 1632
+                        },
+                        new Mapping
+                        {
+                                GroupName = "概念",
+                                SohuId = 1630
+                        }
+                };
+            }
+        }
+
         public static DownloadAllNotionsResult DownloadAllNotions()
         {
-            var result = Sohu.Mappings
+            var result = Mappings
                 .Select(o => ReadGroup(o))
                 .ToList();
 

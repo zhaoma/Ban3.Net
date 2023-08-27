@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Os+QymYfZGe3yrBJT/HMNJ0ZzJeUnMl4B9aJOPg+intu+rz6MePF/sBKxTf5sC3XfxHZ7a6JEidh/fsirXGAiQ==",
+  "dgSpecHash": "xYRVsK8ZSroeQ1jWexxw5QLwnpn1kqd09J1tt5cvajFr6fscqWZQNuVJf7GbsLE9i01OhQzpkRYjus0zMWIUEA==",
   "success": true,
   "projectFilePath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaGtimg/ViaGtimg.csproj",
   "expectedPackageFiles": [
@@ -80,8 +80,7 @@
     "/Users/zhaoma/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/system.threading/4.3.0/system.threading.4.3.0.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/system.threading.tasks/4.3.0/system.threading.tasks.4.3.0.nupkg.sha512",
-    "/Users/zhaoma/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder/system.threading.thread/4.3.0/system.threading.thread.4.3.0.nupkg.sha512"
+    "/Users/zhaoma/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
   "logs": []
 }

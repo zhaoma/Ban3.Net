@@ -2,30 +2,25 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "Ban3.Infrastructures.Common/1.0.13": {
+      "Ban3.Infrastructures.Common/1.0.8": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
           "Rougamo.Fody": "1.4.1",
-          "System.CodeDom": "7.0.0",
           "System.IO": "4.3.0",
           "System.Threading.Tasks": "4.3.0",
           "log4net": "2.0.15"
         },
         "compile": {
-          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
-            "related": ".xml"
-          }
+          "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {}
         },
         "contentFiles": {
-          "contentFiles/any/netstandard2.0/favicon.ico": {
-            "buildAction": "Content",
+          "contentFiles/any/any/_._": {
+            "buildAction": "None",
             "codeLanguage": "any",
             "copyToOutput": false
           }
@@ -453,19 +448,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/System.Buffers.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "System.CodeDom/7.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/System.CodeDom.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/System.CodeDom.dll": {
             "related": ".xml"
           }
         }
@@ -1292,38 +1274,23 @@
             "related": ".xml"
           }
         }
-      },
-      "System.Threading.Thread/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "ref/netstandard1.3/System.Threading.Thread.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard1.3/System.Threading.Thread.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.Common/1.0.13": {
-      "sha512": "+Ko4ThwnlxsHxBLrPzy70WXb0RMmax9a5mgcmKYgn7qlVrLmLgE+enhXjiaJ6m1ZMRAoxWU8pyVO8TSXF1ckeQ==",
+    "Ban3.Infrastructures.Common/1.0.8": {
+      "sha512": "bPpAaiN8UlErEvr2FhtqctvvlxAOnfKy5J9ZVjIJRgCibn+3CTycMiCkAyYjGWULSvbkXeTT9hMsYSzaU7NOdQ==",
       "type": "package",
-      "path": "ban3.infrastructures.common/1.0.13",
+      "path": "ban3.infrastructures.common/1.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.common.1.0.13.nupkg.sha512",
+        "ban3.infrastructures.common.1.0.8.nupkg.sha512",
         "ban3.infrastructures.common.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
         "icon.png",
         "lib/netstandard2.0/Ban3.Infrastructures.Common.dll",
-        "lib/netstandard2.0/Ban3.Infrastructures.Common.xml",
         "readme.md"
       ]
     },
@@ -2084,33 +2051,6 @@
         "system.buffers.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
-      ]
-    },
-    "System.CodeDom/7.0.0": {
-      "sha512": "GLltyqEsE5/3IE+zYRP5sNa1l44qKl9v+bfdMcwg+M9qnQf47wK3H0SUR/T+3N4JEQXF3vV4CSuuo0rsg+nq2A==",
-      "type": "package",
-      "path": "system.codedom/7.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/System.CodeDom.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net6.0/_._",
-        "buildTransitive/netcoreapp2.0/System.CodeDom.targets",
-        "lib/net462/System.CodeDom.dll",
-        "lib/net462/System.CodeDom.xml",
-        "lib/net6.0/System.CodeDom.dll",
-        "lib/net6.0/System.CodeDom.xml",
-        "lib/net7.0/System.CodeDom.dll",
-        "lib/net7.0/System.CodeDom.xml",
-        "lib/netstandard2.0/System.CodeDom.dll",
-        "lib/netstandard2.0/System.CodeDom.xml",
-        "system.codedom.7.0.0.nupkg.sha512",
-        "system.codedom.nuspec",
-        "useSharedDesignerContext.txt"
       ]
     },
     "System.Collections/4.3.0": {
@@ -4333,55 +4273,12 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "System.Threading.Thread/4.3.0": {
-      "sha512": "OHmbT+Zz065NKII/ZHcH9XO1dEuLGI1L2k7uYss+9C1jLxTC9kTZZuzUOyXHayRk+dft9CiDf3I/QZ0t8JKyBQ==",
-      "type": "package",
-      "path": "system.threading.thread/4.3.0",
-      "files": [
-        ".nupkg.metadata",
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net46/System.Threading.Thread.dll",
-        "lib/netcore50/_._",
-        "lib/netstandard1.3/System.Threading.Thread.dll",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net46/System.Threading.Thread.dll",
-        "ref/netstandard1.3/System.Threading.Thread.dll",
-        "ref/netstandard1.3/System.Threading.Thread.xml",
-        "ref/netstandard1.3/de/System.Threading.Thread.xml",
-        "ref/netstandard1.3/es/System.Threading.Thread.xml",
-        "ref/netstandard1.3/fr/System.Threading.Thread.xml",
-        "ref/netstandard1.3/it/System.Threading.Thread.xml",
-        "ref/netstandard1.3/ja/System.Threading.Thread.xml",
-        "ref/netstandard1.3/ko/System.Threading.Thread.xml",
-        "ref/netstandard1.3/ru/System.Threading.Thread.xml",
-        "ref/netstandard1.3/zh-hans/System.Threading.Thread.xml",
-        "ref/netstandard1.3/zh-hant/System.Threading.Thread.xml",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "system.threading.thread.4.3.0.nupkg.sha512",
-        "system.threading.thread.nuspec"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.13",
       "Ban3.Infrastructures.NetHttp >= 1.0.5",
-      "NETStandard.Library >= 2.0.3",
-      "Newtonsoft.Json >= 13.0.3",
-      "System.Threading.Thread >= 4.3.0",
-      "log4net >= 2.0.15"
+      "NETStandard.Library >= 2.0.3"
     ]
   },
   "packageFolders": {
@@ -4426,10 +4323,6 @@
       "netstandard2.0": {
         "targetAlias": "netstandard2.0",
         "dependencies": {
-          "Ban3.Infrastructures.Common": {
-            "target": "Package",
-            "version": "[1.0.13, )"
-          },
           "Ban3.Infrastructures.NetHttp": {
             "target": "Package",
             "version": "[1.0.5, )"
@@ -4439,18 +4332,6 @@
             "target": "Package",
             "version": "[2.0.3, )",
             "autoReferenced": true
-          },
-          "Newtonsoft.Json": {
-            "target": "Package",
-            "version": "[13.0.3, )"
-          },
-          "System.Threading.Thread": {
-            "target": "Package",
-            "version": "[4.3.0, )"
-          },
-          "log4net": {
-            "target": "Package",
-            "version": "[2.0.15, )"
           }
         },
         "imports": [

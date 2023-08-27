@@ -7,14 +7,12 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Infrastructures.SignalRClient/1.0.1": {
+      "Ban3.Infrastructures.SignalRClient/1.0.2": {
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.13",
           "Microsoft.AspNetCore.SignalR": "1.1.0",
           "Microsoft.AspNetCore.SignalR.Client": "7.0.10",
-          "NETStandard.Library": "2.0.3",
-          "Newtonsoft.Json": "13.0.3",
-          "log4net": "2.0.15"
+          "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "Ban3.Infrastructures.SignalRClient.dll": {}
@@ -868,7 +866,7 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.SignalRClient/1.0.1": {
+    "Ban3.Infrastructures.SignalRClient/1.0.2": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

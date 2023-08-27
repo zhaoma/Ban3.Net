@@ -9,12 +9,12 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.PlatformInvoke</Title>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
     <Description>PlatformInvoke extension</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.0.2</AssemblyVersion>
+    <AssemblyVersion>1.0.3.1</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
       <PackageReadmeFile>readme.md</PackageReadmeFile>
       <Configurations>Release;Debug</Configurations>
@@ -43,6 +43,5 @@
   <ItemGroup>
     <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.13" />
     <PackageReference Include="System.Reflection.Metadata" Version="7.0.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>

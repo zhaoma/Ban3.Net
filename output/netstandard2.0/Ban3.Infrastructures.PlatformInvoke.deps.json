@@ -7,11 +7,10 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Infrastructures.PlatformInvoke/1.0.2": {
+      "Ban3.Infrastructures.PlatformInvoke/1.0.3": {
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.13",
           "NETStandard.Library": "2.0.3",
-          "Newtonsoft.Json": "13.0.3",
           "System.Reflection.Metadata": "7.0.2"
         },
         "runtime": {
@@ -377,7 +376,7 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.PlatformInvoke/1.0.2": {
+    "Ban3.Infrastructures.PlatformInvoke/1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -51,18 +51,6 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.3, )"
-            },
-            "System.Threading.Thread": {
-              "target": "Package",
-              "version": "[4.3.0, )"
-            },
-            "log4net": {
-              "target": "Package",
-              "version": "[2.0.15, )"
             }
           },
           "imports": [

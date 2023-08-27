@@ -41,7 +41,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.13" />
     <PackageReference Include="Ban3.Infrastructures.Indicators" Version="1.0.6" />
     <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.5" />
     <PackageReference Include="Ban3.Infrastructures.RuntimeCaching" Version="1.0.5" />
@@ -50,7 +49,5 @@
     <PackageReference Include="Ban3.Sites.ViaSina" Version="1.0.1" />
     <PackageReference Include="Ban3.Sites.ViaTushare" Version="1.0.3" />
     <PackageReference Include="Ban3.Sites.ViaYuncaijing" Version="1.0.0" />
-    <PackageReference Include="System.IO" Version="4.3.0" />
-    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
   </ItemGroup>
 </Project>

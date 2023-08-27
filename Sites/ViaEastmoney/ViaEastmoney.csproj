@@ -11,12 +11,12 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugType>embedded</DebugType>
     <Title>Ban3.Sites.ViaEastmoney</Title>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
     <Description>Via Eastmoney.com</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <AssemblyVersion>1.0.2.1</AssemblyVersion>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
