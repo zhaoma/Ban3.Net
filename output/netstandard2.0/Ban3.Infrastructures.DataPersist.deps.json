@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Infrastructures.DataPersist/1.0.10": {
+      "Ban3.Infrastructures.DataPersist/1.0.11": {
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.13",
           "Microsoft.Data.Sqlite": "7.0.10",
@@ -658,7 +658,7 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.DataPersist/1.0.10": {
+    "Ban3.Infrastructures.DataPersist/1.0.11": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

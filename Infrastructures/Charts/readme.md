@@ -1,5 +1,5 @@
-﻿# Ban3
-
+﻿# Ban3.cn
+No site , private symbol only.
 
 ## _最后修改_
 
@@ -9,14 +9,8 @@
 
 - 图标所需的数据与选项的json输出
 
-## 为何来费空间
-
-少一些重复，多一些持续更新
-
 ## License
 
 WTFPL
 
-啥囚不关
-
-**Free Software, Hell Yeah!**
+**Keep it simple, stupid!**

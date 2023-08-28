@@ -1,21 +1,22 @@
-﻿# Ban3
-我与小孩们常呆在三班，所以用了这么个名字，只是个代号不是么：）
+﻿# Ban3.cn
+No site , private symbol only.
 
 ## _最后修改_
 
+2023-08-26
+-- 增加资源文件和readme.md
+-- 优化与清理脚本
 
 ## Features
 
-- 
-
-## 为何来费空间
-
-少一些重复，多一些持续更新
+- Helper.Analyzer
+- Helper.Calculator
+- Helper.Collector
+-- Helper.Sites
+- Helper.Reportor
 
 ## License
 
 WTFPL
 
-啥囚不关
-
-**Free Software, Hell Yeah!**
+**Keep it simple, stupid!**

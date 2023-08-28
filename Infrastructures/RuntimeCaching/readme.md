@@ -1,9 +1,20 @@
-﻿T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, DateTime absoluteTime)
+﻿# Ban3.cn
+No site , private symbol only.
 
-T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, int minutes)
+## _最后修改_
 
-T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, string localFile)
+2023-08-26
+-- 增加资源文件和readme.md
+-- 优化与清理脚本
 
-T LoadOrSetDefault<T>(this string key, string localFile)
+## Features
 
-T LoadOrSetDefault<T>(this string key, Func<T> defaultValue,DateTime? absoluteTime, int? minutes,string localFile)
+- Helper
+-- T LoadOrSetDefault<T>(this string key, Func<T> defaultValue, DateTime? absoluteTime, int? minutes,string localFile)
+-- List<AssemblyFile> Load()
+
+## License
+
+WTFPL
+
+**Keep it simple, stupid!**

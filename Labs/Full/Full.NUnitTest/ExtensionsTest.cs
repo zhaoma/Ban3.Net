@@ -26,8 +26,8 @@ namespace Ban3.Labs.Full.NUnitTest
         public void Enumerable_AppendDistinct_Twice()
         {
             var a = _vtList;
-            var b= _vtList.RandomResortList();
-            var c = _vtList.Count + 1;
+            var b= _vtList!.RandomResortList();
+            var c = _vtList!.Count + 1;
 
             a.AppendDistinct(b);
             a.AppendDistinct(100);

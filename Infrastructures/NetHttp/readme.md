@@ -1,7 +1,12 @@
-﻿# Ban3
-我与小孩们常呆在三班，所以用了这么个名字，只是个代号不是么：）
+﻿# Ban3.cn
+No site , private symbol only.
 
 ## _最后修改_
+
+2023-08-26
+-- 增加资源文件和readme.md
+-- 优化与清理脚本
+
 2023-07-23
 -- 尝试了下简单的CompileSourceCodes
 -- 发现ReadFile2Rows 的一个小问题，修理了
@@ -14,12 +19,8 @@
         ITargetResource resource,
         string accept = "")
 
-## 为何来费空间
-
-少一些重复，多一些持续更新
-
 ## License
 
-MIT
+WTFPL
 
-**Free Software, Hell Yeah!**
+**Keep it simple, stupid!**

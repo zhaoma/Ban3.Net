@@ -16,8 +16,8 @@
     <PackageIcon>icon.png</PackageIcon>
     <AssemblyVersion>1.0.3.1</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-      <PackageReadmeFile>readme.md</PackageReadmeFile>
-      <Configurations>Release;Debug</Configurations>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <Configurations>Release;Debug</Configurations>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

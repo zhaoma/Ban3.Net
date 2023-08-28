@@ -7,34 +7,30 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Productions.Casino.Contracts/1.0.12": {
+      "Ban3.Productions.Casino.Contracts/1.0.13": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.13",
-          "Ban3.Infrastructures.Indicators": "1.0.6",
-          "Ban3.Infrastructures.NetHttp": "1.0.5",
-          "Ban3.Infrastructures.RuntimeCaching": "1.0.5",
-          "Ban3.Sites.ViaEastmoney": "1.0.1",
-          "Ban3.Sites.ViaNetease": "1.0.1",
-          "Ban3.Sites.ViaSina": "1.0.1",
-          "Ban3.Sites.ViaTushare": "1.0.3",
-          "Ban3.Sites.ViaYuncaijing": "1.0.0",
-          "NETStandard.Library": "2.0.3",
-          "System.IO": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Ban3.Infrastructures.Indicators": "1.0.8",
+          "Ban3.Infrastructures.NetHttp": "1.0.6",
+          "Ban3.Infrastructures.RuntimeCaching": "1.0.6",
+          "Ban3.Sites.ViaEastmoney": "1.0.2",
+          "Ban3.Sites.ViaNetease": "1.0.2",
+          "Ban3.Sites.ViaSina": "1.0.2",
+          "Ban3.Sites.ViaTushare": "1.0.4",
+          "Ban3.Sites.ViaYuncaijing": "1.0.2",
+          "NETStandard.Library": "2.0.3"
         },
         "runtime": {
           "Ban3.Productions.Casino.Contracts.dll": {}
         }
       },
-      "Ban3.Infrastructures.Charts/1.0.3": {
+      "Ban3.Infrastructures.Charts/1.0.4": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.13",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.Common": "1.0.13"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.Charts.dll": {
-            "assemblyVersion": "1.0.0.3",
-            "fileVersion": "1.0.0.3"
+            "assemblyVersion": "1.0.4.1",
+            "fileVersion": "1.0.4.1"
           }
         }
       },
@@ -55,116 +51,94 @@
           }
         }
       },
-      "Ban3.Infrastructures.Indicators/1.0.6": {
+      "Ban3.Infrastructures.Indicators/1.0.8": {
         "dependencies": {
-          "Ban3.Infrastructures.Charts": "1.0.3",
-          "Rougamo.Fody": "1.4.1",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.Charts": "1.0.4"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.Indicators.dll": {
-            "assemblyVersion": "1.0.0.6",
+            "assemblyVersion": "1.0.7.2",
             "fileVersion": "1.0.6.0"
           }
         }
       },
-      "Ban3.Infrastructures.NetHttp/1.0.5": {
+      "Ban3.Infrastructures.NetHttp/1.0.6": {
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.13",
-          "System.Net.Http": "4.3.4",
-          "log4net": "2.0.15"
+          "System.Net.Http": "4.3.4"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {
-            "assemblyVersion": "1.0.0.5",
-            "fileVersion": "1.0.0.5"
+            "assemblyVersion": "1.0.6.1",
+            "fileVersion": "1.0.6.1"
           }
         }
       },
-      "Ban3.Infrastructures.RuntimeCaching/1.0.5": {
+      "Ban3.Infrastructures.RuntimeCaching/1.0.6": {
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.13",
-          "Newtonsoft.Json": "13.0.3",
-          "System.Runtime.Caching": "7.0.0",
-          "log4net": "2.0.15"
+          "System.Runtime.Caching": "7.0.0"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.RuntimeCaching.dll": {
-            "assemblyVersion": "1.0.3.5",
-            "fileVersion": "1.0.3.5"
+            "assemblyVersion": "1.0.6.1",
+            "fileVersion": "1.0.6.1"
           }
         }
       },
-      "Ban3.Sites.ViaEastmoney/1.0.1": {
+      "Ban3.Sites.ViaEastmoney/1.0.2": {
         "dependencies": {
-          "Ban3.Infrastructures.NetHttp": "1.0.5",
-          "Newtonsoft.Json": "13.0.3",
-          "System.Threading.Thread": "4.3.0",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.NetHttp": "1.0.6"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Sites.ViaEastmoney.dll": {
-            "assemblyVersion": "1.0.0.1",
-            "fileVersion": "1.0.0.1"
+            "assemblyVersion": "1.0.2.1",
+            "fileVersion": "1.0.2.1"
           }
         }
       },
-      "Ban3.Sites.ViaNetease/1.0.1": {
+      "Ban3.Sites.ViaNetease/1.0.2": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.13",
-          "Ban3.Infrastructures.NetHttp": "1.0.5",
-          "Newtonsoft.Json": "13.0.3",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.NetHttp": "1.0.6"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Sites.ViaNetease.dll": {
-            "assemblyVersion": "1.0.0.1",
-            "fileVersion": "1.0.0.1"
+            "assemblyVersion": "1.0.2.1",
+            "fileVersion": "1.0.2.1"
           }
         }
       },
-      "Ban3.Sites.ViaSina/1.0.1": {
+      "Ban3.Sites.ViaSina/1.0.2": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.13",
-          "Ban3.Infrastructures.NetHttp": "1.0.5",
-          "Newtonsoft.Json": "13.0.3",
-          "System.Text.Encoding.CodePages": "7.0.0",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.NetHttp": "1.0.6",
+          "System.Text.Encoding.CodePages": "7.0.0"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Sites.ViaSina.dll": {
-            "assemblyVersion": "1.0.0.1",
-            "fileVersion": "1.0.0.1"
+            "assemblyVersion": "1.0.2.1",
+            "fileVersion": "1.0.2.1"
           }
         }
       },
-      "Ban3.Sites.ViaTushare/1.0.3": {
+      "Ban3.Sites.ViaTushare/1.0.4": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.13",
-          "Ban3.Infrastructures.NetHttp": "1.0.5",
-          "Newtonsoft.Json": "13.0.3",
-          "System.Threading.Thread": "4.3.0",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.NetHttp": "1.0.6"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Sites.ViaTushare.dll": {
-            "assemblyVersion": "1.0.2.3",
-            "fileVersion": "1.0.2.3"
+            "assemblyVersion": "1.0.4.1",
+            "fileVersion": "1.0.4.1"
           }
         }
       },
-      "Ban3.Sites.ViaYuncaijing/1.0.0": {
+      "Ban3.Sites.ViaYuncaijing/1.0.2": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.13",
-          "Ban3.Infrastructures.NetHttp": "1.0.5",
-          "Newtonsoft.Json": "13.0.3",
-          "System.Threading.Thread": "4.3.0",
-          "log4net": "2.0.15"
+          "Ban3.Infrastructures.NetHttp": "1.0.6"
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Sites.ViaYuncaijing.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.0.2.1",
+            "fileVersion": "1.0.2.1"
           }
         }
       },
@@ -911,32 +885,21 @@
             "fileVersion": "4.6.28619.1"
           }
         }
-      },
-      "System.Threading.Thread/4.3.0": {
-        "dependencies": {
-          "System.Runtime": "4.3.0"
-        },
-        "runtime": {
-          "lib/netstandard1.3/System.Threading.Thread.dll": {
-            "assemblyVersion": "4.0.1.0",
-            "fileVersion": "4.6.24705.1"
-          }
-        }
       }
     }
   },
   "libraries": {
-    "Ban3.Productions.Casino.Contracts/1.0.12": {
+    "Ban3.Productions.Casino.Contracts/1.0.13": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Ban3.Infrastructures.Charts/1.0.3": {
+    "Ban3.Infrastructures.Charts/1.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-b5f+LdGcqh6rezJmhQha/BqTGx42X7eu2d/kacsCCFCO1zDsev4jtT/h8+mbwguY0PsaRnG/LbsxpzKoPcYnXw==",
-      "path": "ban3.infrastructures.charts/1.0.3",
-      "hashPath": "ban3.infrastructures.charts.1.0.3.nupkg.sha512"
+      "sha512": "sha512-lMLR3WNByVCGZtluSB8H1J6Rdf6CrdHxUrrynx0Lx9ay608MnIfAZGoMlRwCWGAZkRSuYx/PGaqgLNq+YKGtcA==",
+      "path": "ban3.infrastructures.charts/1.0.4",
+      "hashPath": "ban3.infrastructures.charts.1.0.4.nupkg.sha512"
     },
     "Ban3.Infrastructures.Common/1.0.13": {
       "type": "package",
@@ -945,61 +908,61 @@
       "path": "ban3.infrastructures.common/1.0.13",
       "hashPath": "ban3.infrastructures.common.1.0.13.nupkg.sha512"
     },
-    "Ban3.Infrastructures.Indicators/1.0.6": {
+    "Ban3.Infrastructures.Indicators/1.0.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HsvFCes9VJncDr4IE5f8+7gHSLbKuRY6BsxTMbr8rhECC2ltmfR0hIKq65sfbvB5YZUVwgpN7/V3WFVtiJG0ww==",
-      "path": "ban3.infrastructures.indicators/1.0.6",
-      "hashPath": "ban3.infrastructures.indicators.1.0.6.nupkg.sha512"
+      "sha512": "sha512-whpGehFyZbUpwM/N10lKU8nZSRPJfzB8ET8OiYMIaFlwXtCtQv9a/goKlweAeCE7G/bjnHcojtGFMgebpaYc3Q==",
+      "path": "ban3.infrastructures.indicators/1.0.8",
+      "hashPath": "ban3.infrastructures.indicators.1.0.8.nupkg.sha512"
     },
-    "Ban3.Infrastructures.NetHttp/1.0.5": {
+    "Ban3.Infrastructures.NetHttp/1.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-AK+e9E7pX3+NWahb8yEFvX2nDlkIsHau+fCh4PrUmPd95U4It/TtZVIv+YAhruUd3uJbI5ZZvrkhxOshwKVEwQ==",
-      "path": "ban3.infrastructures.nethttp/1.0.5",
-      "hashPath": "ban3.infrastructures.nethttp.1.0.5.nupkg.sha512"
+      "sha512": "sha512-fUZ1EdGAAq28jboy1kGEXSXzBkECZ71ZUGVGMLdAcQmzdluwNX1kQ/GNDewMLQRV2cbnPzpwFDpeFL2g4AC7xQ==",
+      "path": "ban3.infrastructures.nethttp/1.0.6",
+      "hashPath": "ban3.infrastructures.nethttp.1.0.6.nupkg.sha512"
     },
-    "Ban3.Infrastructures.RuntimeCaching/1.0.5": {
+    "Ban3.Infrastructures.RuntimeCaching/1.0.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-npOq5SvLT/GmFHzSEdHuYoLx44H0SAoRP7d1bFF9zPk6TcBz+xnSWsDRYRbVhrn/Nj/KVKsrh3j2DichNqKrIA==",
-      "path": "ban3.infrastructures.runtimecaching/1.0.5",
-      "hashPath": "ban3.infrastructures.runtimecaching.1.0.5.nupkg.sha512"
+      "sha512": "sha512-R2Ih+3rirE73jJdyVuGR4CtQDw/U0JMMYTP+Yj/52YkwhXvn9CdYT3ucvK0+bdVCb3AbzbLMKyqPPPhsIrxjlw==",
+      "path": "ban3.infrastructures.runtimecaching/1.0.6",
+      "hashPath": "ban3.infrastructures.runtimecaching.1.0.6.nupkg.sha512"
     },
-    "Ban3.Sites.ViaEastmoney/1.0.1": {
+    "Ban3.Sites.ViaEastmoney/1.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6SpuwoyjnrONM+xZkPcao1OE02rOUl+5huMQuQsJzfSeaLdBwjoEPmp/8DSFAmQq3NzM75xrly/MM5ShCyvU7Q==",
-      "path": "ban3.sites.viaeastmoney/1.0.1",
-      "hashPath": "ban3.sites.viaeastmoney.1.0.1.nupkg.sha512"
+      "sha512": "sha512-kHR3qFm+1faP41f0ddhQetaXRLzhYqKYGIwHfNyw4kTazTNU6hAW7G0O6Ep8iZuyGjtkDuHQlzeLvhmOYRhRwg==",
+      "path": "ban3.sites.viaeastmoney/1.0.2",
+      "hashPath": "ban3.sites.viaeastmoney.1.0.2.nupkg.sha512"
     },
-    "Ban3.Sites.ViaNetease/1.0.1": {
+    "Ban3.Sites.ViaNetease/1.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-tT38MP0eqLJ2GNXxE3c1B+GqAV1EFV0pp12tJ3MUOa+fIk7palVqfHLrva90HWU06xYgD6FnQ/gPt3QFi2pQqg==",
-      "path": "ban3.sites.vianetease/1.0.1",
-      "hashPath": "ban3.sites.vianetease.1.0.1.nupkg.sha512"
+      "sha512": "sha512-A1QGEgsVZJyNuT+7tuwpvACzE73OxOF2ZvnNk+zCuuSgvDg/SLB81lSBuAF67KcZwaEnv0EMvEqI3HnX1Q/wxQ==",
+      "path": "ban3.sites.vianetease/1.0.2",
+      "hashPath": "ban3.sites.vianetease.1.0.2.nupkg.sha512"
     },
-    "Ban3.Sites.ViaSina/1.0.1": {
+    "Ban3.Sites.ViaSina/1.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-UW3ZfA/hWTk8f1qbmGsOA8vg6rigNdA+qmEJlcIP2u/LVC3dPfGKIohm18Rc74ZB08/7DAdH7OQX6deRPRmGEQ==",
-      "path": "ban3.sites.viasina/1.0.1",
-      "hashPath": "ban3.sites.viasina.1.0.1.nupkg.sha512"
+      "sha512": "sha512-ADjX6QmRTVT9KxMhJRLB8MS3SQCxH10Vzn4X6R8Kl9+z5dXiF02kFAWTViAbHO9CzKLSfeUJeZHGPwJTn9mZbQ==",
+      "path": "ban3.sites.viasina/1.0.2",
+      "hashPath": "ban3.sites.viasina.1.0.2.nupkg.sha512"
     },
-    "Ban3.Sites.ViaTushare/1.0.3": {
+    "Ban3.Sites.ViaTushare/1.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nIugo9fajBG5rqI4JXgM8/GaBqq0SGBUCJNryS/zzXK/n25rj23n+8oZOVRaP2Zvsqsp+06rivGS9ZkI/rCBeg==",
-      "path": "ban3.sites.viatushare/1.0.3",
-      "hashPath": "ban3.sites.viatushare.1.0.3.nupkg.sha512"
+      "sha512": "sha512-8Nt+poNKnilBD0Kwh4dJ7RD6fz7B9bU7nil02G2HYWjvUPLeorhPcuebhIkIgKNN02oL807iN3aXq988zCg1Pw==",
+      "path": "ban3.sites.viatushare/1.0.4",
+      "hashPath": "ban3.sites.viatushare.1.0.4.nupkg.sha512"
     },
-    "Ban3.Sites.ViaYuncaijing/1.0.0": {
+    "Ban3.Sites.ViaYuncaijing/1.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nV84eHrOjQfpPC6ca4/eA7xOsTSL9UeslptdGjNkB7HoMuMZjt+ghLCRS3giDqz4oJBRaKBY9Avec0UIKQVSWA==",
-      "path": "ban3.sites.viayuncaijing/1.0.0",
-      "hashPath": "ban3.sites.viayuncaijing.1.0.0.nupkg.sha512"
+      "sha512": "sha512-++jGFaXW0mxxDtwDWnwt9eGzJHQPv4ZuX9IhOhzjFPXGXd61tE/BOTPykV+SrDS1Xd6Ob84KfVTd3HX+G/yU4w==",
+      "path": "ban3.sites.viayuncaijing/1.0.2",
+      "hashPath": "ban3.sites.viayuncaijing.1.0.2.nupkg.sha512"
     },
     "Fody/6.2.5": {
       "type": "package",
@@ -1144,7 +1107,7 @@
     "runtime.native.System.Net.Http/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-guqHgQOK2eUgtJae2VKjNawBn1xjC0hfOt5wASHa60XHbIdCsQlqtvMsFG+3hy7yp88V+gi9fZCjubuDkeakcQ==",
+      "sha512": "sha512-ZVuZJqnnegJhd2k/PtAbbIcZ3aZeITq3sj06oKfMBSfphW3HDmk/t4ObvbOk/JA/swGR0LNqMksAh/f7gpTROg==",
       "path": "runtime.native.system.net.http/4.3.0",
       "hashPath": "runtime.native.system.net.http.4.3.0.nupkg.sha512"
     },
@@ -1179,7 +1142,7 @@
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Kh9W4agE0r/hK8AX1LvyQI2NrKHBL8pO0gRoDTdDb0LL6Ta1Z2OtFx3lOaAE0ZpCUc/dt9Wzs3rA7a3IsKdOVA==",
+      "sha512": "sha512-kVXCuMTrTlxq4XOOMAysuNwsXWpYeboGddNGpIgNSZmv1b6r/s/DPk0fYMB7Q5Qo4bY68o48jt4T4y5BVecbCQ==",
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0",
       "hashPath": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512"
     },
@@ -1546,13 +1509,6 @@
       "sha512": "sha512-zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
-    },
-    "System.Threading.Thread/4.3.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-OHmbT+Zz065NKII/ZHcH9XO1dEuLGI1L2k7uYss+9C1jLxTC9kTZZuzUOyXHayRk+dft9CiDf3I/QZ0t8JKyBQ==",
-      "path": "system.threading.thread/4.3.0",
-      "hashPath": "system.threading.thread.4.3.0.nupkg.sha512"
     }
   }
 }

@@ -17,12 +17,11 @@
     <AssemblyVersion>1.0.6.1</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/zhaoma/Ban3.Net/tree/main/Libs/RuntimeCaching</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\..\output\</OutputPath>
-    <DocumentationFile>..\..\..\output\Ban3.Infrastructures.RuntimeCaching.xml</DocumentationFile>
+    <OutputPath>..\..\output\</OutputPath>
+    <DocumentationFile>..\..\output\Ban3.Infrastructures.RuntimeCaching.xml</DocumentationFile>
     <AllowedReferenceRelatedFileExtensions>
       .allowedextension
     </AllowedReferenceRelatedFileExtensions>
