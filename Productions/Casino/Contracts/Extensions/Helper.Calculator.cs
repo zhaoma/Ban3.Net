@@ -538,11 +538,18 @@ public static partial class Helper
 
         stocks.ParallelExecute(one =>
         {
-            var prices = typeof(StockPrice).LocalFile(one.Code).ReadFileAs<List<StockPrice>>();
-            var sets = one.LoadStockSets();
-            if (sets != null && sets.Any())
+            try
             {
-                targets.AppendTarget(one,  sets.GetPoints(), prices!.Last(),sets.Last());
+                var prices = typeof(StockPrice).LocalFile(one.Code).ReadFileAs<List<StockPrice>>();
+                var sets = one.LoadStockSets();
+                if (sets != null && sets.Any())
+                {
+                    targets.AppendTarget(one, sets.GetPoints(), prices!.Last(), sets.Last());
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"ERROR WHEN PARSE {one.Code}");
             }
         }, Config.MaxParallelTasks);
 
@@ -554,21 +561,26 @@ public static partial class Helper
     {
         var result=new List<TimelinePoint>();
 
-        var latestDaily = sets.Last(o => o.SetKeys!=null&& o.SetKeys.Contains("MACD.C0.DAILY"));
-
-        if (latestDaily != null)
+        try
         {
-            result.Add(new TimelinePoint(latestDaily));
+            var latestDaily = sets.Last(o => o.SetKeys != null && o.SetKeys.Contains("MACD.C0.DAILY"));
 
-            var afterC0 = sets.Where(o => o.MarkTime.ToYmd().ToInt() > latestDaily.MarkTime.ToYmd().ToInt()).ToList();
-
-            if (!afterC0.Any()) return result;
-
-            foreach (var p in afterC0.Select(s => new TimelinePoint(s)).Where(p => result.All(x => x.Subject != p.Subject)))
+            if (latestDaily != null)
             {
-                result.Add(p);
+                result.Add(new TimelinePoint(latestDaily));
+
+                var afterC0 = sets.Where(o => o.MarkTime.ToYmd().ToInt() > latestDaily.MarkTime.ToYmd().ToInt())
+                    .ToList();
+
+                if (!afterC0.Any()) return result;
+
+                foreach (var p in afterC0.Select(s => new TimelinePoint(s))
+                             .Where(p => result.All(x => x.Subject != p.Subject)))
+                {
+                    result.Add(p);
+                }
             }
-        }
+        }catch(Exception ex) {Logger.Error(".FAULT"); }
 
         return result;
     }
