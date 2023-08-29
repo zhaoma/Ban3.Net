@@ -22,43 +22,46 @@ public class TimelinePoint
         Date = sets.MarkTime.ToYmd();
         Close = sets.Close;
         SetKeys = sets.SetKeys!.ToList();
-        Subject = "";
+        
+        var subjects=new List<string>();
+
+
 
         if (SetKeys!.Contains("MACD.C0.DAILY"))
         {
-            Subject = "日上穿零";
+            Subject += "日上穿零";
         }
         if (SetKeys!.Contains("MACD.D0.DAILY"))
         {
-            Subject = "日下穿零";
-        }
-
-        if (SetKeys!.Contains("MACD.C0.WEEKLY"))
-        {
-            Subject = "周上穿零";
-        }
-        if (SetKeys!.Contains("MACD.D0.WEEKLY"))
-        {
-            Subject = "周下穿零";
-        }
-
-        if (SetKeys!.Contains("MACD.C0.MONTHLY"))
-        {
-            Subject = "月上穿零";
-        }
-        if (SetKeys!.Contains("MACD.D0.MONTHLY"))
-        {
-            Subject = "月下穿零";
+            Subject += "日下穿零";
         }
 
         if (SetKeys!.Contains("MACD.DC.DAILY"))
         {
-            Subject = "日死叉";
+            Subject += "日死叉";
         }
 
         if (SetKeys!.Contains("MACD.GC.DAILY"))
         {
-            Subject = "日金叉";
+            Subject += "日金叉";
+        }
+
+        if (SetKeys!.Contains("MACD.C0.WEEKLY"))
+        {
+            Subject += "周上穿零";
+        }
+        if (SetKeys!.Contains("MACD.D0.WEEKLY"))
+        {
+            Subject += "周下穿零";
+        }
+
+        if (SetKeys!.Contains("MACD.C0.MONTHLY"))
+        {
+            Subject += "月上穿零";
+        }
+        if (SetKeys!.Contains("MACD.D0.MONTHLY"))
+        {
+            Subject += "月下穿零";
         }
     }
 
