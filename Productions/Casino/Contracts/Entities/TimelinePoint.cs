@@ -26,17 +26,29 @@ public class TimelinePoint
 
         if (SetKeys!.Contains("MACD.C0.DAILY"))
         {
-            Subject = "日穿零";
+            Subject = "日上穿零";
         }
-        
+        if (SetKeys!.Contains("MACD.D0.DAILY"))
+        {
+            Subject = "日下穿零";
+        }
+
         if (SetKeys!.Contains("MACD.C0.WEEKLY"))
         {
-            Subject = "周穿零";
+            Subject = "周上穿零";
+        }
+        if (SetKeys!.Contains("MACD.D0.WEEKLY"))
+        {
+            Subject = "周下穿零";
         }
 
         if (SetKeys!.Contains("MACD.C0.MONTHLY"))
         {
-            Subject = "月穿零";
+            Subject = "月上穿零";
+        }
+        if (SetKeys!.Contains("MACD.D0.MONTHLY"))
+        {
+            Subject = "月下穿零";
         }
 
         if (SetKeys!.Contains("MACD.DC.DAILY"))

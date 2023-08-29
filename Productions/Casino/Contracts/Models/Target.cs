@@ -12,8 +12,10 @@ namespace Ban3.Productions.Casino.Contracts.Models;
 /// </summary>
 public class Target
 {
+    /// 
     public Target(){}
 
+    /// 
     public Target(
         Stock stock, 
         List<TimelinePoint> points, 

@@ -540,16 +540,23 @@ public static partial class Helper
         {
             try
             {
+                Logger.Debug($"PARSE {one.Code}");
                 var prices = typeof(StockPrice).LocalFile(one.Code).ReadFileAs<List<StockPrice>>();
                 var sets = one.LoadStockSets();
-                if (sets != null && sets.Any())
+
+                if (sets == null || !sets.Any() || prices == null || !prices.Any())
                 {
-                    targets.AppendTarget(one, sets.GetPoints(), prices!.Last(), sets.Last());
+                    Logger.Debug("SKIP NULL");
+                    return;
                 }
+
+                var points = sets.GetPoints();
+                if (points.Any())
+                    targets.AppendTarget(one, points, prices!.Last(), sets.Last());
             }
             catch (Exception ex)
             {
-                Logger.Error($"ERROR WHEN PARSE {one.Code}");
+                Logger.Error($"ERROR WHEN PARSE {one.Code}:{ex.Message}");
             }
         }, Config.MaxParallelTasks);
 
@@ -567,20 +574,29 @@ public static partial class Helper
 
             if (latestDaily != null)
             {
-                result.Add(new TimelinePoint(latestDaily));
-
                 var afterC0 = sets.Where(o => o.MarkTime.ToYmd().ToInt() > latestDaily.MarkTime.ToYmd().ToInt())
                     .ToList();
 
-                if (!afterC0.Any()) return result;
+                if (!afterC0.Any() || afterC0.Count > 20)
+                {
+                    Logger.Debug("SKIP");
+                    return result;
+                }
+                else
+                {
+                    Logger.Debug($"ADD TARGET {latestDaily.MarkTime}->{afterC0.Count}");
+                }
+                
+                result.Add(new TimelinePoint(latestDaily));
 
                 foreach (var p in afterC0.Select(s => new TimelinePoint(s))
                              .Where(p => result.All(x => x.Subject != p.Subject)))
                 {
-                    result.Add(p);
+                    if (p.Subject != "")
+                        result.Add(p);
                 }
             }
-        }catch(Exception ex) {Logger.Error(".FAULT"); }
+        }catch(Exception ex) {Logger.Error($".FAULT.{ex.Message}"); }
 
         return result;
     }

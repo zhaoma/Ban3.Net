@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Productions.Casino.Contracts" Version="1.0.14" />
+    <PackageReference Include="Ban3.Productions.Casino.Contracts" Version="1.0.15" />
   </ItemGroup>
 
   <ItemGroup>
