@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Sites.ViaTushare.Entries;
@@ -28,7 +29,7 @@ public class Target
         LatestSets = sets;
         LastAccess = DateTime.Now;
 
-
+        Ignore = LatestSets?.SetKeys != null && LatestSets.SetKeys!.Contains("MACD.M.DAILY");
     }
 
     /// <summary>

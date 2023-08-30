@@ -25,44 +25,27 @@ public class TimelinePoint
         
         var subjects=new List<string>();
 
-
+        if (SetKeys!.Contains("MACD.GC.DAILY"))
+        {
+            subjects.Add("日金叉");
+        }
 
         if (SetKeys!.Contains("MACD.C0.DAILY"))
         {
-            Subject += "日上穿零";
-        }
-        if (SetKeys!.Contains("MACD.D0.DAILY"))
-        {
-            Subject += "日下穿零";
-        }
-
-        if (SetKeys!.Contains("MACD.DC.DAILY"))
-        {
-            Subject += "日死叉";
-        }
-
-        if (SetKeys!.Contains("MACD.GC.DAILY"))
-        {
-            Subject += "日金叉";
+            subjects.Add( "日上穿零");
         }
 
         if (SetKeys!.Contains("MACD.C0.WEEKLY"))
         {
-            Subject += "周上穿零";
-        }
-        if (SetKeys!.Contains("MACD.D0.WEEKLY"))
-        {
-            Subject += "周下穿零";
+            subjects.Add("周上穿零");
         }
 
         if (SetKeys!.Contains("MACD.C0.MONTHLY"))
         {
-            Subject += "月上穿零";
+            subjects.Add("月上穿零");
         }
-        if (SetKeys!.Contains("MACD.D0.MONTHLY"))
-        {
-            Subject += "月下穿零";
-        }
+
+        Subject = subjects.AggregateToString(" ");
     }
 
     /// <summary>

@@ -1,24 +1,9 @@
 ﻿using System.Diagnostics;
-using System.Security.Principal;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Common.Models;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.Indicators;
-using Ban3.Infrastructures.Indicators.Entries;
-using Ban3.Infrastructures.Indicators.Inputs;
-using Ban3.Infrastructures.Indicators.Outputs;
-using Ban3.Infrastructures.RuntimeCaching;
 using Ban3.Productions.Casino.CcaAndReport;
-using Ban3.Productions.Casino.Contracts;
-using Ban3.Productions.Casino.Contracts.Entities;
-using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Productions.Casino.Contracts.Extensions;
-using Ban3.Productions.Casino.Contracts.Interfaces;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json;
-using Stock = Ban3.Infrastructures.Indicators.Entries.Stock;
-using System.Linq;
-using Ban3.Productions.Casino.CcaAndReport.Implements;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -76,7 +61,7 @@ internal class Program
                 $"--reinstate :      reinstate prices and indicators data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--dr :             distribute records data".WriteColorLine(ConsoleColor.DarkYellow);
                 $"--check :          check some temp function@ca.Main".WriteColorLine(ConsoleColor.DarkYellow);
-                Signalert.Calculator.GenerateTargets(Signalert.Collector.ScopedCodes());
+
                 break;
         }
 
@@ -91,15 +76,6 @@ internal class Program
     {
         Console.WriteLine("NOTHING IN QUEUE.");
 
-        //Signalert.Analyzer.PrepareDistributeRecords();
-        var d = Signalert.GetLatestStockSets().GenerateList().Save();
-        Console.WriteLine(d.Count);
 
-        //var drs = Signalert.GetDistributeRecords();
-        //drs.ObjToJson().WriteColorLine(ConsoleColor.DarkBlue);
-        //var x = DistributeConditions();
-        //d.ObjToJson().WriteColorLine(ConsoleColor.DarkYellow);
-
-        //Console.WriteLine("PrepareDistributeRecords");
     }
 }
