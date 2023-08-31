@@ -4,10 +4,10 @@
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Elements;
+namespace Ban3.Infrastructures.Charts.Elements;
 
 public interface IHasLine
 {

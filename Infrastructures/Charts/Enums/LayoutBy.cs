@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Charts.Enums;
+namespace Ban3.Infrastructures.Charts.Enums;
 
 /// <summary>
 /// 当使用 dataset 时，seriesLayoutBy 指定了 dataset 中用行还是列对应到系列上，也就是说，

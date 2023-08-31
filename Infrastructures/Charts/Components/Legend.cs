@@ -8,13 +8,13 @@
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
-using  Ban3.Infrastructures.Charts.Elements;
-using  Ban3.Infrastructures.Charts.Styles;
-using  Ban3.Infrastructures.Charts.Cogs;
-using  Ban3.Infrastructures.Charts.Labels;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
+using Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Cogs;
+using Ban3.Infrastructures.Charts.Labels;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 图例组件

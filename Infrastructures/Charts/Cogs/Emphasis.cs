@@ -4,13 +4,13 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Styles;
-using  Ban3.Infrastructures.Charts.Labels;
-using  Ban3.Infrastructures.Charts.Lines;
+using Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Labels;
+using Ban3.Infrastructures.Charts.Lines;
 using Newtonsoft.Json;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 强调

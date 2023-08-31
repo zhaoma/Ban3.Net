@@ -5,10 +5,10 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using  Ban3.Infrastructures.Charts.Elements;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using Ban3.Infrastructures.Charts.Elements;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Lines;
+namespace Ban3.Infrastructures.Charts.Lines;
 
 /// <summary>
 /// 轴线

@@ -4,14 +4,14 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Cogs;
-using  Ban3.Infrastructures.Charts.Elements;
-using  Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Cogs;
+using Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Styles
+namespace Ban3.Infrastructures.Charts.Styles
 {
     public class CheckpointStyle
         : GeneralStyle, IHasSymbol

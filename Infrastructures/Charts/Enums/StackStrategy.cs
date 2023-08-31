@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Charts.Enums;
+namespace Ban3.Infrastructures.Charts.Enums;
 
 /// <summary>
 /// 堆积数值的策略，前提是stack属性已被设置

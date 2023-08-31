@@ -4,10 +4,10 @@
 //  reference:	https://echarts.apache.org/en/option.html#graphic
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Cogs;
+using Ban3.Infrastructures.Charts.Cogs;
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// graphic component enables creating graphic elements in ECharts.

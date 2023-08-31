@@ -4,10 +4,10 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Lines;
+namespace Ban3.Infrastructures.Charts.Lines;
 
 /// <summary>
 /// 标签的视觉引导线

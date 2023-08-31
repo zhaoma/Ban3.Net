@@ -6,9 +6,9 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Elements;
+namespace Ban3.Infrastructures.Charts.Elements;
 
 /// <summary>
 /// 

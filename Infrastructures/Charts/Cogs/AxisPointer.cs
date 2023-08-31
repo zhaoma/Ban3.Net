@@ -4,12 +4,12 @@
 //  reference:	https://echarts.apache.org/en/option.html#axisPointer
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// This is the global configurations of axisPointer.
@@ -17,10 +17,6 @@ namespace  Ban3.Infrastructures.Charts.Cogs;
 /// </summary>
 public class AxisPointer
 {
-    public AxisPointer()
-    {
-    }
-
     /// <summary>
     /// Set this to false to prevent the title from showing
     /// </summary>

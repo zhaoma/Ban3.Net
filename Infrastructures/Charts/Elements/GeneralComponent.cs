@@ -1,4 +1,4 @@
-﻿namespace  Ban3.Infrastructures.Charts.Elements;
+﻿namespace Ban3.Infrastructures.Charts.Elements;
 
 public class GeneralComponent
     : IHasIdentity, IHasPosition

@@ -4,12 +4,12 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// 
 public class GraphicElement

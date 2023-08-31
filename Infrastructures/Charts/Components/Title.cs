@@ -4,12 +4,12 @@
 //  reference:	https://echarts.apache.org/en/option.html#title
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Elements;
-using  Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// Title component, including main title and subtitle.

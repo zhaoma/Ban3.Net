@@ -4,13 +4,13 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Labels;
+namespace Ban3.Infrastructures.Charts.Labels;
 
 /// <summary>
 /// Text label of , to explain some data information about graphic item like value, name and so on.

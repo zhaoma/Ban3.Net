@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Charts.Enums;
+namespace Ban3.Infrastructures.Charts.Enums;
 
 /// <summary>
 /// 从调色盘 option.color 中取色的策略

@@ -8,10 +8,10 @@
 using Ban3.Infrastructures.Charts.Cogs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using  Ban3.Infrastructures.Charts.Elements;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using Ban3.Infrastructures.Charts.Elements;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Axes;
+namespace Ban3.Infrastructures.Charts.Axes;
 
 /// <summary>
 /// 坐标轴

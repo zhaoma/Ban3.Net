@@ -3,6 +3,7 @@ No site , private symbol only.
 
 ## _最后修改_
 
+- 2023-08-31 修改DataZoom
 - 2023-08-21 检查一些小问题
 
 ## Features

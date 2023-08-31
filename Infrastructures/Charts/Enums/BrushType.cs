@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace  Ban3.Infrastructures.Charts.Enums;
+namespace Ban3.Infrastructures.Charts.Enums;
 
 /// <summary>
 /// 选框组件的控制按钮

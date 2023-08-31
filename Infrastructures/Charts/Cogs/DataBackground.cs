@@ -1,7 +1,7 @@
-﻿using  Ban3.Infrastructures.Charts.Styles;
+﻿using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 数据阴影的样式

@@ -5,9 +5,9 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Styles
+namespace Ban3.Infrastructures.Charts.Styles
 {
     /// 
     public class ControlStyle

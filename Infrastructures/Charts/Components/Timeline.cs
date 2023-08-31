@@ -12,7 +12,7 @@ using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// timeline component, which provides functions like switching and playing between multiple ECharts options.

@@ -4,6 +4,7 @@ using Ban3.Productions.Casino.Contracts.Extensions;
 using Ban3.Productions.Casino.Contracts.Request;
 using Ban3.Productions.Casino.Contracts.Response;
 using Ban3.Infrastructures.Indicators.Entries;
+using Ban3.Productions.Casino.Contracts.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ban3.Labs.Casino.Web.Controllers;
@@ -241,6 +242,8 @@ public class PartsController : Controller
 
     public IActionResult Decide()
     {
-        return View();
+        var targets = new Targets();
+        ViewData["Title"] = $"{targets.Data.Count(o=>!o.Value.Ignore)} / {targets.Data.Count}";
+        return View(targets);
     }
 }

@@ -1,8 +1,27 @@
-﻿@model Ban3.Productions.Casino.Contracts.Entities.Stock 
+﻿@model Ban3.Productions.Casino.Contracts.Models.Targets 
 @{
     Layout = null;
+    var showTargets = Model.Data.Where(o => !o.Value.Ignore).Select(o => o.Value).ToList();
+    var defaultTarget = showTargets.First();
 }
 <div class="row">
-    <div class="col-3 lazyLoad" dataUrl="/parts/codes"></div>
-    <div class="col-9 lazyLoad" id="onesChartsContainer" dataUrl="/parts/stock/688004.SH"></div>
+    <div class="col-3">
+
+        <div class="list-group targets">
+            @foreach (var target in showTargets)
+            {
+                <a href="#" class="list-group-item list-group-item-action lazyLoadButton"
+                   dataUrl="@($"/parts/stock/{@target.Stock.Code}")"
+                   renderElement="onesChartsContainer">@Html.Raw(target.Stock.Symbol)
+                    <ol>
+                        @foreach (var p in target.Points)
+                        {
+                            <li>@p.Date @p.Subject</li>
+                        }
+                    </ol>
+                    </a>
+            }
+        </div>
+    </div>
+    <div class="col-9 lazyLoad" id="onesChartsContainer" dataUrl="/parts/stock/@defaultTarget.Stock.Code"></div>
 </div>

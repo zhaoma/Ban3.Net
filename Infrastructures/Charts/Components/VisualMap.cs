@@ -7,11 +7,11 @@
 
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
-using  Ban3.Infrastructures.Charts.Elements;
-using  Ban3.Infrastructures.Charts.Styles;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
+using Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Styles;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 视觉映射组件

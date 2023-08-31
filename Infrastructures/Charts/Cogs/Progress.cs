@@ -1,14 +1,8 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    
-//  reference:
-//  ————————————————————————————————————————————————————————————————————————————
-
-using  Ban3.Infrastructures.Charts.Styles;
-using  Ban3.Infrastructures.Charts.Labels;
+﻿using Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Labels;
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 public class Progress
 {

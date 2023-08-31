@@ -4,10 +4,10 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Styles;
+namespace Ban3.Infrastructures.Charts.Styles;
 
 /// <summary>
 /// 

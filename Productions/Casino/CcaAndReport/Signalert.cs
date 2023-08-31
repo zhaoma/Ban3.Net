@@ -272,8 +272,8 @@ public class Signalert
         cycle = cycle.ToUpper();
 
         var cycleEnum = cycle.StringToEnum<StockAnalysisCycle>();
-
-        return new Stock { Code = code, }.LoadDiagram(cycleEnum).ObjToJson();
+        var diagram = new Stock { Code = code, }.LoadDiagram(cycleEnum);
+        return diagram.ObjToJson();
     }
 
     /// 

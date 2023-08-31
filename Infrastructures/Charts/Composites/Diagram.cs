@@ -9,9 +9,9 @@ using Ban3.Infrastructures.Charts.Axes;
 using Ban3.Infrastructures.Charts.Components;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Composites;
+namespace Ban3.Infrastructures.Charts.Composites;
 
 /// <summary>
 /// 

@@ -4,12 +4,12 @@
 //  reference:	https://echarts.apache.org/zh/option.html#grid
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Cogs;
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Cogs;
+using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// Drawing grid in rectangular coordinate.

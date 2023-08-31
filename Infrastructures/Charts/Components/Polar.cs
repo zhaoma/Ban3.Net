@@ -4,11 +4,11 @@
 //  reference:	https://echarts.apache.org/zh/option.html#polar
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Cogs;
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Cogs;
+using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 极坐标系

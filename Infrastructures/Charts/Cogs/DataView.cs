@@ -4,11 +4,11 @@
 //  reference:https://echarts.apache.org/zh/option.html#toolbox.feature.dataView
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
 using System;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。

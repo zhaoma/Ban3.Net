@@ -4,10 +4,10 @@
 //  reference:	https://echarts.apache.org/zh/option.html#radiusAxis.id
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Axes;
+namespace Ban3.Infrastructures.Charts.Axes;
 
 /// <summary>
 /// 极坐标系的径向轴

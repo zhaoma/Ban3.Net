@@ -5,12 +5,12 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 雷达图坐标系组件，只适用于雷达图。
@@ -142,11 +142,11 @@ public class Radar
     /// </summary>
     [JsonProperty("indicator", NullValueHandling = NullValueHandling.Ignore)]
 
-/* Unmerged change from project 'Common (net5.0)'
-Before:
-        public Data.RadarIndicator[] Indicator { get; set; }
-After:
-        public RadarIndicator[] Indicator { get; set; }
-*/
-    public Cogs.RadarIndicator[]? Indicator { get; set; }
+    /* Unmerged change from project 'Common (net5.0)'
+    Before:
+            public Data.RadarIndicator[] Indicator { get; set; }
+    After:
+            public RadarIndicator[] Indicator { get; set; }
+    */
+    public RadarIndicator[]? Indicator { get; set; }
 }

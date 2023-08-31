@@ -6,7 +6,7 @@
 
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 

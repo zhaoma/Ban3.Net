@@ -4,9 +4,9 @@
 //  reference:	https://
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Styles;
 
-namespace  Ban3.Infrastructures.Charts.Elements;
+namespace Ban3.Infrastructures.Charts.Elements;
 
 public class GeneralLine
     : IHasLine

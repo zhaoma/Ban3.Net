@@ -5,13 +5,13 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
-using  Ban3.Infrastructures.Charts.Styles;
-using  Ban3.Infrastructures.Charts.Lines;
-using  Ban3.Infrastructures.Charts.Labels;
+using Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Lines;
+using Ban3.Infrastructures.Charts.Labels;
 
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Elements;
+namespace Ban3.Infrastructures.Charts.Elements;
 
 public class GeneralAxis
     : IHasIdentity, IAxis, IHasAxisName

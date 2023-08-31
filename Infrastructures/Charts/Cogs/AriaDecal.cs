@@ -6,7 +6,7 @@
 
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 使用默认贴花图案的方式非常简单，只需要开启即可

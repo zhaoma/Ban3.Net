@@ -5,10 +5,10 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using  Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Lines;
+namespace Ban3.Infrastructures.Charts.Lines;
 
 /// <summary>
 /// 坐标轴刻度

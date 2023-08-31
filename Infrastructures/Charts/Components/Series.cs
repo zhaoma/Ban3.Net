@@ -15,7 +15,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 序列

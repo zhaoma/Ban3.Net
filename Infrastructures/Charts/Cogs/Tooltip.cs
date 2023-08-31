@@ -4,13 +4,13 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Elements;
-using  Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 提示框组件
@@ -55,7 +55,7 @@ public class Tooltip
     /// <summary>
     /// 提示框触发的条件
     /// </summary>
-    [JsonProperty("triggrOn", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonProperty("triggerOn", NullValueHandling = NullValueHandling.Ignore)]
     [JsonConverter(typeof(StringEnumConverter))]
     public ECharts.TriggerOn? TriggerOn { get; set; }
 

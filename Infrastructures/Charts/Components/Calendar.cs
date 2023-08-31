@@ -4,15 +4,15 @@
 //  reference:	https://echarts.apache.org/en/option.html#calendar
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Elements;
-using  Ban3.Infrastructures.Charts.Styles;
-using  Ban3.Infrastructures.Charts.Lines;
-using  Ban3.Infrastructures.Charts.Labels;
+using Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Lines;
+using Ban3.Infrastructures.Charts.Labels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Components;
+namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// Calendar coordinates.

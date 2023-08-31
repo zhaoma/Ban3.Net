@@ -5,12 +5,12 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Labels;
+namespace Ban3.Infrastructures.Charts.Labels;
 
 /// <summary>
 /// 雷达图每个指示器名称的配置项

@@ -5,9 +5,9 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
-using  Ban3.Infrastructures.Charts.Styles;
+using Ban3.Infrastructures.Charts.Styles;
 
-namespace  Ban3.Infrastructures.Charts.Lines;
+namespace Ban3.Infrastructures.Charts.Lines;
 
 /// <summary>
 /// 坐标轴次刻度线

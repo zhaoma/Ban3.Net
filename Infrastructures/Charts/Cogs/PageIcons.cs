@@ -1,15 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    
-//  reference:
-//  ————————————————————————————————————————————————————————————————————————————
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace  Ban3.Infrastructures.Charts.Cogs;
+namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// The icons of page buttons.

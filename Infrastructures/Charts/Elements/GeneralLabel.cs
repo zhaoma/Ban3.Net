@@ -5,9 +5,9 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
-using ECharts =  Ban3.Infrastructures.Charts.Enums;
+using ECharts = Ban3.Infrastructures.Charts.Enums;
 
-namespace  Ban3.Infrastructures.Charts.Elements;
+namespace Ban3.Infrastructures.Charts.Elements;
 
 public class GeneralLabel
     : IHasFont, IHasBorder, IHasShadow, IHasTextBorder, IHasTextShadow

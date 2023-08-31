@@ -4,9 +4,9 @@
 //  reference:
 //  ————————————————————————————————————————————————————————————————————————————
 
-using  Ban3.Infrastructures.Charts.Elements;
+using Ban3.Infrastructures.Charts.Elements;
 
-namespace  Ban3.Infrastructures.Charts.Lines;
+namespace Ban3.Infrastructures.Charts.Lines;
 
 public class SplitLine
     : GeneralLine

@@ -6,7 +6,7 @@
 
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Styles;
+namespace Ban3.Infrastructures.Charts.Styles;
 
 public class SelectStyle
 {

@@ -6,7 +6,7 @@
 
 using Newtonsoft.Json;
 
-namespace  Ban3.Infrastructures.Charts.Elements;
+namespace Ban3.Infrastructures.Charts.Elements;
 
 /// <summary>
 /// 文字阴影
