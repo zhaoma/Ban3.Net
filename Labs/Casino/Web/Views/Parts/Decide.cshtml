@@ -5,23 +5,24 @@
     var defaultTarget = showTargets.First();
 }
 <div class="row">
-    <div class="col-3">
-
-        <div class="list-group targets">
-            @foreach (var target in showTargets)
-            {
-                <a href="#" class="list-group-item list-group-item-action lazyLoadButton"
-                   dataUrl="@($"/parts/stock/{@target.Stock.Code}")"
-                   renderElement="onesChartsContainer">@Html.Raw(target.Stock.Symbol)
-                    <ol>
-                        @foreach (var p in target.Points)
-                        {
-                            <li>@p.Date @p.Subject</li>
-                        }
-                    </ol>
-                    </a>
-            }
-        </div>
+    <div class="col-9">
+<h1>@defaultTarget?.Stock.Name 
+	<sup>@defaultTarget?.Stock.Symbol</sup>
+	<sub>@Model.Data.Count(o => !o.Value.Ignore) targets found.</sub>
+	</h1>
+                            <ol>
+                                @foreach (var p in defaultTarget.Points)
+                                {
+                                    <li>@Html.Raw(p.Html(defaultTarget.PreClose()))</li>
+                                }
+                            </ol>
     </div>
-    <div class="col-9 lazyLoad" id="onesChartsContainer" dataUrl="/parts/stock/@defaultTarget.Stock.Code"></div>
+    <div class="col-3">
+        
+    </div>
 </div>
+
+    <div class="row">
+        <div class="col-12 lazyLoad" id="onesChartsContainer" dataUrl="/parts/stock/@defaultTarget.Stock.Code"></div>
+    </div>
+

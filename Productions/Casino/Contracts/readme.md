@@ -3,6 +3,10 @@ No site , private symbol only.
 
 ## _最后修改_
 
+2023-09-02
+1.0.13.6
+edit target output.
+
 2023-08-29
 1.0.13.? 版本为增加 GenerateTargets(
         this ICalculator _,
@@ -14,11 +18,11 @@ No site , private symbol only.
 
 ## Features
 
-- Helper.Analyzer
-- Helper.Calculator
-- Helper.Collector
--- Helper.Sites
-- Helper.Reportor
+- Helper.Analyzer       //
+- Helper.Calculator     //
+- Helper.Collector      //
+- Helper.Sites          //
+- Helper.Reportor       //
 
 ## License
 

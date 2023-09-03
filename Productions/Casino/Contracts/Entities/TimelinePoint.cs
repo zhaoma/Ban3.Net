@@ -85,11 +85,11 @@ public class TimelinePoint
         {
             var className = Close > preClose ? "red" : "green";
             var ratio = Math.Round((Close - preClose.Value) / preClose.Value * 100D, 2);
-            result += $"<span class='{className}'>{d} {Close} <span class='badge'>{ratio} %</span></span>";
+            result += $"<span class='{className}'>{d} {Subject}:{Close} <span class='badge'>{ratio} %</span></span>";
         }
         else
         {
-            result = $" <span>{d} {Close}</span>";
+            result = $" <span>{d} {Subject}:{Close}</span>";
         }
 
         return result;

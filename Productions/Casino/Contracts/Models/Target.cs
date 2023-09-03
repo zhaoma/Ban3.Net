@@ -14,13 +14,13 @@ namespace Ban3.Productions.Casino.Contracts.Models;
 public class Target
 {
     /// 
-    public Target(){}
+    public Target() { }
 
     /// 
     public Target(
-        Stock stock, 
-        List<TimelinePoint> points, 
-        StockPrice price, 
+        Stock stock,
+        List<TimelinePoint> points,
+        StockPrice price,
         StockSets sets)
     {
         Stock = stock;
@@ -29,7 +29,9 @@ public class Target
         LatestSets = sets;
         LastAccess = DateTime.Now;
 
-        Ignore = LatestSets?.SetKeys != null && LatestSets.SetKeys!.Contains("MACD.M.DAILY");
+        Ignore = LatestSets?.SetKeys != null;
+        Ignore = Ignore && !LatestSets.SetKeys!.Contains("MACD.M.DAILY");
+        Ignore = Ignore && !LatestSets.SetKeys!.Contains("MACD.MDI.DAILY");
     }
 
     /// <summary>
@@ -61,10 +63,29 @@ public class Target
     /// </summary>
     [JsonProperty("latestSets", NullValueHandling = NullValueHandling.Ignore)]
     public StockSets LatestSets { get; set; }
-    
+
     /// <summary>
     /// 
     /// </summary>
     [JsonProperty("lastAccess", NullValueHandling = NullValueHandling.Ignore)]
     public DateTime LastAccess { get; set; }
+
+    /// 
+    public double PreClose()
+        => Points.Any() ? Points.First().Close : 0D;
+
+    /// 
+    public double Change()
+        => PreClose() != 0 ? LatestPrice.Close - PreClose() : 0D;
+
+    /// 
+    public double ChangePercent()
+        => PreClose() != 0 ? Change()/ PreClose() *100D: 0D;
+
+    /// 
+    public string Html()
+    {
+        var className = ChangePercent()>0 ? "red" : "green";
+        return $"{Stock.Symbol}-{LatestPrice.TradeDate}:<span class='{className}'>{PreClose()}-{LatestPrice.Close} <span class='badge'>{Math.Round(ChangePercent(),2)} %</span></span>";
+    }
 }
