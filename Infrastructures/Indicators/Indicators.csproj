@@ -10,12 +10,12 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugType>embedded</DebugType>
     <Title>Ban3.Infrastructures.Indicators</Title>
-    <Version>1.0.9</Version>
+    <Version>1.0.10</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
     <Description>Indicators extension</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.7.3</AssemblyVersion>
+    <AssemblyVersion>1.0.7.10</AssemblyVersion>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <FileVersion>1.0.6</FileVersion>
     <PackageReadmeFile>readme.md</PackageReadmeFile>

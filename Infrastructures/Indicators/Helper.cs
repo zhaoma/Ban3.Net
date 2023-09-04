@@ -1,11 +1,15 @@
-﻿using Ban3.Infrastructures.Indicators.Entries;
+﻿using System;
+using Ban3.Infrastructures.Indicators.Entries;
 using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Infrastructures.Indicators.Inputs;
 using log4net;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
+using System.Reflection;
 
 namespace Ban3.Infrastructures.Indicators;
 
@@ -216,4 +220,43 @@ public static partial class Helper
             //{ StockAnalysisCycle.MONTHLY, -40F }
         }
     };
+
+    public static Dictionary<string, string> SetsKeysSummary(this IEnumerable<string>? keys)
+    {
+        if (keys == null) return new Dictionary<string, string> { { "ERROR", "KEYS IS NULL." } };
+
+        var result = new Dictionary<string, string>();
+
+        var keysArray = keys.Select(o => o.Split('.')).ToList();
+
+        foreach (var featureGroup in FeatureGroups)
+        {
+            var ka = keysArray.Where(o => o[0] == featureGroup).ToList();
+            if (ka.Any())
+            {
+                var sb = new StringBuilder();
+                foreach (var b in ka)
+                {
+                    if ((Attribute.GetCustomAttribute(typeof(StockAnalysisCycle).GetField(b[2]), typeof(DescriptionAttribute)) is DescriptionAttribute attribute))
+                    {
+                       sb.Append( attribute.Description + b.FeatureSummary() + ";");
+                    }
+                    else
+                    {
+                        sb.Append(b[2] + b.FeatureSummary() + ";");
+                    }
+                }
+                result.Add(featureGroup,sb.ToString() );
+            }
+        }
+
+        return result;
+    }
+
+    static string FeatureSummary(this string[] ks)
+    {
+        var k = $"{ks[0]}.{ks[1]}";
+        var r = Features.FindLast(o => o.Key == k);
+        return r != null ? r.Subject : "";
+    }
 }

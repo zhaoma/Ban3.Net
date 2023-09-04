@@ -185,3 +185,15 @@ function onesCodes() {
     });
     return false;
 }
+
+function viewTarget(id,ignore) {
+    $.ajax({
+        type: "get",
+        url: "/parts/target/" + id + "?ignore=" + ignore,
+        dataType: "text",
+        success: function (response) {
+            document.location.reload();
+        }
+    });
+    return false;
+}

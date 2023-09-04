@@ -8,14 +8,23 @@ using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.Common;
 using Ban3.Infrastructures.DataPersist.Attributes;
 using Ban3.Infrastructures.DataPersist.Extensions;
+using Ban3.Infrastructures.Indicators;
 using Ban3.Infrastructures.NetMail;
 using Ban3.Infrastructures.PlatformInvoke;
 using Ban3.Infrastructures.PlatformInvoke.Entries;
 
-for (var i = 1; i < 100; i++)
-{
-    $"{i}:{new Random().NextDateTime(DateTime.Now, DateTime.Now.AddYears(3))}".WriteColorLine(ConsoleColor.Red);
-}
+//for (var i = 1; i < 100; i++)
+//{
+//    $"{i}:{new Random().NextDateTime(DateTime.Now, DateTime.Now.AddYears(3))}".WriteColorLine(ConsoleColor.Red);
+//}
+
+var ks =
+    "AMOUNT.UP.DAILY;BIAS.LT.DAILY;DMI.MDI.DAILY;KD.MDI.DAILY;MACD.MDI.DAILY;MACD.N.DAILY;AMOUNT.UP.WEEKLY;BIAS.LT.WEEKLY;DMI.MDI.WEEKLY;DMI.DC.WEEKLY;KD.MDI.WEEKLY;KD.DC.WEEKLY;MACD.PDI.WEEKLY;MACD.N.WEEKLY;AMOUNT.UP.MONTHLY;BIAS.GE.MONTHLY;DMI.PDI.MONTHLY;ENE.LOWER.MONTHLY;KD.MDI.MONTHLY;MACD.MDI.MONTHLY;MACD.N.MONTHLY"
+        .Split(';').ToList();
+
+var dic = ks.SetsKeysSummary();
+
+dic.ObjToJson().WriteColorLine(ConsoleColor.Red);
 
 /*
 

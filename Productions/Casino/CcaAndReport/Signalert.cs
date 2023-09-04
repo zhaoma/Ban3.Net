@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ban3.Infrastructures.Charts.Enums;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Common.Models;
@@ -273,6 +274,12 @@ public class Signalert
 
         var cycleEnum = cycle.StringToEnum<StockAnalysisCycle>();
         var diagram = new Stock { Code = code, }.LoadDiagram(cycleEnum);
+        var insideZoom= diagram.DataZoom?.First(o => o.Type == DataZoomType.Inside);
+        if (insideZoom != null)
+        {
+            insideZoom.Start = 99;
+        }
+
         return diagram.ObjToJson();
     }
 

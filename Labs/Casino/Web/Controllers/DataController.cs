@@ -1,12 +1,6 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Indicators;
-using Ban3.Infrastructures.Indicators.Enums;
 using Ban3.Productions.Casino.CcaAndReport;
-using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts.Extensions;
-using Ban3.Productions.Casino.Contracts;
-using Ban3.Productions.Casino.Contracts.Entities;
-using Ban3.Productions.Casino.Contracts.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ban3.Labs.Casino.Web.Controllers;
@@ -51,4 +45,6 @@ public class DataController : Controller
 
     public ContentResult AmountCandlestick(string id)
         => Content(Signalert.GetAmountDiagram(id));
+
+
 }

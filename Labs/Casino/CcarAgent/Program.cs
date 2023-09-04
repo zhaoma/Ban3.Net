@@ -2,7 +2,9 @@
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Productions.Casino.CcaAndReport;
+using Ban3.Productions.Casino.CcaAndReport.Implements;
 using Ban3.Productions.Casino.Contracts.Extensions;
+using Ban3.Productions.Casino.Contracts.Models;
 
 namespace Ban3.Labs.Casino.CcarAgent;
 
@@ -75,6 +77,22 @@ internal class Program
     {
         Console.WriteLine("NOTHING IN QUEUE.");
 
-        //Any trial funcs test here...
+        //Any trial functions test here...
+
+        var stocks = Signalert.Collector.LoadAllCodes();
+        new Action(() =>
+        {
+            Signalert.Calculator.GenerateTargets(stocks);
+        }).ExecuteAndTiming("GenerateTargets");
+
+        var targets = new Targets();
+        $"{targets.Data.Count(o=>!o.Value.Ignore)} found".WriteColorLine(ConsoleColor.Red);
+
+        Console.WriteLine(Productions.Casino.Contracts.Config.IgnoreKeys.ObjToJson());
+
+        Console.WriteLine(
+        targets.Data.Count(o =>
+            !o.Value.Ignore&&
+            Productions.Casino.Contracts.Config.IgnoreKeys.Any(x => o.Value.LatestSets.SetKeys!.Contains(x))));
     }
 }

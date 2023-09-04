@@ -26,13 +26,13 @@ public static partial class Helper
     /// <returns></returns>
     public static string EnumDescription(this Enum @enum)
     {
-        FieldInfo field = @enum.GetType().GetField(nameof(@enum));
-        if (!(Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attribute))
+        if (!(Attribute.GetCustomAttribute(@enum.GetType().GetField(nameof(@enum)), typeof(DescriptionAttribute)) is
+                DescriptionAttribute attribute))
         {
             return @enum.ToString();
         }
 
-        return attribute.Description ;
+        return attribute.Description;
     }
 
     /// <summary>

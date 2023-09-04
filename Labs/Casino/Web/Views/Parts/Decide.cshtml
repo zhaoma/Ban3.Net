@@ -1,28 +1,46 @@
-﻿@model Ban3.Productions.Casino.Contracts.Models.Targets 
+﻿@using Ban3.Infrastructures.Indicators
+@model Ban3.Productions.Casino.Contracts.Models.Targets 
 @{
     Layout = null;
     var showTargets = Model.Data.Where(o => !o.Value.Ignore).Select(o => o.Value).ToList();
-    var defaultTarget = showTargets.First();
+    var defaultTarget = showTargets
+        .OrderBy(o=>o.LastAccess)
+        .First();
+    var dic = defaultTarget?.LatestSets?.SetKeys.SetsKeysSummary();
 }
-<div class="row">
-    <div class="col-9">
-<h1>@defaultTarget?.Stock.Name 
-	<sup>@defaultTarget?.Stock.Symbol</sup>
-	<sub>@Model.Data.Count(o => !o.Value.Ignore) targets found.</sub>
-	</h1>
-                            <ol>
-                                @foreach (var p in defaultTarget.Points)
-                                {
-                                    <li>@Html.Raw(p.Html(defaultTarget.PreClose()))</li>
-                                }
-                            </ol>
-    </div>
-    <div class="col-3">
-        
-    </div>
+<div class="container">
+    <div class="col">
+        <h1>@defaultTarget?.Stock.Name
+                <sub>@Html.Raw(defaultTarget?.Html())</sub>
+        </h1>
+        <ol>
+            @if (defaultTarget != null)
+            {
+                foreach (var p in defaultTarget.Points)
+                {
+                    <li>@Html.Raw(p.Html(defaultTarget.PreClose()))</li>
+                }
+            }
+        </ol>
+        <hr />
+        <div class="targetButtons">
+            <button type="button" onclick="return viewTarget('@defaultTarget?.Stock.Code',1);" class="btn btn-warning">Ignore</button>
+            <button type="button" onclick="return viewTarget('@defaultTarget?.Stock.Code',0);" class="btn btn-primary">Skip</button>
+            <button type="button" class="btn btn-secondary">@Model.Data.Count(o => !o.Value.Ignore) targets remain.</button>
+        </div>
+        <ol>
+            @if (dic != null)
+            {
+                foreach (var kv in dic)
+                {
+                    <li>@kv.Key : @kv.Value</li>
+                }
+            }
+        </ol>
+        </div>
 </div>
 
-    <div class="row">
-        <div class="col-12 lazyLoad" id="onesChartsContainer" dataUrl="/parts/stock/@defaultTarget.Stock.Code"></div>
-    </div>
+<div class="row">
+    <div class="col-12 lazyLoad" id="onesChartsContainer" dataUrl="/parts/stock/@defaultTarget?.Stock.Code"></div>
+</div>
 

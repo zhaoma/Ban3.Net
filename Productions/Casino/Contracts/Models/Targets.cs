@@ -26,11 +26,11 @@ public class Targets
     /// </summary>
     public Targets()
     {
-        Data = typeof(Models.Targets).LocalFile()
+        Data = typeof(Targets).LocalFile()
                    .ReadFileAs<Dictionary<string, Target>>()
                ?? new Dictionary<string, Target>();
     }
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -39,13 +39,22 @@ public class Targets
     /// <param name="price"></param>
     /// <param name="sets"></param>
     public void AppendTarget(
-        Stock stock, 
+        Stock stock,
         List<TimelinePoint> points,
         StockPrice price,
         StockSets sets
-        )
+    )
     {
-        Data.AddOrReplace(stock.Code, new Target(stock, points, price,sets));
+        var t = new Target(stock, points, price, sets);
+        if (Data.TryGetValue(stock.Code, out var _))
+        {
+            Data[stock.Code] = t;
+        }
+        else
+        {
+            if (!t.Ignore)
+                Data.AddOrReplace(stock.Code, t);
+        }
     }
 
     /// <summary>

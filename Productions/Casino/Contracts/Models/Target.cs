@@ -29,9 +29,11 @@ public class Target
         LatestSets = sets;
         LastAccess = DateTime.Now;
 
-        Ignore = LatestSets?.SetKeys != null;
-        Ignore = Ignore && !LatestSets.SetKeys!.Contains("MACD.M.DAILY");
-        Ignore = Ignore && !LatestSets.SetKeys!.Contains("MACD.MDI.DAILY");
+        if (LatestSets is { SetKeys: { } })
+        {
+            Ignore = LatestSets?.SetKeys != null;
+            Ignore = Ignore && Config.IgnoreKeys.Any(x => LatestSets.SetKeys.Contains(x));
+        }
     }
 
     /// <summary>

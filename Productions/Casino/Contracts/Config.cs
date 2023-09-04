@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Inputs;
 using Ban3.Infrastructures.RuntimeCaching;
@@ -14,6 +15,14 @@ public class Config
 {
     /// 
     public static int MaxParallelTasks = Infrastructures.Common.Config.GetValue("Config:MaxParallelTasks").ToInt(30);
+
+    /// 
+    public static List<string> IgnoreKeys = Infrastructures.Common.Config.GetValue("Config:IgnoreKeys") == ""
+        ? new List<string>
+        {
+            "MACD.N.DAILY", "MACD.MDI.DAILY"
+        }
+        : Infrastructures.Common.Config.GetValue("Config:IgnoreKeys").Split(';').ToList();
 
     ///
     public const int FixDailyPrices = 10;

@@ -246,4 +246,18 @@ public class PartsController : Controller
         ViewData["Title"] = $"{targets.Data.Count(o=>!o.Value.Ignore)} / {targets.Data.Count}";
         return View(targets);
     }
+
+    public IActionResult Target(string id,int ignore=0)
+    {
+        var targets = new Targets();
+
+        if (targets.Data.TryGetValue(id, out var target))
+        {
+            target.LastAccess=DateTime.Now;
+            target.Ignore = ignore == 1;
+            targets.Save();
+        }
+
+        return RedirectToAction("Decide");
+    }
 }
