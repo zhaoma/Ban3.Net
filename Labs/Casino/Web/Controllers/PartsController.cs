@@ -25,7 +25,7 @@ public class PartsController : Controller
     {
         var dots = Signalert.GetDots(request);
 
-        if (dots == null)
+        if (!dots.Any())
         {
             return Content("dots is empty");
         }
@@ -240,7 +240,7 @@ public class PartsController : Controller
         return View(dic);
     }
 
-    public IActionResult Decide()
+    public IActionResult Decide(RenderView request)
     {
         var targets = new Targets();
         ViewData["Title"] = $"{targets.Data.Count(o=>!o.Value.Ignore)} / {targets.Data.Count}";
@@ -259,5 +259,17 @@ public class PartsController : Controller
         }
 
         return RedirectToAction("Decide");
+    }
+
+    public IActionResult ViewTarget(string id)
+    {
+        var targets = new Targets();
+
+        if (targets.Data.TryGetValue(id, out var target))
+        {
+            return View(target);
+        }
+
+        return Content("NOT EXISTS TARGET!");
     }
 }
