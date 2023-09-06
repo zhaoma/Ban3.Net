@@ -7,9 +7,9 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Infrastructures.SignalRClient/1.0.2": {
+      "Ban3.Infrastructures.SignalRClient/1.0.3": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.13",
+          "Ban3.Infrastructures.Common": "1.0.14",
           "Microsoft.AspNetCore.SignalR": "1.1.0",
           "Microsoft.AspNetCore.SignalR.Client": "7.0.10",
           "NETStandard.Library": "2.0.3"
@@ -18,7 +18,7 @@
           "Ban3.Infrastructures.SignalRClient.dll": {}
         }
       },
-      "Ban3.Infrastructures.Common/1.0.13": {
+      "Ban3.Infrastructures.Common/1.0.14": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
@@ -30,8 +30,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
-            "assemblyVersion": "1.0.0.13",
-            "fileVersion": "1.0.0.13"
+            "assemblyVersion": "1.0.0.14",
+            "fileVersion": "1.0.0.14"
           }
         }
       },
@@ -866,17 +866,17 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.SignalRClient/1.0.2": {
+    "Ban3.Infrastructures.SignalRClient/1.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Ban3.Infrastructures.Common/1.0.13": {
+    "Ban3.Infrastructures.Common/1.0.14": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+Ko4ThwnlxsHxBLrPzy70WXb0RMmax9a5mgcmKYgn7qlVrLmLgE+enhXjiaJ6m1ZMRAoxWU8pyVO8TSXF1ckeQ==",
-      "path": "ban3.infrastructures.common/1.0.13",
-      "hashPath": "ban3.infrastructures.common.1.0.13.nupkg.sha512"
+      "sha512": "sha512-v8O9hUPEyPu03YV1kAY0TRQzmFLNuKVnpb5fe/mtZonkT2qHeL/PeDpFSKNhVcxBdED5W0dCWkk3jQkUrNDbMA==",
+      "path": "ban3.infrastructures.common/1.0.14",
+      "hashPath": "ban3.infrastructures.common.1.0.14.nupkg.sha512"
     },
     "Fody/6.2.5": {
       "type": "package",

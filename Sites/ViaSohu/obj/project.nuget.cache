@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "o997M6Os4L346uovtEea0tPsu86iCkPbhuG3a49b5YzhznPAYyzedjjoutWQyXSK7hR5IC6DyG2VmTa71oV/pw==",
+  "dgSpecHash": "Ne6fsfYvb1QcbTTPe6O05GQ756fiQMVGjX8zjIdqn7IikziJpDQUStmvFKfLzEnikz6KcJshdCwsOKPutSk+/w==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Sites\\ViaSohu\\ViaSohu.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.13\\ban3.infrastructures.common.1.0.13.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.6\\ban3.infrastructures.nethttp.1.0.6.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.14\\ban3.infrastructures.common.1.0.14.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.7\\ban3.infrastructures.nethttp.1.0.7.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.2.5\\fody.6.2.5.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

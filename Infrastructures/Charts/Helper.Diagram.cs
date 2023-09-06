@@ -325,6 +325,7 @@ public static partial class Helper
         return diagram;
     }
 
+    ///
     public static Diagram AddSeries(
         this Diagram diagram,
         Series[] series)

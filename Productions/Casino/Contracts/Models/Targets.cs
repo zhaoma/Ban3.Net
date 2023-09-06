@@ -97,4 +97,14 @@ public class Targets
 
         return null;
     }
+
+    /// 
+    public Target? Get(string code)
+    {
+        if (Data.TryGetValue(code, out var target))
+            return target;
+
+        return null;
+    }
+
 }

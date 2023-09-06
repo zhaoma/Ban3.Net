@@ -35,5 +35,11 @@ public enum StockGroup
     /// 科创板
     /// </summary>
     [Description("科创板")]
-    SHK = 7
+    SHK = 7,
+
+    /// <summary>
+    /// 北交所/新三板
+    /// </summary>
+    [Description("其它")]
+    Other
 }

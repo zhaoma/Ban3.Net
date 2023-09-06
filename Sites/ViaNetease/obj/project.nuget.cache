@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "wQ7qjd6CSAG9h7RaZI4filvn6Hx90DGKrcy+Ny8NYzipLOn0d3K5Ckz5xUmf6Jsk6PjHdG5QQrxYj+eXnI2rDg==",
+  "dgSpecHash": "/L1TpYc7zsViiMGoJL3Wp1ohFy+5+nTTZ1Yi/vXx7cnipzccLI5l9PwiyqU1YzSt3B/59Lau6kRjpR9oABVKaw==",
   "success": true,
   "projectFilePath": "D:\\GIT\\Ban3.Net\\Sites\\ViaNetease\\ViaNetease.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.13\\ban3.infrastructures.common.1.0.13.nupkg.sha512",
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.6\\ban3.infrastructures.nethttp.1.0.6.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.common\\1.0.14\\ban3.infrastructures.common.1.0.14.nupkg.sha512",
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\ban3.infrastructures.nethttp\\1.0.7\\ban3.infrastructures.nethttp.1.0.7.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\fody\\6.2.5\\fody.6.2.5.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
     "C:\\Users\\z004k7zb\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Infrastructures\Consoles\Consoles.csproj" />
-    <ProjectReference Include="..\..\..\Infrastructures\DataPersist\DataPersist.csproj" />
-    <ProjectReference Include="..\..\..\Infrastructures\Indicators\Indicators.csproj" />
-    <ProjectReference Include="..\..\..\Infrastructures\NetMail\NetMail.csproj" />
-    <ProjectReference Include="..\..\..\Infrastructures\PlatformInvoke\PlatformInvoke.csproj" />
+    <Compile Remove="Demo.cs" />
+    <Compile Remove="Demo2.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructures\Common\Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -47,7 +47,7 @@
           "dependencies": {
             "Ban3.Infrastructures.NetHttp": {
               "target": "Package",
-              "version": "[1.0.6, )"
+              "version": "[1.0.7, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",

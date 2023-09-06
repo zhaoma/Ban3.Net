@@ -36,5 +36,22 @@ public static partial class Helper
             return result;
         };
 
-
+    public static Enums.StockGroup StockGroup(this string prefix)
+    {
+        return prefix switch
+        {
+            "000" => Enums.StockGroup.SZA,
+            "001" => Enums.StockGroup.SZA,
+            "002" => Enums.StockGroup.SZZ,
+            "003" => Enums.StockGroup.SZZ,
+            "300" => Enums.StockGroup.SZC,
+            "301" => Enums.StockGroup.SZC,
+            "600" => Enums.StockGroup.SHA,
+            "601" => Enums.StockGroup.SHA,
+            "603" => Enums.StockGroup.SHA,
+            "688" => Enums.StockGroup.SHK,
+            "689" => Enums.StockGroup.SHK,
+            _ => Enums.StockGroup.Other
+        };
+    }
 }

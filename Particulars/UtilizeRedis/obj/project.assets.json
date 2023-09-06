@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "Ban3.Infrastructures.Common/1.0.13": {
+      "Ban3.Infrastructures.Common/1.0.14": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
@@ -611,14 +611,14 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.Common/1.0.13": {
-      "sha512": "+Ko4ThwnlxsHxBLrPzy70WXb0RMmax9a5mgcmKYgn7qlVrLmLgE+enhXjiaJ6m1ZMRAoxWU8pyVO8TSXF1ckeQ==",
+    "Ban3.Infrastructures.Common/1.0.14": {
+      "sha512": "v8O9hUPEyPu03YV1kAY0TRQzmFLNuKVnpb5fe/mtZonkT2qHeL/PeDpFSKNhVcxBdED5W0dCWkk3jQkUrNDbMA==",
       "type": "package",
-      "path": "ban3.infrastructures.common/1.0.13",
+      "path": "ban3.infrastructures.common/1.0.14",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.common.1.0.13.nupkg.sha512",
+        "ban3.infrastructures.common.1.0.14.nupkg.sha512",
         "ban3.infrastructures.common.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
@@ -2003,7 +2003,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.13",
+      "Ban3.Infrastructures.Common >= 1.0.14",
       "NETStandard.Library >= 2.0.3",
       "StackExchange.Redis >= 2.6.122"
     ]
@@ -2013,7 +2013,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "1.0.10",
+    "version": "1.0.11",
     "restore": {
       "projectUniqueName": "D:\\GIT\\Ban3.Net\\Particulars\\UtilizeRedis\\UtilizeRedis.csproj",
       "projectName": "Ban3.Particulars.UtilizeRedis",
@@ -2055,7 +2055,7 @@
         "dependencies": {
           "Ban3.Infrastructures.Common": {
             "target": "Package",
-            "version": "[1.0.13, )"
+            "version": "[1.0.14, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",

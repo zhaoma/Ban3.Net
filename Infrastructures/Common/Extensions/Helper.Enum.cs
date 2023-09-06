@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
 using Ban3.Infrastructures.Common.Attributes;
 using Ban3.Infrastructures.Common.Models;
 
@@ -22,17 +21,20 @@ public static partial class Helper
     /// <summary>
     /// 获取到对应枚举的描述-没有描述信息，返回枚举值
     /// </summary>
-    /// <param name="enum"></param>
+    /// <param name="enumValue"></param>
     /// <returns></returns>
-    public static string EnumDescription(this Enum @enum)
+    public static string EnumDescription<T>(this T enumValue) where T : Enum
     {
-        if (!(Attribute.GetCustomAttribute(@enum.GetType().GetField(nameof(@enum)), typeof(DescriptionAttribute)) is
-                DescriptionAttribute attribute))
+        var result = enumValue.ToString();
+        var fieldInfo = typeof(T).GetField(result);
+
+        if (Attribute.GetCustomAttribute(fieldInfo, typeof(DescriptionAttribute)) is
+                DescriptionAttribute attribute)
         {
-            return @enum.ToString();
+            result= attribute.Description;
         }
 
-        return attribute.Description;
+        return result;
     }
 
     /// <summary>

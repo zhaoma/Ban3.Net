@@ -5,7 +5,7 @@
   },
   "projects": {
     "D:\\GIT\\Ban3.Net\\Particulars\\UtilizeRedis\\UtilizeRedis.csproj": {
-      "version": "1.0.10",
+      "version": "1.0.11",
       "restore": {
         "projectUniqueName": "D:\\GIT\\Ban3.Net\\Particulars\\UtilizeRedis\\UtilizeRedis.csproj",
         "projectName": "Ban3.Particulars.UtilizeRedis",
@@ -47,7 +47,7 @@
           "dependencies": {
             "Ban3.Infrastructures.Common": {
               "target": "Package",
-              "version": "[1.0.13, )"
+              "version": "[1.0.14, )"
             },
             "NETStandard.Library": {
               "suppressParent": "All",
