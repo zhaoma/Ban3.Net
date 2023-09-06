@@ -36,22 +36,51 @@ public static partial class Helper
             return result;
         };
 
-    public static Enums.StockGroup StockGroup(this string prefix)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="prefix"></param>
+    /// <returns></returns>
+    public static Enums.StockGroup StockGroup(this string prefix) => 
+	    prefix.Substring(0, 3) switch
+            {
+                "000" => Enums.StockGroup.SZA,
+                "001" => Enums.StockGroup.SZA,
+                "002" => Enums.StockGroup.SZZ,
+                "003" => Enums.StockGroup.SZZ,
+                "300" => Enums.StockGroup.SZC,
+                "301" => Enums.StockGroup.SZC,
+                "600" => Enums.StockGroup.SHA,
+                "601" => Enums.StockGroup.SHA,
+                "603" => Enums.StockGroup.SHA,
+                "688" => Enums.StockGroup.SHK,
+                "689" => Enums.StockGroup.SHK,
+                _ => Enums.StockGroup.Other
+            };
+
+    public static Enums.PriceScope PriceScope(this double price)
     {
-        return prefix switch
-        {
-            "000" => Enums.StockGroup.SZA,
-            "001" => Enums.StockGroup.SZA,
-            "002" => Enums.StockGroup.SZZ,
-            "003" => Enums.StockGroup.SZZ,
-            "300" => Enums.StockGroup.SZC,
-            "301" => Enums.StockGroup.SZC,
-            "600" => Enums.StockGroup.SHA,
-            "601" => Enums.StockGroup.SHA,
-            "603" => Enums.StockGroup.SHA,
-            "688" => Enums.StockGroup.SHK,
-            "689" => Enums.StockGroup.SHK,
-            _ => Enums.StockGroup.Other
-        };
+        if (price <= 5D)
+            return Enums.PriceScope.LE5;
+
+        if (price <= 10D)
+            return Enums.PriceScope.LE10;
+
+        if (price <= 20D)
+            return Enums.PriceScope.LE20;
+
+        if (price <= 30D)
+            return Enums.PriceScope.LE30;
+
+        if (price <= 50D)
+            return Enums.PriceScope.LE50;
+
+        if (price <= 100D)
+            return Enums.PriceScope.LE100;
+
+        if (price <= 200D)
+            return Enums.PriceScope.LE200;
+
+        return Enums.PriceScope.GT200;
     }
 }

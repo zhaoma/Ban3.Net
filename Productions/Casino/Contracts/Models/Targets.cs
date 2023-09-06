@@ -7,6 +7,7 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Sites.ViaTushare.Entries;
+using Ban3.Productions.Casino.Contracts.Extensions;
 
 namespace Ban3.Productions.Casino.Contracts.Models;
 
@@ -92,7 +93,7 @@ public class Targets
     {
         if (Data.Any(o => !o.Value.Ignore))
         {
-            return Data.OrderBy(o=>o.Value.LastAccess).FirstOrDefault().Value;
+            return Data.OrderBy(o => o.Value.LastAccess).FirstOrDefault().Value;
         }
 
         return null;
@@ -107,4 +108,15 @@ public class Targets
         return null;
     }
 
+    public Dictionary<Enums.StockGroup, int> GroupSummary() =>
+        Data
+        .Where(o => !o.Value.Ignore)
+        .Select(o => o.Value.Stock)
+        .GroupBy(o => o.Symbol.Substring(0, 3))
+        .Select(o => new
+        {
+            group = o.Key.StockGroup(),
+            counter = o.Count()
+        })
+    .ToDictionary(o => o.group, o => o.counter);
 }
