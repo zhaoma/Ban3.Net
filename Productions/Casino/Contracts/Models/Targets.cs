@@ -128,8 +128,19 @@ public class Targets
         })
     .ToDictionary(o => o.group, o => o.counter);
 
+    /// <summary>
+    /// 价格区间计数
+    /// </summary>
+    /// <returns></returns>
     public Dictionary<PriceScope, int> PriceScopes()
         => Counter(target => ((double)target.LatestPrice.Close).PriceScope());
+
+    /// <summary>
+    /// 所属板块计数
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<StockGroup, int> StockGroups()
+        => Counter(target => target.Stock.Symbol.StockGroup());
     /*
     public Dictionary<CapitalScope,int> CapitalScopes()
     => Counter(target => (target.Stock.).PriceScope());
