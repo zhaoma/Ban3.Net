@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.NetHttp;
 using Ban3.Sites.ViaSohu.Entries;
@@ -11,30 +12,25 @@ namespace Ban3.Sites.ViaSohu
 {
     public static partial class Helper
     {
-        static List<Mapping> Mappings
-        {
-            get
+        static readonly List<Mapping> Mappings =
+            new List<Mapping>
             {
-                return new List<Mapping>
+                new Mapping
                 {
-                        new Mapping
-                        {
-                                GroupName = "行业",
-                                SohuId = 1631
-                        },
-                        new Mapping
-                        {
-                                GroupName = "地域",
-                                SohuId = 1632
-                        },
-                        new Mapping
-                        {
-                                GroupName = "概念",
-                                SohuId = 1630
-                        }
-                };
-            }
-        }
+                    GroupName = "行业",
+                    SohuId = 1631
+                },
+                new Mapping
+                {
+                    GroupName = "地域",
+                    SohuId = 1632
+                },
+                new Mapping
+                {
+                    GroupName = "概念",
+                    SohuId = 1630
+                }
+            };
 
         public static DownloadAllNotionsResult DownloadAllNotions()
         {
@@ -52,10 +48,14 @@ namespace Ban3.Sites.ViaSohu
                 SohuId = target.SohuId
             };
 
-            var js = new Infrastructures.NetHttp.Entries.TargetHost
+            var bytes = new Infrastructures.NetHttp.Entries.TargetHost
             {
                 Anonymous = true
-            }.ReadContent(request).Result;
+            }.ReadBytes(request).Result;
+            
+            Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            var js = Encoding.GetEncoding(request.Charset).GetString(bytes);
+
             var json = $"[{js.Substr("'pllist',", "])</script>")}" + "]";
 
             var result = json.JsonToObj<List<string[]>>();

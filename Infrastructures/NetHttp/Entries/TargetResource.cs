@@ -68,8 +68,11 @@ public class TargetResource : ITargetResource
             }
         }
 
-        if(!string.IsNullOrEmpty(Charset))
-            request.Headers.Add("Accept-Charset",Charset);
+        if (!string.IsNullOrEmpty(Charset))
+        {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            request.Headers.Add("Accept-Charset", Charset);
+        }
 
         return request;
     }

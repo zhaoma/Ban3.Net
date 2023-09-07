@@ -37,7 +37,7 @@ public static partial class Helper
         };
 
     /// <summary>
-    /// 
+    /// 板块归属
     /// </summary>
     /// <param name="prefix"></param>
     /// <returns></returns>
@@ -58,29 +58,54 @@ public static partial class Helper
                 _ => Enums.StockGroup.Other
             };
 
-    public static Enums.PriceScope PriceScope(this double price)
-    {
-        if (price <= 5D)
-            return Enums.PriceScope.LE5;
+    /// <summary>
+    /// 价格区间划分
+    /// </summary>
+    /// <param name="price"></param>
+    /// <returns></returns>
+    public static Enums.PriceScope PriceScope(this double price) =>
+        price switch
+        {
+            <= 5D => Enums.PriceScope.LE5,
+            <= 10D => Enums.PriceScope.LE10,
+            <= 20D => Enums.PriceScope.LE20,
+            <= 30D => Enums.PriceScope.LE30,
+            <= 50D => Enums.PriceScope.LE50,
+            <= 100D => Enums.PriceScope.LE100,
+            <= 200D => Enums.PriceScope.LE200,
+            _ => Enums.PriceScope.GT200
+        };
 
-        if (price <= 10D)
-            return Enums.PriceScope.LE10;
+    /// <summary>
+    /// 按股本划分
+    /// </summary>
+    /// <param name="capital"></param>
+    /// <returns></returns>
+    public static Enums.CapitalScope CapitalScope(this double capital) =>
+        capital switch
+        {
+            <= 50D * 1000 * 1000 => Enums.CapitalScope.LE50M,
+            <= 100D * 1000 * 1000 => Enums.CapitalScope.LE100M,
+            <= 200D * 1000 * 1000 => Enums.CapitalScope.LE200M,
+            <= 300D * 1000 * 1000 => Enums.CapitalScope.LE300M,
+            <= 500D * 1000 * 1000 => Enums.CapitalScope.LE500M,
+            <= 1000D * 1000 * 1000 => Enums.CapitalScope.LE1000M,
+            <= 2000D * 1000 * 1000 => Enums.CapitalScope.LE2000M,
+            _ => Enums.CapitalScope.GT2000M
+        };
 
-        if (price <= 20D)
-            return Enums.PriceScope.LE20;
-
-        if (price <= 30D)
-            return Enums.PriceScope.LE30;
-
-        if (price <= 50D)
-            return Enums.PriceScope.LE50;
-
-        if (price <= 100D)
-            return Enums.PriceScope.LE100;
-
-        if (price <= 200D)
-            return Enums.PriceScope.LE200;
-
-        return Enums.PriceScope.GT200;
-    }
+    /// <summary>
+    /// 按市值划分
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static Enums.ValueScope ValueScope(this double value) =>
+        value switch
+        {
+            <= 2D * 1000 * 1000 * 1000 => Enums.ValueScope.LE2B,
+            <= 5D * 1000 * 1000 * 1000 => Enums.ValueScope.LE5B,
+            <= 10D * 1000 * 1000 * 1000 => Enums.ValueScope.LE10B,
+            <= 20D * 1000 * 1000 * 1000 => Enums.ValueScope.LE20B,
+            _ => Enums.ValueScope.GT20B
+        };
 }

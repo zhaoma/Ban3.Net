@@ -5,13 +5,17 @@ using System.Reflection;
 using Ban3.Infrastructures.Common.Models;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Common;
+using Ban3.Infrastructures.Consoles;
+
+var a=
+Ban3.Sites.ViaSohu.Helper.DownloadAllNotions();
+
+a.ObjToJson().WriteColorLine(ConsoleColor.Red);
 
 //for (var i = 1; i < 100; i++)
 //{
 //    $"{i}:{new Random().NextDateTime(DateTime.Now, DateTime.Now.AddYears(3))}".WriteColorLine(ConsoleColor.Red);
 //}
-Console.WriteLine(nameof(Ban3.Infrastructures.Common.Enums.Sort.Ascending));
-Console.WriteLine(Ban3.Infrastructures.Common.Enums.Sort.Ascending.EnumDescription());
 
 //Console.WriteLine("301178".StockGroup());
 
@@ -19,6 +23,8 @@ Console.WriteLine(Ban3.Infrastructures.Common.Enums.Sort.Ascending.EnumDescripti
 
 /*
 
+Console.WriteLine(nameof(Ban3.Infrastructures.Common.Enums.Sort.Ascending));
+Console.WriteLine(Ban3.Infrastructures.Common.Enums.Sort.Ascending.EnumDescription());
 var ks =
     "AMOUNT.UP.DAILY;BIAS.LT.DAILY;DMI.MDI.DAILY;KD.MDI.DAILY;MACD.MDI.DAILY;MACD.N.DAILY;AMOUNT.UP.WEEKLY;BIAS.LT.WEEKLY;DMI.MDI.WEEKLY;DMI.DC.WEEKLY;KD.MDI.WEEKLY;KD.DC.WEEKLY;MACD.PDI.WEEKLY;MACD.N.WEEKLY;AMOUNT.UP.MONTHLY;BIAS.GE.MONTHLY;DMI.PDI.MONTHLY;ENE.LOWER.MONTHLY;KD.MDI.MONTHLY;MACD.MDI.MONTHLY;MACD.N.MONTHLY"
         .Split(';').ToList();

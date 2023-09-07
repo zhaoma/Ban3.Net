@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Infrastructures.Consoles</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Infrastructures.Consoles.Entries.ColumnShowFormat">
+            <summary>
+            列显示格式信息
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ColumnShowFormat.#ctor(System.Int32,System.Int32,Ban3.Infrastructures.Consoles.Enums.Alignment)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="strLength"></param>
+            <param name="alignment"></param>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ColumnShowFormat.Index">
+            <summary>
+            索引，第几列数据
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ColumnShowFormat.Alignment">
+            <summary>
+            对其方式
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ColumnShowFormat.StrLength">
+            <summary>
+            一列字符串长度
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Consoles.Entries.ConsoleTable">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.TitleString">
+            <summary>
+            表格头部字符串
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.Columns">
+            <summary>
+            表格的列
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.Rows">
+            <summary>
+            行
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.ColumnWides">
+            <summary>
+            列宽
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.ColumnBlankNum">
+            <summary>
+            空白字符数量
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.Alignment">
+            <summary>
+            对其方式
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.EnableCount">
+            <summary>
+            是否显示行数
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.TableStyle">
+            <summary>
+            表格显示样式
+            每次设置样子后就会重置 StyleInfo
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.FormatInfo">
+            <summary>
+            通过 Format 获得到表格显示样式
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.FinalColumnWides">
+            <summary>
+            每一列的宽度
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.ColumnShowFormats">
+            <summary>
+            每一列显示的基本信息
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.AddColumn(System.String,System.Int32)">
+            <summary>
+            添加列
+            </summary>
+            <param name="columnName">列明</param>
+            <param name="columnWide">列的宽</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.AddRow(System.String[])">
+            <summary>
+            添加行
+            </summary>
+            <param name="values">该行数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.From``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            加载 List 对象的数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.ToString">
+            <summary>
+            获取表格字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.Write(System.ConsoleColor)">
+            <summary>
+            绘制表格
+            </summary>
+            <param name="color">title颜色</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.GetHeader">
+            <summary>
+            获取完成头
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.GetExistData">
+            <summary>
+            获取现有数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.GetNewRow(System.String[])">
+            <summary>
+            获取新行数据
+            </summary>
+            <param name="row"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.GetEnd">
+            <summary>
+            获取底
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.GetColumns``1">
+            <summary>
+            获取列名
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.GetColumnValue``1(``0,System.String)">
+            <summary>
+            获取列值
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="obj">数据</param>
+            <param name="column">列名</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Consoles.Entries.StyleInfo">
+            <summary>
+            表格显示样式信息
+            通过 Format 获取到的
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.StyleInfo.DelimiterStr">
+            <summary>
+            每一列数据之间的间隔字符串
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.StyleInfo.RowHasBorder">
+            <summary>
+            是否显示顶部，底部，和每一行数据之间的横向边框
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Consoles.Entries.StyleInfo.AngleStr">
+            <summary>
+            边角字符串
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Consoles.Enums.TableStyle">
+            <summary>
+            表格显示样式
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Consoles.Enums.TableStyle.Default">
+            <summary>
+            默认格式的表格
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Consoles.Enums.TableStyle.MarkDown">
+            <summary>
+            Markdwon格式的表格
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Consoles.Enums.TableStyle.Alternative">
+            <summary>
+            交替格式的表格
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Consoles.Enums.TableStyle.Minimal">
+            <summary>
+            最简格式的表格
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Helper.WriteColorLine(System.String,System.ConsoleColor)">
+            <summary>
+            在控制台输出
+            </summary>
+            <param name="str">文本</param>
+            <param name="color">前颜色</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Helper.WriteErrorLine(System.String,System.ConsoleColor)">
+            <summary>
+            打印错误信息
+            </summary>
+            <param name="str">待打印的字符串</param>
+            <param name="color">想要打印的颜色</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Helper.WriteWarningLine(System.String,System.ConsoleColor)">
+            <summary>
+            打印警告信息
+            </summary>
+            <param name="str">待打印的字符串</param>
+            <param name="color">想要打印的颜色</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Helper.WriteInfoLine(System.String,System.ConsoleColor)">
+            <summary>
+            打印正常信息
+            </summary>
+            <param name="str">待打印的字符串</param>
+            <param name="color">想要打印的颜色</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Helper.WriteSuccessLine(System.String,System.ConsoleColor)">
+            <summary>
+            打印成功的信息
+            </summary>
+            <param name="str">待打印的字符串</param>
+            <param name="color">想要打印的颜色</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.GetColumnWides(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.String[]})">
+            <summary>
+            按照现有数据计算每列最大宽度
+            </summary>
+            <param name="columns">列信息</param>
+            <param name="rows">现有行数据</param>
+            <returns>每一列显示宽度</returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.FillFormatTostring(System.Collections.Generic.List{Ban3.Infrastructures.Consoles.Entries.ColumnShowFormat},System.String[],System.String,System.Int32)">
+            <summary>
+            将填充格式转成字符串
+            表头和数据行会用到
+            </summary>
+            <param name="format">一行的显示格式信息</param>
+            <param name="objs">一行要显示的数据</param>
+            <param name="delimiterStr">间隔符</param>
+            <param name="columnBlankNum">每列留白数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.GetTitleStr(System.Collections.Generic.List{System.Int32},System.String,System.Int32,System.String)">
+            <summary>
+            获取title 字符串
+            </summary>
+            <param name="columnWides">></param>
+            <param name="titleStr">标题字符串信息</param>
+            <param name="columnBlankNum">列两端留白数</param>
+            <param name="delimiterStr">每列之间分割字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.GetDivider(System.Collections.Generic.List{System.Int32},System.String,System.Int32)">
+            <summary>
+            获取每行之间的分割行字符串
+            </summary>
+            <param name="columnWides">列宽信息</param>
+            <param name="angleStr">每列之间分割字符串</param>
+            <param name="columnBlankNum">列两端留白数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.GetTopAndDown(System.Collections.Generic.List{System.Int32},System.String,System.Int32)">
+            <summary>
+            获取头部和底部字符串
+            </summary>
+            <param name="columnWides">列宽信息</param>
+            <param name="angleStr">每列之间分割字符串</param>
+            <param name="columnBlankNum">列两端留白数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.GetFormatInfo(Ban3.Infrastructures.Consoles.Enums.TableStyle)">
+            <summary>
+            获取表格显示样式
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.FullHalfLength(System.String)">
+            <summary>
+            获取文本长度，区分全角半角
+            全角算两个字符
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.GetChineseText(System.String)">
+            <summary>
+            获取中文文本
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

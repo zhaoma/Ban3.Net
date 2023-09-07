@@ -1,11 +1,14 @@
 ﻿#nullable enable
 using System;
+using System.Collections;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
+using Ban3.Productions.Casino.Contracts.Enums;
 using Ban3.Sites.ViaTushare.Entries;
 using Ban3.Productions.Casino.Contracts.Extensions;
 
@@ -108,15 +111,27 @@ public class Targets
         return null;
     }
 
-    public Dictionary<Enums.StockGroup, int> GroupSummary() =>
+    /// <summary>
+    /// 分组统计
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <param name="getKey"></param>
+    /// <returns></returns>
+    public Dictionary<TKey, int> Counter<TKey>(Func<Target,TKey> getKey) =>
         Data
         .Where(o => !o.Value.Ignore)
-        .Select(o => o.Value.Stock)
-        .GroupBy(o => o.Symbol.Substring(0, 3))
+        .GroupBy(o => getKey(o.Value))
         .Select(o => new
         {
-            group = o.Key.StockGroup(),
+            group = o.Key,
             counter = o.Count()
         })
     .ToDictionary(o => o.group, o => o.counter);
+
+    public Dictionary<PriceScope, int> PriceScopes()
+        => Counter(target => ((double)target.LatestPrice.Close).PriceScope());
+    /*
+    public Dictionary<CapitalScope,int> CapitalScopes()
+    => Counter(target => (target.Stock.).PriceScope());
+    */
 }
