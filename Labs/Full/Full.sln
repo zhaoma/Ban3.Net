@@ -58,6 +58,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaTushare", "..\..\Sites\V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaGtimg", "..\..\Sites\ViaGtimg\ViaGtimg.csproj", "{5E836F90-0B00-4673-AB1D-ED1AFC992C9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaIfeng", "..\..\Sites\ViaIfeng\ViaIfeng.csproj", "{3130C563-4E8F-4783-85BA-4B0439A2088A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -156,6 +158,10 @@ Global
 		{5E836F90-0B00-4673-AB1D-ED1AFC992C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E836F90-0B00-4673-AB1D-ED1AFC992C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E836F90-0B00-4673-AB1D-ED1AFC992C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3130C563-4E8F-4783-85BA-4B0439A2088A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3130C563-4E8F-4783-85BA-4B0439A2088A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3130C563-4E8F-4783-85BA-4B0439A2088A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3130C563-4E8F-4783-85BA-4B0439A2088A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -183,6 +189,7 @@ Global
 		{61E123D0-6F35-467E-8409-DB5119955F6D} = {7D98555D-B324-444A-BF29-267F9E63E663}
 		{9189479B-F679-472C-BBF7-70468CFB95E6} = {7D98555D-B324-444A-BF29-267F9E63E663}
 		{5E836F90-0B00-4673-AB1D-ED1AFC992C9A} = {7D98555D-B324-444A-BF29-267F9E63E663}
+		{3130C563-4E8F-4783-85BA-4B0439A2088A} = {7D98555D-B324-444A-BF29-267F9E63E663}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0411A79E-D9D7-4686-8190-6E05F219E28D}

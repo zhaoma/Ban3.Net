@@ -31,11 +31,12 @@
           }
         }
       },
-      "Ban3.Infrastructures.NetHttp/1.0.7": {
+      "Ban3.Infrastructures.NetHttp/1.0.8": {
         "type": "package",
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.14",
-          "System.Net.Http": "4.3.4"
+          "System.Net.Http": "4.3.4",
+          "System.Text.Encoding.CodePages": "7.0.0"
         },
         "compile": {
           "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
@@ -1212,6 +1213,23 @@
           }
         }
       },
+      "System.Text.Encoding.CodePages/7.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Text.Encodings.Web/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -1319,14 +1337,14 @@
         "readme.md"
       ]
     },
-    "Ban3.Infrastructures.NetHttp/1.0.7": {
-      "sha512": "YjiARvPOS6V9o4BeGXKGfbhaojK+IKfHD5GAF9E5yj3G0/zCbNQRTq9cQN+6aba/mCx0hJuQxDAoKpBM/EdF3A==",
+    "Ban3.Infrastructures.NetHttp/1.0.8": {
+      "sha512": "MtaXb4kVL6ikvcEYaBLP0+xK3yZDERgUP8TDCmTyJvVznrTX5WQJrKfr74ydAUxRqgbih3fMn+DB/UNZfk/ebw==",
       "type": "package",
-      "path": "ban3.infrastructures.nethttp/1.0.7",
+      "path": "ban3.infrastructures.nethttp/1.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.nethttp.1.0.7.nupkg.sha512",
+        "ban3.infrastructures.nethttp.1.0.8.nupkg.sha512",
         "ban3.infrastructures.nethttp.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
@@ -4051,6 +4069,43 @@
         "system.text.encoding.nuspec"
       ]
     },
+    "System.Text.Encoding.CodePages/7.0.0": {
+      "sha512": "LSyCblMpvOe0N3E+8e0skHcrIhgV2huaNcjUUEa8hRtgEAm36aGkRoC8Jxlb6Ra6GSfF29ftduPNywin8XolzQ==",
+      "type": "package",
+      "path": "system.text.encoding.codepages/7.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Text.Encoding.CodePages.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Text.Encoding.CodePages.targets",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net462/System.Text.Encoding.CodePages.dll",
+        "lib/net462/System.Text.Encoding.CodePages.xml",
+        "lib/net6.0/System.Text.Encoding.CodePages.dll",
+        "lib/net6.0/System.Text.Encoding.CodePages.xml",
+        "lib/net7.0/System.Text.Encoding.CodePages.dll",
+        "lib/net7.0/System.Text.Encoding.CodePages.xml",
+        "lib/netstandard2.0/System.Text.Encoding.CodePages.dll",
+        "lib/netstandard2.0/System.Text.Encoding.CodePages.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.xml",
+        "runtimes/win/lib/net7.0/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/net7.0/System.Text.Encoding.CodePages.xml",
+        "system.text.encoding.codepages.7.0.0.nupkg.sha512",
+        "system.text.encoding.codepages.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Text.Encodings.Web/7.0.0": {
       "sha512": "OP6umVGxc0Z0MvZQBVigj4/U31Pw72ITihDWP9WiWDm+q5aoe0GaJivsfYGq53o6dxH7DcXWiCTl7+0o2CGdmg==",
       "type": "package",
@@ -4332,7 +4387,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.NetHttp >= 1.0.7",
+      "Ban3.Infrastructures.NetHttp >= 1.0.8",
       "NETStandard.Library >= 2.0.3"
     ]
   },
@@ -4380,7 +4435,7 @@
         "dependencies": {
           "Ban3.Infrastructures.NetHttp": {
             "target": "Package",
-            "version": "[1.0.7, )"
+            "version": "[1.0.8, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",

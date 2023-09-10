@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "E3gkgaZTCo1fz3xEEcW6BpGYxxetDu9kOoJ7uZmPyJIKHrpYeu7byItZoCdy8aOTlbEMUXlB0ZIwemWu1Ogc7Q==",
+  "dgSpecHash": "zuJOavCAVDkvtFX8kHrvMqJsnzm8P/hb2HnoxmBqr5YsObxE56JA8CtoapEy5c9q/leNQhv+6bcKUfAd3TPXJg==",
   "success": true,
   "projectFilePath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaSina/ViaSina.csproj",
   "expectedPackageFiles": [
     "/Users/zhaoma/.nuget/packages/ban3.infrastructures.common/1.0.14/ban3.infrastructures.common.1.0.14.nupkg.sha512",
-    "/Users/zhaoma/.nuget/packages/ban3.infrastructures.nethttp/1.0.7/ban3.infrastructures.nethttp.1.0.7.nupkg.sha512",
+    "/Users/zhaoma/.nuget/packages/ban3.infrastructures.nethttp/1.0.8/ban3.infrastructures.nethttp.1.0.8.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/fody/6.2.5/fody.6.2.5.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/log4net/2.0.15/log4net.2.0.15.nupkg.sha512",
     "/Users/zhaoma/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

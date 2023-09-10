@@ -31,11 +31,12 @@
           }
         }
       },
-      "Ban3.Infrastructures.NetHttp/1.0.7": {
+      "Ban3.Infrastructures.NetHttp/1.0.8": {
         "type": "package",
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.14",
-          "System.Net.Http": "4.3.4"
+          "System.Net.Http": "4.3.4",
+          "System.Text.Encoding.CodePages": "7.0.0"
         },
         "compile": {
           "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
@@ -1336,14 +1337,14 @@
         "readme.md"
       ]
     },
-    "Ban3.Infrastructures.NetHttp/1.0.7": {
-      "sha512": "YjiARvPOS6V9o4BeGXKGfbhaojK+IKfHD5GAF9E5yj3G0/zCbNQRTq9cQN+6aba/mCx0hJuQxDAoKpBM/EdF3A==",
+    "Ban3.Infrastructures.NetHttp/1.0.8": {
+      "sha512": "MtaXb4kVL6ikvcEYaBLP0+xK3yZDERgUP8TDCmTyJvVznrTX5WQJrKfr74ydAUxRqgbih3fMn+DB/UNZfk/ebw==",
       "type": "package",
-      "path": "ban3.infrastructures.nethttp/1.0.7",
+      "path": "ban3.infrastructures.nethttp/1.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.nethttp.1.0.7.nupkg.sha512",
+        "ban3.infrastructures.nethttp.1.0.8.nupkg.sha512",
         "ban3.infrastructures.nethttp.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
@@ -4386,7 +4387,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.NetHttp >= 1.0.7",
+      "Ban3.Infrastructures.NetHttp >= 1.0.8",
       "NETStandard.Library >= 2.0.3",
       "System.Text.Encoding.CodePages >= 7.0.0"
     ]
@@ -4435,7 +4436,7 @@
         "dependencies": {
           "Ban3.Infrastructures.NetHttp": {
             "target": "Package",
-            "version": "[1.0.7, )"
+            "version": "[1.0.8, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",
