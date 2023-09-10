@@ -1,10 +1,8 @@
 ﻿using System;
 
-namespace ViaIfeng
-{
-    public class Class1
-    {
+namespace Ban3.Sites.ViaIfeng;
 
-    }
+public static class Helper{
+
 }
 
