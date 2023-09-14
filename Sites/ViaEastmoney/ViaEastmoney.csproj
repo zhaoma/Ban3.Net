@@ -30,6 +30,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Enums\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="favicon.ico" />
     <None Include="..\..\icon.png">
       <Pack>True</Pack>
@@ -43,5 +46,8 @@
 
   <ItemGroup>
     <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enums\" />
   </ItemGroup>
 </Project>
