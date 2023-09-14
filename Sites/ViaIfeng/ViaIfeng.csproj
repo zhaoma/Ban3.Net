@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,29 +6,32 @@
     <LangVersion>10.0</LangVersion>
     <Nullable>enable</Nullable>
     <NullableContextOptions>enable </NullableContextOptions>
-    <RootNamespace>Ban3.Sites.ViaEastmoney</RootNamespace>
-    <AssemblyName>Ban3.Sites.ViaEastmoney</AssemblyName>
+    <RootNamespace>Ban3.Sites.ViaIfeng</RootNamespace>
+    <AssemblyName>Ban3.Sites.ViaIfeng</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <DebugType>embedded</DebugType>
-    <Title>Ban3.Sites.ViaEastmoney</Title>
-    <Version>1.0.2</Version>
+    <Title>Ban3.Sites.ViaIfeng</Title>
+    <Version>1.0.0</Version>
     <Authors>zhaoma</Authors>
     <Company>BAN3</Company>
-    <Description>Via Eastmoney.com</Description>
+    <Description>Via ifeng.com</Description>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.2.1</AssemblyVersion>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\..\output\</OutputPath>
-    <DocumentationFile>..\..\..\output\Ban3.Sites.ViaEastmoney.xml</DocumentationFile>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>../../../output/</OutputPath>
+    <DocumentationFile>../../../output/ban3.Infrastructures.Platforms.ViaGtimg.xml</DocumentationFile>
     <AllowedReferenceRelatedFileExtensions>
       .allowedextension
     </AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
-
+  
+  <ItemGroup>
+    <None Remove="Response\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
     <None Include="..\..\icon.png">
@@ -43,5 +46,10 @@
 
   <ItemGroup>
     <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.8" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entries\" />
+    <Folder Include="Request\" />
+    <Folder Include="Response\" />
   </ItemGroup>
 </Project>

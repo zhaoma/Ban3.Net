@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.7" />
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.8" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
   </ItemGroup>
 

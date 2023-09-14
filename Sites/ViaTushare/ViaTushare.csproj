@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.7" />
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.8" />
   </ItemGroup>
 
 </Project>

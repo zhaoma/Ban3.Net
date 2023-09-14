@@ -42,7 +42,7 @@
 
   <ItemGroup>
     <PackageReference Include="Ban3.Infrastructures.Indicators" Version="1.0.11" />
-    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.7" />
+    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.8" />
     <PackageReference Include="Ban3.Infrastructures.RuntimeCaching" Version="1.0.7" />
     <PackageReference Include="Ban3.Sites.ViaEastmoney" Version="1.0.2" />
     <PackageReference Include="Ban3.Sites.ViaNetease" Version="1.0.2" />

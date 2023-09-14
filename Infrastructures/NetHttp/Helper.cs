@@ -30,7 +30,11 @@ public static class Helper
             if (!string.IsNullOrEmpty(accept))
                 client.DefaultRequestHeaders.Add("Accept", accept);
 
-            return await client.SendAsync(resource.Request());
+            var request = resource.Request();
+
+            Logger.Debug($"{request.Method}:{request.RequestUri.AbsoluteUri}");
+
+            return await client.SendAsync(request);
         }
         catch (HttpRequestException ex)
             when (ex.InnerException is OperationCanceledException tex)
