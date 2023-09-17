@@ -24,6 +24,9 @@ public class QueryCondition
     &reportName=RPT_CUSTOM_F10_EH_FREEHOLDERS_JOIN_FREEHOLDER_SHAREANALYSIS
     &columns=ALL
     &filter=(END_DATE%3E=%272023-01-1%27)
+    
+    https://datacenter-web.eastmoney.com/api/data/v1/get?pageSize=50&pageNumber=1&reportName=RPT_CUSTOM_F10_EH_FREEHOLDERS_JOIN_FREEHOLDER_SHAREANALYSIS&columns=ALL&filter=(END_DATE>='2023-01-1')
+    
     */
 
     public int PageSize { get; set; } = 50;
