@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Ban3.Sites.ViaEastmoney.Entries;
 
@@ -9,117 +10,86 @@ namespace Ban3.Sites.ViaEastmoney.Entries;
 [Serializable, DataContract]
 public class StockHolder
 {
-    /// <summary>
-    /// 票编码
-    /// </summary>
-    [DataMember(Name = "COMPANYCODE")]
-    public string CompanyCode { get; set; } = string.Empty;
+	[JsonProperty("SECUCODE")]
+	public string Code { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 股东名称
-    /// </summary>
-    [DataMember(Name = "SHAREHDNAME")]
-    public string ShareHDName { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 股东类型
-    /// </summary>
-    [DataMember(Name = "SHAREHDTYPE")]
-    public string ShareHDType { get; set; } = string.Empty;
+    [JsonProperty("SECURITY_CODE")]
+	public string Symbol{get;set;}=string.Empty;
 
-    /// <summary>
-    /// 持股类型
-    /// </summary>
-    [DataMember(Name = "SHARESTYPE")]
-    public string SharesType { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 持股排名
-    /// </summary>
-    [DataMember(Name = "RANK")]
-    public decimal Rank { get; set; }
+    [JsonProperty("ORG_CODE")]
+	public string OrganizationCode{get;set;}=string.Empth;
 
-    /// <summary>
-    /// 股票编码
-    /// </summary>
-    [DataMember(Name = "SCODE")]
-    public string Scode { get; set; } = string.Empty;
+    [JsonProperty("END_DATE")]
+	public DateTime REportDate{get;set;}
 
-    /// <summary>
-    /// 股票名称
-    /// </summary>
-    [DataMember(Name = "SNAME")]
-    public string Sname { get; set; } = string.Empty;
+	[JsonProperty("HOLDER_NAME")]
+	public string HolderName{get;set;}
+	
+	
+[JsonProperty(		"HOLD_NUM")]
+public double HoldNumber{get;set;}
+[JsonProperty(		"FREE_HOLDNUM_RATIO")]
+public double HoldRatioFree{get;set;}
 
-    /// <summary>
-    /// 报告日期
-    /// </summary>
-    [DataMember(Name = "RDATE")]
-    public DateTime Rdate { get; set; }
+[JsonProperty(		"HOLD_NUM_CHANGE")]
+public string HoldChangeSubject{get;set;}
 
-    /// <summary>
-    /// 持股数量
-    /// </summary>
-    [DataMember(Name = "SHAREHDNUM")]
-    public double ShareHDNum { get; set; }
+[JsonProperty(		"CHANGE_RATIO")]
+public double HoldChangeRatio{get;set;}
 
-    /// <summary>
-    /// 持股市值
-    /// </summary>
-    [DataMember(Name = "LTAG")]
-    public double Ltag { get; set; }
 
-    /// <summary>
-    /// 占比
-    /// </summary>
-    [DataMember(Name = "ZB")]
-    public string Zb { get; set; } = string.Empty;
+[JsonProperty(		"IS_HOLDORG")]
+public bool IsHoldOrganization{get;set;}
 
-    /// <summary>
-    /// 公告日期
-    /// </summary>
-    [DataMember(Name = "NDATE")]
-    public DateTime Ndata { get; set; }
+[JsonProperty(		"HOLDER_RANK")]
+public int HoldRank{get;set;}
 
-    /// <summary>
-    /// 变动状态
-    /// </summary>
-    [DataMember(Name = "BZ")]
-    public string Bz { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 变动比例
-    /// </summary>
-    [DataMember(Name = "BDBL")]
-    public string BdBl { get; set; } = string.Empty;
+[JsonProperty(		"SECURITY_NAME_ABBR")]
+public string StockName{get;set;}
 
-    /// <summary>
-    /// 股东编号
-    /// </summary>
-    [DataMember(Name = "SHAREHDCODE")]
-    public string ShareHDCode { get; set; } = string.Empty;
+[JsonProperty(		"HOLDER_CODE")]
+public string HolderCode{get;set;}
 
-    /// <summary>
-    /// 总股本占比
-    /// </summary>
-    [DataMember(Name = "SHAREHDRATIO")]
-    public string ShareHDRatio { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 变动总额
-    /// </summary>
-    [DataMember(Name = "BDSUM")]
-    public string BdSum { get; set; } = string.Empty;
+	[JsonProperty(	"SECURITY_TYPE_CODE")]
+	public string StockTypeCode{get;set;}
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [DataMember(Name = "Ratio")]
-    public decimal Ratio { get; set; }
+	
+[JsonProperty(		"HOLDER_STATE": null,
+[JsonProperty(		"HOLDER_MARKET_CAP": 389490530.32,
+[JsonProperty(		"HOLD_RATIO": 13.7524,
+[JsonProperty(		"HOLD_CHANGE": "不变",
+	[JsonProperty(	"HOLD_RATIO_CHANGE": 0,
+[JsonProperty(		"HOLDER_TYPE": "其它",
+[JsonProperty(	"SHARES_TYPE": "A股",
+[JsonProperty("UPDATE_DATE": "2023-09-16 00:00:00",
+[JsonProperty("REPORT_DATE_NAME": "2023-09-14",
+[JsonProperty("HOLDER_NEW": "10501094",
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [DataMember(Name = "StockId")]
-    public int StockId { get; set; }
+    [JsonProperty("FREE_RATIO_QOQ": "不变",
+
+    [JsonProperty("HOLDER_STATEE": null,
+
+    [JsonProperty("IS_REPORT": "0",
+
+    [JsonProperty("HOLDER_CODE_OLD": "80469310",
+
+    [JsonProperty("HOLDER_NEWTYPE": "其他",
+
+    [JsonProperty("HOLDNUM_CHANGE_NAME": "不变",
+
+    [JsonProperty("IS_MAX_REPORTDATE": "1",
+
+    [JsonProperty("COOPERATION_HOLDER_MARK": "10501094",
+
+    [JsonProperty("MXID": "2981ee9332165d66c03e8d38d0206a03",
+
+    [JsonProperty("LISTING_STATE": "0",
+
+    [JsonProperty("XZCHANGE": 0,
+
+    [JsonProperty("NEW_CHANGE_RATIO": "不变"
 }
