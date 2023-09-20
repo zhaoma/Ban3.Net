@@ -1,33 +1,25 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
+namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC;
+
+public class FileContentMetadata
 {
-	public class FileContentMetadata
-	{
-		public FileContentMetadata()
-		{
-		}
+    public FileContentMetadata()
+    {
+    }
 
-        [JsonProperty("contentType")]
-		public string ContentType { get; set; } 
-		
-		[JsonProperty("encoding")]
-		public int Encoding { get; set; }
+    [JsonProperty("contentType")] public string ContentType { get; set; }
 
-		[JsonProperty("extension")]
-		public string Extension { get; set; } 
+    [JsonProperty("encoding")] public int Encoding { get; set; }
 
-		[JsonProperty("fileName")]
-		public string FileName { get; set; } 
+    [JsonProperty("extension")] public string Extension { get; set; }
 
-		[JsonProperty("isBinary")]
-		public bool IsBinary { get; set; } 
+    [JsonProperty("fileName")] public string FileName { get; set; }
 
-		[JsonProperty("isImage")]
-		public bool IsImage { get; set; }
+    [JsonProperty("isBinary")] public bool IsBinary { get; set; }
 
-		[JsonProperty("vsLink")]
-		public string VSLink { get; set; } 
-	}
+    [JsonProperty("isImage")] public bool IsImage { get; set; }
+
+    [JsonProperty("vsLink")] public string VSLink { get; set; }
 }
 

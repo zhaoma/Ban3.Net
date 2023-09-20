@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Ban3.Infrastructures.DataPersist.Attributes;
 using Newtonsoft.Json;
 
-using Ban3.Infrastructures.Common.Contracts.Attributes;
+
 
 namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
 {
-    [TableStrategy( "Changeset", "Changeset", false )]
+    [TableIs( "Changeset", "Changeset", false )]
     public class TfvcChangeset
             : TfvcChangesetRef
     {

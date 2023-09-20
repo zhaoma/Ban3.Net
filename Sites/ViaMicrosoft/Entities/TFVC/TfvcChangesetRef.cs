@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading;
 
-using Dapper.Contrib.Extensions;
+
 
 using Newtonsoft.Json;
 
 using Ban3.Sites.ViaMicrosoft.Entities.Discussion;
-using Ban3.Infrastructures.Common.Contracts.Attributes;
-using Ban3.Infrastructures.Common.Contracts.Entities;
+
+
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.DataPersist.Attributes;
+using Ban3.Infrastructures.DataPersist.Entities;
 
 namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
 {
@@ -16,19 +19,19 @@ namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
     /// 变更集
     /// </summary>
     [Table( "Changeset" )]
-    [TableStrategy( "Changeset", "Changeset", false )]
+    [TableIs( "Changeset", "Changeset", false )]
     public class TfvcChangesetRef
-            : _BaseEntity
+            : BaseEntity
     {
         [JsonProperty( "changesetId" )]
-        [Write(false)]
+        
         public int ChangesetId { get; set; }
 
         /// <summary>
         /// Alias or display name of user
         /// </summary>
         [JsonProperty( "author" )]
-        [Write(false)]
+        
         public IdentityRef Author { get; set; }
 
         public string AuthorId { get; set; }
@@ -37,7 +40,7 @@ namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
         /// Alias or display name of user
         /// </summary>
         [JsonProperty( "checkedInBy" )]
-        [Write(false)]
+        
         public IdentityRef CheckedInBy { get; set; }
 
         public string CheckedInById { get; set; }
@@ -61,13 +64,13 @@ namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
         public bool CommentTruncated { get; set; }
 
         [JsonProperty( "threads" )]
-        [Write(false)]
+        
         public List<Entities.Discussion.Thread> Threads { get; set; }
 
         /// <summary>
         /// List of work items associated with the changeset.
         /// </summary>
-        [Write(false)]
+        
         [JsonProperty( "workItems" )]
         public List<AssociatedWorkItem> WorkItems { get; set; }
 

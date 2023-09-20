@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-using Dapper.Contrib.Extensions;
+
 
 using Newtonsoft.Json;
 
-using Ban3.Infrastructures.Common.Contracts.Attributes;
-using Ban3.Infrastructures.Common.Contracts.Entities;
+
+
 using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
@@ -14,9 +14,9 @@ namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
     /// 搁置集
     /// </summary>
     [Table( "Shelveset" )]
-    [TableStrategy( "Shelveset", "Shelveset", false )]
+    [TableIs( "Shelveset", "Shelveset", false )]
     public class TfvcShelvesetRef
-            : _BaseEntity
+            : BaseEntity
     {
         public TfvcShelvesetRef() {}
 
@@ -30,7 +30,7 @@ namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
         public string Name { get; set; }
 
         [JsonProperty( "owner" )]
-        [Write(false)]
+        
         public Entities.IdentityRef Owner { get; set; }
 
         public string OwnerId { get; set; }
@@ -48,11 +48,11 @@ namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
         public string Url { get; set; }
 
         [JsonProperty( "threads" )]
-        [Write(false)]
+        
         public List<Entities.Discussion.Thread> Threads { get; set; }
 
         [JsonProperty( "workItems" )]
-        [Write(false)]
+        
         public List<AssociatedWorkItem> WorkItems { get; set; }
 
         public override string KeyValue() => Id;

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-using Dapper.Contrib.Extensions;
-using Ban3.Infrastructures.Common.Contracts.Attributes;
-using Ban3.Infrastructures.Common.Contracts.Entities;
+
+
+
 using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Sites.ViaMicrosoft.Models
 {
     [Table( "RefererMapping" )]
-    [TableStrategy("RefererMapping", "RefererMapping", true, false)]
+    [TableIs("RefererMapping", "RefererMapping", true, false)]
     public class RefererMapping
             : Entities._BaseEntity
     {

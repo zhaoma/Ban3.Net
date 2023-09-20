@@ -1,44 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Newtonsoft.Json;
+using Ban3.Infrastructures.DataPersist.Attributes;
+using Ban3.Infrastructures.DataPersist.Entities;
 
-using Dapper.Contrib.Extensions;
+namespace Ban3.Sites.ViaMicrosoft.Entities.Core;
 
-using Newtonsoft.Json;
-
-using Ban3.Infrastructures.Common.Contracts.Attributes;
-using Ban3.Infrastructures.Common.Contracts.Entities;
-
-namespace Ban3.Sites.ViaMicrosoft.Entities.Core
+/// <summary>
+/// 
+/// </summary>
+[TableIs("WebApiTeam", "WebApiTeam", true)]
+public class WebApiTeamRef
+    : BaseEntity
 {
     /// <summary>
-    /// 
+    /// Team(Identity) Guid.A Team Foundation ID.
     /// </summary>
-    [TableStrategy( "WebApiTeam", "WebApiTeam", true )]
-    public class WebApiTeamRef
-            : _BaseEntity
-    {
-        /// <summary>
-        /// Team(Identity) Guid.A Team Foundation ID.
-        /// </summary>
-        [ExplicitKey]
-        [JsonProperty( "id" )]
-        public string Id { get; set; }
+    [JsonProperty("id")]
+    public string Id { get; set; }
 
-        /// <summary>
-        /// Team name
-        /// </summary>
+    /// <summary>
+    /// Team name
+    /// </summary>
 
-        [JsonProperty( "name" )]
-        public string Name { get; set; }
+    [JsonProperty("name")]
+    public string Name { get; set; }
 
-        /// <summary>
-        ///  Team REST API Url
-        /// </summary>
+    /// <summary>
+    ///  Team REST API Url
+    /// </summary>
 
-        [JsonProperty( "url" )]
-        public string Url { get; set; }
+    [JsonProperty("url")]
+    public string Url { get; set; }
 
-        public override string KeyValue() => Id;
-    }
+    public override string KeyValue() => Id;
 }

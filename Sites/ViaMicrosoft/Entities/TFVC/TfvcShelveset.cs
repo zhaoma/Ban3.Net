@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-using Ban3.Infrastructures.Common.Contracts.Attributes;
+
 
 namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
 {
-    [TableStrategy("Shelveset", "Shelveset", false)]
+    [TableIs("Shelveset", "Shelveset", false)]
 	public class TfvcShelveset
 		:TfvcShelvesetRef
 	{
