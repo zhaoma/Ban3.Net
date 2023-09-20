@@ -1,30 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaNetease/ViaNetease.csproj": {}
+    "D:\\GIT\\Ban3.Net\\Sites\\ViaNetease\\ViaNetease.csproj": {}
   },
   "projects": {
-    "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaNetease/ViaNetease.csproj": {
+    "D:\\GIT\\Ban3.Net\\Sites\\ViaNetease\\ViaNetease.csproj": {
       "version": "1.0.2",
       "restore": {
-        "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaNetease/ViaNetease.csproj",
+        "projectUniqueName": "D:\\GIT\\Ban3.Net\\Sites\\ViaNetease\\ViaNetease.csproj",
         "projectName": "Ban3.Sites.ViaNetease",
-        "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaNetease/ViaNetease.csproj",
-        "packagesPath": "/Users/zhaoma/.nuget/packages/",
-        "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaNetease/obj/",
+        "projectPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaNetease\\ViaNetease.csproj",
+        "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
+        "outputPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaNetease\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
         },
         "frameworks": {
           "netstandard2.0": {
@@ -64,7 +67,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.304/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

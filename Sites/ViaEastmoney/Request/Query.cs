@@ -11,7 +11,7 @@ public class Query
     ///
     public Query()
 	{
-		Url = $"https://datacenter-web.eastmoney.com/api/data/v1/get?{Condition?.QueringString()}";
+		Url = $"https://datacenter-web.eastmoney.com/api/data/v1/get?{Condition?.QueryString()}";
 	}
 }
 

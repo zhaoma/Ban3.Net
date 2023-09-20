@@ -37,8 +37,8 @@ public class QueryCondition
 
     public string Columns { get; set; } = "ALL";
 
-    public string Filter { get; set; } = $"(END_DATE%3E='{DateTime.Now.ToString("yyyy-01-01")}')";
+    public string Filter { get; set; } = $"(END_DATE%3E='{DateTime.Now.Year}-01-01')";
 
-    public string QueringString() => $"pageSize={PageSize}&pageNumber={PageNumber}&reportName={ReportName.EnumDescription()}&columns={Columns}&filter={Filter}";
+    public string QueryString() => $"pageSize={PageSize}&pageNumber={PageNumber}&reportName={ReportName.EnumDescription()}&columns={Columns}&filter={Filter}";
 }
 

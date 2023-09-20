@@ -44,7 +44,7 @@ public class FieldIsAttribute
     /// 显示主题
     /// </summary>
     [JsonProperty("subject", NullValueHandling = NullValueHandling.Ignore)]
-    public bool Subject { get; set; }
+    public string Subject { get; set; } = string.Empty;
 
     /// <summary>
     /// 字段支持检索

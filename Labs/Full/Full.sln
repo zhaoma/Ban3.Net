@@ -44,21 +44,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UtilizeRedis", "..\..\Parti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sites", "Sites", "{7D98555D-B324-444A-BF29-267F9E63E663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaSohu", "..\..\Sites\ViaSohu\ViaSohu.csproj", "{337F32CA-343B-4107-BA3B-27417C35C7FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaSohu", "..\..\Sites\ViaSohu\ViaSohu.csproj", "{337F32CA-343B-4107-BA3B-27417C35C7FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaSina", "..\..\Sites\ViaSina\ViaSina.csproj", "{AD5FD1CC-3C78-4158-B166-613DA3F8D91F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaSina", "..\..\Sites\ViaSina\ViaSina.csproj", "{AD5FD1CC-3C78-4158-B166-613DA3F8D91F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaNetease", "..\..\Sites\ViaNetease\ViaNetease.csproj", "{865572DD-48D1-4A2E-A31F-1540A2EA176D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaNetease", "..\..\Sites\ViaNetease\ViaNetease.csproj", "{865572DD-48D1-4A2E-A31F-1540A2EA176D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaEastmoney", "..\..\Sites\ViaEastmoney\ViaEastmoney.csproj", "{AFAC31B9-63B0-484E-9ADF-E2660F5E3A97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaEastmoney", "..\..\Sites\ViaEastmoney\ViaEastmoney.csproj", "{AFAC31B9-63B0-484E-9ADF-E2660F5E3A97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaYuncaijing", "..\..\Sites\ViaYuncaijing\ViaYuncaijing.csproj", "{61E123D0-6F35-467E-8409-DB5119955F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaYuncaijing", "..\..\Sites\ViaYuncaijing\ViaYuncaijing.csproj", "{61E123D0-6F35-467E-8409-DB5119955F6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaTushare", "..\..\Sites\ViaTushare\ViaTushare.csproj", "{9189479B-F679-472C-BBF7-70468CFB95E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaTushare", "..\..\Sites\ViaTushare\ViaTushare.csproj", "{9189479B-F679-472C-BBF7-70468CFB95E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaGtimg", "..\..\Sites\ViaGtimg\ViaGtimg.csproj", "{5E836F90-0B00-4673-AB1D-ED1AFC992C9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaGtimg", "..\..\Sites\ViaGtimg\ViaGtimg.csproj", "{5E836F90-0B00-4673-AB1D-ED1AFC992C9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaIfeng", "..\..\Sites\ViaIfeng\ViaIfeng.csproj", "{3130C563-4E8F-4783-85BA-4B0439A2088A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaIfeng", "..\..\Sites\ViaIfeng\ViaIfeng.csproj", "{3130C563-4E8F-4783-85BA-4B0439A2088A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaMicrosoft", "..\..\Sites\ViaMicrosoft\ViaMicrosoft.csproj", "{F19F276C-C6B2-440F-BCDF-6578AF6FE405}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaGoogle", "..\..\Sites\ViaGoogle\ViaGoogle.csproj", "{DADBC850-4636-4135-9C3A-101150F69223}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViaWechat", "..\..\Sites\ViaWechat\ViaWechat.csproj", "{ADCD4B9A-3C0C-4179-9EB8-49D4254D4313}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -162,6 +168,18 @@ Global
 		{3130C563-4E8F-4783-85BA-4B0439A2088A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3130C563-4E8F-4783-85BA-4B0439A2088A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3130C563-4E8F-4783-85BA-4B0439A2088A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F19F276C-C6B2-440F-BCDF-6578AF6FE405}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F19F276C-C6B2-440F-BCDF-6578AF6FE405}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F19F276C-C6B2-440F-BCDF-6578AF6FE405}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F19F276C-C6B2-440F-BCDF-6578AF6FE405}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DADBC850-4636-4135-9C3A-101150F69223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DADBC850-4636-4135-9C3A-101150F69223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DADBC850-4636-4135-9C3A-101150F69223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DADBC850-4636-4135-9C3A-101150F69223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADCD4B9A-3C0C-4179-9EB8-49D4254D4313}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADCD4B9A-3C0C-4179-9EB8-49D4254D4313}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADCD4B9A-3C0C-4179-9EB8-49D4254D4313}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADCD4B9A-3C0C-4179-9EB8-49D4254D4313}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +208,9 @@ Global
 		{9189479B-F679-472C-BBF7-70468CFB95E6} = {7D98555D-B324-444A-BF29-267F9E63E663}
 		{5E836F90-0B00-4673-AB1D-ED1AFC992C9A} = {7D98555D-B324-444A-BF29-267F9E63E663}
 		{3130C563-4E8F-4783-85BA-4B0439A2088A} = {7D98555D-B324-444A-BF29-267F9E63E663}
+		{F19F276C-C6B2-440F-BCDF-6578AF6FE405} = {7D98555D-B324-444A-BF29-267F9E63E663}
+		{DADBC850-4636-4135-9C3A-101150F69223} = {7D98555D-B324-444A-BF29-267F9E63E663}
+		{ADCD4B9A-3C0C-4179-9EB8-49D4254D4313} = {7D98555D-B324-444A-BF29-267F9E63E663}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0411A79E-D9D7-4686-8190-6E05F219E28D}
