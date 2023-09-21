@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ban3.Sites.ViaMicrosoft.Entities.WIQL
+namespace Ban3.Sites.ViaMicrosoft.Entities.WIQL;
+
+/// <summary>
+/// Represents the reference to a specific version of a comment on a Work Item.
+/// </summary>
+public class WorkItemCommentVersionRef
 {
-    /// <summary>
-    /// Represents the reference to a specific version of a comment on a Work Item.
-    /// </summary>
-    public class WorkItemCommentVersionRef
-    {
-        public string CommentId { get; set; }
+    public string CommentId { get; set; }
 
-        public int CreatedInRevision { get; set; }
-        
-        public bool IsDeleted { get; set; }
-        
-        public string Text { get; set; }
+    public int CreatedInRevision { get; set; }
 
-        public string Url { get; set; }
+    public bool IsDeleted { get; set; }
 
-        public int Version { get; set; }
-    }
+    public string Text { get; set; }
+
+    public string Url { get; set; }
+
+    public int Version { get; set; }
 }

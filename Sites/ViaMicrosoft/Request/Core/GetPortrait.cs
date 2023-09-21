@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using Ban3.Infrastructures.NetHttp.Entries;
+using Ban3.Sites.ViaMicrosoft.Enums;
 using Newtonsoft.Json;
 
-namespace Ban3.Sites.ViaMicrosoft.Request.Core
+namespace Ban3.Sites.ViaMicrosoft.Request.Core;
+
+/// <summary>
+/// 下载头像
+/// </summary>
+public class GetPortrait
+    : TargetResource
 {
-    public class GetPortrait
-            : IRequest
+    [JsonProperty("id")] public string Id { get; set; } = string.Empty;
+
+    public GetPortrait()
     {
-        public string Method() => "GET";
-
-        public string Resource()
-            => Enums.APIResource.Portrait.ToAPIResourceString( Id );
-
-        [JsonProperty( "id" )]
-        public string Id { get; set; }
-
-        public string JsonBody() => null;
+        Url = APIResource.Portrait.ToAPIResourceString(Id);
     }
 }

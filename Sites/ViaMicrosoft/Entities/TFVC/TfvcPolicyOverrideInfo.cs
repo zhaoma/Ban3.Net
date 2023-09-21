@@ -1,19 +1,15 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
+namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC;
+
+public class TfvcPolicyOverrideInfo
 {
-	public class TfvcPolicyOverrideInfo
-	{
-		public TfvcPolicyOverrideInfo()
-		{
-		}
+    public TfvcPolicyOverrideInfo()
+    {
+    }
 
-        [JsonProperty("comment")]
-		public string Comment { get; set; } 
+    [JsonProperty("comment")] public string Comment { get; set; }
 
-        [JsonProperty("policyFailures")]
-		public IEnumerable<TfvcPolicyFailureInfo> PolicyFailures { get; set; } = default;
-	}
+    [JsonProperty("policyFailures")] public IEnumerable<TfvcPolicyFailureInfo> PolicyFailures { get; set; } = default;
 }
-

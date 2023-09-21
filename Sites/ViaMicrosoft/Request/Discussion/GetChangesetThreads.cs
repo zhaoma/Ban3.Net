@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ban3.Sites.ViaMicrosoft.Request.Discussion
+namespace Ban3.Sites.ViaMicrosoft.Request.Discussion;
+
+public class GetChangesetThreads
+    : IRequest
 {
-    public class GetChangesetThreads
-    :IRequest
+
+    public string Method() => "GET";
+
+    public string Resource()
+        => Enums.APIResource.ChangesetDiscussion.ToAPIResourceString(ChangesetId);
+
+    public string JsonBody() => null;
+
+    public GetChangesetThreads()
     {
-
-        public string Method() => "GET";
-
-        public string Resource()
-            => Enums.APIResource.ChangesetDiscussion.ToAPIResourceString(ChangesetId);
-
-        public string JsonBody() => null;
-
-        public GetChangesetThreads(){}
-
-        public int ChangesetId { get; set; }
     }
+
+    public int ChangesetId { get; set; }
 }

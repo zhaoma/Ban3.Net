@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ban3.Sites.ViaMicrosoft.Enums;
 
-namespace Ban3.Sites.ViaMicrosoft.Request.Core
+namespace Ban3.Sites.ViaMicrosoft.Request.Core;
+
+public class GetTeamMembers
+    : MultiPageQuery
 {
-    public class GetTeamMembers
-            : MultiPageQuery, IRequest
+    public string ProjectId { get; set; } = string.Empty;
+
+    public string TeamId { get; set; } = string.Empty;
+
+    public GetTeamMembers()
     {
-        public string Method() => "GET";
-
-        public string Resource()
-            => Enums.APIResource.TeamMembers.ToAPIResourceString( ProjectId, TeamId );
-
-        public string JsonBody() => null;
-
-        public string ProjectId { get; set; }
-
-        public string TeamId { get; set; }
+        Url = APIResource.TeamMembers.ToAPIResourceString(ProjectId, TeamId);
     }
 }

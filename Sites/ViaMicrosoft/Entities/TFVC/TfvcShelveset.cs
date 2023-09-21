@@ -1,26 +1,22 @@
 ﻿using System.Collections.Generic;
+using Ban3.Infrastructures.DataPersist.Attributes;
 using Newtonsoft.Json;
 
 
 
-namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
+namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC;
+
+[TableIs("Shelveset", "Shelveset", false)]
+public class TfvcShelveset
+    : TfvcShelvesetRef
 {
-    [TableIs("Shelveset", "Shelveset", false)]
-	public class TfvcShelveset
-		:TfvcShelvesetRef
-	{
-		public TfvcShelveset()
-		{
-		}
+    public TfvcShelveset()
+    {
+    }
 
-		[JsonProperty("changes")]
-		public IEnumerable<TfvcChange> Changes { get; set; } 
+    [JsonProperty("changes")] public IEnumerable<TfvcChange> Changes { get; set; }
 
-        [JsonProperty("notes")]
-		public IEnumerable<CheckinNote> Notes { get; set; } 
+    [JsonProperty("notes")] public IEnumerable<CheckinNote> Notes { get; set; }
 
-		[JsonProperty("policyOverride")]
-		public TfvcPolicyOverrideInfo PolicyOverride { get; set; } 
-	}
+    [JsonProperty("policyOverride")] public TfvcPolicyOverrideInfo PolicyOverride { get; set; }
 }
-

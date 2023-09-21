@@ -1,36 +1,32 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC
+namespace Ban3.Sites.ViaMicrosoft.Entities.TFVC;
+
+public class TfvcItemDescriptor
 {
-	public class TfvcItemDescriptor
-	{
-		public TfvcItemDescriptor()
-		{
-		}
+    public TfvcItemDescriptor()
+    {
+    }
 
-        [JsonProperty("path")]		
-		public string Path { get; set; } 
-		
-		/// <summary>
-        /// Enums.VersionControlRecursionType
-        /// </summary>
-        [JsonProperty("recursionLevel")]
-		public string RecursionLevel { get; set; } 
+    [JsonProperty("path")] public string Path { get; set; }
 
-        [JsonProperty("version")]
-		public string Version { get; set; } 
+    /// <summary>
+    /// Enums.VersionControlRecursionType
+    /// </summary>
+    [JsonProperty("recursionLevel")]
+    public string RecursionLevel { get; set; }
 
-        /// <summary>
-        /// Enums.TfvcVersionOption
-        /// </summary>
-		[JsonProperty("versionOption")]
-		public string VersionOption { get; set; } 
+    [JsonProperty("version")] public string Version { get; set; }
 
-		/// <summary>
-        /// Enums.TfvcVersionType
-        /// </summary>
-        [JsonProperty("versionType")]
-		public string VersionType { get; set; } 
-	}
+    /// <summary>
+    /// Enums.TfvcVersionOption
+    /// </summary>
+    [JsonProperty("versionOption")]
+    public string VersionOption { get; set; }
+
+    /// <summary>
+    /// Enums.TfvcVersionType
+    /// </summary>
+    [JsonProperty("versionType")]
+    public string VersionType { get; set; }
 }
-

@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Ban3.Sites.ViaMicrosoft.Entities.WIQL
-{
-    public class WorkItemReference
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
+namespace Ban3.Sites.ViaMicrosoft.Entities.WIQL;
 
-        [JsonProperty("url")]
-        public string Url { get; set; }
-    }
+public class WorkItemReference
+{
+    [JsonProperty("id")] public int Id { get; set; }
+
+    [JsonProperty("url")] public string Url { get; set; }
 }
