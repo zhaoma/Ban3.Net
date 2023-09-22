@@ -1,169 +1,1629 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Ban3.Productions.Casino.CcaAndReport</name>
+        <name>Ban3.Productions.Casino.Contracts</name>
     </assembly>
     <members>
-        <member name="T:Ban3.Productions.Casino.CcaAndReport.Implements.Analyzer">
-            <summary>
-            分析器
-            </summary>
-        </member>
-        <member name="T:Ban3.Productions.Casino.CcaAndReport.Implements.Calculator">
-            <summary>
-            计算器
-            </summary>
-        </member>
-        <member name="T:Ban3.Productions.Casino.CcaAndReport.Implements.Collector">
-            <summary>
-            采集器
-            </summary>
-        </member>
-        <member name="P:Ban3.Productions.Casino.CcaAndReport.Implements.Collector.Sites">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Ban3.Productions.Casino.CcaAndReport.Implements.Reportor">
-            <summary>
-            输出报告者
-            </summary>
-        </member>
-        <member name="T:Ban3.Productions.Casino.CcaAndReport.Implements.Sites">
-            <summary>
-            网站资源访问抓手
-            </summary>
-        </member>
-        <member name="T:Ban3.Productions.Casino.CcaAndReport.Signalert">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Collector">
+        <member name="T:Ban3.Productions.Casino.Contracts.Config">
             
         </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Calculator">
+        <member name="F:Ban3.Productions.Casino.Contracts.Config.MaxParallelTasks">
             
         </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Analyzer">
+        <member name="F:Ban3.Productions.Casino.Contracts.Config.IgnoreKeys">
             
         </member>
-        <member name="F:Ban3.Productions.Casino.CcaAndReport.Signalert.Reportor">
+        <member name="F:Ban3.Productions.Casino.Contracts.Config.FixDailyPrices">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.TargetCodes">
+        <member name="F:Ban3.Productions.Casino.Contracts.Config.FixPageSize">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Config.CacheKey``1(System.String)">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Config.NeedSync">
             <summary>
-            关注标的池
+            只在交易时间运行ca --realtime
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.PrepareEventsAndSeeds(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="M:Ban3.Productions.Casino.Contracts.Config.Profiles">
             <summary>
-            下载事件，计算复权价格
+            当前策略集合
             </summary>
-            <param name="allCodes"></param>
-        </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ReinstateAllPrices(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
-            <summary>
-            计算复权价格
-            </summary>
-            <param name="allCodes"></param>
             <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteFullyJob(System.Boolean)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Config.DistributeConditions">
             <summary>
-            完整任务
-            下载历史行情数据（分红配股事件及计算复权因子）
+            当前分拣条件集合
             </summary>
-            <param name="reCalculateSeeds"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteDailyJob">
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.CompositeRecords">
             <summary>
-            日常任务
-            无参数，全市场
+            操作记录
             </summary>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteDailyJob(System.String)">
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.CompositeRecords.Profile">
             <summary>
-            指定codes，","分割
+            策略
             </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.CompositeRecords.Records">
+            <summary>
+            记录
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.CompositeRecords.RightKeys">
+            <summary>
+            正确记录Keys
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.CompositeRecords.WrongKeys">
+            <summary>
+            错误记录Keys
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition">
+            <summary>
+            分发条件
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.#ctor(System.Int32,System.String,Ban3.Productions.Casino.Contracts.Entities.DistributeExpression,System.Boolean)">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.Rank">
+            <summary>
+            序号/标识
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.Request">
+            <summary>
+            条件
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.Show">
+            <summary>
+            默认显示
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.IsTarget(Ban3.Productions.Casino.Contracts.Entities.TimelineRecord)">
+            <summary>
+            对时间记录判定
+            </summary>
+            <param name="record"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.ToString">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.GetHashCode">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.DistributeCondition.Equals(System.Object)">
+            
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression">
+            <summary>
+            分发条件
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.#ctor">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.StartsWith">
+            <summary>
+            代码开始于(002,003,30,68,60)
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.HasWeek">
+            <summary>
+            指标包含周线
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.HasMonth">
+            <summary>
+            指标包含月线
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.SortDesc">
+            <summary>
+            指标包含月线
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.Sorter">
+            <summary>
+            排序方式
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.MaxIncrease">
+            <summary>
+            最大涨幅
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.MinIncrease">
+            <summary>
+            最小涨幅
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.MaxAmplitude">
+            <summary>
+            最大振幅
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.MinAmplitude">
+            <summary>
+            最小振幅
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.MaxPrice">
+            <summary>
+            最高价
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.MinPrice">
+            <summary>
+            最低价
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.MaxDays">
+            <summary>
+            最多上市天数
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.Page">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.DistributeExpression.PageSize">
+            <summary>
+            页尺寸
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.Favorite">
+            <summary>
+            收藏夹
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Entities.Favorite._identity">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.Favorite.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.Favorite.#ctor(System.String)">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.Favorite.Records">
+            <summary>
+            运行时缓存收藏夹
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.Favorite.ParseOne(Ban3.Productions.Casino.Contracts.Enums.StockFavoriteType,Ban3.Productions.Casino.Contracts.Entities.Stock,System.Single,System.Boolean)">
+            <summary>
+            操作一个标的
+            </summary>
+            <param name="type"></param>
+            <param name="stock"></param>
+            <param name="price"></param>
+            <param name="withoutUpdate"></param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.Favorite.ParseOne(Ban3.Productions.Casino.Contracts.Enums.StockFavoriteType,System.String,System.String,System.String,System.Single,System.Boolean)">
+            <summary>
+            操作一个标的
+            </summary>
+            <param name="type"></param>
+            <param name="code"></param>
+            <param name="symbol"></param>
+            <param name="name"></param>
+            <param name="price"></param>
+            <param name="withoutUpdate"></param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.Favorite.Update">
+            <summary>
+            更新收藏夹
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.FavoriteLog">
+            <summary>
+            收藏日志
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FavoriteLog.Type">
+            <summary>
+            收藏类型
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FavoriteLog.MarkTime">
+            <summary>
+            收藏时间
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FavoriteLog.Close">
+            <summary>
+            收盘价
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.FavoriteRecord">
+            <summary>
+            收藏夹记录
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FavoriteRecord.Type">
+            <summary>
+            收藏方式
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FavoriteRecord.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FavoriteRecord.Symbol">
+            <summary>
+            代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FavoriteRecord.MarkTime">
+            <summary>
+            收藏时间
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FavoriteRecord.Close">
+            <summary>
+            收盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FavoriteRecord.Logs">
+            <summary>
+            日志记录
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.FocusData">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.FocusData.#ctor">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusData.Total">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusData.Previous">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.FocusData.PreviousKeys">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusData.Current">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.FocusData.CurrentKeys">
+            
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.FocusRecord">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.#ctor(Ban3.Sites.ViaTushare.Entries.StockPrice)">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.TradeDate">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.Open">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.High">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.Low">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.Close">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.PreClose">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.ChangePercent">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.SetKeys">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.SellDate">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.SellPrice">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusRecord.Gains">
+            
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.FocusTarget">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusTarget.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusTarget.Symbol">
+            <summary>
+            代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusTarget.Days">
+            <summary>
+            日线筛选结果
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusTarget.Weeks">
+            <summary>
+            周线筛选结果
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.FocusTarget.Months">
+            <summary>
+            月线筛选结果
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.Stock">
+            <summary>
+            标的
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.StockEvent">
+            <summary>
+            财务事件
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.StockEvent.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.StockEvent.#ctor(Ban3.Sites.ViaSina.Entries.ShareBonus)">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.MarkTime">
+            <summary>
+            除权日
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.EventType">
+            <summary>
+            事件类型
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.EventSubject">
+            <summary>
+            事件主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.Sbonus">
+            <summary>
+            送股(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.Zbonus">
+            <summary>
+            转增(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.Xmoney">
+            <summary>
+            派息(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.Pbonus">
+            <summary>
+            配股(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.Pprice">
+            <summary>
+            配股价格
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.Pcapital">
+            <summary>
+            基准股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockEvent.Lifted">
+            <summary>
+            解禁数量
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.StockRealtime">
+            <summary>
+            实时行情
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.StockRealtime.#ctor">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRealtime.Records">
+            <summary>
+            实时行情
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.StockRealtime.Close(System.String)">
+            <summary>
+            最新收盘价
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.StockRealtime.Append(Ban3.Sites.ViaNetease.Entries.StockRecord)">
+            <summary>
+            添加
+            </summary>
+            <param name="sr"></param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.StockRealtime.Append(System.Collections.Generic.Dictionary{System.String,Ban3.Sites.ViaNetease.Entries.StockRecord})">
+            <summary>
+            添加
+            </summary>
+            <param name="dic"></param>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord">
+            实时行情记录
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.Code">
+            代码
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.Name">
+            名称
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.TradeDate">
+            交易时间
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.Open">
+            开盘价
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.High">
+            最高价
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.Low">
+            最低价
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.Close">
+            收盘价
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.PreClose">
+            前收盘价
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.ChangePercent">
+            <summary>
+            涨幅
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.Vol">
+            <summary>
+            交易量
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.Amount">
+            <summary>
+            交易额
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.StockRuntimeRecord.#ctor(Ban3.Sites.ViaNetease.Entries.StockRecord)">
+            
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.StockSeed">
+            <summary>
+            复权因子集合
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockSeed.MarkTime">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.StockSeed.Seed">
+            <summary>
+            复权因子
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint">
+            <summary>
+            时间点
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.#ctor(Ban3.Infrastructures.Indicators.Outputs.StockSets)">
+            
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.Date">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.Close">
+            <summary>
+            收盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.SetKeys">
+            <summary>
+            特征集
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.TimelinePoint.Html(System.Nullable{System.Double})">
+            <summary>
+            简要输出
+            </summary>
+            <param name="preClose"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord">
+            <summary>
+            时间线记录
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.Code">
+            <summary>
+            代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.DailyRecord">
+            <summary>
+            日线时间点
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.WeeklyRecord">
+            <summary>
+            周线时间点
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.MonthlyRecord">
+            <summary>
+            月线时间点
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.NearlyRecord">
+            <summary>
+            最新记录
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.GcPoints">
+            <summary>
+            金叉记录
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.DcPoints">
+            <summary>
+            死叉记录
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.High">
+            <summary>
+            最高点记录
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.Low">
+            <summary>
+            最低点记录
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.#ctor">
+            
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.#ctor(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets},System.Boolean@)">
+            <summary>
+            
+            </summary>
+            <param name="sets"></param>
+            <param name="selected">输出当前标的是否为分析目标</param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.Increase">
+            <summary>
+            计算涨幅
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.Amplitude">
+            <summary>
+            计算振幅
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Entities.TimelineRecord.DurationDays">
+            <summary>
+            记录日线时间点距今天数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.CapitalScope">
+            <summary>
+            股本范围，M=1百万
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.CapitalScope.LE50M">
+            <summary>
+            五千万及以下
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.CapitalScope.LE100M">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.CapitalScope.LE200M">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.CapitalScope.LE300M">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.CapitalScope.LE500M">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.CapitalScope.LE1000M">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.CapitalScope.LE2000M">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.CapitalScope.GT2000M">
+            超过20亿
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.IndicatorHas">
+            <summary>
+            信号周期枚举
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.IndicatorHas.Daily">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.IndicatorHas.Weekly">
+            <summary>
+            周线出现信号
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.IndicatorHas.Monthly">
+            <summary>
+            月线出现信号
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.PriceScope">
+            <summary>
+            价格区间
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.PriceScope.LE5">
+            5块及以下
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.PriceScope.LE10">
+            5-10
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.PriceScope.LE20">
+            10-20
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.PriceScope.LE30">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.PriceScope.LE50">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.PriceScope.LE100">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.PriceScope.LE200">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.PriceScope.GT200">
+            高于200
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.RecordsSorter">
+            <summary>
+            排序方式枚举
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.RecordsSorter.Code">
+            <summary>
+            代码
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.RecordsSorter.Increase">
+            <summary>
+            涨幅
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.RecordsSorter.Amplitude">
+            <summary>
+            振幅
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.RecordsSorter.Price">
+            <summary>
+            价格
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.RecordsSorter.Asc">
+            <summary>
+            升序
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.RecordsSorter.Desc">
+            <summary>
+            降序
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.StockEventType">
+            <summary>
+            事件类型
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockEventType.Fenghong">
+            <summary>
+            分红
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockEventType.Peigu">
+            <summary>
+            配股
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockEventType.Jiejin">
+            <summary>
+            解禁
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteModules">
+            <summary>
+            收藏对象
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteModules.Stock">
+            <summary>
+            股票
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteModules.StockHolder">
+            <summary>
+            股东
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteModules.StockNotion">
+            <summary>
+            概念
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteType">
+            <summary>
+            收藏模式
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteType.Position">
+            <summary>
+            持仓
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteType.Focus">
+            <summary>
+            关注/收藏
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteType.Pool">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteType.Ignore">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockFavoriteType.BlackList">
+            <summary>
+            黑名单
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.StockGroup">
+            <summary>
+            板块
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockGroup.SZA">
+            <summary>
+            深证A股
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockGroup.SZZ">
+            <summary>
+            中小板
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockGroup.SZC">
+            <summary>
+            创业板
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockGroup.SHA">
+            <summary>
+            上证A股
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockGroup.SHK">
+            <summary>
+            科创板
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockGroup.Other">
+            <summary>
+            北交所/新三板
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.StockHolderType">
+            <summary>
+            股东类型
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Enums.StockHolderType.Values">
+            <summary>
+            股东类型字典
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Enums.StockHolderType.GetKey(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.StockNotionGroup">
+            <summary>
+            题材分组
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockNotionGroup.Concept">
+            <summary>
+            概念
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockNotionGroup.Region">
+            <summary>
+            地区
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.StockNotionGroup.Industry">
+            <summary>
+            行业
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Enums.ValueScope">
+            <summary>
+            市值范围
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.ValueScope.LE2B">
+            20亿及以下
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.ValueScope.LE5B">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.ValueScope.LE10B">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.ValueScope.LE20B">
+            
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Enums.ValueScope.GT20B">
+            <summary>
+            超过200亿
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Extensions.Helper">
+            <summary>
+            IAnalyzer扩展方法，分析相关
+            </summary>
+            <summary>
+            ICollector 扩展方法，计算相关
+            </summary>
+            <summary>
+            ICollector扩展方法，采集相关
+            </summary>
+            <summary>
+            IReportor扩展方法，报告报表相关
+            </summary>
+            <summary>
+            数据采集
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadSummary(Ban3.Productions.Casino.Contracts.Interfaces.IAnalyzer)">
+            <summary>
+            加载策略汇总数据
+            </summary>
+            <param name="_"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.EvaluateProfiles(Ban3.Productions.Casino.Contracts.Interfaces.IAnalyzer,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Entries.Stock})">
+            <summary>
+            评估策略，生成汇总
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareCompositeRecords(Ban3.Productions.Casino.Contracts.Interfaces.IAnalyzer,System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
             <param name="codes"></param>
+            <param name="profileId"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecuteDailyJob(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadProfileDetails(Ban3.Productions.Casino.Contracts.Interfaces.IAnalyzer,System.Collections.Generic.List{System.String},System.String)">
             <summary>
-            指定标的集合
+            
             </summary>
-            <param name="stocks"></param>
+            <param name="_"></param>
+            <param name="codes"></param>
+            <param name="identity"></param>
+            <returns></returns>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.ExecutePrepare(System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareDistributeRecords(Ban3.Productions.Casino.Contracts.Interfaces.IAnalyzer)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.CalculateSeeds(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,System.Collections.Generic.List{Ban3.Sites.ViaTushare.Entries.StockPrice},System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.StockEvent})">
+            <summary>
+            计算复权因子
+            </summary>
+            <param name="_"></param>
+            <param name="prices"></param>
+            <param name="events"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.ReinstatePrices(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,System.String,System.String,System.Collections.Generic.List{Ban3.Sites.ViaTushare.Entries.StockPrice})">
             <summary>
             计算复权价格
-            计算指标值
-            准备指标图表数据
-            准备指标特征数据
-            生成最新列表
             </summary>
+            <param name="_"></param>
+            <param name="code"></param>
+            <param name="symbol"></param>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadReinstatedPrices(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,System.String,Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle)">
+            <summary>
+            加载复权价格
+            </summary>
+            <param name="_"></param>
+            <param name="code"></param>
+            <param name="cycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadPricesForIndicators(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,System.String,Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle)">
+            <summary>
+            加载复权价格(用于指标计算)
+            </summary>
+            <param name="_"></param>
+            <param name="code"></param>
+            <param name="cycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.ExtendedDots(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Entries.DotInfo}},Ban3.Productions.Casino.Contracts.Request.RenderView)">
+            <summary>
+            对dots of buying or selling main table按照RenderView筛选
+            </summary>
+            <param name="dots"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadAllLatestSets(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator)">
+            <summary>
+            Latest Sets
+            </summary>
+            <param name="_"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.ScopedByRenderView(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,Ban3.Productions.Casino.Contracts.Request.RenderView)">
+            <summary>
+            筛选
+            </summary>
+            <param name="_"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.GenerateBasisData(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            准备基础数据
+            </summary>
+            <param name="_"></param>
+            <param name="stocks"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.GenerateOneBasisData(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,Ban3.Infrastructures.Indicators.Entries.Stock,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price},Ban3.Infrastructures.Indicators.Formulas.Full,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets}@)">
+            <summary>
+            准备个股基础数据
+            </summary>
+            <param name="_"></param>
+            <param name="stock"></param>
+            <param name="prices"></param>
+            <param name="formulas"></param>
+            <param name="dailySets"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.GenerateAmountDiagrams(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock},System.Int32)">
+            <summary>
+            成交额图表
+            </summary>
+            <param name="_"></param>
+            <param name="stocks"></param>
+            <param name="days"></param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.GenerateAmountDiagram(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,Ban3.Infrastructures.Indicators.Entries.Stock,System.Int32)">
+            <summary>
+            单个成交额图表
+            </summary>
+            <param name="_"></param>
+            <param name="stock"></param>
+            <param name="days"></param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.GenerateTimelineRecords(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            MACD时间线
+            </summary>
+            <param name="_"></param>
             <param name="stocks"></param>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDots(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.GenerateTargets(Ban3.Productions.Casino.Contracts.Interfaces.ICalculator,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            生成Decide
+            </summary>
+            <param name="_"></param>
+            <param name="stocks"></param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareAllCodes(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            准备标的数据
+            </summary>
+            <param name="_"></param>
+            <param name="allCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadAllCodes(Ban3.Productions.Casino.Contracts.Interfaces.ICollector)">
+            <summary>
+            加载标的数据
+            </summary>
+            <param name="_"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.ScopedCodes(Ban3.Productions.Casino.Contracts.Interfaces.ICollector)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDotsKey(System.Boolean)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadStock(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.String)">
+            <summary>
+            获取某一标的
+            </summary>
+            <param name="_"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            获取所有历史行情
+            </summary>
+            <param name="_"></param>
+            <param name="allCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareOnesPrices(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.String)">
+            <summary>
+            获取某一历史行情
+            </summary>
+            <param name="_"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.FixDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            补充所有行情数据
+            </summary>
+            <param name="_"></param>
+            <param name="allCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.String)">
+            <summary>
+            加载行情数据
+            </summary>
+            <param name="_"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareAllEvents(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            准备所有事件数据
+            </summary>
+            <param name="_"></param>
+            <param name="allCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareOnesEvents(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.String)">
+            <summary>
+            准备某一事件数据
+            </summary>
+            <param name="_"></param>
+            <param name="symbol"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadOnesEvents(Ban3.Productions.Casino.Contracts.Interfaces.ICollector,System.String)">
+            <summary>
+            加载某一事件数据
+            </summary>
+            <param name="_"></param>
+            <param name="symbol"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Extensions.Helper.StrFilter">
+            <summary>
+            用RenderView筛选字符串
+            </summary>
+        </member>
+        <member name="F:Ban3.Productions.Casino.Contracts.Extensions.Helper.DotFilter">
+            <summary>
+            用RenderView筛选Dots
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.StockGroup(System.String)">
+            <summary>
+            板块归属
+            </summary>
+            <param name="prefix"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PriceScope(System.Double)">
+            <summary>
+            价格区间划分
+            </summary>
+            <param name="price"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.CapitalScope(System.Double)">
+            <summary>
+            按股本划分
+            </summary>
+            <param name="capital"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.ValueScope(System.Double)">
+            <summary>
+            按市值划分
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadDotsSankey(Ban3.Productions.Casino.Contracts.Interfaces.IReportor,Ban3.Infrastructures.Indicators.Entries.FocusFilter)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadDotsKey(Ban3.Productions.Casino.Contracts.Interfaces.IReportor,Ban3.Infrastructures.Indicators.Entries.FocusFilter,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="filter"></param>
+            <param name="forBuying"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadDots(Ban3.Productions.Casino.Contracts.Interfaces.IReportor,Ban3.Infrastructures.Indicators.Entries.FocusFilter)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadDistributeRecords(Ban3.Productions.Casino.Contracts.Interfaces.IReportor)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareAllCodesFromEastmoney(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="allCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareAllCodesFromTushare(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="allCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadAllCodes(Ban3.Productions.Casino.Contracts.Interfaces.ISites)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.GetDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.Collections.Generic.List{System.String},System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="tsCodes"></param>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.GetDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.Collections.Generic.List{System.String},Ban3.Sites.ViaTushare.Entries.DateRange)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="tsCodes"></param>
+            <param name="dateRange"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareOnesDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareAllDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="allCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.FixAllDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="allCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.FixAllDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.Collections.Generic.List{System.String})">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="codes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadOnesDailyPrices(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareOnesEvents(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.String)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetLineOfPoint(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.PrepareAllEvents(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.Stock})">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="allCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Extensions.Helper.LoadOnesEvents(Ban3.Productions.Casino.Contracts.Interfaces.ISites,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="_"></param>
+            <param name="symbol"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Interfaces.IAnalyzer">
+            <summary>
+            数据转换
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Interfaces.ICalculator">
+            <summary>
+            计算相关
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Interfaces.ICollector">
+            <summary>
+            采集相关
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Interfaces.ICollector.Sites">
+            <summary>
+            Sites Access
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Interfaces.IReportor">
+            <summary>
+            报表输出
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Interfaces.ISites">
+            <summary>
+            Sites Access
+            </summary>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Models.Target">
+            <summary>
+            标的
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Target.#ctor">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetListRecords(System.String)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Target.#ctor(Ban3.Productions.Casino.Contracts.Entities.Stock,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.TimelinePoint},Ban3.Sites.ViaTushare.Entries.StockPrice,Ban3.Infrastructures.Indicators.Outputs.StockSets)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetStockPrices(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.Stock">
+            <summary>
+            标的信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.Ignore">
+            <summary>
+            忽略该标的
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.Points">
+            <summary>
+            事件点
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.LatestPrice">
+            <summary>
+            价格信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.LatestSets">
+            <summary>
+            特征信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Target.LastAccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Target.PreClose">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetStockSets(Ban3.Productions.Casino.Contracts.Request.RenderView)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Target.Change">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetLatestStockSets">
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Target.ChangePercent">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.UnsellRecord(Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord,System.Double@)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Target.Html">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetTreemapDiagram(System.Int32)">
+        <member name="T:Ban3.Productions.Casino.Contracts.Models.Targets">
+            <summary>
+            标的
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Models.Targets.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.AppendTarget(Ban3.Productions.Casino.Contracts.Entities.Stock,System.Collections.Generic.List{Ban3.Productions.Casino.Contracts.Entities.TimelinePoint},Ban3.Sites.ViaTushare.Entries.StockPrice,Ban3.Infrastructures.Indicators.Outputs.StockSets)">
+            <summary>
+            
+            </summary>
+            <param name="stock"></param>
+            <param name="points"></param>
+            <param name="price"></param>
+            <param name="sets"></param>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.Save">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.Ignore(System.String)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetSankeyDiagram(System.Int32)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.Skip(System.String)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetCandlestickDiagram(System.String,System.String)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.PopOne">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetAmountDiagram(System.String)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.Get(System.String)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetBiasDiagram(System.String)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.Counter``1(System.Func{Ban3.Productions.Casino.Contracts.Models.Target,``0})">
+            <summary>
+            分组统计
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <param name="getKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.PriceScopes">
+            <summary>
+            价格区间计数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Models.Targets.StockGroups">
+            <summary>
+            所属板块计数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Request.RenderView">
+            <summary>
+            视图输出条件
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.Id">
+            <summary>
+            主键/标的代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.Cycle">
+            <summary>
+            周期
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.RedOnly">
+            <summary>
+            上涨
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.GreenOnly">
+            <summary>
+            下跌
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Request.RenderView.CycleEnum">
+            <summary>
+            周期枚举
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.StartsWith">
+            <summary>
+            代码前缀
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.EndsWith">
+            <summary>
+            代码后缀
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.IncludeKeys">
+            <summary>
+            包含特征
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.ExcludeKeys">
+            <summary>
+            不包含特征
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.ViewName">
+            <summary>
+            视图名
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.Page">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.PageSize">
+            <summary>
+            页尺寸
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.Total">
+            <summary>
+            记录总数
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.RenderElement">
+            <summary>
+            输出目的元素
+            </summary>
+        </member>
+        <member name="P:Ban3.Productions.Casino.Contracts.Request.RenderView.DataUrl">
+            <summary>
+            数据地址
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Request.RenderView.Pagination">
+            <summary>
+            分页HTML
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Productions.Casino.Contracts.Response.FocusFilterResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Productions.Casino.Contracts.Response.FocusFilterResult.#ctor">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDmiDiagram(System.String)">
+        <member name="P:Ban3.Productions.Casino.Contracts.Response.FocusFilterResult.Targets">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetKdDiagram(System.String)">
+        <member name="M:Ban3.Productions.Casino.Contracts.Response.FocusFilterResult.Append(System.String,Ban3.Productions.Casino.Contracts.Entities.FocusTarget)">
             
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetMacdDiagram(System.String)">
-            
+        <member name="T:Ban3.Productions.Casino.Contracts.Response.RenderViewResult`1">
+            <summary>
+            常用分拣条件
+            </summary>
+            <typeparam name="T"></typeparam>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetProfileDetails(System.Collections.Generic.List{System.String},System.String)">
+        <member name="P:Ban3.Productions.Casino.Contracts.Response.RenderViewResult`1.Counter">
+            <summary>
             
+            </summary>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetCompositeRecords(System.String)">
+        <member name="P:Ban3.Productions.Casino.Contracts.Response.RenderViewResult`1.Request">
+            <summary>
             
+            </summary>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetTimelineRecords">
+        <member name="P:Ban3.Productions.Casino.Contracts.Response.RenderViewResult`1.ShowData">
+            <summary>
             
+            </summary>
         </member>
-        <member name="M:Ban3.Productions.Casino.CcaAndReport.Signalert.GetDistributeRecords">
+        <member name="P:Ban3.Productions.Casino.Contracts.Response.RenderViewResult`1.Pagination">
+            <summary>
             
+            </summary>
         </member>
     </members>
 </doc>

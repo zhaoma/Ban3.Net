@@ -26,7 +26,8 @@ public static class Helper
     {
         try
         {
-            var client = host.Client();
+            using var client = host.Client();
+
             if (!string.IsNullOrEmpty(accept))
                 client.DefaultRequestHeaders.Add("Accept", accept);
 

@@ -566,11 +566,12 @@ public static partial class Helper
 
     static List<TimelinePoint> GetPoints(this List<StockSets> sets)
     {
-        var result=new List<TimelinePoint>();
+        var result = new List<TimelinePoint>();
 
         try
         {
-            var latestDaily = sets.Last(o => o.SetKeys != null && o.SetKeys.Contains("MACD.C0.DAILY"));
+            var latestDaily =
+                sets.Last(o => o.SetKeys != null && o.SetKeys.Any() && o.SetKeys.Contains("MACD.C0.DAILY"));
 
             if (latestDaily != null)
             {
@@ -586,7 +587,7 @@ public static partial class Helper
                 {
                     Logger.Debug($"ADD TARGET {latestDaily.MarkTime}->{afterC0.Count}");
                 }
-                
+
                 result.Add(new TimelinePoint(latestDaily));
 
                 foreach (var p in afterC0.Select(s => new TimelinePoint(s))
@@ -596,7 +597,11 @@ public static partial class Helper
                         result.Add(p);
                 }
             }
-        }catch(Exception ex) {Logger.Error($".FAULT.{ex.Message}"); }
+        }
+        catch (Exception ex)
+        {
+            Logger.Error($".FAULT.{ex.Message}");
+        }
 
         return result;
     }

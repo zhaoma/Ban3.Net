@@ -46,9 +46,8 @@ public class Body
         if (StreamContent != null)
             return new StreamContent(StreamContent);
 
-        if (!string.IsNullOrEmpty(StringContent))
-            return new StringContent(StringContent, Encoding.GetEncoding(ContentEncoding), ContentMediaType);
-
-        return null;
+        return !string.IsNullOrEmpty(StringContent) 
+            ? new StringContent(StringContent, Encoding.GetEncoding(ContentEncoding), ContentMediaType) 
+            : null;
     }
 }
