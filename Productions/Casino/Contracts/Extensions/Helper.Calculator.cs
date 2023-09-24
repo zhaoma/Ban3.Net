@@ -446,7 +446,7 @@ public static partial class Helper
     /// <param name="days"></param>
     public static void GenerateAmountDiagrams(
         this ICalculator _,
-        List<Entities.Stock> stocks,
+        List<Stock> stocks,
         int days = 3)
     {
         var total = stocks.Count;
@@ -534,7 +534,9 @@ public static partial class Helper
         this ICalculator _,
         List<Stock> stocks)
     {
-        var targets = new Models.Targets();
+        var targets = new Targets();
+
+        targets.Reset();
 
         stocks.ParallelExecute(one =>
         {

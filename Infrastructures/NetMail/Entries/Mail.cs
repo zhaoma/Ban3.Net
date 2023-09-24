@@ -1,8 +1,4 @@
-﻿/* -------------------------------------------------------------------------------------------------
-   Copyright (C) Siemens Healthcare GmbH 2023, All rights reserved. Restricted.
-   ------------------------------------------------------------------------------------------------- */
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Mail;
 
 namespace Ban3.Infrastructures.NetMail.Entries;
@@ -40,6 +36,8 @@ public class Mail
         get;
         set;
     }
+
+    public string FromName { get; set; }
 
     /// 
     public Mail()

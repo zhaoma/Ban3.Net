@@ -35,6 +35,17 @@ public class Targets
                ?? new Dictionary<string, Target>();
     }
 
+    public void Reset()
+    {
+        if (Data != null && Data.Any())
+        {
+            foreach (var d in Data)
+            {
+                d.Value.Ignore = true;
+            }
+        }
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -92,11 +103,13 @@ public class Targets
     }
 
     /// 
-    public Target? PopOne()
+    public Target? PopOne(StockGroup? selectedGroup)
     {
         if (Data.Any(o => !o.Value.Ignore))
         {
-            return Data.OrderBy(o => o.Value.LastAccess).FirstOrDefault().Value;
+            return Data
+        .Where(o => selectedGroup == null || o.Key.StockGroup().Equals(selectedGroup.Value))
+        .OrderBy(o => o.Value.LastAccess).FirstOrDefault().Value;
         }
 
         return null;
@@ -145,4 +158,26 @@ public class Targets
     public Dictionary<CapitalScope,int> CapitalScopes()
     => Counter(target => (target.Stock.).PriceScope());
     */
+
+    /// <summary>
+    /// 每个group
+    /// </summary>
+    /// <returns></returns>
+    public Dictionary<StockGroup, Target> FocusOnEveryGroup()
+    {
+        var result = new Dictionary<StockGroup, Target>();
+
+        var counter = StockGroups();
+
+        foreach (var kvp in counter)
+        {
+            var t = PopOne(kvp.Key);
+            if (t != null)
+            {
+                result.Add(kvp.Key, t);
+            }
+        }
+
+        return result;
+    }
 }

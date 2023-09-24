@@ -32,7 +32,7 @@ public class Target
         if (LatestSets is { SetKeys: { } })
         {
             Ignore = LatestSets?.SetKeys != null;
-            Ignore = Ignore && !Config.IgnoreKeys.Any(x => LatestSets.SetKeys.Contains(x));
+            Ignore = Ignore && Config.IgnoreKeys.Any(x => LatestSets.SetKeys.Contains(x));
         }
     }
 

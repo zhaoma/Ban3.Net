@@ -1,0 +1,96 @@
+﻿@using Ban3.Infrastructures.Common.Extensions;
+@using Ban3.Productions.Casino.Contracts.Extensions;
+@model Ban3.Productions.Casino.Contracts.Models.Targets
+
+@{
+    ViewData["Title"] = $"{Model.Data.Count(o => !o.Value.Ignore)} targets.";
+    Layout = null;
+
+    var priceScopes = Model.PriceScopes();
+    var groupScopes = Model.StockGroups();
+}
+
+    <div class="row grid" data-masonry='{"percentPosition": true }'>
+        <div class="col-sm-12 col-lg-4 mb-4">
+            <div class="card grayBox">
+                <div class="card-header">价格统计</div>
+                <div class="card-body col">
+                    <table class="table table-hover table-striped table-dark  table-bordered caption-top">
+                        <thead>
+                            <tr><th>Subject</th><th>Counter</th></tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in priceScopes)
+                            {
+                                <tr>
+                                    <td>@row.Key.EnumDescription()</td>
+                                    <td>@row.Value</td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-4 mb-4">
+            <div class="card grayBox">
+                <div class="card-header">板块统计</div>
+                <div class="card-body col">
+                    <table class="table table-hover table-striped table-dark  table-bordered caption-top">
+                        <thead>
+                            <tr><th>Subject</th><th>Counter</th></tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in groupScopes)
+                            {
+                                <tr>
+                                    <td>@row.Key.EnumDescription()</td>
+                                    <td>@row.Value</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @foreach (var g in groupScopes)
+        {
+            var list = Model.Data.Where(o => o.Key.StockGroup().Equals(g.Key) && !o.Value.Ignore)
+            .Select(o => o.Value)
+	    .OrderByDescending(o=>o.Stock.Symbol)
+	    .ToList();
+
+            <div class="col-sm-12 col-lg-4 mb-4">
+                <div class="card grayBox">
+                    <div class="card-header">@g.Key.EnumDescription()</div>
+                    <div class="card-body col">
+                        <table class="table table-hover table-striped table-dark  table-bordered caption-top">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <td>Name</td>
+                                    <th>MarkDate</th>
+                                    <th>From</th>
+                                    <th>Nearly</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var row in list)
+                                {
+                                    var found = row.Points.First();
+                                    <tr>
+                                        <td>@row.Stock.Symbol</td>
+                                        <td>@row.Stock.Name</td>
+                                        <td>@found?.Date</td>
+                                        <td>@found?.Close</td>
+                                        <td>@row.LatestPrice.Close</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

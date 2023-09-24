@@ -79,31 +79,19 @@ internal class Program
 
         //Any trial functions test here...
 
-        //var stocks = Signalert.Collector.LoadAllCodes();
-        //new Action(() =>
-        //{
-        //    Signalert.Calculator.GenerateTargets(stocks);
-        //}).ExecuteAndTiming("GenerateTargets");
+        var stocks = Signalert.Collector.LoadAllCodes();
+        
+        new Action(() =>
+        {
+            Signalert.Calculator.GenerateTargets(stocks);
+        }).ExecuteAndTiming("GenerateTargets");
 
         var targets = new Targets();
         var focus = targets.Data.Where(o => !o.Value.Ignore)
             .Select(o=>o.Value)
             .ToList();
 
-        var codeSummary = focus.Select(o=>o.Stock)
-            .GroupBy(o => o.Symbol.Substring(0, 2))
-            .Select(o=>new
-            {
-                key=o.Key,
-                c=o.Count()
-            });
-
-        "codeSummary".WriteColorLine(ConsoleColor.Red);
-        foreach (var s in codeSummary)
-        {
-            $"{s.key}:{s.c}".WriteColorLine(ConsoleColor.Blue);
-        }
-        Console.WriteLine();
+        Console.WriteLine(focus.Count+" in targets.");
 
 
 

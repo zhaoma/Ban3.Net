@@ -272,4 +272,10 @@ public class PartsController : Controller
 
         return Content("NOT EXISTS TARGET!");
     }
+
+    public IActionResult Targets()
+    {
+        var targets = new Targets();
+        return View(targets);
+    }
 }

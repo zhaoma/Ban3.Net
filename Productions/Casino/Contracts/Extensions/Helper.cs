@@ -53,6 +53,7 @@ public static partial class Helper
                 "600" => Enums.StockGroup.SHA,
                 "601" => Enums.StockGroup.SHA,
                 "603" => Enums.StockGroup.SHA,
+                "605" => Enums.StockGroup.SHA,
                 "688" => Enums.StockGroup.SHK,
                 "689" => Enums.StockGroup.SHK,
                 _ => Enums.StockGroup.Other
