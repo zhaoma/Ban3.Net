@@ -1,7 +1,6 @@
 ﻿@using Ban3.Infrastructures.Indicators
 @model Ban3.Productions.Casino.Contracts.Models.Target
 @{
-    Layout = null;
     var dic = Model.LatestSets?.SetKeys.SetsKeysSummary();
 }
 <div class="container">
@@ -30,9 +29,9 @@
             }
         </ol>
         </div>
-</div>
-
 <div class="row">
     <div class="col-12 lazyLoad" id="onesChartsContainer" dataUrl="/parts/stock/@Model.Stock.Code"></div>
 </div>
+</div>
+
 
