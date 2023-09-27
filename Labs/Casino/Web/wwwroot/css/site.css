@@ -303,6 +303,8 @@ html {
 
 .targets ol{ display: none;}
 
-.targets .active ol{ display: block;}
+.targets .active ol {
+    display: block;
+}
 
 .targetButtons{ text-align: right;}

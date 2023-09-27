@@ -11,128 +11,107 @@
     var groupScopes = Model.StockGroups();
 }
 
-    <div class="row grid" data-masonry='{"percentPosition": true }'>
+<div class="row grid" data-masonry='{"percentPosition": true }'>
+    <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card grayBox">
+            <div class="card-header">价格统计 @($"{priceScopes.Sum(o=>o.Value)} : {priceScopes.Count()}")</div>
+            <div class="card-body col">
+                <table class="table table-hover table-striped table-dark  table-bordered caption-top">
+                    <thead>
+                    <tr><th>Subject</th><th>Counter</th></tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var row in priceScopes)
+                    {
+                        <tr>
+                            <td>@row.Key.EnumDescription()</td>
+                            <td>@row.Value</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card grayBox">
+            <div class="card-header">板块统计 @($"{groupScopes.Sum(o=>o.Value)} : {groupScopes.Count()}")</div>
+            <div class="card-body col">
+                <table class="table table-hover table-striped table-dark  table-bordered caption-top">
+                    <thead>
+                    <tr><th>Subject</th><th>Counter</th></tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var row in groupScopes)
+                    {
+                        <tr>
+                            <td>@row.Key.EnumDescription()</td>
+                            <td>@row.Value</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @foreach (var g in groupScopes)
+    {
+        var list = all.Where(o => o.Stock.Code.StockGroup().Equals(g.Key))
+            .OrderByDescending(o => o.Stock.Symbol)
+            .ToList();
+
         <div class="col-sm-12 col-lg-4 mb-4">
             <div class="card grayBox">
-                <div class="card-header">价格统计 @($"{priceScopes.Sum(o=>o.Value)} : {priceScopes.Count()}")</div>
+                <div class="card-header">@($"{g.Key.EnumDescription()} : {list.Count()}")</div>
                 <div class="card-body col">
                     <table class="table table-hover table-striped table-dark  table-bordered caption-top">
                         <thead>
-                            <tr><th>Subject</th><th>Counter</th></tr>
+                        <tr>
+                            <th>Code</th>
+                            <td>Name</td>
+                            <th>MarkDate</th>
+                            <th>From</th>
+                            <th>Nearly</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach (var row in priceScopes)
-                            {
-                                <tr>
-                                    <td>@row.Key.EnumDescription()</td>
-                                    <td>@row.Value</td>
-                                </tr>
-                            }
+                        @foreach (var row in list)
+                        {
+                            var found = row.Points.First();
+                            <tr class="modalTrigger" code="@row.Stock.Code">
+                                <td>@row.Stock.Symbol</td>
+                                <td>@row.Stock.Name</td>
+                                <td>@found?.Date</td>
+                                <td>@found?.Close</td>
+                                <td>@row.LatestPrice.Close</td>
+                            </tr>
+                            <tr id="points_@row.Stock.Code" class="hidePoints">
+                                <td colspan="5">
+                                    <ol>
+                                        @foreach (var p in row.Points)
+                                        {
+                                            <li>@Html.Raw(p.Html(row.PreClose()))</li>
+                                        }
+                                    </ol>
+                                </td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-lg-4 mb-4">
-            <div class="card grayBox">
-                <div class="card-header">板块统计 @($"{groupScopes.Sum(o=>o.Value)} : {groupScopes.Count()}")</div>
-                <div class="card-body col">
-                    <table class="table table-hover table-striped table-dark  table-bordered caption-top">
-                        <thead>
-                            <tr><th>Subject</th><th>Counter</th></tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var row in groupScopes)
-                            {
-                                <tr>
-                                    <td>@row.Key.EnumDescription()</td>
-                                    <td>@row.Value</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        @foreach (var g in groupScopes)
-            {
-                var list = all.Where(o => o.Stock.Code.StockGroup().Equals(g.Key))
-                    .OrderByDescending(o => o.Stock.Symbol)
-                    .ToList();
+    }
+</div>
 
-            <div class="col-sm-12 col-lg-4 mb-4">
-                <div class="card grayBox">
-                    <div class="card-header">@($"{g.Key.EnumDescription()} : {list.Count()}")</div>
-                    <div class="card-body col">
-                        <table class="table table-hover table-striped table-dark  table-bordered caption-top">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <td>Name</td>
-                                    <th>MarkDate</th>
-                                    <th>From</th>
-                                    <th>Nearly</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var row in list)
-                                {
-                                    var found = row.Points.First();
-                                    <tr>
-                                        <td><a href="/parts/viewtarget/@row.Stock.Code" data-bs-toggle="modal" data-bs-target="targetModal">@row.Stock.Symbol</a></td>
-                                        <td>@row.Stock.Name</td>
-                                        <td>@found?.Date</td>
-                                        <td>@found?.Close</td>
-                                        <td>@row.LatestPrice.Close</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-    <div id="targetModal" class="modal-dialog modal-xl" role="dialog" aria-labelledby="M" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- 模态框头部 -->
-                <div class="modal-header">
-                    <h4 class="modal-title">模态框标题</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
-                <!-- 模态框内容 -->
-                <div class="modal-body">
-                    模态框内容..
-                </div>
-
-                <!-- 模态框底部 -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
 <script>
     $(".modalTrigger").each(function () {
         var button = $(this);
         button.bind('click', function () {
-            alert("show me");
-            var url='/parts/viewtarget/'+$(this).attr('code');
-            $("#targetModal").modal({
-                remote: url
-	        });
+            console.log("#points_" + $(this).attr('code'));
+            $("#points_" + $(this).attr('code')).toggle();
 
             return false;
         });
     });
-    $("#targetModal").on("hidden.bs.modal", function () {
-        alert("hide me");
-        $(this).removeData("bs.modal");
-	    $(this).find(".modal-body").children().remove();
-        
-    });  
 </script>
