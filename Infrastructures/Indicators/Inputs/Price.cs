@@ -75,4 +75,5 @@ public class Price
     /// </summary>
     [JsonProperty("amount", NullValueHandling = NullValueHandling.Ignore)]
     public double? Amount { get; set; }
+
 }

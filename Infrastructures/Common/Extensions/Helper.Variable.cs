@@ -285,7 +285,7 @@ public static partial class Helper
 
     /// 
     public static DateTime FromYmd(this string val) => val.ToDateTimeEx();
-    
+
     /// <summary>
     /// 相同日期
     /// </summary>
@@ -293,4 +293,15 @@ public static partial class Helper
     /// <param name="inVal"></param>
     /// <returns></returns>
     public static bool DateEqual(this DateTime dt, DateTime inVal) => inVal.ToYmd().Equals(dt.ToYmd());
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="close"></param>
+    /// <param name="preClose"></param>
+    /// <param name="changeRatio"></param>
+    /// <returns></returns>
+    public static bool IsLimit(this double close, double preClose, decimal changeRatio) 
+	    => Math.Round(preClose * (double)(changeRatio + 1), 2)
+            .Equals(Math.Round(close, 2));
 }
