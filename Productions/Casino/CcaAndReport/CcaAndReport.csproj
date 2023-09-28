@@ -23,7 +23,7 @@
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <OutputPath>..\..\..\output\</OutputPath>
-        <DocumentationFile>..\..\..\output\xmls\Ban3.Infrastructures.Common.xml</DocumentationFile>
+        <DocumentationFile>..\..\..\output\xmls\Ban3.Productions.Casino.CcaAndReport.xml</DocumentationFile>
         <AllowedReferenceRelatedFileExtensions>
             .allowedextension
         </AllowedReferenceRelatedFileExtensions>
@@ -42,13 +42,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Ban3.Productions.Casino.Contracts" Version="1.0.25" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Update="readme.md">
-            <PackagePath>\</PackagePath>
-            <Pack>True</Pack>
-        </None>
+        <PackageReference Include="Ban3.Productions.Casino.Contracts" Version="1.0.26" />
     </ItemGroup>
 </Project>
