@@ -374,3 +374,4 @@ Labs/Casino/Web/appsettings.json
 *.cache
 *.props
 *.targets
+output/
