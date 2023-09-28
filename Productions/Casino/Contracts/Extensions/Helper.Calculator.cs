@@ -554,7 +554,7 @@ public static partial class Helper
 
                 var points = sets.GetPoints();
                 if (points.Any())
-                    targets.AppendTarget(one, points, prices!.Last(), sets.Last());
+                    targets.AppendTarget(one, points, prices!.Last(), sets.Last(),prices.Count);
             }
             catch (Exception ex)
             {

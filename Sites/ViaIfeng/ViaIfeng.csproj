@@ -1,50 +1,52 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <LangVersion>10.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <NullableContextOptions>enable </NullableContextOptions>
-    <RootNamespace>Ban3.Sites.ViaIfeng</RootNamespace>
-    <AssemblyName>Ban3.Sites.ViaIfeng</AssemblyName>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DebugType>embedded</DebugType>
-    <Title>Ban3.Sites.ViaIfeng</Title>
-    <Version>1.0.0</Version>
-    <Authors>zhaoma</Authors>
-    <Company>BAN3</Company>
-    <Description>Via ifeng.com</Description>
-    <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../../output/</OutputPath>
-    <DocumentationFile>../../../output/ban3.Infrastructures.Platforms.ViaGtimg.xml</DocumentationFile>
-    <AllowedReferenceRelatedFileExtensions>
-      .allowedextension
-    </AllowedReferenceRelatedFileExtensions>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <None Remove="Response\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-    <None Include="..\..\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <NullableContextOptions>enable </NullableContextOptions>
+        <RootNamespace>Ban3.Sites.ViaIfeng</RootNamespace>
+        <AssemblyName>Ban3.Sites.ViaIfeng</AssemblyName>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Sites.ViaIfeng</Title>
+        <Version>1.0.0</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>Via ifeng.com</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.0.1</AssemblyVersion>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.8" />
-  </ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>../../output/</OutputPath>
+        <DocumentationFile>../../output/xmls/ban3.Infrastructures.Platforms.ViaGtimg.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="Response\" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.9" />
+    </ItemGroup>
 </Project>

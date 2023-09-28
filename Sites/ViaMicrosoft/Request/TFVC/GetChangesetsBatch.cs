@@ -1,6 +1,6 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
 
-namespace Ban3.Infrastructures.Platforms.ViaMicrosoft.Request.TFVC
+namespace Ban3.Sites.ViaMicrosoft.Request.TFVC
 {
 	public class GetChangesetsBatch
 		: MultiPageQuery, IRequest

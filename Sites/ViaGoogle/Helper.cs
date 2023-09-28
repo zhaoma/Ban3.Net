@@ -5,16 +5,12 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System;
-using Interfaces=Ban3.Infrastructures.Interfaces;
-
-namespace ViaGoogle
+namespace Ban3.Sites.ViaGoogle
 {
     /// <summary>
     /// Google平台接口实现
     /// </summary>
-    public class Service
-        : Interfaces.Platforms.IGoogle
+    public class Helper
     {
     }
 }

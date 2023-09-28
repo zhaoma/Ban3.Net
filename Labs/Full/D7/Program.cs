@@ -7,10 +7,13 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Common;
 using Ban3.Infrastructures.Consoles;
 
-var a=
-Ban3.Sites.ViaSohu.Helper.DownloadAllNotions();
+var s = 98.9D.IsLimit(90, 10);
+Console.WriteLine(s);
 
-a.ObjToJson().WriteColorLine(ConsoleColor.Red);
+
+//var a=Ban3.Sites.ViaSohu.Helper.DownloadAllNotions();
+
+//a.ObjToJson().WriteColorLine(ConsoleColor.Red);
 
 //for (var i = 1; i < 100; i++)
 //{

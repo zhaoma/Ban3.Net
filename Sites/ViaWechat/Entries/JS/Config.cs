@@ -46,7 +46,7 @@ namespace Ban3.Platforms.WeChatClient.Entries.JS
         /// ctor
         public Config()
         {
-            appId = Infrastructures.Common.Config.CurrrentEnvironment.Platforms.WeChat.OAuth2Client.AppKey;
+            appId = "";// Infrastructures.Common.Config.CurrrentEnvironment.Platforms.WeChat.OAuth2Client.AppKey;
             timestamp = DateTime.Now.ToString("yyyyMMddHHmmssffff");
             nonceStr = new Guid().ToString("");
             jsApiList = new List<string>

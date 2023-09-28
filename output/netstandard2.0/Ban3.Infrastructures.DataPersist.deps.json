@@ -7,10 +7,10 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Infrastructures.DataPersist/1.0.12": {
+      "Ban3.Infrastructures.DataPersist/1.0.13": {
         "dependencies": {
-          "Ban3.Infrastructures.Common": "1.0.14",
-          "Microsoft.Data.Sqlite": "7.0.10",
+          "Ban3.Infrastructures.Common": "1.0.15",
+          "Microsoft.Data.Sqlite": "7.0.11",
           "MySql.Data": "8.1.0",
           "NETStandard.Library": "2.0.3",
           "Newtonsoft.Json": "13.0.3",
@@ -27,9 +27,11 @@
           "Ban3.Infrastructures.DataPersist.dll": {}
         }
       },
-      "Ban3.Infrastructures.Common/1.0.14": {
+      "Ban3.Infrastructures.Common/1.0.15": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
+          "Mono.Cecil": "0.11.5",
+          "Mono.Reflection": "2.0.0",
           "Newtonsoft.Json": "13.0.3",
           "Rougamo.Fody": "1.4.1",
           "System.CodeDom": "7.0.0",
@@ -39,8 +41,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Infrastructures.Common.dll": {
-            "assemblyVersion": "1.0.0.14",
-            "fileVersion": "1.0.0.14"
+            "assemblyVersion": "1.0.0.15",
+            "fileVersion": "1.0.0.15"
           }
         }
       },
@@ -116,20 +118,20 @@
           }
         }
       },
-      "Microsoft.Data.Sqlite/7.0.10": {
+      "Microsoft.Data.Sqlite/7.0.11": {
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "7.0.10",
+          "Microsoft.Data.Sqlite.Core": "7.0.11",
           "SQLitePCLRaw.bundle_e_sqlite3": "2.1.4"
         }
       },
-      "Microsoft.Data.Sqlite.Core/7.0.10": {
+      "Microsoft.Data.Sqlite.Core/7.0.11": {
         "dependencies": {
           "SQLitePCLRaw.core": "2.1.4"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {
-            "assemblyVersion": "7.0.10.0",
-            "fileVersion": "7.0.1023.36204"
+            "assemblyVersion": "7.0.11.0",
+            "fileVersion": "7.0.1123.40906"
           }
         }
       },
@@ -243,6 +245,34 @@
           "lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
             "assemblyVersion": "4.1.3.0",
             "fileVersion": "4.700.19.56404"
+          }
+        }
+      },
+      "Mono.Cecil/0.11.5": {
+        "runtime": {
+          "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {
+            "assemblyVersion": "0.11.5.0",
+            "fileVersion": "0.11.5.0"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {
+            "assemblyVersion": "0.11.5.0",
+            "fileVersion": "0.11.5.0"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {
+            "assemblyVersion": "0.11.5.0",
+            "fileVersion": "0.11.5.0"
+          },
+          "lib/netstandard2.0/Mono.Cecil.dll": {
+            "assemblyVersion": "0.11.5.0",
+            "fileVersion": "0.11.5.0"
+          }
+        }
+      },
+      "Mono.Reflection/2.0.0": {
+        "runtime": {
+          "lib/netstandard2.0/Mono.Reflection.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
           }
         }
       },
@@ -658,17 +688,17 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.DataPersist/1.0.12": {
+    "Ban3.Infrastructures.DataPersist/1.0.13": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Ban3.Infrastructures.Common/1.0.14": {
+    "Ban3.Infrastructures.Common/1.0.15": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-v8O9hUPEyPu03YV1kAY0TRQzmFLNuKVnpb5fe/mtZonkT2qHeL/PeDpFSKNhVcxBdED5W0dCWkk3jQkUrNDbMA==",
-      "path": "ban3.infrastructures.common/1.0.14",
-      "hashPath": "ban3.infrastructures.common.1.0.14.nupkg.sha512"
+      "sha512": "sha512-vp58yIayX/ooocxrymWg1gHYF46FpTu11oqUgJ11S8hNQxZt9T9Hy/I+8PdiaTImXaQ36+GljRcmYvHhGd6Z8g==",
+      "path": "ban3.infrastructures.common/1.0.15",
+      "hashPath": "ban3.infrastructures.common.1.0.15.nupkg.sha512"
     },
     "Fody/6.2.5": {
       "type": "package",
@@ -719,19 +749,19 @@
       "path": "microsoft.bcl.asyncinterfaces/7.0.0",
       "hashPath": "microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512"
     },
-    "Microsoft.Data.Sqlite/7.0.10": {
+    "Microsoft.Data.Sqlite/7.0.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ajn0QXUDNKHTXhSUbGLyoetmcEyqx66ScStWBuK4Q/EOvpW9bPNCItSSFX6VhbwzIlgDrQRPNkIjjNEd5JXj0Q==",
-      "path": "microsoft.data.sqlite/7.0.10",
-      "hashPath": "microsoft.data.sqlite.7.0.10.nupkg.sha512"
+      "sha512": "sha512-nPcjkvaq0P0Hg2esYdJKswiMv7rq7Lp/hycPBau1GK6J6u2qMRIWmZ72+YzUbO5VhiUdKrLNS92foi8bly7OCA==",
+      "path": "microsoft.data.sqlite/7.0.11",
+      "hashPath": "microsoft.data.sqlite.7.0.11.nupkg.sha512"
     },
-    "Microsoft.Data.Sqlite.Core/7.0.10": {
+    "Microsoft.Data.Sqlite.Core/7.0.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-SA6LOen490YTforjaNfVDClYpwiG3LmHJM8objq6KwIIFP0fq9Eulhbu6zBl6AduMefQqUA3pllrFFVQpwPoqw==",
-      "path": "microsoft.data.sqlite.core/7.0.10",
-      "hashPath": "microsoft.data.sqlite.core.7.0.10.nupkg.sha512"
+      "sha512": "sha512-s7YzfqaP0lsfT2eUEYBHR+bP51fPIv1Xt02eh36/8be5MAYj/UaN8rX+GM5jc3dUqwZSxAsxkaU6ZlllqYtBhQ==",
+      "path": "microsoft.data.sqlite.core/7.0.11",
+      "hashPath": "microsoft.data.sqlite.core.7.0.11.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/7.0.0": {
       "type": "package",
@@ -809,6 +839,20 @@
       "sha512": "sha512-KSrRMb5vNi0CWSGG1++id2ZOs/1QhRqROt+qgbEAdQuGjGrFcl4AOl4/exGPUYz2wUnU42nvJqon1T3U0kPXLA==",
       "path": "microsoft.win32.registry/4.7.0",
       "hashPath": "microsoft.win32.registry.4.7.0.nupkg.sha512"
+    },
+    "Mono.Cecil/0.11.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fxfX+0JGTZ8YQeu1MYjbBiK2CYTSzDyEeIixt+yqKKTn7FW8rv7JMY70qevup4ZJfD7Kk/VG/jDzQQTpfch87g==",
+      "path": "mono.cecil/0.11.5",
+      "hashPath": "mono.cecil.0.11.5.nupkg.sha512"
+    },
+    "Mono.Reflection/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gipqt3dO1NsgM9wfUsQeNVLYmSskDfaN+muNQHLJYkCuYxx2bIp6gAA8j2Rp+Ey6YNHloZv+BJY56r9fl3tfew==",
+      "path": "mono.reflection/2.0.0",
+      "hashPath": "mono.reflection.2.0.0.nupkg.sha512"
     },
     "MySql.Data/8.1.0": {
       "type": "package",

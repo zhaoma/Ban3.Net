@@ -1,60 +1,61 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <LangVersion>10.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <NullableContextOptions>enable </NullableContextOptions>
-    <RootNamespace>Ban3.Infrastructures.Common</RootNamespace>
-    <AssemblyName>Ban3.Infrastructures.Common</AssemblyName>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DebugType>embedded</DebugType>
-    <Title>Ban3.Infrastructures.Common</Title>
-    <Version>1.0.14</Version>
-    <Authors>zhaoma</Authors>
-    <Company>BAN3</Company>
-    <Description>Common,Extensions,Indicators and Echarts</Description>
-    <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.0.14</AssemblyVersion>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Configurations>Release;Debug</Configurations>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <NullableContextOptions>enable </NullableContextOptions>
+        <RootNamespace>Ban3.Infrastructures.Common</RootNamespace>
+        <AssemblyName>Ban3.Infrastructures.Common</AssemblyName>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Infrastructures.Common</Title>
+        <Version>1.0.15</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>Common,Extensions,Indicators and Echarts</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.0.15</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\output\</OutputPath>
-    <DocumentationFile>..\..\output\Ban3.Infrastructures.Common.xml</DocumentationFile>
-    <AllowedReferenceRelatedFileExtensions>
-      .allowedextension
-    </AllowedReferenceRelatedFileExtensions>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Infrastructures.Common.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-    <None Include="..\..\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Fody" Version="6.8.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-    <PackageReference Include="Mono.Cecil" Version="0.11.5" />
-    <PackageReference Include="Mono.Reflection" Version="2.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="log4net" Version="2.0.15" />
-    <PackageReference Include="Rougamo.Fody" Version="1.4.1" />
-    <PackageReference Include="System.CodeDom" Version="7.0.0" />
-    <PackageReference Include="System.IO" Version="4.3.0" />
-    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Fody" Version="6.8.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+        <PackageReference Include="Mono.Cecil" Version="0.11.5" />
+        <PackageReference Include="Mono.Reflection" Version="2.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="log4net" Version="2.0.15" />
+        <PackageReference Include="Rougamo.Fody" Version="1.4.1" />
+        <PackageReference Include="System.CodeDom" Version="7.0.0" />
+        <PackageReference Include="System.IO" Version="4.3.0" />
+        <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+    </ItemGroup>
 </Project>

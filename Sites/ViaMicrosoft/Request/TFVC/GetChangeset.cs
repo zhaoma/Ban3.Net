@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Ban3.Sites.ViaMicrosoft.Request;
+using Ban3.Sites.ViaMicrosoft.Request.TFVC;
+using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.Platforms.ViaMicrosoft.Request.TFVC
+namespace Ban3.Sites.ViaMicrosoft.Request.TFVC
 {
 	public class GetChangeset
 		: MultiPageQuery, IRequest

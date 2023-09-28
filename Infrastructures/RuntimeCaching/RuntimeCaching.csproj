@@ -1,47 +1,49 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <LangVersion>10.0</LangVersion>
-    <AssemblyName>Ban3.Infrastructures.RuntimeCaching</AssemblyName>
-    <RootNamespace>Ban3.Infrastructures.RuntimeCaching</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DebugType>embedded</DebugType>
-    <Title>Ban3.Infrastructures.RuntimeCaching</Title>
-    <Version>1.0.7</Version>
-    <Authors>zhaoma</Authors>
-    <Company>BAN3</Company>
-    <Description>Runtime Caching extension</Description>
-    <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.6.2</AssemblyVersion>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <AssemblyName>Ban3.Infrastructures.RuntimeCaching</AssemblyName>
+        <RootNamespace>Ban3.Infrastructures.RuntimeCaching</RootNamespace>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Infrastructures.RuntimeCaching</Title>
+        <Version>1.0.8</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>Runtime Caching extension</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.6.3</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\output\</OutputPath>
-    <DocumentationFile>..\..\output\Ban3.Infrastructures.RuntimeCaching.xml</DocumentationFile>
-    <AllowedReferenceRelatedFileExtensions>
-      .allowedextension
-    </AllowedReferenceRelatedFileExtensions>
-  </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Infrastructures.RuntimeCaching.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-    <None Include="..\..\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.14" />
-    <PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+        <PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
+    </ItemGroup>
 
 </Project>

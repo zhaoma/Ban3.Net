@@ -22,7 +22,7 @@ public class Comment
 
     [JsonProperty("author")] public IdentityRef Author { get; set; }
 
-    public string AuthorId => Author?.Id;
+    public string AuthorId ;
 
     [JsonProperty("content")] public string Content { get; set; }
 

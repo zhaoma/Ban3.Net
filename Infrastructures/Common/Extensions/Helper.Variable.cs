@@ -301,7 +301,11 @@ public static partial class Helper
     /// <param name="preClose"></param>
     /// <param name="changeRatio"></param>
     /// <returns></returns>
-    public static bool IsLimit(this double close, double preClose, decimal changeRatio) 
-	    => Math.Round(preClose * (double)(changeRatio + 1), 2)
-            .Equals(Math.Round(close, 2));
+    public static bool IsLimit(this double close, double preClose, decimal changeRatio)
+    {
+        var a = Math.Round(preClose * (double)(changeRatio / 100M + 1), 2);
+        var b = Math.Round(close, 2);
+        
+        return a >= b;
+    }
 }

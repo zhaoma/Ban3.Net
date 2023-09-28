@@ -1,50 +1,51 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <LangVersion>10.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Ban3.Infrastructures.NativeLibs</RootNamespace>
-    <AssemblyName>Ban3.Infrastructures.NativeLibs</AssemblyName>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DebugType>embedded</DebugType>
-    <Title>Ban3.Infrastructures.NativeLibs</Title>
-    <Version>1.0.1</Version>
-    <Authors>zhaoma</Authors>
-    <Company>BAN3</Company>
-    <Description>Native Libs extension</Description>
-    <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.1.1</AssemblyVersion>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <FileVersion>1.0.0</FileVersion>
-    <Configurations>Release;Debug</Configurations>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Ban3.Infrastructures.NativeLibs</RootNamespace>
+        <AssemblyName>Ban3.Infrastructures.NativeLibs</AssemblyName>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Infrastructures.NativeLibs</Title>
+        <Version>1.0.1</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>Native Libs extension</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.1.1</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <FileVersion>1.0.0</FileVersion>
+        <Configurations>Release;Debug</Configurations>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\output\</OutputPath>
-    <DocumentationFile>..\..\output\Ban3.Infrastructures.Common.xml</DocumentationFile>
-    <AllowedReferenceRelatedFileExtensions>
-      .allowedextension
-    </AllowedReferenceRelatedFileExtensions>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Infrastructures.Common.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
 
-  <ItemGroup>
-      <Content Include="favicon.ico" />
-    <None Include="..\..\icon.png" Link="icon.png">
-      <PackagePath>\</PackagePath>
-      <Pack>True</Pack>
-    </None>
-      <None Update="readme.md">
-          <Pack>True</Pack>
-          <PackagePath>\</PackagePath>
-      </None>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png" Link="icon.png">
+            <PackagePath>\</PackagePath>
+            <Pack>True</Pack>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.CodeDom" Version="7.0.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="System.CodeDom" Version="7.0.0" />
+    </ItemGroup>
 
 </Project>

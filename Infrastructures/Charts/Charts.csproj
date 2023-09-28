@@ -1,46 +1,48 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <LangVersion>10.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Ban3.Infrastructures.Charts</RootNamespace>
-    <AssemblyName>Ban3.Infrastructures.Charts</AssemblyName>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DebugType>embedded</DebugType>
-    <Title>Ban3.Infrastructures.Charts</Title>
-    <Version>1.0.6</Version>
-    <Authors>zhaoma</Authors>
-    <Company>BAN3</Company>
-    <Description>Charts extensions</Description>
-    <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.5.2</AssemblyVersion>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Ban3.Infrastructures.Charts</RootNamespace>
+        <AssemblyName>Ban3.Infrastructures.Charts</AssemblyName>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Infrastructures.Charts</Title>
+        <Version>1.0.7</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>Charts extensions</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.5.3</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\output\</OutputPath>
-    <DocumentationFile>..\..\output\Ban3.Infrastructures.Charts.xml</DocumentationFile>
-    <AllowedReferenceRelatedFileExtensions>
-      .allowedextension
-    </AllowedReferenceRelatedFileExtensions>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-    <None Include="..\..\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Infrastructures.Charts.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.14" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+    </ItemGroup>
 </Project>

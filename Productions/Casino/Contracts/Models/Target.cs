@@ -21,13 +21,15 @@ public class Target
         Stock stock,
         List<TimelinePoint> points,
         StockPrice price,
-        StockSets sets)
+        StockSets sets,
+        int days)
     {
         Stock = stock;
         Points = points;
         LatestPrice = price;
         LatestSets = sets;
         LastAccess = DateTime.Now;
+        ListDays=days;
 
         if (LatestSets is { SetKeys: { } })
         {
@@ -47,6 +49,12 @@ public class Target
     /// </summary>
     [JsonProperty("ignore", NullValueHandling = NullValueHandling.Ignore)]
     public bool Ignore { get; set; }
+
+    /// <summary>
+    /// 上市天数
+    /// </summary>
+    [JsonProperty("listDays", NullValueHandling = NullValueHandling.Ignore)]
+    public int ListDays { get; set; }
 
     /// <summary>
     /// 事件点
@@ -87,7 +95,9 @@ public class Target
     /// 
     public string Html()
     {
-        var className = ChangePercent()>0 ? "red" : "green";
-        return $"{Stock.Symbol}-{LatestPrice.TradeDate}:<span class='{className}'>{PreClose()}-{LatestPrice.Close} <span class='badge'>{Math.Round(ChangePercent(),2)} %</span></span>";
+        var className = ChangePercent() > 0 ? "red" :
+            ChangePercent() == 0 ? "gray" : "green";
+        return
+            $"{Stock.Symbol}-{LatestPrice.TradeDate}:<span class='{className}'>{PreClose()}-{LatestPrice.Close} <span class='badge'>{Math.Round(ChangePercent(), 2)} %</span></span>";
     }
 }

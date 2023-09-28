@@ -1,49 +1,50 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <LangVersion>10.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <AssemblyName>Ban3.Infrastructures.NetMail</AssemblyName>
-    <RootNamespace>Ban3.Infrastructures.NetMail</RootNamespace>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DebugType>embedded</DebugType>
-    <Title>Ban3.Infrastructures.NetMail</Title>
-    <Version>1.0.4</Version>
-    <Authors>zhaoma</Authors>
-    <Company>BAN3</Company>
-    <Description>System.Net.Mail extension</Description>
-    <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.3.2</AssemblyVersion>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Configurations>Release;Debug</Configurations>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\output\</OutputPath>
-    <DocumentationFile>..\..\output\Ban3.Infrastructures.NetMail.xml</DocumentationFile>
-    <AllowedReferenceRelatedFileExtensions>
-      .allowedextension
-    </AllowedReferenceRelatedFileExtensions>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Ban3.Infrastructures.NetMail</AssemblyName>
+        <RootNamespace>Ban3.Infrastructures.NetMail</RootNamespace>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Infrastructures.NetMail</Title>
+        <Version>1.0.5</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>System.Net.Mail extension</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.3.3</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-    <None Include="..\..\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Infrastructures.NetMail.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.14" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Office.Interop.Outlook" Version="15.0.4797.1004" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+        <PackageReference Include="Microsoft.Office.Interop.Outlook" Version="15.0.4797.1004" />
+    </ItemGroup>
 </Project>

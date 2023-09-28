@@ -78,14 +78,14 @@
                         @foreach (var row in list)
                         {
                             var found = row.Points.First();
-                            <tr class="modalTrigger" code="@row.Stock.Code">
+                                <tr class="modalTrigger" code="@row.Stock.Symbol">
                                 <td>@row.Stock.Symbol</td>
                                 <td>@row.Stock.Name</td>
                                 <td>@found?.Date</td>
                                 <td>@found?.Close</td>
                                 <td>@row.LatestPrice.Close</td>
                             </tr>
-                            <tr id="points_@row.Stock.Code" class="hidePoints">
+                            <tr id="points_@row.Stock.Symbol" class="hidePoints">
                                 <td colspan="5">
                                     <ol>
                                         @foreach (var p in row.Points)
@@ -108,8 +108,7 @@
     $(".modalTrigger").each(function () {
         var button = $(this);
         button.bind('click', function () {
-            console.log("#points_" + $(this).attr('code'));
-            $("#points_" + $(this).attr('code')).toggle();
+            $("#points_" + $(this).attr('code')).toggle(300);
 
             return false;
         });

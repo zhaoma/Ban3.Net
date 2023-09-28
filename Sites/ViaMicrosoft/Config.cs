@@ -25,12 +25,7 @@ namespace Ban3.Sites.ViaMicrosoft
         {
             get
             {
-                return $"{DomainIdentity}.Config"
-                    .LoadOrSetDefault<Models.AppEnvironment>
-                    (
-                        new Models.AppEnvironment(),
-                        DomainConfig
-                    );
+                return new();
             }
         }
 

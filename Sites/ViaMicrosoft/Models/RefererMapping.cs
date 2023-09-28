@@ -3,7 +3,7 @@ using Ban3.Infrastructures.DataPersist.Entities;
 
 namespace Ban3.Sites.ViaMicrosoft.Models;
 
-[TableIs("RefererMapping", "RefererMapping", true, false)]
+[TableIs("RefererMapping", "RefererMapping", true, "false")]
 public class RefererMapping
     : BaseEntity
 {

@@ -1,21 +1,49 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>9.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <NullableContextOptions>enable </NullableContextOptions>
-    <RootNamespace>Ban3.Infrastructures.Platforms.ViaGoogle</RootNamespace>
-    <AssemblyName>ban3.Infrastructures.Platforms.ViaGoogle</AssemblyName>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <NullableContextOptions>enable </NullableContextOptions>
+        <RootNamespace>Ban3.Sites.ViaGoogle</RootNamespace>
+        <AssemblyName>Ban3.Sites.ViaGoogle</AssemblyName>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Sites.ViaGoogle</Title>
+        <Version>1.0.1</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>Via google.com</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.0.1</AssemblyVersion>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>../../../output/</OutputPath>
-    <DocumentationFile>../../../output/ban3.Infrastructures.Platforms.ViaGoogle.xml</DocumentationFile>
-  </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Sites.ViaGoogle.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.csproj" />
-    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.9" />
+    </ItemGroup>
 </Project>

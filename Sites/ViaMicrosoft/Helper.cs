@@ -13,7 +13,7 @@ using Ban3.Infrastructures.Common.Extensions;
 
 namespace Ban3.Sites.ViaMicrosoft
 {
-    public static class Constant
+    public static class Helper
     {
         public static string ToAPIVersionString( this APIVersion version )
         {
@@ -121,35 +121,7 @@ namespace Ban3.Sites.ViaMicrosoft
                 }
             }
         }
-
-        public static Common.Contracts.Servers.NetResource NetResource(
-                this Models.Target target,
-                Request.IRequest request,
-                bool includeProject = true )
-        {
-            var dic = request.ToDictionary() ?? new Dictionary<string, object>();
-
-            //dic.Add("api-version", target.APIVersion.ToAPIVersionString());
-
-            return new Common.Contracts.Servers.NetResource
-            {
-                    Url = includeProject
-                                      ? $"https://{target.Instance}/{target.Collection}/{target.Project}"
-                                      : $"https://{target.Instance}/{target.Collection}",
-                    // target.Host,
-                    BasicAuthentication=new Common.Contracts.Authenticators.BasicAuthentication
-                    {
-
-                    UserName = target.UserName,
-                    Password = target.Password
-                    },
-                    QueryParameters = dic,
-                    //Resource = request.Resource(),
-                    Method = request.Method(),
-                    Body = request.JsonBody()
-            };
-        }
-
+        
         /// <summary>
         /// 
         /// </summary>

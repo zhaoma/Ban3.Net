@@ -1,66 +1,67 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <LangVersion>10.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <NullableContextOptions>enable </NullableContextOptions>
-    <RootNamespace>Ban3.Infrastructures.DataPersist</RootNamespace>
-    <AssemblyName>Ban3.Infrastructures.DataPersist</AssemblyName>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DebugType>embedded</DebugType>
-    <Title>Ban3.Infrastructures.DataPersist</Title>
-    <Version>1.0.12</Version>
-    <Authors>zhaoma</Authors>
-    <Company>BAN3</Company>
-    <Description>DataPersistDataPersistDayaDataPersist ,mysql sqlite</Description>
-    <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.11.2</AssemblyVersion>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Configurations>Release;Debug</Configurations>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <NullableContextOptions>enable </NullableContextOptions>
+        <RootNamespace>Ban3.Infrastructures.DataPersist</RootNamespace>
+        <AssemblyName>Ban3.Infrastructures.DataPersist</AssemblyName>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Infrastructures.DataPersist</Title>
+        <Version>1.0.13</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>DataPersistDataPersistDayaDataPersist ,mysql sqlite</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.11.3</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\output\</OutputPath>
-    <DocumentationFile>..\..\output\Ban3.Infrastructures.Common.xml</DocumentationFile>
-    <AllowedReferenceRelatedFileExtensions>
-      .allowedextension
-    </AllowedReferenceRelatedFileExtensions>
-  </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Infrastructures.DataPersist.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-    <None Include="..\..\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Enums\" />
-    <Folder Include="Attributes\" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Interfaces\" />
+        <Folder Include="Enums\" />
+        <Folder Include="Attributes\" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.14" />
-    <PackageReference Include="log4net" Version="2.0.15" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.10" />
-    <PackageReference Include="MySql.Data" Version="8.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-    <PackageReference Include="System.Reflection" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Context" Version="7.0.0" />
-    <PackageReference Include="System.Reflection.DispatchProxy" Version="4.7.1" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+        <PackageReference Include="log4net" Version="2.0.15" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.11" />
+        <PackageReference Include="MySql.Data" Version="8.1.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+        <PackageReference Include="System.Reflection" Version="4.3.0" />
+        <PackageReference Include="System.Reflection.Context" Version="7.0.0" />
+        <PackageReference Include="System.Reflection.DispatchProxy" Version="4.7.1" />
+        <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+        <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
+        <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
+    </ItemGroup>
 
 </Project>

@@ -93,13 +93,17 @@ public class StockPrice
 
     public bool IsLimitUp()
     {
+        if (Code.StartsWith("30")||Code.StartsWith("68"))
+            return ((double)Close).IsLimit((double)PreClose, 20);
 
+        return ((double)Close).IsLimit((double)PreClose, 10);
     }
 
     public bool IsLimitDown()
     {
+        if (Code.StartsWith("30") || Code.StartsWith("68"))
+            return ((double)Close).IsLimit((double)PreClose, -20);
 
+        return ((double)Close).IsLimit((double)PreClose, -10);
     }
-
-
 }

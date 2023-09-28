@@ -2,10 +2,12 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.0": {
-      "Ban3.Infrastructures.Common/1.0.14": {
+      "Ban3.Infrastructures.Common/1.0.15": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "7.0.0",
+          "Mono.Cecil": "0.11.5",
+          "Mono.Reflection": "2.0.0",
           "Newtonsoft.Json": "13.0.3",
           "Rougamo.Fody": "1.4.1",
           "System.CodeDom": "7.0.0",
@@ -222,6 +224,50 @@
         },
         "runtime": {
           "lib/netstandard1.0/_._": {}
+        }
+      },
+      "Mono.Cecil/0.11.5": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.dll": {
+            "related": ".Mdb.pdb;.pdb;.Pdb.pdb;.Rocks.pdb"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mono.Cecil.Mdb.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Pdb.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.Rocks.dll": {
+            "related": ".pdb"
+          },
+          "lib/netstandard2.0/Mono.Cecil.dll": {
+            "related": ".Mdb.pdb;.pdb;.Pdb.pdb;.Rocks.pdb"
+          }
+        }
+      },
+      "Mono.Reflection/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Mono.Reflection.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Mono.Reflection.dll": {
+            "related": ".pdb"
+          }
         }
       },
       "NETStandard.Library/2.0.3": {
@@ -611,14 +657,14 @@
     }
   },
   "libraries": {
-    "Ban3.Infrastructures.Common/1.0.14": {
-      "sha512": "v8O9hUPEyPu03YV1kAY0TRQzmFLNuKVnpb5fe/mtZonkT2qHeL/PeDpFSKNhVcxBdED5W0dCWkk3jQkUrNDbMA==",
+    "Ban3.Infrastructures.Common/1.0.15": {
+      "sha512": "vp58yIayX/ooocxrymWg1gHYF46FpTu11oqUgJ11S8hNQxZt9T9Hy/I+8PdiaTImXaQ36+GljRcmYvHhGd6Z8g==",
       "type": "package",
-      "path": "ban3.infrastructures.common/1.0.14",
+      "path": "ban3.infrastructures.common/1.0.15",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.common.1.0.14.nupkg.sha512",
+        "ban3.infrastructures.common.1.0.15.nupkg.sha512",
         "ban3.infrastructures.common.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
@@ -956,6 +1002,48 @@
         "microsoft.netcore.targets.1.1.0.nupkg.sha512",
         "microsoft.netcore.targets.nuspec",
         "runtime.json"
+      ]
+    },
+    "Mono.Cecil/0.11.5": {
+      "sha512": "fxfX+0JGTZ8YQeu1MYjbBiK2CYTSzDyEeIixt+yqKKTn7FW8rv7JMY70qevup4ZJfD7Kk/VG/jDzQQTpfch87g==",
+      "type": "package",
+      "path": "mono.cecil/0.11.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Mono.Cecil.Mdb.dll",
+        "lib/net40/Mono.Cecil.Mdb.pdb",
+        "lib/net40/Mono.Cecil.Pdb.dll",
+        "lib/net40/Mono.Cecil.Pdb.pdb",
+        "lib/net40/Mono.Cecil.Rocks.dll",
+        "lib/net40/Mono.Cecil.Rocks.pdb",
+        "lib/net40/Mono.Cecil.dll",
+        "lib/net40/Mono.Cecil.pdb",
+        "lib/netstandard2.0/Mono.Cecil.Mdb.dll",
+        "lib/netstandard2.0/Mono.Cecil.Mdb.pdb",
+        "lib/netstandard2.0/Mono.Cecil.Pdb.dll",
+        "lib/netstandard2.0/Mono.Cecil.Pdb.pdb",
+        "lib/netstandard2.0/Mono.Cecil.Rocks.dll",
+        "lib/netstandard2.0/Mono.Cecil.Rocks.pdb",
+        "lib/netstandard2.0/Mono.Cecil.dll",
+        "lib/netstandard2.0/Mono.Cecil.pdb",
+        "mono.cecil.0.11.5.nupkg.sha512",
+        "mono.cecil.nuspec"
+      ]
+    },
+    "Mono.Reflection/2.0.0": {
+      "sha512": "gipqt3dO1NsgM9wfUsQeNVLYmSskDfaN+muNQHLJYkCuYxx2bIp6gAA8j2Rp+Ey6YNHloZv+BJY56r9fl3tfew==",
+      "type": "package",
+      "path": "mono.reflection/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Mono.Reflection.dll",
+        "lib/net40/Mono.Reflection.pdb",
+        "lib/netstandard2.0/Mono.Reflection.dll",
+        "lib/netstandard2.0/Mono.Reflection.pdb",
+        "mono.reflection.2.0.0.nupkg.sha512",
+        "mono.reflection.nuspec"
       ]
     },
     "NETStandard.Library/2.0.3": {
@@ -2003,36 +2091,39 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.Common >= 1.0.14",
+      "Ban3.Infrastructures.Common >= 1.0.15",
       "NETStandard.Library >= 2.0.3",
       "StackExchange.Redis >= 2.6.122"
     ]
   },
   "packageFolders": {
-    "/Users/zhaoma/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\z004k7zb\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.11",
     "restore": {
-      "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Particulars/UtilizeRedis/UtilizeRedis.csproj",
+      "projectUniqueName": "D:\\GIT\\Ban3.Net\\Particulars\\UtilizeRedis\\UtilizeRedis.csproj",
       "projectName": "Ban3.Particulars.UtilizeRedis",
-      "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Particulars/UtilizeRedis/UtilizeRedis.csproj",
-      "packagesPath": "/Users/zhaoma/.nuget/packages/",
-      "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Particulars/UtilizeRedis/obj/",
+      "projectPath": "D:\\GIT\\Ban3.Net\\Particulars\\UtilizeRedis\\UtilizeRedis.csproj",
+      "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
+      "outputPath": "D:\\GIT\\Ban3.Net\\Particulars\\UtilizeRedis\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
       },
       "frameworks": {
         "netstandard2.0": {
@@ -2052,7 +2143,7 @@
         "dependencies": {
           "Ban3.Infrastructures.Common": {
             "target": "Package",
-            "version": "[1.0.14, )"
+            "version": "[1.0.15, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",
@@ -2076,7 +2167,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.304/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

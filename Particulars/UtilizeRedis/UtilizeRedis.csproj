@@ -1,46 +1,47 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-    <LangVersion>10.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <NullableContextOptions>enable </NullableContextOptions>
-    <RootNamespace>Ban3.Particulars.UtilizeRedis</RootNamespace>
-    <AssemblyName>Ban3.Particulars.UtilizeRedis</AssemblyName>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <DebugType>embedded</DebugType>
-    <Title>Ban3.Particulars.UtilizeRedis</Title>
-    <Version>1.0.11</Version>
-    <Authors>zhaoma</Authors>
-    <Company>BAN3</Company>
-    <Description>Redis Client</Description>
-    <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.3.11</AssemblyVersion>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Configurations>Debug;Release</Configurations>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <Nullable>enable</Nullable>
+        <NullableContextOptions>enable </NullableContextOptions>
+        <RootNamespace>Ban3.Particulars.UtilizeRedis</RootNamespace>
+        <AssemblyName>Ban3.Particulars.UtilizeRedis</AssemblyName>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Particulars.UtilizeRedis</Title>
+        <Version>1.0.11</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>Redis Client</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.3.11</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <Configurations>Debug;Release</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>..\..\output\Ban3.Particulars.UtilizeRedis.xml</DocumentationFile>
-    <OutputPath>..\..\output\</OutputPath>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-    <None Include="..\..\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="readme.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DocumentationFile>..\..\output\xmls\Ban3.Particulars.UtilizeRedis.xml</DocumentationFile>
+        <OutputPath>..\..\output\</OutputPath>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
-    <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.14" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+    </ItemGroup>
 </Project>

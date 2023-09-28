@@ -1,9 +1,7 @@
 ﻿#nullable enable
 using System;
-using System.Collections;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Outputs;
@@ -35,9 +33,12 @@ public class Targets
                ?? new Dictionary<string, Target>();
     }
 
+    /// <summary>
+    /// 复位昨天的记录
+    /// </summary>
     public void Reset()
     {
-        if (Data != null && Data.Any())
+        if (Data.Any())
         {
             foreach (var d in Data)
             {
@@ -53,14 +54,16 @@ public class Targets
     /// <param name="points"></param>
     /// <param name="price"></param>
     /// <param name="sets"></param>
+    /// <param name="days"></param>
     public void AppendTarget(
         Stock stock,
         List<TimelinePoint> points,
         StockPrice price,
-        StockSets sets
+        StockSets sets,
+        int days
     )
     {
-        var t = new Target(stock, points, price, sets);
+        var t = new Target(stock, points, price, sets,days);
         if (Data.TryGetValue(stock.Code, out var _))
         {
             Data[stock.Code] = t;
