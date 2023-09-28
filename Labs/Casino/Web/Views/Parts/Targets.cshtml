@@ -14,79 +14,73 @@
 <div class="row grid" data-masonry='{"percentPosition": true }'>
     <div class="col-sm-12 col-lg-4 mb-4">
         <div class="card grayBox">
-            <div class="card-header">价格统计 @($"{priceScopes.Sum(o=>o.Value)} : {priceScopes.Count()}")</div>
+            <div class="card-header">价格统计 @($"{priceScopes.Sum(o => o.Value)} : {priceScopes.Count()}")</div>
             <div class="card-body col">
                 <table class="table table-hover table-striped table-dark  table-bordered caption-top">
                     <thead>
-                    <tr><th>Subject</th><th>Counter</th></tr>
+                        <tr><th>Subject</th><th>Counter</th></tr>
                     </thead>
                     <tbody>
-                    @foreach (var row in priceScopes)
-                    {
-                        <tr>
-                            <td>@row.Key.EnumDescription()</td>
-                            <td>@row.Value</td>
-                        </tr>
-                    }
+                        @foreach (var row in priceScopes.OrderBy(o=>(int)o.Key))
+                        {
+                            <tr>
+                                <td>@row.Key.EnumDescription()</td>
+                                <td>@row.Value</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
     <div class="col-sm-12 col-lg-4 mb-4">
         <div class="card grayBox">
-            <div class="card-header">板块统计 @($"{groupScopes.Sum(o=>o.Value)} : {groupScopes.Count()}")</div>
+            <div class="card-header">板块统计 @($"{groupScopes.Sum(o => o.Value)} : {groupScopes.Count()}")</div>
             <div class="card-body col">
                 <table class="table table-hover table-striped table-dark  table-bordered caption-top">
                     <thead>
-                    <tr><th>Subject</th><th>Counter</th></tr>
+                        <tr><th>Subject</th><th>Counter</th></tr>
                     </thead>
                     <tbody>
-                    @foreach (var row in groupScopes)
-                    {
-                        <tr>
-                            <td>@row.Key.EnumDescription()</td>
-                            <td>@row.Value</td>
-                        </tr>
-                    }
+                        @foreach (var row in groupScopes.OrderByDescending(o=>o.Value))
+                        {
+                            <tr>
+                                <td>@row.Key.EnumDescription()</td>
+                                <td>@row.Value</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    @foreach (var g in groupScopes)
-    {
-        var list = all.Where(o => o.Stock.Code.StockGroup().Equals(g.Key))
-            .OrderByDescending(o => o.Stock.Symbol)
-            .ToList();
 
-        <div class="col-sm-12 col-lg-4 mb-4">
-            <div class="card grayBox">
-                <div class="card-header">@($"{g.Key.EnumDescription()} : {list.Count()}")</div>
-                <div class="card-body col">
-                    <table class="table table-hover table-striped table-dark  table-bordered caption-top">
-                        <thead>
+    <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card grayBox">
+            <div class="card-header">交易天数(10)</div>
+            <div class="card-body col">
+                <table class="table table-hover table-striped table-dark  table-bordered caption-top">
+                    <thead>
                         <tr>
                             <th>Code</th>
                             <td>Name</td>
                             <th>MarkDate</th>
-                            <th>From</th>
-                            <th>Nearly</th>
+                            <th>ListDays</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @foreach (var row in list)
+                    </thead>
+                    <tbody>
+                        @foreach (var row in all.OrderBy(o => o.ListDays).Take(10))
                         {
                             var found = row.Points.First();
-                                <tr class="modalTrigger" code="@row.Stock.Symbol">
+                            <tr class="modalTrigger" code="@row.Stock.Symbol">
                                 <td>@row.Stock.Symbol</td>
                                 <td>@row.Stock.Name</td>
                                 <td>@found?.Date</td>
-                                <td>@found?.Close</td>
-                                <td>@row.LatestPrice.Close</td>
+                                <td>@row.ListDays</td>
                             </tr>
-                            <tr id="points_@row.Stock.Symbol" class="hidePoints">
-                                <td colspan="5">
+                            <tr class="hidePoints points_@row.Stock.Symbol">
+                                <td colspan="4">
                                     <ol>
                                         @foreach (var p in row.Points)
                                         {
@@ -96,6 +90,134 @@
                                 </td>
                             </tr>
                         }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card grayBox">
+            <div class="card-header">涨幅(10)</div>
+            <div class="card-body col">
+                <table class="table table-hover table-striped table-dark  table-bordered caption-top">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <td>Name</td>
+                            <th>MarkDate</th>
+                            <th>Up</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in all.OrderByDescending(o => o.ChangePercent()).Take(10))
+                        {
+                            var found = row.Points.First();
+                            <tr class="modalTrigger" code="@row.Stock.Symbol">
+                                <td>@row.Stock.Symbol</td>
+                                <td>@row.Stock.Name</td>
+                                <td>@found?.Date</td>
+                                <td>@Math.Round(row.ChangePercent(),2) %</td>
+                            </tr>
+                            <tr class="hidePoints points_@row.Stock.Symbol">
+                                <td colspan="4">
+                                    <ol>
+                                        @foreach (var p in row.Points)
+                                        {
+                                            <li>@Html.Raw(p.Html(row.PreClose()))</li>
+                                        }
+                                    </ol>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-lg-4 mb-4">
+        <div class="card grayBox">
+            <div class="card-header">跌幅(10)</div>
+            <div class="card-body col">
+                <table class="table table-hover table-striped table-dark  table-bordered caption-top">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <td>Name</td>
+                            <th>MarkDate</th>
+                            <th>Down</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var row in all.OrderBy(o => o.ChangePercent()).Take(10))
+                        {
+                            var found = row.Points.First();
+                            <tr class="modalTrigger" code="@row.Stock.Symbol">
+                                <td>@row.Stock.Symbol</td>
+                                <td>@row.Stock.Name</td>
+                                <td>@found?.Date</td>
+                                <td>@Math.Round(row.ChangePercent(),2) %</td>
+                            </tr>
+                            <tr class="hidePoints points_@row.Stock.Symbol">
+                                <td colspan="4">
+                                    <ol>
+                                        @foreach (var p in row.Points)
+                                        {
+                                            <li>@Html.Raw(p.Html(row.PreClose()))</li>
+                                        }
+                                    </ol>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @foreach (var g in groupScopes)
+    {
+        var list = all.Where(o => o.Stock.Code.StockGroup().Equals(g.Key))
+        .OrderByDescending(o => o.Stock.Symbol)
+        .ToList();
+
+        <div class="col-sm-12 col-lg-4 mb-4">
+            <div class="card grayBox">
+                <div class="card-header">@($"{g.Key.EnumDescription()} : {list.Count()}")</div>
+                <div class="card-body col">
+                    <table class="table table-hover table-striped table-dark  table-bordered caption-top">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <td>Name</td>
+                                <th>MarkDate</th>
+                                <th>From</th>
+                                <th>Nearly</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in list)
+                            {
+                                var found = row.Points.First();
+                                <tr class="modalTrigger" code="@row.Stock.Symbol">
+                                    <td>@row.Stock.Symbol</td>
+                                    <td>@row.Stock.Name</td>
+                                    <td>@found?.Date</td>
+                                    <td>@found?.Close</td>
+                                    <td>@row.LatestPrice.Close</td>
+                                </tr>
+                                <tr class="hidePoints points_@row.Stock.Symbol">
+                                    <td colspan="5">
+                                        <ol>
+                                            @foreach (var p in row.Points)
+                                            {
+                                                <li>@Html.Raw(p.Html(row.PreClose()))</li>
+                                            }
+                                        </ol>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -108,8 +230,8 @@
     $(".modalTrigger").each(function () {
         var button = $(this);
         button.bind('click', function () {
-            $("#points_" + $(this).attr('code')).toggle(300);
-
+            $(".points_" + $(this).attr('code')).toggle(300);
+            initGrid();
             return false;
         });
     });
