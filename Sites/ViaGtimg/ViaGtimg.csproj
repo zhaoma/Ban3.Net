@@ -44,6 +44,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.9" />
+        <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.10" />
     </ItemGroup>
 </Project>

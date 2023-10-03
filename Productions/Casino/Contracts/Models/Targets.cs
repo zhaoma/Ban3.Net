@@ -55,15 +55,17 @@ public class Targets
     /// <param name="price"></param>
     /// <param name="sets"></param>
     /// <param name="days"></param>
+    /// <param name="preClose"></param>
     public void AppendTarget(
         Stock stock,
         List<TimelinePoint> points,
         StockPrice price,
         StockSets sets,
-        int days
+        int days,
+        float preClose
     )
     {
-        var t = new Target(stock, points, price, sets,days);
+        var t = new Target(stock, points, price, sets,days,preClose);
         if (Data.TryGetValue(stock.Code, out var _))
         {
             Data[stock.Code] = t;

@@ -6,10 +6,14 @@ using Ban3.Infrastructures.Common.Models;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Common;
 using Ban3.Infrastructures.Consoles;
+using Ban3.Sites.ViaTushare;
 
-var s = 98.9D.IsLimit(90, 10);
-Console.WriteLine(s);
+//var s = 98.9D.IsLimit(90, 10);
+//Console.WriteLine(s);
 
+var request = new Ban3.Sites.ViaTushare.Request.GetStockBasic();
+var c = request.GetResult();
+c.ObjToJson().WriteColorLine(ConsoleColor.Red);
 
 //var a=Ban3.Sites.ViaSohu.Helper.DownloadAllNotions();
 

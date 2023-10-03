@@ -305,7 +305,7 @@ public static partial class Helper
     {
         var a = Math.Round(preClose * (double)(changeRatio / 100M + 1), 2);
         var b = Math.Round(close, 2);
-        
-        return a >= b;
+
+        return a <= b;
     }
 }

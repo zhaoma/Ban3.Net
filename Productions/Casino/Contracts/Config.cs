@@ -20,7 +20,7 @@ public class Config
     public static List<string> IgnoreKeys = Infrastructures.Common.Config.GetValue("Config:IgnoreKeys") == ""
         ? new List<string>
         {
-            "MACD.N.DAILY", "MACD.MDI.DAILY"
+            "MACD.N.DAILY","MACD.MDI.DAILY","MACD.N.WEEKLY","MACD.N.MONTHLY","KD.MDI.DAILY","DMI.MDI.DAILY"
         }
         : Infrastructures.Common.Config.GetValue("Config:IgnoreKeys").Split(';').ToList();
 
@@ -76,13 +76,13 @@ public class Config
             {
                 var ps = new List<DistributeCondition>
                 {
-		            new (
+                    new (
                         0,
                         "次新横盘",
                         new DistributeExpression
                         {
                             StartsWith = "68,002,003,30",
-                            HasWeek = true, 
+                            HasWeek = true,
                             MaxIncrease=5,
                             MaxDays=250,
                             Sorter = RecordsSorter.Increase

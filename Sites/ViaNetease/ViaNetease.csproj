@@ -20,6 +20,7 @@
         <PackageReadmeFile>readme.md</PackageReadmeFile>
         <ApplicationIcon>favicon.ico</ApplicationIcon>
         <BaseOutputPath>..\..\output</BaseOutputPath>
+        <Configurations>Release;Debug</Configurations>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -43,6 +44,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.9" />
+        <PackageReference Include="Ban3.Infrastructures.NetHttp" Version="1.0.10" />
     </ItemGroup>
 </Project>

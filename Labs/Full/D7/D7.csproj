@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\..\Infrastructures\Common\Common.csproj" />
     <ProjectReference Include="..\..\..\Infrastructures\Consoles\Consoles.csproj" />
     <ProjectReference Include="..\..\..\Sites\ViaSohu\ViaSohu.csproj" />
+    <ProjectReference Include="..\..\..\Sites\ViaTushare\ViaTushare.csproj" />
   </ItemGroup>
 
   <ItemGroup>

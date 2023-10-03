@@ -33,7 +33,7 @@
           }
         }
       },
-      "Ban3.Infrastructures.NetHttp/1.0.9": {
+      "Ban3.Infrastructures.NetHttp/1.0.10": {
         "type": "package",
         "dependencies": {
           "Ban3.Infrastructures.Common": "1.0.15",
@@ -41,10 +41,14 @@
           "System.Text.Encoding.CodePages": "7.0.0"
         },
         "compile": {
-          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
+          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {}
+          "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll": {
+            "related": ".xml"
+          }
         },
         "contentFiles": {
           "contentFiles/any/netstandard2.0/favicon.ico": {
@@ -1383,19 +1387,20 @@
         "readme.md"
       ]
     },
-    "Ban3.Infrastructures.NetHttp/1.0.9": {
-      "sha512": "BYCuaLkmf5qS3qpODNrMeZsZxxx+0LkvCmJzPFiPQEUz9BjtwS4GbdMirDm3p+NWFOI41RbinLdnxOxfUS4Uqw==",
+    "Ban3.Infrastructures.NetHttp/1.0.10": {
+      "sha512": "Y1I2qIi8NOuqwH5UkRXXd0ctQVqGDL+FpyDKE6ICB2spDugxgh/yM26uvBuTIOP7y+GgmJEhYd7/IJ2ThPKkHA==",
       "type": "package",
-      "path": "ban3.infrastructures.nethttp/1.0.9",
+      "path": "ban3.infrastructures.nethttp/1.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "ban3.infrastructures.nethttp.1.0.9.nupkg.sha512",
+        "ban3.infrastructures.nethttp.1.0.10.nupkg.sha512",
         "ban3.infrastructures.nethttp.nuspec",
         "content/favicon.ico",
         "contentFiles/any/netstandard2.0/favicon.ico",
         "icon.png",
         "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.dll",
+        "lib/netstandard2.0/Ban3.Infrastructures.NetHttp.xml",
         "readme.md"
       ]
     },
@@ -2005,12 +2010,11 @@
       ]
     },
     "runtime.native.System.Net.Http/4.3.0": {
-      "sha512": "ZVuZJqnnegJhd2k/PtAbbIcZ3aZeITq3sj06oKfMBSfphW3HDmk/t4ObvbOk/JA/swGR0LNqMksAh/f7gpTROg==",
+      "sha512": "guqHgQOK2eUgtJae2VKjNawBn1xjC0hfOt5wASHa60XHbIdCsQlqtvMsFG+3hy7yp88V+gi9fZCjubuDkeakcQ==",
       "type": "package",
       "path": "runtime.native.system.net.http/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -2075,12 +2079,11 @@
       ]
     },
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.Apple/4.3.0": {
-      "sha512": "kVXCuMTrTlxq4XOOMAysuNwsXWpYeboGddNGpIgNSZmv1b6r/s/DPk0fYMB7Q5Qo4bY68o48jt4T4y5BVecbCQ==",
+      "sha512": "Kh9W4agE0r/hK8AX1LvyQI2NrKHBL8pO0gRoDTdDb0LL6Ta1Z2OtFx3lOaAE0ZpCUc/dt9Wzs3rA7a3IsKdOVA==",
       "type": "package",
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple/4.3.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.apple.4.3.0.nupkg.sha512",
@@ -4477,38 +4480,35 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "Ban3.Infrastructures.NetHttp >= 1.0.9",
+      "Ban3.Infrastructures.NetHttp >= 1.0.10",
       "NETStandard.Library >= 2.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\z004k7zb\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/zhaoma/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.3",
     "restore": {
-      "projectUniqueName": "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\ViaEastmoney.csproj",
+      "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaEastmoney/ViaEastmoney.csproj",
       "projectName": "Ban3.Sites.ViaEastmoney",
-      "projectPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\ViaEastmoney.csproj",
-      "packagesPath": "C:\\Users\\z004k7zb\\.nuget\\packages\\",
-      "outputPath": "D:\\GIT\\Ban3.Net\\Sites\\ViaEastmoney\\obj\\",
+      "projectPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaEastmoney/ViaEastmoney.csproj",
+      "packagesPath": "/Users/zhaoma/.nuget/packages/",
+      "outputPath": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaEastmoney/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\z004k7zb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/zhaoma/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
-        "https://for.artifactory.healthcare.siemens.com/artifactory/api/nuget/di_ct_nuget": {}
+        "/usr/local/share/dotnet/library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
@@ -4528,7 +4528,7 @@
         "dependencies": {
           "Ban3.Infrastructures.NetHttp": {
             "target": "Package",
-            "version": "[1.0.9, )"
+            "version": "[1.0.10, )"
           },
           "NETStandard.Library": {
             "suppressParent": "All",
@@ -4548,7 +4548,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.304/RuntimeIdentifierGraph.json"
       }
     }
   }

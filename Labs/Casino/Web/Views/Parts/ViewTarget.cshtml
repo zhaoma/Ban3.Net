@@ -11,7 +11,7 @@
         <ol>
             @foreach (var p in Model.Points)
             {
-            <li>@Html.Raw(p.Html(Model.PreClose()))</li>
+            <li>@Html.Raw(p.Html(Model.PreClose))</li>
             }
         </ol>
         <hr />

@@ -1,5 +1,4 @@
 ﻿using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Sites.ViaNetease.Entries;
 using Newtonsoft.Json;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
@@ -60,18 +59,4 @@ public class StockRuntimeRecord
     /// 
     public StockRuntimeRecord() { }
 
-    /// 
-    public StockRuntimeRecord(StockRecord o)
-    {
-        Code = o.Symbol;
-        TradeDate = o.Time.ToYmd();
-        Open = (float)o.Open;
-        High = (float)o.High;
-        Low = (float)o.Low;
-        Close = (float)o.Price;
-        PreClose = (float)o.YestClose;
-        ChangePercent = (float)o.Percent * 100;
-        Vol = (float)o.Volume;
-        Amount = (float)o.TurnOver;
-    }
 }

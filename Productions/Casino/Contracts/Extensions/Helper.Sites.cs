@@ -62,7 +62,7 @@ public static partial class Helper
     #endregion
 
     #region codes
-
+    /*
     /// <summary>
     /// 
     /// </summary>
@@ -97,7 +97,7 @@ public static partial class Helper
                 .SetsFile()
                 .WriteFile(local.ObjToJson()));
     }
-
+    */
     /// <summary>
     /// 
     /// </summary>

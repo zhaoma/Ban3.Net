@@ -552,9 +552,10 @@ public static partial class Helper
                     return;
                 }
 
-                var points = sets.GetPoints();
+                var points = sets.GetPoints(prices,out var preClose);
+
                 if (points.Any())
-                    targets.AppendTarget(one, points, prices!.Last(), sets.Last(),prices.Count);
+                    targets.AppendTarget(one, points, prices!.Last(), sets.Last(),prices.Count,preClose);
             }
             catch (Exception ex)
             {
@@ -566,9 +567,10 @@ public static partial class Helper
         Logger.Debug($"GenerateTargets {targets.Data.Count},success");
     }
 
-    static List<TimelinePoint> GetPoints(this List<StockSets> sets)
+    static List<TimelinePoint> GetPoints(this List<StockSets> sets,List<StockPrice> prices,out float preClose)
     {
         var result = new List<TimelinePoint>();
+        preClose = 0F;
 
         try
         {
@@ -577,26 +579,43 @@ public static partial class Helper
 
             if (latestDaily != null)
             {
-                var afterC0 = sets.Where(o => o.MarkTime.ToYmd().ToInt() > latestDaily.MarkTime.ToYmd().ToInt())
+                var setsAfterC0 = sets.Where(o => o.MarkTime.ToYmd().ToInt() >= latestDaily.MarkTime.ToYmd().ToInt())
                     .ToList();
 
-                if (!afterC0.Any() || afterC0.Count > 20)
+                if (!setsAfterC0.Any() || setsAfterC0.Count > 20)
                 {
                     Logger.Debug("SKIP");
                     return result;
                 }
                 else
                 {
-                    Logger.Debug($"ADD TARGET {latestDaily.MarkTime}->{afterC0.Count}");
+                    Logger.Debug($"ADD TARGET {latestDaily.MarkTime}->{setsAfterC0.Count}");
                 }
 
-                result.Add(new TimelinePoint(latestDaily));
+                //result.AddRange(latestDaily.OneSetsPoints());
 
-                foreach (var p in afterC0.Select(s => new TimelinePoint(s))
-                             .Where(p => result.All(x => x.Subject != p.Subject)))
+                setsAfterC0.ForEach(sets =>
                 {
-                    if (p.Subject != "")
-                        result.Add(p);
+                    var tmp = sets.OneSetsPoints()
+                    .FindAll(p => result.All(x => x.Subject != p.Subject));
+
+                    if (tmp.Any())
+                        result.AddRange(tmp);
+                });
+
+                var pricesAfterC0=prices.Where(o => o.TradeDate.ToInt() >= latestDaily.MarkTime.ToYmd().ToInt())
+                    .ToList();
+
+                if (pricesAfterC0 != null && pricesAfterC0.Any())
+                {
+                    preClose = pricesAfterC0.First().PreClose;
+                    pricesAfterC0.ForEach(price =>
+                    {
+                        if (price.OnePricePoint(out var p))
+                        {
+                            result.Add(p);
+                        }
+                    });
                 }
             }
         }
@@ -606,5 +625,98 @@ public static partial class Helper
         }
 
         return result;
+    }
+
+    static bool OnePricePoint(this StockPrice price,out TimelinePoint point)
+    {
+        var result = false;
+        point = new TimelinePoint();
+
+        var ratioUp =
+        price.Code.StartsWith("68") || price.Code.StartsWith("30")
+            ? 20M
+            : 10M;
+        var ratioDown =
+        price.Code.StartsWith("68") || price.Code.StartsWith("30")
+            ? -20M
+            : -10M;
+
+        if (price.Close.IsLimitRatio(price.PreClose, ratioUp))
+        {
+            point = new TimelinePoint
+            {
+                DailyEvent = Enums.DailyEvent.LimitUp,
+                Subject = "涨停",
+                Date = price.TradeDate,
+                Close=price.Close,
+                SetKeys=new List<string>()
+            };
+            result= true;
+        }
+
+        if (price.Close.IsLimitRatio(price.PreClose, ratioDown))
+        {
+            point = new TimelinePoint
+            {
+                DailyEvent = Enums.DailyEvent.LimitDown,
+                Subject = "跌停",
+                Date = price.TradeDate,
+                Close = price.Close,
+                SetKeys = new List<string>()
+            };
+            result = true;
+        }
+
+        return result;
+    }
+
+    static List<TimelinePoint> OneSetsPoints(this StockSets sets)
+    {
+        var result = new List<TimelinePoint>();
+
+        var point = new TimelinePoint
+        {
+            Date = sets.MarkTime.ToYmd(),
+            Close = sets.Close,
+            SetKeys=sets.SetKeys!.ToList()
+        };
+
+        if (point.SetKeys!.Contains("MACD.GC.DAILY"))
+        {
+            point.Subject="日金叉";
+            point.DailyEvent = Enums.DailyEvent.MacdDailyGC;
+            result.Add(point);
+        }
+
+        if (point.SetKeys!.Contains("MACD.C0.DAILY"))
+        {
+            point.Subject="日上穿零";
+            point.DailyEvent = Enums.DailyEvent.MacdDailyC0;
+            result.Add(point);
+        }
+
+        if (point.SetKeys!.Contains("MACD.C0.WEEKLY"))
+        {
+            point.Subject="周上穿零";
+            point.DailyEvent = Enums.DailyEvent.MacdWeeklyC0;
+            result.Add(point);
+        }
+
+        if (point.SetKeys!.Contains("MACD.C0.MONTHLY"))
+        {
+            point.Subject="月上穿零";
+            point.DailyEvent = Enums.DailyEvent.MacdMonthlyC0;
+            result.Add(point);
+        }
+
+        return result;
+    }
+
+    static bool IsLimitRatio(this float close, float preClose, decimal changeRatio)
+    {
+        var a = Math.Round((decimal)preClose * (changeRatio / 100M + 1), 2);
+        var b = Math.Round((decimal)close, 2);
+
+        return a.Equals(b);
     }
 }

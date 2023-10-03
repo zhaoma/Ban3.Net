@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Ban3.Infrastructures.Indicators.Outputs;
 using System.Linq;
+using Ban3.Productions.Casino.Contracts.Enums;
+using Newtonsoft.Json.Converters;
 
 #nullable enable
 namespace Ban3.Productions.Casino.Contracts.Entities;
@@ -22,8 +24,8 @@ public class TimelinePoint
         Date = sets.MarkTime.ToYmd();
         Close = sets.Close;
         SetKeys = sets.SetKeys!.ToList();
-        
-        var subjects=new List<string>();
+
+        var subjects = new List<string>();
 
         if (SetKeys!.Contains("MACD.GC.DAILY"))
         {
@@ -32,7 +34,7 @@ public class TimelinePoint
 
         if (SetKeys!.Contains("MACD.C0.DAILY"))
         {
-            subjects.Add( "日上穿零");
+            subjects.Add("日上穿零");
         }
 
         if (SetKeys!.Contains("MACD.C0.WEEKLY"))
@@ -47,6 +49,13 @@ public class TimelinePoint
 
         Subject = subjects.AggregateToString(" ");
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("dailyEvent", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonConverter(typeof(StringEnumConverter))]
+    public DailyEvent DailyEvent { get; set; }
 
     /// <summary>
     /// 主题
@@ -85,11 +94,11 @@ public class TimelinePoint
         {
             var className = Close > preClose ? "red" : "green";
             var ratio = Math.Round((Close - preClose.Value) / preClose.Value * 100D, 2);
-            result += $"<span class='{className}'>{d} {Subject}:{Close} <span class='badge'>{ratio} %</span></span>";
+            result += $"<span class='{className}'>{d} {Subject}:{Math.Round(Close,2)} <span class='badge bg-warning'>{ratio} %</span></span>";
         }
         else
         {
-            result = $" <span>{d} {Subject}:{Close}</span>";
+            result = $" <span>{d} {Subject}:{Math.Round(Close,2)}</span>";
         }
 
         return result;

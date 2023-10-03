@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Indicators.Outputs;
 using Ban3.Productions.Casino.Contracts.Entities;
 using Ban3.Sites.ViaTushare.Entries;
@@ -22,7 +23,8 @@ public class Target
         List<TimelinePoint> points,
         StockPrice price,
         StockSets sets,
-        int days)
+        int days,
+	float preClose)
     {
         Stock = stock;
         Points = points;
@@ -30,11 +32,15 @@ public class Target
         LatestSets = sets;
         LastAccess = DateTime.Now;
         ListDays=days;
+        PreClose = preClose;
 
         if (LatestSets is { SetKeys: { } })
         {
             Ignore = LatestSets?.SetKeys != null;
             Ignore = Ignore && Config.IgnoreKeys.Any(x => LatestSets.SetKeys.Contains(x));
+
+            Console.WriteLine($"ignore:{Config.IgnoreKeys.ObjToJson()} - in:{LatestSets?.SetKeys.ObjToJson()} = {Ignore}");
+
         }
     }
 
@@ -81,16 +87,15 @@ public class Target
     public DateTime LastAccess { get; set; }
 
     /// 
-    public double PreClose()
-        => Points.Any() ? Points.First().Close : 0D;
+    public double PreClose { get; set; }
 
     /// 
     public double Change()
-        => PreClose() != 0 ? LatestPrice.Close - PreClose() : 0D;
+        => PreClose != 0 ? LatestPrice.Close - PreClose : 0D;
 
     /// 
     public double ChangePercent()
-        => PreClose() != 0 ? Change()/ PreClose() *100D: 0D;
+        => PreClose != 0 ? Change()/ PreClose *100D: 0D;
 
     /// 
     public string Html()
@@ -98,6 +103,6 @@ public class Target
         var className = ChangePercent() > 0 ? "red" :
             ChangePercent() == 0 ? "gray" : "green";
         return
-            $"{Stock.Symbol}-{LatestPrice.TradeDate}:<span class='{className}'>{PreClose()}-{LatestPrice.Close} <span class='badge'>{Math.Round(ChangePercent(), 2)} %</span></span>";
+            $"{Stock.Symbol}-{LatestPrice.TradeDate}:<span class='{className}'>{Math.Round(PreClose,2)}-{LatestPrice.Close} <span class='badge'>{Math.Round(ChangePercent(), 2)} %</span></span>";
     }
 }

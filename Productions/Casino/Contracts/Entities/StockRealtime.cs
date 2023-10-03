@@ -2,7 +2,6 @@
 using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.RuntimeCaching;
-using Ban3.Sites.ViaNetease.Entries;
 
 namespace Ban3.Productions.Casino.Contracts.Entities;
 
@@ -42,30 +41,4 @@ public class StockRealtime
 
     private static Dictionary<string, StockRuntimeRecord> _records;
     
-    /// <summary>
-    /// 添加
-    /// </summary>
-    /// <param name="sr"></param>
-    public static void Append(StockRecord sr)
-    {
-        var r=new StockRuntimeRecord(sr);
-        _records.AddOrReplace(r.Code, r);
-    }
-
-    /// <summary>
-    /// 添加
-    /// </summary>
-    /// <param name="dic"></param>
-    public static void Append(Dictionary<string, StockRecord> dic)
-    {
-        dic.AsParallel()
-            .ForAll(o =>
-            {
-                Append(o.Value);
-            });
-
-        typeof(StockRealtime)
-            .LocalFile()
-            .WriteFile(_records.ObjToJson());
-    }
 }
