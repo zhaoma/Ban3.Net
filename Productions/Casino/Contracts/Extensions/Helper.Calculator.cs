@@ -567,7 +567,7 @@ public static partial class Helper
         Logger.Debug($"GenerateTargets {targets.Data.Count},success");
     }
 
-    static List<TimelinePoint> GetPoints(this List<StockSets> sets,List<StockPrice> prices,out float preClose)
+    static List<TimelinePoint> GetPoints(this List<StockSets> sets, List<StockPrice> prices, out float preClose)
     {
         var result = new List<TimelinePoint>();
         preClose = 0F;
@@ -603,7 +603,7 @@ public static partial class Helper
                         result.AddRange(tmp);
                 });
 
-                var pricesAfterC0=prices.Where(o => o.TradeDate.ToInt() >= latestDaily.MarkTime.ToYmd().ToInt())
+                var pricesAfterC0 = prices.Where(o => o.TradeDate.ToInt() >= latestDaily.MarkTime.ToYmd().ToInt())
                     .ToList();
 
                 if (pricesAfterC0 != null && pricesAfterC0.Any())
@@ -674,39 +674,52 @@ public static partial class Helper
     {
         var result = new List<TimelinePoint>();
 
-        var point = new TimelinePoint
+        if (sets.SetKeys!.Contains("MACD.GC.DAILY"))
         {
-            Date = sets.MarkTime.ToYmd(),
-            Close = sets.Close,
-            SetKeys=sets.SetKeys!.ToList()
-        };
-
-        if (point.SetKeys!.Contains("MACD.GC.DAILY"))
-        {
-            point.Subject="日金叉";
-            point.DailyEvent = Enums.DailyEvent.MacdDailyGC;
-            result.Add(point);
+            result.Add(new TimelinePoint
+            {
+                Date = sets.MarkTime.ToYmd(),
+                Close = sets.Close,
+                SetKeys = sets.SetKeys!.ToList(),
+                Subject = "日金叉",
+                DailyEvent = Enums.DailyEvent.MacdDailyGC
+            });
         }
 
-        if (point.SetKeys!.Contains("MACD.C0.DAILY"))
+        if (sets.SetKeys!.Contains("MACD.C0.DAILY"))
         {
-            point.Subject="日上穿零";
-            point.DailyEvent = Enums.DailyEvent.MacdDailyC0;
-            result.Add(point);
+            result.Add(new TimelinePoint
+            {
+                Date = sets.MarkTime.ToYmd(),
+                Close = sets.Close,
+                SetKeys = sets.SetKeys!.ToList(),
+                Subject = "日上穿零",
+                DailyEvent = Enums.DailyEvent.MacdDailyC0
+            });
         }
 
-        if (point.SetKeys!.Contains("MACD.C0.WEEKLY"))
+        if (sets.SetKeys!.Contains("MACD.C0.WEEKLY"))
         {
-            point.Subject="周上穿零";
-            point.DailyEvent = Enums.DailyEvent.MacdWeeklyC0;
-            result.Add(point);
+            result.Add(new TimelinePoint
+            {
+                Date = sets.MarkTime.ToYmd(),
+                Close = sets.Close,
+                SetKeys = sets.SetKeys!.ToList(),
+                Subject = "周上穿零",
+                DailyEvent = Enums.DailyEvent.MacdWeeklyC0
+            });
         }
 
-        if (point.SetKeys!.Contains("MACD.C0.MONTHLY"))
+        if (sets.SetKeys!.Contains("MACD.C0.MONTHLY"))
         {
-            point.Subject="月上穿零";
-            point.DailyEvent = Enums.DailyEvent.MacdMonthlyC0;
-            result.Add(point);
+            result.Add(new TimelinePoint
+            {
+                Date = sets.MarkTime.ToYmd(),
+                Close = sets.Close,
+                SetKeys = sets.SetKeys!.ToList(),
+                Subject = "月上穿零",
+                DailyEvent = Enums.DailyEvent.MacdMonthlyC0
+            });
         }
 
         return result;

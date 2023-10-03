@@ -4489,7 +4489,7 @@
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.0.3",
+    "version": "1.0.4",
     "restore": {
       "projectUniqueName": "/Users/zhaoma/Projects/Ban3.Net/Sites/ViaEastmoney/ViaEastmoney.csproj",
       "projectName": "Ban3.Sites.ViaEastmoney",

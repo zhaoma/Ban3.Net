@@ -24,15 +24,15 @@ public class Target
         StockPrice price,
         StockSets sets,
         int days,
-	float preClose)
+    float preClose)
     {
         Stock = stock;
         Points = points;
         LatestPrice = price;
         LatestSets = sets;
         LastAccess = DateTime.Now;
-        ListDays=days;
-        PreClose = preClose;
+        ListDays = days;
+        PreClose = Math.Round(preClose, 2);
 
         if (LatestSets is { SetKeys: { } })
         {
@@ -103,6 +103,6 @@ public class Target
         var className = ChangePercent() > 0 ? "red" :
             ChangePercent() == 0 ? "gray" : "green";
         return
-            $"{Stock.Symbol}-{LatestPrice.TradeDate}:<span class='{className}'>{Math.Round(PreClose,2)}-{LatestPrice.Close} <span class='badge'>{Math.Round(ChangePercent(), 2)} %</span></span>";
+            $"{Stock.Symbol}-{LatestPrice.TradeDate}:<span class='{className}'>{Math.Round(PreClose,2)}-{LatestPrice.Close} <span class='badge bg-warning'>{Math.Round(ChangePercent(), 2)} %</span></span>";
     }
 }

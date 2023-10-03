@@ -9,7 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "Ban3.Productions.Casino.CcaAndReport/1.0.4": {
         "dependencies": {
-          "Ban3.Productions.Casino.Contracts": "1.0.35",
+          "Ban3.Productions.Casino.Contracts": "1.0.37",
           "NETStandard.Library": "2.0.3"
         },
         "runtime": {
@@ -82,7 +82,7 @@
           }
         }
       },
-      "Ban3.Productions.Casino.Contracts/1.0.35": {
+      "Ban3.Productions.Casino.Contracts/1.0.37": {
         "dependencies": {
           "Ban3.Infrastructures.Indicators": "1.0.12",
           "Ban3.Infrastructures.RuntimeCaching": "1.0.8",
@@ -91,8 +91,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Ban3.Productions.Casino.Contracts.dll": {
-            "assemblyVersion": "1.0.24.13",
-            "fileVersion": "1.0.24.13"
+            "assemblyVersion": "1.0.24.15",
+            "fileVersion": "1.0.24.15"
           }
         }
       },
@@ -934,12 +934,12 @@
       "path": "ban3.infrastructures.runtimecaching/1.0.8",
       "hashPath": "ban3.infrastructures.runtimecaching.1.0.8.nupkg.sha512"
     },
-    "Ban3.Productions.Casino.Contracts/1.0.35": {
+    "Ban3.Productions.Casino.Contracts/1.0.37": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-E3VXv81pkvQLsgAA2A/nwr+354D/3naWTAKfOqTsjUJhc/aPliG60PAEWr/AtlYNGeC2bc8t4jwYyMV3X0nLLQ==",
-      "path": "ban3.productions.casino.contracts/1.0.35",
-      "hashPath": "ban3.productions.casino.contracts.1.0.35.nupkg.sha512"
+      "sha512": "sha512-SJATyaYhog7ksC15Mr0UFZYQe9/DdOEXdHbPHWrPpiM1D9S1LxqvqUhFxVUmbS/qqHKD78pwtsP/LhJ18yczMw==",
+      "path": "ban3.productions.casino.contracts/1.0.37",
+      "hashPath": "ban3.productions.casino.contracts.1.0.37.nupkg.sha512"
     },
     "Ban3.Sites.ViaSina/1.0.4": {
       "type": "package",
