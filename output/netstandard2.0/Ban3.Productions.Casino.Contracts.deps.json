@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "Ban3.Productions.Casino.Contracts/1.0.36": {
+      "Ban3.Productions.Casino.Contracts/1.0.37": {
         "dependencies": {
           "Ban3.Infrastructures.Indicators": "1.0.12",
           "Ban3.Infrastructures.RuntimeCaching": "1.0.8",
@@ -883,7 +883,7 @@
     }
   },
   "libraries": {
-    "Ban3.Productions.Casino.Contracts/1.0.36": {
+    "Ban3.Productions.Casino.Contracts/1.0.37": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

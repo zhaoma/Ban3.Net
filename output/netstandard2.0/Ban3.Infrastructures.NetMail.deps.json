@@ -171,7 +171,7 @@
         "runtime": {
           "lib/netstandard2.0/Microsoft.Office.Interop.Outlook.dll": {
             "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.4797.1003"
+            "fileVersion": "0.0.0.0"
           }
         }
       },
