@@ -1,7 +1,7 @@
 ﻿using System;
-using Ban3.Infrastructures.ServiceCentre.Enums;
+using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
 /// <summary>
 /// 缓存策略
@@ -23,7 +23,7 @@ public class CacheProfile
     public CacheProfile(DateTime expireTime)
     {
         CacheDependency = CacheDependency.AbsoluteTime;
-        AbsoluteTime= expireTime;
+        AbsoluteTime = expireTime;
     }
 
     /// <summary>
@@ -33,7 +33,7 @@ public class CacheProfile
     public CacheProfile(TimeSpan remainTimeSpan)
     {
         CacheDependency = CacheDependency.RelativeTime;
-        RelativeTime=remainTimeSpan;
+        RelativeTime = remainTimeSpan;
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ public class CacheProfile
     public CacheProfile(string monitorFile)
     {
         CacheDependency = CacheDependency.File;
-        File= monitorFile;
+        File = monitorFile;
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class CacheProfile
     /// 相对存活时间
     /// </summary>
     public TimeSpan? RelativeTime { get; set; }
-    
+
     /// <summary>
     /// 监视文件变化
     /// </summary>

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Ban3.Infrastructures.ServiceCentre.Request;
-using Ban3.Infrastructures.ServiceCentre.Response;
+using Ban3.Infrastructures.ServiceCentre.Request.Hybird;
+using Ban3.Infrastructures.ServiceCentre.Response.Hybird;
 
-namespace Ban3.Infrastructures.ServiceCentre.Interfaces;
+namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
 /// <summary>
 /// 

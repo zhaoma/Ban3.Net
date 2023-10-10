@@ -1,4 +1,4 @@
-﻿namespace Ban3.Infrastructures.ServiceCentre.Entries;
+﻿namespace Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
 /// <summary>
 /// 缓存条目

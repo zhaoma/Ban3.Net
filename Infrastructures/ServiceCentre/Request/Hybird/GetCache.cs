@@ -1,4 +1,4 @@
-﻿namespace Ban3.Infrastructures.ServiceCentre.Request;
+﻿namespace Ban3.Infrastructures.ServiceCentre.Request.Hybird;
 
 /// <summary>
 /// 

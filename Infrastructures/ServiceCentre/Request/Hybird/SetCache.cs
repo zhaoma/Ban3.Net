@@ -1,7 +1,7 @@
 ﻿using System;
-using Ban3.Infrastructures.ServiceCentre.Entries;
+using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
-namespace Ban3.Infrastructures.ServiceCentre.Request;
+namespace Ban3.Infrastructures.ServiceCentre.Request.Hybird;
 
 /// <summary>
 /// 
