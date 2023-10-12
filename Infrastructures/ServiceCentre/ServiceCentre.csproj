@@ -34,9 +34,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Entries\Kalendar\" />
       <Folder Include="Applications\Kalendar\" />
     </ItemGroup>
     <ItemGroup>
+      <None Remove="Entries\Kalendar\" />
       <None Remove="Applications\Kalendar\" />
     </ItemGroup>
 </Project>

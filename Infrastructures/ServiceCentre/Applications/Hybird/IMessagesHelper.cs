@@ -2,7 +2,12 @@
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
-public interface ICommunications
+/// <summary>
+/// 消息接口
+/// 
+/// </summary>
+public interface IMessagesHelper
 {
+
 }
 

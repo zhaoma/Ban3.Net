@@ -1,6 +1,6 @@
 ﻿namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
-public interface IStockNotionsCollector
+public interface IStocksAnalyzer
 {
     
 }

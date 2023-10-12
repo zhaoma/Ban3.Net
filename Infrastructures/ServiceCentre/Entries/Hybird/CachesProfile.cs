@@ -6,12 +6,12 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 /// <summary>
 /// 缓存策略
 /// </summary>
-public class CacheProfile
+public class CachesProfile
 {
     /// <summary>
     /// 默认持久
     /// </summary>
-    public CacheProfile()
+    public CachesProfile()
     {
         CacheDependency = CacheDependency.None;
     }
@@ -20,7 +20,7 @@ public class CacheProfile
     /// 绝对时间型
     /// </summary>
     /// <param name="expireTime"></param>
-    public CacheProfile(DateTime expireTime)
+    public CachesProfile(DateTime expireTime)
     {
         CacheDependency = CacheDependency.AbsoluteTime;
         AbsoluteTime = expireTime;
@@ -30,7 +30,7 @@ public class CacheProfile
     /// 相对时间型
     /// </summary>
     /// <param name="remainTimeSpan"></param>
-    public CacheProfile(TimeSpan remainTimeSpan)
+    public CachesProfile(TimeSpan remainTimeSpan)
     {
         CacheDependency = CacheDependency.RelativeTime;
         RelativeTime = remainTimeSpan;
@@ -40,7 +40,7 @@ public class CacheProfile
     /// 监视文件型
     /// </summary>
     /// <param name="monitorFile"></param>
-    public CacheProfile(string monitorFile)
+    public CachesProfile(string monitorFile)
     {
         CacheDependency = CacheDependency.File;
         File = monitorFile;
