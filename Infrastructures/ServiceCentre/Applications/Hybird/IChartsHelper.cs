@@ -6,6 +6,6 @@ namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
 public interface IChartsHelper
 {
-    Task<bool> CreateDiagram<T>(T data,out ChartsDiagram chartsDiagram);
+    Task<bool> CreateDiagram<T>(T data,out IChartsDiagram chartsDiagram);
 }
 

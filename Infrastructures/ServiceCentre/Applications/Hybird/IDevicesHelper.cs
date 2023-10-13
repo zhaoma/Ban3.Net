@@ -17,9 +17,9 @@ public interface IDevicesHelper
     /// <param name="deviceAnswer"></param>
     /// <returns></returns>
     Task<bool> TryControl(
-        DeviceEndpoint deviceEndpoint,
-        DeviceControl deviceControl,
-        out DeviceAnswer deviceAnswer
+        IDeviceEndpoint deviceEndpoint,
+        IDeviceControl deviceControl,
+        out IDeviceAnswer deviceAnswer
 	);
 }
 

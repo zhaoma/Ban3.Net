@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
+using Ban3.Infrastructures.ServiceCentre.Models.Hybird;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 

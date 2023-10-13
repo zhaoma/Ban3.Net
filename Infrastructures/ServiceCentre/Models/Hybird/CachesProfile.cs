@@ -1,7 +1,7 @@
 ﻿using System;
 using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
+namespace Ban3.Infrastructures.ServiceCentre.Models.Hybird;
 
 /// <summary>
 /// 缓存策略
