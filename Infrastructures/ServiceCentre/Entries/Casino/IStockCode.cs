@@ -1,12 +1,16 @@
-﻿namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+﻿using Newtonsoft.Json;
 
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+
+/// <summary>
+/// 有编号的记录
+/// </summary>
 public interface IStockCode
 {
+    /// <summary>
+    /// 编号 600001.SH
+    /// </summary>
+    [JsonProperty("code")]
     string Code { get; set; }
 
-    string Symbol { get; set; }
-
-    string Name { get; set; }
-
-    string ListDate { get; set; }
 }
