@@ -7,9 +7,5 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 /// </summary>
 public interface IStockFeature : IStockRecord
 {
-    /// <summary>
-    /// 特质集合
-    /// </summary>
-    IEnumerable<string> Keys { get; set; }
 }
 

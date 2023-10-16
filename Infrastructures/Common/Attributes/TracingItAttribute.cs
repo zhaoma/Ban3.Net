@@ -21,7 +21,7 @@ public class TracingItAttribute : MoAttribute
             ? Config.TraceSetting.BindFlags
             : AccessFlags.All;
 
-    static readonly ILog Logger = LogManager.GetLogger(typeof(TracingItAttribute));
+    readonly ILog Logger = LogManager.GetLogger(typeof(TracingItAttribute));
 
     readonly Stopwatch _stopwatch = new ();
 

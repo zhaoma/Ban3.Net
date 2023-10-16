@@ -1,7 +1,11 @@
 ﻿namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
+/// <summary>
+/// 公式声明
+/// </summary>
 public interface IFormulas
 {
+
     IAmount Amount { get; set; }
 
     IBias Bias { get; set; }
