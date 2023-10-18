@@ -1,12 +1,27 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 
-public interface IEne
+/// <summary>
+/// Energy Envelope
+/// </summary>
+public interface IEne : IStockRecord, IEvaluation<IEne>
 {
-	decimal UPPER { get; set; }
+    /// <summary>
+    /// 上轨
+    /// </summary>
+    [JsonProperty("upper")]
+    decimal UPPER { get; set; }
 
-	decimal ENE { get; set; }
+    /// <summary>
+    /// 中轨
+    /// </summary>
+    [JsonProperty("ene")]
+    decimal ENE { get; set; }
 
-	decimal LOWER { get; set; }
+    /// <summary>
+    /// 下轨
+    /// </summary>
+    [JsonProperty("lower")]
+    decimal LOWER { get; set; }
 }
-

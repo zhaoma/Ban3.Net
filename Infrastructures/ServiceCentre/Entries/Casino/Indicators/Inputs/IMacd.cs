@@ -1,23 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
 public interface IMacd
 {
-    [JsonProperty("short", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonProperty("short")]
     int SHORT { get; set; }
 
     /// <summary>
     /// LONG(长期)
     /// </summary>
-    [JsonProperty("long", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonProperty("long")]
     int LONG { get; set; }
 
     /// <summary>
     /// M 天数
     /// </summary>
-    [JsonProperty("mid", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonProperty("mid")]
     int MID { get; set; }
 }
 

@@ -16,7 +16,7 @@ public class TracingItAttribute : MoAttribute
     /// <summary>
     /// 记录所有方法
     /// </summary>
-    public override AccessFlags Flags { get; } =
+    public override AccessFlags Flags { get; set; } =
         Config.TraceSetting != null
             ? Config.TraceSetting.BindFlags
             : AccessFlags.All;

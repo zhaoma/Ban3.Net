@@ -53,7 +53,7 @@
         <PackageReference Include="Mono.Reflection" Version="2.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="log4net" Version="2.0.15" />
-        <PackageReference Include="Rougamo.Fody" Version="1.4.1" />
+        <PackageReference Include="Rougamo.Fody" Version="2.0.0" />
         <PackageReference Include="System.CodeDom" Version="7.0.0" />
         <PackageReference Include="System.IO" Version="4.3.0" />
         <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
