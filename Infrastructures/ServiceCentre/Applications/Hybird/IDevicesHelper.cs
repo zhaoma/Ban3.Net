@@ -1,22 +1,21 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
 /// <summary>
-/// 
+/// 通信设备接口声明
 /// </summary>
 public interface IDevicesHelper
 {
     /// <summary>
-    /// 
+    /// 通信
     /// </summary>
-    /// <param name="deviceEndpoint"></param>
-    /// <param name="deviceControl"></param>
-    /// <param name="deviceAnswer"></param>
+    /// <param name="deviceEndpoint">设备地址</param>
+    /// <param name="deviceControl">控制指令</param>
+    /// <param name="deviceAnswer">设备应答</param>
     /// <returns></returns>
-    Task<bool> TryControl(
+    Task<bool> TryCommunicate(
         IDeviceEndpoint deviceEndpoint,
         IDeviceControl deviceControl,
         out IDeviceAnswer deviceAnswer

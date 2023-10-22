@@ -1,7 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 /// <summary>
 /// 标的财务数据声明

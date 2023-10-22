@@ -3,7 +3,7 @@ using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 /// <summary>
 /// 标的题材数据声明

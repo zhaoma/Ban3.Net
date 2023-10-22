@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 /// <summary>
 /// 标的事件数据声明
 /// </summary>
-public interface IStockEvent : IStockRecord, IStockCode
+public interface IStockEvent : IStockRecord
 {
     /// <summary>
     /// 送股(每十股)

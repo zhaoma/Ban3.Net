@@ -1,8 +1,10 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
+/// <summary>
+/// 周期定义，日周月，M60
+/// </summary>
 public enum AnalysisCycle
 {
     /// <summary>

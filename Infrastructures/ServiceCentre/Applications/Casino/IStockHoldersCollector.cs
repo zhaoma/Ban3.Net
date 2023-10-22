@@ -1,4 +1,5 @@
 ﻿using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,5 +15,5 @@ public interface IStockHoldersCollector
     /// </summary>
     /// <param name="stockHolders">大股东数据</param>
     /// <returns></returns>
-    Task<bool> PrepareStockHoldes(out IEnumerable<IStockHolder> stockHolders);
+    Task<bool> TryFetchHoldes(out IEnumerable<IStockHolder> stockHolders);
 }

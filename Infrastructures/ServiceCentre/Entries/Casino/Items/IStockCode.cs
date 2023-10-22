@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 /// <summary>
 /// 有编号的记录

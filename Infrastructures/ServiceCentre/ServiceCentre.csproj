@@ -39,6 +39,7 @@
       <Folder Include="Entries\Casino\Indicators\" />
       <Folder Include="Entries\Casino\Indicators\Inputs\" />
       <Folder Include="Entries\Casino\Indicators\Outputs\" />
+      <Folder Include="Entries\Casino\Items\" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="Entries\Kalendar\" />
@@ -47,5 +48,6 @@
       <None Remove="Entries\Casino\Indicators\" />
       <None Remove="Entries\Casino\Indicators\Inputs\" />
       <None Remove="Entries\Casino\Indicators\Outputs\" />
+      <None Remove="Entries\Casino\Items\" />
     </ItemGroup>
 </Project>

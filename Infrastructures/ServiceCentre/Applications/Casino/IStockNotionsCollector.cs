@@ -1,4 +1,5 @@
 ﻿using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,6 +15,6 @@ public interface IStockNotionsCollector
     /// </summary>
     /// <param name="stockNotions">题材概念数据</param>
     /// <returns></returns>
-    Task<bool> PrepareStockNotions(out IEnumerable<IStockNotion> stockNotions);
+    Task<bool> TryFetchNotions(out IEnumerable<IStockNotion> stockNotions);
 
 }

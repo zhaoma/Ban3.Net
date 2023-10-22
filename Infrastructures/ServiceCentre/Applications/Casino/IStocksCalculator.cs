@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
@@ -17,9 +18,9 @@ public interface IStocksCalculator
     /// <param name="stockEvents"></param>
     /// <param name="stockSeeds"></param>
     /// <returns></returns>
-    Task<bool> GenerateSeeds(
-	    IEnumerable<IStockEvent> stockEvents,
-	    out IEnumerable<IStockSeed> stockSeeds
+    Task<bool> TryGenerateSeeds(
+        IStockData<IStockEvent> stockEvents,
+	    out IStockData<IStockSeed> stockSeeds
 	);
 
     /// <summary>
@@ -29,22 +30,22 @@ public interface IStocksCalculator
     /// <param name="stockSeeds"></param>
     /// <param name="targetPrices"></param>
     /// <returns></returns>
-    Task<bool> AdjustPrices(
-        IEnumerable<IStockPrice> sourcePrices,
-        IEnumerable<IStockSeed> stockSeeds,
-        out IEnumerable<IStockPrice> targetPrices
+    Task<bool> TryAdjustPrices(
+        IStockData<IStockPrice> sourcePrices,
+        IStockData<IStockSeed> stockSeeds,
+        out IStockData<IStockPrice> targetPrices
     );
     /// <summary>
     /// 周期转换，日->周/月
     /// </summary>
-    /// <param name="sourcePrices"></param>
+    /// <param name="dailyPrices"></param>
     /// <param name="analysisCycle"></param>
     /// <param name="targetPrices"></param>
     /// <returns></returns>
-    Task<bool> ConvertCycle(
-        IEnumerable<IStockPrice> sourcePrices,
+    Task<bool> TryConvertCycle(
+        IStockData<IStockPrice> dailyPrices,
         AnalysisCycle analysisCycle,
-        out IEnumerable<IStockPrice> targetPrices
+        out IStockData<IStockPrice> targetPrices
 	);
 
     /// <summary>
@@ -53,7 +54,7 @@ public interface IStocksCalculator
     /// <param name="input"></param>
     /// <param name="output"></param>
     /// <returns></returns>
-    Task<bool> GenerateIndicators(
+    Task<bool> TryGenerateIndicators(
 	    IInput input,
 	    out IOutput output
 	);

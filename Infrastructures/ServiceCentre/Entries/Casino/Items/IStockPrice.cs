@@ -1,12 +1,11 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 /// <summary>
 /// 标的价格数据声明
 /// </summary>
-public interface IStockPrice : IStockRecord,IStockCode
+public interface IStockPrice : IStockRecord
 {
     /// <summary>
     /// 前收盘价

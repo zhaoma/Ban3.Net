@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
+﻿using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
@@ -10,18 +10,15 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 public interface IInput
 {
     /// <summary>
-    /// 标的
-    /// </summary>
-    IStock Stock { get; set; }
-
-    /// <summary>
     /// 价格数据集合
     /// </summary>
-    IEnumerable<IStockPrice> StockPrices { get; set; }
+    [JsonProperty("stockPrices")]
+    IStockData<IStockPrice> StockPrices { get; set; }
 
     /// <summary>
     /// 公式集合
     /// </summary>
+    [JsonProperty("formulas")]
     IFormulas Formulas { get; set; }
 }
 

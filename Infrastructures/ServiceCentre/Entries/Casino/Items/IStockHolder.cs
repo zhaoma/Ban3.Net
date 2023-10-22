@@ -2,12 +2,12 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 /// <summary>
 /// 股东信息声明
 /// </summary>
-public interface IStockHolder
+public interface IStockHolder : IStockRecord, IStockCode
 {
     /// <summary>
     /// 股东标识

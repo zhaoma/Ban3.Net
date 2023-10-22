@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Newtonsoft.Json;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
 /// <summary>
 /// 标的特征声明
 /// </summary>
-public interface IStockFeature : IStock
+public interface IStockFeature : IStockRecord
 {
     /// <summary>
     /// 评分
@@ -15,7 +16,7 @@ public interface IStockFeature : IStock
     int Score { get; set; }
 
     /// <summary>
-    /// 特质集合
+    /// 特征集合
     /// </summary>
     [JsonProperty("keys")]
     IEnumerable<string> Keys { get; set; }
