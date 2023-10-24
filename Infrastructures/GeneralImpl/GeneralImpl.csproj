@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <AssemblyName>Ban3.Infrastructures.GeneralImpl</AssemblyName>
+        <RootNamespace>Ban3.Infrastructures.GeneralImpl</RootNamespace>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Infrastructures.GeneralImpl</Title>
+        <Version>1.0.0</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>Runtime Caching extension</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+  </PropertyGroup>
+  
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Infrastructures.GeneralImpl.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Applications\" />
+      <None Remove="Applications\Casino\" />
+      <None Remove="Entries\" />
+      <None Remove="Entries\Hybird\" />
+      <None Remove="Applications\Hybird\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Applications\" />
+      <Folder Include="Applications\Casino\" />
+      <Folder Include="Entries\" />
+      <Folder Include="Entries\Hybird\" />
+      <Folder Include="Applications\Hybird\" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\ServiceCentre\ServiceCentre.csproj" />
+    </ItemGroup>
+</Project>
