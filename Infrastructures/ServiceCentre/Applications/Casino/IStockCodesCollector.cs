@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
@@ -14,5 +15,5 @@ public interface IStockCodesCollector
     /// </summary>
     /// <param name="stocks">标的集合</param>
     /// <returns></returns>
-    Task<bool> TryFetchStocks(out IEnumerable<IStock> stocks);
+    Task<bool> TryFetchStocks(Action<IEnumerable<IStock>> stocks);
 }

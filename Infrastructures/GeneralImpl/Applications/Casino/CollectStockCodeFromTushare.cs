@@ -17,9 +17,11 @@ public class CollectStockCodeFromTushare:OneImplement, IStockCodesCollector
 		_internetsHelper = internetsHelper;
     }
 
-	public Task<bool> TryFetchStocks(out IEnumerable<IStock> stocks)
+	public async Task<bool> TryFetchStocks(Action<IEnumerable<IStock>> action)
 	{
-		_internetsHelper.TryRequest()
+		//await _internetsHelper.TryRequest()
+
+		return true;
 	}
 }
 

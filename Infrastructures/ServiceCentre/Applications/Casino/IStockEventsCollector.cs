@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
@@ -14,7 +15,7 @@ public interface IStockEventsCollector
     /// 标的事件数据
     /// </summary>
     /// <param name="stock">标的</param>
-    /// <param name="stockEvents">事件集合</param>
+    /// <param name="action">事件集合</param>
     /// <returns></returns>
-    Task<bool> TryFetchEvents(IStock stock, out IStockData<IStockEvent> stockEvents);
+    Task<bool> TryFetchEvents(IStock stock, Action<IStockData<IStockEvent>> action);
 }
