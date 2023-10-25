@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <AssemblyName>Ban3.Infrastructures.WebAutomator</AssemblyName>
+        <RootNamespace>Ban3.Infrastructures.WebAutomator</RootNamespace>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Infrastructures.WebAutomator</Title>
+        <Version>1.0.0</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>Selenium extension (chrome)</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+  </PropertyGroup>
+  
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Infrastructures.WebAutomator.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Selenium.Support" Version="4.14.1" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="118.0.5993.7000" />
+  </ItemGroup>
+</Project>
+ß
