@@ -32,6 +32,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Extensions\Helper.Arithmetic" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="favicon.ico" />
         <None Include="..\..\icon.png">
             <Pack>True</Pack>
@@ -57,5 +60,8 @@
         <PackageReference Include="System.CodeDom" Version="7.0.0" />
         <PackageReference Include="System.IO" Version="4.3.0" />
         <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Include="Extensions\Helper.Arithmetic.cs" />
     </ItemGroup>
 </Project>

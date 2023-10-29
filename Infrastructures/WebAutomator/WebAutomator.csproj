@@ -34,4 +34,3 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="118.0.5993.7000" />
   </ItemGroup>
 </Project>
-ß
