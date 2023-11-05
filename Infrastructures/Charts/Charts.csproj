@@ -43,6 +43,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.2.2" />
     </ItemGroup>
 </Project>
