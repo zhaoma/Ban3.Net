@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 13:23
-//  function:	Graphic.cs
-//  reference:	https://echarts.apache.org/en/option.html#graphic
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
 using Newtonsoft.Json;
@@ -11,6 +10,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// graphic component enables creating graphic elements in ECharts.
+/// https://echarts.apache.org/en/option.html#graphic
 /// </summary>
 public class Graphic
 {

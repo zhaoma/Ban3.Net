@@ -2,7 +2,7 @@
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
-public interface IBias
+public interface IBias : IParameter
 {
     [JsonProperty("n")]
     int N { get; set; }

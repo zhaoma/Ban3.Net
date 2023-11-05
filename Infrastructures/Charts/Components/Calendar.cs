@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 13:24
-//  function:	Calendar.cs
-//  reference:	https://echarts.apache.org/en/option.html#calendar
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Elements;
 using Ban3.Infrastructures.Charts.Styles;
@@ -20,6 +19,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 /// by using the calendar coordinates to achieve the calendar chart, 
 /// as shown in the following example, 
 /// we can use calendar coordinates in heatmap, scatter, effectScatter, and graph.
+/// https://echarts.apache.org/en/option.html#calendar
 /// </summary>
 public class Calendar
     : GeneralComponent

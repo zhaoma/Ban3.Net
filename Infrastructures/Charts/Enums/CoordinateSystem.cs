@@ -1,4 +1,9 @@
-﻿using System.ComponentModel;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace Ban3.Infrastructures.Charts.Enums;

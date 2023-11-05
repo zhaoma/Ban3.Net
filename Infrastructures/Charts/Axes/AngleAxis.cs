@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    极坐标系的角度轴
-//  reference:	    https://echarts.apache.org/en/option.html#angleAxis
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
 using Ban3.Infrastructures.Charts.Elements;
@@ -12,6 +11,7 @@ namespace Ban3.Infrastructures.Charts.Axes;
 /// <summary>
 /// 极坐标系的角度轴
 /// The angle axis in Polar Coordinate.
+/// https://echarts.apache.org/en/option.html#angleAxis
 /// </summary>
 public class AngleAxis
     : GeneralAxis

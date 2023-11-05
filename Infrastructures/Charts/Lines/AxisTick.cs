@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022-09-01 08:00
- * function:            坐标轴刻度
- * reference:https://echarts.apache.org/zh/option.html#angleAxis.axisTick
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
@@ -12,6 +10,7 @@ namespace Ban3.Infrastructures.Charts.Lines;
 
 /// <summary>
 /// 坐标轴刻度
+/// https://echarts.apache.org/zh/option.html#angleAxis.axisTick
 /// </summary>
 public class AxisTick
 {

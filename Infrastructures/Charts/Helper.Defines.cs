@@ -1,4 +1,9 @@
-﻿using Ban3.Infrastructures.Charts.Elements;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Charts.Elements;
 using Ban3.Infrastructures.Charts.Styles;
 
 namespace Ban3.Infrastructures.Charts;

@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    toolbox.feature. dataView
-//  reference:https://echarts.apache.org/zh/option.html#toolbox.feature.dataView
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
@@ -12,6 +11,7 @@ namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+/// https://echarts.apache.org/zh/option.html#toolbox.feature.dataView
 /// </summary>
 public class DataView
 {

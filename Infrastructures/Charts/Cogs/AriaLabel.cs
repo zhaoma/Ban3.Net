@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    
-//  reference:https://echarts.apache.org/zh/option.html#aria.label
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
 
@@ -10,6 +9,7 @@ namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 开启后，会根据图表、数据、标题等情况，自动智能生成关于图表的描述，用户也可以通过配置项修改描述。
+/// https://echarts.apache.org/zh/option.html#aria.label
 /// </summary>
 public class AriaLabel
 {

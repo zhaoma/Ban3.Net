@@ -1,15 +1,15 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    对于图表的整体性描述
-//  reference:https://echarts.apache.org/zh/option.html#aria.label.general
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
-/// 
+/// 对于图表的整体性描述
+/// https://echarts.apache.org/zh/option.html#aria.label.general
 /// </summary>
 public class AriaLabelGeneral
 {

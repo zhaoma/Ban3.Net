@@ -1,4 +1,9 @@
-﻿using Ban3.Infrastructures.Consoles.Entries;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Consoles.Entries;
 using Ban3.Infrastructures.Consoles.Enums;
 using System;
 using System.Collections.Generic;
@@ -7,6 +12,9 @@ using System.Text.RegularExpressions;
 
 namespace Ban3.Infrastructures.Consoles.Utils;
 
+/// <summary>
+/// ConsoleTable 辅助项目（宽度计算以及填充）
+/// </summary>
 public static class Parser
 {
     /// <summary>
@@ -156,6 +164,11 @@ public static class Parser
     /// <returns></returns>
     public static string GetChineseText(this string text) => Regex.Replace(text, "[\x00-\xff]", "");
 
+    /// <summary>
+    /// 处理空值
+    /// </summary>
+    /// <param name="o"></param>
+    /// <returns></returns>
     public static string ObjToString(this object o)
     {
         return o + "";

@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma      2022/10/16 12:06
-//  function:	坐标轴指示器
-//  reference:	https://echarts.apache.org/en/option.html#axisPointer
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
@@ -12,8 +11,10 @@ using ECharts = Ban3.Infrastructures.Charts.Enums;
 namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
+/// 坐标轴指示器
 /// This is the global configurations of axisPointer.
 /// axisPointer is a tool for displaying reference line and axis value under mouse pointer.
+/// https://echarts.apache.org/en/option.html#axisPointer
 /// </summary>
 public class AxisPointer
 {

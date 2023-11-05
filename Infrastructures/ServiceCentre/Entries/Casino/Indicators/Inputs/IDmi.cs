@@ -2,7 +2,7 @@
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
-public interface IDmi
+public interface IDmi : IParameter
 {
     [JsonProperty("n")]
     int N { get; set; }

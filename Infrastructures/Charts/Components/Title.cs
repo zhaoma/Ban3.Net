@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 11:26
-//  function:	Title.cs
-//  reference:	https://echarts.apache.org/en/option.html#title
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Elements;
 using Ban3.Infrastructures.Charts.Styles;
@@ -13,15 +12,16 @@ namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// Title component, including main title and subtitle.
+/// https://echarts.apache.org/en/option.html#title
 /// </summary>
 public class Title
     : GeneralComponent, IHasBorder, IHasShadow
 
 {
-    public Title()
-    {
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="text"></param>
     public Title(string text)
     {
         Text = text;

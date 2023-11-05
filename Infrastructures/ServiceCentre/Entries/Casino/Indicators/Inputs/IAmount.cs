@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
-public interface IAmount
+public interface IAmount:IParameter
 {
     /// <summary>
     /// 周期集合

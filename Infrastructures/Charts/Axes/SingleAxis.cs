@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 13:21
-//  function:	单轴。可以被应用到散点图中展现一维数据。
-//  reference:	https://echarts.apache.org/en/option.html#singleAxis
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Elements;
@@ -13,15 +12,17 @@ using ECharts = Ban3.Infrastructures.Charts.Enums;
 namespace Ban3.Infrastructures.Charts.Axes;
 
 /// <summary>
-/// 单轴
+/// 单轴。可以被应用到散点图中展现一维数据。
+/// https://echarts.apache.org/en/option.html#singleAxis
 /// </summary>
 public class SingleAxis
     : GeneralAxis, IHasPosition
 {
-    public SingleAxis()
-    {
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="data"></param>
     public SingleAxis(ECharts.AxisType type, object? data)
     {
         Type = type;

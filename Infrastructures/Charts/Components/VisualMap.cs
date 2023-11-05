@@ -1,9 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 11:51
-//  function:	VisualMap.cs
-//  reference:	https://echarts.apache.org/zh/option.html#visualMap-continuous
-//              https://echarts.apache.org/zh/option.html#visualMap-piecewise
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
@@ -15,6 +13,8 @@ namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 视觉映射组件
+/// https://echarts.apache.org/zh/option.html#visualMap-continuous
+/// https://echarts.apache.org/zh/option.html#visualMap-piecewise
 /// </summary>
 public class VisualMap
     : GeneralComponent

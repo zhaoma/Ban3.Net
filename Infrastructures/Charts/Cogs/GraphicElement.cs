@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    
-//  reference:
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
@@ -11,7 +10,9 @@ using ECharts = Ban3.Infrastructures.Charts.Enums;
 
 namespace Ban3.Infrastructures.Charts.Cogs;
 
+/// <summary>
 /// 
+/// </summary>
 public class GraphicElement
     : GeneralComponent
 {

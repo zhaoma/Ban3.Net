@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022-09-01 08:00
- * function:            坐标轴刻度标签
- * reference:https://echarts.apache.org/zh/option.html#angleAxis.axisLabel
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
@@ -13,7 +11,8 @@ using ECharts = Ban3.Infrastructures.Charts.Enums;
 namespace Ban3.Infrastructures.Charts.Labels;
 
 /// <summary>
-/// 雷达图每个指示器名称的配置项
+/// 坐标轴刻度标签
+/// https://echarts.apache.org/zh/option.html#angleAxis.axisLabel
 /// </summary>
 public class AxisName
     : GeneralLabel

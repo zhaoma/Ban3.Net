@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System.Collections.Generic;
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Labels;
 using Ban3.Infrastructures.Charts.Styles;

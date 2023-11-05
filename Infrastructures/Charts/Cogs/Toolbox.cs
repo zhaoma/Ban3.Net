@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 12:06
-//  function:	Toolbox.cs
-//  reference:	https://echarts.apache.org/en/option.html#toolbox
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Elements;
 using Ban3.Infrastructures.Charts.Styles;
@@ -12,6 +11,9 @@ using ECharts = Ban3.Infrastructures.Charts.Enums;
 
 namespace Ban3.Infrastructures.Charts.Cogs;
 
+/// <summary>
+/// https://echarts.apache.org/en/option.html#toolbox
+/// </summary>
 public class Toolbox
     : IHasIdentity, IHasPosition
 {

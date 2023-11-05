@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 11:29
-//  function:	Grid.cs
-//  reference:	https://echarts.apache.org/zh/option.html#grid
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Elements;
@@ -17,6 +16,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 /// Line chart, bar chart, and scatter chart (bubble chart) can be drawn in grid.
 /// In ECharts 2.x, there could only be one single grid component at most in a single echarts instance. 
 /// But in ECharts 3, there is no limitation.
+/// https://echarts.apache.org/zh/option.html#grid
 /// </summary>
 public class Grid
     : GeneralComponent, IHasBorder, IHasShadow

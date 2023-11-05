@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022
- * function:            绘制控制台表格
- * reference:
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -17,7 +15,7 @@ using Ban3.Infrastructures.Consoles.Utils;
 namespace Ban3.Infrastructures.Consoles.Entries;
 
 /// <summary>
-/// 
+/// 绘制控制台表格
 /// </summary>
 public class ConsoleTable
 {
@@ -108,7 +106,7 @@ public class ConsoleTable
                 // 得到每一列最大的宽度
                 List<int> columnWidth = Columns.GetColumnWides(Rows);
                 // 替换用户输入长度
-                ColumnWides = ColumnWides ?? new ();
+                ColumnWides = ColumnWides ?? new();
                 for (int i = 0; i < ColumnWides.Count; i++) columnWidth[i] = ColumnWides[i];
                 _finalColumnWides = columnWidth;
             }
@@ -313,11 +311,11 @@ public class ConsoleTable
     /// <returns></returns>
     private static string GetColumnValue<T>(T obj, string column)
     {
-        if (obj == null) return null;
+        if (obj == null) return string.Empty;
 
-        JObject o = obj as JObject ?? (JObject)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(obj));
+        JObject o = JObject.Parse(JsonConvert.SerializeObject(obj));
 
-        return o.GetValue(column).ToString();
+        return o.GetValue(column)?.ToString() + "";
     }
 
     #endregion 帮助方法

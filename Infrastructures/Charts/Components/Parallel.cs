@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 12:14
-//  function:	平行坐标系
-//  reference:	https://echarts.apache.org/en/option.html#parallel
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Elements;
 using Newtonsoft.Json;
@@ -13,6 +12,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 平行坐标系
+/// https://echarts.apache.org/en/option.html#parallel
 /// </summary>
 public class Parallel
     : GeneralComponent

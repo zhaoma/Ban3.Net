@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022
- * function:            扩展方法定义（公共）
- * reference:           
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Collections.Generic;
@@ -15,11 +13,13 @@ using Timer = System.Timers.Timer;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
-/// 
+/// <summary>
+/// Action 相关扩展
+/// </summary>
 public static partial class Helper
 {
     /// <summary>
-    /// 
+    /// 计时
     /// </summary>
     /// <param name="action"></param>
     /// <param name="message"></param>
@@ -28,6 +28,7 @@ public static partial class Helper
         string message)
     {
         var sw = new Stopwatch();
+
         sw.Start();
         action();
         sw.Stop();
@@ -36,7 +37,7 @@ public static partial class Helper
     }
 
     /// <summary>
-    /// 并发运行
+    /// 用队列并行
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="all"></param>
@@ -72,7 +73,7 @@ public static partial class Helper
     internal static SemaphoreSlim? Semaphore;
 
     /// <summary>
-    /// 实际使用中发现，信号量会增加些开销
+    /// 用信号量并行
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="all"></param>

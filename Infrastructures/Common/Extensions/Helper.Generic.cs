@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022
- * function:            扩展方法定义（泛型）
- * reference:
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Linq;
@@ -78,5 +76,27 @@ public static partial class Helper
     public static bool InstanceOf<T>(this object value)
     {
         return value is T;
+    }
+
+    /// <summary>
+    /// 用json序列化转换实体的类型
+    /// </summary>
+    /// <typeparam name="TInput"></typeparam>
+    /// <typeparam name="TOutput"></typeparam>
+    /// <param name="input"></param>
+    /// <param name="output"></param>
+    /// <returns></returns>
+    public static bool TryConvert<TInput, TOutput>(this TInput input, out TOutput? output)
+    {
+        try
+        {
+            output = input.ObjToJson().JsonToObj<TOutput>();
+
+            return true;
+        }
+        catch (Exception) { }
+
+        output = default(TOutput);
+        return false;
     }
 }

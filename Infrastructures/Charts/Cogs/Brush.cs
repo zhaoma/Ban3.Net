@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 12:08
-//  function:	区域选择组件
-//  reference:	https://echarts.apache.org/en/option.html#brush
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
@@ -15,6 +14,7 @@ namespace Ban3.Infrastructures.Charts.Cogs;
 /// 区域选择组件，用户可以选择图中一部分数据，从而便于向用户展示被选中数据，或者他们的一些统计计算结果。
 /// 目前 brush 组件支持的图表类型：scatter、bar、candlestick（parallel 本身自带刷选功能，但并非由 brush 组件来提供）。
 /// 点击 toolbox 中的按钮，能够进行『区域选择』、『清除选择』等操作。
+/// https://echarts.apache.org/en/option.html#brush
 /// </summary>
 public class Brush
 {

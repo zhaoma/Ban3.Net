@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 12:10
-//  function:	Geo.cs
-//  reference:	https://echarts.apache.org/en/option.html#geo
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Elements;
@@ -14,6 +13,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 地理坐标系组件
+/// https://echarts.apache.org/en/option.html#geo
 /// </summary>
 public class Geo
     : GeneralComponent

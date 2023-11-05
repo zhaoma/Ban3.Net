@@ -8,6 +8,7 @@
             <summary>
             极坐标系的角度轴
             The angle axis in Polar Coordinate.
+            https://echarts.apache.org/en/option.html#angleAxis
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Axes.AngleAxis.PolarIndex">
@@ -27,8 +28,26 @@
         </member>
         <member name="T:Ban3.Infrastructures.Charts.Axes.CartesianAxis">
             <summary>
-            坐标轴
+            直角坐标系 grid 中的轴
+            https://echarts.apache.org/zh/option.html#xAxis
             </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Charts.Axes.CartesianAxis.#ctor(System.Boolean,System.Boolean,System.Nullable{System.Int32})">
+            <summary>
+            
+            </summary>
+            <param name="scale"></param>
+            <param name="showSplitArea"></param>
+            <param name="gridIndex"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Charts.Axes.CartesianAxis.#ctor(Ban3.Infrastructures.Charts.Enums.AxisType,System.Object,System.Nullable{System.Int32},System.Nullable{System.Boolean})">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="data"></param>
+            <param name="gridIndex"></param>
+            <param name="show"></param>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Axes.CartesianAxis.GridIndex">
             <summary>
@@ -58,6 +77,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Axes.ParallelAxis">
             <summary>
             This component is the coordinate axis for parallel coordinate.
+            https://echarts.apache.org/en/option.html#parallelAxis
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Axes.ParallelAxis.Dim">
@@ -91,6 +111,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Axes.RadiusAxis">
             <summary>
             极坐标系的径向轴
+            https://echarts.apache.org/zh/option.html#radiusAxis.id
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Axes.RadiusAxis.PolarIndex">
@@ -100,8 +121,16 @@
         </member>
         <member name="T:Ban3.Infrastructures.Charts.Axes.SingleAxis">
             <summary>
-            单轴
+            单轴。可以被应用到散点图中展现一维数据。
+            https://echarts.apache.org/en/option.html#singleAxis
             </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Charts.Axes.SingleAxis.#ctor(Ban3.Infrastructures.Charts.Enums.AxisType,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="data"></param>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Axes.SingleAxis.Left">
             
@@ -134,6 +163,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Cogs.Animation">
             <summary>
             动画配置
+            https://echarts.apache.org/zh/option.html#graphic.elements-group.enterAnimation
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Animation.Duration">
@@ -154,6 +184,8 @@
         <member name="T:Ban3.Infrastructures.Charts.Cogs.Aria">
             <summary>
             无障碍富互联网应用规范集
+            the Accessible Rich Internet Applications Suite
+            https://echarts.apache.org/en/option.html#aria
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Aria.Enabled">
@@ -171,7 +203,9 @@
         </member>
         <member name="T:Ban3.Infrastructures.Charts.Cogs.AriaDecal">
             <summary>
+            为系列数据增加贴花纹理，作为颜色的辅助，帮助区分数据。
             使用默认贴花图案的方式非常简单，只需要开启即可
+            https://echarts.apache.org/zh/option.html#aria.decal
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.AriaDecal.Show">
@@ -183,6 +217,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Cogs.AriaLabel">
             <summary>
             开启后，会根据图表、数据、标题等情况，自动智能生成关于图表的描述，用户也可以通过配置项修改描述。
+            https://echarts.apache.org/zh/option.html#aria.label
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.AriaLabel.Enabled">
@@ -202,7 +237,8 @@
         </member>
         <member name="T:Ban3.Infrastructures.Charts.Cogs.AriaLabelGeneral">
             <summary>
-            
+            对于图表的整体性描述
+            https://echarts.apache.org/zh/option.html#aria.label.general
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.AriaLabelGeneral.WithTitle">
@@ -218,8 +254,10 @@
         </member>
         <member name="T:Ban3.Infrastructures.Charts.Cogs.AxisPointer">
             <summary>
+            坐标轴指示器
             This is the global configurations of axisPointer.
             axisPointer is a tool for displaying reference line and axis value under mouse pointer.
+            https://echarts.apache.org/en/option.html#axisPointer
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.AxisPointer.Show">
@@ -303,6 +341,7 @@
             区域选择组件，用户可以选择图中一部分数据，从而便于向用户展示被选中数据，或者他们的一些统计计算结果。
             目前 brush 组件支持的图表类型：scatter、bar、candlestick（parallel 本身自带刷选功能，但并非由 brush 组件来提供）。
             点击 toolbox 中的按钮，能够进行『区域选择』、『清除选择』等操作。
+            https://echarts.apache.org/en/option.html#brush
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Brush.Id">
@@ -418,6 +457,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Cogs.DataView">
             <summary>
             数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新。
+            https://echarts.apache.org/zh/option.html#toolbox.feature.dataView
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.DataView.Show">
@@ -486,6 +526,8 @@
         <member name="T:Ban3.Infrastructures.Charts.Cogs.DataZoom">
             <summary>
             数据区域缩放。目前只支持直角坐标系的缩放。
+            能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响
+            https://echarts.apache.org/zh/option.html#dataZoom
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.DataZoom.Title">
@@ -780,10 +822,19 @@
         <member name="T:Ban3.Infrastructures.Charts.Cogs.DataZoomInside">
             <summary>
             内置型数据区域缩放组件（dataZoomInside）
+            https://echarts.apache.org/zh/option.html#dataZoom-inside
             </summary>
         </member>
         <member name="T:Ban3.Infrastructures.Charts.Cogs.DataZoomSlider">
-            
+            <summary>
+            滑动条型数据区域缩放组件
+            https://echarts.apache.org/zh/option.html#dataZoom-slider
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.DataZoomSliderEmphasis">
+            <summary>
+            缩放图示
+            </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.DataZoomSliderEmphasis.HandleStyle">
             <summary>
@@ -883,8 +934,15 @@
             The style of control button, which includes: play button, previous button, and next button.
             </summary>
         </member>
-        <member name="T:Ban3.Infrastructures.Charts.Cogs.GraphicElement">
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.GeoRegion">
+            <summary>
             
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.GraphicElement">
+            <summary>
+            
+            </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.GraphicElement.Type">
             <summary>
@@ -1034,6 +1092,11 @@
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Handle.Opacity">
             
         </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.IconEmphasis">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.IconEmphasis.IconStyle">
             <summary>
             
@@ -1118,6 +1181,46 @@
             在饼图中常用来微调已经计算好的引导线，其它情况一般不建议设置。
             </summary>
         </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.Limit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.Media">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.Media.Query">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.Media.Option">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.MediaQuery">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.MediaQuery.MinWidth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.MediaQuery.MaxHeight">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.MediaQuery.MinAspectRatio">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Ban3.Infrastructures.Charts.Cogs.PageIcons">
             <summary>
             The icons of page buttons.
@@ -1142,6 +1245,11 @@
             Icons can be set to arbitrary vector path via 'path://' in ECharts.
             </summary>
         </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.Progress">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Progress.LineStyle">
             <summary>
             
@@ -1153,6 +1261,36 @@
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Progress.Label">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.RadarIndicator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.RadarIndicator.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.RadarIndicator.Max">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.RadarIndicator.Min">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.RadarIndicator.Color">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.Restore">
             <summary>
             
             </summary>
@@ -1247,6 +1385,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Cogs.SplitArea">
             <summary>
             坐标轴在 grid 区域中的分隔区域，默认不显示。
+            https://echarts.apache.org/zh/option.html#angleAxis.splitArea
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.SplitArea.Interval">
@@ -1267,6 +1406,11 @@
         <member name="P:Ban3.Infrastructures.Charts.Cogs.SplitArea.AreaStyle">
             <summary>
             分隔区域的样式
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.Toolbox">
+            <summary>
+            https://echarts.apache.org/en/option.html#toolbox
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Toolbox.Id">
@@ -1499,6 +1643,11 @@
             多系列提示框浮层排列顺序
             </summary>
         </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.Transform">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Transform.Type">
             
         </member>
@@ -1507,6 +1656,11 @@
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Transform.Print">
             
+        </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.Transition">
+            <summary>
+            
+            </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Cogs.Transition.Enabled">
             <summary>
@@ -1523,6 +1677,26 @@
             
             </summary>
         </member>
+        <member name="T:Ban3.Infrastructures.Charts.Cogs.TreemapLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.TreemapLevel.ItemStyle">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.TreemapLevel.UpperLabel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Charts.Cogs.TreemapLevel.Emphasis">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Ban3.Infrastructures.Charts.Components.Calendar">
             <summary>
             Calendar coordinates.
@@ -1530,6 +1704,7 @@
             by using the calendar coordinates to achieve the calendar chart, 
             as shown in the following example, 
             we can use calendar coordinates in heatmap, scatter, effectScatter, and graph.
+            https://echarts.apache.org/en/option.html#calendar
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Calendar.Range">
@@ -1546,6 +1721,11 @@
             The size of each rect of calendar coordinates, can be set to a single value or array,
             the first element is width and the second element is height.
             Support setting self-adaptation: auto, the default width and height to be 20.
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Charts.Components.DataSet">
+            <summary>
+            https://echarts.apache.org/en/option.html#dataset
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.DataSet.Id">
@@ -1602,11 +1782,13 @@
         <member name="T:Ban3.Infrastructures.Charts.Components.Geo">
             <summary>
             地理坐标系组件
+            https://echarts.apache.org/en/option.html#geo
             </summary>
         </member>
         <member name="T:Ban3.Infrastructures.Charts.Components.Graphic">
             <summary>
             graphic component enables creating graphic elements in ECharts.
+            https://echarts.apache.org/en/option.html#graphic
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Graphic.Id">
@@ -1622,6 +1804,7 @@
             Line chart, bar chart, and scatter chart (bubble chart) can be drawn in grid.
             In ECharts 2.x, there could only be one single grid component at most in a single echarts instance. 
             But in ECharts 3, there is no limitation.
+            https://echarts.apache.org/zh/option.html#grid
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Grid.ContainLabel">
@@ -1684,6 +1867,7 @@
             图例组件
             Legend component shows symbol, color and name of different series. 
             You can click legends to toggle displaying series in the chart.
+            https://echarts.apache.org/en/option.html#legend
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Legend.Type">
@@ -1953,6 +2137,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Components.Parallel">
             <summary>
             平行坐标系
+            https://echarts.apache.org/en/option.html#parallel
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Parallel.Layout">
@@ -1998,6 +2183,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Components.Polar">
             <summary>
             极坐标系
+            https://echarts.apache.org/zh/option.html#polar
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Polar.Center">
@@ -2029,6 +2215,7 @@
             雷达图坐标系与极坐标系不同的是它的每一个轴（indicator 指示器）都是一个单独的维度，
             可以通过 name、axisLine、axisTick、axisLabel、splitLine、 splitArea 
             几个配置项配置指示器坐标轴线的样式。
+            https://echarts.apache.org/en/option.html#radar
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Radar.Center">
@@ -2138,6 +2325,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Components.Series">
             <summary>
             序列
+            https://echarts.apache.org/en/option.html#series
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Series.Name">
@@ -2329,6 +2517,7 @@
         <member name="T:Ban3.Infrastructures.Charts.Components.Timeline">
             <summary>
             timeline component, which provides functions like switching and playing between multiple ECharts options.
+            https://echarts.apache.org/en/option.html#timeline
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Timeline.Type">
@@ -2470,7 +2659,14 @@
         <member name="T:Ban3.Infrastructures.Charts.Components.Title">
             <summary>
             Title component, including main title and subtitle.
+            https://echarts.apache.org/en/option.html#title
             </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Charts.Components.Title.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="text"></param>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.Title.Text">
             <summary>
@@ -2586,6 +2782,8 @@
         <member name="T:Ban3.Infrastructures.Charts.Components.VisualMap">
             <summary>
             视觉映射组件
+            https://echarts.apache.org/zh/option.html#visualMap-continuous
+            https://echarts.apache.org/zh/option.html#visualMap-piecewise
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Components.VisualMap.Type">
@@ -2742,7 +2940,7 @@
         </member>
         <member name="T:Ban3.Infrastructures.Charts.Composites.Diagram">
             <summary>
-            
+            完整的图表定义
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Charts.Composites.Diagram.Title">

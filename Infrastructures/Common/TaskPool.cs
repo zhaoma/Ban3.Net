@@ -1,4 +1,9 @@
-﻿using System;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;

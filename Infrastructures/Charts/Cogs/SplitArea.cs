@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    坐标轴在 grid 区域中的分隔区域，默认不显示
-//  reference:https://echarts.apache.org/zh/option.html#angleAxis.splitArea
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Styles;
 using Newtonsoft.Json;
@@ -11,6 +10,7 @@ namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 坐标轴在 grid 区域中的分隔区域，默认不显示。
+/// https://echarts.apache.org/zh/option.html#angleAxis.splitArea
 /// </summary>
 public class SplitArea
 {

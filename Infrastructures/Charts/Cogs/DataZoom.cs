@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @            2022/10/16 11:51
-//  function:	        用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响
-//  reference:	https://echarts.apache.org/zh/option.html#dataZoom
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Elements;
 using Ban3.Infrastructures.Charts.Styles;
@@ -15,6 +14,8 @@ namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 数据区域缩放。目前只支持直角坐标系的缩放。
+/// 能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响
+/// https://echarts.apache.org/zh/option.html#dataZoom
 /// </summary>
 public class DataZoom : GeneralComponent
 {

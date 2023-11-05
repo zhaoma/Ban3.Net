@@ -1,4 +1,9 @@
-﻿using System;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -18,7 +23,7 @@ public static partial class Helper
     {
         try
         {
-            var codeProvider = new CSharpCodeProvider();
+            using var codeProvider = new CSharpCodeProvider();
             CompilerParameters compilerParameters = new()
             {
                 GenerateExecutable = false,

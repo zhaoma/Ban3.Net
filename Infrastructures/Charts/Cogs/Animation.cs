@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    graphic.elements-group.enterAnimation/updateAnimation 动画配置
-//  reference:https://echarts.apache.org/zh/option.html#graphic.elements-group.enterAnimation
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -12,6 +11,7 @@ namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 动画配置
+/// https://echarts.apache.org/zh/option.html#graphic.elements-group.enterAnimation
 /// </summary>
 public class Animation
 {

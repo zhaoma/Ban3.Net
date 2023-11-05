@@ -1,8 +1,16 @@
-﻿using System;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System;
 using System.Reflection;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
+/// <summary>
+/// 程序集扩展
+/// </summary>
 public static partial class Helper
 {
     /// 

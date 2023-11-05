@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022
- * function:            扩展方法定义（变量类型转换）
- * reference:
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Globalization;
@@ -231,7 +229,7 @@ public static partial class Helper
     {
         DateTime weekend = day;
         while (weekend.DayOfWeek != DayOfWeek.Saturday)
-            weekend = weekend.AddDays(1.0);
+            weekend = weekend.AddDays(1);
         return weekend;
     }
 

@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    布局方式
-//  reference:https://echarts.apache.org/zh/option.html#parallel.layout
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using System.ComponentModel;
 using System.Runtime.Serialization;
@@ -10,7 +9,8 @@ using System.Runtime.Serialization;
 namespace Ban3.Infrastructures.Charts.Enums;
 
 /// <summary>
-/// 
+/// 布局方式
+/// https://echarts.apache.org/zh/option.html#parallel.layout
 /// </summary>
 public enum Layout
 {

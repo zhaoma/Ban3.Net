@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022
- * function:            扩展方法定义（公共）
- * reference:           
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using log4net;
 using System;
@@ -12,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
-/// 
+/// <summary>
+/// 延时
+/// </summary>
 public static partial class Helper
 {
     static readonly ILog Logger = LogManager.GetLogger(typeof(Helper));

@@ -1,4 +1,9 @@
-﻿using Ban3.Infrastructures.Charts.Components;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Charts.Components;
 using Ban3.Infrastructures.Charts.Entries;
 using Ban3.Infrastructures.Charts.Styles;
 using System.Collections.Generic;

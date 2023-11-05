@@ -1,4 +1,8 @@
-﻿
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
 using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.Common.Models;

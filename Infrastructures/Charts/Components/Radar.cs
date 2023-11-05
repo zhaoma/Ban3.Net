@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 11:51
-//  function:	Radar.cs
-//  reference:	https://echarts.apache.org/en/option.html#radar
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Elements;
@@ -19,6 +18,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 /// 雷达图坐标系与极坐标系不同的是它的每一个轴（indicator 指示器）都是一个单独的维度，
 /// 可以通过 name、axisLine、axisTick、axisLabel、splitLine、 splitArea 
 /// 几个配置项配置指示器坐标轴线的样式。
+/// https://echarts.apache.org/en/option.html#radar
 /// </summary>
 public class Radar
     : GeneralComponent

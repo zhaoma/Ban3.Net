@@ -1,4 +1,9 @@
-﻿namespace Ban3.Infrastructures.Charts.Elements;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+namespace Ban3.Infrastructures.Charts.Elements;
 
 public class GeneralComponent
     : IHasIdentity, IHasPosition

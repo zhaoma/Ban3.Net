@@ -1,11 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022
- * function:            表格显示样式信息
- * reference:
- * —————————————————————————————————————————————————————————————————————————————
- */
-
-using System;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 namespace Ban3.Infrastructures.Consoles.Entries;
 
@@ -15,6 +11,12 @@ namespace Ban3.Infrastructures.Consoles.Entries;
 /// </summary>
 public class StyleInfo
 {
+    /// <summary>
+    /// 样式（线条）
+    /// </summary>
+    /// <param name="delimiterStr"></param>
+    /// <param name="rowHasBorder"></param>
+    /// <param name="angleStr"></param>
     public StyleInfo(string delimiterStr = "|", bool rowHasBorder = true, string angleStr = "-")
     {
         DelimiterStr = delimiterStr;

@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022-09-01 08:00
- * function:            图例组件
- * reference:           https://echarts.apache.org/en/option.html#legend
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
@@ -20,6 +18,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 /// 图例组件
 /// Legend component shows symbol, color and name of different series. 
 /// You can click legends to toggle displaying series in the chart.
+/// https://echarts.apache.org/en/option.html#legend
 /// </summary>
 public class Legend
     : GeneralComponent, IHasBorder, IHasShadow

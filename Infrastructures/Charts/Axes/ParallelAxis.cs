@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 12:27
-//  function:	ParallelAxis.cs
-//  reference:	https://echarts.apache.org/en/option.html#parallelAxis
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Elements;
 using Ban3.Infrastructures.Charts.Styles;
@@ -12,6 +11,7 @@ namespace Ban3.Infrastructures.Charts.Axes;
 
 /// <summary>
 /// This component is the coordinate axis for parallel coordinate.
+/// https://echarts.apache.org/en/option.html#parallelAxis
 /// </summary>
 public class ParallelAxis
     : GeneralAxis

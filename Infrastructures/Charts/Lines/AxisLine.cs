@@ -1,17 +1,15 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022-09-01 08:00
- * function:            坐标轴轴线
- * reference:https://echarts.apache.org/zh/option.html#angleAxis.axisLine
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Elements;
-using ECharts = Ban3.Infrastructures.Charts.Enums;
 
 namespace Ban3.Infrastructures.Charts.Lines;
 
 /// <summary>
 /// 轴线
+/// https://echarts.apache.org/zh/option.html#angleAxis.axisLine
 /// </summary>
 public class AxisLine
     : GeneralLine, IHasSymbol

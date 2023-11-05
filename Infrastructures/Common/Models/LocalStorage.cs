@@ -1,4 +1,9 @@
-﻿namespace Ban3.Infrastructures.Common.Models;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+namespace Ban3.Infrastructures.Common.Models;
 
 /// <summary>
 /// 本地存储设置

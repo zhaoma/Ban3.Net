@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022-09-01 08:00
- * function:            Charts序列元素
- * reference:           https://echarts.apache.org/en/option.html#series
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
 using Ban3.Infrastructures.Charts.Cogs;
@@ -19,6 +17,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 序列
+/// https://echarts.apache.org/en/option.html#series
 /// </summary>
 public class Series
     : GeneralComponent, ISeries, IHasSymbol

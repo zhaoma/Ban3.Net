@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    
-//  reference:
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
 using Ban3.Infrastructures.Charts.Axes;
@@ -14,7 +13,7 @@ using ECharts = Ban3.Infrastructures.Charts.Enums;
 namespace Ban3.Infrastructures.Charts.Composites;
 
 /// <summary>
-/// 
+/// 完整的图表定义
 /// </summary>
 public class Diagram
     : Elements.IHasAnimation

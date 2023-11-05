@@ -1,4 +1,9 @@
-﻿using Newtonsoft.Json.Converters;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using Newtonsoft.Json.Converters;
 using System;
 using Newtonsoft.Json;
 

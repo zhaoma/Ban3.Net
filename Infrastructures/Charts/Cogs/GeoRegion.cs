@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @        2022/10/16 11:50
-//  function:	    
-//  reference:
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Styles;
 using Ban3.Infrastructures.Charts.Labels;
@@ -10,9 +9,11 @@ using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Charts.Cogs;
 
+/// <summary>
+/// 
+/// </summary>
 public class GeoRegion
 {
-
     [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
     public string? Name { get; set; }
 

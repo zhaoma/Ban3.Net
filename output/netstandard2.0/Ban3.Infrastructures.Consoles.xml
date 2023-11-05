@@ -34,7 +34,7 @@
         </member>
         <member name="T:Ban3.Infrastructures.Consoles.Entries.ConsoleTable">
             <summary>
-            
+            绘制控制台表格
             </summary>
         </member>
         <member name="P:Ban3.Infrastructures.Consoles.Entries.ConsoleTable.TitleString">
@@ -175,6 +175,14 @@
             通过 Format 获取到的
             </summary>
         </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Entries.StyleInfo.#ctor(System.String,System.Boolean,System.String)">
+            <summary>
+            样式（线条）
+            </summary>
+            <param name="delimiterStr"></param>
+            <param name="rowHasBorder"></param>
+            <param name="angleStr"></param>
+        </member>
         <member name="P:Ban3.Infrastructures.Consoles.Entries.StyleInfo.DelimiterStr">
             <summary>
             每一列数据之间的间隔字符串
@@ -189,6 +197,17 @@
             <summary>
             边角字符串
             </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Consoles.Enums.Alignment">
+            <summary>
+            对齐方式
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Consoles.Enums.Alignment.Left">
+            
+        </member>
+        <member name="F:Ban3.Infrastructures.Consoles.Enums.Alignment.Right">
+            
         </member>
         <member name="T:Ban3.Infrastructures.Consoles.Enums.TableStyle">
             <summary>
@@ -213,6 +232,11 @@
         <member name="F:Ban3.Infrastructures.Consoles.Enums.TableStyle.Minimal">
             <summary>
             最简格式的表格
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Consoles.Helper">
+            <summary>
+            控制台扩展方法
             </summary>
         </member>
         <member name="M:Ban3.Infrastructures.Consoles.Helper.WriteColorLine(System.String,System.ConsoleColor)">
@@ -249,6 +273,19 @@
             </summary>
             <param name="str">待打印的字符串</param>
             <param name="color">想要打印的颜色</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Helper.ConsoleTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            实体集合输出ConsoleTable
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="ts"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Consoles.Utils.Parser">
+            <summary>
+            ConsoleTable 辅助项目（宽度计算以及填充）
+            </summary>
         </member>
         <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.GetColumnWides(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{System.String[]})">
             <summary>
@@ -316,6 +353,13 @@
             获取中文文本
             </summary>
             <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Consoles.Utils.Parser.ObjToString(System.Object)">
+            <summary>
+            处理空值
+            </summary>
+            <param name="o"></param>
             <returns></returns>
         </member>
     </members>

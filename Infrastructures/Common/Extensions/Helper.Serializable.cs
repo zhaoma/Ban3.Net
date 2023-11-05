@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022
- * function:            扩展方法定义（序列化）
- * reference:
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.IO;
@@ -13,6 +11,7 @@ using System.Xml;
 using System.Xml.Serialization;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
@@ -21,6 +20,23 @@ namespace Ban3.Infrastructures.Common.Extensions;
 /// </summary>
 public static partial class Helper
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public static JToken JsonToken(this object? obj) 
+        => JToken.Parse(obj.ObjToJson());
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public static object? JsonValue(this object? obj, string key)
+        => obj.JsonToken().GetPropertyValue(key);
+
     /// <summary>
     /// 命名约束
     /// </summary>

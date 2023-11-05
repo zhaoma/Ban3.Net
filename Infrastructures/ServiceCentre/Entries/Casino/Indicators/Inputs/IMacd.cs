@@ -2,7 +2,7 @@
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
-public interface IMacd
+public interface IMacd : IParameter
 {
     [JsonProperty("short")]
     int SHORT { get; set; }

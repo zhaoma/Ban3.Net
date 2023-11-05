@@ -11,12 +11,12 @@
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <DebugType>embedded</DebugType>
         <Title>Ban3.Infrastructures.Common</Title>
-        <Version>1.0.15</Version>
+        <Version>1.2.2</Version>
         <Authors>zhaoma</Authors>
         <Company>BAN3</Company>
         <Description>Common,Extensions,Indicators and Echarts</Description>
         <PackageIcon>icon.png</PackageIcon>
-        <AssemblyVersion>1.0.0.15</AssemblyVersion>
+        <AssemblyVersion>1.2.1.2</AssemblyVersion>
         <ApplicationIcon>favicon.ico</ApplicationIcon>
         <PackageReadmeFile>readme.md</PackageReadmeFile>
         <Configurations>Release;Debug</Configurations>
@@ -60,8 +60,5 @@
         <PackageReference Include="System.CodeDom" Version="7.0.0" />
         <PackageReference Include="System.IO" Version="4.3.0" />
         <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
-    </ItemGroup>
-    <ItemGroup>
-      <Compile Include="Extensions\Helper.Arithmetic.cs" />
     </ItemGroup>
 </Project>

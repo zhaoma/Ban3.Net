@@ -1,4 +1,8 @@
-﻿using Newtonsoft.Json.Linq;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
 using System.ComponentModel;
 using System.Runtime.Serialization;
 

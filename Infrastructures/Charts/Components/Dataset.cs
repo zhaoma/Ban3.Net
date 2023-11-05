@@ -1,14 +1,16 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 13:25
-//  function:	Dataset.cs
-//  reference:	https://echarts.apache.org/en/option.html#dataset
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Charts.Components;
 
+/// <summary>
+/// https://echarts.apache.org/en/option.html#dataset
+/// </summary>
 public class DataSet
 {
     /// 

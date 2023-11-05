@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Charts.Entries;

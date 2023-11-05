@@ -1,8 +1,10 @@
-﻿using System;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
-using Newtonsoft.Json.Linq;
-using System.Security.Cryptography;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 

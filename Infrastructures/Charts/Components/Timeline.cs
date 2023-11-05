@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 13:22
-//  function:	Timeline.cs
-//  reference:	https://echarts.apache.org/en/option.html#timeline
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Elements;
@@ -16,6 +15,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// timeline component, which provides functions like switching and playing between multiple ECharts options.
+/// https://echarts.apache.org/en/option.html#timeline
 /// </summary>
 public class Timeline
     : GeneralComponent, IHasSymbol

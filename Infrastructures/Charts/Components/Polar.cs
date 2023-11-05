@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 11:50
-//  function:	Polar.cs
-//  reference:	https://echarts.apache.org/zh/option.html#polar
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
 using Ban3.Infrastructures.Charts.Elements;
@@ -12,6 +11,7 @@ namespace Ban3.Infrastructures.Charts.Components;
 
 /// <summary>
 /// 极坐标系
+/// https://echarts.apache.org/zh/option.html#polar
 /// </summary>
 public class Polar
     : GeneralComponent

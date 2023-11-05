@@ -1,8 +1,7 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 13:26
-//  function:	the Accessible Rich Internet Applications Suite
-//  reference:	https://echarts.apache.org/en/option.html#aria
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
 
@@ -10,6 +9,8 @@ namespace Ban3.Infrastructures.Charts.Cogs;
 
 /// <summary>
 /// 无障碍富互联网应用规范集
+/// the Accessible Rich Internet Applications Suite
+/// https://echarts.apache.org/en/option.html#aria
 /// </summary>
 public class Aria
 {

@@ -1,4 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using Newtonsoft.Json;
 using System;
 
 namespace Ban3.Infrastructures.Charts.Cogs;

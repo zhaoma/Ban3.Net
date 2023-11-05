@@ -1,4 +1,9 @@
-﻿using Rougamo;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using Rougamo;
 using Rougamo.Context;
 using System.Diagnostics;
 using Ban3.Infrastructures.Common.Extensions;

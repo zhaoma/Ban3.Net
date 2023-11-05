@@ -1,9 +1,7 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma@hotmail.com   2022-09-01 08:00
- * function:            直角坐标系 grid 中的轴
- * reference:https://echarts.apache.org/zh/option.html#xAxis
- * —————————————————————————————————————————————————————————————————————————————
- */
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Charts.Cogs;
 using Newtonsoft.Json;
@@ -14,15 +12,18 @@ using ECharts = Ban3.Infrastructures.Charts.Enums;
 namespace Ban3.Infrastructures.Charts.Axes;
 
 /// <summary>
-/// 坐标轴
+/// 直角坐标系 grid 中的轴
+/// https://echarts.apache.org/zh/option.html#xAxis
 /// </summary>
 public class CartesianAxis
     : GeneralAxis
 {
-    public CartesianAxis()
-    {
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="scale"></param>
+    /// <param name="showSplitArea"></param>
+    /// <param name="gridIndex"></param>
     public CartesianAxis(bool scale, bool showSplitArea, int? gridIndex = null)
     {
         Scale = scale;
@@ -30,6 +31,13 @@ public class CartesianAxis
         GridIndex = gridIndex;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="data"></param>
+    /// <param name="gridIndex"></param>
+    /// <param name="show"></param>
     public CartesianAxis(ECharts.AxisType type, object? data, int? gridIndex, bool? show)
     {
         Type = type;

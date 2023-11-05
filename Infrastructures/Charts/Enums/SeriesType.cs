@@ -1,15 +1,15 @@
-﻿//  ————————————————————————————————————————————————————————————————————————————
-//  zhaoma @ 2022/10/16 13:34
-//  function:	SeriesType.cs
-//  reference:	https://echarts.apache.org/zh/option.html#series
-//  ————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+—
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace Ban3.Infrastructures.Charts.Enums;
 
 /// <summary>
-/// 
+/// https://echarts.apache.org/zh/option.html#series
 /// </summary>
 public enum SeriesType
 {
