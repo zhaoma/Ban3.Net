@@ -1,8 +1,12 @@
-﻿using System;
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Kalendar
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Kalendar;
+
+public interface ICalendarReminder
 {
-	public interface ICalendarReminder
-	{
-	}
+
 }
 

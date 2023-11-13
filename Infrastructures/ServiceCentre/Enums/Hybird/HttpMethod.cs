@@ -1,4 +1,8 @@
-﻿using System;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
 using System.ComponentModel;
 
 namespace Ban3.Infrastructures.ServiceCentre.Enums.Hybird;

@@ -1,15 +1,21 @@
-﻿using System.Collections.Generic;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
-public interface IEvaluation<T>
+public interface IEvaluation<in T>
 {
     /// <summary>
     /// 评判指标
     /// </summary>
-    /// <param name="score"></param>
-    /// <param name="keys"></param>
+    /// <param name="previousValue">上期值</param>
+    /// <param name="score">得分</param>
+    /// <param name="keys">输出特征</param>
     /// <returns></returns>
     bool Judge(T previousValue, out int score, out IEnumerable<string> keys);
 

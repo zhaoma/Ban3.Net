@@ -1,4 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;

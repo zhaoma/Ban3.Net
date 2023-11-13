@@ -1,4 +1,8 @@
-﻿using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;

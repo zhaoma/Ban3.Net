@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
 using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;

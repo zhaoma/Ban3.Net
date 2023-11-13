@@ -1,4 +1,9 @@
-﻿using System.ComponentModel;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System.ComponentModel;
 
 namespace Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
@@ -7,21 +12,15 @@ namespace Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 /// </summary>
 public enum NotionIs
 {
-    /// <summary>
-    /// 概念
-    /// </summary>
+    /// <summary />
     [Description("概念")]
     Concept = 1,
 
-    /// <summary>
-    /// 地区
-    /// </summary>
+    /// <summary />
     [Description("地区")]
     Region = 3,
 
-    /// <summary>
-    /// 行业
-    /// </summary>
+    /// <summary />
     [Description("行业")]
     Industry = 4
 }

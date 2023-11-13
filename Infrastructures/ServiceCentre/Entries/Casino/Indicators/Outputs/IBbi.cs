@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 
 /// <summary>
-/// 多空指标,Bull And Bear lndex
+/// 多空指标,Bull And Bear Index
 /// </summary>
 public interface IBbi : IStockRecord, IEvaluation<IEne>
 {

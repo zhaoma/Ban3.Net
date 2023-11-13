@@ -1,42 +1,38 @@
-﻿using System.ComponentModel;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System.ComponentModel;
 
 namespace Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
+/// <summary>
+/// 交易所
+/// </summary>
 public enum BoardIs
 {
-    /// <summary>
-    /// 深证A股
-    /// </summary>
+    /// <summary />
     [Description("深证A股")]
     SZA = 11,
 
-    /// <summary>
-    /// 中小板
-    /// </summary>
+    /// <summary />
     [Description("中小板")]
     SZZ = 12,
 
-    /// <summary>
-    /// 创业板
-    /// </summary>
+    /// <summary />
     [Description("创业板")]
     SZC = 13,
 
-    /// <summary>
-    /// 上证A股
-    /// </summary>
+    /// <summary />
     [Description("上证A股")]
     SHA = 21,
 
-    /// <summary>
-    /// 科创板
-    /// </summary>
+    /// <summary />
     [Description("科创板")]
     SHK = 22,
 
-    /// <summary>
-    /// 北交所/新三板
-    /// </summary>
+    /// <summary />
     [Description("其它")]
     Other = 10
 }

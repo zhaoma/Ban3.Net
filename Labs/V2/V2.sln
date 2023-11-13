@@ -5,21 +5,19 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructures", "Infrastructures", "{B3D7869F-679A-4F46-82CD-62C8AB1B363B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceCentre", "..\..\Infrastructures\ServiceCentre\ServiceCentre.csproj", "{87BABC9F-122D-4ED1-AD52-F9AA51B9D4F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceCentre", "..\..\Infrastructures\ServiceCentre\ServiceCentre.csproj", "{87BABC9F-122D-4ED1-AD52-F9AA51B9D4F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\..\Infrastructures\Common\Common.csproj", "{D67306D2-301A-4E87-A957-FEF2F15A9DB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\..\Infrastructures\Common\Common.csproj", "{D67306D2-301A-4E87-A957-FEF2F15A9DB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Charts", "..\..\Infrastructures\Charts\Charts.csproj", "{2F49B04A-8105-4B42-BBD5-B144AD85C2F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Charts", "..\..\Infrastructures\Charts\Charts.csproj", "{2F49B04A-8105-4B42-BBD5-B144AD85C2F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependecyInjection", "..\..\Infrastructures\DependecyInjection\DependecyInjection.csproj", "{7908A8DC-D0D6-4E20-9CF4-AA99FD144DEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependecyInjection", "..\..\Infrastructures\DependecyInjection\DependecyInjection.csproj", "{7908A8DC-D0D6-4E20-9CF4-AA99FD144DEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneralImpl", "..\..\Infrastructures\GeneralImpl\GeneralImpl.csproj", "{0E852853-5D64-40A4-9ABB-9B3685A62593}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeneralImpl", "..\..\Infrastructures\GeneralImpl\GeneralImpl.csproj", "{0E852853-5D64-40A4-9ABB-9B3685A62593}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAutomator", "..\..\Infrastructures\WebAutomator\WebAutomator.csproj", "{CE73D392-53A0-41BF-9C90-64F187193B16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAutomator", "..\..\Infrastructures\WebAutomator\WebAutomator.csproj", "{CE73D392-53A0-41BF-9C90-64F187193B16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abacus", "..\..\Infrastructures\Abacus\Abacus.csproj", "{11F65646-79EE-4F49-8B26-CFD64874F4A0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indicators", "..\..\Infrastructures\Indicators\Indicators.csproj", "{EEF501FC-ABC7-4AE2-8CC1-930506501212}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abacus", "..\..\Infrastructures\Abacus\Abacus.csproj", "{11F65646-79EE-4F49-8B26-CFD64874F4A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,10 +53,6 @@ Global
 		{11F65646-79EE-4F49-8B26-CFD64874F4A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11F65646-79EE-4F49-8B26-CFD64874F4A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11F65646-79EE-4F49-8B26-CFD64874F4A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEF501FC-ABC7-4AE2-8CC1-930506501212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEF501FC-ABC7-4AE2-8CC1-930506501212}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEF501FC-ABC7-4AE2-8CC1-930506501212}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEF501FC-ABC7-4AE2-8CC1-930506501212}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,7 +65,6 @@ Global
 		{0E852853-5D64-40A4-9ABB-9B3685A62593} = {B3D7869F-679A-4F46-82CD-62C8AB1B363B}
 		{CE73D392-53A0-41BF-9C90-64F187193B16} = {B3D7869F-679A-4F46-82CD-62C8AB1B363B}
 		{11F65646-79EE-4F49-8B26-CFD64874F4A0} = {B3D7869F-679A-4F46-82CD-62C8AB1B363B}
-		{EEF501FC-ABC7-4AE2-8CC1-930506501212} = {B3D7869F-679A-4F46-82CD-62C8AB1B363B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8225F0FD-77EF-415F-875C-C81BBC20BAFA}

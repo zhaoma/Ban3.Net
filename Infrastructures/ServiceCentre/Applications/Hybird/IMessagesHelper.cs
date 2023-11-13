@@ -1,4 +1,9 @@
-﻿using System;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 

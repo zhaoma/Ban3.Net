@@ -1,6 +1,21 @@
-﻿/* —————————————————————————————————————————————————————————————————————————————
- * zhaoma @ 2022 :
- * 跟踪拦截器
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using Ban3.Infrastructures.Common.Extensions;
+using Castle.DynamicProxy;
+using log4net;
+
+namespace Ban3.Infrastructures.DependecyInjection.Interceptors;
+
+/* —————————————————————————————————————————————————————————————————————————————
  * https://github.com/castleproject/Core
  * public interface IInvocation
     {
@@ -23,74 +38,63 @@
  * —————————————————————————————————————————————————————————————————————————————
  */
 
-using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Ban3.Infrastructures.Common.Extensions;
-using Castle.DynamicProxy;
-using log4net;
-
-namespace Ban3.Infrastructures.DependecyInjection.Interceptors
+/// <summary>
+/// 跟踪拦截器
+/// </summary>
+public class TraceInterceptor
+    : IInterceptor
 {
+    static ILog _logger = LogManager.GetLogger(typeof(TraceInterceptor));
+
     /// <summary>
-    /// 跟踪拦截器
+    /// 
     /// </summary>
-    public class TraceInterceptor
-            : IInterceptor
+    /// <param name="invocation"></param>
+    public void Intercept(IInvocation invocation)
     {
-        static ILog _logger = LogManager.GetLogger(typeof(TraceInterceptor));
-        
-	    /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="invocation"></param>
-        public void Intercept(IInvocation invocation)
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
+
+        _logger.Debug($"calling : '{invocation.Method.Name}' arguments : {invocation.Arguments.ObjToJson()}...");
+
+        invocation.Proceed();
+
+        var returnType = invocation.Method.ReturnType;
+
+        if (invocation.Method.IsAsyncMethod())
         {
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            _logger.Debug($"calling : '{invocation.Method.Name}' arguments : {invocation.Arguments.ObjToJson()}...");
-
-            invocation.Proceed();
-
-            var returnType = invocation.Method.ReturnType;
-
-            if (invocation.Method.IsAsyncMethod())
+            if (returnType != null && returnType == typeof(Task))
             {
-                if (returnType != null && returnType == typeof(Task))
+                Func<Task> res = async () => await (Task)invocation.ReturnValue;
+
+                invocation.ReturnValue = res();
+            }
+            else
+            {
+                var reflectedType = invocation.Method.ReflectedType; //获取返回类型
+
+                if (reflectedType != null)
                 {
-                    Func<Task> res = async () => await (Task)invocation.ReturnValue;
+                    var resultType = returnType!.GetGenericArguments()[0];
 
-                    invocation.ReturnValue = res();
-                }
-                else
-                {
-                    var reflectedType = invocation.Method.ReflectedType;//获取返回类型
+                    var methodInfo = typeof(TraceInterceptor)
+                        .GetMethod("HandleAsync", BindingFlags.Instance | BindingFlags.Public);
 
-                    if (reflectedType != null)
-                    {
-                        var resultType = returnType!.GetGenericArguments()[0];
-
-                        var methodInfo = typeof(TraceInterceptor)
-                            .GetMethod("HandleAsync", BindingFlags.Instance | BindingFlags.Public);
-
-                        var mi = methodInfo.MakeGenericMethod(resultType);
-                        invocation.ReturnValue = mi.Invoke(this, new[] { invocation.ReturnValue });
-                    }
+                    var mi = methodInfo.MakeGenericMethod(resultType);
+                    invocation.ReturnValue = mi.Invoke(this, new[] { invocation.ReturnValue });
                 }
             }
-
-            stopwatch.Stop();
-            _logger.Debug($"execute finished {stopwatch.ElapsedMilliseconds} ms , return ：{invocation.ReturnValue.ObjToJson()}");
         }
 
-        async Task<T> HandleAsync<T>(Task<T> task)
-        {
-            var t = await task;
+        stopwatch.Stop();
+        _logger.Debug(
+            $"execute finished {stopwatch.ElapsedMilliseconds} ms , return ：{invocation.ReturnValue.ObjToJson()}");
+    }
 
-            return t;
-        }
+    async Task<T> HandleAsync<T>(Task<T> task)
+    {
+        var t = await task;
+
+        return t;
     }
 }

@@ -1,4 +1,9 @@
-﻿using System;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
@@ -13,7 +18,14 @@ public interface IStockCodesCollector
     /// <summary>
     /// 标的采集
     /// </summary>
-    /// <param name="stocks">标的集合</param>
+    /// <param name="action">标的集合</param>
     /// <returns></returns>
-    Task<bool> TryFetchStocks(Action<IEnumerable<IStock>> stocks);
+    Task<bool> TryFetchStocks(Action<IEnumerable<IStock>> action);
+
+    /// <summary>
+    /// 提供标的
+    /// </summary>
+    /// <param name="data"></param>
+    /// <returns></returns>
+    Task<bool> TryLoad(out IEnumerable<IStock> data);
 }

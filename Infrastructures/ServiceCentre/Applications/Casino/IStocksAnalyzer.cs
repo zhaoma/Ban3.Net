@@ -1,4 +1,9 @@
-﻿using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using System.Collections.Generic;

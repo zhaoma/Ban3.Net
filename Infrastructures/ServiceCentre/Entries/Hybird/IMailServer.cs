@@ -1,4 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 

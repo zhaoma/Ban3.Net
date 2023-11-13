@@ -1,4 +1,9 @@
-﻿using System.IO;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System.IO;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
@@ -23,9 +28,12 @@ public interface IInternetData
     string StringContent { get; set; }
 
     /// <summary>
-    /// 
+    /// 媒体类型
     /// </summary>
     string ContentMediaType { get; set; }
 
+    /// <summary>
+    /// 编码方式
+    /// </summary>
     string ContentEncoding { get; set; }
 }

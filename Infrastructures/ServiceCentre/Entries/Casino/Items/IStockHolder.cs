@@ -1,4 +1,9 @@
-﻿using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

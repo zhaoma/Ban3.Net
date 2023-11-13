@@ -1,4 +1,9 @@
-﻿using System.ComponentModel;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+using System.ComponentModel;
 
 namespace Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
 
@@ -7,9 +12,11 @@ namespace Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
 /// </summary>
 public enum HttpStatus
 {
+    /// <summary />
     [Description("OK")]
     Ok,
 
+    /// <summary />
     [Description("ERROR")]
     Error
 }

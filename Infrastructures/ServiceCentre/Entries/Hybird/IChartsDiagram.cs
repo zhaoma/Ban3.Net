@@ -1,11 +1,15 @@
-﻿namespace Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2023
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
 /// <summary>
 /// 
 /// </summary>
 public interface IChartsDiagram
 {
-
     /// <summary>
     /// https://echarts.apache.org/zh/index.html
     /// </summary>
