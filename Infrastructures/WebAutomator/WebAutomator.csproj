@@ -28,8 +28,28 @@
             .allowedextension
         </AllowedReferenceRelatedFileExtensions>
     </PropertyGroup>
+  
+    <ItemGroup>
+      <None Remove="favicon.ico" />
+    </ItemGroup>
+  
+    <ItemGroup>
+      <Content Include="favicon.ico" />
+    </ItemGroup>
 
-  <ItemGroup>
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
     <PackageReference Include="Selenium.Support" Version="4.14.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="118.0.5993.7000" />
   </ItemGroup>

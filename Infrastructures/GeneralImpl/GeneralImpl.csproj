@@ -30,24 +30,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Applications\" />
-      <None Remove="Applications\Casino\" />
-      <None Remove="Entries\" />
-      <None Remove="Entries\Hybird\" />
-      <None Remove="Applications\Hybird\" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Applications\" />
-      <Folder Include="Applications\Casino\" />
-      <Folder Include="Entries\" />
-      <Folder Include="Entries\Hybird\" />
-      <Folder Include="Applications\Hybird\" />
-    </ItemGroup>
-    <ItemGroup>
-      <ProjectReference Include="..\ServiceCentre\ServiceCentre.csproj" />
+        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+        <ProjectReference Include="..\ServiceCentre\ServiceCentre.csproj" />
     </ItemGroup>
 </Project>

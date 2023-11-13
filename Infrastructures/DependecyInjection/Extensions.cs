@@ -11,7 +11,6 @@ using System.Runtime.Loader;
 
 using Autofac;
 using Autofac.Configuration;
-using Autofac.log4net;
 using Autofac.Extensions.DependencyInjection;
 
 using Ban3.Infrastructures.Interfaces.ServiceTags;
@@ -109,23 +108,7 @@ namespace Ban3.Infrastructures.DependecyInjection
         }
 
         #endregion
-
-        #region Log4net
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="container"></param>
-        public static void UseLog4net(this ContainerBuilder container)
-        {
-            var log4netModule = new Log4NetModule(Log4netConfigFile, true);
-
-            container.RegisterModule(log4netModule);
-        }
-
-        #endregion
-
+        
         const string AutofacConfigFile = "Config/autofac.json";
-        const string Log4netConfigFile = "Config/log4net.config";
     }
 }

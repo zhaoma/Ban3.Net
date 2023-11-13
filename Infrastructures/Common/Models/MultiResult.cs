@@ -23,12 +23,12 @@ public class MultiResult<T>
     /// </summary>
     /// <param name="data"></param>
     /// <param name="recordCount"></param>
-    public MultiResult( List<T>? data, int? recordCount=null)
+    public MultiResult(List<T>? data, int? recordCount = null)
     {
-        RecordCount =recordCount ?? data?.Count;
+        RecordCount = recordCount ?? data?.Count;
         Data = data;
     }
-    
+
     /// <summary>
     /// 记录总数
     /// </summary>

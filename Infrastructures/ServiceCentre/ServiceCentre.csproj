@@ -30,24 +30,22 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Entries\Kalendar\" />
-      <Folder Include="Enums\Casino\" />
-      <Folder Include="Entries\Casino\Indicators\" />
-      <Folder Include="Entries\Casino\Indicators\Inputs\" />
-      <Folder Include="Entries\Casino\Indicators\Outputs\" />
-      <Folder Include="Entries\Casino\Items\" />
-    </ItemGroup>
-    <ItemGroup>
-      <None Remove="Entries\Kalendar\" />
-      <None Remove="Applications\Kalendar\" />
-      <None Remove="Enums\Casino\" />
-      <None Remove="Entries\Casino\Indicators\" />
-      <None Remove="Entries\Casino\Indicators\Inputs\" />
-      <None Remove="Entries\Casino\Indicators\Outputs\" />
-      <None Remove="Entries\Casino\Items\" />
+      <Folder Include="ServiceTags\" />
     </ItemGroup>
 </Project>

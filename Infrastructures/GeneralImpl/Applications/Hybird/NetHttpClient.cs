@@ -17,8 +17,8 @@ public class NetHttpClient:OneImplement,IInternetsHelper
         IInternetResource internetResource,
         out IInternetResponse internetResponse)
     {
-        await 
-        return true;
+        internetResponse = null;
+        return Task.FromResult( true);
     }
 }
 
