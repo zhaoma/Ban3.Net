@@ -42,10 +42,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+      <Folder Include="ServiceTags\" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ServiceTags\" />
+      <PackageReference Include="log4net" Version="2.0.15" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 </Project>

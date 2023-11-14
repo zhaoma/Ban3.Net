@@ -43,6 +43,7 @@
 
     <ItemGroup>
         <PackageReference Include="Ban3.Infrastructures.Common" Version="1.0.15" />
+        <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
         <ProjectReference Include="..\ServiceCentre\ServiceCentre.csproj" />
     </ItemGroup>
 </Project>

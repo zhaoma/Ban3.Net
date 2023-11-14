@@ -27,6 +27,7 @@ public interface IStocksAnalyzer
     /// <summary>
     /// 用特征值生成
     /// </summary>
+    /// <param name="stockFilter"></param>
     /// <param name="stockFeatures"></param>
     /// <param name="stockSuggests"></param>
     /// <returns></returns>

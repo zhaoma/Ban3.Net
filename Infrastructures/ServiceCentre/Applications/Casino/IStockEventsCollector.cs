@@ -21,7 +21,7 @@ public interface IStockEventsCollector
     /// 标的事件数据
     /// </summary>
     /// <param name="stock">标的</param>
-    /// <param name="action">事件集合</param>
+    /// <param name="action">处理动作</param>
     /// <returns></returns>
     Task<bool> TryFetchEvents( IStock stock, Action<IStockData<IStockEvent>> action );
 

@@ -12,6 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.GeneralImpl.Entries.Hybird;
+using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
+
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 
 public class CollectStockCodeFromTushare : OneImplement, IStockCodesCollector
@@ -25,8 +29,24 @@ public class CollectStockCodeFromTushare : OneImplement, IStockCodesCollector
 
     public async Task<bool> TryFetchStocks( Action<IEnumerable<IStock>> action )
     {
-        //await _internetsHelper.TryRequest()
+        var host = new InternetHost
+        {
+            AuthenticationType = AuthenticationType.None,
+            BaseUrl = @"http://api.tushare.pro"
+        };
 
-        return true;
+        var resource = new InternetResource
+        {
+            Url = @""
+        };
+
+        return await _internetsHelper.TryRequest(
+            host,
+            resource,
+            callback =>
+            {
+                var data = callback.Response.StringContent.JsonToObj<IEnumerable<IStock>>();
+                action( data );
+            } );
     }
 }

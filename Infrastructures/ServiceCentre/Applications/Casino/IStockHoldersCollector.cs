@@ -3,6 +3,9 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using System;
+
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 using System.Collections.Generic;
@@ -18,9 +21,9 @@ public interface IStockHoldersCollector
     /// <summary>
     /// 准备大股东数据
     /// </summary>
-    /// <param name="action">大股东数据</param>
+    /// <param name="action">处理动作</param>
     /// <returns></returns>
-    Task<bool> TryFetchHolders( out IEnumerable<IStockHolder> action );
+    Task<bool> TryFetchHolders( Action<IEnumerable<IStockHolder>> action );
 
     /// <summary>
     /// 提供大股东数据

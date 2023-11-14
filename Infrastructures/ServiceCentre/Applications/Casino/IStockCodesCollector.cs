@@ -19,7 +19,7 @@ public interface IStockCodesCollector
     /// <summary>
     /// 标的采集
     /// </summary>
-    /// <param name="action">标的集合</param>
+    /// <param name="action">处理动作</param>
     /// <returns></returns>
     Task<bool> TryFetchStocks( Action<IEnumerable<IStock>> action );
 

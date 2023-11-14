@@ -37,6 +37,12 @@ public interface IInternetResource
     string Charset { get; set; }
 
     /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty( "accept" )]
+    string Accept { get; set; }
+
+    /// <summary>
     /// 资源是jsonp
     /// </summary>
     [JsonProperty( "isJsonp" )]

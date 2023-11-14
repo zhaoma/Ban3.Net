@@ -21,6 +21,8 @@ public class InternetResource : OneObject, IInternetResource
 
     public string Charset { get; set; }
 
+    public string Accept { get; set; }
+
     public bool IsJsonp { get; set; }
 
     public string JsonpPrefix { get; set; }

@@ -3,6 +3,8 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using System;
+
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 using System.Collections.Generic;
@@ -18,9 +20,9 @@ public interface IStockNotionsCollector
     /// <summary>
     /// 准备题材概念数据
     /// </summary>
-    /// <param name="action">题材概念数据</param>
+    /// <param name="action">处理动作</param>
     /// <returns></returns>
-    Task<bool> TryFetchNotions( out IEnumerable<IStockNotion> action );
+    Task<bool> TryFetchNotions( Action<IEnumerable<IStockNotion>> action );
 
     /// <summary>
     /// 提供题材概念数据
