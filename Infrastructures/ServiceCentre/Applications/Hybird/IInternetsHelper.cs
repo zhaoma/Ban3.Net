@@ -3,8 +3,9 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
+
+using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
@@ -18,7 +19,7 @@ public interface IInternetsHelper
     /// <param name="internetResponse"></param>
     /// <returns></returns>
     Task<bool> TryRequest(
-        IInternetHost internetHost, 
+        IInternetHost internetHost,
         IInternetResource internetResource,
-        out IInternetResponse internetResponse);
+        out IInternetResponse internetResponse );
 }

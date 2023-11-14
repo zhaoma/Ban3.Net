@@ -3,8 +3,9 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
+
+using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
@@ -20,6 +21,5 @@ public interface IChartsHelper
     /// <param name="data"></param>
     /// <param name="chartsDiagram"></param>
     /// <returns></returns>
-    Task<bool> TryCreate<T>(T data,out IChartsDiagram chartsDiagram);
+    Task<bool> TryCreate<T>( T data, out IChartsDiagram chartsDiagram );
 }
-

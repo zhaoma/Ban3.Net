@@ -14,16 +14,14 @@ namespace Ban3.Infrastructures.Common.Models;
 public class MultiResult<T>
 {
     /// ctor
-    public MultiResult()
-    {
-    }
+    public MultiResult() {}
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="data"></param>
     /// <param name="recordCount"></param>
-    public MultiResult(List<T>? data, int? recordCount = null)
+    public MultiResult( List<T>? data, int? recordCount = null )
     {
         RecordCount = recordCount ?? data?.Count;
         Data = data;

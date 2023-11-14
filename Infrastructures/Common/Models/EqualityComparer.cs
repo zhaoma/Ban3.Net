@@ -23,7 +23,7 @@ public class EqualityComparer<T, TV> : IEqualityComparer<T>
     /// </summary>
     /// <param name="keySelector"></param>
     /// <param name="comparer"></param>
-    public EqualityComparer(Func<T, TV> keySelector, IEqualityComparer<TV> comparer)
+    public EqualityComparer( Func<T, TV> keySelector, IEqualityComparer<TV> comparer )
     {
         _keySelector = keySelector;
         _comparer = comparer;
@@ -33,10 +33,8 @@ public class EqualityComparer<T, TV> : IEqualityComparer<T>
     /// 
     /// </summary>
     /// <param name="keySelector"></param>
-    public EqualityComparer(Func<T, TV> keySelector)
-        : this(keySelector, EqualityComparer<TV>.Default)
-    {
-    }
+    public EqualityComparer( Func<T, TV> keySelector )
+        : this( keySelector, EqualityComparer<TV>.Default ) {}
 
     /// <summary>
     /// 
@@ -44,9 +42,9 @@ public class EqualityComparer<T, TV> : IEqualityComparer<T>
     /// <param name="x"></param>
     /// <param name="y"></param>
     /// <returns></returns>
-    public bool Equals(T x, T y)
+    public bool Equals( T x, T y )
     {
-        return _comparer.Equals(_keySelector(x), _keySelector(y));
+        return _comparer.Equals( _keySelector( x ), _keySelector( y ) );
     }
 
     /// <summary>
@@ -54,8 +52,8 @@ public class EqualityComparer<T, TV> : IEqualityComparer<T>
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public int GetHashCode(T obj)
+    public int GetHashCode( T obj )
     {
-        return _comparer.GetHashCode(_keySelector(obj));
+        return _comparer.GetHashCode( _keySelector( obj ) );
     }
 }

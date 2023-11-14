@@ -3,8 +3,9 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Collections.Generic;
 using Newtonsoft.Json;
+
+using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
@@ -17,18 +18,17 @@ public interface IEvaluation<in T>
     /// <param name="score">得分</param>
     /// <param name="keys">输出特征</param>
     /// <returns></returns>
-    bool Judge(T previousValue, out int score, out IEnumerable<string> keys);
+    bool Judge( T previousValue, out int score, out IEnumerable<string> keys );
 
     /// <summary>
     /// 评分
     /// </summary>
-    [JsonProperty("score")]
+    [JsonProperty( "score" )]
     int Score { get; set; }
 
     /// <summary>
     /// 特质集合
     /// </summary>
-    [JsonProperty("keys")]
+    [JsonProperty( "keys" )]
     IEnumerable<string> Keys { get; set; }
 }
-

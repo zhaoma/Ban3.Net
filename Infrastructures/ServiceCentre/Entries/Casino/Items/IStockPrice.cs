@@ -15,49 +15,48 @@ public interface IStockPrice : IStockRecord
     /// <summary>
     /// 前收盘价
     /// </summary>
-    [JsonProperty("preClose")]
+    [JsonProperty( "preClose" )]
     decimal PreClose { get; set; }
 
     /// <summary>
     /// 开盘价
     /// </summary>
-    [JsonProperty("open")]
+    [JsonProperty( "open" )]
     decimal Open { get; set; }
 
     /// <summary>
     /// 收盘价
     /// </summary>
-    [JsonProperty("close")]
+    [JsonProperty( "close" )]
     decimal Close { get; set; }
 
     /// <summary>
     /// 最高价
     /// </summary>
-    [JsonProperty("high")]
+    [JsonProperty( "high" )]
     decimal High { get; set; }
 
     /// <summary>
     /// 最低价
     /// </summary>
-    [JsonProperty("low")]
+    [JsonProperty( "low" )]
     decimal Low { get; set; }
 
     /// <summary>
     /// 换手率
     /// </summary>
-    [JsonProperty("turnover")]
+    [JsonProperty( "turnover" )]
     decimal Turnover { get; set; }
 
     /// <summary>
     /// 交易量
     /// </summary>
-    [JsonProperty("vol")]
+    [JsonProperty( "vol" )]
     double Vol { get; set; }
 
     /// <summary>
     /// 交易额
     /// </summary>
-    [JsonProperty("amount")]
+    [JsonProperty( "amount" )]
     double Amount { get; set; }
 }
-

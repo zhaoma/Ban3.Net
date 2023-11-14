@@ -3,9 +3,11 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Collections.Generic;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+
 using Newtonsoft.Json;
+
+using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 
@@ -17,7 +19,6 @@ public interface IAmount : IStockRecord, IEvaluation<IAmount>
     /// <summary>
     /// 均线集合
     /// </summary>
-    [JsonProperty("lines")]
+    [JsonProperty( "lines" )]
     IEnumerable<ILine<double>> Lines { get; set; }
 }
-

@@ -5,7 +5,4 @@
 
 namespace Ban3.Infrastructures.ServiceCentre.ServiceTags;
 
-public interface IScopedTag
-{
-    
-}
+public interface IScopedTag {}

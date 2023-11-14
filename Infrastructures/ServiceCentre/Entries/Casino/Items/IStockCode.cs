@@ -15,7 +15,6 @@ public interface IStockCode
     /// <summary>
     /// 编号 600001.SH
     /// </summary>
-    [JsonProperty("code")]
+    [JsonProperty( "code" )]
     string Code { get; set; }
-
 }

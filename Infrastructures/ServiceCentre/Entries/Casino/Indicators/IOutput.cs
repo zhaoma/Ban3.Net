@@ -17,4 +17,3 @@ public interface IOutput : IStockCode
     /// </summary>
     IStockData<IComputedResult> ComputedResults { get; set; }
 }
-

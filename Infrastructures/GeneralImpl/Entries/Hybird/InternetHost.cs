@@ -1,16 +1,17 @@
-﻿using System;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
 using Ban3.Infrastructures.ServiceCentre.Applications;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
-using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Hybird;
 
 public class InternetHost : OneObject, IInternetHost
 {
-    public InternetHost()
-    {
-    }
+    public InternetHost() {}
 
     public AuthenticationType AuthenticationType { get; set; }
 
@@ -22,4 +23,3 @@ public class InternetHost : OneObject, IInternetHost
 
     public string Password { get; set; }
 }
-

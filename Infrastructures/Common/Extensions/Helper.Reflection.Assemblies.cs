@@ -14,61 +14,61 @@ namespace Ban3.Infrastructures.Common.Extensions;
 public static partial class Helper
 {
     /// 
-    public static Assembly? GetAssembly(this string dllPath)
+    public static Assembly? GetAssembly( this string dllPath )
     {
         try
         {
             byte[] assemblyBuffer = dllPath.ReadBytes()!;
-            return Assembly.Load(assemblyBuffer);
+            return Assembly.Load( assemblyBuffer );
         }
-        catch (Exception ex)
+        catch( Exception ex )
         {
-            Logger.Error(ex);
+            Logger.Error( ex );
         }
 
         return null;
     }
 
     /// 获取dll引用(managed dll)
-    public static AssemblyName[]? GetReferencedAssemblies(this string dllPath)
+    public static AssemblyName[]? GetReferencedAssemblies( this string dllPath )
     {
         try
         {
             return dllPath
-                .GetAssembly()?
-                .GetReferencedAssemblies();
+                  .GetAssembly()?
+                  .GetReferencedAssemblies();
         }
-        catch (Exception ex)
+        catch( Exception ex )
         {
-            Logger.Error(ex);
+            Logger.Error( ex );
         }
 
         return null;
     }
 
     /// <summary>
-    /// 从程序集获取资源
+    /// 尝试从程序集获取资源
     /// </summary>
-    /// <param name="assembly"></param>
-    /// <param name="resourceName"></param>
-    /// <param name="result"></param>
+    /// <param name="assembly">程序集</param>
+    /// <param name="resourceName">资源名称(程序集名称+路径)</param>
+    /// <param name="result">资源字节数值</param>
     /// <returns></returns>
-    public static bool GetResourceBytes(this Assembly assembly, string resourceName, out byte[]? result)
+    public static bool TryGetResource( this Assembly assembly, string resourceName, out byte[]? result )
     {
         try
         {
-            using var stream = assembly.GetManifestResourceStream(resourceName);
-            if (stream != null)
+            using var stream = assembly.GetManifestResourceStream( resourceName );
+            if( stream != null )
             {
                 var length = (int)stream.Length;
                 result = new byte[length];
 
-                return stream.Read(result, 0, length) > 0;
+                return stream.Read( result, 0, length ) > 0;
             }
         }
-        catch (Exception ex)
+        catch( Exception ex )
         {
-            Logger.Error(ex);
+            Logger.Error( ex );
         }
 
         result = null;

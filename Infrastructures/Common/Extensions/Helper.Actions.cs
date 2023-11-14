@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Timer = System.Timers.Timer;
 
 namespace Ban3.Infrastructures.Common.Extensions;
@@ -25,7 +26,7 @@ public static partial class Helper
     /// <param name="message"></param>
     public static void ExecuteAndTiming(
         this Action action,
-        string message)
+        string message )
     {
         var sw = new Stopwatch();
 
@@ -33,7 +34,7 @@ public static partial class Helper
         action();
         sw.Stop();
 
-        Logger.Debug($"{message},{sw.ElapsedMilliseconds} ms elapsed.");
+        Logger.Debug( $"{message},{sw.ElapsedMilliseconds} ms elapsed." );
     }
 
     /// <summary>
@@ -46,27 +47,30 @@ public static partial class Helper
     public static void ParallelExecute<T>(
         this IEnumerable<T> all,
         Action<T> action,
-        int taskCount)
+        int taskCount )
     {
         var queue = new Queue<T>();
-        foreach (var item in all)
+        foreach( var item in all )
         {
-            queue.Enqueue(item);
+            queue.Enqueue( item );
         }
 
-        if (taskCount <= 0) taskCount = 32;
+        if( taskCount <= 0 ) taskCount = 32;
 
-        while (queue.Any())
+        while( queue.Any() )
         {
             var tasks = new List<Task>();
 
-            while (queue.Any() && tasks.Count < taskCount)
+            while( queue.Any() && tasks.Count < taskCount )
             {
                 var t = queue.Dequeue();
-                tasks.Add(Task.Run(() => { action(t); }));
+                tasks.Add( Task.Run( () =>
+                {
+                    action( t );
+                } ) );
             }
 
-            Task.WaitAll(tasks.ToArray());
+            Task.WaitAll( tasks.ToArray() );
         }
     }
 
@@ -83,30 +87,30 @@ public static partial class Helper
     public static async Task ParallelExecuteAsync<T>(
         this IEnumerable<T> all,
         Action<T> action,
-        int taskCount)
+        int taskCount )
     {
-        if (taskCount <= 0) taskCount = 32;
+        if( taskCount <= 0 ) taskCount = 32;
 
-        Semaphore ??= new SemaphoreSlim(taskCount);
+        Semaphore ??= new SemaphoreSlim( taskCount );
         var tasks = new List<Task>();
 
-        foreach (var t in all)
+        foreach( var t in all )
         {
             await Semaphore.WaitAsync();
-            tasks.Add(Task.Run(() =>
+            tasks.Add( Task.Run( () =>
             {
                 try
                 {
-                    action(t);
+                    action( t );
                 }
                 finally
                 {
                     Semaphore.Release();
                 }
-            }));
+            } ) );
         }
 
-        await Task.WhenAll(tasks);
+        await Task.WhenAll( tasks );
     }
 
     private static string? _latestExecutedDate;
@@ -117,7 +121,7 @@ public static partial class Helper
     /// <param name="action"></param>
     /// <param name="dailyTime"></param>
     /// <returns></returns>
-    public static Timer CreateTimer(this Action action, DateTime dailyTime)
+    public static Timer CreateTimer( this Action action, DateTime dailyTime )
     {
         var timer = new Timer
         {
@@ -126,11 +130,11 @@ public static partial class Helper
             Enabled = true
         };
 
-        timer.Elapsed += (_, _) =>
+        timer.Elapsed += ( _, _ ) =>
         {
             var now = DateTime.Now;
 
-            if (_latestExecutedDate == now.ToYmd() || !now.TimeGe(dailyTime)) return;
+            if( _latestExecutedDate == now.ToYmd() || !now.TimeGe( dailyTime ) ) return;
 
             try
             {
@@ -138,9 +142,9 @@ public static partial class Helper
                 _latestExecutedDate = now.ToYmd();
                 action.Invoke();
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                Logger.Error(ex);
+                Logger.Error( ex );
             }
             finally
             {
@@ -158,7 +162,7 @@ public static partial class Helper
     /// <param name="action"></param>
     /// <param name="interval"></param>
     /// <returns></returns>
-    public static Timer CreateTimer(this Action action, int interval)
+    public static Timer CreateTimer( this Action action, int interval )
     {
         var timer = new Timer
         {
@@ -167,16 +171,16 @@ public static partial class Helper
             Enabled = true
         };
 
-        timer.Elapsed += (_, _) =>
+        timer.Elapsed += ( _, _ ) =>
         {
             try
             {
                 timer.Enabled = false;
                 action.Invoke();
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                Logger.Error(ex);
+                Logger.Error( ex );
             }
             finally
             {
@@ -195,7 +199,7 @@ public static partial class Helper
     /// <param name="callbackAction"></param>
     /// <param name="interval"></param>
     /// <returns></returns>
-    public static Timer CreateAsyncTimer(this Action action, Action<IAsyncResult> callbackAction, int interval)
+    public static Timer CreateAsyncTimer( this Action action, Action<IAsyncResult> callbackAction, int interval )
     {
         var timer = new Timer
         {
@@ -204,16 +208,16 @@ public static partial class Helper
             Enabled = true
         };
 
-        timer.Elapsed += (_, _) =>
+        timer.Elapsed += ( _, _ ) =>
         {
             try
             {
                 timer.Enabled = false;
-                action.BeginInvoke(new AsyncCallback(callbackAction), null);
+                action.BeginInvoke( new AsyncCallback( callbackAction ), null );
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                Logger.Error(ex);
+                Logger.Error( ex );
             }
         };
 
@@ -225,12 +229,12 @@ public static partial class Helper
     /// </summary>
     /// <param name="action"></param>
     /// <param name="count"></param>
-    public static void TimesParallel(this Action action, int count)
+    public static void TimesParallel( this Action action, int count )
     {
-        Enumerable.Range(1, count)
-            .AsParallel()
-            .ForAll(
-                _ => action());
+        Enumerable.Range( 1, count )
+                  .AsParallel()
+                  .ForAll(
+                       _ => action() );
     }
 
     /// <summary>
@@ -238,11 +242,11 @@ public static partial class Helper
     /// </summary>
     /// <param name="action"></param>
     /// <param name="count"></param>
-    public static void Times(this Action action, int count)
+    public static void Times( this Action action, int count )
     {
-        Enumerable.Range(1, count)
-            .ToList()
-            .ForEach(
-                _ => action());
+        Enumerable.Range( 1, count )
+                  .ToList()
+                  .ForEach(
+                       _ => action() );
     }
 }

@@ -20,4 +20,3 @@ public class LocalStorage
     /// </summary>
     public string RootUrl { get; set; } = string.Empty;
 }
-

@@ -22,11 +22,11 @@ public static partial class Helper
     /// <param name="path"></param>
     /// <param name="charset"></param>
     /// <returns></returns>
-    public static T? ReadFileAs<T>(this string path, string charset = "utf-8")
+    public static T? ReadFileAs<T>( this string path, string charset = "utf-8" )
         =>
             path
-                .ReadFile(charset)
-                .JsonToObj<T>();
+               .ReadFile( charset )
+               .JsonToObj<T>();
 
     /// <summary>
     /// 读文件(ReadToEnd)
@@ -34,17 +34,17 @@ public static partial class Helper
     /// <param name="path"></param>
     /// <param name="charset"></param>
     /// <returns></returns>
-    public static string ReadFile(this string path, string charset = "utf-8")
+    public static string ReadFile( this string path, string charset = "utf-8" )
     {
         string result = string.Empty;
 
-        if (File.Exists(path) && LockSlim.TryEnterReadLock(LockSlimTimeout))
+        if( File.Exists( path ) && LockSlim.TryEnterReadLock( LockSlimTimeout ) )
         {
             try
             {
-                var absoluteEncoding = Encoding.GetEncoding(charset);
+                var absoluteEncoding = Encoding.GetEncoding( charset );
 
-                using var stream = new StreamReader(path, absoluteEncoding);
+                using var stream = new StreamReader( path, absoluteEncoding );
 
                 result = stream.ReadToEnd();
 
@@ -65,21 +65,21 @@ public static partial class Helper
     /// <param name="path"></param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
-    public static List<string> ReadFile2Rows(this string path)
+    public static List<string> ReadFile2Rows( this string path )
     {
         var result = new List<string>();
 
-        if (File.Exists(path) && LockSlim.TryEnterReadLock(LockSlimTimeout))
+        if( File.Exists( path ) && LockSlim.TryEnterReadLock( LockSlimTimeout ) )
         {
             try
             {
                 Encoding absoluteEncoding = new UTF8Encoding();
 
-                using var reader = new StreamReader(path, absoluteEncoding);
+                using var reader = new StreamReader( path, absoluteEncoding );
 
-                while (reader.ReadLine() is { } line)
+                while( reader.ReadLine() is {} line )
                 {
-                    result.Add(line);
+                    result.Add( line );
                 }
             }
             finally
@@ -96,15 +96,15 @@ public static partial class Helper
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    public static byte[]? ReadBytes(this string path)
+    public static byte[]? ReadBytes( this string path )
     {
         byte[]? result = null;
 
-        if (File.Exists(path) && LockSlim.TryEnterReadLock(LockSlimTimeout))
+        if( File.Exists( path ) && LockSlim.TryEnterReadLock( LockSlimTimeout ) )
         {
             try
             {
-                result = File.ReadAllBytes(path);
+                result = File.ReadAllBytes( path );
             }
             finally
             {
@@ -122,15 +122,15 @@ public static partial class Helper
     /// <param name="lines"></param>
     /// <param name="charset"></param>
     /// <returns></returns>
-    public static string WriteRows2File(this string path, List<string> lines, string charset = "utf-8")
+    public static string WriteRows2File( this string path, List<string> lines, string charset = "utf-8" )
     {
         var sb = new StringBuilder();
-        foreach (var l in lines)
+        foreach( var l in lines )
         {
-            sb.AppendLine(l);
+            sb.AppendLine( l );
         }
 
-        return path.WriteFile(sb.ToString(), charset);
+        return path.WriteFile( sb.ToString(), charset );
     }
 
     /// <summary>
@@ -140,26 +140,26 @@ public static partial class Helper
     /// <param name="content"></param>
     /// <param name="charset"></param>
     /// <returns></returns>
-    public static string WriteFile(this string path, string content, string charset = "utf-8")
+    public static string WriteFile( this string path, string content, string charset = "utf-8" )
     {
         string result = string.Empty;
 
-        if (LockSlim.TryEnterWriteLock(LockSlimTimeout))
+        if( LockSlim.TryEnterWriteLock( LockSlimTimeout ) )
         {
             try
             {
-                Encoding encoding = Encoding.GetEncoding(charset);
+                Encoding encoding = Encoding.GetEncoding( charset );
 
-                using var stream = new StreamWriter(path, false, encoding);
+                using var stream = new StreamWriter( path, false, encoding );
 
-                stream.Write(content);
+                stream.Write( content );
                 stream.Close();
 
                 result = path;
             }
-            catch (Exception ex)
+            catch( Exception ex )
             {
-                Logger.Error(ex);
+                Logger.Error( ex );
             }
             finally
             {
@@ -177,21 +177,21 @@ public static partial class Helper
     /// <param name="bytes"></param>
     /// <param name="charset"></param>
     /// <returns></returns>
-    public static string WriteBytes(this string path, byte[] bytes, string charset = "utf-8")
+    public static string WriteBytes( this string path, byte[] bytes, string charset = "utf-8" )
     {
         string result = string.Empty;
 
         try
         {
-            Encoding encoding = Encoding.GetEncoding(charset);
+            Encoding encoding = Encoding.GetEncoding( charset );
 
-            var content = encoding.GetString(bytes);
+            var content = encoding.GetString( bytes );
 
-            result = path.WriteFile(content, charset);
+            result = path.WriteFile( content, charset );
         }
-        catch (Exception ex)
+        catch( Exception ex )
         {
-            Logger.Error(ex);
+            Logger.Error( ex );
         }
 
         return result;
@@ -205,32 +205,32 @@ public static partial class Helper
     /// <param name="content"></param>
     /// <param name="timestamp"></param>
     /// <returns></returns>
-    public static bool SaveFileOnDemand<T>(this string filePath, T content, out string timestamp)
+    public static bool SaveFileOnDemand<T>( this string filePath, T content, out string timestamp )
     {
         try
         {
             timestamp = content!.ObjToJson().MD5String();
 
-            var foundTimestamp = FilesTimestampDic.TryGetValue(filePath, out var ts);
-            if (foundTimestamp && ts != null && ts.Equals(timestamp)) return true;
+            var foundTimestamp = FilesTimestampDic.TryGetValue( filePath, out var ts );
+            if( foundTimestamp && ts != null && ts.Equals( timestamp ) ) return true;
 
-            if (!foundTimestamp)
+            if( !foundTimestamp )
             {
                 ts = filePath.ReadFile().MD5String();
-                if (ts.Equals(timestamp))
+                if( ts.Equals( timestamp ) )
                 {
                     return true;
                 }
             }
 
-            filePath.WriteFile(content!.ObjToJson());
-            FilesTimestampDic.AddOrReplace(filePath, timestamp);
+            filePath.WriteFile( content!.ObjToJson() );
+            FilesTimestampDic.AddOrReplace( filePath, timestamp );
 
             return true;
         }
-        catch (Exception ex)
+        catch( Exception ex )
         {
-            Logger.Error(ex);
+            Logger.Error( ex );
         }
 
         timestamp = string.Empty;
@@ -244,12 +244,12 @@ public static partial class Helper
     /// <param name="entity"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static T SaveEntity<T>(this T entity, Func<T, string> key)
+    public static T SaveEntity<T>( this T entity, Func<T, string> key )
     {
-        if (entity == null) return entity;
+        if( entity == null ) return entity;
 
-        var filePath = typeof(T).LocalFile(key(entity));
-        filePath.SaveFileOnDemand(entity, out _);
+        var filePath = typeof( T ).LocalFile( key( entity ) );
+        filePath.SaveFileOnDemand( entity, out _ );
 
         return entity;
     }
@@ -260,7 +260,7 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static T? LoadEntity<T>(this string key) => typeof(T).LocalFile(key).ReadFileAs<T>();
+    public static T? LoadEntity<T>( this string key ) => typeof( T ).LocalFile( key ).ReadFileAs<T>();
 
     /// <summary>
     /// 保存实体列表
@@ -269,12 +269,12 @@ public static partial class Helper
     /// <param name="entities"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static List<T>? SaveEntities<T>(this List<T>? entities, string key)
+    public static List<T>? SaveEntities<T>( this List<T>? entities, string key )
     {
-        if (entities == null) return entities;
+        if( entities == null ) return entities;
 
-        var filePath = typeof(T).LocalFile(key);
-        filePath.SaveFileOnDemand(entities, out _);
+        var filePath = typeof( T ).LocalFile( key );
+        filePath.SaveFileOnDemand( entities, out _ );
 
         return entities;
     }
@@ -285,7 +285,7 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static List<T>? LoadEntities<T>(this string key) => typeof(T).LocalFile(key).ReadFileAs<List<T>>();
+    public static List<T>? LoadEntities<T>( this string key ) => typeof( T ).LocalFile( key ).ReadFileAs<List<T>>();
 
     private static readonly Dictionary<string, string> FilesTimestampDic = new();
 
@@ -294,8 +294,8 @@ public static partial class Helper
     /// </summary>
     /// <param name="assembly"></param>
     /// <returns></returns>
-    public static string AssemblyName(this string assembly)
+    public static string AssemblyName( this string assembly )
     {
-        return assembly.EndsWith(".dll") ? assembly : assembly + ".dll";
+        return assembly.EndsWith( ".dll" ) ? assembly : assembly + ".dll";
     }
 }

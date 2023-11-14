@@ -3,10 +3,11 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Common.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ban3.Infrastructures.Common.Models;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
@@ -23,16 +24,18 @@ public static partial class Helper
     /// <returns></returns>
     public static List<RecursionNode> AllChildren(
         this List<RecursionNode> allNodes,
-        int specialNodeId)
+        int specialNodeId )
     {
         var result = new List<RecursionNode>();
-        
-        var node = allNodes.FindLast(o => o.Id == specialNodeId);
 
-        if (node != null)
-            result.Add(node);
+        var node = allNodes.FindLast( o => o.Id == specialNodeId );
 
-        RecursionScan(allNodes, result, specialNodeId);
+        if( node != null )
+        {
+            result.Add( node );
+        }
+
+        RecursionScan( allNodes, result, specialNodeId );
 
         return result;
     }
@@ -40,16 +43,19 @@ public static partial class Helper
     private static void RecursionScan(
         List<RecursionNode> all,
         List<RecursionNode> result,
-        int specialNodeId)
+        int specialNodeId )
     {
-        var temp = all.FindAll(o => o.ParentId == specialNodeId);
-        if (!temp.Any()) return;
-
-        foreach (var node in temp)
+        var temp = all.FindAll( o => o.ParentId == specialNodeId );
+        if( !temp.Any() )
         {
-            result.Add(node);
+            return;
+        }
 
-            RecursionScan(all, result, node.Id);
+        foreach( var node in temp )
+        {
+            result.Add( node );
+
+            RecursionScan( all, result, node.Id );
         }
     }
 
@@ -59,9 +65,9 @@ public static partial class Helper
     /// <param name="names"></param>
     /// <param name="seq"></param>
     /// <returns></returns>
-    public static string AggregateToString(this IEnumerable<object> names, string seq = " ")
+    public static string AggregateToString( this IEnumerable<object> names, string seq = " " )
     {
-        return string.Join(seq, names);
+        return string.Join( seq, names );
     }
 
     /// <summary>
@@ -70,17 +76,19 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="all"></param>
     /// <param name="one"></param>
-    public static void AppendDistinct<T>(this List<T> all, T one)
+    public static void AppendDistinct<T>( this List<T> all, T one )
     {
         try
         {
             LockSlim.EnterWriteLock();
-            if (!all.Contains(one))
-                all.Add(one);
+            if( !all.Contains( one ) )
+            {
+                all.Add( one );
+            }
         }
-        catch (Exception ex)
+        catch( Exception ex )
         {
-            Logger.Error(ex);
+            Logger.Error( ex );
         }
         finally
         {
@@ -94,11 +102,11 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="all"></param>
     /// <param name="add">新集合</param>
-    public static void AppendDistinct<T>(this List<T> all, IEnumerable<T> add)
+    public static void AppendDistinct<T>( this List<T> all, IEnumerable<T> add )
     {
-        foreach (var v in add)
+        foreach( var v in add )
         {
-            all.AppendDistinct(v);
+            all.AppendDistinct( v );
         }
     }
 
@@ -109,11 +117,11 @@ public static partial class Helper
     /// <param name="source">集合列表</param>
     /// <returns></returns>
     public static IEnumerable<T> UnionAll<T>(
-        this IEnumerable<IEnumerable<T>> source)
+        this IEnumerable<IEnumerable<T>> source )
     {
         var result = new List<T>();
 
-        return source.Aggregate(result, (current, a) => current.Union(a).ToList());
+        return source.Aggregate( result, ( current, a ) => current.Union( a ).ToList() );
     }
 
     /// <summary>
@@ -123,36 +131,36 @@ public static partial class Helper
     /// <param name="keys">待查找</param>
     /// <param name="targetKeys">目标集</param>
     /// <returns></returns>
-    public static bool AllFoundIn<T>(this IEnumerable<T>? keys, IEnumerable<T> targetKeys)
-        => keys != null && !keys.Except(targetKeys).Any();
-    
+    public static bool AllFoundIn<T>( this IEnumerable<T>? keys, IEnumerable<T> targetKeys )
+        => keys != null && !keys.Except( targetKeys ).Any();
+
     /// <summary>
     /// 全包含，包括复合条件
     /// </summary>
     /// <param name="keys"></param>
     /// <param name="setKeys"></param>
     /// <returns></returns>
-    public static bool AllFoundInComplex(this List<string> keys, List<string> setKeys)
+    public static bool AllFoundInComplex( this List<string> keys, List<string> setKeys )
     {
         var result = true;
 
-        keys.ForEach(k =>
+        keys.ForEach( k =>
         {
-            if (k.Contains("|"))
+            if( k.Contains( "|" ) )
             {
-                var ks = k.Split('|');
-                var one = ks.Select(s => s.Contains(";")
-                        ? s.Split(';').Aggregate(true, (current, s1) => current && setKeys.Contains(s1))
-                        : setKeys.Contains(s))
-                    .Aggregate(false, (current1, x) => current1 || x);
+                var ks = k.Split( '|' );
+                var one = ks.Select( s => s.Contains( ";" )
+                                         ? s.Split( ';' ).Aggregate( true, ( current, s1 ) => current && setKeys.Contains( s1 ) )
+                                         : setKeys.Contains( s ) )
+                            .Aggregate( false, ( current1, x ) => current1 || x );
 
                 result = result && one;
             }
             else
             {
-                result = result && setKeys.Contains(k);
+                result = result && setKeys.Contains( k );
             }
-        });
+        } );
 
         return result;
     }
@@ -164,8 +172,8 @@ public static partial class Helper
     /// <param name="keys">待查找</param>
     /// <param name="targetKeys">目标集</param>
     /// <returns></returns>
-    public static bool NotFoundIn<T>(this IEnumerable<T>? keys, IEnumerable<T> targetKeys)
-        => keys != null && !keys.Intersect(targetKeys).Any();
+    public static bool NotFoundIn<T>( this IEnumerable<T>? keys, IEnumerable<T> targetKeys )
+        => keys != null && !keys.Intersect( targetKeys ).Any();
 
     /// <summary>
     /// [checked] 集合随机排序
@@ -173,14 +181,14 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="oriList">源集合</param>
     /// <returns></returns>
-    public static IEnumerable<T> RandomResortList<T>(this IEnumerable<T> oriList)
+    public static IEnumerable<T> RandomResortList<T>( this IEnumerable<T> oriList )
     {
         var random = new Random();
         var newList = new List<T>();
 
-        foreach (var item in oriList)
+        foreach( var item in oriList )
         {
-            newList.Insert(random.Next(newList.Count), item);
+            newList.Insert( random.Next( newList.Count ), item );
         }
 
         return newList;
@@ -192,27 +200,32 @@ public static partial class Helper
     /// <param name="arr"></param>
     /// <param name="args"></param>
     /// <returns></returns>
-    public static bool Matches(this Type[] arr, Type[] args)
+    public static bool Matches( this Type[] arr, Type[] args )
     {
-        if (arr.Length != args.Length) return false;
-        return !args.Where((t, i) => !arr[i].IsAssignableFrom(t)).Any();
+        if( arr.Length != args.Length )
+        {
+            return false;
+        }
+        return !args.Where( ( t, i ) => !arr[ i ].IsAssignableFrom( t ) ).Any();
     }
-    
+
     /// <summary>
     /// [checked] 重新定义数组长度
     /// </summary>
     /// <param name="arr">原数组</param>
     /// <param name="length">新长度</param>
     /// <returns>新长度，从头填充原数组，超出部分截断</returns>
-    public static T[] Redim<T>(this T[]? arr, int length)
+    public static T[] Redim<T>( this T[]? arr, int length )
     {
+        if( length <= 0 )
+        {
+            return Array.Empty<T>();
+        }
+
         var r = new T[length];
 
-        if (arr is { Length: > 0 })
-        {
-            var len = Math.Min(r.Length, arr.Length);
-            Array.Copy(arr, 0, r, 0, len);
-        }
+        var len = Math.Max( r.Length, arr!.Length );
+        Array.Copy( arr, 0, r, 0, len );
 
         return r;
     }
@@ -224,13 +237,16 @@ public static partial class Helper
     /// <param name="numbers"></param>
     /// <param name="toDecimal">用来排序的取值函数</param>
     /// <returns></returns>
-    public static bool IsAsc<T>(this List<T>? numbers, Func<T, double> toDecimal)
+    public static bool IsAsc<T>( this List<T>? numbers, Func<T, double> toDecimal )
     {
-        if(numbers is not { Count: > 1 })return true;
-
-        for (var i = 1; i < numbers.Count; i++)
+        if( numbers is not { Count: > 1 } )
         {
-            if (toDecimal(numbers[i - 1]) > toDecimal(numbers[i]))
+            return true;
+        }
+
+        for( var i = 1; i < numbers.Count; i++ )
+        {
+            if( toDecimal( numbers[ i - 1 ] ) > toDecimal( numbers[ i ] ) )
             {
                 return false;
             }
@@ -246,18 +262,52 @@ public static partial class Helper
     /// <param name="numbers"></param>
     /// <param name="toDecimal">用来排序的取值函数</param>
     /// <returns></returns>
-    public static bool IsDesc<T>(this List<T>? numbers, Func<T, IComparable<object>> toDecimal)
+    public static bool IsDesc<T>( this List<T>? numbers, Func<T, IComparable<object>> toDecimal )
     {
-        if (numbers is not { Count: > 1 }) return true;
-
-        for (var i = 1; i < numbers.Count; i++)
+        if( numbers is not { Count: > 1 } )
         {
-            if (toDecimal(numbers[i ]).CompareTo( toDecimal(numbers[i-1]))>0)
+            return true;
+        }
+
+        for( var i = 1; i < numbers.Count; i++ )
+        {
+            if( toDecimal( numbers[ i ] ).CompareTo( toDecimal( numbers[ i - 1 ] ) ) > 0 )
             {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// 截取
+    /// </summary>
+    /// <typeparam name="TInput"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    /// <param name="inputValue"></param>
+    /// <param name="getValue"></param>
+    /// <param name="getResult"></param>
+    /// <param name="rangeFrom"></param>
+    /// <param name="rangeTo"></param>
+    /// <returns></returns>
+    public static TValue Calculate<TInput, TValue>(
+        this List<TInput> inputValue,
+        Func<TInput, TValue> getValue,
+        Func<IEnumerable<TValue>, TValue> getResult,
+        int rangeFrom,
+        int rangeTo
+    )
+    {
+        var temp = new List<TValue>();
+
+        for( var i = Math.Max( 0, rangeFrom ); i < Math.Min( inputValue.Count, rangeTo ); i++ )
+        {
+            temp.Add( getValue( inputValue[ i ] ) );
+        }
+
+        var result = getResult( temp );
+
+        return result;
     }
 }

@@ -3,20 +3,18 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Loader;
-
 using Autofac;
 using Autofac.Configuration;
 using Autofac.Extensions.DependencyInjection;
-
-using Ban3.Infrastructures.Interfaces.ServiceTags;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Hosting;
+
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Loader;
 
 namespace Ban3.Infrastructures.DependecyInjection
 {
@@ -30,9 +28,9 @@ namespace Ban3.Infrastructures.DependecyInjection
         /// </summary>
         /// <param name="host"></param>
         /// <returns></returns>
-        public static IHostBuilder UseAutofac(this IHostBuilder host)
+        public static IHostBuilder UseAutofac( this IHostBuilder host )
         {
-            return host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            return host.UseServiceProviderFactory( new AutofacServiceProviderFactory() );
         }
 
         #region DI
@@ -46,9 +44,9 @@ namespace Ban3.Infrastructures.DependecyInjection
             var config = new ConfigurationBuilder();
             var configSource = new JsonConfigurationSource
             {
-                    Path = AutofacConfigFile,
-                    Optional = false,
-                    ReloadOnChange = true
+                Path = AutofacConfigFile,
+                Optional = false,
+                ReloadOnChange = true
             };
             config.Add( configSource );
 
@@ -60,53 +58,53 @@ namespace Ban3.Infrastructures.DependecyInjection
         /// 通过依赖注入
         /// </summary>
         /// <param name="container"></param>
-        public static void RegisterOnDependencies(this ContainerBuilder container)
+        public static void RegisterOnDependencies( this ContainerBuilder container )
         {
             var libs = DependencyContext.Default?.CompileLibraries
-                                        .Where(lib => lib.Serviceable == false && lib.Type == "project")
-                                        .Select(lib => lib.Name)
+                                        .Where( lib => lib.Serviceable == false && lib.Type == "project" )
+                                        .Select( lib => lib.Name )
                                         .ToList();
 
-            if (libs == null) return;
+            if( libs == null ) return;
 
-            var assemblies = libs.Select(lib => AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(lib)))
+            var assemblies = libs.Select( lib => AssemblyLoadContext.Default.LoadFromAssemblyName( new AssemblyName( lib ) ) )
                                  .ToArray();
 
             container
-                    .RegisterAssemblyTypes(assemblies)
-                    .Where(type => type.IsAbstract == false && type.IsAssignableTo<ISingletonTag>())
-                    .AsSelf()
-                    .AsImplementedInterfaces()
-                    .SingleInstance()
-                    .PropertiesAutowired();
+               .RegisterAssemblyTypes( assemblies )
+               .Where( type => type.IsAbstract == false && type.IsAssignableTo<ISingletonTag>() )
+               .AsSelf()
+               .AsImplementedInterfaces()
+               .SingleInstance()
+               .PropertiesAutowired();
 
             container
-                    .RegisterAssemblyTypes(assemblies)
-                    .Where(type => type.IsAbstract == false && type.IsAssignableTo<IScopedTag>())
-                    .AsSelf()
-                    .AsImplementedInterfaces()
-                    .InstancePerLifetimeScope()
-                    .PropertiesAutowired();
+               .RegisterAssemblyTypes( assemblies )
+               .Where( type => type.IsAbstract == false && type.IsAssignableTo<IScopedTag>() )
+               .AsSelf()
+               .AsImplementedInterfaces()
+               .InstancePerLifetimeScope()
+               .PropertiesAutowired();
 
             container
-                    .RegisterAssemblyTypes(assemblies)
-                    .Where(type => type.IsAbstract == false && type.IsAssignableTo<ITransientTag>())
-                    .AsSelf()
-                    .AsImplementedInterfaces()
-                    .InstancePerDependency()
-                    .PropertiesAutowired();
+               .RegisterAssemblyTypes( assemblies )
+               .Where( type => type.IsAbstract == false && type.IsAssignableTo<ITransientTag>() )
+               .AsSelf()
+               .AsImplementedInterfaces()
+               .InstancePerDependency()
+               .PropertiesAutowired();
 
             container
-                    .RegisterAssemblyTypes(assemblies)
-                    .Where(type => type.IsAbstract == false)
-                    .AsSelf()
-                    .InstancePerDependency()
-                    .PropertiesAutowired()
-                    .PreserveExistingDefaults();
+               .RegisterAssemblyTypes( assemblies )
+               .Where( type => type.IsAbstract == false )
+               .AsSelf()
+               .InstancePerDependency()
+               .PropertiesAutowired()
+               .PreserveExistingDefaults();
         }
 
         #endregion
-        
+
         const string AutofacConfigFile = "Config/autofac.json";
     }
 }

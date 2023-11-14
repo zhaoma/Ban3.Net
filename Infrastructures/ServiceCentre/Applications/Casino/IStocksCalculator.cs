@@ -3,11 +3,12 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Threading.Tasks;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
-using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
+using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
@@ -24,8 +25,8 @@ public interface IStocksCalculator
     /// <returns></returns>
     Task<bool> TryGenerateSeeds(
         IStockData<IStockEvent> stockEvents,
-	    out IStockData<IStockSeed> stockSeeds
-	);
+        out IStockData<IStockSeed> stockSeeds
+    );
 
     /// <summary>
     /// 价格复权
@@ -39,6 +40,7 @@ public interface IStocksCalculator
         IStockData<IStockSeed> stockSeeds,
         out IStockData<IStockPrice> targetPrices
     );
+
     /// <summary>
     /// 周期转换，日->周/月
     /// </summary>
@@ -50,7 +52,7 @@ public interface IStocksCalculator
         IStockData<IStockPrice> dailyPrices,
         AnalysisCycle analysisCycle,
         out IStockData<IStockPrice> targetPrices
-	);
+    );
 
     /// <summary>
     /// 用价格信息计算指标
@@ -59,7 +61,7 @@ public interface IStocksCalculator
     /// <param name="output"></param>
     /// <returns></returns>
     Task<bool> TryGenerateIndicators(
-	    IInput input,
-	    out IOutput output
-	);
+        IInput input,
+        out IOutput output
+    );
 }

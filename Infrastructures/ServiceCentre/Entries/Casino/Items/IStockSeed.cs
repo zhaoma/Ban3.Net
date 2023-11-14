@@ -15,7 +15,6 @@ public interface IStockSeed : IStockRecord
     /// <summary>
     /// 复权系数
     /// </summary>
-    [JsonProperty("factor")]
+    [JsonProperty( "factor" )]
     decimal Factor { get; set; }
 }
-

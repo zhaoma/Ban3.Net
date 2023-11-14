@@ -4,6 +4,7 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,12 +20,12 @@ public interface IStockNotionsCollector
     /// </summary>
     /// <param name="action">题材概念数据</param>
     /// <returns></returns>
-    Task<bool> TryFetchNotions(out IEnumerable<IStockNotion> action);
+    Task<bool> TryFetchNotions( out IEnumerable<IStockNotion> action );
 
     /// <summary>
     /// 提供题材概念数据
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
-    Task<bool> TryLoad(out IEnumerable<IStockNotion> data);
+    Task<bool> TryLoad( out IEnumerable<IStockNotion> data );
 }

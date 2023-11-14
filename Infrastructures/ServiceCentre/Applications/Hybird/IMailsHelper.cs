@@ -3,8 +3,9 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
+
+using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
@@ -19,6 +20,5 @@ public interface IMailsHelper
     /// <param name="mailServer"></param>
     /// <param name="mail"></param>
     /// <returns></returns>
-    Task<bool> TrySend(IMailServer mailServer, IMail mail);
+    Task<bool> TrySend( IMailServer mailServer, IMail mail );
 }
-

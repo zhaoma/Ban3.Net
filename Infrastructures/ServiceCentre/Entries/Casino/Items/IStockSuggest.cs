@@ -15,37 +15,36 @@ public interface IStockSuggest
     /// <summary>
     /// 购买日期
     /// </summary>
-    [JsonProperty("buyDate")]
+    [JsonProperty( "buyDate" )]
     string BuyDate { get; set; }
 
     /// <summary>
     /// 购买价格
     /// </summary>
-    [JsonProperty("buyPrice")]
+    [JsonProperty( "buyPrice" )]
     decimal BuyPrice { get; set; }
 
     /// <summary>
     /// 售出日期
     /// </summary>
-    [JsonProperty("sellDate")]
+    [JsonProperty( "sellDate" )]
     string SellDate { get; set; }
 
     /// <summary>
     /// 售出价格
     /// </summary>
-    [JsonProperty("sellPrice")]
+    [JsonProperty( "sellPrice" )]
     decimal SellPrice { get; set; }
 
     /// <summary>
     /// 改变比率
     /// </summary>
-    [JsonProperty("changeRatio")]
+    [JsonProperty( "changeRatio" )]
     decimal ChangeRatio { get; set; }
 
     /// <summary>
     /// 建议正确
     /// </summary>
-    [JsonProperty("isCorrect")]
+    [JsonProperty( "isCorrect" )]
     bool IsCorrect { get; set; }
 }
-

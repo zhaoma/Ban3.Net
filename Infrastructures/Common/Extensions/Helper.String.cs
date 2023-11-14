@@ -21,9 +21,9 @@ public static partial class Helper
     /// </summary>
     /// <param name="s"></param>
     /// <returns></returns>
-    public static string ToCamel(this string s)
+    public static string ToCamel( this string s )
     {
-        return string.IsNullOrEmpty(s) ? s : s[0].ToString().ToLower() + s.Substring(1);
+        return string.IsNullOrEmpty( s ) ? s : s[ 0 ].ToString().ToLower() + s.Substring( 1 );
     }
 
     /// <summary>
@@ -31,9 +31,9 @@ public static partial class Helper
     /// </summary>
     /// <param name="s"></param>
     /// <returns></returns>
-    public static string ToPascal(this string s)
+    public static string ToPascal( this string s )
     {
-        return string.IsNullOrEmpty(s) ? s : s[0].ToString().ToUpper() + s.Substring(1);
+        return string.IsNullOrEmpty( s ) ? s : s[ 0 ].ToString().ToUpper() + s.Substring( 1 );
     }
 
     /// <summary>
@@ -43,22 +43,22 @@ public static partial class Helper
     /// <returns>
     /// 全角字符串
     /// </returns>
-    public static string ToSBC(this string input)
+    public static string ToSBC( this string input )
     {
         char[] c = input.ToCharArray();
-        for (int i = 0; i < c.Length; i++)
+        for( int i = 0; i < c.Length; i++ )
         {
-            if (c[i] == 32)
+            if( c[ i ] == 32 )
             {
-                c[i] = (char)12288;
+                c[ i ] = (char)12288;
                 continue;
             }
 
-            if (c[i] < 127)
-                c[i] = (char)(c[i] + 65248);
+            if( c[ i ] < 127 )
+                c[ i ] = (char)( c[ i ] + 65248 );
         }
 
-        return new string(c);
+        return new string( c );
     }
 
     /// <summary>
@@ -68,41 +68,41 @@ public static partial class Helper
     /// <returns>
     /// 半角字符串
     /// </returns>
-    public static string ToDBC(this string input)
+    public static string ToDBC( this string input )
     {
         char[] c = input.ToCharArray();
-        for (int i = 0; i < c.Length; i++)
+        for( int i = 0; i < c.Length; i++ )
         {
-            if (c[i] == 12288)
+            if( c[ i ] == 12288 )
             {
-                c[i] = (char)32;
+                c[ i ] = (char)32;
                 continue;
             }
 
-            if (c[i] > 65280 && c[i] < 65375)
-                c[i] = (char)(c[i] - 65248);
+            if( c[ i ] > 65280 && c[ i ] < 65375 )
+                c[ i ] = (char)( c[ i ] - 65248 );
         }
 
-        return new string(c);
+        return new string( c );
     }
-    
+
     /// <summary>
     /// Matches the specified s.
     /// </summary>
     /// <param name="s">The s.</param>
     /// <param name="pattern">The pattern.</param>
     /// <returns></returns>
-    public static string Match(this string s, string pattern) 
-        => string.IsNullOrEmpty(s) ? "" : Regex.Match(s, pattern).Value;
+    public static string Match( this string s, string pattern )
+        => string.IsNullOrEmpty( s ) ? "" : Regex.Match( s, pattern ).Value;
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="bytes"></param>
     /// <returns></returns>
-    public static string ToBase64String(byte[] bytes)
+    public static string ToBase64String( byte[] bytes )
     {
-        return Convert.ToBase64String(bytes);
+        return Convert.ToBase64String( bytes );
     }
 
     #region SQL/HTML/TEXT
@@ -112,9 +112,9 @@ public static partial class Helper
     /// </summary>
     /// <param name="source"></param>
     /// <returns></returns>
-    public static bool IsEmail(string source)
+    public static bool IsEmail( string source )
     {
-        return Regex.IsMatch(source, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", RegexOptions.IgnoreCase);
+        return Regex.IsMatch( source, @"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", RegexOptions.IgnoreCase );
     }
 
     /// <summary>
@@ -122,9 +122,9 @@ public static partial class Helper
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
-    public static bool HasChinese(string str)
+    public static bool HasChinese( string str )
     {
-        return Regex.IsMatch(str, @"[\u4e00-\u9fa5]");
+        return Regex.IsMatch( str, @"[\u4e00-\u9fa5]" );
     }
 
     /// <summary>
@@ -132,14 +132,14 @@ public static partial class Helper
     /// </summary>
     /// <param name="inVal"></param>
     /// <returns></returns>
-    public static string ConvertJapan(string inVal)
+    public static string ConvertJapan( string inVal )
     {
-        var jis = Encoding.GetEncoding("Shift_JIS");
-        var gb2312 = Encoding.GetEncoding("GB2312");
+        var jis = Encoding.GetEncoding( "Shift_JIS" );
+        var gb2312 = Encoding.GetEncoding( "GB2312" );
 
-        var buff = gb2312.GetBytes(inVal);
-        buff = Encoding.Convert(jis, gb2312, buff);
-        return gb2312.GetString(buff);
+        var buff = gb2312.GetBytes( inVal );
+        buff = Encoding.Convert( jis, gb2312, buff );
+        return gb2312.GetString( buff );
     }
 
     /// <summary>
@@ -147,13 +147,13 @@ public static partial class Helper
     /// </summary>
     /// <param name="text">The text.</param>
     /// <returns></returns>
-    public static string SQLParse(this string text)
+    public static string SQLParse( this string text )
     {
         var sqlExp =
             new Regex(
-                @"\s*\'\s+|\s(and|exec|insert|select|delete|update|count|drop|table|\*|\%|chr|mid|master|truncate|char|declare)\s");
+                @"\s*\'\s+|\s(and|exec|insert|select|delete|update|count|drop|table|\*|\%|chr|mid|master|truncate|char|declare)\s" );
 
-        return sqlExp.Replace(text + "", "");
+        return sqlExp.Replace( text + "", "" );
     }
 
     /// <summary>
@@ -162,10 +162,10 @@ public static partial class Helper
     /// <param name="content">The content.</param>
     /// <param name="denyWords">The deny words.</param>
     /// <returns></returns>
-    public static string StripDenyWord(this string content, string denyWords)
+    public static string StripDenyWord( this string content, string denyWords )
     {
-        var sqlExp = new Regex($".*({denyWords}).*");
-        return sqlExp.Replace(content, "");
+        var sqlExp = new Regex( $".*({denyWords}).*" );
+        return sqlExp.Replace( content, "" );
     }
 
     /// <summary>
@@ -175,10 +175,10 @@ public static partial class Helper
     /// <param name="badWords">The bad words.</param>
     /// <param name="fixWord">The fix word.</param>
     /// <returns></returns>
-    public static string StripBadWord(this string content, string badWords, string fixWord)
+    public static string StripBadWord( this string content, string badWords, string fixWord )
     {
-        var sqlExp = new Regex($"({badWords})");
-        return sqlExp.Replace(content, fixWord);
+        var sqlExp = new Regex( $"({badWords})" );
+        return sqlExp.Replace( content, fixWord );
     }
 
     /// <summary>
@@ -186,31 +186,31 @@ public static partial class Helper
     /// </summary>
     /// <param name="html">The HTML.</param>
     /// <returns></returns>
-    public static string StripHTML(this string html)
+    public static string StripHTML( this string html )
     {
         string strOutput = html;
 
-        var scriptRegExp = new Regex("<scr" + "ipt[^>.]*>[\\s\\S]*?</sc" + "ript>",
-            RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline &
-            RegexOptions.ExplicitCapture);
-        strOutput = scriptRegExp.Replace(strOutput, "");
+        var scriptRegExp = new Regex( "<scr" + "ipt[^>.]*>[\\s\\S]*?</sc" + "ript>",
+                                      RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline &
+                                      RegexOptions.ExplicitCapture );
+        strOutput = scriptRegExp.Replace( strOutput, "" );
 
-        var styleRegex = new Regex("<style[^>.]*>[\\s\\S]*?</style>",
-            RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline &
-            RegexOptions.ExplicitCapture);
-        strOutput = styleRegex.Replace(strOutput, "");
+        var styleRegex = new Regex( "<style[^>.]*>[\\s\\S]*?</style>",
+                                    RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline &
+                                    RegexOptions.ExplicitCapture );
+        strOutput = styleRegex.Replace( strOutput, "" );
 
-        var objRegExp = new Regex("<(.|\\n)+?>",
-            RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline);
-        strOutput = objRegExp.Replace(strOutput, "");
+        var objRegExp = new Regex( "<(.|\\n)+?>",
+                                   RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline );
+        strOutput = objRegExp.Replace( strOutput, "" );
 
-        objRegExp = new Regex("<[^>]+>", RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline);
+        objRegExp = new Regex( "<[^>]+>", RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline );
 
-        strOutput = objRegExp.Replace(strOutput, "");
+        strOutput = objRegExp.Replace( strOutput, "" );
 
-        strOutput = strOutput.Replace("&lt;", "<");
-        strOutput = strOutput.Replace("&gt;", ">");
-        strOutput = strOutput.Replace("&nbsp;", " ");
+        strOutput = strOutput.Replace( "&lt;", "<" );
+        strOutput = strOutput.Replace( "&gt;", ">" );
+        strOutput = strOutput.Replace( "&nbsp;", " " );
 
         return strOutput;
     }
@@ -220,18 +220,18 @@ public static partial class Helper
     /// </summary>
     /// <param name="html">The HTML.</param>
     /// <returns></returns>
-    public static string StripHTMLButImage(this string html)
+    public static string StripHTMLExceptImages( this string html )
     {
         string strOutput = html;
 
-        Regex objRegExp = new Regex("<[^img][^>]*>",
-            RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline);
-        strOutput = objRegExp.Replace(strOutput, "");
+        Regex objRegExp = new Regex( "<[^img][^>]*>",
+                                     RegexOptions.IgnoreCase & RegexOptions.Compiled & RegexOptions.Multiline );
+        strOutput = objRegExp.Replace( strOutput, "" );
 
-        strOutput = strOutput.Replace("&lt;", "<");
-        strOutput = strOutput.Replace("&gt;", ">");
+        strOutput = strOutput.Replace( "&lt;", "<" );
+        strOutput = strOutput.Replace( "&gt;", ">" );
         //&nbsp; 
-        strOutput = strOutput.Replace("&nbsp;", " ");
+        strOutput = strOutput.Replace( "&nbsp;", " " );
 
         return strOutput;
     }
@@ -241,7 +241,7 @@ public static partial class Helper
     /// </summary>
     /// <param name="o"></param>
     /// <returns></returns>
-    public static string ObjToString(this object o)
+    public static string ObjToString( this object o )
     {
         return o + "";
     }
@@ -254,14 +254,14 @@ public static partial class Helper
     /// <param name="input"></param>
     /// <param name="pattern"></param>
     /// <returns></returns>
-    public static bool IsMatch(this string input, string pattern)
+    public static bool IsMatch( this string input, string pattern )
     {
-        if (string.IsNullOrEmpty(input)) return false;
-        return Regex.IsMatch(input, pattern,
-            options: RegexOptions.IgnoreCase |
-                     RegexOptions.IgnorePatternWhitespace |
-                     RegexOptions.Multiline
-        ) || (input + "").ToUpper().Contains((pattern + "").ToUpper());
+        if( string.IsNullOrEmpty( input ) ) return false;
+        return Regex.IsMatch( input, pattern,
+                              options: RegexOptions.IgnoreCase |
+                                       RegexOptions.IgnorePatternWhitespace |
+                                       RegexOptions.Multiline
+        ) || ( input + "" ).ToUpper().Contains( ( pattern + "" ).ToUpper() );
     }
 
     /// <summary>
@@ -270,7 +270,7 @@ public static partial class Helper
     /// <param name="input"></param>
     /// <param name="pattern"></param>
     /// <returns></returns>
-    public static string FirstMatchValue(this string input, string pattern)
+    public static string FirstMatchValue( this string input, string pattern )
     {
         var match = Regex.Match(
             input,
@@ -278,7 +278,7 @@ public static partial class Helper
             RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline
         );
 
-        return match.Groups[1].Value;
+        return match.Groups[ 1 ].Value;
     }
 
     /// <summary>
@@ -287,10 +287,10 @@ public static partial class Helper
     /// <param name="input"></param>
     /// <param name="imgSymbol"></param>
     /// <returns></returns>
-    public static string FirstHtmlImage(this string input, string imgSymbol)
+    public static string FirstHtmlImage( this string input, string imgSymbol )
     {
         var pattern = $@"<img.+{imgSymbol}.+?src=[\""'](?<value>.+?)[\""'].*?>";
-        return input.FirstMatchValue(pattern);
+        return input.FirstMatchValue( pattern );
     }
 
     /// <summary>
@@ -299,12 +299,12 @@ public static partial class Helper
     /// <param name="input"></param>
     /// <param name="tdSymbol"></param>
     /// <returns></returns>
-    public static List<string> FindHtmlTd(this string input, string tdSymbol)
+    public static List<string> FindHtmlTd( this string input, string tdSymbol )
     {
         var pattern = $@"<td.+{tdSymbol}.+>(?<value>.+?)</td>";
-        var matches = Regex.Matches(input, pattern);
+        var matches = Regex.Matches( input, pattern );
 
-        return (from Match mc in matches select mc.Groups[1].Value).ToList();
+        return ( from Match mc in matches select mc.Groups[ 1 ].Value ).ToList();
     }
 
     /// <summary>
@@ -314,16 +314,16 @@ public static partial class Helper
     /// <param name="prefix"></param>
     /// <param name="suffix"></param>
     /// <returns></returns>
-    public static string Substr(this string input, string prefix, string suffix)
+    public static string Substr( this string input, string prefix, string suffix )
     {
-        if (!input.Contains(prefix)) return string.Empty;
+        if( !input.Contains( prefix ) ) return string.Empty;
 
-        var start = input.IndexOf(prefix, StringComparison.Ordinal) + prefix.Length;
-        var result = input.Substring(start);
+        var start = input.IndexOf( prefix, StringComparison.Ordinal ) + prefix.Length;
+        var result = input.Substring( start );
 
-        return !result.Contains(suffix) 
-            ? result 
-            : result.Substring(0, result.Length - suffix.Length);
+        return !result.Contains( suffix )
+            ? result
+            : result.Substring( 0, result.Length - suffix.Length );
     }
 
     /// <summary>
@@ -332,9 +332,9 @@ public static partial class Helper
     /// <param name="input"></param>
     /// <param name="jsonp"></param>
     /// <returns></returns>
-    public static string RemoveJsonpTags(this string input, string jsonp)
-        => input.Substr($"{jsonp}(", ");");
-    
+    public static string RemoveJsonpTags( this string input, string jsonp )
+        => input.Substr( $"{jsonp}(", ");" );
+
     /// <summary>
     /// 
     /// </summary>
@@ -342,24 +342,24 @@ public static partial class Helper
     /// <param name="prefix"></param>
     /// <param name="suffix"></param>
     /// <returns></returns>
-    public static List<string> SplitFix(this string inVal, string prefix, string suffix)
+    public static List<string> SplitFix( this string inVal, string prefix, string suffix )
     {
         var result = new List<string>();
         try
         {
             var tmp = inVal;
-            while (tmp.Contains(prefix))
+            while( tmp.Contains( prefix ) )
             {
-                tmp = tmp.Substring(tmp.IndexOf(prefix, StringComparison.Ordinal) + prefix.Length);
+                tmp = tmp.Substring( tmp.IndexOf( prefix, StringComparison.Ordinal ) + prefix.Length );
 
-                var item = tmp.Substring(0, tmp.IndexOf(suffix, StringComparison.Ordinal));
-               
-                result.Add(item);
+                var item = tmp.Substring( 0, tmp.IndexOf( suffix, StringComparison.Ordinal ) );
+
+                result.Add( item );
             }
         }
-        catch (Exception ex)
+        catch( Exception ex )
         {
-            Logger.Error(ex);
+            Logger.Error( ex );
         }
 
         return result;
@@ -372,27 +372,27 @@ public static partial class Helper
     /// <param name="tdStart"></param>
     /// <param name="tdEnd"></param>
     /// <returns></returns>
-    public static List<List<string>> SplitTbody(this string val, string tdStart = "<td>", string tdEnd = "</td>")
+    public static List<List<string>> SplitTbody( this string val, string tdStart = "<td>", string tdEnd = "</td>" )
     {
         var result = new List<List<string>>();
 
-        if (val.Contains("</tbody>"))
+        if( val.Contains( "</tbody>" ) )
         {
             val = val
-                .Substring(0, val.IndexOf("</tbody>", StringComparison.Ordinal))
-                .Substring(val.IndexOf("<tbody>", StringComparison.Ordinal) + 7);
+                 .Substring( 0, val.IndexOf( "</tbody>", StringComparison.Ordinal ) )
+                 .Substring( val.IndexOf( "<tbody>", StringComparison.Ordinal ) + 7 );
         }
 
-        var trs = val.SplitFix("<tr>", "</tr>");
-        if (trs.Any())
+        var trs = val.SplitFix( "<tr>", "</tr>" );
+        if( trs.Any() )
         {
             result.AddRange(
                 from tr in trs
-                select tr.SplitFix(tdStart, tdEnd)
+                select tr.SplitFix( tdStart, tdEnd )
                 into tds
                 where tds.Any()
-                select tds.Select(o => o.StripHTML())
-                    .ToList());
+                select tds.Select( o => o.StripHTML() )
+                          .ToList() );
         }
 
         return result;
@@ -405,100 +405,63 @@ public static partial class Helper
     /// <param name="key"></param>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static StringBuilder AppendQuery(
+    public static StringBuilder AppendQuery<T>(
         this StringBuilder sb,
         string key,
-        string value)
+        T? value )
     {
-        if (string.IsNullOrEmpty(value)) return sb;
-        if (sb.ToString() != "?")
-            sb.Append("&");
-        sb.Append($"{key}={value}");
-
-        return sb;
-    }
-
-    /// 
-    public static StringBuilder AppendQuery(this StringBuilder sb, string key, Enum? value)
-    {
-        if (value != null)
+        if( value is null )
         {
-            if (sb.ToString() != "?")
-                sb.Append("&");
-
-            sb.Append($"{key}={value}");
+            return sb;
         }
-
-        return sb;
-    }
-
-    /// 
-    public static StringBuilder AppendQuery(this StringBuilder sb, string key, int? value)
-    {
-        if (value != null)
+        if( sb.ToString() != "?" )
         {
-            if (sb.ToString() != "?")
-                sb.Append("&");
-
-            sb.Append($"{key}={value}");
+            sb.Append( "&" );
         }
+        sb.Append( $"{key}={value}" );
 
         return sb;
     }
 
     /// 
-    public static StringBuilder AppendQuery(this StringBuilder sb, string key, bool? value)
+    public static bool DateGe( this string dateString, string dateVal )
     {
-        if (value != null)
-        {
-            if (sb.ToString() != "?")
-                sb.Append("&");
-
-            sb.Append($"{key}={value}");
-        }
-
-        return sb;
-    }
-
-    /// 
-    public static bool DateGe(this string dateString, string dateVal)
-    {
-        if (string.IsNullOrEmpty(dateVal)) return true;
+        if( string.IsNullOrEmpty( dateVal ) ) return true;
 
         return dateString.ToDateTime()
-                   .Subtract(dateVal.ToDateTime())
-                   .Seconds
-               >= 0;
+                         .Subtract( dateVal.ToDateTime() )
+                         .Seconds
+            >= 0;
     }
 
     /// 
-    public static bool DateLe(this string dateString, string dateVal)
+    public static bool DateLe( this string dateString, string dateVal )
     {
-        if (string.IsNullOrEmpty(dateVal)) return true;
+        if( string.IsNullOrEmpty( dateVal ) ) return true;
 
         return dateVal.ToDateTime()
-                   .Subtract(dateString.ToDateTime())
-                   .Seconds
-               >= 0;
+                      .Subtract( dateString.ToDateTime() )
+                      .Seconds
+            >= 0;
     }
 
     /// 
-    public static bool StringExists(this string content, string key)
+    public static bool StringExists( this string content, string key )
     {
-        if (string.IsNullOrEmpty(key)) return true;
+        if( string.IsNullOrEmpty( key ) ) return true;
 
-        var keys = key.Split(' ');
-        return keys.Any(o => content.Contains(o.Trim()));
+        var keys = key.Split( ' ' );
+        return keys.Any( o => content.Contains( o.Trim() ) );
     }
 
     /// 
-    public static bool StartsWithIn(this string content, IEnumerable<string> prefixes)
-        => prefixes.Any(o => content.ToUpper().StartsWith(o.ToUpper()));
+    public static bool StartsWithIn( this string content, IEnumerable<string> prefixes )
+        => prefixes.Any( o => content.ToUpper().StartsWith( o.ToUpper() ) );
 
     /// 
-    public static bool StringEquals(this string a, string b)
+    public static bool StringEquals( this string a, string b )
     {
-        if (string.IsNullOrEmpty(a)||string.IsNullOrEmpty(b)) return true;
+        if( string.IsNullOrEmpty( a ) || string.IsNullOrEmpty( b ) ) return true;
 
         return a.Trim().ToUpper() == b.Trim().ToUpper();
     }

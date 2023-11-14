@@ -3,10 +3,12 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Collections.Generic;
 using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+
+using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
@@ -18,49 +20,49 @@ public interface IInternetResource
     /// <summary>
     /// 地址
     /// </summary>
-    [JsonProperty("url")]
+    [JsonProperty( "url" )]
     string Url { get; set; }
 
     /// <summary>
     /// 请求方法
     /// </summary>
-    [JsonProperty("method")]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonProperty( "method" )]
+    [JsonConverter( typeof( StringEnumConverter ) )]
     HttpMethod Method { get; set; }
 
     /// <summary>
     /// 字符集
     /// </summary>
-    [JsonProperty("charset")]
+    [JsonProperty( "charset" )]
     string Charset { get; set; }
 
     /// <summary>
     /// 资源是jsonp
     /// </summary>
-    [JsonProperty("isJsonp")]
+    [JsonProperty( "isJsonp" )]
     bool IsJsonp { get; set; }
 
     /// <summary>
     /// jsonp前缀
     /// </summary>
-    [JsonProperty("jsonPrefix")]
+    [JsonProperty( "jsonPrefix" )]
     string JsonpPrefix { get; set; }
 
     /// <summary>
     /// 请求头
     /// </summary>
-    [JsonProperty("headers")]
+    [JsonProperty( "headers" )]
     IDictionary<string, string> Headers { get; set; }
 
     /// <summary>
     /// 请求体
     /// </summary>
-    [JsonProperty("request")]
+    [JsonProperty( "request" )]
     IInternetData Request { get; set; }
 
     /// <summary>
     /// QueryString dictionary
     /// </summary>
-    [JsonProperty("query")]
-    IDictionary<string,string> Query { get; set; }
+    [JsonProperty( "query" )]
+    IDictionary<string, string> Query { get; set; }
 }

@@ -17,9 +17,9 @@ public static partial class Helper
     /// </summary>
     /// <param name="this">The @this.</param>
     /// <param name="parameterName">Name of the parameter.</param>
-    public static void CheckOnNull(this object @this, string parameterName)
+    public static void CheckOnNull( this object @this, string parameterName )
     {
-        if (@this.IsNull()) throw new ArgumentNullException(parameterName);
+        if( @this.IsNull() ) throw new ArgumentNullException( parameterName );
     }
 
     /// <summary>
@@ -28,9 +28,9 @@ public static partial class Helper
     /// <param name="this">The @this.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     /// <param name="message">The message.</param>
-    public static void CheckOnNull(this object @this, string parameterName, string message)
+    public static void CheckOnNull( this object @this, string parameterName, string message )
     {
-        if (@this.IsNull()) throw new ArgumentNullException(parameterName, message);
+        if( @this.IsNull() ) throw new ArgumentNullException( parameterName, message );
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public static partial class Helper
     /// <returns>
     ///   <c>true</c> if the specified @this is null; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsNull(this object? @this)
+    public static bool IsNull( this object? @this )
     {
         return @this == null;
     }
@@ -52,7 +52,7 @@ public static partial class Helper
     /// <returns>
     ///   <c>true</c> if [is not null] [the specified @this]; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsNotNull(this object @this)
+    public static bool IsNotNull( this object @this )
     {
         return !@this.IsNull();
     }

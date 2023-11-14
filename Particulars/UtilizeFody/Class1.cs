@@ -1,4 +1,4 @@
-﻿namespace Abacus
+﻿namespace UtilizeFody
 {
     public class Class1 {}
 }

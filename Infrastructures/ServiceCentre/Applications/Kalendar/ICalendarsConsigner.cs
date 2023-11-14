@@ -3,9 +3,10 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.ServiceCentre.Entries.Kalendar;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Ban3.Infrastructures.ServiceCentre.Entries.Kalendar;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Kalendar;
 

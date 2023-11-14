@@ -15,10 +15,12 @@ public enum Sort
     /// <summary>
     /// 升序
     /// </summary>
-    [Description("升序")] Ascending = 1,
+    [Description( "升序" )]
+    Ascending = 1,
 
     /// <summary>
     /// 降序
     /// </summary>
-    [Description("降序")] Descending = 2
+    [Description( "降序" )]
+    Descending = 2
 }

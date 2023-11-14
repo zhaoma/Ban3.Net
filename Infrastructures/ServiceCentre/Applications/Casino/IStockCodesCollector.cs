@@ -3,10 +3,11 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
@@ -20,12 +21,12 @@ public interface IStockCodesCollector
     /// </summary>
     /// <param name="action">标的集合</param>
     /// <returns></returns>
-    Task<bool> TryFetchStocks(Action<IEnumerable<IStock>> action);
+    Task<bool> TryFetchStocks( Action<IEnumerable<IStock>> action );
 
     /// <summary>
     /// 提供标的
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
-    Task<bool> TryLoad(out IEnumerable<IStock> data);
+    Task<bool> TryLoad( out IEnumerable<IStock> data );
 }

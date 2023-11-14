@@ -39,4 +39,9 @@ public class EnumOption
     /// 图标颜色
     /// </summary>
     public string IconColor { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 别名(英文值)
+    /// </summary>
+    public string Alias { get; set; } = string.Empty;
 }

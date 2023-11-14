@@ -18,14 +18,14 @@ public static partial class Helper
     /// </summary>
     /// <param name="type">类型</param>
     /// <returns></returns>
-    public static string GetGenericTypeName(this Type type)
+    public static string GetGenericTypeName( this Type type )
     {
         string typeName;
 
-        if (type.IsGenericType)
+        if( type.IsGenericType )
         {
-            var genericTypes = string.Join(",", type.GetGenericArguments().Select(t => t.Name).ToArray());
-            typeName = $"{type.Name.Remove(type.Name.IndexOf('`'))}<{genericTypes}>";
+            var genericTypes = string.Join( ",", type.GetGenericArguments().Select( t => t.Name ).ToArray() );
+            typeName = $"{type.Name.Remove( type.Name.IndexOf( '`' ) )}<{genericTypes}>";
         }
         else
         {
@@ -40,7 +40,7 @@ public static partial class Helper
     /// </summary>
     /// <param name="object">对象</param>
     /// <returns></returns>
-    public static string GetGenericTypeName(this object @object)
+    public static string GetGenericTypeName( this object @object )
     {
         return @object.GetType().GetGenericTypeName();
     }
@@ -51,9 +51,9 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="value">The value.</param>
     /// <returns></returns>
-    public static T? UnsafeCast<T>(this object value)
+    public static T? UnsafeCast<T>( this object value )
     {
-        return value.IsNull() ? default(T) : (T)value;
+        return value.IsNull() ? default( T ) : (T)value;
     }
 
     /// <summary>
@@ -62,9 +62,9 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="value">The value.</param>
     /// <returns></returns>
-    public static T? SafeCast<T>(this object value)
+    public static T? SafeCast<T>( this object value )
     {
-        return value is T ? value.UnsafeCast<T>() : default(T);
+        return value is T ? value.UnsafeCast<T>() : default( T );
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="value">The value.</param>
     /// <returns></returns>
-    public static bool InstanceOf<T>(this object value)
+    public static bool InstanceOf<T>( this object value )
     {
         return value is T;
     }
@@ -86,7 +86,7 @@ public static partial class Helper
     /// <param name="input"></param>
     /// <param name="output"></param>
     /// <returns></returns>
-    public static bool TryConvert<TInput, TOutput>(this TInput input, out TOutput? output)
+    public static bool TryConvert<TInput, TOutput>( this TInput input, out TOutput? output )
     {
         try
         {
@@ -94,9 +94,9 @@ public static partial class Helper
 
             return true;
         }
-        catch (Exception) { }
+        catch( Exception ) {}
 
-        output = default(TOutput);
+        output = default( TOutput );
         return false;
     }
 }

@@ -3,9 +3,10 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Common.Models;
+
 using System.Collections.Generic;
 using System.Linq;
-using Ban3.Infrastructures.Common.Models;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
@@ -26,8 +27,8 @@ public static partial class Helper
     public static TValue GetValue<TKey, TValue>(
         this Dictionary<TKey, TValue> dict,
         TKey key,
-        TValue defaultValue)
-        => dict.TryGetValue(key, out var result) ? result : defaultValue;
+        TValue defaultValue )
+        => dict.TryGetValue( key, out var result ) ? result : defaultValue;
 
     /// <summary>
     /// 字典添加项(可以保留原有项)
@@ -43,18 +44,18 @@ public static partial class Helper
         this Dictionary<TKey, TValue> dict,
         TKey key,
         TValue value,
-        bool replaceExisted = true)
+        bool replaceExisted = true )
     {
-        lock (ObjLock)
+        lock( ObjLock )
         {
-            if (dict.ContainsKey(key))
+            if( dict.ContainsKey( key ) )
             {
-                if (replaceExisted)
-                    dict[key] = value;
+                if( replaceExisted )
+                    dict[ key ] = value;
             }
             else
             {
-                dict.Add(key, value);
+                dict.Add( key, value );
             }
         }
 
@@ -73,27 +74,27 @@ public static partial class Helper
     public static Dictionary<TKey, MultiResult<TValue>> AppendInMultiResult<TKey, TValue>(
         this Dictionary<TKey, MultiResult<TValue>> result,
         TKey key,
-        TValue val)
+        TValue val )
     {
-        if (result.TryGetValue(key, out var mr))
+        if( result.TryGetValue( key, out var mr ) )
         {
             mr ??= new MultiResult<TValue>();
-            if (!mr.Data!.Contains(val))
+            if( !mr.Data!.Contains( val ) )
             {
                 mr.RecordCount++;
-                mr.Data.Add(val);
+                mr.Data.Add( val );
 
-                lock (ObjLock)
+                lock( ObjLock )
                 {
-                    result[key] = mr;
+                    result[ key ] = mr;
                 }
             }
         }
         else
         {
-            lock (ObjLock)
+            lock( ObjLock )
             {
-                result.Add(key, new MultiResult<TValue> { RecordCount = 1, Data = new List<TValue> { val } });
+                result.Add( key, new MultiResult<TValue> { RecordCount = 1, Data = new List<TValue> { val } } );
             }
         }
 
@@ -112,26 +113,26 @@ public static partial class Helper
     public static Dictionary<TKey, List<TValue>> AppendInList<TKey, TValue>(
         this Dictionary<TKey, List<TValue>> result,
         TKey key,
-        TValue val)
+        TValue val )
     {
-        if (result.TryGetValue(key, out var mr))
+        if( result.TryGetValue( key, out var mr ) )
         {
             mr ??= new List<TValue>();
-            if (!mr!.Contains(val))
+            if( !mr!.Contains( val ) )
             {
-                mr.Add(val);
+                mr.Add( val );
 
-                lock (ObjLock)
+                lock( ObjLock )
                 {
-                    result[key] = mr;
+                    result[ key ] = mr;
                 }
             }
         }
         else
         {
-            lock (ObjLock)
+            lock( ObjLock )
             {
-                result.Add(key, new List<TValue> { val } );
+                result.Add( key, new List<TValue> { val } );
             }
         }
 
@@ -150,32 +151,32 @@ public static partial class Helper
     public static Dictionary<TKey, TValue> AddRange<TKey, TValue>(
         this Dictionary<TKey, TValue> dict,
         IEnumerable<KeyValuePair<TKey, TValue>> values,
-        bool replaceExisted = true)
+        bool replaceExisted = true )
     {
-        foreach (var item in values)
+        foreach( var item in values )
         {
-            dict.AddOrReplace(item.Key, item.Value, replaceExisted);
+            dict.AddOrReplace( item.Key, item.Value, replaceExisted );
         }
 
         return dict;
     }
-    
+
     /// <summary>
     /// 字典键计数
     /// </summary>
     /// <param name="dic">字典</param>
     /// <param name="keys">键集合</param>
-    public static void AppendKeys(this Dictionary<string, int> dic, IEnumerable<string> keys)
+    public static void AppendKeys( this Dictionary<string, int> dic, IEnumerable<string> keys )
     {
-        foreach (var o in keys)
+        foreach( var o in keys )
         {
-            if (dic.ContainsKey(o))
+            if( dic.ContainsKey( o ) )
             {
-                dic[o] += 1;
+                dic[ o ] += 1;
             }
             else
             {
-                dic.Add(o, 1);
+                dic.Add( o, 1 );
             }
         }
     }
@@ -185,12 +186,12 @@ public static partial class Helper
     /// </summary>
     /// <param name="keys">键集合列表</param>
     /// <returns></returns>
-    public static Dictionary<string, int> MergeToDictionary(this IEnumerable<IEnumerable<string>> keys)
+    public static Dictionary<string, int> MergeToDictionary( this IEnumerable<IEnumerable<string>> keys )
     {
         var dic = new Dictionary<string, int>();
-        foreach (var list in keys)
+        foreach( var list in keys )
         {
-            dic.AppendKeys(list);
+            dic.AppendKeys( list );
         }
 
         return dic;
@@ -202,27 +203,25 @@ public static partial class Helper
     /// <param name="dic">目标字典</param>
     /// <param name="addDic">新增字典</param>
     /// <returns></returns>
-    public static Dictionary<string, int> Merge(this Dictionary<string, int> dic, Dictionary<string, int>? addDic)
+    public static Dictionary<string, int> Merge( this Dictionary<string, int> dic, Dictionary<string, int>? addDic )
     {
-        if (addDic != null)
+        if( addDic != null )
         {
-
-            foreach (var i in addDic)
+            foreach( var i in addDic )
             {
-                if (dic.ContainsKey(i.Key))
+                if( dic.ContainsKey( i.Key ) )
                 {
-                    dic[i.Key] += i.Value;
+                    dic[ i.Key ] += i.Value;
                 }
                 else
                 {
-                    dic.Add(i.Key, i.Value);
+                    dic.Add( i.Key, i.Value );
                 }
             }
         }
 
         return dic;
     }
-
 
     /// <summary>
     /// 字典追加值集合
@@ -232,15 +231,15 @@ public static partial class Helper
     /// <param name="result">字典</param>
     /// <param name="key">键</param>
     /// <param name="values">值集合</param>
-    public static void Append<TK, TV>(this Dictionary<TK, List<TV>> result, TK key, List<TV> values)
+    public static void Append<TK, TV>( this Dictionary<TK, List<TV>> result, TK key, List<TV> values )
     {
-        if (result.ContainsKey(key))
+        if( result.ContainsKey( key ) )
         {
-            result[key] = result[key].Union(values).ToList();
+            result[ key ] = result[ key ].Union( values ).ToList();
         }
         else
         {
-            result.Add(key, values);
+            result.Add( key, values );
         }
     }
 
@@ -250,22 +249,21 @@ public static partial class Helper
     /// <param name="result">字典</param>
     /// <param name="keys">键集合</param>
     /// <param name="value">值</param>
-    public static void Append(this Dictionary<string, List<string>> result, List<string> keys, string value)
+    public static void Append( this Dictionary<string, List<string>> result, List<string> keys, string value )
     {
-        keys.ForEach(key =>
+        keys.ForEach( key =>
         {
-            if (!string.IsNullOrEmpty(key))
+            if( !string.IsNullOrEmpty( key ) )
             {
-                if (result.ContainsKey(key))
+                if( result.ContainsKey( key ) )
                 {
-                    result[key] = result[key].Union(new List<string> { value }).ToList();
+                    result[ key ] = result[ key ].Union( new List<string> { value } ).ToList();
                 }
                 else
                 {
-                    result.Add(key, new List<string> { value });
+                    result.Add( key, new List<string> { value } );
                 }
             }
-        });
+        } );
     }
-
 }

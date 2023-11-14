@@ -3,8 +3,9 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Models.Hybird;
+
+using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
@@ -21,7 +22,7 @@ public interface ICachesHelper
     /// <param name="data"></param>
     /// <param name="cachesProfile"></param>
     /// <returns></returns>
-    Task<bool> TrySet<T>(string key, T data, CachesProfile cachesProfile);
+    Task<bool> TrySet<T>( string key, T data, CachesProfile cachesProfile );
 
     /// <summary>
     /// 获取缓存
@@ -30,14 +31,14 @@ public interface ICachesHelper
     /// <param name="key"></param>
     /// <param name="savedData"></param>
     /// <returns></returns>
-    Task<bool> TryGet<T>(string key, out T savedData);
+    Task<bool> TryGet<T>( string key, out T savedData );
 
     /// <summary>
     /// 移除一项缓存
     /// </summary>
     /// <param name="key"></param>
     /// <returns></returns>
-    Task<bool> TryRemove(string key);
+    Task<bool> TryRemove( string key );
 
     /// <summary>
     /// 清空缓存

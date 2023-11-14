@@ -3,14 +3,14 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Collections.Generic;
 using Newtonsoft.Json;
+
+using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
 public interface IMa : IParameter
 {
-    [JsonProperty("durations")]
+    [JsonProperty( "durations" )]
     IEnumerable<int> Durations { get; set; }
 }
-

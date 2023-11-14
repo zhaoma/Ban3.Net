@@ -3,6 +3,9 @@ No site , private symbol only.
 
 ## _最后修改_
 
+- 2023-11-14
+  * 移除Fody
+
 - 2023-11-05
   * 统一一下风格
   * 增加 UnitTest
@@ -23,9 +26,6 @@ No site , private symbol only.
   * 程序集，反射相关
   * 序列化
   * 泛型以及变量转换与处置，位、字节、日期、数值等
-
-- 其他各种小尝试
-  * Rougamo.Fody的静态织入
 
 ## License
 

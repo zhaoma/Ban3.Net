@@ -10,9 +10,5 @@ namespace Ban3.Infrastructures.ServiceCentre.Applications;
 /// </summary>
 public abstract class OneObject
 {
-    protected OneObject()
-	{
-	}
-
+    protected OneObject() {}
 }
-

@@ -5,6 +5,7 @@
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+
 using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
@@ -20,6 +21,5 @@ public interface IStockPricesCollector
     /// <param name="stock"></param>
     /// <param name="stockPrices"></param>
     /// <returns></returns>
-    Task<bool> TryFetchPrices(IStock stock, out IStockData<IStockPrice> stockPrices);
-
+    Task<bool> TryFetchPrices( IStock stock, out IStockData<IStockPrice> stockPrices );
 }

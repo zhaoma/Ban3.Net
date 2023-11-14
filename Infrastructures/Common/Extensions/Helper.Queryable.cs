@@ -3,12 +3,12 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Common.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
-using Ban3.Infrastructures.Common.Models;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
@@ -25,10 +25,13 @@ public static partial class Helper
     /// <param name="predicate">The predicate.</param>
     /// <param name="condition">if set to <c>true</c> [condition].</param>
     /// <returns></returns>
-    public static IQueryable<T> WhereIf<T>(this IQueryable<T> source, Expression<Func<T, bool>> predicate,
-        bool condition)
+    public static IQueryable<T> WhereIf<T>(
+        this IQueryable<T> source,
+        Expression<Func<T, bool>> predicate,
+        bool condition
+    )
     {
-        return condition ? source.Where(predicate) : source;
+        return condition ? source.Where( predicate ) : source;
     }
 
     /// <summary>
@@ -39,10 +42,13 @@ public static partial class Helper
     /// <param name="predicate">The predicate.</param>
     /// <param name="condition">if set to <c>true</c> [condition].</param>
     /// <returns></returns>
-    public static IQueryable<T> WhereIf<T>(this IQueryable<T> source, Expression<Func<T, int, bool>> predicate,
-        bool condition)
+    public static IQueryable<T> WhereIf<T>(
+        this IQueryable<T> source,
+        Expression<Func<T, int, bool>> predicate,
+        bool condition
+    )
     {
-        return condition ? source.Where(predicate) : source;
+        return condition ? source.Where( predicate ) : source;
     }
 
     /// <summary>
@@ -53,9 +59,13 @@ public static partial class Helper
     /// <param name="predicate">The predicate.</param>
     /// <param name="condition">if set to <c>true</c> [condition].</param>
     /// <returns></returns>
-    public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> source, Func<T, bool> predicate, bool condition)
+    public static IEnumerable<T> WhereIf<T>(
+        this IEnumerable<T> source,
+        Func<T, bool> predicate,
+        bool condition
+    )
     {
-        return condition ? source.Where(predicate) : source;
+        return condition ? source.Where( predicate ) : source;
     }
 
     /// <summary>
@@ -66,9 +76,13 @@ public static partial class Helper
     /// <param name="predicate">The predicate.</param>
     /// <param name="condition">if set to <c>true</c> [condition].</param>
     /// <returns></returns>
-    public static IEnumerable<T> WhereIf<T>(this IEnumerable<T> source, Func<T, int, bool> predicate, bool condition)
+    public static IEnumerable<T> WhereIf<T>(
+        this IEnumerable<T> source,
+        Func<T, int, bool> predicate,
+        bool condition
+    )
     {
-        return condition ? source.Where(predicate) : source;
+        return condition ? source.Where( predicate ) : source;
     }
 
     /// <summary>
@@ -83,21 +97,25 @@ public static partial class Helper
     /// <returns>
     ///   <c>true</c> if the specified t is between; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsBetween<T>(this T t,
+    public static bool IsBetween<T>(
+        this T t,
         T lowerBound,
         T upperBound,
         bool includeLowerBound = false,
-        bool includeUpperBound = false)
-        where T : class, IComparable<T>
+        bool includeUpperBound = false
+    ) where T : class, IComparable<T>
     {
-        if (t == null) throw new ArgumentNullException("t");
+        if( t == null )
+        {
+            throw new ArgumentNullException( typeof( T ).ToString() );
+        }
 
-        var lowerCompareResult = t.CompareTo(lowerBound);
-        var upperCompareResult = t.CompareTo(upperBound);
+        var lowerCompareResult = t.CompareTo( lowerBound );
+        var upperCompareResult = t.CompareTo( upperBound );
 
-        return (includeLowerBound && lowerCompareResult == 0) ||
-               (includeUpperBound && upperCompareResult == 0) ||
-               (lowerCompareResult > 0 && upperCompareResult < 0);
+        return ( includeLowerBound && lowerCompareResult == 0 ) ||
+               ( includeUpperBound && upperCompareResult == 0 ) ||
+               ( lowerCompareResult > 0 && upperCompareResult < 0 );
     }
 
     /// <summary>
@@ -113,21 +131,25 @@ public static partial class Helper
     /// <returns>
     ///   <c>true</c> if the specified t is between; otherwise, <c>false</c>.
     /// </returns>
-    public static bool IsBetween<T>(this T t,
-        T lowerBound,
-        T upperBound,
-        IComparer<T> comparer,
-        bool includeLowerBound = false,
-        bool includeUpperBound = false)
+    public static bool IsBetween<T>( this T t,
+                                     T lowerBound,
+                                     T upperBound,
+                                     IComparer<T> comparer,
+                                     bool includeLowerBound = false,
+                                     bool includeUpperBound = false
+    )
     {
-        if (comparer == null) throw new ArgumentNullException("comparer");
+        if( t == null || comparer == null )
+        {
+            throw new ArgumentNullException( typeof( T ).ToString() );
+        }
 
-        var lowerCompareResult = comparer.Compare(t, lowerBound);
-        var upperCompareResult = comparer.Compare(t, upperBound);
+        var lowerCompareResult = comparer.Compare( t, lowerBound );
+        var upperCompareResult = comparer.Compare( t, upperBound );
 
-        return (includeLowerBound && lowerCompareResult == 0) ||
-               (includeUpperBound && upperCompareResult == 0) ||
-               (lowerCompareResult > 0 && upperCompareResult < 0);
+        return ( includeLowerBound && lowerCompareResult == 0 ) ||
+               ( includeUpperBound && upperCompareResult == 0 ) ||
+               ( lowerCompareResult > 0 && upperCompareResult < 0 );
     }
 
     /// <summary>
@@ -138,9 +160,9 @@ public static partial class Helper
     /// <param name="source">The source.</param>
     /// <param name="keySelector">The key selector.</param>
     /// <returns></returns>
-    public static IEnumerable<T> Distinct<T, TV>(this IEnumerable<T> source, Func<T, TV> keySelector)
+    public static IEnumerable<T> Distinct<T, TV>( this IEnumerable<T> source, Func<T, TV> keySelector )
     {
-        return source.Distinct(new EqualityComparer<T, TV>(keySelector));
+        return source.Distinct( new EqualityComparer<T, TV>( keySelector ) );
     }
 
     /// <summary>
@@ -152,10 +174,13 @@ public static partial class Helper
     /// <param name="keySelector">The key selector.</param>
     /// <param name="comparer">The comparer.</param>
     /// <returns></returns>
-    public static IEnumerable<T> Distinct<T, TV>(this IEnumerable<T> source, Func<T, TV> keySelector,
-        IEqualityComparer<TV> comparer)
+    public static IEnumerable<T> Distinct<T, TV>(
+        this IEnumerable<T> source,
+        Func<T, TV> keySelector,
+        IEqualityComparer<TV> comparer
+    )
     {
-        return source.Distinct(new EqualityComparer<T, TV>(keySelector, comparer));
+        return source.Distinct( new EqualityComparer<T, TV>( keySelector, comparer ) );
     }
 
     /// <summary>
@@ -164,9 +189,9 @@ public static partial class Helper
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    public static Expression AndAlso(this Expression left, Expression right)
+    public static Expression AndAlso( this Expression left, Expression right )
     {
-        return Expression.AndAlso(left, right);
+        return Expression.AndAlso( left, right );
     }
 
     /// <summary>
@@ -176,9 +201,13 @@ public static partial class Helper
     /// <param name="methodName"></param>
     /// <param name="arguments"></param>
     /// <returns></returns>
-    public static Expression Call(this Expression instance, string methodName, params Expression[] arguments)
+    public static Expression Call(
+        this Expression instance,
+        string methodName,
+        params Expression[] arguments
+    )
     {
-        return Expression.Call(instance, instance.Type.GetMethod(methodName)!, arguments);
+        return Expression.Call( instance, instance.Type.GetMethod( methodName )!, arguments );
     }
 
     /// <summary>
@@ -187,9 +216,9 @@ public static partial class Helper
     /// <param name="expression"></param>
     /// <param name="propertyName"></param>
     /// <returns></returns>
-    public static Expression Property(this Expression expression, string propertyName)
+    public static Expression Property( this Expression expression, string propertyName )
     {
-        return Expression.Property(expression, propertyName);
+        return Expression.Property( expression, propertyName );
     }
 
     /// <summary>
@@ -198,9 +227,9 @@ public static partial class Helper
     /// <param name="left"></param>
     /// <param name="right"></param>
     /// <returns></returns>
-    public static Expression GreaterThan(this Expression left, Expression right)
+    public static Expression GreaterThan( this Expression left, Expression right )
     {
-        return Expression.GreaterThan(left, right);
+        return Expression.GreaterThan( left, right );
     }
 
     /// <summary>
@@ -210,9 +239,8 @@ public static partial class Helper
     /// <param name="body"></param>
     /// <param name="parameters"></param>
     /// <returns></returns>
-    public static Expression<TDelegate> ToLambda<TDelegate>(this Expression body,
-        params ParameterExpression[] parameters)
+    public static Expression<TDelegate> ToLambda<TDelegate>( this Expression body, params ParameterExpression[] parameters )
     {
-        return Expression.Lambda<TDelegate>(body, parameters);
+        return Expression.Lambda<TDelegate>( body, parameters );
     }
 }

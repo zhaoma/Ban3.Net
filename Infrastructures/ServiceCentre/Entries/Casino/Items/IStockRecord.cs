@@ -15,7 +15,6 @@ public interface IStockRecord
     /// <summary>
     /// 日期用yyyyMMdd格式的string
     /// </summary>
-    [JsonProperty("recordDate")]
+    [JsonProperty( "recordDate" )]
     string RecordDate { get; set; }
 }
-

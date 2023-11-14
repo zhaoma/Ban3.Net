@@ -3,15 +3,15 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.ServiceCentre.Entries.Kalendar;
+
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Ban3.Infrastructures.ServiceCentre.Entries.Kalendar;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Kalendar;
 
 public interface ICalendarsSynchronizer
 {
-
     Task<bool> TrySaveGroup(
         ICalendarPlatform calendarPlatform,
         ICalendarOwner calendarOwner,
@@ -21,7 +21,7 @@ public interface ICalendarsSynchronizer
     Task<bool> TryRetrieveGroups(
         ICalendarPlatform calendarPlatform,
         ICalendarOwner calendarOwner,
-        out IEnumerable<ICalendarGroup> calendarGroups);
+        out IEnumerable<ICalendarGroup> calendarGroups );
 
     Task<bool> TryDeleteGroup(
         ICalendarPlatform calendarPlatform,
@@ -38,14 +38,13 @@ public interface ICalendarsSynchronizer
     Task<bool> TryRetrieveCalendars(
         ICalendarPlatform calendarPlatform,
         ICalendarOwner calendarOwner,
-        out IEnumerable<ICalendar> calendars);
+        out IEnumerable<ICalendar> calendars );
 
     Task<bool> TryDeleteCalendar(
         ICalendarPlatform calendarPlatform,
         ICalendarOwner calendarOwner,
         ICalendar calendar
     );
-
 
     Task<bool> TrySaveEvent(
         ICalendarPlatform calendarPlatform,
@@ -56,13 +55,11 @@ public interface ICalendarsSynchronizer
     Task<bool> TryRetrieveEvents(
         ICalendarPlatform calendarPlatform,
         ICalendarOwner calendarOwner,
-        out IEnumerable<ICalendarEvent> calendarEvents);
+        out IEnumerable<ICalendarEvent> calendarEvents );
 
     Task<bool> TryDeleteEvent(
         ICalendarPlatform calendarPlatform,
         ICalendarOwner calendarOwner,
         ICalendarEvent calendarEvent
     );
-
-
 }

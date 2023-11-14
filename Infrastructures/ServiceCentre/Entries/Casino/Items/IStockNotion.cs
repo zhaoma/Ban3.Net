@@ -3,10 +3,12 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Collections.Generic;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+
+using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
@@ -18,25 +20,25 @@ public interface IStockNotion
     /// <summary>
     /// 标识
     /// </summary>
-    [JsonProperty("id")]
+    [JsonProperty( "id" )]
     int Id { get; set; }
 
     /// <summary>
     /// 题材主题
     /// </summary>
-    [JsonProperty("name")]
+    [JsonProperty( "name" )]
     string Name { get; set; }
 
     /// <summary>
     /// 题材分组（地域/行业/热门）
     /// </summary>
-    [JsonProperty("notionIs")]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonProperty( "notionIs" )]
+    [JsonConverter( typeof( StringEnumConverter ) )]
     NotionIs NotionIs { get; set; }
 
     /// <summary>
     /// 相关标的
     /// </summary>
-    [JsonProperty("stocks")]
+    [JsonProperty( "stocks" )]
     IEnumerable<IStock> Stocks { get; set; }
 }

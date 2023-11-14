@@ -18,8 +18,8 @@ public static partial class Helper
     /// <summary>
     /// 拼音哈希表
     /// </summary>
-    private static readonly Hashtable PinyinHash
-        = new ()
+    private static readonly Hashtable PinyinTable
+        = new()
         {
             { -20319, "a" },
             { -20317, "ai" },
@@ -425,15 +425,19 @@ public static partial class Helper
     /// </summary>
     /// <param name="charValue">The char value.</param>
     /// <returns></returns>
-    private static string GetPinyin(this int charValue)
+    private static string GetPinyin( this int charValue )
     {
-        if (charValue < -20319 || charValue > -10247)
+        if( charValue < -20319 || charValue > -10247 )
+        {
             return "";
+        }
 
-        while (!PinyinHash.ContainsKey(charValue))
+        while( !PinyinTable.ContainsKey( charValue ) )
+        {
             charValue--;
+        }
 
-        return (string)PinyinHash[charValue];
+        return (string)PinyinTable[ charValue ];
     }
 
     #endregion
@@ -443,21 +447,21 @@ public static partial class Helper
     /// </summary>
     /// <param name="chineseChars">The chinese chars.</param>
     /// <returns></returns>
-    public static string GetPinyin(this string chineseChars)
+    public static string GetPinyin( this string chineseChars )
     {
-        byte[] byteArray = Encoding.Default.GetBytes(chineseChars);
-        StringBuilder sb = new StringBuilder(chineseChars.Length * 4);
-        for (int i = 0; i < byteArray.Length; i++)
+        byte[] byteArray = Encoding.Default.GetBytes( chineseChars );
+        StringBuilder sb = new StringBuilder( chineseChars.Length * 4 );
+        for( int i = 0; i < byteArray.Length; i++ )
         {
-            var byteValue = (int)byteArray[i];
-            if (byteValue > 160)
+            var byteValue = (int)byteArray[ i ];
+            if( byteValue > 160 )
             {
-                byteValue = byteValue * 256 + byteArray[++i] - 65536;
-                sb.Append(byteValue.GetPinyin());
+                byteValue = byteValue * 256 + byteArray[ ++i ] - 65536;
+                sb.Append( byteValue.GetPinyin() );
             }
             else
             {
-                sb.Append((char)byteValue);
+                sb.Append( (char)byteValue );
             }
         }
 
@@ -469,27 +473,27 @@ public static partial class Helper
     /// </summary>
     /// <param name="chineseChars">The chinese chars.</param>
     /// <returns></returns>
-    public static string GetShortPinyin(this string chineseChars)
+    public static string GetShortPinyin( this string chineseChars )
     {
-        byte[] byteArray = Encoding.Default.GetBytes(chineseChars);
-        StringBuilder sb = new StringBuilder(chineseChars.Length * 4);
-        for (int i = 0; i < byteArray.Length; i++)
+        byte[] byteArray = Encoding.Default.GetBytes( chineseChars );
+        StringBuilder sb = new StringBuilder( chineseChars.Length * 4 );
+        for( int i = 0; i < byteArray.Length; i++ )
         {
-            var byteValue = (int)byteArray[i];
-            if (byteValue > 160)
+            var byteValue = (int)byteArray[ i ];
+            if( byteValue > 160 )
             {
-                byteValue = byteValue * 256 + byteArray[++i] - 65536;
+                byteValue = byteValue * 256 + byteArray[ ++i ] - 65536;
                 string charPinyin = byteValue.GetPinyin();
-                if (!string.IsNullOrEmpty(charPinyin))
+                if( !string.IsNullOrEmpty( charPinyin ) )
                 {
-                    charPinyin = new string(charPinyin[0], 1);
+                    charPinyin = new string( charPinyin[ 0 ], 1 );
                 }
 
-                sb.Append(charPinyin);
+                sb.Append( charPinyin );
             }
             else
             {
-                sb.Append((char)byteValue);
+                sb.Append( (char)byteValue );
             }
         }
 

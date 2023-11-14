@@ -9,19 +9,18 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
 public interface IMacd : IParameter
 {
-    [JsonProperty("short")]
+    [JsonProperty( "short" )]
     int SHORT { get; set; }
 
     /// <summary>
     /// LONG(长期)
     /// </summary>
-    [JsonProperty("long")]
+    [JsonProperty( "long" )]
     int LONG { get; set; }
 
     /// <summary>
     /// M 天数
     /// </summary>
-    [JsonProperty("mid")]
+    [JsonProperty( "mid" )]
     int MID { get; set; }
 }
-

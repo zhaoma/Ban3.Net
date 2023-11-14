@@ -3,9 +3,11 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Collections.Generic;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
 using Newtonsoft.Json;
+
+using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
@@ -17,19 +19,18 @@ public interface IStockCondition
     /// <summary>
     /// 周期
     /// </summary>
-    [JsonProperty("analysisCycle")]
+    [JsonProperty( "analysisCycle" )]
     AnalysisCycle? AnalysisCycle { get; set; }
 
     /// <summary>
     /// 包含特征
     /// </summary>
-    [JsonProperty("includeKeys")]
+    [JsonProperty( "includeKeys" )]
     IEnumerable<string> IncludeKeys { get; set; }
 
     /// <summary>
     /// 不包含特征
     /// </summary>
-    [JsonProperty("excludeKeys")]
+    [JsonProperty( "excludeKeys" )]
     IEnumerable<string> ExcludeKeys { get; set; }
 }
-

@@ -21,7 +21,7 @@ public interface IStoragesHelper
     /// <param name="data"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    Task<bool> TrySave<T>(T data,Func<T,string> key);
+    Task<bool> TrySave<T>( T data, Func<T, string> key );
 
     /// <summary>
     /// 读取
@@ -29,7 +29,7 @@ public interface IStoragesHelper
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
     /// <returns></returns>
-    Task<bool> TryLoad<T>(string key);
+    Task<bool> TryLoad<T>( string key );
 
     /// <summary>
     /// 删除
@@ -37,7 +37,7 @@ public interface IStoragesHelper
     /// <typeparam name="T"></typeparam>
     /// <param name="data"></param>
     /// <returns></returns>
-    Task<bool> TryDelete<T>(T data);
+    Task<bool> TryDelete<T>( T data );
 
     /// <summary>
     /// 查询
@@ -46,6 +46,5 @@ public interface IStoragesHelper
     /// <param name="predicate"></param>
     /// <param name="values"></param>
     /// <returns></returns>
-    Task<bool> TryQuery<T>(Predicate<T> predicate, out IEnumerable<T> values);
+    Task<bool> TryQuery<T>( Predicate<T> predicate, out IEnumerable<T> values );
 }
-

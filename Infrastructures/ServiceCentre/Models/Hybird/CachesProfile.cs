@@ -3,8 +3,9 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System;
 using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
+
+using System;
 
 namespace Ban3.Infrastructures.ServiceCentre.Models.Hybird;
 
@@ -25,7 +26,7 @@ public class CachesProfile
     /// 绝对时间型
     /// </summary>
     /// <param name="expireTime"></param>
-    public CachesProfile(DateTime expireTime)
+    public CachesProfile( DateTime expireTime )
     {
         CacheDependency = CacheDependency.AbsoluteTime;
         AbsoluteTime = expireTime;
@@ -35,7 +36,7 @@ public class CachesProfile
     /// 相对时间型
     /// </summary>
     /// <param name="remainTimeSpan"></param>
-    public CachesProfile(TimeSpan remainTimeSpan)
+    public CachesProfile( TimeSpan remainTimeSpan )
     {
         CacheDependency = CacheDependency.RelativeTime;
         RelativeTime = remainTimeSpan;
@@ -45,7 +46,7 @@ public class CachesProfile
     /// 监视文件型
     /// </summary>
     /// <param name="monitorFile"></param>
-    public CachesProfile(string monitorFile)
+    public CachesProfile( string monitorFile )
     {
         CacheDependency = CacheDependency.File;
         File = monitorFile;

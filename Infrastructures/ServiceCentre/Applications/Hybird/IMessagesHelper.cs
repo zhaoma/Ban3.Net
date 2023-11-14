@@ -3,9 +3,10 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
+
 using System;
 using System.Threading.Tasks;
-using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
@@ -20,7 +21,7 @@ public interface IMessagesHelper
     /// <param name="messageHub">路由</param>
     /// <param name="messageBody">消息</param>
     /// <returns></returns>
-    Task<bool> TryPublish(IMessageHub messageHub, IMessageBody messageBody);
+    Task<bool> TryPublish( IMessageHub messageHub, IMessageBody messageBody );
 
     /// <summary>
     /// 消息订阅
@@ -28,6 +29,5 @@ public interface IMessagesHelper
     /// <param name="messageHub">路由</param>
     /// <param name="action">消息</param>
     /// <returns></returns>
-    Task<bool> TrySubscribe(IMessageHub messageHub, Action<IMessageBody> action);
+    Task<bool> TrySubscribe( IMessageHub messageHub, Action<IMessageBody> action );
 }
-

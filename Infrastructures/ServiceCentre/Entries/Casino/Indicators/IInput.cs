@@ -4,6 +4,7 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
@@ -16,13 +17,12 @@ public interface IInput
     /// <summary>
     /// 价格数据集合
     /// </summary>
-    [JsonProperty("stockPrices")]
+    [JsonProperty( "stockPrices" )]
     IStockData<IStockPrice> StockPrices { get; set; }
 
     /// <summary>
     /// 公式集合
     /// </summary>
-    [JsonProperty("formulas")]
+    [JsonProperty( "formulas" )]
     IFormulas Formulas { get; set; }
 }
-

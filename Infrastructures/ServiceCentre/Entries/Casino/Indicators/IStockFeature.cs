@@ -3,9 +3,11 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Collections.Generic;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+
 using Newtonsoft.Json;
+
+using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
@@ -17,13 +19,12 @@ public interface IStockFeature : IStockRecord
     /// <summary>
     /// 评分
     /// </summary>
-    [JsonProperty("score")]
+    [JsonProperty( "score" )]
     int Score { get; set; }
 
     /// <summary>
     /// 特征集合
     /// </summary>
-    [JsonProperty("keys")]
+    [JsonProperty( "keys" )]
     IEnumerable<string> Keys { get; set; }
 }
-

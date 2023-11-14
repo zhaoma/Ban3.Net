@@ -3,15 +3,16 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
 using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
@@ -25,8 +26,8 @@ public static partial class Helper
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public static JToken JsonToken(this object? obj) 
-        => JToken.Parse(obj.ObjToJson());
+    public static JToken JsonToken( this object? obj )
+        => JToken.Parse( obj.ObjToJson() );
 
     /// <summary>
     /// 
@@ -34,16 +35,16 @@ public static partial class Helper
     /// <param name="obj"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static object? JsonValue(this object? obj, string key)
-        => obj.JsonToken().GetPropertyValue(key);
+    public static object? JsonValue( this object? obj, string key )
+        => obj.JsonToken().GetPropertyValue( key );
 
     /// <summary>
     /// 命名约束
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public static string ObjToJson(this object? obj) 
-        => JsonConvert.SerializeObject(obj);
+    public static string ObjToJson( this object? obj )
+        => JsonConvert.SerializeObject( obj );
 
     /// <summary>
     /// json转实体
@@ -51,11 +52,11 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="str"></param>
     /// <returns></returns>
-    public static T? JsonToObj<T>(this string str)
+    public static T? JsonToObj<T>( this string str )
         =>
-            string.IsNullOrEmpty(str)
-                ? default(T)
-                : JsonConvert.DeserializeObject<T>(str);
+            string.IsNullOrEmpty( str )
+                ? default( T )
+                : JsonConvert.DeserializeObject<T>( str );
 
     /// <summary>
     /// jsonp
@@ -63,21 +64,21 @@ public static partial class Helper
     /// <param name="inVal"></param>
     /// <param name="callback"></param>
     /// <returns></returns>
-    public static string JsonpParse(this string inVal, string callback)
-        => inVal.Substring(callback.Length + 1, inVal.Length - callback.Length - 3);
+    public static string JsonpParse( this string inVal, string callback )
+        => inVal.Substring( callback.Length + 1, inVal.Length - callback.Length - 3 );
 
     /// <summary>
     /// Serializes the specified value.
     /// </summary>
     /// <param name="value">The value.</param>
     /// <returns></returns>
-    public static byte[] Serialize(this object value)
+    public static byte[] Serialize( this object value )
     {
         using var ms = new MemoryStream();
 
         var bf1 = new BinaryFormatter();
 
-        bf1.Serialize(ms, value);
+        bf1.Serialize( ms, value );
 
         return ms.ToArray();
     }
@@ -87,23 +88,23 @@ public static partial class Helper
     /// </summary>
     /// <param name="o">The o.</param>
     /// <returns></returns>
-    public static string SerializeXml(this object o)
+    public static string SerializeXml( this object o )
     {
-        var serializer = new XmlSerializer(o.GetType());
+        var serializer = new XmlSerializer( o.GetType() );
 
         var ns = new XmlSerializerNamespaces();
 
-        ns.Add("", "");
+        ns.Add( "", "" );
 
         using var stream = new MemoryStream();
 
-        var setting = new XmlWriterSettings { Encoding = new UTF8Encoding(false), Indent = true };
+        var setting = new XmlWriterSettings { Encoding = new UTF8Encoding( false ), Indent = true };
 
-        using var textWriter = XmlWriter.Create(stream, setting);
+        using var textWriter = XmlWriter.Create( stream, setting );
 
-        serializer.Serialize(textWriter, o, ns);
+        serializer.Serialize( textWriter, o, ns );
 
-        return Encoding.UTF8.GetString(stream.ToArray());
+        return Encoding.UTF8.GetString( stream.ToArray() );
     }
 
     /// <summary>
@@ -112,9 +113,9 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="xml">The XML.</param>
     /// <returns></returns>
-    public static T DeserializeXml<T>(this string xml)
+    public static T DeserializeXml<T>( this string xml )
     {
-        return (T)Deserialize(xml, typeof(T));
+        return (T)Deserialize( xml, typeof( T ) );
     }
 
     /// <summary>
@@ -123,11 +124,11 @@ public static partial class Helper
     /// <param name="xml">The XML.</param>
     /// <param name="type">The type.</param>
     /// <returns></returns>
-    public static object Deserialize(string xml, Type type)
+    public static object Deserialize( string xml, Type type )
     {
-        var serializer = new XmlSerializer(type);
-        using TextReader textReader = new StringReader(xml);
-        var o = serializer.Deserialize(textReader);
+        var serializer = new XmlSerializer( type );
+        using TextReader textReader = new StringReader( xml );
+        var o = serializer.Deserialize( textReader );
         return o;
     }
 
@@ -137,22 +138,21 @@ public static partial class Helper
     /// <param name="node"></param>
     /// <param name="attributeName"></param>
     /// <returns></returns>
-    public static string TryGetAttribute(this XmlNode node, string attributeName)
+    public static string TryGetAttribute( this XmlNode node, string attributeName )
     {
         try
         {
-            if (node.Attributes is { Count: > 0 })
-                foreach (XmlAttribute nodeAttributes in node.Attributes)
+            if( node.Attributes is { Count: > 0 } )
+            {
+                if( node.Attributes.Cast<XmlAttribute>().Any( nodeAttributes => nodeAttributes.Name == attributeName ) )
                 {
-                    if (nodeAttributes.Name == attributeName)
-                    {
-                        return node.Attributes[attributeName].Value;
-                    }
+                    return node.Attributes[ attributeName ].Value;
                 }
+            }
         }
-        catch (Exception ex)
+        catch( Exception ex )
         {
-            Logger.Error(ex);
+            Logger.Error( ex );
         }
 
         return string.Empty;

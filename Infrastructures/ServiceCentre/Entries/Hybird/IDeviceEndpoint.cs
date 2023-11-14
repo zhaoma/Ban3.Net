@@ -4,6 +4,7 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -17,21 +18,20 @@ public interface IDeviceEndpoint
     /// <summary>
     /// 设备所在
     /// </summary>
-    [JsonProperty("deviceAt")]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonProperty( "deviceAt" )]
+    [JsonConverter( typeof( StringEnumConverter ) )]
     DeviceAt DeviceAt { get; set; }
 
     /// <summary>
     /// 波特率
     /// </summary>
-    [JsonProperty("deviceBoundary")]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonProperty( "deviceBoundary" )]
+    [JsonConverter( typeof( StringEnumConverter ) )]
     DeviceBoundary DeviceBoundary { get; set; }
 
     /// <summary>
     /// 使用端口
     /// </summary>
-    [JsonProperty("port")]
+    [JsonProperty( "port" )]
     int Port { get; set; }
 }
-

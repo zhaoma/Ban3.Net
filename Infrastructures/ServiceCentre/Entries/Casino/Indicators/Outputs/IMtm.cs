@@ -4,6 +4,7 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
@@ -16,13 +17,12 @@ public interface IMtm : IStockRecord, IEvaluation<IMa>
     /// <summary>
     /// MTM:CLOSE-REF(CLOSE,N);
     /// </summary>
-    [JsonProperty("mtm")]
+    [JsonProperty( "mtm" )]
     decimal MTM { get; set; }
 
     /// <summary>
     /// MAMTM:MA(MTM, M);
     /// </summary>
-    [JsonProperty("mamtm")]
+    [JsonProperty( "mamtm" )]
     decimal MAMTM { get; set; }
 }
-

@@ -3,14 +3,18 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System;
 using Microsoft.CSharp;
+
+using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Reflection;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
+/// <summary>
+/// (动态)编译相关
+/// </summary>
 public static partial class Helper
 {
     /// <summary>
@@ -19,7 +23,7 @@ public static partial class Helper
     /// <param name="codeFiles">源码(每文件)</param>
     /// <param name="references">引用/依赖库(.dll)</param>
     /// <returns></returns>
-    public static Assembly? CompileSourceCodes(this string[] codeFiles,List<string> references)
+    public static Assembly? CompileSourceCodes( this string[] codeFiles, List<string> references )
     {
         try
         {
@@ -30,15 +34,18 @@ public static partial class Helper
                 GenerateInMemory = true
             };
 
-            references.ForEach(r => { compilerParameters.ReferencedAssemblies.Add(r); });
-
-            var compilerResult = codeProvider.CompileAssemblyFromSource(compilerParameters, codeFiles);
-
-            if (compilerResult.Errors.HasErrors)
+            references.ForEach( r =>
             {
-                foreach (CompilerError err in compilerResult.Errors)
+                compilerParameters.ReferencedAssemblies.Add( r );
+            } );
+
+            var compilerResult = codeProvider.CompileAssemblyFromSource( compilerParameters, codeFiles );
+
+            if( compilerResult.Errors.HasErrors )
+            {
+                foreach( CompilerError err in compilerResult.Errors )
                 {
-                    Logger.Error($"{err.ErrorNumber}:{err.ErrorText}");
+                    Logger.Error( $"{err.ErrorNumber}:{err.ErrorText}" );
                 }
 
                 return null;
@@ -46,9 +53,9 @@ public static partial class Helper
 
             return compilerResult.CompiledAssembly;
         }
-        catch (Exception ex)
+        catch( Exception ex )
         {
-            Logger.Error(ex);
+            Logger.Error( ex );
         }
 
         return null;

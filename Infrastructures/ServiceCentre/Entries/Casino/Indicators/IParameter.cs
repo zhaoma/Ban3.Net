@@ -5,7 +5,4 @@
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
-public interface IParameter
-{
-}
-
+public interface IParameter {}

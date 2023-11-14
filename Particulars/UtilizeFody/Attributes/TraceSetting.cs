@@ -3,15 +3,25 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Common.Attributes;
-using Rougamo;
-
-namespace Ban3.Infrastructures.Common.Interfaces;
+namespace Ban3.Infrastructures.Common.Models;
 
 /// <summary>
-/// 用Rougamo.Fody记录程序运行过程
+/// 跟踪设置
 /// </summary>
-public interface ITraceIt:IRougamo<TracingItAttribute>
+public class TraceSetting
 {
-    
+    /// <summary>
+    /// 记录时间
+    /// </summary>
+    public bool Timing { get; set; }
+
+    /// <summary>
+    /// 记录参数
+    /// </summary>
+    public bool LoggingArguments { get; set; }
+
+    /// <summary>
+    /// 绑定对象
+    /// </summary>
+    public AccessFlags BindFlags { get; set; }
 }

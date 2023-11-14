@@ -3,9 +3,10 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Newtonsoft.Json.Converters;
-using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+using System;
 
 namespace Ban3.Infrastructures.Common.Models;
 
@@ -24,7 +25,7 @@ public class DateTimeConverter
     }
 
     /// 
-    public DateTimeConverter(string? formatter)
+    public DateTimeConverter( string? formatter )
     {
         _dtConvertor = new IsoDateTimeConverter { DateTimeFormat = formatter };
     }
@@ -35,9 +36,9 @@ public class DateTimeConverter
     /// <param name="writer"></param>
     /// <param name="value"></param>
     /// <param name="serializer"></param>
-    public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+    public override void WriteJson( JsonWriter writer, object? value, JsonSerializer serializer )
     {
-        _dtConvertor.WriteJson(writer, value, serializer);
+        _dtConvertor.WriteJson( writer, value, serializer );
     }
 
     /// <summary>
@@ -48,22 +49,18 @@ public class DateTimeConverter
     /// <param name="existingValue"></param>
     /// <param name="serializer"></param>
     /// <returns></returns>
-    public override object? ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+    public override object? ReadJson( JsonReader reader,
+                                      Type objectType,
+                                      object? existingValue,
+                                      JsonSerializer serializer )
     {
-        if (existingValue == null) return null;
-        return _dtConvertor.ReadJson(reader, objectType, existingValue, serializer);
+        if( existingValue == null ) return null;
+        return _dtConvertor.ReadJson( reader, objectType, existingValue, serializer );
     }
-}
 
-/// <summary>
-/// 
-/// </summary>
-public class DateOnlyConverter
-    : DateTimeConverter
-{
     /// 
-    public DateOnlyConverter()
-        : base("yyyy-MM-dd")
-    {
-    }
+    public static DateTimeConverter DateOnlyConverter = new( "yyyy-MM-dd" );
+
+    ///
+    public static DateTimeConverter YmdConverter = new( "yyyyMMdd" );
 }

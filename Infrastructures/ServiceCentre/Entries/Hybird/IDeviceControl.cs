@@ -15,8 +15,6 @@ public interface IDeviceControl
     /// <summary>
     /// 指令字节组
     /// </summary>
-    [JsonProperty("codes")]
+    [JsonProperty( "codes" )]
     byte[] Codes { get; set; }
-
 }
-

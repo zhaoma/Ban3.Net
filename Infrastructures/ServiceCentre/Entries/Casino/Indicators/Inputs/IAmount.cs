@@ -3,8 +3,9 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System.Collections.Generic;
 using Newtonsoft.Json;
+
+using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
@@ -13,6 +14,6 @@ public interface IAmount : IParameter
     /// <summary>
     /// 周期集合
     /// </summary>
-    [JsonProperty("durations")]
+    [JsonProperty( "durations" )]
     IEnumerable<int> Durations { get; set; }
 }

@@ -11,9 +11,7 @@ namespace Ban3.Infrastructures.Common.Models;
 public class RecursionNode
 {
     /// ctor
-    public RecursionNode()
-    {
-    }
+    public RecursionNode() {}
 
     /// <summary>
     /// 当前key

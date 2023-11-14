@@ -3,11 +3,12 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Common.Attributes;
+using Ban3.Infrastructures.Common.Models;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Ban3.Infrastructures.Common.Attributes;
-using Ban3.Infrastructures.Common.Models;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
@@ -21,18 +22,50 @@ public static partial class Helper
     /// </summary>
     /// <param name="enumValue"></param>
     /// <returns></returns>
-    public static string EnumDescription<T>(this T enumValue) where T : Enum
+    public static string EnumDescription<T>( this T enumValue ) where T : Enum
     {
         var result = enumValue.ToString();
-        var fieldInfo = typeof(T).GetField(result);
+        var fieldInfo = typeof( T ).GetField( result );
 
-        if (Attribute.GetCustomAttribute(fieldInfo, typeof(DescriptionAttribute)) is
-                DescriptionAttribute attribute)
+        if( Attribute.GetCustomAttribute( fieldInfo, typeof( DescriptionAttribute ) ) is
+           DescriptionAttribute attribute )
         {
-            result= attribute.Description;
+            result = attribute.Description;
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// 获取枚举属性项
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="enumValue"></param>
+    /// <returns></returns>
+    public static EnumOption EnumOption<T>( this T enumValue ) where T : Enum
+    {
+        var m = new EnumOption
+        {
+            Value = Convert.ToInt32( enumValue ),
+            Name = enumValue.ToString()
+        };
+
+        var attributes = typeof( T )
+                        .GetField( m.Name )
+                        .GetCustomAttributes( typeof( EnumAttachedAttribute ), true );
+
+        if( attributes.Length > 0 )
+        {
+            var aa = attributes[ 0 ] as EnumAttachedAttribute;
+
+            m.TagType = aa!.TagType;
+            m.Description = aa.Description;
+            m.Icon = aa.Icon;
+            m.IconColor = aa.IconColor;
+            m.Alias = aa.Alias;
+        }
+
+        return m;
     }
 
     /// <summary>
@@ -42,7 +75,7 @@ public static partial class Helper
     /// <returns></returns>
     public static List<EnumOption> EnumOptions<T>()
     {
-        return typeof(T).EnumOptions();
+        return typeof( T ).EnumOptions();
     }
 
     /// <summary>
@@ -50,29 +83,30 @@ public static partial class Helper
     /// </summary>
     /// <param name="enumType"></param>
     /// <returns></returns>
-    public static List<EnumOption> EnumOptions(this Type enumType)
+    public static List<EnumOption> EnumOptions( this Type enumType )
     {
         var options = new List<EnumOption>();
-        foreach (var e in Enum.GetValues(enumType))
+        foreach( var e in Enum.GetValues( enumType ) )
         {
             var m = new EnumOption();
             object[] attachedAttributes = e.GetType()
-                .GetField(e.ToString())
-                .GetCustomAttributes(typeof(EnumAttachedAttribute), true);
+                                           .GetField( e.ToString() )
+                                           .GetCustomAttributes( typeof( EnumAttachedAttribute ), true );
 
-            if (attachedAttributes.Length > 0)
+            if( attachedAttributes.Length > 0 )
             {
-                var aa = attachedAttributes[0] as EnumAttachedAttribute;
+                var aa = attachedAttributes[ 0 ] as EnumAttachedAttribute;
 
                 m.TagType = aa!.TagType;
                 m.Description = aa.Description;
                 m.Icon = aa.Icon;
                 m.IconColor = aa.IconColor;
+                m.Alias = aa.Alias;
             }
 
-            m.Value = Convert.ToInt32(e);
+            m.Value = Convert.ToInt32( e );
             m.Name = e.ToString();
-            options.Add(m);
+            options.Add( m );
         }
 
         return options;
@@ -84,9 +118,9 @@ public static partial class Helper
     /// <typeparam name="T"></typeparam>
     /// <param name="val"></param>
     /// <returns></returns>
-    public static T StringToEnum<T>(this string val) where T : Enum
+    public static T StringToEnum<T>( this string val ) where T : Enum
     {
-        return (T)Enum.Parse(typeof(T), val);
+        return (T)Enum.Parse( typeof( T ), val );
     }
 
     /// <summary>
@@ -96,12 +130,12 @@ public static partial class Helper
     /// <typeparam name="TNew"></typeparam>
     /// <param name="inVal"></param>
     /// <returns></returns>
-    public static TNew EnumToEnum<TOld, TNew>(this TOld inVal)
+    public static TNew EnumToEnum<TOld, TNew>( this TOld inVal )
         where TOld : Enum
         where TNew : struct
     {
-        var success = Enum.TryParse<TNew>($"{inVal}", out var result);
+        var success = Enum.TryParse<TNew>( $"{inVal}", out var result );
 
-        return !success ? default(TNew) : result;
+        return !success ? default( TNew ) : result;
     }
 }

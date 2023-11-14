@@ -3,10 +3,11 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Common.Enums;
+
 using System;
 using System.Security.Cryptography;
 using System.Text;
-using Ban3.Infrastructures.Common.Enums;
 
 namespace Ban3.Infrastructures.Common.Extensions;
 
@@ -20,8 +21,8 @@ public static partial class Helper
     /// </summary>
     /// <param name="plainText"></param>
     /// <returns></returns>
-    public static string MD5String(this string plainText)
-        => HashType.MD5.GetHashedString(Encoding.UTF8.GetBytes(plainText), null);
+    public static string MD5String( this string plainText )
+        => HashType.MD5.GetHashedString( Encoding.UTF8.GetBytes( plainText ), null );
 
     /// <summary>
     /// 获取哈希之后的字符串
@@ -31,12 +32,12 @@ public static partial class Helper
     /// <param name="key"></param>
     /// <param name="isLower"></param>
     /// <returns></returns>
-    public static string GetHashedString(this HashType type, string source, string key = "", bool isLower = false)
+    public static string GetHashedString( this HashType type, string source, string key = "", bool isLower = false )
         => type
-            .GetHashedString(
-                Encoding.UTF8.GetBytes(source),
-                string.IsNullOrEmpty(key) ? null : Encoding.UTF8.GetBytes(key),
-                isLower);
+           .GetHashedString(
+                Encoding.UTF8.GetBytes( source ),
+                string.IsNullOrEmpty( key ) ? null : Encoding.UTF8.GetBytes( key ),
+                isLower );
 
     /// <summary>
     /// 获取哈希之后的字符串
@@ -46,29 +47,29 @@ public static partial class Helper
     /// <param name="key">key</param>
     /// <param name="isLower">是否是小写</param>
     /// <returns>哈希算法处理之后的字符串</returns>
-    public static string GetHashedString(this HashType type, byte[]? source, byte[]? key, bool isLower = false)
+    public static string GetHashedString( this HashType type, byte[]? source, byte[]? key, bool isLower = false )
     {
-        if (source == null || source.Length == 0)
+        if( source == null || source.Length == 0 )
         {
             return string.Empty;
         }
 
-        var hashedBytes = GetHashedBytes(type, source, key);
-        if (hashedBytes != null)
+        var hashedBytes = GetHashedBytes( type, source, key );
+        if( hashedBytes != null )
         {
             var sbText = new StringBuilder();
-            if (isLower)
+            if( isLower )
             {
-                foreach (var b in hashedBytes)
+                foreach( var b in hashedBytes )
                 {
-                    sbText.Append(b.ToString("x2"));
+                    sbText.Append( b.ToString( "x2" ) );
                 }
             }
             else
             {
-                foreach (var b in hashedBytes)
+                foreach( var b in hashedBytes )
                 {
-                    sbText.Append(b.ToString("X2"));
+                    sbText.Append( b.ToString( "X2" ) );
                 }
             }
 
@@ -84,8 +85,8 @@ public static partial class Helper
     /// <param name="type">hash类型</param>
     /// <param name="str">要hash的字符串</param>
     /// <returns>hash过的字节数组</returns>
-    public static byte[]? GetHashedBytes(this HashType type, string str)
-        => GetHashedBytes(type, str, Encoding.UTF8);
+    public static byte[]? GetHashedBytes( this HashType type, string str )
+        => GetHashedBytes( type, str, Encoding.UTF8 );
 
     /// <summary>
     /// 计算字符串Hash值
@@ -94,15 +95,15 @@ public static partial class Helper
     /// <param name="str">要hash的字符串</param>
     /// <param name="encoding">编码类型</param>
     /// <returns>hash过的字节数组</returns>
-    public static byte[]? GetHashedBytes(this HashType type, string str, Encoding encoding)
+    public static byte[]? GetHashedBytes( this HashType type, string str, Encoding encoding )
     {
-        if (string.IsNullOrEmpty(str))
+        if( string.IsNullOrEmpty( str ) )
         {
             return Array.Empty<byte>();
         }
 
-        var bytes = encoding.GetBytes(str);
-        return GetHashedBytes(type, bytes);
+        var bytes = encoding.GetBytes( str );
+        return GetHashedBytes( type, bytes );
     }
 
     /// <summary>
@@ -112,9 +113,9 @@ public static partial class Helper
     /// <param name="key">key</param>
     /// <param name="bytes">原字节数组</param>
     /// <returns></returns>
-    public static byte[]? GetHashedBytes(this HashType type, byte[]? bytes, byte[]? key = null)
+    public static byte[]? GetHashedBytes( this HashType type, byte[]? bytes, byte[]? key = null )
     {
-        if (bytes == null || bytes.Length == 0)
+        if( bytes == null || bytes.Length == 0 )
         {
             return bytes;
         }
@@ -122,7 +123,7 @@ public static partial class Helper
         HashAlgorithm? algorithm = null;
         try
         {
-            if (key == null)
+            if( key == null )
             {
                 algorithm = type switch
                 {
@@ -137,15 +138,15 @@ public static partial class Helper
             {
                 algorithm = type switch
                 {
-                    HashType.SHA1 => new HMACSHA1(key),
-                    HashType.SHA256 => new HMACSHA256(key),
-                    HashType.SHA384 => new HMACSHA384(key),
-                    HashType.SHA512 => new HMACSHA512(key),
-                    _ => new HMACMD5(key)
+                    HashType.SHA1 => new HMACSHA1( key ),
+                    HashType.SHA256 => new HMACSHA256( key ),
+                    HashType.SHA384 => new HMACSHA384( key ),
+                    HashType.SHA512 => new HMACSHA512( key ),
+                    _ => new HMACMD5( key )
                 };
             }
 
-            return algorithm.ComputeHash(bytes);
+            return algorithm.ComputeHash( bytes );
         }
         finally
         {

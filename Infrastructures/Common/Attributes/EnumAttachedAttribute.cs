@@ -10,7 +10,7 @@ namespace Ban3.Infrastructures.Common.Attributes;
 /// <summary>
 /// 枚举类型关联属性
 /// </summary>
-[AttributeUsage(AttributeTargets.Field, Inherited = true)]
+[AttributeUsage( AttributeTargets.Field )]
 public class EnumAttachedAttribute : Attribute
 {
     /// <summary>
@@ -20,7 +20,7 @@ public class EnumAttachedAttribute : Attribute
 
     /// <summary>
     /// 中文描述
-    /// </summary>
+    /// </summary
     public string Description { get; set; } = string.Empty;
 
     /// <summary>
@@ -32,4 +32,9 @@ public class EnumAttachedAttribute : Attribute
     /// 图标颜色
     /// </summary>
     public string IconColor { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 别名(英文值)
+    /// </summary>
+    public string Alias { get; set; } = string.Empty;
 }

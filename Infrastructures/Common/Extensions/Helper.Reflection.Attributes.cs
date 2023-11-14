@@ -24,14 +24,15 @@ public static partial class Helper
     /// <returns></returns>
     public static IEnumerable<T>? GetAttributes<T>(
         this object obj,
-        bool includeInherited = true) where T : Attribute
+        bool includeInherited = true
+    ) where T : Attribute
     {
-        var type = (obj as Type ?? obj.GetType());
-        var attributes = type.GetCustomAttributes(typeof(T), includeInherited);
+        var type = ( obj as Type ?? obj.GetType() );
+        var attributes = type.GetCustomAttributes( typeof( T ), includeInherited );
 
         return attributes.Length > 0 ? attributes.OfType<T>() : null;
     }
-    
+
     /// <summary>
     /// 获取属性成员的自定义属性
     /// </summary>
@@ -40,9 +41,11 @@ public static partial class Helper
     /// <param name="includeInherited"></param>
     /// <returns></returns>
     public static IEnumerable<T>? GetPropertyAttributes<T>(
-        this PropertyInfo property, bool includeInherited = true) where T : Attribute
+        this PropertyInfo property,
+        bool includeInherited = true
+    ) where T : Attribute
     {
-        var attributes= property.GetCustomAttributes(typeof(T), includeInherited);
+        var attributes = property.GetCustomAttributes( typeof( T ), includeInherited );
 
         return attributes.Length > 0 ? attributes.OfType<T>() : null;
     }

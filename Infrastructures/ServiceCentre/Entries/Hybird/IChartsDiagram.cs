@@ -15,6 +15,4 @@ public interface IChartsDiagram
     /// </summary>
     /// <returns></returns>
     string OptionsForECharts();
-    
 }
-

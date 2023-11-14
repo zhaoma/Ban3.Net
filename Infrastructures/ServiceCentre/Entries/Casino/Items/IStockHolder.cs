@@ -4,6 +4,7 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -17,32 +18,32 @@ public interface IStockHolder : IStockRecord, IStockCode
     /// <summary>
     /// 股东标识
     /// </summary>
-    [JsonProperty("id")]
+    [JsonProperty( "id" )]
     string Id { get; set; }
 
     /// <summary>
     /// 股东类型
     /// </summary>
-    [JsonProperty("holderIs")]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonProperty( "holderIs" )]
+    [JsonConverter( typeof( StringEnumConverter ) )]
     HolderIs HolderIs { get; set; }
 
     /// <summary>
     /// 持股数量
     /// </summary>
-    [JsonProperty("holdNumber")]
+    [JsonProperty( "holdNumber" )]
     long HoldNumber { get; set; }
 
     /// <summary>
     /// 持有比例
     /// </summary>
-    [JsonProperty("holdRatio")]
+    [JsonProperty( "holdRatio" )]
     decimal HoldRatio { get; set; }
 
     /// <summary>
     /// 持仓变化
     /// </summary>
-    [JsonProperty("holdChange")]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonProperty( "holdChange" )]
+    [JsonConverter( typeof( StringEnumConverter ) )]
     HoldChange HoldChange { get; set; }
 }

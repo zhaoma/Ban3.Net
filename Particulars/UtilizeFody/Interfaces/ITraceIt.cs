@@ -3,9 +3,11 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-namespace Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Common.Attributes;
 
-public static partial class Helper
-{
-    
-}
+namespace Ban3.Infrastructures.Common.Interfaces;
+
+/// <summary>
+/// 用Rougamo.Fody记录程序运行过程
+/// </summary>
+public interface ITraceIt : IRougamo<TracingItAttribute> {}

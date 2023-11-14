@@ -21,8 +21,8 @@ public static partial class Helper
     /// <param name="obj">The obj.</param>
     /// <param name="methodName">Name of the method.</param>
     /// <returns></returns>
-    public static T? InvokeMethod<T>(this object obj, string methodName) 
-        => obj.InvokeMethod<T>(methodName, null);
+    public static T? InvokeMethod<T>( this object obj, string methodName )
+        => obj.InvokeMethod<T>( methodName, null );
 
     /// <summary>
     /// Invokes the method.
@@ -32,10 +32,10 @@ public static partial class Helper
     /// <param name="parameters">The parameters.</param>
     /// <returns></returns>
     public static object? InvokeMethod(
-        this object obj, 
-        string methodName, 
-        params object[] parameters) 
-        => InvokeMethod<object>(obj, methodName, parameters);
+        this object obj,
+        string methodName,
+        params object[] parameters )
+        => InvokeMethod<object>( obj, methodName, parameters );
 
     /// <summary>
     /// Invokes the method.
@@ -45,31 +45,28 @@ public static partial class Helper
     /// <param name="methodName">Name of the method.</param>
     /// <param name="parameters">The parameters.</param>
     /// <returns></returns>
-    public static T? InvokeMethod<T>(this object obj, string methodName, params object[]? parameters)
+    public static T? InvokeMethod<T>( this object obj, string methodName, params object[]? parameters )
     {
         var type = obj.GetType();
-        var method = type.GetMethod(methodName);
+        var method = type.GetMethod( methodName );
 
-        if (method != null)
+        if( method != null )
         {
-            var value = method.Invoke(obj, parameters);
-            if (value is T result)
-                return result;
-
-            return default(T);
+            var value = method.Invoke( obj, parameters );
+            return value is T result ? result : default( T );
         }
 
-        throw new ArgumentException($"Method '{methodName}' not found.", methodName);
+        throw new ArgumentException( $"Method '{methodName}' not found.", methodName );
     }
 
     /// <summary>
     /// 判断是否异步方法
     /// </summary>
-    public static bool IsAsyncMethod(this MethodInfo method)
+    public static bool IsAsyncMethod( this MethodInfo method )
     {
         return (
-            method.ReturnType == typeof(Task) ||
-            (method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>))
+            method.ReturnType == typeof( Task ) ||
+            ( method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof( Task<> ) )
         );
     }
 }

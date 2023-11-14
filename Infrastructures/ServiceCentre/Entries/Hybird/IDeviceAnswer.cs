@@ -15,6 +15,6 @@ public interface IDeviceAnswer
     /// <summary>
     /// 应答字节组
     /// </summary>
-    [JsonProperty("data")]
+    [JsonProperty( "data" )]
     byte[] Data { get; set; }
 }

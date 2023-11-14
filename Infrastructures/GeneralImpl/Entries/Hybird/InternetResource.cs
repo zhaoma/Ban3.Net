@@ -1,16 +1,19 @@
-﻿using System;
-using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
-using System.Collections.Generic;
-using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
+﻿// —————————————————————————————————————————————————————————————————————————————
+// zhaoma@hotmail.com   2022
+// WTFPL . DRY . KISS . YAGNI
+// —————————————————————————————————————————————————————————————————————————————
+
 using Ban3.Infrastructures.ServiceCentre.Applications;
+using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
+using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
+
+using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Hybird;
 
 public class InternetResource : OneObject, IInternetResource
 {
-    public InternetResource()
-    {
-    }
+    public InternetResource() {}
 
     public string Url { get; set; }
 
@@ -28,4 +31,3 @@ public class InternetResource : OneObject, IInternetResource
 
     public IDictionary<string, string> Query { get; set; }
 }
-
