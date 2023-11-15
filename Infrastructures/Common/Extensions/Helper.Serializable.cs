@@ -24,7 +24,7 @@ public static partial class Helper
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="obj"></param>
+    /// <param name="json"></param>
     /// <returns></returns>
     public static JToken JsonToken( this string json )
         => JToken.Parse( json );
@@ -40,7 +40,7 @@ public static partial class Helper
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="obj"></param>
+    /// <param name="json"></param>
     /// <param name="key"></param>
     /// <returns></returns>
     public static object? JsonValue( this string json, string key )

@@ -16,18 +16,19 @@ using System.Threading.Tasks;
 using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
 
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
 using System.Text;
 
 using Ban3.Infrastructures.GeneralImpl.Entries.Hybird;
 
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Hybird;
 
+/// 
 public class NetHttpClient : OneImplement, IInternetsHelper
 {
+    /// 
     public NetHttpClient() {}
 
+    /// 
     public async Task<bool> TryRequest(
         IInternetHost internetHost,
         IInternetResource internetResource,
@@ -75,13 +76,18 @@ public class NetHttpClient : OneImplement, IInternetsHelper
         return false;
     }
 
-    static readonly object ObjectLock = new();
+    #region private
+
+    static readonly object _objectLock = new();
 
     private HttpClient Client( IInternetHost internetHost )
     {
-        if( _client != null ) return _client;
+        if( _client != null )
+        {
+            return _client;
+        }
 
-        lock( ObjectLock )
+        lock( _objectLock )
         {
             _client ??= internetHost.AuthenticationType == AuthenticationType.None
                 ? new HttpClient { Timeout = TimeSpan.FromMinutes( 5 ) }
@@ -152,10 +158,12 @@ public class NetHttpClient : OneImplement, IInternetsHelper
 
         if( !string.IsNullOrEmpty( internetResource.Charset ) )
         {
-            System.Text.Encoding.RegisterProvider( System.Text.CodePagesEncodingProvider.Instance );
+            Encoding.RegisterProvider( CodePagesEncodingProvider.Instance );
             request.Headers.Add( "Accept-Charset", internetResource.Charset );
         }
 
         return request;
     }
+
+    #endregion
 }

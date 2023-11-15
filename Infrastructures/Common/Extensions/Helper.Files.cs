@@ -106,7 +106,9 @@ public static partial class Helper
     public static string Check( this string path )
     {
         if( !Directory.Exists( path ) )
+        {
             Directory.CreateDirectory( path );
+        }
 
         return path;
     }

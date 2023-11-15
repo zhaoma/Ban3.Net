@@ -38,15 +38,16 @@ public interface IStoragesHelper
     /// <typeparam name="T"></typeparam>
     /// <param name="key"></param>
     /// <returns></returns>
-    Task<bool> TryLoad<T>( string key );
+    Task<T> TryLoad<T>( string key );
 
     /// <summary>
     /// 删除
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="data"></param>
+    /// <param name="getKey"></param>
     /// <returns></returns>
-    Task<bool> TryDelete<T>( T data );
+    Task<bool> TryDelete<T>( T data, Func<T, string> getKey );
 
     /// <summary>
     /// 删除

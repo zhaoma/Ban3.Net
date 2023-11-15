@@ -9,8 +9,16 @@ using System.Reflection;
 
 namespace Ban3.Infrastructures.Common.Models;
 
+/// <summary>
+/// 
+/// </summary>
 public class CompiledMethodInfo
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="methodInfo"></param>
+    /// <param name="type"></param>
     public CompiledMethodInfo( MethodInfo methodInfo, Type type )
     {
         var instanceExpression = Expression.Parameter( typeof( object ), "instance" );
@@ -46,6 +54,12 @@ public class CompiledMethodInfo
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="instance"></param>
+    /// <param name="arguments"></param>
+    /// <returns></returns>
     public object Invoke( object instance, params object[] arguments )
     {
         return _func( instance, arguments );

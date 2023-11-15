@@ -3,7 +3,14 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-namespace Ban3.Infrastructures.ServiceCentre.ServiceTags;
+using System.Collections.Generic;
 
-/// 
-public interface ISingletonTag {}
+using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+
+namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino;
+
+public class StockData<T> : Stock, IStockData<T>
+{
+    public IEnumerable<T> Values { get; set; }
+}

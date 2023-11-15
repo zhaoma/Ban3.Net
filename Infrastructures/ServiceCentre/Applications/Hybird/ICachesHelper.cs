@@ -32,8 +32,9 @@ public interface ICachesHelper
     /// <typeparam name="T"></typeparam>
     /// <param name="data"></param>
     /// <param name="getKey"></param>
+    /// <param name="cachesProfile"></param>
     /// <returns></returns>
-    Task<bool> TrySet<T>( T data, Func<T, string> getKey );
+    Task<bool> TrySet<T>( T data, Func<T, string> getKey, CachesProfile cachesProfile );
 
     /// <summary>
     /// 获取缓存
