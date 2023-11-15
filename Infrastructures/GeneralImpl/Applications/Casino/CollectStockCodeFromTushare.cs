@@ -54,10 +54,7 @@ public class CollectStockCodeFromTushare : OneImplement, IStockCodesCollector
             BaseUrl = @"http://api.tushare.pro"
         };
 
-        var resource = new InternetResource
-        {
-            Url = @""
-        };
+        var resource = Request.TushareRequest.ResourceForCodes();
 
         return await _internetsHelper.TryRequest(
             host,

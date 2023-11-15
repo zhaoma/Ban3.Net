@@ -47,4 +47,10 @@
         <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
         <ProjectReference Include="..\ServiceCentre\ServiceCentre.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Extensions\" />
+      <Folder Include="Response\" />
+      <Folder Include="Request\" />
+    </ItemGroup>
 </Project>
