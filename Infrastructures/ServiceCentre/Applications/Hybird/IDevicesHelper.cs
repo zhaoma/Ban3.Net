@@ -3,6 +3,8 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using System;
+
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
 using System.Threading.Tasks;
@@ -24,6 +26,6 @@ public interface IDevicesHelper
     Task<bool> TryCommunicate(
         IDeviceEndpoint deviceEndpoint,
         IDeviceControl deviceControl,
-        out IDeviceAnswer deviceAnswer
+        Action<IDeviceAnswer> deviceAnswer
     );
 }

@@ -3,6 +3,8 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using System;
+
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
@@ -20,15 +22,14 @@ public interface IChartsHelper
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="data"></param>
-    /// <param name="chartsDiagram"></param>
+    /// <param name="action"></param>
     /// <returns></returns>
-    Task<bool> TryCreate<T>( T data, out IChartsDiagram chartsDiagram );
+    Task<bool> TryCreate<T>( T data, Action<string, IChartsDiagram> action );
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="key"></param>
-    /// <param name="data"></param>
     /// <returns></returns>
-    Task<bool> TryLoad( string key, out IChartsDiagram data );
+    Task<IChartsDiagram> TryLoad( string key );
 }

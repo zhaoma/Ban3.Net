@@ -2,6 +2,52 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+      <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+      <LangVersion>10.0</LangVersion>
+      <Nullable>enable</Nullable>
+      <NullableContextOptions>enable </NullableContextOptions>
+      <RootNamespace>Ban3.Particulars.UtilizeFody</RootNamespace>
+      <AssemblyName>Ban3.Particulars.UtilizeFody</AssemblyName>
+      <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+      <DebugType>embedded</DebugType>
+      <Title>Ban3.Particulars.UtilizeFody</Title>
+      <Version>1.0.1</Version>
+      <Authors>zhaoma</Authors>
+      <Company>BAN3</Company>
+      <Description>Fody 's kits</Description>
+      <PackageIcon>icon.png</PackageIcon>
+      <AssemblyVersion>1.0.1.1</AssemblyVersion>
+      <ApplicationIcon>favicon.ico</ApplicationIcon>
+      <PackageReadmeFile>readme.md</PackageReadmeFile>
+      <Configurations>Release;Debug</Configurations>
+      <BaseOutputPath>..\..\output</BaseOutputPath>
   </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>..\..\output\</OutputPath>
+        <DocumentationFile>..\..\output\xmls\Ban3.Infrastructures.Common.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <PackageReference Include="Costura.Fody" Version="5.7.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="log4net" Version="2.0.15" />
+        <PackageReference Include="Rougamo.Fody" Version="2.0.0" />
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
 
 </Project>

@@ -28,7 +28,13 @@ public interface IStockHoldersCollector
     /// <summary>
     /// 提供大股东数据
     /// </summary>
-    /// <param name="data"></param>
     /// <returns></returns>
-    Task<bool> TryLoad( out IEnumerable<IStockHolder> data );
+    Task<IEnumerable<IStockHolder>> TryLoad();
+
+    /// <summary>
+    /// 提供大股东数据(个股)
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    Task<IEnumerable<IStockHolder>> TryLoad( IStock stock );
 }

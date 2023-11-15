@@ -5,6 +5,8 @@
 
 using Ban3.Infrastructures.Common.Extensions;
 
+using Castle.DynamicProxy;
+
 using log4net;
 
 using System;

@@ -3,6 +3,11 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
-public interface IParameter {}
+public interface IParameter
+{
+    IndicatorIs IndicatorIs { get; set; }
+}

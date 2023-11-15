@@ -7,6 +7,8 @@ using Autofac;
 using Autofac.Configuration;
 using Autofac.Extensions.DependencyInjection;
 
+using Ban3.Infrastructures.ServiceCentre.ServiceTags;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.DependencyModel;

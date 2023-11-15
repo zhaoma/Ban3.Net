@@ -26,8 +26,16 @@ public static partial class Helper
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public static JToken JsonToken( this object? obj )
-        => JToken.Parse( obj.ObjToJson() );
+    public static JToken JsonToken( this string json )
+        => JToken.Parse( json );
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="json"></param>
+    /// <returns></returns>
+    public static JObject JsonObject( this string json )
+        => JObject.Parse( json );
 
     /// <summary>
     /// 
@@ -35,8 +43,8 @@ public static partial class Helper
     /// <param name="obj"></param>
     /// <param name="key"></param>
     /// <returns></returns>
-    public static object? JsonValue( this object? obj, string key )
-        => obj.JsonToken().GetPropertyValue( key );
+    public static object? JsonValue( this string json, string key )
+        => json.JsonToken().GetPropertyValue( key );
 
     /// <summary>
     /// 命名约束

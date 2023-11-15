@@ -1,31 +1,22 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
+// zhaoma@hotmail.com   2022
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
-
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
 
-namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
+namespace Ban3.Infrastructures.Common.Extensions;
 
 /// <summary>
-/// 标的采集
+/// 文件相关扩展方法
 /// </summary>
-public interface IStockCodesCollector
+public static partial class Helper
 {
-    /// <summary>
-    /// 标的采集
-    /// </summary>
-    /// <param name="action">处理动作</param>
-    /// <returns></returns>
-    Task<bool> TryFetchStocks( Action<IEnumerable<IStock>> action );
-
-    /// <summary>
-    /// 提供标的
-    /// </summary>
-    /// <returns></returns>
-    Task<IEnumerable<IStock>> TryLoad();
+    public static async Task<string> ReadAsync( this string filePath )
+    {
+        return await File.ReadAllTextAsync( filePath );
+    }
 }

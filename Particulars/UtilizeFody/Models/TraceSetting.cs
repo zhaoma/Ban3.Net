@@ -1,27 +1,29 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
+// zhaoma@hotmail.com   2022
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System;
+using Rougamo;
 
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
-
-using System.Threading.Tasks;
-
-namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
+namespace Ban3.Particulars.UtilizeFody.Models;
 
 /// <summary>
-/// 价格数据收集
+/// 跟踪设置
 /// </summary>
-public interface IStockPricesCollector
+public class TraceSetting
 {
     /// <summary>
-    /// 价格数据(历史日行情)
+    /// 记录时间
     /// </summary>
-    /// <param name="stock"></param>
-    /// <param name="action">处理动作</param>
-    /// <returns></returns>
-    Task<bool> TryFetchPrices( IStock stock, Action<IStockData<IStockPrice>> action );
+    public bool Timing { get; set; }
+
+    /// <summary>
+    /// 记录参数
+    /// </summary>
+    public bool LoggingArguments { get; set; }
+
+    /// <summary>
+    /// 绑定对象
+    /// </summary>
+    public AccessFlags BindFlags { get; set; }
 }

@@ -3,9 +3,14 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Rougamo;
+using Rougamo.Context;
+
 using System.Diagnostics;
 
-namespace Ban3.Infrastructures.Common.Attributes;
+using log4net;
+
+namespace Ban3.Particulars.UtilizeFody.Attributes;
 
 /// <summary>
 /// 用Rougamo 记录方法(方法的执行耗时)
@@ -35,7 +40,12 @@ public class TracingItAttribute : MoAttribute
         var debugInfo = $"ENTRY:{context.Method.DeclaringType}.{context.Method.Name}";
 
         if( Config.TraceSetting is { LoggingArguments: true } )
-            debugInfo += $"{context.Arguments.ObjToJson()}.";
+        {
+            foreach( var arg in context.Arguments )
+            {
+                debugInfo += $"{arg}";
+            }
+        }
 
         Logger.Debug( debugInfo );
     }

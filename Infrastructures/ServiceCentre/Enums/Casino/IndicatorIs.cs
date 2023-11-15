@@ -1,27 +1,21 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2022
+// zhaoma@hotmail.com   2023
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-namespace Ban3.Infrastructures.Common.Models;
+namespace Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
-/// <summary>
-/// 跟踪设置
-/// </summary>
-public class TraceSetting
+public enum IndicatorIs
 {
-    /// <summary>
-    /// 记录时间
-    /// </summary>
-    public bool Timing { get; set; }
-
-    /// <summary>
-    /// 记录参数
-    /// </summary>
-    public bool LoggingArguments { get; set; }
-
-    /// <summary>
-    /// 绑定对象
-    /// </summary>
-    public AccessFlags BindFlags { get; set; }
+    AMOUNT,
+    BBI,
+    BIAS,
+    CCI,
+    ENE,
+    KD,
+    LWR,
+    MA,
+    MACD,
+    MTM,
+    RSI
 }

@@ -28,7 +28,7 @@ public interface IStockEventsCollector
     /// <summary>
     /// 提供事件数据
     /// </summary>
-    /// <param name="data"></param>
+    /// <param name="stock"></param>
     /// <returns></returns>
-    Task<bool> TryLoad( out IEnumerable<IStockEvent> data );
+    Task<IStockData<IStockEvent>> TryLoad( IStock stock );
 }
