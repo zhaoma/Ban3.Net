@@ -49,7 +49,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Extensions\" />
       <Folder Include="Response\" />
       <Folder Include="Request\" />
     </ItemGroup>

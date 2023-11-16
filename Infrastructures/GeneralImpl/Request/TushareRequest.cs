@@ -12,10 +12,21 @@ using Ban3.Infrastructures.GeneralImpl.Entries.Hybird;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
 
+#nullable enable
 namespace Ban3.Infrastructures.GeneralImpl.Request;
 
+/// 
 public class TushareRequest
 {
+    /// 
+    public static InternetHost Host()
+        => new()
+        {
+            AuthenticationType = AuthenticationType.None,
+            BaseUrl = @"http://api.tushare.pro"
+        };
+
+    /// 
     public static InternetResource ResourceForCodes()
     {
         return new InternetResource
@@ -36,6 +47,7 @@ public class TushareRequest
         };
     }
 
+    /// 
     public static InternetResource ResourceForPrices( IStock stock )
     {
         return new InternetResource
@@ -60,23 +72,30 @@ public class TushareRequest
         };
     }
 
-    protected class ApiRequestBody
+    /// 
+    internal class ApiRequestBody
     {
+        /// 
         [JsonProperty( "api_name" )]
         public string ApiName { get; set; } = string.Empty;
 
+        /// 
         [JsonProperty( "token" )]
         public string Token { get; set; }
 
+        /// 
         [JsonProperty( "params", NullValueHandling = NullValueHandling.Ignore )]
         public Dictionary<string, object>? Params { get; set; }
 
+        /// 
         [JsonProperty( "fields" )]
         public string Fields => string.Join( ",", FieldList );
 
+        /// 
         [JsonIgnore]
         public List<string> FieldList { get; set; } = new();
 
+        /// 
         public ApiRequestBody()
         {
             var token = Common.Config.GetValue( "Sites:TushareToken" );
@@ -87,16 +106,22 @@ public class TushareRequest
         }
     }
 
-    class GetDailyParams
+    /// 
+    internal class GetDailyParams
     {
+        /// 
         public string Code { get; set; } = string.Empty;
 
+        /// 
         public string TradeDate { get; set; } = string.Empty;
 
+        /// 
         public string StartDate { get; set; } = string.Empty;
 
+        /// 
         public string EndDate { get; set; } = string.Empty;
 
+        /// 
         public Dictionary<string, object> ToDictionary()
         {
             var dic = new Dictionary<string, object>();
@@ -113,8 +138,10 @@ public class TushareRequest
             return dic;
         }
 
+        /// 
         public GetDailyParams() {}
 
+        /// 
         public GetDailyParams( IEnumerable<string> tsCodes )
         {
             Code = string.Join( ",", tsCodes );

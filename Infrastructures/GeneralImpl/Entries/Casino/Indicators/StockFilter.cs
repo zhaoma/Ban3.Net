@@ -4,32 +4,36 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
-
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 using System.Collections.Generic;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
+namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;
 
 /// <summary>
-/// 计算结果声明
+/// 筛选策略
 /// </summary>
-public interface IComputedResult : IStockRecord, IEvaluation<IComputedResult>
+public class StockFilter : IStockFilter
 {
-    /// <summary>
-    /// 分析周期
-    /// </summary>
-    [JsonProperty( "analysisCycle" )]
-    [JsonConverter( typeof( StringEnumConverter ) )]
-    AnalysisCycle AnalysisCycle { get; set; }
+    /// 
+    public string Id { get; set; }
 
-    /// <summary>
-    /// 成交量均线
-    /// </summary>
-    [JsonProperty( "results" )]
-    IEnumerable<IEvaluation<IParameter>> Results { get; set; }
+    /// 
+    public string Subject { get; set; }
 
-    IndicatorIs IndicatorIs { get; set; }
+    /// 
+    public IEnumerable<IStockCondition> BuyConditions { get; set; }
+
+    /// 
+    public IEnumerable<IStockCondition> SellConditions { get; set; }
+
+    /// 
+    public IEnumerable<BoardIs> Boards { get; set; }
+
+    /// 
+    public IEnumerable<NotionIs> Notions { get; set; }
+
+    /// 
+    public IEnumerable<IStockHolder> Holders { get; set; }
 }

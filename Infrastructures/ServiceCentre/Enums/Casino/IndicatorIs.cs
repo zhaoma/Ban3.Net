@@ -15,6 +15,7 @@ public enum IndicatorIs
     BBI,
     BIAS,
     CCI,
+    DMI,
     ENE,
     KD,
     LWR,

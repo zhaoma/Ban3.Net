@@ -3,26 +3,26 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
+
+#nullable enable
+namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;
 
 /// <summary>
-/// 动量指标,Momentum Index
+/// 筛选条件
 /// </summary>
-public interface IMtm : IStockRecord, IEvaluation<IMtm>
+public class StockCondition : IStockCondition
 {
-    /// <summary>
-    /// MTM:CLOSE-REF(CLOSE,N);
-    /// </summary>
-    [JsonProperty( "mtm" )]
-    decimal MTM { get; set; }
+    /// 
+    public AnalysisCycle? AnalysisCycle { get; set; }
 
-    /// <summary>
-    /// MAMTM:MA(MTM, M);
-    /// </summary>
-    [JsonProperty( "mamtm" )]
-    decimal MAMTM { get; set; }
+    /// 
+    public IEnumerable<string>? IncludeKeys { get; set; }
+
+    /// 
+    public IEnumerable<string>? ExcludeKeys { get; set; }
 }
