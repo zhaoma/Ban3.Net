@@ -16,7 +16,9 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;
 /// </summary>
 public class Formulas : IFormulas
 {
+    /// 
     public IEnumerable<IParameter> Parameters { get; set; }
 
+    /// 
     public int MaxScore { get; set; }
 }

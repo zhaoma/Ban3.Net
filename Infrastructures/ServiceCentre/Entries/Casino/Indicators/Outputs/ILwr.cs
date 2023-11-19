@@ -20,7 +20,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// 类似于威廉指标，LWR指标的取值范围在-100到0之间，其中-100表示市场处于超买状态，0表示市场处于超卖状态。
 /// RSV:= (HHV(HIGH,N)-CLOSE)/(HHV(HIGH,N)-LLV(LOW,N))*100;
 /// </summary>
-public interface ILwr : IStockRecord, IEvaluation<ILwr>
+public interface ILwr : IStockRecord, IEvaluation<ILwr> 
 {
     /// <summary>
     /// LWR1:SMA(RSV,M1,1);

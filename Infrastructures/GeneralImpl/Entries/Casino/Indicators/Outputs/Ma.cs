@@ -14,10 +14,10 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 价格均线指标
 /// </summary>
-public class Ma : StockFeature, IEvaluation<Ma>
+public class Ma : StockValue, IEvaluation<Ma>
 {
     /// 
-    public IEnumerable<ILine<decimal>> Lines { get; set; }
+    public IEnumerable<Line<decimal>> Lines { get; set; }
 
     /// 
     public bool Judge( Ma previousValue, out int score, out IEnumerable<string> keys )

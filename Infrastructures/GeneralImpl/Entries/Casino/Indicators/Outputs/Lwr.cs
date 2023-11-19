@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 
-public class Lwr : StockFeature, IEvaluation<Lwr>
+public class Lwr : StockValue, IEvaluation<Lwr>
 {
     /// 
     public decimal LWR1 { get; set; }

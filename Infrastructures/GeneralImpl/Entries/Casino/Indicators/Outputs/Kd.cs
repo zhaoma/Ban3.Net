@@ -13,7 +13,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 随机震荡指数
 /// </summary>
-public class Kd : StockFeature, IEvaluation<Kd>
+public class Kd : StockValue, IEvaluation<Kd>
 {
     /// 
     public decimal K { get; set; }

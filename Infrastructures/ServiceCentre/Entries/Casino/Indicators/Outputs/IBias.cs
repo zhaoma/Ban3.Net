@@ -11,7 +11,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 乖离率
 /// </summary>
-public interface IBias : IStockRecord, IEvaluation<IBias>
+public interface IBias : IStockRecord, IEvaluation<IBias> 
 {
     /// <summary>
     /// 乖离

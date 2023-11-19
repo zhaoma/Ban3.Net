@@ -7,7 +7,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 多空指标,Bull And Bear Index
 /// </summary>
-public interface IBbi : IStockRecord, IEvaluation<IBbi>
+public interface IBbi : IStockRecord, IEvaluation<IBbi> 
 {
     /// <summary>
     /// 均线型指标，一般选用3日、6日、12日、24日等4条平均线

@@ -19,6 +19,6 @@ public interface IAmount : IStockRecord, IEvaluation<IAmount>
     /// <summary>
     /// 均线集合
     /// </summary>
-    [JsonProperty( "lines" )]
+    [JsonProperty("lines")]
     IEnumerable<ILine<double>> Lines { get; set; }
 }

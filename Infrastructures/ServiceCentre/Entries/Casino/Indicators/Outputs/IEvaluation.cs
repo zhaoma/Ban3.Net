@@ -3,28 +3,23 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
-
-using Newtonsoft.Json;
-
 using System.Collections.Generic;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 
 /// <summary>
-/// 标的特征声明
+/// 可实现评估的声明
 /// </summary>
-public interface IStockFeature : IStockRecord
+/// <typeparam name="T"></typeparam>
+public interface IEvaluation<in T> : IStockValue
 {
     /// <summary>
-    /// 评分
+    /// 评判指标
     /// </summary>
-    [JsonProperty( "score" )]
-    int Score { get; set; }
+    /// <param name="previousValue">上期值</param>
+    /// <param name="score">得分</param>
+    /// <param name="keys">输出特征</param>
+    /// <returns></returns>
+    bool Judge( T previousValue, out int score, out IEnumerable<string> keys );
 
-    /// <summary>
-    /// 特征集合
-    /// </summary>
-    [JsonProperty( "keys" )]
-    IEnumerable<string> Keys { get; set; }
 }

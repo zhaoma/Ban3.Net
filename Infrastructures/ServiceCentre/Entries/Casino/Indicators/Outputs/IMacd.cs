@@ -11,7 +11,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 异同移动平均线指标
 /// </summary>
-public interface IMacd : IStockRecord, IEvaluation<IMacd>
+public interface IMacd : IStockRecord, IEvaluation<IMacd> 
 {
     /// <summary>
     /// 快线

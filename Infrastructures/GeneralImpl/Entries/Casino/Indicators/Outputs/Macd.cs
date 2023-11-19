@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 
-public class Macd : StockFeature, IEvaluation<Macd>
+public class Macd : StockValue, IEvaluation<Macd>
 {
     /// 
     public decimal DIF { get; set; }

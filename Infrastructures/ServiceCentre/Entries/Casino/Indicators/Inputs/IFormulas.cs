@@ -3,21 +3,26 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Newtonsoft.Json;
+
 using System.Collections.Generic;
 
-using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
-
-namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 
 /// <summary>
-/// 标的特征声明
+/// 公式声明
 /// </summary>
-public class StockFeature : StockRecord, IStockFeature
+public interface IFormulas
 {
-    /// 
-    public int Score { get; set; }
+    /// <summary>
+    /// 参数集合
+    /// </summary>
+    [JsonProperty( "parameters" )]
+    IEnumerable<IParameter> Parameters { get; set; }
 
-    /// 
-    public IEnumerable<string> Keys { get; set; }
+    /// <summary>
+    /// 最高分统计
+    /// </summary>
+    [JsonProperty( "maxScore" )]
+    int MaxScore { get; set; }
 }

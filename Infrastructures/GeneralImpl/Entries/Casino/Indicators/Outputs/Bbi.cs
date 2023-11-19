@@ -13,7 +13,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 多空指标,Bull And Bear Index
 /// </summary>
-public class Bbi : StockFeature, IEvaluation<Bbi>
+public class Bbi : StockValue, IEvaluation<Bbi>
 {
     /// 
     public decimal BBI { get; set; }

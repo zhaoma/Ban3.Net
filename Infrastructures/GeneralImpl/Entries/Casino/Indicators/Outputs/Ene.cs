@@ -13,7 +13,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// Energy Envelope
 /// </summary>
-public class Ene : StockFeature, IEvaluation<Ene>
+public class Ene : StockValue, IEvaluation<Ene>
 {
     /// 
     public decimal UPPER { get; set; }

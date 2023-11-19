@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 
-public class Dmi : StockFeature, IEvaluation<Dmi>
+public class Dmi : StockValue, IEvaluation<Dmi>
 {
     /// 
     public decimal PDI { get; set; }

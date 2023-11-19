@@ -13,7 +13,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 顺势指标
 /// </summary>
-public class Cci : StockFeature, IEvaluation<Cci>
+public class Cci : StockValue, IEvaluation<Cci>
 {
     /// 
     public decimal CCI { get; set; }

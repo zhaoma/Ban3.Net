@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 using System.Collections.Generic;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Filters;
 
 /// <summary>
 /// 筛选策略

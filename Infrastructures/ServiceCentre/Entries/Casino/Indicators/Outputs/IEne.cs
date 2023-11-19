@@ -11,7 +11,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// Energy Envelope
 /// </summary>
-public interface IEne : IStockRecord, IEvaluation<IEne>
+public interface IEne : IStockRecord, IEvaluation<IEne> 
 {
     /// <summary>
     /// 上轨

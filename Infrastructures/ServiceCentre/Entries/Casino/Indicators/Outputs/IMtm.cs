@@ -12,7 +12,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 动量指标,Momentum Index
 /// </summary>
-public interface IMtm : IStockRecord, IEvaluation<IMtm>
+public interface IMtm : IStockRecord, IEvaluation<IMtm> 
 {
     /// <summary>
     /// MTM:CLOSE-REF(CLOSE,N);

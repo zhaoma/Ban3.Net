@@ -30,6 +30,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Entries\Casino\Filters\" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="favicon.ico" />
         <None Include="..\..\icon.png">
             <Pack>True</Pack>
@@ -43,6 +46,7 @@
 
     <ItemGroup>
       <Folder Include="ServiceTags\" />
+      <Folder Include="Entries\Casino\Filters\" />
     </ItemGroup>
 
     <ItemGroup>

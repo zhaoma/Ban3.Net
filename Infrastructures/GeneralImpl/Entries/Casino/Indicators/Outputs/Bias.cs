@@ -13,7 +13,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 乖离率
 /// </summary>
-public class Bias : StockFeature, IEvaluation<Bias>
+public class Bias : StockValue, IEvaluation<Bias>
 {
     /// 
     public decimal BIAS { get; set; }

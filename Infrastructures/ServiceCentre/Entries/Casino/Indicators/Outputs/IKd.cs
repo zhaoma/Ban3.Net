@@ -11,7 +11,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 随机震荡指数
 /// </summary>
-public interface IKd : IStockRecord, IEvaluation<IKd>
+public interface IKd : IStockRecord, IEvaluation<IKd> 
 {
     /// <summary>
     /// K线

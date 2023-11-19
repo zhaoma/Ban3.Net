@@ -3,32 +3,34 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
 using Newtonsoft.Json;
 
 using System.Collections.Generic;
 
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Filters;
 
-public interface IEvaluation<in T>
+/// <summary>
+/// 筛选条件
+/// </summary>
+public interface IStockCondition
 {
     /// <summary>
-    /// 评判指标
+    /// 周期
     /// </summary>
-    /// <param name="previousValue">上期值</param>
-    /// <param name="score">得分</param>
-    /// <param name="keys">输出特征</param>
-    /// <returns></returns>
-    bool Judge( T previousValue, out int score, out IEnumerable<string> keys );
+    [JsonProperty( "analysisCycle" )]
+    AnalysisCycle? AnalysisCycle { get; set; }
 
     /// <summary>
-    /// 评分
+    /// 包含特征
     /// </summary>
-    [JsonProperty( "score" )]
-    int Score { get; set; }
+    [JsonProperty( "includeKeys" )]
+    IEnumerable<string> IncludeKeys { get; set; }
 
     /// <summary>
-    /// 特质集合
+    /// 不包含特征
     /// </summary>
-    [JsonProperty( "keys" )]
-    IEnumerable<string> Keys { get; set; }
+    [JsonProperty( "excludeKeys" )]
+    IEnumerable<string> ExcludeKeys { get; set; }
 }

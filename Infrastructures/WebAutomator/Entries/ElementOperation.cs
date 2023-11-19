@@ -4,17 +4,16 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using System;
-using Ban3.Infrastructures.WebAutomator.Enums;
 
 namespace Ban3.Infrastructures.WebAutomator.Entries;
 
 public class ElementOperation
 {
-	public ElementOperation()
-	{
-	}
+    public ElementOperation()
+    {
+    }
 
-	public ElementIs ElementIs { get; set; }
+    public string HtmlTag { get; set; }
 
 
 }

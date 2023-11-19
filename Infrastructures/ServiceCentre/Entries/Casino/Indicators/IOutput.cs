@@ -3,6 +3,7 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
@@ -10,10 +11,10 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 /// <summary>
 /// 计算输出结果声明
 /// </summary>
-public interface IOutput : IStockCode
+public interface IOutput : IStockCode,IStockValue
 {
     /// <summary>
     /// 计算结果：公式结果集合->特征集合+得分（分周期）
     /// </summary>
-    IStockData<IComputedResult> ComputedResults { get; set; }
+    IStockData<Outputs.IComputedResult> ComputedResults { get; set; }
 }
