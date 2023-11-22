@@ -21,5 +21,4 @@ public interface IEvaluation<in T> : IStockValue
     /// <param name="keys">输出特征</param>
     /// <returns></returns>
     bool Judge( T previousValue, out int score, out IEnumerable<string> keys );
-
 }

@@ -3,8 +3,6 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Common.Extensions;
-
 using Castle.DynamicProxy;
 
 using log4net;
@@ -14,7 +12,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Ban3.Infrastructures.DependecyInjection.Interceptors;
+namespace Ban3.Infrastructures.DependencyInjection.Interceptors;
 
 /* —————————————————————————————————————————————————————————————————————————————
  * https://github.com/castleproject/Core
@@ -56,40 +54,37 @@ public class TraceInterceptor
         var stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        _logger.Debug( $"calling : '{invocation.Method.Name}' arguments : {invocation.Arguments.ObjToJson()}..." );
+        _logger.Debug( $"calling : '{invocation.Method.Name}'..." );
 
         invocation.Proceed();
 
         var returnType = invocation.Method.ReturnType;
 
-        if( invocation.Method.IsAsyncMethod() )
+        if( returnType != null && returnType == typeof( Task ) )
         {
-            if( returnType != null && returnType == typeof( Task ) )
+            Func<Task> res = async () => await (Task)invocation.ReturnValue;
+
+            invocation.ReturnValue = res();
+        }
+        else
+        {
+            var reflectedType = invocation.Method.ReflectedType; //获取返回类型
+
+            if( reflectedType != null )
             {
-                Func<Task> res = async () => await (Task)invocation.ReturnValue;
+                var resultType = returnType!.GetGenericArguments()[ 0 ];
 
-                invocation.ReturnValue = res();
-            }
-            else
-            {
-                var reflectedType = invocation.Method.ReflectedType; //获取返回类型
+                var methodInfo = typeof( TraceInterceptor )
+                   .GetMethod( "HandleAsync", BindingFlags.Instance | BindingFlags.Public );
 
-                if( reflectedType != null )
-                {
-                    var resultType = returnType!.GetGenericArguments()[ 0 ];
-
-                    var methodInfo = typeof( TraceInterceptor )
-                       .GetMethod( "HandleAsync", BindingFlags.Instance | BindingFlags.Public );
-
-                    var mi = methodInfo.MakeGenericMethod( resultType );
-                    invocation.ReturnValue = mi.Invoke( this, new[] { invocation.ReturnValue } );
-                }
+                var mi = methodInfo.MakeGenericMethod( resultType );
+                invocation.ReturnValue = mi.Invoke( this, new[] { invocation.ReturnValue } );
             }
         }
 
         stopwatch.Stop();
         _logger.Debug(
-            $"execute finished {stopwatch.ElapsedMilliseconds} ms , return ：{invocation.ReturnValue.ObjToJson()}" );
+            $"execute elapsed {stopwatch.ElapsedMilliseconds} ms." );
     }
 
     async Task<T> HandleAsync<T>( Task<T> task )

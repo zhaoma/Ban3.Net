@@ -11,6 +11,9 @@ using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 using System.Threading.Tasks;
 
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Filters;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
+
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
 /// <summary>
@@ -26,7 +29,7 @@ public interface IStocksAnalyzer
     /// <returns></returns>
     Task<bool> TryGenerateFeatures(
         IOutput output,
-        Action<IStockData<IStockFeature>> action
+        Action<IStockData<IStockValue>> action
     );
 
     /// <summary>
@@ -34,7 +37,7 @@ public interface IStocksAnalyzer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    Task<IStockData<IStockFeature>> TryLoadFeatures( IStock stock );
+    Task<IStockData<IStockValue>> TryLoadFeatures( IStock stock );
 
     /// <summary>
     /// 用特征值生成建议
@@ -45,7 +48,7 @@ public interface IStocksAnalyzer
     /// <returns></returns>
     Task<bool> TryGenerateSuggests(
         IStockFilter stockFilter,
-        IStockData<IStockFeature> stockFeatures,
+        IStockData<IStockValue> stockFeatures,
         Action<IStockData<IStockSuggest>> action
     );
 

@@ -5,6 +5,7 @@
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;

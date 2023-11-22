@@ -8,6 +8,8 @@ using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
 using System.Collections.Generic;
 
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
+
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 
 public class Lwr : StockValue, IEvaluation<Lwr>

@@ -3,22 +3,21 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Newtonsoft.Json;
-
 using System.Collections.Generic;
 
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
+using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 
-namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;
+namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
 
 /// <summary>
-/// 公式声明
+/// 标的特征声明
 /// </summary>
-public class Formulas : IFormulas
+public class StockValue : StockRecord, IStockValue
 {
     /// 
-    public IEnumerable<IParameter> Parameters { get; set; }
+    public int Score { get; set; }
 
     /// 
-    public int MaxScore { get; set; }
+    public IEnumerable<string> Keys { get; set; }
 }

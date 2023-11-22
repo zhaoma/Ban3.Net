@@ -18,7 +18,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 
-namespace Ban3.Infrastructures.DependecyInjection
+namespace Ban3.Infrastructures.DependencyInjection
 {
     /// <summary>
     /// 使用Autofac完成注入

@@ -3,7 +3,6 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
@@ -29,8 +28,13 @@ public interface IComputedResult : IStockRecord, IEvaluation<IComputedResult>
     /// <summary>
     /// 成交量均线
     /// </summary>
-    [JsonProperty( "results" )]
-    IEnumerable<IEvaluation<IParameter>> Results { get; set; }
+    [JsonProperty( "values" )]
+    IEnumerable<IStockValue> Values { get; set; }
 
+    /// <summary>
+    /// 指标类型
+    /// </summary>
+    [JsonProperty( "indicatorIs" )]
+    [JsonConverter( typeof( StringEnumConverter ) )]
     IndicatorIs IndicatorIs { get; set; }
 }

@@ -1,48 +1,62 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-      <TargetFramework>netstandard2.0</TargetFramework>
-      <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
-      <LangVersion>10.0</LangVersion>
-    <RootNamespace>Ban3.Infrastructures.DependecyInjection</RootNamespace>
-    <AssemblyName>ban3.Infrastructures.DependecyInjection</AssemblyName>
-      <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-      <DebugType>embedded</DebugType>
-      <Title>Ban3.Infrastructures.DependecyInjection</Title>
-      <Version>1.0.0</Version>
-      <Authors>zhaoma</Authors>
-      <Company>BAN3</Company>
-      <Description>DependecyInjection</Description>
-      <PackageIcon>icon.png</PackageIcon>
-      <AssemblyVersion>1.0.0.0</AssemblyVersion>
-      <ApplicationIcon>favicon.ico</ApplicationIcon>
-      <PackageReadmeFile>readme.md</PackageReadmeFile>
-      <Configurations>Release;Debug</Configurations>
-      <BaseOutputPath>..\..\output</BaseOutputPath>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+        <LangVersion>10.0</LangVersion>
+        <RootNamespace>Ban3.Infrastructures.DependencyInjection</RootNamespace>
+        <AssemblyName>ban3.Infrastructures.DependencyInjection</AssemblyName>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <DebugType>embedded</DebugType>
+        <Title>Ban3.Infrastructures.DependencyInjection</Title>
+        <Version>1.0.0</Version>
+        <Authors>zhaoma</Authors>
+        <Company>BAN3</Company>
+        <Description>DependencyInjection</Description>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <ApplicationIcon>favicon.ico</ApplicationIcon>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <Configurations>Release;Debug</Configurations>
+        <BaseOutputPath>..\..\output</BaseOutputPath>
+    </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\output</OutputPath>
-    <DocumentationFile>..\..\output\ban3.Infrastructures.DependecyInjection.xml</DocumentationFile>
-      <AllowedReferenceRelatedFileExtensions>
-          .allowedextension
-      </AllowedReferenceRelatedFileExtensions>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.5.0" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Autofac.Configuration" Version="6.0.0" />
-    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
-    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ServiceCentre\ServiceCentre.csproj" />
-  </ItemGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <OutputPath>..\..\output</OutputPath>
+        <DocumentationFile>..\..\output\ban3.Infrastructures.DependencyInjection.xml</DocumentationFile>
+        <AllowedReferenceRelatedFileExtensions>
+            .allowedextension
+        </AllowedReferenceRelatedFileExtensions>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <Content Include="favicon.ico" />
+        <None Include="..\..\icon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Update="readme.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Autofac" Version="6.5.0" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Autofac.Configuration" Version="6.0.0" />
+        <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+        <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
+        <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\ServiceCentre\ServiceCentre.csproj" />
+    </ItemGroup>
 
 </Project>

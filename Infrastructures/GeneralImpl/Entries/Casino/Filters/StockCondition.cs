@@ -3,21 +3,26 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
 using System.Collections.Generic;
 
-using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Filters;
 
-namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;
+#nullable enable
+namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Filters;
 
 /// <summary>
-/// 标的特征声明
+/// 筛选条件
 /// </summary>
-public class StockValue : StockRecord, IStockValue
+public class StockCondition : IStockCondition
 {
     /// 
-    public int Score { get; set; }
+    public AnalysisCycle? AnalysisCycle { get; set; }
 
     /// 
-    public IEnumerable<string> Keys { get; set; }
+    public IEnumerable<string>? IncludeKeys { get; set; }
+
+    /// 
+    public IEnumerable<string>? ExcludeKeys { get; set; }
 }
