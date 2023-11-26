@@ -1,8 +1,4 @@
-﻿/* -------------------------------------------------------------------------------------------------
-   Copyright (C) Siemens Healthcare GmbH 2023, All rights reserved. Restricted.
-   ------------------------------------------------------------------------------------------------- */
-
-// —————————————————————————————————————————————————————————————————————————————
+﻿// —————————————————————————————————————————————————————————————————————————————
 // zhaoma@hotmail.com   2023
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
@@ -21,7 +17,7 @@ using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Hybird;
 
 /// 
-public class CachingInRuntime : OneImplement, ICachesHelper
+public class CachesUtilizeRuntimeCaching : OneImplement, ICachesHelper
 {
     /// 
     public async Task<bool> TrySet<T>( string key, T data, CachesProfile cachesProfile )

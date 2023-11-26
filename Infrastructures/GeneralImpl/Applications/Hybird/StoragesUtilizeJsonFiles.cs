@@ -18,7 +18,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Applications.Hybird;
 /// <summary>
 /// 数据存储的本地json文件实现
 /// </summary>
-public class SaveToLocalJsonFiles : OneImplement, IStoragesHelper
+public class StoragesUtilizeJsonFiles : OneImplement, IStoragesHelper
 {
     /// 
     public async Task<bool> TrySave<T>( T data, Func<T, string> getKey )

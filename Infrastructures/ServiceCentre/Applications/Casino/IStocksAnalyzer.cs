@@ -22,24 +22,6 @@ namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 public interface IStocksAnalyzer
 {
     /// <summary>
-    /// 用指标生成特征值
-    /// </summary>
-    /// <param name="output"></param>
-    /// <param name="action"></param>
-    /// <returns></returns>
-    Task<bool> TryGenerateFeatures(
-        IOutput output,
-        Action<IStockData<IStockValue>> action
-    );
-
-    /// <summary>
-    /// 提供(个股)特征值
-    /// </summary>
-    /// <param name="stock"></param>
-    /// <returns></returns>
-    Task<IStockData<IStockValue>> TryLoadFeatures( IStock stock );
-
-    /// <summary>
     /// 用特征值生成建议
     /// </summary>
     /// <param name="stockFilter"></param>
@@ -48,7 +30,7 @@ public interface IStocksAnalyzer
     /// <returns></returns>
     Task<bool> TryGenerateSuggests(
         IStockFilter stockFilter,
-        IStockData<IStockValue> stockFeatures,
+        IOutput output,
         Action<IStockData<IStockSuggest>> action
     );
 

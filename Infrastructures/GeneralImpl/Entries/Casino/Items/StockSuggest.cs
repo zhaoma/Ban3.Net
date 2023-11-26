@@ -12,6 +12,8 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 /// </summary>
 public class StockSuggest : IStockSuggest
 {
+    public string Code { get; set; }
+
     /// <summary>
     /// 购买日期
     /// </summary>

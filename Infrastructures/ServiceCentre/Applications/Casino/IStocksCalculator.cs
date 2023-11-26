@@ -39,6 +39,13 @@ public interface IStocksCalculator
     Task<IStockData<IStockSeed>> TryLoadSeeds( IStock stock );
 
     /// <summary>
+    /// 提供(个股未复权)历史价格数据
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    Task<IStockData<IStockPrice>> TryLoadOriginalPrices( IStock stock );
+
+    /// <summary>
     /// 价格复权
     /// </summary>
     /// <param name="sourcePrices"></param>
@@ -65,12 +72,15 @@ public interface IStocksCalculator
     );
 
     /// <summary>
-    /// 提供价格数据
+    /// 提供价格数据(复权后)
     /// </summary>
     /// <param name="stock"></param>
     /// <param name="cycle"></param>
     /// <returns></returns>
-    Task<IStockData<IStockPrice>> TryLoadPrices( IStock stock, AnalysisCycle cycle );
+    Task<IStockData<IStockPrice>> TryLoadRehabilitatedPrices( 
+	    IStock stock, 
+	    AnalysisCycle cycle 
+	);
 
     /// <summary>
     /// 用价格信息计算指标

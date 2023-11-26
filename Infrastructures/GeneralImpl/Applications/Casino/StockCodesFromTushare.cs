@@ -19,7 +19,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 /// <summary>
 /// 
 /// </summary>
-public class CollectStockCodesFromTushare : OneImplement, IStockCodesCollector
+public class StockCodesFromTushare : OneImplement, IStockCodesCollector
 {
     private IInternetsHelper _internetsHelper;
     private IStoragesHelper _storagesHelper;
@@ -29,7 +29,7 @@ public class CollectStockCodesFromTushare : OneImplement, IStockCodesCollector
     /// </summary>
     /// <param name="internetsHelper"></param>
     /// <param name="storagesHelper"></param>
-    public CollectStockCodesFromTushare(
+    public StockCodesFromTushare(
         IInternetsHelper internetsHelper,
         IStoragesHelper storagesHelper
     )

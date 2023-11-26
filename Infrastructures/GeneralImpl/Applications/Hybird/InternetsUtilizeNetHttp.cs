@@ -23,10 +23,10 @@ using Ban3.Infrastructures.GeneralImpl.Entries.Hybird;
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Hybird;
 
 /// 
-public class NetHttpClient : OneImplement, IInternetsHelper
+public class InternetsUtilizeNetHttp : OneImplement, IInternetsHelper
 {
     /// 
-    public NetHttpClient() {}
+    public InternetsUtilizeNetHttp() {}
 
     /// 
     public async Task<bool> TryRequest(
