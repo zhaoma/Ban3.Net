@@ -41,7 +41,7 @@ public class StocksAnalyzer : IStocksAnalyzer
 
         var previousSuggest = new StockSuggest { Code = output.Code };
 
-
+        
 
         return await _storagesHelper.TrySave(result, output.Code);
     }
