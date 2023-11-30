@@ -30,6 +30,16 @@ public class InternetsUtilizeNetHttp : OneImplement, IInternetsHelper
 
     /// 
     public async Task<bool> TryRequest(
+        IInternetResource internetResource,
+        Action<IInternetResponse> action
+    )
+        => await TryRequest(
+            new InternetHost { AuthenticationType = AuthenticationType.None },
+            internetResource,
+            action );
+
+    /// 
+    public async Task<bool> TryRequest(
         IInternetHost internetHost,
         IInternetResource internetResource,
         Action<IInternetResponse> action

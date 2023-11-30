@@ -4,6 +4,7 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 
@@ -12,6 +13,16 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 /// </summary>
 public class StockEvent : StockRecord, IStockEvent
 {
+    /// <summary>
+    /// 事件类型
+    /// </summary>
+    public EventIs EventIs { get; set; }
+
+    /// <summary>
+    /// 事件主题
+    /// </summary>
+    public string Subject { get; set; }
+
     /// <summary>
     /// 送股(每十股)
     /// </summary>

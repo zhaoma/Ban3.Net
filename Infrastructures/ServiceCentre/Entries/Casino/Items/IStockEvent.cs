@@ -3,7 +3,10 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
@@ -12,6 +15,19 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 /// </summary>
 public interface IStockEvent : IStockRecord
 {
+    /// <summary>
+    /// 事件类型
+    /// </summary>
+    [JsonProperty( "eventIs" )]
+    [JsonConverter( typeof( StringEnumConverter ) )]
+    EventIs EventIs { get; set; }
+
+    /// <summary>
+    /// 事件主题
+    /// </summary>
+    [JsonProperty( "subject" )]
+    string Subject { get; set; }
+
     /// <summary>
     /// 送股(每十股)
     /// </summary>

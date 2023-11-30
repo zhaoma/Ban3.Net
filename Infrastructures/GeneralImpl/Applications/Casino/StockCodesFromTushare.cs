@@ -16,19 +16,13 @@ using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 
-/// <summary>
 /// 
-/// </summary>
 public class StockCodesFromTushare : OneImplement, IStockCodesCollector
 {
     private IInternetsHelper _internetsHelper;
     private IStoragesHelper _storagesHelper;
 
-    /// <summary>
     /// 
-    /// </summary>
-    /// <param name="internetsHelper"></param>
-    /// <param name="storagesHelper"></param>
     public StockCodesFromTushare(
         IInternetsHelper internetsHelper,
         IStoragesHelper storagesHelper
@@ -38,14 +32,9 @@ public class StockCodesFromTushare : OneImplement, IStockCodesCollector
         _storagesHelper = storagesHelper;
     }
 
-    /// <summary>
     /// 
-    /// </summary>
-    /// <param name="action"></param>
-    /// <returns></returns>
     public async Task<bool> TryFetchStocks( Action<IEnumerable<IStock>> action )
         => await _internetsHelper.TryRequest(
-            Request.TushareRequest.Host(),
             Request.TushareRequest.ResourceForCodes(),
             callback =>
             {
@@ -56,10 +45,7 @@ public class StockCodesFromTushare : OneImplement, IStockCodesCollector
                 action( data );
             } );
 
-    /// <summary>
     /// 
-    /// </summary>
-    /// <returns></returns>
     public async Task<IEnumerable<IStock>> TryLoad()
         => await _storagesHelper.TryLoad<IEnumerable<Stock>>( "all" );
 }

@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
+/// <summary>
+/// 
+/// </summary>
 public interface IInternetsHelper
 {
     /// <summary>
@@ -24,4 +27,15 @@ public interface IInternetsHelper
         IInternetHost internetHost,
         IInternetResource internetResource,
         Action<IInternetResponse> internetResponse );
+
+    /// <summary>
+    /// anonymous request
+    /// </summary>
+    /// <param name="internetResource"></param>
+    /// <param name="action"></param>
+    /// <returns></returns>
+    Task<bool> TryRequest(
+        IInternetResource internetResource,
+        Action<IInternetResponse> action
+    );
 }

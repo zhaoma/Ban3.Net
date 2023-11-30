@@ -19,14 +19,6 @@ namespace Ban3.Infrastructures.GeneralImpl.Request;
 public class TushareRequest
 {
     /// 
-    public static InternetHost Host()
-        => new()
-        {
-            AuthenticationType = AuthenticationType.None,
-            BaseUrl = @"http://api.tushare.pro"
-        };
-
-    /// 
     public static InternetResource ResourceForCodes()
     {
         return new InternetResource
@@ -100,8 +92,9 @@ public class TushareRequest
         {
             var token = Common.Config.GetValue( "Sites:TushareToken" );
             if( string.IsNullOrEmpty( token ) )
+            {
                 token = @"dac6b901ec28c2fd99e62afd8b250f8c171e4d3a474ae1b0633903d0";
-
+            }
             Token = token;
         }
     }
@@ -127,13 +120,21 @@ public class TushareRequest
             var dic = new Dictionary<string, object>();
 
             if( !string.IsNullOrEmpty( Code ) )
+            {
                 dic.Add( "ts_code", Code );
+            }
             if( !string.IsNullOrEmpty( StartDate ) )
+            {
                 dic.Add( "start_date", StartDate );
+            }
             if( !string.IsNullOrEmpty( EndDate ) )
+            {
                 dic.Add( "end_date", EndDate );
+            }
             if( !string.IsNullOrEmpty( TradeDate ) )
+            {
                 dic.Add( "trade_date", TradeDate );
+            }
 
             return dic;
         }

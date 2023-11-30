@@ -29,7 +29,7 @@ public interface IStockHoldersCollector
     /// 提供大股东数据
     /// </summary>
     /// <returns></returns>
-    Task<IEnumerable<IStockHolder>> TryLoad();
+    Task<IEnumerable<IStockHolder>> TryLoad( IStockHolder stockHolder );
 
     /// <summary>
     /// 提供大股东数据(个股)
