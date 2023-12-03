@@ -58,7 +58,7 @@ public class SinaResponse
                     {
                         result.Add( new StockEvent
                         {
-                            EventIs = EventIs.A,
+                            EventIs = EventIs.Sharing,
                             Subject = "分红",
                             RecordDate = atr[ 5 ],
                             Sbonus = atr[ 1 ].ToDecimal(),
@@ -83,7 +83,7 @@ public class SinaResponse
                     {
                         result.Add( new StockEvent
                         {
-                            EventIs = EventIs.B,
+                            EventIs = EventIs.StockBonus,
                             Subject = "配股",
                             RecordDate = atr[ 4 ],
                             Pbonus = atr[ 1 ].ToDecimal(),

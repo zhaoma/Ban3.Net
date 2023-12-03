@@ -2,16 +2,15 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI . 2023-11-25
 //  ————————————————————————————————————————————————————————————————————————————
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 using Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 using Ban3.Infrastructures.ServiceCentre.Applications;
 using Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
-
-using System;
-
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
-
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 
@@ -35,8 +34,10 @@ public class StockHoldersFromEastmoney : OneImplement, IStockHoldersCollector
     public async Task<bool> TryFetchHolders( Action<IEnumerable<IStockHolder>> action ) {}
 
     /// 
-    public async Task<IEnumerable<IStockHolder>> TryLoad( IStockHolder stockHolder ) {}
+    public async Task<IEnumerable<IStockHolder>> TryLoad(IStockHolder stockHolder)
+        => await _storagesHelper.TryLoad<IEnumerable<StockHolder>>($"Holder.{stockHolder.Code}.Stocks");
 
     /// 
-    public async Task<IEnumerable<IStockHolder>> TryLoad( IStock stock ) {}
+    public async Task<IEnumerable<IStockHolder>> TryLoad( IStock stock)
+        => await _storagesHelper.TryLoad<IEnumerable<StockHolder>>($"Stock.{stock.Code}.Holders");
 }

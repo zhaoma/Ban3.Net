@@ -77,6 +77,7 @@ public class StoragesUtilizeJsonFiles : OneImplement, IStoragesHelper
     private string JsonFilePath<T>( string key = "all" )
     {
         var path = Path.Combine( Common.Config.LocalStorage!.RootPath, typeof( T ).Name );
+
         if( !Directory.Exists( path ) )
         {
             Directory.CreateDirectory( path );

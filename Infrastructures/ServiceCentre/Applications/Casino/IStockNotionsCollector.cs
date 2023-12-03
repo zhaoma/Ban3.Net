@@ -31,16 +31,16 @@ public interface IStockNotionsCollector
     Task<IEnumerable<IStockNotion>> TryLoad();
 
     /// <summary>
-    /// 提供(个股)题材概念数据
-    /// </summary>
-    /// <param name="stock"></param>
-    /// <returns></returns>
-    Task<IEnumerable<IStockNotion>> TryLoad( IStock stock );
-
-    /// <summary>
     /// 提供(题材概念相关)个股数据
     /// </summary>
     /// <param name="stockNotion"></param>
     /// <returns></returns>
     Task<IEnumerable<IStock>> TryLoad( IStockNotion stockNotion );
+
+    /// <summary>
+    /// 提供(个股)题材概念数据
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    Task<IEnumerable<IStockNotion>> TryLoad( IStock stock );
 }

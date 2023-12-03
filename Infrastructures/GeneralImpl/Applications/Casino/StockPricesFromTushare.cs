@@ -3,16 +3,15 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using System;
+using System.Threading.Tasks;
+
 using Ban3.Infrastructures.ServiceCentre.Applications;
 using Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 using Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.GeneralImpl.Response;
-
-using System.Threading.Tasks;
-using System;
-
 using Ban3.Infrastructures.GeneralImpl.Request;
 
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
@@ -40,7 +39,6 @@ public class CollectStockPricesFromTushare : OneImplement, IStockPricesCollector
     /// 
     public async Task<bool> TryFetchPrices( IStock stock, Action<IStockData<IStockPrice>> action )
         => await _internetsHelper.TryRequest(
-            TushareRequest.Host(),
             TushareRequest.ResourceForPrices( stock ),
             callback =>
             {

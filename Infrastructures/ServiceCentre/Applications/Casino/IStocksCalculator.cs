@@ -4,14 +4,12 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using System;
+using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
-
-using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 

@@ -3,10 +3,8 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 using Ban3.Infrastructures.GeneralImpl.Response;
 using Ban3.Infrastructures.ServiceCentre.Applications;
 using Ban3.Infrastructures.ServiceCentre.Applications.Casino;
@@ -40,7 +38,7 @@ public class StockEventsFromSina : OneImplement, IStockEventsCollector
             {
                 var data = SinaResponse.ResultToEvents( callback, stock );
 
-                _storagesHelper.TrySave( data, "all" );
+                _storagesHelper.TrySave( data, stock.Code );
 
                 action( data );
             } );

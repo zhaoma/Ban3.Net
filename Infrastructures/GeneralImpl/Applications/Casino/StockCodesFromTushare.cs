@@ -1,7 +1,10 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2022
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
+
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Applications;
 using Ban3.Infrastructures.ServiceCentre.Applications.Casino;
@@ -9,10 +12,6 @@ using Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 using Ban3.Infrastructures.GeneralImpl.Response;
-
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 

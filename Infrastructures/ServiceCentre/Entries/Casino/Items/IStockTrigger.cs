@@ -1,10 +1,11 @@
 ﻿//  ————————————————————————————————————————————————————————————————————————————
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI . 2023-11-25
 //  ————————————————————————————————————————————————————————————————————————————
-using System;
-using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 

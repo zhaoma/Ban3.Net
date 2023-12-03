@@ -6,6 +6,7 @@ using Ban3.Infrastructures.GeneralImpl.Entries.Hybird;
 
 namespace Ban3.Infrastructures.GeneralImpl.Request;
 
+/// 
 public class SohuRequest
 {
     /// 
@@ -18,6 +19,7 @@ public class SohuRequest
         };
     }
 
+    /// 
     public static InternetResource ResourceForNotionStocks( int notionId )
     {
         return new InternetResource

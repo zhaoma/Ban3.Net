@@ -4,19 +4,20 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using Ban3.Infrastructures.GeneralImpl.Entries.Casino;
 using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Applications;
 using Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 using Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Filters;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 
-public class StocksAnalyzer : IStocksAnalyzer
+public class StocksAnalyzer : OneImplement, IStocksAnalyzer
 {
     private IStoragesHelper _storagesHelper;
 
