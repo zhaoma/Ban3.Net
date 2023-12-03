@@ -22,11 +22,7 @@ public class CollectStockPricesFromTushare : OneImplement, IStockPricesCollector
     private IInternetsHelper _internetsHelper;
     private IStoragesHelper _storagesHelper;
 
-    /// <summary>
     /// 
-    /// </summary>
-    /// <param name="internetsHelper"></param>
-    /// <param name="storagesHelper"></param>
     public CollectStockPricesFromTushare(
         IInternetsHelper internetsHelper,
         IStoragesHelper storagesHelper
@@ -37,15 +33,15 @@ public class CollectStockPricesFromTushare : OneImplement, IStockPricesCollector
     }
 
     /// 
-    public async Task<bool> TryFetchPrices( IStock stock, Action<IStockData<IStockPrice>> action )
+    public async Task<bool> TryFetchPrices(IStock stock, Action<IStockData<IStockPrice>> action)
         => await _internetsHelper.TryRequest(
-            TushareRequest.ResourceForPrices( stock ),
+            TushareRequest.ResourceForPrices(stock),
             callback =>
             {
-                var data = TushareResponse.ResultToPrices( callback, stock );
+                var data = TushareResponse.ResultToPrices(callback, stock);
 
-                _storagesHelper.TrySave( data, stock.Code );
+                _storagesHelper.TrySave(data, stock.Code);
 
-                action( data );
-            } );
+                action(data);
+            });
 }

@@ -13,6 +13,7 @@ using Ban3.Infrastructures.GeneralImpl.Entries.Casino;
 using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 
 #nullable enable
 namespace Ban3.Infrastructures.GeneralImpl.Response;
@@ -21,7 +22,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Response;
 public class TushareResponse
 {
     /// 
-    public static List<Stock> ResultToCodes( IInternetResponse callback )
+    public static IEnumerable<IStock> ResultToCodes( IInternetResponse callback )
     {
         var result = callback.Response.StringContent.JsonToObj<TushareResponse.ApiResult>();
 
@@ -40,7 +41,7 @@ public class TushareResponse
     }
 
     /// 
-    public static StockData<IStockPrice> ResultToPrices( IInternetResponse callback, IStock stock )
+    public static IStockData<IStockPrice> ResultToPrices( IInternetResponse callback, IStock stock )
     {
         var result = callback.Response.StringContent.JsonToObj<TushareResponse.ApiResult>();
 

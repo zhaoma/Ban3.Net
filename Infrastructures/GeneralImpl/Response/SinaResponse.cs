@@ -8,6 +8,7 @@ using System.Linq;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.GeneralImpl.Entries.Casino;
 using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
@@ -18,7 +19,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Response;
 public class SinaResponse
 {
     /// 
-    public static StockData<IStockEvent> ResultToEvents( IInternetResponse callback, IStock stock )
+    public static IStockData<IStockEvent> ResultToEvents( IInternetResponse callback, IStock stock )
     {
         var result = callback.Response.StringContent.JsonToObj<TushareResponse.ApiResult>();
 

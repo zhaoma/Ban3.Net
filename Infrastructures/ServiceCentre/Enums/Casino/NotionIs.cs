@@ -11,17 +11,23 @@ namespace Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 /// 题材分组
 /// </summary>
 public enum NotionIs
-{
-    /// <summary />
-    [Description("概念")]
+{ 
+    /// <summary>
+    /// 概念
+    /// </summary>
+    [Description("concept")]
     Concept = 1,
 
-    /// <summary />
-    [Description("地区")]
+    /// <summary>
+    /// 地区
+    /// </summary>
+    [Description("region")]
     Region = 3,
 
-    /// <summary />
-    [Description("行业")]
+    /// <summary>
+    /// 行业
+    /// </summary>
+    [Description("industry")]
     Industry = 4
 }
 

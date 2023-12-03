@@ -38,9 +38,7 @@ public class StocksCalculator : OneImplement, IStocksCalculator
 
     /// 
     public async Task<IStockData<IStockSeed>> TryLoadSeeds(IStock stock)
-    {
-
-    }
+        => await _storagesHelper.TryLoad<IStockData<IStockSeed>>(stock.Code);
 
 
     /// 
@@ -82,8 +80,6 @@ public class StocksCalculator : OneImplement, IStocksCalculator
 
     /// 
     public async Task<IOutput> TryLoadIndicators(IStock stock)
-    {
-
-    }
+        => await _storagesHelper.TryLoad<IOutput>(stock.Code);
 }
 
