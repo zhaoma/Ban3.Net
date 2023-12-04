@@ -2,15 +2,19 @@
 
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.DependencyInjection;
+using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 var container = new ContainerBuilder().RegisterOnConfig().Build();
 
-var collectCodes = container.Resolve<IStockCodesCollector>();
+var c = container.Resolve<IStockEventsCollector>();
 
-IEnumerable<IStock> result = new List<IStock>();
-var got = await collectCodes.TryFetchStocks( r => result = r );
+var got = await c.TryFetchEvents( new Stock { Symbol = "300757" }, d =>
+{
+    Console.WriteLine( d.ObjToJson() );
+} );
 
 Console.WriteLine( got );
-Console.WriteLine( result.ObjToJson() );
+
+Console.ReadKey();

@@ -12,6 +12,7 @@ using Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 
+#nullable enable
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 
 /// 
@@ -31,7 +32,9 @@ public class StockHoldersFromEastmoney : OneImplement, IStockHoldersCollector
     }
 
     /// 
-    public async Task<bool> TryFetchHolders( Action<IEnumerable<IStockHolder>> action )
+    public async Task<bool> TryFetchHolders(
+        IStock stock,
+        Action<IEnumerable<IStockHolder>>? action )
     {
         return await Task.FromResult( true );
     }

@@ -15,6 +15,8 @@ using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 
+using System.Text;
+
 #nullable enable
 namespace Ban3.Infrastructures.GeneralImpl.Response;
 
@@ -24,6 +26,8 @@ public class TushareResponse
     /// 
     public static IEnumerable<IStock> ResultToCodes( IInternetResponse callback )
     {
+        Encoding.RegisterProvider( CodePagesEncodingProvider.Instance );
+
         var result = callback.Response.StringContent.JsonToObj<TushareResponse.ApiResult>();
 
         return result!

@@ -11,18 +11,20 @@ namespace Ban3.Infrastructures.GeneralImpl.Request;
 public class EastmoneyRequest
 {
     /// 
-    public static InternetResource ResourceForHoldersA( int page = 1, int ps = 300 ) => new()
+    public static InternetResource ResourceForHoldersAll( int page = 1, int ps = 500 ) => new()
     {
+        IsJsonp = true,
+        JsonpPrefix = "eastmoney",
         Method = HttpMethod.Post,
-        Url = $"http://dcfm.eastmoney.com//em_mutisvcexpandinterface/api/js/get?type=NSHDDETAILLA&token=70f12f2f4f091e459a279469fe49eca5&cmd=&st=NDATE,SCODE,RANK&sr=1&p={page}&ps={ps}" +
-              "&js={\"pages\":(tp),\"data\":(x)}"
+        Url = $"https://datacenter-web.eastmoney.com/api/data/v1/get?callback=eastmoney&sortColumns=RANK&sortTypes=1&pageSize={ps}&pageNumber={page}&reportName=RPT_DMSK_HOLDERS&columns=ALL&source=WEB&client=WEB"
     };
 
     /// 
-    public static InternetResource ResourceForHoldersB( int page = 1, int ps = 300 ) => new()
+    public static InternetResource ResourceForHoldersOne( string code, int page = 1, int ps = 500 ) => new()
     {
+        IsJsonp = true,
+        JsonpPrefix = "eastmoney",
         Method = HttpMethod.Post,
-        Url = $"http://dcfm.eastmoney.com//em_mutisvcexpandinterface/api/js/get?type=HDDETAILLA&token=70f12f2f4f091e459a279469fe49eca5&cmd=&st=NDATE,SCODE,RANK&sr=1&p={page}&ps={ps}" +
-              "&js={\"pages\":(tp),\"data\":(x)}"
+        Url = $"https://datacenter-web.eastmoney.com/api/data/v1/get?callback=eastmoney&sortColumns=RANK&sortTypes=1&pageSize={ps}&pageNumber={page}&reportName=RPT_DMSK_HOLDERS&columns=ALL&source=WEB&client=WEB&filter=(SECURITY_CODE%3D%22{code}%22)"
     };
 }

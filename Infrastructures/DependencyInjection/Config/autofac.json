@@ -21,16 +21,6 @@
       "injectProperties": true
     },
     {
-      "type": "Ban3.Infrastructures.GeneralImpl.Applications.Hybird.InSqliteService,Ban3.Infrastructures.GeneralImpl",
-      "services": [
-        {
-          "type": "Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IDevicesHelper,Ban3.Infrastructures.ServiceCentre"
-        }
-      ],
-      "instanceScope": "single-instance",
-      "injectProperties": true
-    },
-    {
       "type": "Ban3.Infrastructures.GeneralImpl.Applications.Hybird.InternetsUtilizeNetHttp,Ban3.Infrastructures.GeneralImpl",
       "services": [
         {

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
 /// <summary>
@@ -19,9 +20,12 @@ public interface IStockHoldersCollector
     /// <summary>
     /// 准备大股东数据
     /// </summary>
+    /// <param name="stock"></param>
     /// <param name="action">处理动作</param>
     /// <returns></returns>
-    Task<bool> TryFetchHolders( Action<IEnumerable<IStockHolder>> action );
+    Task<bool> TryFetchHolders(
+        IStock stock,
+        Action<IEnumerable<IStockHolder>>? action );
 
     /// <summary>
     /// 提供大股东数据

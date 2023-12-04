@@ -12,6 +12,7 @@ using Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
+#nullable enable
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 
 /// 
@@ -31,19 +32,24 @@ public class StockEventsFromSina : OneImplement, IStockEventsCollector
     }
 
     /// 
-    public async Task<bool> TryFetchEvents( IStock stock, Action<IStockData<IStockEvent>> action )
+    public async Task<bool> TryFetchEvents( IStock stock, Action<IStockData<IStockEvent>>? action )
         => await _internetsHelper.TryRequest(
-            Request.SinaRequest.ResourceForEvents( stock.Code ),
+            Request.SinaRequest.ResourceForEvents( stock.Symbol ),
             callback =>
             {
                 var data = SinaResponse.ResultToEvents( callback, stock );
 
-                _storagesHelper.TrySave( data, stock.Code );
-
-                action( data );
+                if( action == null )
+                {
+                    _storagesHelper.TrySave( data, stock.Symbol );
+                }
+                else
+                {
+                    action( data );
+                }
             } );
 
     /// 
     public async Task<IStockData<IStockEvent>> TryLoad( IStock stock )
-        => await _storagesHelper.TryLoad<IStockData<IStockEvent>>( stock.Code );
+        => await _storagesHelper.TryLoad<IStockData<IStockEvent>>( stock.Symbol );
 }

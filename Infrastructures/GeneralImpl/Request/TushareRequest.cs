@@ -27,6 +27,7 @@ public class TushareRequest
             Url = @"http://api.tushare.pro",
             Request = new InternetData
             {
+                ContentEncoding = "UTF-8",
                 StringContent = new ApiRequestBody
                 {
                     ApiName = "stock_basic",

@@ -1,13 +1,11 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
-
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
