@@ -4,10 +4,11 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Filters;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
 using System.Collections.Generic;
+
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Filters;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Filters;
 

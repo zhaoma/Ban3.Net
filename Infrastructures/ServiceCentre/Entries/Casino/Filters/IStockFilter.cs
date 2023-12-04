@@ -3,14 +3,14 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using System.Collections.Generic;
+
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
 using Newtonsoft.Json;
 
-using System.Collections.Generic;
-
-namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Filters;
+namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Filters;
 
 /// <summary>
 /// 筛选策略

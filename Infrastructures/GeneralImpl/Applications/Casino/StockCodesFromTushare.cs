@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Applications;
@@ -13,6 +14,7 @@ using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 using Ban3.Infrastructures.GeneralImpl.Response;
 
+#nullable enable
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 
 /// 
@@ -32,16 +34,24 @@ public class StockCodesFromTushare : OneImplement, IStockCodesCollector
     }
 
     /// 
-    public async Task<bool> TryFetchStocks( Action<IEnumerable<IStock>> action )
+    public async Task<bool> TryFetchStocks( Action<IEnumerable<IStock>>? action )
         => await _internetsHelper.TryRequest(
             Request.TushareRequest.ResourceForCodes(),
             callback =>
             {
-                var data = TushareResponse.ResultToCodes( callback );
+                var data = TushareResponse
+                          .ResultToCodes( callback )
+                          .OrderBy( o => o.Code )
+                          .ToList();
 
-                _storagesHelper.TrySave( data, "all" );
-
-                action( data );
+                if( action == null )
+                {
+                    _storagesHelper.TrySave( data, "all" );
+                }
+                else
+                {
+                    action( data );
+                }
             } );
 
     /// 

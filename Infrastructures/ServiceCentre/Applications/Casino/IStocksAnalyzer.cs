@@ -1,15 +1,14 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Filters;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Filters;
 
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
@@ -22,7 +21,7 @@ public interface IStocksAnalyzer
     /// 用特征值生成建议
     /// </summary>
     /// <param name="stockFilter"></param>
-    /// <param name="stockFeatures"></param>
+    /// <param name="output"></param>
     /// <param name="action"></param>
     /// <returns></returns>
     Task<bool> TryGenerateSuggests(

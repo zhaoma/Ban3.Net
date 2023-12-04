@@ -31,13 +31,16 @@ public class StockHoldersFromEastmoney : OneImplement, IStockHoldersCollector
     }
 
     /// 
-    public async Task<bool> TryFetchHolders( Action<IEnumerable<IStockHolder>> action ) {}
+    public async Task<bool> TryFetchHolders( Action<IEnumerable<IStockHolder>> action )
+    {
+        return await Task.FromResult( true );
+    }
 
     /// 
-    public async Task<IEnumerable<IStockHolder>> TryLoad(IStockHolder stockHolder)
-        => await _storagesHelper.TryLoad<IEnumerable<StockHolder>>($"Holder.{stockHolder.Code}.Stocks");
+    public async Task<IEnumerable<IStockHolder>> TryLoad( IStockHolder stockHolder )
+        => await _storagesHelper.TryLoad<IEnumerable<StockHolder>>( $"Holder.{stockHolder.Code}.Stocks" );
 
     /// 
-    public async Task<IEnumerable<IStockHolder>> TryLoad( IStock stock)
-        => await _storagesHelper.TryLoad<IEnumerable<StockHolder>>($"Stock.{stock.Code}.Holders");
+    public async Task<IEnumerable<IStockHolder>> TryLoad( IStock stock )
+        => await _storagesHelper.TryLoad<IEnumerable<StockHolder>>( $"Stock.{stock.Code}.Holders" );
 }

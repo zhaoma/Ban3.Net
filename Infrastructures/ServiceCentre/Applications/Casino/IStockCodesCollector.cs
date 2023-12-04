@@ -1,6 +1,5 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using System;
@@ -9,6 +8,7 @@ using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
 /// <summary>
@@ -21,7 +21,7 @@ public interface IStockCodesCollector
     /// </summary>
     /// <param name="action">处理动作</param>
     /// <returns></returns>
-    Task<bool> TryFetchStocks( Action<IEnumerable<IStock>> action );
+    Task<bool> TryFetchStocks( Action<IEnumerable<IStock>>? action );
 
     /// <summary>
     /// 提供标的

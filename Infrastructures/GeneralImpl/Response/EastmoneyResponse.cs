@@ -13,8 +13,8 @@ namespace Ban3.Infrastructures.GeneralImpl.Response;
 public class EastmoneyResponse
 {
     /// 
-    public static IEnumerable<IStockHolder> ResultToHolders(IInternetResponse callback)
+    public static IEnumerable<IStockHolder> ResultToHolders( IInternetResponse callback )
     {
-
+        return new List<IStockHolder>();
     }
 }

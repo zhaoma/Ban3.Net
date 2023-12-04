@@ -1,71 +1,50 @@
 ﻿{
   "components": [
     {
-      "type": "Ban3.Infrastructures.ServiceCentre.DataCache.InMemoryService,Ban3.Infrastructures.GeneralImpl",
+      "type": "Ban3.Infrastructures.GeneralImpl.Applications.Hybird.CachesUtilizeRuntimeCaching,Ban3.Infrastructures.GeneralImpl",
       "services": [
         {
-          "type": "Ban3.Infrastructures.ServiceCentre.IDataCache,Ban3.Infrastructures.ServiceCentre"
+          "type": "Ban3.Infrastructures.ServiceCentre.Applications.Hybird.ICachesHelper,Ban3.Infrastructures.ServiceCentre"
         }
       ],
       "instanceScope": "single-instance",
       "injectProperties": true
     },
     {
-      "type": "Ban3.Infrastructures.ServiceCentre.DataCollect.RestSharpService,Ban3.Infrastructures.ServiceCentre",
+      "type": "Ban3.Infrastructures.GeneralImpl.Applications.Hybird.ChartsUtilizeApacheECharts,Ban3.Infrastructures.GeneralImpl",
       "services": [
         {
-          "type": "Ban3.Infrastructures.ServiceCentre.IDataCollect,Ban3.Infrastructures.ServiceCentre"
+          "type": "Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IChartsHelper,Ban3.Infrastructures.ServiceCentre"
         }
       ],
       "instanceScope": "single-instance",
       "injectProperties": true
     },
     {
-      "type": "Ban3.Infrastructures.ServiceCentre.DataStorage.InSqliteService,Ban3.Infrastructures.ServiceCentre",
+      "type": "Ban3.Infrastructures.GeneralImpl.Applications.Hybird.InSqliteService,Ban3.Infrastructures.GeneralImpl",
       "services": [
         {
-          "type": "Ban3.Infrastructures.ServiceCentre.IDataStorage,Ban3.Infrastructures.ServiceCentre"
+          "type": "Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IDevicesHelper,Ban3.Infrastructures.ServiceCentre"
         }
       ],
       "instanceScope": "single-instance",
       "injectProperties": true
     },
     {
-      "type": "Ban3.Infrastructures.ServiceCentre.FileStorage.InJsonService,Ban3.Infrastructures.ServiceCentre",
+      "type": "Ban3.Infrastructures.GeneralImpl.Applications.Hybird.InternetsUtilizeNetHttp,Ban3.Infrastructures.GeneralImpl",
       "services": [
         {
-          "type": "Ban3.Infrastructures.ServiceCentre.IFileStorage,Ban3.Infrastructures.ServiceCentre"
+          "type": "Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IInternetsHelper,Ban3.Infrastructures.ServiceCentre"
         }
       ],
       "instanceScope": "single-instance",
       "injectProperties": true
     },
     {
-      "type": "Ban3.Infrastructures.ServiceCentre.FileParser.InLocalService,Ban3.Infrastructures.ServiceCentre",
+      "type": "Ban3.Infrastructures.GeneralImpl.Applications.Hybird.StoragesUtilizeJsonFiles,Ban3.Infrastructures.GeneralImpl",
       "services": [
         {
-          "type": "Ban3.Infrastructures.ServiceCentre.IFileParser,Ban3.Infrastructures.ServiceCentre"
-        }
-      ],
-      "instanceScope": "single-instance",
-      "injectProperties": true
-    },
-
-    {
-      "type": "Tfvckits.Application.One.ExportService,tfvckits.Application.One",
-      "services": [
-        {
-          "type": "Tfvckits.Domain.Platform.Interfaces.IExportService,Tfvckits.Domain.Platform"
-        }
-      ],
-      "instanceScope": "single-instance",
-      "injectProperties": true
-    },
-    {
-      "type": "Tfvckits.Application.One.ImportService,Tfvckits.Application.One",
-      "services": [
-        {
-          "type": "Tfvckits.Domain.Platform.Interfaces.IImportService,Tfvckits.Domain.Platform"
+          "type": "Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IStoragesHelper,Ban3.Infrastructures.ServiceCentre"
         }
       ],
       "instanceScope": "single-instance",
@@ -73,70 +52,10 @@
     },
 
     {
-      "type": "Tfvckits.Application.One.AssembliesService,Tfvckits.Application.One",
+      "type": "Ban3.Infrastructures.GeneralImpl.Applications.Casino.StockCodesFromTushare,Ban3.Infrastructures.GeneralImpl",
       "services": [
         {
-          "type": "Tfvckits.Domain.LocalAgent.Interfaces.IAssembliesService,Tfvckits.Domain.LocalAgent"
-        }
-      ],
-      "instanceScope": "single-instance",
-      "injectProperties": true
-    },
-    {
-      "type": "Tfvckits.Application.One.FusionLogsService,Tfvckits.Application.One",
-      "services": [
-        {
-          "type": "Tfvckits.Domain.LocalAgent.Interfaces.IFusionLogsService,Tfvckits.Domain.LocalAgent"
-        }
-      ],
-      "instanceScope": "single-instance",
-      "injectProperties": true
-    },
-    {
-      "type": "Tfvckits.Application.One.PatternsService,Tfvckits.Application.One",
-      "services": [
-        {
-          "type": "Tfvckits.Domain.LocalAgent.Interfaces.IPatternsService,Tfvckits.Domain.LocalAgent"
-        }
-      ],
-      "instanceScope": "single-instance",
-      "injectProperties": true
-    },
-    {
-      "type": "Tfvckits.Application.One.ReportsService,Tfvckits.Application.One",
-      "services": [
-        {
-          "type": "Tfvckits.Domain.LocalAgent.Interfaces.IReportsService,Tfvckits.Domain.LocalAgent"
-        }
-      ],
-      "instanceScope": "single-instance",
-      "injectProperties": true
-    },
-    {
-      "type": "Tfvckits.Application.One.SolutionsService,Tfvckits.Application.One",
-      "services": [
-        {
-          "type": "Tfvckits.Domain.LocalAgent.Interfaces.ISolutionsService,Tfvckits.Domain.LocalAgent"
-        }
-      ],
-      "instanceScope": "single-instance",
-      "injectProperties": true
-    },
-    {
-      "type": "Tfvckits.Application.One.SpringConfigsService,Tfvckits.Application.One",
-      "services": [
-        {
-          "type": "Tfvckits.Domain.LocalAgent.Interfaces.ISpringConfigsService,Tfvckits.Domain.LocalAgent"
-        }
-      ],
-      "instanceScope": "single-instance",
-      "injectProperties": true
-    },
-    {
-      "type": "Tfvckits.Application.One.WxsConfigsService,Tfvckits.Application.One",
-      "services": [
-        {
-          "type": "Tfvckits.Domain.LocalAgent.Interfaces.IWxsConfigsService,Tfvckits.Domain.LocalAgent"
+          "type": "Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockCodesCollector,Ban3.Infrastructures.ServiceCentre"
         }
       ],
       "instanceScope": "single-instance",

@@ -17,28 +17,26 @@ public class StockNotionsFromSohu
     private IStoragesHelper _storagesHelper;
 
     ///
-    public StockNotionsFromSohu(IStoragesHelper storagesHelper)
+    public StockNotionsFromSohu( IStoragesHelper storagesHelper )
     {
         _storagesHelper = storagesHelper;
     }
 
     ///
-    public async Task<bool> TryFetchNotions(Action<IEnumerable<IStockNotion>> action)
+    public async Task<bool> TryFetchNotions( Action<IEnumerable<IStockNotion>> action )
     {
-
+        return await Task.FromResult( true );
     }
 
     ///
     public async Task<IEnumerable<IStockNotion>> TryLoad()
-        => await _storagesHelper.TryLoad<IEnumerable<StockNotion>>("all");
+        => await _storagesHelper.TryLoad<IEnumerable<StockNotion>>( "all" );
 
     ///
-    public async Task<IEnumerable<IStock>> TryLoad(IStockNotion stockNotion)
-        => await _storagesHelper.TryLoad<IEnumerable<Stock>>($"Notion.{stockNotion.Id}.Stocks");
+    public async Task<IEnumerable<IStock>> TryLoad( IStockNotion stockNotion )
+        => await _storagesHelper.TryLoad<IEnumerable<Stock>>( $"Notion.{stockNotion.Id}.Stocks" );
 
     ///
-    public async Task<IEnumerable<IStockNotion>> TryLoad(IStock stock)
-        => await _storagesHelper.TryLoad<IEnumerable<StockNotion>>($"Stock.{stock.Code}.Notions");
-
+    public async Task<IEnumerable<IStockNotion>> TryLoad( IStock stock )
+        => await _storagesHelper.TryLoad<IEnumerable<StockNotion>>( $"Stock.{stock.Code}.Notions" );
 }
-

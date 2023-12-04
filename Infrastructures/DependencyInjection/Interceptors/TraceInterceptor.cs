@@ -62,7 +62,7 @@ public class TraceInterceptor
 
         if( returnType != null && returnType == typeof( Task ) )
         {
-            Func<Task> res = async () => await (Task)invocation.ReturnValue;
+            var res = async () => await (Task)invocation.ReturnValue;
 
             invocation.ReturnValue = res();
         }

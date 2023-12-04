@@ -20,31 +20,27 @@ public class StocksCalculator : OneImplement, IStocksCalculator
     private IStoragesHelper _storagesHelper;
 
     public StocksCalculator(
-        IStoragesHelper storagesHelper)
+        IStoragesHelper storagesHelper )
     {
         _storagesHelper = storagesHelper;
-
     }
 
     /// 
     public async Task<bool> TryGenerateSeeds(
-       IStockData<IStockEvent> stockEvents,
-       Action<IStockData<IStockSeed>> action
+        IStockData<IStockEvent> stockEvents,
+        Action<IStockData<IStockSeed>> action
     )
     {
-
+        return await Task.FromResult( true );
     }
 
+    /// 
+    public async Task<IStockData<IStockSeed>> TryLoadSeeds( IStock stock )
+        => await _storagesHelper.TryLoad<IStockData<IStockSeed>>( stock.Code );
 
     /// 
-    public async Task<IStockData<IStockSeed>> TryLoadSeeds(IStock stock)
-        => await _storagesHelper.TryLoad<IStockData<IStockSeed>>(stock.Code);
-
-
-    /// 
-    public async Task<IStockData<IStockPrice>> TryLoadOriginalPrices(IStock stock)
-        => await _storagesHelper.TryLoad<IStockData<IStockPrice>>(stock.Code);
-
+    public async Task<IStockData<IStockPrice>> TryLoadOriginalPrices( IStock stock )
+        => await _storagesHelper.TryLoad<IStockData<IStockPrice>>( stock.Code );
 
     /// 
     public async Task<bool> TryAdjustPrices(
@@ -53,21 +49,22 @@ public class StocksCalculator : OneImplement, IStocksCalculator
         Action<IStockData<IStockPrice>> action
     )
     {
-
+        return await Task.FromResult( true );
     }
-
 
     /// 
     public async Task<bool> TryConvertCycle(
         IStockData<IStockPrice> dailyPrices,
         AnalysisCycle analysisCycle,
         Action<AnalysisCycle, IStockData<IStockPrice>> action
-    );
-
+    )
+    {
+        return await Task.FromResult( true );
+    }
 
     /// 
-    public async Task<IStockData<IStockPrice>> TryLoadRehabilitatedPrices(IStock stock, AnalysisCycle cycle)
-        => await _storagesHelper.TryLoad<IStockData<IStockPrice>>($"{stock.Code}.{cycle}");
+    public async Task<IStockData<IStockPrice>> TryLoadRehabilitatedPrices( IStock stock, AnalysisCycle cycle )
+        => await _storagesHelper.TryLoad<IStockData<IStockPrice>>( $"{stock.Code}.{cycle}" );
 
     /// 
     public async Task<bool> TryGenerateIndicators(
@@ -75,11 +72,10 @@ public class StocksCalculator : OneImplement, IStocksCalculator
         Action<IOutput> output
     )
     {
-
+        return await Task.FromResult( true );
     }
 
     /// 
-    public async Task<IOutput> TryLoadIndicators(IStock stock)
-        => await _storagesHelper.TryLoad<IOutput>(stock.Code);
+    public async Task<IOutput> TryLoadIndicators( IStock stock )
+        => await _storagesHelper.TryLoad<IOutput>( stock.Code );
 }
-

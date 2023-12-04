@@ -1,6 +1,5 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using Autofac;
@@ -41,7 +40,7 @@ namespace Ban3.Infrastructures.DependencyInjection
         /// ContainerBuilder load config/autofac.json
         /// </summary>
         /// <param name="container"></param>
-        public static void RegisterOnConfig( this ContainerBuilder container )
+        public static ContainerBuilder RegisterOnConfig( this ContainerBuilder container )
         {
             var config = new ConfigurationBuilder();
             var configSource = new JsonConfigurationSource
@@ -54,20 +53,22 @@ namespace Ban3.Infrastructures.DependencyInjection
 
             var configModule = new ConfigurationModule( config.Build() );
             container.RegisterModule( configModule );
+
+            return container;
         }
 
         /// <summary>
         /// 通过依赖注入
         /// </summary>
         /// <param name="container"></param>
-        public static void RegisterOnDependencies( this ContainerBuilder container )
+        public static ContainerBuilder RegisterOnDependencies( this ContainerBuilder container )
         {
             var libs = DependencyContext.Default?.CompileLibraries
                                         .Where( lib => lib.Serviceable == false && lib.Type == "project" )
                                         .Select( lib => lib.Name )
                                         .ToList();
 
-            if( libs == null ) return;
+            if( libs == null ) return null;
 
             var assemblies = libs.Select( lib => AssemblyLoadContext.Default.LoadFromAssemblyName( new AssemblyName( lib ) ) )
                                  .ToArray();
@@ -103,6 +104,8 @@ namespace Ban3.Infrastructures.DependencyInjection
                .InstancePerDependency()
                .PropertiesAutowired()
                .PreserveExistingDefaults();
+
+            return container;
         }
 
         #endregion

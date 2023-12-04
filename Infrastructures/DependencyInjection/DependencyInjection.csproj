@@ -36,6 +36,9 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <None Update="Config\autofac.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
         <None Update="readme.md">
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
