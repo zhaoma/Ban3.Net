@@ -3,6 +3,7 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.GeneralImpl.Entries.Hybird;
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
 namespace Ban3.Infrastructures.GeneralImpl.Request;
 
@@ -14,7 +15,7 @@ public class SohuRequest
     {
         return new InternetResource
         {
-            Url = $"http://hq.stock.sohu.com/pl/pl-{sohuId}.html",
+            Url = $"https://q.stock.sohu.com/pl/pl-{sohuId}.html",
             Charset = "gb2312"
         };
     }
@@ -24,7 +25,7 @@ public class SohuRequest
     {
         return new InternetResource
         {
-            Url = $"http://q.stock.sohu.com/cn/bk_{notionId}.shtml",
+            Url = $"https://q.stock.sohu.com/cn/bk_{notionId}.shtml",
             Charset = "gb2312"
         };
     }
