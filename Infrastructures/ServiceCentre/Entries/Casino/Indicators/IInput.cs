@@ -3,6 +3,9 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using System.Collections.Generic;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
@@ -13,11 +16,17 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 public interface IInput
 {
     /// <summary>
+    /// 
+    /// </summary>
+    [JsonProperty("stock")]
+    IStock Stock { get; set; }
+
+    /// <summary>
     /// 价格数据集合
     /// </summary>
     [JsonProperty( "stockPrices" )]
-    IStockData<Items.IStockPrice> StockPrices { get; set; }
-
+    IDictionary<AnalysisCycle,IStockPrice> StockPrices { get; set; }
+    
     /// <summary>
     /// 公式集合
     /// </summary>

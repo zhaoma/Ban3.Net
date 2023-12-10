@@ -3,7 +3,6 @@
 //  ————————————————————————————————————————————————————————————————————————————
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Applications;
@@ -12,15 +11,18 @@ using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Hybird;
 
+///
 public class ChartsUtilizeApacheECharts : OneImplement, IChartsHelper
 {
     private IStoragesHelper _storagesHelper;
 
+    ///
     public ChartsUtilizeApacheECharts( IStoragesHelper storagesHelper )
     {
         _storagesHelper = storagesHelper;
     }
 
+    ///
     public async Task<bool> TryCreate<T>( T data, Action<string, IChartsDiagram> action )
     {
         return await Task.FromResult( true );

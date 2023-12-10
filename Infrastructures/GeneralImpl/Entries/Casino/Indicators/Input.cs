@@ -3,10 +3,12 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
+using System;
+using System.Collections.Generic;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
+using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;
 
@@ -16,7 +18,10 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;
 public class Input : IInput
 {
     ///
-    public IStockData<IStockPrice> StockPrices { get; set; }
+    public IStock Stock { get; set; }
+
+    ///
+    public IDictionary<AnalysisCycle, IStockPrice> StockPrices { get; set; }
 
     /// 
     public IFormulas Formulas { get; set; }

@@ -19,13 +19,6 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 public interface IComputedResult : IStockRecord, IEvaluation<IComputedResult>
 {
     /// <summary>
-    /// 分析周期
-    /// </summary>
-    [JsonProperty( "analysisCycle" )]
-    [JsonConverter( typeof( StringEnumConverter ) )]
-    AnalysisCycle AnalysisCycle { get; set; }
-
-    /// <summary>
     /// 成交量均线
     /// </summary>
     [JsonProperty( "values" )]

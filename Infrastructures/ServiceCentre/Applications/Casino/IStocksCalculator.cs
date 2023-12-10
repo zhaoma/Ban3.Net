@@ -10,7 +10,7 @@ using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
-
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
 /// <summary>
@@ -21,12 +21,12 @@ public interface IStocksCalculator
     /// <summary>
     /// 从财务事件中分析复权因子
     /// </summary>
-    /// <param name="stockEvents"></param>
+    /// <param name="stock"></param>
     /// <param name="action"></param>
     /// <returns></returns>
     Task<bool> TryGenerateSeeds(
-        IStockData<IStockEvent> stockEvents,
-        Action<IStockData<IStockSeed>> action
+        IStock stock,
+        Action<IStockData<IStockSeed>>? action=null
     );
 
     /// <summary>
@@ -46,14 +46,12 @@ public interface IStocksCalculator
     /// <summary>
     /// 价格复权
     /// </summary>
-    /// <param name="sourcePrices"></param>
-    /// <param name="stockSeeds"></param>
+    /// <param name="stock"></param>
     /// <param name="action"></param>
     /// <returns></returns>
-    Task<bool> TryAdjustPrices(
-        IStockData<IStockPrice> sourcePrices,
-        IStockData<IStockSeed> stockSeeds,
-        Action<IStockData<IStockPrice>> action
+    Task<bool> TryRehabilitatePrices(
+        IStock stock,
+        Action<IStockData<IStockPrice>>? action=null
     );
 
     /// <summary>
@@ -64,9 +62,8 @@ public interface IStocksCalculator
     /// <param name="action"></param>
     /// <returns></returns>
     Task<bool> TryConvertCycle(
-        IStockData<IStockPrice> dailyPrices,
-        AnalysisCycle analysisCycle,
-        Action<AnalysisCycle, IStockData<IStockPrice>> action
+        IStock stock,
+        Action<IStockData<IStockPrice>, IStockData<IStockPrice>>? action=null
     );
 
     /// <summary>
@@ -88,7 +85,7 @@ public interface IStocksCalculator
     /// <returns></returns>
     Task<bool> TryGenerateIndicators(
         IInput input,
-        Action<IOutput> output
+        Action<IOutput>? output
     );
 
     /// <summary>
