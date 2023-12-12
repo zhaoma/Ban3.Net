@@ -23,6 +23,8 @@ using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
 
+using Amount = Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Inputs.Amount;
+
 #nullable enable
 namespace Ban3.Infrastructures.GeneralImpl.Applications.Casino;
 
@@ -252,6 +254,51 @@ public class StocksCalculator : OneImplement, IStocksCalculator
         out KeyValuePair<AnalysisCycle, IEnumerable<ComputedResult>> result )
     {
         result = new KeyValuePair<AnalysisCycle, IEnumerable<ComputedResult>>( cycle, new List<ComputedResult>() );
+
+        foreach( var formula in formulas.Parameters )
+        {
+            switch( formula.IndicatorIs )
+            {
+                case IndicatorIs.AMOUNT:
+                    var amount = (Amount)formula;
+
+                    break;
+                case IndicatorIs.BBI:
+
+                    break;
+                case IndicatorIs.BIAS:
+
+                    break;
+
+                case IndicatorIs.CCI:
+
+                    break;
+
+                case IndicatorIs.DMI:
+                    break;
+
+                case IndicatorIs.ENE:
+                    break;
+
+                case IndicatorIs.KD:
+                    break;
+                case IndicatorIs.LWR:
+
+                    break;
+                case IndicatorIs.MA:
+
+                    break;
+
+                case IndicatorIs.MACD:
+                    break;
+                case IndicatorIs.MTM:
+
+                    break;
+                case IndicatorIs.RSI:
+
+                    break;
+            }
+        }
 
         var line = new LineOfPoint
         {
