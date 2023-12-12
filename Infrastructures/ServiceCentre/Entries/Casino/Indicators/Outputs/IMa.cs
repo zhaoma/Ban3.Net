@@ -1,9 +1,6 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
-
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 using Newtonsoft.Json;
 
@@ -14,7 +11,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 价格均线指标
 /// </summary>
-public interface IMa : IStockRecord, IEvaluation<IMa> 
+public interface IMa : IEvaluation<IMa>
 {
     /// <summary>
     /// 价格均线集合

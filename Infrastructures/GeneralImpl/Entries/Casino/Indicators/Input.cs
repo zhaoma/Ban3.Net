@@ -1,10 +1,9 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using System;
 using System.Collections.Generic;
+
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
@@ -21,7 +20,7 @@ public class Input : IInput
     public IStock Stock { get; set; }
 
     ///
-    public IDictionary<AnalysisCycle, IStockPrice> StockPrices { get; set; }
+    public IDictionary<AnalysisCycle, IEnumerable<IStockPrice>> StockPrices { get; set; }
 
     /// 
     public IFormulas Formulas { get; set; }

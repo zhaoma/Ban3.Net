@@ -4,8 +4,10 @@
 // —————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
+
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
+
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
@@ -18,15 +20,15 @@ public interface IInput
     /// <summary>
     /// 
     /// </summary>
-    [JsonProperty("stock")]
+    [JsonProperty( "stock" )]
     IStock Stock { get; set; }
 
     /// <summary>
     /// 价格数据集合
     /// </summary>
     [JsonProperty( "stockPrices" )]
-    IDictionary<AnalysisCycle,IStockPrice> StockPrices { get; set; }
-    
+    IDictionary<AnalysisCycle, IEnumerable<IStockPrice>> StockPrices { get; set; }
+
     /// <summary>
     /// 公式集合
     /// </summary>

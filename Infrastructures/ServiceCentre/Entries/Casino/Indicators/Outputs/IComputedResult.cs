@@ -1,6 +1,5 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
@@ -16,7 +15,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 计算结果声明
 /// </summary>
-public interface IComputedResult : IStockRecord, IEvaluation<IComputedResult>
+public interface IComputedResult
 {
     /// <summary>
     /// 成交量均线
@@ -30,4 +29,22 @@ public interface IComputedResult : IStockRecord, IEvaluation<IComputedResult>
     [JsonProperty( "indicatorIs" )]
     [JsonConverter( typeof( StringEnumConverter ) )]
     IndicatorIs IndicatorIs { get; set; }
+}
+
+/// <summary>
+/// 指标值
+/// </summary>
+public interface IStockValue : IStockRecord
+{
+    /// <summary>
+    /// 评分
+    /// </summary>
+    [JsonProperty( "score" )]
+    int Score { get; set; }
+
+    /// <summary>
+    /// 特征值
+    /// </summary>
+    [JsonProperty( "keys" )]
+    IEnumerable<string> Keys { get; set; }
 }

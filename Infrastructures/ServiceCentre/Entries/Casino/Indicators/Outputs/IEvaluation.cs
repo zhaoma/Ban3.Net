@@ -1,6 +1,5 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
@@ -17,8 +16,6 @@ public interface IEvaluation<in T> : IStockValue
     /// 评判指标
     /// </summary>
     /// <param name="previousValue">上期值</param>
-    /// <param name="score">得分</param>
-    /// <param name="keys">输出特征</param>
     /// <returns></returns>
-    bool Judge( T previousValue, out int score, out IEnumerable<string> keys );
+    bool Judge( T previousValue );
 }

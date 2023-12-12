@@ -1,14 +1,13 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using System.Collections.Generic;
+
 using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
-using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators;
 
@@ -24,5 +23,5 @@ public class Output : StockCode, IOutput
     public IEnumerable<string> Keys { get; set; }
 
     /// 
-    public IDictionary<AnalysisCycle, IStockData<IComputedResult>> ComputedResults { get; set; }
+    public IDictionary<AnalysisCycle, IEnumerable<IComputedResult>> ComputedResults { get; set; }
 }

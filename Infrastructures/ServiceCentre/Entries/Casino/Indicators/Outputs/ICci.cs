@@ -1,9 +1,7 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
@@ -11,12 +9,11 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// <summary>
 /// 顺势指标
 /// </summary>
-public interface ICci : IStockRecord, IEvaluation<ICci> 
+public interface ICci : IEvaluation<ICci>
 {
     /// <summary>
     /// CCI
     /// </summary>
-    [JsonProperty("cci")]
+    [JsonProperty( "cci" )]
     decimal CCI { get; set; }
 }
-

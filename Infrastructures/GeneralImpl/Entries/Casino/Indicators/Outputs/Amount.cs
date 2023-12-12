@@ -1,6 +1,5 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
@@ -18,10 +17,10 @@ public class Amount : StockValue, IEvaluation<Amount>
     public IEnumerable<Line<double>> Lines { get; set; }
 
     /// 
-    public bool Judge( Amount previousValue, out int score, out IEnumerable<string> keys )
+    public bool Judge( Amount previousValue )
     {
-        score = 0;
-        keys = new List<string>();
+        Score = 0;
+        Keys = new List<string>();
 
         return true;
     }

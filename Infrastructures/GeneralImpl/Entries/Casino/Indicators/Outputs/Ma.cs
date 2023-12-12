@@ -1,12 +1,9 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
 
-using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Outputs;
@@ -20,10 +17,10 @@ public class Ma : StockValue, IEvaluation<Ma>
     public IEnumerable<Line<decimal>> Lines { get; set; }
 
     /// 
-    public bool Judge( Ma previousValue, out int score, out IEnumerable<string> keys )
+    public bool Judge( Ma previousValue )
     {
-        score = 0;
-        keys = new List<string>();
+        Score = 0;
+        Keys = new List<string>();
 
         return true;
     }

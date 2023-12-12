@@ -1,6 +1,5 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
@@ -16,13 +15,12 @@ public interface ILine<T>
     /// <summary>
     /// 周期
     /// </summary>
-    [JsonProperty("duration")]
+    [JsonProperty( "duration" )]
     int Duration { get; set; }
 
     /// <summary>
     /// 取值
     /// </summary>
-    [JsonProperty("value")]
+    [JsonProperty( "value" )]
     T Value { get; set; }
 }
-

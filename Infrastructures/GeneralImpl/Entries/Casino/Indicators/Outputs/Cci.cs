@@ -1,10 +1,6 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
-
-using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
 using System.Collections.Generic;
 
@@ -21,10 +17,10 @@ public class Cci : StockValue, IEvaluation<Cci>
     public decimal CCI { get; set; }
 
     /// 
-    public bool Judge( Cci previousValue, out int score, out IEnumerable<string> keys )
+    public bool Judge( Cci previousValue )
     {
-        score = 0;
-        keys = new List<string>();
+        Score = 0;
+        Keys = new List<string>();
 
         return true;
     }

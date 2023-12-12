@@ -1,9 +1,6 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
-
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 using Newtonsoft.Json;
 
@@ -15,7 +12,7 @@ namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 /// 强弱指标多在70与30之间波动。当六日指标上升到达80时，表示股市已有超买现象，如果一旦继续上升，超过90以上时，则表示已到严重超买的警戒区，股价已形成头部，极可能在短期内反转回转
 /// 当六日强弱指标下降至20时，表示股市有超卖现象，如果一旦继续下降至10以下时则表示已到严重超卖区域，股价极可能有止跌回升的机会
 /// </summary>
-public interface IRsi : IStockRecord, IEvaluation<IRsi> 
+public interface IRsi : IEvaluation<IRsi>
 {
     /// <summary>
     /// LC:=REF(CLOSE,1);

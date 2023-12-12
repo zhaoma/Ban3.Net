@@ -1,6 +1,5 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Enums.Casino;
@@ -16,9 +15,7 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 /// </summary>
 public class StockNotion : IStockNotion
 {
-    /// <summary>
-    /// 标识
-    /// </summary>
+    ///
     public int Id { get; set; }
 
     /// <summary>

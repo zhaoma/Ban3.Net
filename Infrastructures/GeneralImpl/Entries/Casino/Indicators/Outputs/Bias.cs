@@ -1,10 +1,6 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
-
-using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
-using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 
 using System.Collections.Generic;
 
@@ -24,10 +20,10 @@ public class Bias : StockValue, IEvaluation<Bias>
     public decimal BIASMA { get; set; }
 
     /// 
-    public bool Judge( Bias previousValue, out int score, out IEnumerable<string> keys )
+    public bool Judge( Bias previousValue )
     {
-        score = 0;
-        keys = new List<string>();
+        Score = 0;
+        Keys = new List<string>();
 
         return true;
     }

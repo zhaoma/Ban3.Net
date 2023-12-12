@@ -1,6 +1,5 @@
 ﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
@@ -13,11 +12,10 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino.Items;
 /// </summary>
 public class StockHolder : StockRecord, IStockHolder
 {
+    /// 
     public string Code { get; set; }
 
-    /// <summary>
-    /// 股东标识
-    /// </summary>
+    /// 
     public string Id { get; set; }
 
     /// <summary>

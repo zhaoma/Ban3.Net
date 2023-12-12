@@ -10,9 +10,11 @@ using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino;
 
+///
 public class StockData<T> : Stock, IStockData<T>
 {
-    public StockData(IStock stock )
+    ///
+    public StockData( IStock stock )
     {
         Code = stock.Code;
         Name = stock.Name;
@@ -21,5 +23,6 @@ public class StockData<T> : Stock, IStockData<T>
         Values = new List<T>();
     }
 
+    ///
     public IEnumerable<T> Values { get; set; }
 }
