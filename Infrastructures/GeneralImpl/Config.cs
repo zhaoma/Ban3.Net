@@ -3,6 +3,7 @@
 // WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.GeneralImpl.Entries.Casino.Indicators.Inputs;
 using Ban3.Infrastructures.ServiceCentre;
 
 using System;
@@ -17,4 +18,6 @@ public class Config : IConfig
     {
         return default( T );
     }
+
+    public static Formulas CurrentFormulas = new Formulas();
 }

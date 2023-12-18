@@ -2,6 +2,7 @@
 // zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 // —————————————————————————————————————————————————————————————————————————————
 
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
@@ -22,5 +23,5 @@ public interface ILine<T>
     /// 取值
     /// </summary>
     [JsonProperty( "value" )]
-    T Value { get; set; }
+    IEnumerable<T> Value { get; set; }
 }
