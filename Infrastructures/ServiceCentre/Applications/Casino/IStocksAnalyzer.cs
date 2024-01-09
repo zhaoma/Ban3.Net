@@ -1,6 +1,6 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Threading.Tasks;
@@ -10,6 +10,7 @@ using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Filters;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators;
 using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Casino;
 
 /// <summary>
@@ -27,7 +28,7 @@ public interface IStocksAnalyzer
     Task<bool> TryGenerateSuggests(
         IStockFilter stockFilter,
         IOutput output,
-        Action<IStockData<IStockSuggest>> action
+        Action<IStockData<IStockSuggest>>? action
     );
 
     /// <summary>

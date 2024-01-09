@@ -23,12 +23,12 @@ public class ChartsUtilizeApacheECharts : OneImplement, IChartsHelper
     }
 
     ///
-    public async Task<bool> TryCreate<T>( T data, Action<string, IChartsDiagram> action )
+    public Task<bool> TryCreate<T>( T data, Action<string, IChartsDiagram> action )
     {
-        return await Task.FromResult( true );
+        return Task.FromResult( true );
     }
 
     ///
-    public async Task<IChartsDiagram> TryLoad( string key )
-        => await _storagesHelper.TryLoad<IChartsDiagram>( key );
+    public Task<IChartsDiagram> TryLoad( string key )
+        => _storagesHelper.TryLoad<IChartsDiagram>( key );
 }

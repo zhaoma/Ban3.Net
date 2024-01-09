@@ -1,8 +1,8 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
-using System.Collections.Generic;
+using Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;
 
@@ -16,6 +16,7 @@ public interface IEvaluation<in T> : IStockValue
     /// 评判指标
     /// </summary>
     /// <param name="previousValue">上期值</param>
+    /// <param name="price">行情值</param>
     /// <returns></returns>
-    bool Judge( T previousValue );
+    bool Judge( T previousValue, IStockPrice price );
 }

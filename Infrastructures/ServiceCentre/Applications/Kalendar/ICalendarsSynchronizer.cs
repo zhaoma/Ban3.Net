@@ -1,13 +1,13 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Kalendar;
 
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Kalendar;
 
 public interface ICalendarsSynchronizer

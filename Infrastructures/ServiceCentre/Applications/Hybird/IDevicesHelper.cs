@@ -1,13 +1,13 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
 /// <summary>
@@ -22,9 +22,5 @@ public interface IDevicesHelper
     /// <param name="deviceControl">控制指令</param>
     /// <param name="deviceAnswer">设备应答</param>
     /// <returns></returns>
-    Task<bool> TryCommunicate(
-        IDeviceEndpoint deviceEndpoint,
-        IDeviceControl deviceControl,
-        Action<IDeviceAnswer> deviceAnswer
-    );
+    Task<bool> TryCommunicate( IDeviceEndpoint deviceEndpoint, IDeviceControl deviceControl, Action<IDeviceAnswer>? deviceAnswer );
 }

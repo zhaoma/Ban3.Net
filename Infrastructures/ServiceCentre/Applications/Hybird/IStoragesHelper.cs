@@ -1,12 +1,12 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
 /// <summary>
@@ -62,7 +62,7 @@ public interface IStoragesHelper
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="predicate"></param>
-    /// <param name="values"></param>
+    /// <param name="action"></param>
     /// <returns></returns>
-    Task<bool> TryQuery<T>( Predicate<T> predicate, Action<IEnumerable<T>> values );
+    Task<bool> TryQuery<T>( Predicate<T> predicate, Action<IEnumerable<T>>? action );
 }

@@ -1,7 +1,6 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System.ComponentModel;
 
@@ -13,19 +12,18 @@ namespace Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
 public enum DeviceAt
 {
     /// <summary />
-    [Description("TCP")]
+    [Description( "TCP" )]
     TCP,
 
     /// <summary />
-    [Description("UDP")]
+    [Description( "UDP" )]
     UDP,
 
     /// <summary />
-    [Description("串口")]
+    [Description( "串口" )]
     SerialPort,
 
     /// <summary />
-    [Description("USB")]
+    [Description( "USB" )]
     USB
 }
-

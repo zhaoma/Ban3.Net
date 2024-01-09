@@ -1,7 +1,6 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System.ComponentModel;
 
@@ -15,7 +14,7 @@ public enum AuthenticationType
     /// <summary>
     /// 匿名
     /// </summary>
-    [Description("None")]
+    [Description( "None" )]
     None,
 
     /// <summary>
@@ -27,7 +26,7 @@ public enum AuthenticationType
     /// 服务器将用户名密码解码后比对，成功匹配后即认证成功。
     /// 因为Base64不算是一种加密方法：无密钥的可逆加密，任何人都可解密（百度搜索一下”在线解码“一大堆）。因此基本认证被认为是明文传输，安全性不好。极易出现密码被窃听和重放攻击等安全性问题。
     /// </summary>
-    [Description("Basic")]
+    [Description( "Basic" )]
     Basic,
 
     /// <summary>
@@ -42,7 +41,7 @@ public enum AuthenticationType
     /// 2）客户端无法确认服务端的正确身份，缺少对服务端的认证方式
     /// 3）近年来，随着计算机性能的提高等因素，传统高强度加密算法的破解已成可能。而MD5更是已有破解方法。更多安全性问题请参考RFC2617。
     /// </summary>
-    [Description("Digest")]
+    [Description( "Digest" )]
     Digest,
 
     /// <summary>
@@ -58,20 +57,20 @@ public enum AuthenticationType
     /// 2 61646d696e            -> Unicode              = 610064006d0069006e00
     /// 3 610064006d0069006e00  -> MD4                  = 209c6174da490caeb422f3fa5a7ae634
     /// </summary>
-    [Description("NTLM")]
+    [Description( "NTLM" )]
     NTLM,
 
     /// <summary>
     /// Kerberose相比NTML有很大改善：速度快，而且允许相互认证、认证代理和简单的信任关系。
     /// </summary>
-    [Description("Negotiate")]
+    [Description( "Negotiate" )]
     Negotiate,
 
     /// <summary>
     /// 服务器与客户端通过第三方的Kerberos服务器完成认证。
     /// Kerberose相比NTML有很大改善：速度快，而且允许相互认证、认证代理和简单的信任关系。
     /// </summary>
-    [Description("Kerberos")]
+    [Description( "Kerberos" )]
     Kerberos,
 
     /// <summary>
@@ -80,7 +79,6 @@ public enum AuthenticationType
     /// SPENGO其实是一种”伪认证机制“（pseudo-mechanism），用以协商出真正的认证机制。
     /// 最常见的是微软的HTTP协商认证扩展（HTTP Negotiate authentication extension），协商的最终机制在NTML和Kerberos中选择。Kerberos因其优点优先使用。
     /// </summary>
-    [Description("SPNEGO")]
+    [Description( "SPNEGO" )]
     SPNEGO
 }
-

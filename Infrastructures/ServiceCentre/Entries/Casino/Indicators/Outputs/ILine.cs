@@ -1,8 +1,9 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
+
 using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs;

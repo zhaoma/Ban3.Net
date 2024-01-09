@@ -45,4 +45,10 @@
         <PackageReference Include="log4net" Version="2.0.15" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Entries\Common\" />
+      <Folder Include="Enums\Kalendar\" />
+      <Folder Include="Enums\Common\" />
+    </ItemGroup>
 </Project>

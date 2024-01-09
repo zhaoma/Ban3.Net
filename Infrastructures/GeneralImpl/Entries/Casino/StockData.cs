@@ -1,6 +1,6 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System.Collections.Generic;
 
@@ -13,6 +13,8 @@ namespace Ban3.Infrastructures.GeneralImpl.Entries.Casino;
 ///
 public class StockData<T> : Stock, IStockData<T>
 {
+    public StockData() {}
+
     ///
     public StockData( IStock stock )
     {

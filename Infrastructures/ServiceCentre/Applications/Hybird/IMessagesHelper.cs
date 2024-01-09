@@ -1,13 +1,13 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
 /// <summary>
@@ -29,5 +29,5 @@ public interface IMessagesHelper
     /// <param name="messageHub">路由</param>
     /// <param name="action">消息</param>
     /// <returns></returns>
-    Task<bool> TrySubscribe( IMessageHub messageHub, Action<IMessageBody> action );
+    Task<bool> TrySubscribe( IMessageHub messageHub, Action<IMessageBody>? action );
 }

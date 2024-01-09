@@ -1,7 +1,6 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
 
@@ -15,36 +14,36 @@ public interface IMailServer
     /// <summary>
     /// 地址
     /// </summary>
-    [JsonProperty("serverEndpoint")]
+    [JsonProperty( "serverEndpoint" )]
     string ServerEndpoint { get; set; }
 
     /// <summary>
     /// 端口
     /// </summary>
-    [JsonProperty("serverPort")]
+    [JsonProperty( "serverPort" )]
     int ServerPort { get; set; }
 
     /// <summary>
     /// 使用SSL
     /// </summary>
-    [JsonProperty("enableSsl")]
+    [JsonProperty( "enableSsl" )]
     bool EnableSsl { get; set; }
 
     /// <summary>
     /// 使用授权
     /// </summary>
-    [JsonProperty("useDefaultCredentials")]
+    [JsonProperty( "useDefaultCredentials" )]
     bool UseDefaultCredentials { get; set; }
 
     /// <summary>
     /// 账号
     /// </summary>
-    [JsonProperty("userName")]
+    [JsonProperty( "userName" )]
     string UserName { get; set; }
 
     /// <summary>
     /// 密码
     /// </summary>
-    [JsonProperty("password")]
+    [JsonProperty( "password" )]
     string Password { get; set; }
 }

@@ -1,6 +1,6 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Collections.Generic;
@@ -34,8 +34,8 @@ public class StockCodesFromTushare : OneImplement, IStockCodesCollector
     }
 
     /// 
-    public async Task<bool> TryFetchStocks( Action<IEnumerable<IStock>>? action )
-        => await _internetsHelper.TryRequest(
+    public Task<bool> TryFetchStocks( Action<IEnumerable<IStock>>? action )
+        => _internetsHelper.TryRequest(
             Request.TushareRequest.ResourceForCodes(),
             callback =>
             {
@@ -55,6 +55,6 @@ public class StockCodesFromTushare : OneImplement, IStockCodesCollector
             } );
 
     /// 
-    public async Task<IEnumerable<IStock>> TryLoad()
-        => await _storagesHelper.TryLoad<IEnumerable<Stock>>( "all" );
+    public Task<IEnumerable<IStock>> TryLoad()
+        => _storagesHelper.TryLoad<IEnumerable<IStock>>( "all" );
 }

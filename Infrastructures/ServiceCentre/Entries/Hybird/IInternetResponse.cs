@@ -1,9 +1,9 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.ServiceCentre.Enums.Hybird;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -14,13 +14,13 @@ public interface IInternetResponse
     /// <summary>
     /// 状态码
     /// </summary>
-    [JsonProperty("statusCode")]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonProperty( "statusCode" )]
+    [JsonConverter( typeof( StringEnumConverter ) )]
     HttpStatus StatusCode { get; set; }
 
     /// <summary>
     /// 响应体
     /// </summary>
-    [JsonProperty("response")]
+    [JsonProperty( "response" )]
     IInternetData Response { get; set; }
 }

@@ -1,12 +1,13 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
 /// <summary>
@@ -21,7 +22,7 @@ public interface IChartsHelper
     /// <param name="data"></param>
     /// <param name="action"></param>
     /// <returns></returns>
-    Task<bool> TryCreate<T>( T data, Action<string, IChartsDiagram> action );
+    Task<bool> TryCreate<T>( T data, Action<string, IChartsDiagram>? action );
 
     /// <summary>
     /// 

@@ -1,13 +1,13 @@
-﻿// —————————————————————————————————————————————————————————————————————————————
-// zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
-// —————————————————————————————————————————————————————————————————————————————
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 using System;
 using System.Threading.Tasks;
 
 using Ban3.Infrastructures.ServiceCentre.Entries.Hybird;
 
+#nullable enable
 namespace Ban3.Infrastructures.ServiceCentre.Applications.Hybird;
 
 /// <summary>
@@ -22,10 +22,7 @@ public interface IInternetsHelper
     /// <param name="internetResource"></param>
     /// <param name="internetResponse"></param>
     /// <returns></returns>
-    Task<bool> TryRequest(
-        IInternetHost internetHost,
-        IInternetResource internetResource,
-        Action<IInternetResponse> internetResponse );
+    Task<bool> TryRequest( IInternetHost internetHost, IInternetResource internetResource, Action<IInternetResponse>? internetResponse );
 
     /// <summary>
     /// anonymous request
@@ -33,8 +30,5 @@ public interface IInternetsHelper
     /// <param name="internetResource"></param>
     /// <param name="action"></param>
     /// <returns></returns>
-    Task<bool> TryRequest(
-        IInternetResource internetResource,
-        Action<IInternetResponse> action
-    );
+    Task<bool> TryRequest( IInternetResource internetResource, Action<IInternetResponse>? action );
 }
