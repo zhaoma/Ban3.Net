@@ -332,7 +332,7 @@ public class StocksCalculator : OneImplement, IStocksCalculator
                     //}
                 }
             },
-            { IndicatorIs.BBI, ( indicatorParameter, prices, index, result ) => {} },
+            { IndicatorIs.BBI, BbiAction },
             { IndicatorIs.BIAS, ( indicatorParameter, prices, index, result ) => {} },
             { IndicatorIs.CCI, ( indicatorParameter, prices, index, result ) => {} },
             { IndicatorIs.DMI, ( indicatorParameter, prices, index, result ) => {} },
@@ -344,6 +344,8 @@ public class StocksCalculator : OneImplement, IStocksCalculator
             { IndicatorIs.MTM, ( indicatorParameter, prices, index, result ) => {} },
             { IndicatorIs.RSI, ( indicatorParameter, prices, index, result ) => {} }
         };
+
+    private static Action<IParameter, List<IStockPrice>, int, ComputedResult> BbiAction => ( indicatorParameter, prices, index, result ) => {};
 
     /// 
     public async Task<IOutput> TryLoadIndicators( IStock stock )
