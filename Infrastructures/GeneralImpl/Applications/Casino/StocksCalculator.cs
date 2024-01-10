@@ -149,7 +149,7 @@ public class StocksCalculator : OneImplement, IStocksCalculator
         var monthly = new List<StockPrice>();
         try
         {
-            if( dailyPrices != null && dailyPrices.Values.Any() )
+            if( dailyPrices.Values.Any() )
             {
                 foreach( var price in dailyPrices.Values )
                 {
@@ -304,35 +304,8 @@ public class StocksCalculator : OneImplement, IStocksCalculator
     public static readonly Dictionary<IndicatorIs, Action<IParameter, List<IStockPrice>, int, ComputedResult>>
         CalculateActions = new()
         {
-            {
-                IndicatorIs.AMOUNT, ( indicatorParameter, prices, index, result ) =>
-                {
-                    var amount = (Amount)indicatorParameter;
-                    var calculated = new Entries.Casino.Indicators.Outputs.Amount
-                    {
-                        Lines = amount.Durations.Select( o => new Line<double> {} )
-                    };
-
-                    //result==null?
-
-                    //foreach( var detail in amount.Durations )
-                    //{
-                    //    if( index >= detail - 1 )
-                    //    {
-                    //        if( line.EndPoints[ i ].Amount!.RefAmounts.All( o => o.Days != detail.Days ) )
-                    //        {
-                    //            line.EndPoints[ i ].Amount!.RefAmounts.Add(
-                    //                new LineWithValue
-                    //                {
-                    //                    Ref = DescRangeAmountAverage( prices, i, detail.Days ),
-                    //                    Days = detail.Days
-                    //                } );
-                    //        }
-                    //    }
-                    //}
-                }
-            },
-            { IndicatorIs.BBI, BbiAction },
+            { IndicatorIs.AMOUNT, ActionOfAMOUNT },
+            { IndicatorIs.BBI, ActionOfBBI },
             { IndicatorIs.BIAS, ( indicatorParameter, prices, index, result ) => {} },
             { IndicatorIs.CCI, ( indicatorParameter, prices, index, result ) => {} },
             { IndicatorIs.DMI, ( indicatorParameter, prices, index, result ) => {} },
@@ -345,9 +318,36 @@ public class StocksCalculator : OneImplement, IStocksCalculator
             { IndicatorIs.RSI, ( indicatorParameter, prices, index, result ) => {} }
         };
 
-    private static Action<IParameter, List<IStockPrice>, int, ComputedResult> BbiAction => ( indicatorParameter, prices, index, result ) => {};
+    private static Action<IParameter, List<IStockPrice>, int, ComputedResult> ActionOfAMOUNT => ( indicatorParameter, prices, index, result ) =>
+    {
+        var amount = (Amount)indicatorParameter;
+        var calculated = new Entries.Casino.Indicators.Outputs.Amount
+        {
+            Lines = amount.Durations.Select( o => new Line<double> {} )
+        };
+
+        //result==null?
+
+        //foreach( var detail in amount.Durations )
+        //{
+        //    if( index >= detail - 1 )
+        //    {
+        //        if( line.EndPoints[ i ].Amount!.RefAmounts.All( o => o.Days != detail.Days ) )
+        //        {
+        //            line.EndPoints[ i ].Amount!.RefAmounts.Add(
+        //                new LineWithValue
+        //                {
+        //                    Ref = DescRangeAmountAverage( prices, i, detail.Days ),
+        //                    Days = detail.Days
+        //                } );
+        //        }
+        //    }
+        //}
+    };
+
+    private static Action<IParameter, List<IStockPrice>, int, ComputedResult> ActionOfBBI => ( indicatorParameter, prices, index, result ) => {};
 
     /// 
-    public async Task<IOutput> TryLoadIndicators( IStock stock )
-        => await _storagesHelper.TryLoad<IOutput>( stock.Code );
+    public Task<IOutput> TryLoadIndicators( IStock stock )
+        => _storagesHelper.TryLoad<IOutput>( stock.Code );
 }
