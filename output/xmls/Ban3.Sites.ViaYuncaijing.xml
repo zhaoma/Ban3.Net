@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Sites.ViaYuncaijing</name>
+    </assembly>
+    <members>
+        <member name="M:Ban3.Sites.ViaYuncaijing.Helper.DownloadOneIcon(Ban3.Sites.ViaYuncaijing.Request.DownloadOneIcon)">
+            <summary>
+            解析出地址,并下载到本地
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Sites.ViaYuncaijing.Request.DownloadOneIcon.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

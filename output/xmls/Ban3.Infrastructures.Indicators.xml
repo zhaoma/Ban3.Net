@@ -1,0 +1,2029 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Infrastructures.Indicators</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Infrastructures.Indicators.Entries.DotOfBuyingOrSelling">
+            <summary>
+            用FocusFilter 筛选买卖点
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Entries.ListRecord">
+            <summary>
+            标的排名
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Entries.ListRecord.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Entries.ListRecord.#ctor(Ban3.Infrastructures.Indicators.Outputs.StockSets)">
+            <summary>
+            
+            </summary>
+            <param name="sets"></param>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ListRecord.Code">
+            <summary>
+            TS_CODE
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ListRecord.Symbol">
+            <summary>
+            代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ListRecord.Value">
+            <summary>
+            计分
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ListRecord.Rank">
+            <summary>
+            排名
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ListRecord.Close">
+            <summary>
+            最新收盘价
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Entries.ProfileSummary">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ProfileSummary.Identity">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ProfileSummary.StockCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ProfileSummary.RecordCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ProfileSummary.RightCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ProfileSummary.Best">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ProfileSummary.Worst">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.ProfileSummary.Average">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Entries.Record">
+            <summary>
+            记录基类
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.Record.TradeDate">
+            <summary>
+            记录时间
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Entries.RecordWithValue">
+            <summary>
+            指标值
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.RecordWithValue.ParamId">
+            <summary>
+            指标参数
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.RecordWithValue.Ref">
+            <summary>
+            计算获值
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Entries.SetsFeature">
+            <summary>
+            特征定义
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Entries.SetsFeature.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Entries.SetsFeature.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="subject"></param>
+            <param name="value"></param>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.SetsFeature.Key">
+            <summary>
+            特征值
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.SetsFeature.Subject">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Entries.SetsFeature.Value">
+            <summary>
+            评分
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Entries.TradeDateConverter">
+            <summary>
+            日期序列化格式
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Entries.TradeDateConverter.#ctor">
+            <summary>
+            用tushare习惯yyyyMMdd
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Enums.ConditionParamIs">
+            <summary>
+            条件参数类型
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamIs.Indicator">
+            <summary>
+            指标
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamIs.Information">
+            <summary>
+            资料（财务指标）
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Enums.ConditionParamType">
+            <summary>
+            条件参数取值
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.CONSTANT">
+            <summary>
+            常量
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.AMOUNT5">
+            <summary>
+            AMOUNT 5
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.AMOUNT10">
+            <summary>
+            AMOUNT 10
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.BIAS">
+            <summary>
+            乖离率
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.BIASMA">
+            <summary>
+            乖离率均线
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.CCI">
+            <summary>
+            顺势指标
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.DMIPDI">
+            <summary>
+            DMI趋向指标 多头指标
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.DMIMDI">
+            <summary>
+            DMI趋向指标 空头指标
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.DMIADX">
+            <summary>
+            DMI趋向指标 ADX
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.DMIADXR">
+            <summary>
+            DMI趋向指标 ADXR
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.ENEUPPER">
+            <summary>
+            上轨
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.ENE">
+            <summary>
+            中轨
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.ENELOWER">
+            <summary>
+            ENE 下轨
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.KDK">
+            <summary>
+            KD K
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.KDD">
+            <summary>
+            KD D
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.MA5">
+            <summary>
+            MA 5
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.MA10">
+            <summary>
+            MA 10
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.MA20">
+            <summary>
+            MA 20
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.MA30">
+            <summary>
+            MA 30
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.MACDDIF">
+            <summary>
+            MACD DIF
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.MACDDEA">
+            <summary>
+            MACD DEA
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.MACD">
+            <summary>
+            MACD
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.Price">
+            <summary>
+            价格
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.Amount">
+            <summary>
+            成交额
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.NegotiableCapital">
+            <summary>
+            流通股本
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.GeneralCapital">
+            <summary>
+            总股本
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.Equity">
+            <summary>
+            净资产
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.EquityRatio">
+            <summary>
+            市净率
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.EarningsRatio">
+            <summary>
+            市盈率
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionParamType.DebtsRatio">
+            <summary>
+            负债率
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Enums.ConditionSymbol">
+            <summary>
+            条件运算符
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionSymbol.GT">
+            <summary>
+            大于
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionSymbol.GE">
+            <summary>
+            大于等于
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionSymbol.EQ">
+            <summary>
+            等于
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionSymbol.LE">
+            <summary>
+            小于等于
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionSymbol.LT">
+            <summary>
+            小于
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionSymbol.UC">
+            <summary>
+            上穿
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.ConditionSymbol.DC">
+            <summary>
+            下穿
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Enums.IndicatorKind">
+            <summary>
+            指标类型
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorKind.Junxian">
+            <summary>
+            均线
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorKind.Qushi">
+            <summary>
+            趋势
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorKind.Qingxu">
+            <summary>
+            情绪
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorKind.Bodong">
+            <summary>
+            波动
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Enums.IndicatorType">
+            <summary>
+            指标公式
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorType.AMOUNT">
+            refer Indicators.Formulas
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorType.BIAS">
+            refer Indicators.Formulas
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorType.CCI">
+            refer Indicators.Formulas
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorType.DMI">
+            refer Indicators.Formulas
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorType.ENE">
+            refer Indicators.Formulas
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorType.KD">
+            refer Indicators.Formulas
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorType.MA">
+            refer Indicators.Formulas
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorType.MACD">
+            refer Indicators.Formulas
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.IndicatorType.FULL">
+            refer Indicators.Formulas
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle">
+            <summary>
+            周期定义
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle.DAILY">
+            <summary>
+            日线
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle.WEEKLY">
+            <summary>
+            周线
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle.MONTHLY">
+            <summary>
+            月线
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Enums.StockOperate">
+            <summary>
+            操作
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.StockOperate.Buy">
+            <summary>
+            买进
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.StockOperate.Keep">
+            <summary>
+            持有
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.StockOperate.Sell">
+            <summary>
+            卖出
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Enums.StockOperate.Left">
+            <summary>
+            舍弃
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Communal">
+            <summary>
+            共用公式
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Communal.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Communal.EMA(System.Double,System.Double,System.Int32,System.Int32)">
+            <summary>
+            EMA(C,N)=2*C/(N+1)+(N-1)/(N+1)*昨天的指数收盘平均值
+            </summary>
+            <param name="current"></param>
+            <param name="yest"></param>
+            <param name="days"></param>
+            <param name="round"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Communal.AVEDEV(System.Double,System.Collections.Generic.List{System.Double},System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="current"></param>
+            <param name="values"></param>
+            <param name="round"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Communal.DescRangeAmountAverage(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price},System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="prices"></param>
+            <param name="current"></param>
+            <param name="N"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Communal.DescRangeCloseAverage(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price},System.Int32,System.Int32)">
+            <summary>
+            DescRangeCloseAverage
+            </summary>
+            <param name="prices"></param>
+            <param name="current"></param>
+            <param name="N"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Communal.LLV(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price},System.Int32,System.Int32)">
+            <summary>
+            LLV
+            </summary>
+            <param name="prices"></param>
+            <param name="current"></param>
+            <param name="N"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Communal.HHV(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price},System.Int32,System.Int32)">
+            <summary>
+            HHV
+            </summary>
+            <param name="prices"></param>
+            <param name="current"></param>
+            <param name="N"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Full">
+            <summary>
+            完整指标
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Full.Calculate(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算指标
+            </summary>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Specials.AMOUNT">
+            <summary>
+            成交额均线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.AMOUNT.Details">
+            <summary>
+            数据线条
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.AMOUNT.#ctor">
+            <summary>
+            默认参数选择 5日与10日 均量
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.AMOUNT.#ctor(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="s">短期（默认5）</param>
+            <param name="l">长期（默认10）</param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.AMOUNT.CalculateLastValues(System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算最后的指标值
+            </summary>
+            <param name="stockCode"></param>
+            <param name="prices"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.AMOUNT.CalculateAll(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算MA
+            MA:ma(AMO, DAYS);
+            </summary>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Specials.BIAS">
+            <summary>
+            乖离率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.BIAS.N">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.BIAS.M">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.BIAS.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.BIAS.CalculateLastValues(System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算最后的指标值
+            </summary>
+            <param name="values"></param>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.BIAS.CalculateAll(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算BIAS
+            BIAS :(CLOSE-MA(CLOSE,N))/MA(CLOSE,N)*100;
+            BIASMA :MA(BIAS, M);
+            
+            zhaoma/N=4,M=4
+            </summary>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Specials.CCI">
+            <summary>
+            商品路径指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.CCI.N">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.CCI.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.CCI.CalculateLastValues(System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算最后的指标值
+            先把历史数据给Result
+            </summary>
+            <param name="stockCode"></param>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.CCI.CalculateAll(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算CCI
+            
+            TYP:=(HIGH+LOW+CLOSE)/3;
+            CCI:(TYP-MA(TYP, N))/(0.015*AVEDEV(TYP, N));
+            
+            默认参数：N=14
+            AVEDEV
+            绝对平均偏差= 1/n * (求和：|xi-x均|，i=1,2,3...n)
+            比如说三个数，59，60，61，平均值为60
+            绝对平均偏差就是 1/3 * ( |59-60| + |60-60|+ |61-60|)=0.667=0.7
+            </summary>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Specials.DMI">
+            <summary>
+            趋向指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.DMI.N">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.DMI.M">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.DMI.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.DMI.CalculateLastValues(System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算最后的指标值
+            </summary>
+            <param name="stockCode"></param>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.DMI.CalculateAll(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            
+            </summary>
+            <param name="prices"></param>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Specials.ENE">
+            <summary>
+            ENE指标
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.ENE.N">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.ENE.M1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.ENE.M2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.ENE.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.ENE.CalculateLastValues(System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算最后的指标值
+            </summary>
+            <param name="stockCode"></param>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.ENE.CalculateAll(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            ENE指标
+            
+            UPPER:(1+M1/100)*MA(CLOSE,N);
+            LOWER:(1-M2/100)* MA(CLOSE, N);
+            ENE:(UPPER+LOWER)/2;
+            </summary>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Specials.KD">
+            <summary>
+            随机指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.KD.N">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.KD.M">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.KD.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.KD.CalculateLastValues(System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算最后的指标值
+            </summary>
+            <param name="stockCode"></param>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.KD.CalculateAll(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算KD
+            LOWV:=LLV(LOW, N);
+            HIGHV:=HHV(HIGH, N);
+            RSV:=EMA((CLOSE-LOWV)/(HIGHV-LOWV)*100,M);
+            K:EMA(RSV, M);
+            D:MA(K, M);
+            
+            默认参数 N=9 M=3
+            </summary>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Specials.MA">
+            <summary>
+            均线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.MA.Details">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.MA.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.MA.CalculateLastValues(System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算最后的指标值
+            </summary>
+            <param name="stockCode"></param>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.MA.CalculateAll(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算MA
+            MA:ma(CLOSE, DAYS);
+            </summary>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Formulas.Specials.MACD">
+            <summary>
+            平滑异同平均
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.MACD.SHORT">
+            <summary>
+            SHORT(短期)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.MACD.LONG">
+            <summary>
+            LONG(长期)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Formulas.Specials.MACD.MID">
+            <summary>
+            M 天数
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.MACD.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.MACD.CalculateLastValues(System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算最后的指标值
+            </summary>
+            <param name="stockCode"></param>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Formulas.Specials.MACD.CalculateAll(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            计算MACD
+            DIF:EMA(CLOSE,SHORT)-EMA(CLOSE,LONG);
+            DEA:EMA(DIF,MID);
+            MACD:(DIF-DEA)*2,COLORSTICK;
+            默认 SHORT=12 LONG=26 MID=9
+            </summary>
+            <param name="prices"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Helper">
+            <summary>
+            
+            </summary>
+            <summary>
+            数据保存与加载
+            </summary>
+            <summary>
+            图表创建
+            </summary>
+            <summary>
+            常用处理扩展
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Helper.FeatureGroups">
+            <summary>
+            指标
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Helper.ColorsDic">
+            <summary>
+            指标颜色定义字典
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Helper.Features">
+            <summary>
+            指标特征字典
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.FeatureKeys(System.String,System.Boolean)">
+            <summary>
+            指标下加分/减分特征集合
+            </summary>
+            <param name="indicator"></param>
+            <param name="plus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.ReNew(Ban3.Infrastructures.Indicators.Entries.SetsFeature,System.String,System.Int32)">
+            <summary>
+            输出特征值描述信息
+            </summary>
+            <param name="feature"></param>
+            <param name="cycleSubject"></param>
+            <param name="newValue"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Helper.AllFeatures">
+            <summary>
+            所有指标特征值
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Helper.DefaultProfile">
+            <summary>
+            默认策略
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Helper.DefaultProfiles">
+            <summary>
+            默认策略池
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Indicators.Helper.DefaultFilter">
+            <summary>
+            默认买点筛选规则
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.Save(System.Collections.Generic.Dictionary{System.String,Ban3.Infrastructures.Indicators.Entries.ProfileSummary})">
+            <summary>
+            保存策略汇总
+            </summary>
+            <param name="ps"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LoadProfileSummaries">
+            <summary>
+            加载策略汇总
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.SaveFor(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Entries.DotInfo}},Ban3.Infrastructures.Indicators.Entries.FocusFilter)">
+            <summary>
+            保存买卖点
+            </summary>
+            <param name="dots"></param>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LoadDots(Ban3.Infrastructures.Indicators.Entries.FocusFilter)">
+            <summary>
+            加载买卖点
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.SaveFor(Ban3.Infrastructures.Indicators.Outputs.LineOfPoint,Ban3.Infrastructures.Indicators.Entries.Stock,Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle)">
+            <summary>
+            LineOfPoint 保存
+            </summary>
+            <param name="lineOfPoint"></param>
+            <param name="stock"></param>
+            <param name="cycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LoadLineOfPoint(Ban3.Infrastructures.Indicators.Entries.Stock,Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle)">
+            <summary>
+            LineOfPoint 获取
+            </summary>
+            <param name="stock"></param>
+            <param name="cycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.SaveFor(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets},Ban3.Infrastructures.Indicators.Entries.Stock)">
+            <summary>
+            StockSets 保存
+            </summary>
+            <param name="sets"></param>
+            <param name="stock"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LoadStockSets(Ban3.Infrastructures.Indicators.Entries.Stock)">
+            <summary>
+            StockSets获取
+            </summary>
+            <param name="stock"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.GetSetKeys(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets},System.String)">
+            <summary>
+            个股StockSets中用日期获取
+            </summary>
+            <param name="sets"></param>
+            <param name="tradeDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.Save(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Entries.ListRecord})">
+            <summary>
+            保存榜单
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LoadList">
+            <summary>
+            加载榜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.SaveFor(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockOperate},Ban3.Infrastructures.Indicators.Entries.Stock,Ban3.Infrastructures.Indicators.Inputs.Profile)">
+            <summary>
+            StockOperate 保存
+            </summary>
+            <param name="operates"></param>
+            <param name="stock"></param>
+            <param name="profile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LoadOperates(Ban3.Infrastructures.Indicators.Entries.Stock,Ban3.Infrastructures.Indicators.Inputs.Profile)">
+            <summary>
+            StockOperate 获取
+            </summary>
+            <param name="stock"></param>
+            <param name="profile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.SaveFor(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord},Ban3.Infrastructures.Indicators.Entries.Stock,Ban3.Infrastructures.Indicators.Inputs.Profile)">
+            <summary>
+            StockOperationRecord 保存
+            </summary>
+            <param name="operates"></param>
+            <param name="stock"></param>
+            <param name="profile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LoadStockOperationRecords(Ban3.Infrastructures.Indicators.Entries.Stock,Ban3.Infrastructures.Indicators.Inputs.Profile)">
+            <summary>
+            StockOperationRecord 获取
+            </summary>
+            <param name="stock"></param>
+            <param name="profile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.SaveFor(Ban3.Infrastructures.Charts.Composites.Diagram,Ban3.Infrastructures.Indicators.Entries.Stock,Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle)">
+            <summary>
+            图表保存
+            </summary>
+            <param name="diagram"></param>
+            <param name="stock"></param>
+            <param name="cycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LoadDiagram(Ban3.Infrastructures.Indicators.Entries.Stock,Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle)">
+            <summary>
+            图表获取
+            </summary>
+            <param name="stock"></param>
+            <param name="cycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.SaveFor(Ban3.Infrastructures.Charts.Composites.Diagram,System.String)">
+            <summary>
+            起名保存Diagram
+            </summary>
+            <param name="diagram"></param>
+            <param name="diagramName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LoadDiagram(System.String)">
+            <summary>
+            获取Diagram
+            </summary>
+            <param name="diagramName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.CreateCandlestickDiagram(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price},Ban3.Infrastructures.Indicators.Outputs.LineOfPoint,Ban3.Infrastructures.Indicators.Entries.Stock)">
+            <summary>
+            个股K线以及指标图表
+            </summary>
+            <param name="prices"></param>
+            <param name="indicatorValue"></param>
+            <param name="stock"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.IndicatorDiagram(System.String,System.String)">
+            <summary>
+            指标图表
+            </summary>
+            <param name="code"></param>
+            <param name="indicator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.CreateTreemapDiagram(System.Collections.Generic.Dictionary{System.String,System.Int32},System.String)">
+            <summary>
+            用特征字典创建treemap
+            </summary>
+            <param name="keysDic"></param>
+            <param name="title"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.CreateSankeyDiagram(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets},System.String)">
+            <summary>
+            用特征集合创建桑基图
+            </summary>
+            <param name="records"></param>
+            <param name="title"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.IsAsc``1(System.Collections.Generic.List{``0},System.Func{``0,System.Double})">
+            <summary>
+            是否升序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="numbers"></param>
+            <param name="toDecimal"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.Evaluation(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String}@)">
+            <summary>
+            评估特征计分
+            </summary>
+            <param name="features"></param>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.Evaluation(Ban3.Infrastructures.Indicators.Outputs.StockSets,System.Collections.Generic.List{System.String}@,System.Int32@)">
+            <summary>
+            评估特征计分
+            </summary>
+            <param name="sets"></param>
+            <param name="result"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.SplitAmount(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price},System.Int32,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price}@)">
+            <summary>
+            用五日量尝试指标
+            </summary>
+            <param name="prices"></param>
+            <param name="days"></param>
+            <param name="amounts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.SplitWeeklyAndMonthly(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price},System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price}@,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price}@)">
+            <summary>
+            价格日行情转周、月行情(每日)
+            </summary>
+            <param name="prices"></param>
+            <param name="weekly"></param>
+            <param name="monthly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.End(System.DateTime,Ban3.Infrastructures.Indicators.Enums.StockAnalysisCycle)">
+            <summary>
+            找期末时间（周末、月末）
+            </summary>
+            <param name="begin"></param>
+            <param name="targetCycle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LatestList(Ban3.Infrastructures.Indicators.Outputs.LineOfPoint)">
+            <summary>
+            指标值曲线转点集合
+            </summary>
+            <param name="line"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.GetOperate(System.Collections.Generic.IEnumerable{System.String},Ban3.Infrastructures.Indicators.Inputs.Profile,Ban3.Infrastructures.Indicators.Enums.StockOperate)">
+            <summary>
+            根据指标与上一操作获取当前操作建议
+            </summary>
+            <param name="codeKeys"></param>
+            <param name="profile"></param>
+            <param name="prevOperation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.FinalProfit(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord})">
+            <summary>
+            策略收益计算
+            </summary>
+            <param name="records"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.CalculateIndicators(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price},Ban3.Infrastructures.Indicators.Formulas.Full)">
+            <summary>
+            行情数据集转指标结果线
+            </summary>
+            <param name="prices">复权后价格</param>
+            <param name="formulas">采用的计算公式，默认参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.LineToSets(Ban3.Infrastructures.Indicators.Outputs.LineOfPoint,Ban3.Infrastructures.Indicators.Entries.Stock)">
+            <summary>
+            结果线转特征集
+            </summary>
+            <param name="line"></param>
+            <param name="stock"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.MergeWeeklyAndMonthly(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets},System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets},System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets})">
+            <summary>
+            特征集合并
+            </summary>
+            <param name="daily"></param>
+            <param name="weekly"></param>
+            <param name="monthly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.PushLatest(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets},System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets})">
+            <summary>
+            最后一个StockSets推送到集合
+            </summary>
+            <param name="all"></param>
+            <param name="target"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.GenerateList(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets})">
+            <summary>
+            指标特征集转换榜单
+            </summary>
+            <param name="stockSets"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.OutputDailyOperates(Ban3.Infrastructures.Indicators.Inputs.Profile,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockSets})">
+            <summary>
+            策略+特征集生成操作建议(近一年)
+            </summary>
+            <param name="profile"></param>
+            <param name="everydayKeys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.ConvertToRecords(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockOperate})">
+            <summary>
+            操作建议转操作记录
+            </summary>
+            <param name="stockOperates"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.RecordsSummary(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord},Ban3.Infrastructures.Indicators.Inputs.Profile)">
+            <summary>
+            操作记录汇总
+            </summary>
+            <param name="records"></param>
+            <param name="profile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Helper.MergeSummary(System.Collections.Generic.Dictionary{System.String,Ban3.Infrastructures.Indicators.Entries.ProfileSummary},Ban3.Infrastructures.Indicators.Entries.ProfileSummary)">
+            <summary>
+            个股汇总成策略统计
+            </summary>
+            <param name="evaluateSummary"></param>
+            <param name="one"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Inputs.Condition">
+            <summary>
+            筛选条件
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Condition.ParamAis">
+            <summary>
+            条件左侧类型
+            枚举 变量/常量/价格
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Condition.Symbol">
+            <summary>
+            运算符
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Condition.ParamBis">
+            <summary>
+            条件右侧类型
+            枚举 变量/常量/价格
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Condition.ValueB">
+            <summary>
+            右侧静态取值
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Condition.Weight">
+            <summary>
+            权重
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Condition.Desc">
+            <summary>
+            排序方式（默认增序）
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Inputs.ConditionParttern">
+            <summary>
+            筛选条件
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.ConditionParttern.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.ConditionParttern.Cycle">
+            <summary>
+            分析周期（日/周/月）
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.ConditionParttern.Conditions">
+            <summary>
+            条件组
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.ConditionParttern.Key">
+            <summary>
+            标识（RedisSetKey）
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.ConditionParttern.Output">
+            <summary>
+            多票筛选结果（存入Set）
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.ConditionParttern.IsMatch">
+            <summary>
+            单票筛选结果
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Inputs.Price">
+            <summary>
+            股票价格扩展
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.PreClose">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.Open">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.Close">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.High">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.Low">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.Change">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.ChangePercent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.Vol">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Price.Amount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Inputs.Profile">
+            <summary>
+            投资策略
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Inputs.Profile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Profile.Identity">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Profile.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Profile.BuyingCondition">
+            <summary>
+            买入条件
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Profile.OrderConditions">
+            <summary>
+            排序条件
+            ParamA 与 Order
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Profile.SellingCondition">
+            <summary>
+            卖出条件
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Profile.DigRecordCount">
+            <summary>
+            发掘条数
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Profile.Persistence">
+            <summary>
+            持久保存结果
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Profile.IsDefault">
+            <summary>
+            默认策略
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Inputs.Profile.MatchBuying(Ban3.Infrastructures.Indicators.Outputs.StockSets)">
+            
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Inputs.Profile.MatchSelling(Ban3.Infrastructures.Indicators.Outputs.StockSets)">
+            
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.ProfileCondition.Include">
+            <summary>
+            包含特征(Complex)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.ProfileCondition.Exclude">
+            <summary>
+            不包含特征(任一)
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Inputs.Stake">
+            <summary>
+            赌注策略（）
+            最多买多少钱；多少股
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Stake.MaxAmount">
+            <summary>
+            最大额度
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Stake.MaxVolume">
+            <summary>
+            最大数量
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Stake.MinAmount">
+            <summary>
+            最小额度
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Inputs.Stake.MinVolume">
+            <summary>
+            最小数量
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Interfaces.IIndicatorFormula">
+            <summary>
+            指标计算接口申明
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Interfaces.IIndicatorFormula.CalculateLastValues(System.String,System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            修补计算
+            </summary>
+            <param name="stockCode"></param>
+            <param name="prices"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Interfaces.IIndicatorFormula.CalculateAll(System.Collections.Generic.List{Ban3.Infrastructures.Indicators.Inputs.Price})">
+            <summary>
+            全数据计算
+            </summary>
+            <param name="prices"></param>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Latest">
+            <summary>
+            最新指标值
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Latest.Prev">
+            <summary>
+            上一周期指标值
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Latest.Current">
+            <summary>
+            当前周期指标值
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Line">
+            <summary>
+            输出线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Line.Days">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.LineOfPoint">
+            <summary>
+            输出时间线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.LineOfPoint.EndPoints">
+            <summary>
+            时间点集合
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.LineWithValue">
+            <summary>
+            带值输出线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.LineWithValue.Ref">
+            <summary>
+            指标值
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.MileStone">
+            <summary>
+            标的里程碑
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.MileStone.NoticeDates">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.NoticeDate">
+            <summary>
+            标的提示日期
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.NoticeDate.#ctor">
+            ctor
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.NoticeDate.Day">
+            <summary>
+            日
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.NoticeDate.Week">
+            <summary>
+            周
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.NoticeDate.Month">
+            <summary>
+            月
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.PointOfTime">
+            <summary>
+            某个时间点的索引值组
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.PointOfTime.Amount">
+            <summary>
+            成交额
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.PointOfTime.Bias">
+            <summary>
+            乖离
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.PointOfTime.Cci">
+            <summary>
+            顺势指标(唐纳德·蓝伯特)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.PointOfTime.Dmi">
+            <summary>
+            趋向指标(威尔斯·威尔德)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.PointOfTime.Ene">
+            <summary>
+            轨道线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.PointOfTime.Kd">
+            <summary>
+            慢速随机指标(乔治·莱恩)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.PointOfTime.Ma">
+            <summary>
+            均线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.PointOfTime.Macd">
+            <summary>
+            指数平滑移动平均线(查拉尔德·阿佩尔)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.PointOfTime.Close">
+            <summary>
+            当期收盘价
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.StockInfo">
+            <summary>
+            标的
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockInfo.StockIcon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockInfo.Close">
+            <summary>
+            当前价
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockInfo.Amount">
+            <summary>
+            成交额
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockInfo.GeneralCapital">
+            <summary>
+            总股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockInfo.NegotiableCapital">
+            <summary>
+            流通股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockInfo.Equity">
+            <summary>
+            净资产
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockInfo.EquityRatio">
+            <summary>
+            市净率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockInfo.EarningsRatio">
+            <summary>
+            市盈率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockInfo.DebtsRatio">
+            <summary>
+            负债率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockKeep.Current">
+            <summary>
+            当前价
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockKeep.Increase">
+            <summary>
+            涨幅
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockKeep.GeneralCapital">
+            <summary>
+            总股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockKeep.NegotiableCapital">
+            <summary>
+            流通股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockKeep.Notions">
+            <summary>
+            相关题材
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockKeep.Keys">
+            <summary>
+            所有特征
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.StockLog">
+            <summary>
+            标的日志
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.StockLog.#ctor">
+            ctor
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockLog.Code">
+            <summary>
+            标的代码(_SZ/_SH)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockLog.Symbol">
+            <summary>
+            标的代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockLog.MarkTime">
+            <summary>
+            标注日期
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockLog.Close">
+            <summary>
+            收盘价
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.StockOperate">
+            <summary>
+            标的操作
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.StockOperate.#ctor">
+            ctor
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperate.Operate">
+            <summary>
+            建议操作
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperate.IsRight">
+            <summary>
+            操作是否正确
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperate.Keys">
+            <summary>
+            特征集合
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord">
+            <summary>
+            指标计算结果
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord.Code">
+            <summary>
+            股票编码
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord.BuyDate">
+            <summary>
+            买入时间
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord.BuyPrice">
+            <summary>
+            入选时价格
+            B选择最高价
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord.SellDate">
+            <summary>
+            卖出时间
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord.SellPrice">
+            <summary>
+            入选时价格
+            S选择最低价
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord.Volume">
+            <summary>
+            交易量
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockOperationRecord.Ratio">
+            <summary>
+            涨幅/跌幅
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.StockSets">
+            <summary>
+            输出标的特征
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.StockSets.SetKeys">
+            <summary>
+            特征
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Values.AMOUNT">
+            <summary>
+            成交量均线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.AMOUNT.RefAmounts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.Values.AMOUNT.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Values.BIAS">
+            <summary>
+            乖离率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.BIAS.RefBIAS">
+            <summary>
+            乖离
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.BIAS.RefBIASMA">
+            <summary>
+            平均乖离
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.Values.BIAS.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Values.CCI">
+            <summary>
+            顺势指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.CCI.RefCCI">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.CCI.RefTYP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.Values.CCI.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Values.DMI">
+            <summary>
+            趋向指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.RefHD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.RefLD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.RefPDI">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.RefMDI">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.RefADX">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.RefADXR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.RefMTR">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.RefDMP">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.RefDMM">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.Values.DMI.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Values.ENE">
+            <summary>
+            轨道线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.ENE.RefUPPER">
+            <summary>
+            上轨
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.ENE.RefLOWER">
+            <summary>
+            下轨
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.ENE.RefENE">
+            <summary>
+            中轨
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.Values.ENE.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Values.KD">
+            <summary>
+            随机震荡指数
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.KD.RefK">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.KD.RefD">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.KD.RefPSV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.KD.RefDailyPSV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.KD.RefLLV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.KD.RefHHV">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.Values.KD.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Values.MA">
+            <summary>
+            移动平均线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.MA.RefPrices">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.Values.MA.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Indicators.Outputs.Values.MACD">
+            <summary>
+            异同移动平均线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.MACD.RefEMAShort">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.MACD.RefEMALong">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.MACD.RefDIF">
+            <summary>
+            快线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.MACD.RefDEA">
+            <summary>
+            加权移动均线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Indicators.Outputs.Values.MACD.RefMACD">
+            <summary>
+            MACD柱
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Indicators.Outputs.Values.MACD.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

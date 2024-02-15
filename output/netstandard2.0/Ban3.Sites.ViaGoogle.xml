@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Sites.ViaGoogle</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Sites.ViaGoogle.Helper">
+            <summary>
+            Google平台接口实现
+            </summary>
+        </member>
+    </members>
+</doc>

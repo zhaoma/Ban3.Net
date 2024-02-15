@@ -1,0 +1,849 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Particulars.UtilizeRedis</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Particulars.UtilizeRedis.Interfaces.IHash">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashDecrement(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashDelete(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashExists(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashGet``1(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashGetAll``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashIncrement(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashLength(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashScan``1(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <param name="pattern"></param>
+            <param name="pageSize"></param>
+            <param name="pageNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashSet``1(System.String,System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String,``0}})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <param name="kvs"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashSet``1(System.String,System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IHash.HashValues``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString.Publish(System.String,System.String)">
+            <summary>
+            发布
+            </summary>
+            <param name="channel">发布频道</param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString.Subscribe(System.String,System.Action{System.String,System.String})">
+            <summary>
+            订阅
+            </summary>
+            <param name="channel">订阅频道</param>
+            <param name="callBack"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString.Ping">
+            <summary>
+            链接测速
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString.IsConnected(System.String)">
+            <summary>
+            链接？
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString.KeyExists(System.String)">
+            <summary>
+            判断键值存在与否
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString.KeyDelete(System.String)">
+            <summary>
+            移除键
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString.StringGet``1(System.String)">
+            <summary>
+            读取
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键名</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString.StringSet``1(System.String,``0,System.Int32)">
+            <summary>
+            写入
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键名</param>
+            <param name="value">键值</param>
+            <param name="expiryMinutes">过期时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IKeyAndString.StringDelete(System.String)">
+            <summary>
+            删除
+            </summary>
+            <param name="key">键值</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Particulars.UtilizeRedis.Interfaces.IList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListLeftPush``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListLeftPop``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListRightPush``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListRightPop``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListLength(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="listKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListRange``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListGetByIndex``1(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListInsertAfter``1(System.String,``0,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="pivot"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListInsertBefore``1(System.String,``0,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="pivot"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListRemove``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListSetByIndex``1(System.String,System.Int32,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.IList.ListTrim(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="listKey"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+        </member>
+        <member name="T:Ban3.Particulars.UtilizeRedis.Interfaces.ISet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetAdd``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetAdd``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetDifference``1(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetIntersect``1(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetMerge``1(System.Collections.Generic.List{System.String})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKeys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetUnion``1(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetContains``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetLength(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="setKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetMembers``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetMove``1(System.String,System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="destination"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetPop``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetPop(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="setKey"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetRandomMember``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetRandomMembers``1(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetRemove``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISet.SetScan``1(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="pattern"></param>
+            <param name="pageSize"></param>
+            <param name="pageNo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetAdd``1(System.String,``0,System.Double)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="value"></param>
+            <param name="score"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetDifference``1(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="destination"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetIntersect``1(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="destination"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetUnion``1(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="first"></param>
+            <param name="second"></param>
+            <param name="destination"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetLength(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="setKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetPop``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetRangeByRank``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetRangeByScore``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetRank``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetRemove``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetScore``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Interfaces.ISortedSet.SortedSetScan``1(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="pattern"></param>
+            <param name="pageSize"></param>
+            <param name="pageNo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Particulars.UtilizeRedis.Service">
+            <summary>
+            Redis服务器访问接口实现
+            </summary>
+        </member>
+        <member name="P:Ban3.Particulars.UtilizeRedis.Service.Instance">
+            <summary>
+            单例获取
+            </summary>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.GetManager">
+            <summary>
+            内部方法，获取Redis连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Ban3.Particulars.UtilizeRedis.Service.Client">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Particulars.UtilizeRedis.Service.Subscriber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Particulars.UtilizeRedis.Service.MuxerConfigurationChanged">
+            <summary>
+            配置更改时
+            </summary>
+        </member>
+        <member name="F:Ban3.Particulars.UtilizeRedis.Service.MuxerErrorMessage">
+            <summary>
+            发生错误时
+            </summary>
+        </member>
+        <member name="F:Ban3.Particulars.UtilizeRedis.Service.MuxerConnectionRestored">
+            <summary>
+            重新建立连接之前的错误
+            </summary>
+        </member>
+        <member name="F:Ban3.Particulars.UtilizeRedis.Service.MuxerConnectionFailed">
+            <summary>
+            连接失败 ， 如果重新连接成功你将不会收到这个通知
+            </summary>
+        </member>
+        <member name="F:Ban3.Particulars.UtilizeRedis.Service.MuxerHashSlotMoved">
+            <summary>
+            更改集群
+            </summary>
+        </member>
+        <member name="F:Ban3.Particulars.UtilizeRedis.Service.MuxerInternalError">
+            <summary>
+            redis类库错误
+            </summary>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.Publish(System.String,System.String)">
+            see interface
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.Subscribe(System.String,System.Action{System.String,System.String})">
+            see interface
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.Ping">
+            see interface
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.IsConnected(System.String)">
+            see interface
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.KeyExists(System.String)">
+            see interface
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.KeyDelete(System.String)">
+            see interface
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.StringGet``1(System.String)">
+            <summary>
+            读取
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键名</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.StringSet``1(System.String,``0,System.Int32)">
+            <summary>
+            写入
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键名</param>
+            <param name="value">键值</param>
+            <param name="expiryMinutes">过期时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.StringDelete(System.String)">
+            <summary>
+            删除
+            </summary>
+            <param name="key">键值</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashDecrement(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashDelete(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashExists(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashGet``1(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashGetAll``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashIncrement(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashLength(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="hashKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashScan``1(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <param name="pattern"></param>
+            <param name="pageSize"></param>
+            <param name="pageNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashSet``1(System.String,System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String,``0}})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <param name="kvs"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashSet``1(System.String,System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <param name="hashField"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.HashValues``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="hashKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListLeftPush``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListLeftPop``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListRightPush``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListRightPop``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListLength(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="listKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListRange``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListGetByIndex``1(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListInsertAfter``1(System.String,``0,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="pivot"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListInsertBefore``1(System.String,``0,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="pivot"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListRemove``1(System.String,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListSetByIndex``1(System.String,System.Int32,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="listKey"></param>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.ListTrim(System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="listKey"></param>
+            <param name="start"></param>
+            <param name="stop"></param>
+        </member>
+        <member name="M:Ban3.Particulars.UtilizeRedis.Service.SetAdd``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="setKey"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1547 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Infrastructures.ServiceCentre</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockCodesCollector">
+            <summary>
+            标的采集
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockCodesCollector.TryFetchStocks(System.Action{System.Collections.Generic.IEnumerable{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStock}})">
+            <summary>
+            标的采集
+            </summary>
+            <param name="stocks">标的集合</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockEventsCollector">
+            <summary>
+            标的事件数据收集
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockEventsCollector.TryFetchEvents(Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStock,System.Action{Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent}})">
+            <summary>
+            标的事件数据
+            </summary>
+            <param name="stock">标的</param>
+            <param name="action">事件集合</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockHoldersCollector">
+            <summary>
+            大股东数据收集
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockHoldersCollector.TryFetchHoldes(System.Collections.Generic.IEnumerable{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockHolder}@)">
+            <summary>
+            准备大股东数据
+            </summary>
+            <param name="stockHolders">大股东数据</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockNotionsCollector">
+            <summary>
+            题材概念数据收集
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockNotionsCollector.TryFetchNotions(System.Collections.Generic.IEnumerable{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockNotion}@)">
+            <summary>
+            准备题材概念数据
+            </summary>
+            <param name="stockNotions">题材概念数据</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockPricesCollector">
+            <summary>
+            价格数据收集
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStockPricesCollector.TryFetchPrices(Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStock,Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice}@)">
+            <summary>
+            价格数据
+            </summary>
+            <param name="stock"></param>
+            <param name="stockPrices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStocksAnalyzer.TryGenerateFeatures(Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IOutput,Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFeature}@)">
+            <summary>
+            用指标生成特征值
+            </summary>
+            <param name="output"></param>
+            <param name="stockFeatures"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStocksAnalyzer.TryGenerateSuggests(Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFilter,Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFeature},Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSuggest}@)">
+            <summary>
+            用特征值生成
+            </summary>
+            <param name="stockFeatures"></param>
+            <param name="stockSuggests"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStocksCalculator">
+            <summary>
+            标的数据计算
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStocksCalculator.TryGenerateSeeds(Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent},Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSeed}@)">
+            <summary>
+            从财务事件中分析复权因子
+            </summary>
+            <param name="stockEvents"></param>
+            <param name="stockSeeds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStocksCalculator.TryAdjustPrices(Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice},Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSeed},Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice}@)">
+            <summary>
+            价格复权
+            </summary>
+            <param name="sourcePrices"></param>
+            <param name="stockSeeds"></param>
+            <param name="targetPrices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStocksCalculator.TryConvertCycle(Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice},Ban3.Infrastructures.ServiceCentre.Enums.Casino.AnalysisCycle,Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData{Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice}@)">
+            <summary>
+            周期转换，日->周/月
+            </summary>
+            <param name="dailyPrices"></param>
+            <param name="analysisCycle"></param>
+            <param name="targetPrices"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Casino.IStocksCalculator.TryGenerateIndicators(Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IInput,Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IOutput@)">
+            <summary>
+            用价格信息计算指标
+            </summary>
+            <param name="input"></param>
+            <param name="output"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.ICachesHelper">
+            <summary>
+            缓存处理声明
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.ICachesHelper.TrySet``1(System.String,``0,Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile)">
+            <summary>
+            设置缓存
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="data"></param>
+            <param name="cachesProfile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.ICachesHelper.TryGet``1(System.String,``0@)">
+            <summary>
+            获取缓存
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="savedData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.ICachesHelper.TryRemove(System.String)">
+            <summary>
+            移除一项缓存
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.ICachesHelper.TryFlush">
+            <summary>
+            清空缓存
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IChartsHelper">
+            <summary>
+            图表生成接口声明
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IChartsHelper.TryCreate``1(``0,Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IChartsDiagram@)">
+            <summary>
+            创建图表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="chartsDiagram"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IDevicesHelper">
+            <summary>
+            通信设备接口声明
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IDevicesHelper.TryCommunicate(Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceEndpoint,Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceControl,Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceAnswer@)">
+            <summary>
+            通信
+            </summary>
+            <param name="deviceEndpoint">设备地址</param>
+            <param name="deviceControl">控制指令</param>
+            <param name="deviceAnswer">设备应答</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IInternetsHelper.TryRequest(Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetHost,Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource,Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResponse@)">
+            <summary>
+            CommandLine Uniform Resource Locator
+            </summary>
+            <param name="internetHost"></param>
+            <param name="internetResource"></param>
+            <param name="internetResponse"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IMailsHelper">
+            <summary>
+            电子邮件接口声明
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IMailsHelper.TrySend(Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailServer,Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMail)">
+            <summary>
+            
+            </summary>
+            <param name="mailServer"></param>
+            <param name="mail"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IMessagesHelper">
+            <summary>
+            消息接口
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IMessagesHelper.TryPublish(Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMessageHub,Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMessageBody)">
+            <summary>
+            消息推送
+            </summary>
+            <param name="messageHub">路由</param>
+            <param name="messageBody">消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IMessagesHelper.TrySubscribe(Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMessageHub,System.Action{Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMessageBody})">
+            <summary>
+            消息订阅
+            </summary>
+            <param name="messageHub">路由</param>
+            <param name="action">消息</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IStoragesHelper">
+            <summary>
+            存储接口声明
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IStoragesHelper.TrySave``1(``0,System.Func{``0,System.String})">
+            <summary>
+            保存
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IStoragesHelper.TryLoad``1(System.String)">
+            <summary>
+            读取
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IStoragesHelper.TryDelete``1(``0)">
+            <summary>
+            删除
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Applications.Hybird.IStoragesHelper.TryQuery``1(System.Predicate{``0},System.Collections.Generic.IEnumerable{``0}@)">
+            <summary>
+            查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate"></param>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.OneImplement">
+            <summary>
+            实现的基类 
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Applications.OneObject">
+            <summary>
+            对象的基类
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IComputedResult">
+            <summary>
+            计算结果声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IComputedResult.AnalysisCycle">
+            <summary>
+            分析周期
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IComputedResult.Results">
+            <summary>
+            成交量均线
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IEvaluation`1.Judge(`0,System.Int32@,System.Collections.Generic.IEnumerable{System.String}@)">
+            <summary>
+            评判指标
+            </summary>
+            <param name="score"></param>
+            <param name="keys"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IEvaluation`1.Score">
+            <summary>
+            评分
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IEvaluation`1.Keys">
+            <summary>
+            特质集合
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IFormulas">
+            <summary>
+            公式声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IFormulas.Parameters">
+            <summary>
+            参数集合
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IFormulas.MaxScore">
+            <summary>
+            最高分统计
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IInput">
+            <summary>
+            计算输入条件声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IInput.StockPrices">
+            <summary>
+            价格数据集合
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IInput.Formulas">
+            <summary>
+            公式集合
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs.IAmount.Durations">
+            <summary>
+            周期集合
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs.IMacd.LONG">
+            <summary>
+            LONG(长期)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Inputs.IMacd.MID">
+            <summary>
+            M 天数
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IOutput">
+            <summary>
+            计算输出结果声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IOutput.ComputedResults">
+            <summary>
+            计算结果：公式结果集合->特征集合+得分（分周期）
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockCondition">
+            <summary>
+            筛选条件
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockCondition.AnalysisCycle">
+            <summary>
+            周期
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockCondition.IncludeKeys">
+            <summary>
+            包含特征
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockCondition.ExcludeKeys">
+            <summary>
+            不包含特征
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFeature">
+            <summary>
+            标的特征声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFeature.Score">
+            <summary>
+            评分
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFeature.Keys">
+            <summary>
+            特征集合
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFilter">
+            <summary>
+            筛选策略
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFilter.Id">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFilter.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFilter.BuyConditions">
+            <summary>
+            买入条件集合
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFilter.SellConditions">
+            <summary>
+            卖出条件集合
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFilter.Boards">
+            <summary>
+            所属板块，空则所有
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFilter.Notions">
+            <summary>
+            归属题材，空则所有
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.IStockFilter.Holders">
+            <summary>
+            相关股东，空则所有
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IAmount">
+            <summary>
+            成交额指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IAmount.Lines">
+            <summary>
+            均线集合
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IBbi">
+            <summary>
+            多空指标,Bull And Bear lndex
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IBbi.BBI">
+            <summary>
+            均线型指标，一般选用3日、6日、12日、24日等4条平均线
+            BBI:(MA(CLOSE, M1)+MA(CLOSE, M2)+MA(CLOSE, M3)+MA(CLOSE, M4))/4;
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IBias">
+            <summary>
+            乖离率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IBias.BIAS">
+            <summary>
+            乖离
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IBias.BIASMA">
+            <summary>
+            平均乖离
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.ICci">
+            <summary>
+            顺势指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.ICci.CCI">
+            <summary>
+            CCI
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IDmi">
+            <summary>
+            趋向指标，Directional Movement Index
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IDmi.PDI">
+            <summary>
+            多头指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IDmi.MDI">
+            <summary>
+            空头指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IDmi.ADX">
+            <summary>
+            平均动向指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IDmi.ADXR">
+            <summary>
+            动向评估指标
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IEne">
+            <summary>
+            Energy Envelope
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IEne.UPPER">
+            <summary>
+            上轨
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IEne.ENE">
+            <summary>
+            中轨
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IEne.LOWER">
+            <summary>
+            下轨
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IKd">
+            <summary>
+            随机震荡指数
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IKd.K">
+            <summary>
+            K线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IKd.D">
+            <summary>
+            D线
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.ILine`1">
+            <summary>
+            指标线
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.ILine`1.Duration">
+            <summary>
+            周期
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.ILine`1.Value">
+            <summary>
+            取值
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.ILwr">
+            <summary>
+            ​​LWR指标（LWR，Lary Williams R）是一种技术分析工具，是对经典的威廉指标（Williams %R）的一种改进和调整。
+            LWR指标基于威廉指标，通过对威廉指标的计算公式和参数进行修改，提供了更平滑的指标线，从而减少了噪音，并在一定程度上改善了指标的可读性和可用性。
+            LWR指标的计算方法与威廉指标类似，其计算公式如下：
+            首先确定计算的时间周期，例如一般常用的周期为14天。
+            计算当日的LWR值：LWR值 = （最高价 - 当日收盘价）/ （最高价 - 最低价） × (-100)
+            将计算得到的LWR值绘制成图表，形成LWR指标曲线。
+            与威廉指标不同的是，LWR指标在计算时使用了更平滑的移动平均方法，因此相较于威廉指标，LWR指标的曲线更加平滑，能够过滤掉一些噪音，并且更加易于观察和解读。
+            类似于威廉指标，LWR指标的取值范围在-100到0之间，其中-100表示市场处于超买状态，0表示市场处于超卖状态。
+            RSV:= (HHV(HIGH,N)-CLOSE)/(HHV(HIGH,N)-LLV(LOW,N))*100;
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.ILwr.LWR1">
+            <summary>
+            LWR1:SMA(RSV,M1,1);
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.ILwr.LWR2">
+            <summary>
+            LWR2:SMA(LWR1,M2,1);
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IMa">
+            <summary>
+            价格均线指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IMa.Lines">
+            <summary>
+            价格均线集合
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IMacd">
+            <summary>
+            异同移动平均线指标
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IMacd.DIF">
+            <summary>
+            快线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IMacd.DEA">
+            <summary>
+            加权移动均线
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IMacd.MACD">
+            <summary>
+            MACD柱
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IMtm">
+            <summary>
+            动量指标,Momentum Index
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IMtm.MTM">
+            <summary>
+            MTM:CLOSE-REF(CLOSE,N);
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IMtm.MAMTM">
+            <summary>
+            MAMTM:MA(MTM, M);
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IRsi">
+            <summary>
+            相对强弱指标
+            受计算公式的限制，不论价位如何变动，强弱指标的值均在0与100之间。⑵强弱指标保持高于50表示为强势市场，反之低于50表示为弱势市场
+            强弱指标多在70与30之间波动。当六日指标上升到达80时，表示股市已有超买现象，如果一旦继续上升，超过90以上时，则表示已到严重超买的警戒区，股价已形成头部，极可能在短期内反转回转
+            当六日强弱指标下降至20时，表示股市有超卖现象，如果一旦继续下降至10以下时则表示已到严重超卖区域，股价极可能有止跌回升的机会
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IRsi.LC">
+            <summary>
+            LC:=REF(CLOSE,1);
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IRsi.RSI1">
+            <summary>
+            RSI1:SMA(MAX(CLOSE-LC,0),N1,1)/SMA(ABS(CLOSE-LC),N1,1)*100;
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IRsi.RSI2">
+            <summary>
+            RSI2:SMA(MAX(CLOSE-LC,0),N2,1)/SMA(ABS(CLOSE-LC),N2,1)*100;
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Indicators.Outputs.IRsi.RSI3">
+            <summary>
+            RSI3:SMA(MAX(CLOSE-LC,0),N3,1)/SMA(ABS(CLOSE-LC),N3,1)*100;
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.IStockData`1.Values">
+            <summary>
+            数据集合
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStock">
+            <summary>
+            标的声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStock.Symbol">
+            <summary>
+            代码 600001
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStock.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStock.ListDate">
+            <summary>
+            上市时间
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockCode">
+            <summary>
+            有编号的记录
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockCode.Code">
+            <summary>
+            编号 600001.SH
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent">
+            <summary>
+            标的事件数据声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent.Sbonus">
+            <summary>
+            送股(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent.Zbonus">
+            <summary>
+            转增(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent.Xmoney">
+            <summary>
+            派息(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent.Pbonus">
+            <summary>
+            配股(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent.Pprice">
+            <summary>
+            配股价格
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent.Pcapital">
+            <summary>
+            基准股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockEvent.Lifted">
+            <summary>
+            解禁数量
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance">
+            <summary>
+            标的财务数据声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.Equity">
+            <summary>
+            每股净资产
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.Earnings">
+            <summary>
+            每股收益
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.Assets">
+            <summary>
+            总资产
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.Debts">
+            <summary>
+            总负债
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.Profits">
+            <summary>
+            总利润
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.RateOfReturn">
+            <summary>
+            收益率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.CapitalOriginal">
+            <summary>
+            原始股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.NegotiableCapital">
+            <summary>
+            流通股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.Capital">
+            <summary>
+            总股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockFinance.Tradable">
+            <summary>
+            流通股本
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockHolder">
+            <summary>
+            股东信息声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockHolder.Id">
+            <summary>
+            股东标识
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockHolder.HolderIs">
+            <summary>
+            股东类型
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockHolder.HoldNumber">
+            <summary>
+            持股数量
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockHolder.HoldRatio">
+            <summary>
+            持有比例
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockHolder.HoldChange">
+            <summary>
+            持仓变化
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockNotion">
+            <summary>
+            标的题材数据声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockNotion.Id">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockNotion.Name">
+            <summary>
+            题材主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockNotion.NotionIs">
+            <summary>
+            题材分组（地域/行业/热门）
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockNotion.Stocks">
+            <summary>
+            相关标的
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice">
+            <summary>
+            标的价格数据声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice.PreClose">
+            <summary>
+            前收盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice.Open">
+            <summary>
+            开盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice.Close">
+            <summary>
+            收盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice.High">
+            <summary>
+            最高价
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice.Low">
+            <summary>
+            最低价
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice.Turnover">
+            <summary>
+            换手率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice.Vol">
+            <summary>
+            交易量
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockPrice.Amount">
+            <summary>
+            交易额
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockRecord">
+            <summary>
+            有日期的记录
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockRecord.RecordDate">
+            <summary>
+            日期用yyyyMMdd格式的string
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSeed">
+            <summary>
+            复权因子
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSeed.Factor">
+            <summary>
+            复权系数
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSuggest">
+            <summary>
+            操作建议
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSuggest.BuyDate">
+            <summary>
+            购买日期
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSuggest.BuyPrice">
+            <summary>
+            购买价格
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSuggest.SellDate">
+            <summary>
+            售出日期
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSuggest.SellPrice">
+            <summary>
+            售出价格
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSuggest.ChangeRatio">
+            <summary>
+            改变比率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Casino.Items.IStockSuggest.IsCorrect">
+            <summary>
+            建议正确
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IChartsDiagram">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IChartsDiagram.OptionsForECharts">
+            <summary>
+            https://echarts.apache.org/zh/index.html
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceAnswer">
+            <summary>
+            设备应答声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceAnswer.Data">
+            <summary>
+            应答字节组
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceControl">
+            <summary>
+            设备指令声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceControl.Codes">
+            <summary>
+            指令字节组
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceEndpoint">
+            <summary>
+            设备节点声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceEndpoint.DeviceAt">
+            <summary>
+            设备所在
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceEndpoint.DeviceBoundary">
+            <summary>
+            波特率
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IDeviceEndpoint.Port">
+            <summary>
+            使用端口
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetData">
+            <summary>
+            互联网数据声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetData.Bytes">
+            <summary>
+            字节组
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetData.StreamContent">
+            <summary>
+            内容流
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetData.StringContent">
+            <summary>
+            文本内容
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetData.ContentMediaType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetHost">
+            <summary>
+            互联网主机声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetHost.AuthenticationType">
+            <summary>
+            认证方式
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetHost.Domain">
+            <summary>
+            域
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetHost.BaseUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetHost.UserName">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetHost.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource">
+            <summary>
+            互联网资源声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource.Url">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource.Method">
+            <summary>
+            请求方法
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource.Charset">
+            <summary>
+            字符集
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource.IsJsonp">
+            <summary>
+            资源是jsonp
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource.JsonpPrefix">
+            <summary>
+            jsonp前缀
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource.Headers">
+            <summary>
+            请求头
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource.Request">
+            <summary>
+            请求体
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResource.Query">
+            <summary>
+            QueryString dictionary
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResponse.StatusCode">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IInternetResponse.Response">
+            <summary>
+            响应体
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMail">
+            <summary>
+            邮件声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMail.To">
+            <summary>
+            收件人
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMail.Cc">
+            <summary>
+            抄送
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMail.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMail.Body">
+            <summary>
+            正文
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMail.From">
+            <summary>
+            发件人
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailServer">
+            <summary>
+            邮件服务器声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailServer.ServerEndpoint">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailServer.ServerPort">
+            <summary>
+            端口
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailServer.EnableSsl">
+            <summary>
+            使用SSL
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailServer.UseDefaultCredentials">
+            <summary>
+            使用授权
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailServer.UserName">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailServer.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailTo">
+            <summary>
+            邮件地址声明
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailTo.Email">
+            <summary>
+            电子邮件地址
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Entries.Hybird.IMailTo.Name">
+            <summary>
+            显示名称
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Casino.AnalysisCycle">
+            <summary>
+            周期定义，日周月，M60
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.AnalysisCycle.DAILY">
+            <summary>
+            日线
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.AnalysisCycle.WEEKLY">
+            <summary>
+            周线
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.AnalysisCycle.MONTHLY">
+            <summary>
+            月线
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.BoardIs.SZA">
+            <summary>
+            深证A股
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.BoardIs.SZZ">
+            <summary>
+            中小板
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.BoardIs.SZC">
+            <summary>
+            创业板
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.BoardIs.SHA">
+            <summary>
+            上证A股
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.BoardIs.SHK">
+            <summary>
+            科创板
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.BoardIs.Other">
+            <summary>
+            北交所/新三板
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Casino.HoldChange">
+            <summary>
+            股东持股变化类型
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.HoldChange.None">
+            <summary>
+            无变化
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.HoldChange.Increased">
+            <summary>
+            股东增持
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.HoldChange.Decreased">
+            <summary>
+            股东减持
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Casino.HolderIs">
+            <summary>
+            股东类型
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Casino.MarkAs">
+            <summary>
+            标的标记
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.MarkAs.Position">
+            <summary>
+            持仓
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.MarkAs.Focus">
+            <summary>
+            关注/收藏
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.MarkAs.Pool">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.MarkAs.Ignore">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.MarkAs.BlackList">
+            <summary>
+            黑名单
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Casino.NotionIs">
+            <summary>
+            题材分组
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.NotionIs.Concept">
+            <summary>
+            概念
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.NotionIs.Region">
+            <summary>
+            地区
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.NotionIs.Industry">
+            <summary>
+            行业
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.Operate.Buy">
+            <summary>
+            买进
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.Operate.Keep">
+            <summary>
+            持有
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.Operate.Sell">
+            <summary>
+            卖出
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Casino.Operate.Left">
+            <summary>
+            舍弃
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.AuthenticationType">
+            <summary>
+            服务器认证方式
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.AuthenticationType.None">
+            <summary>
+            匿名
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.AuthenticationType.Basic">
+            <summary>
+            基本认证
+            服务端的401响应中包含一个认证要求（authentication challenge），此认证要求中含有“Basic”关键字和一个用以表明访问的被保护资源名称的“名称=值”对，如下：
+            WWW-Authenticate: Basic realm =”Protected page”
+            如果你使用的浏览器，浏览器在接收到401响应时，将会弹出窗口让你输入用户名密码，然后发送认证请求。认证请求中同样包含”Basic”关键字，此外还有Base64编码后的用户名密码，如下：
+            Authorization: Basic QWRlcGxveSdzIGJsb2c =
+            服务器将用户名密码解码后比对，成功匹配后即认证成功。
+            因为Base64不算是一种加密方法：无密钥的可逆加密，任何人都可解密（百度搜索一下”在线解码“一大堆）。因此基本认证被认为是明文传输，安全性不好。极易出现密码被窃听和重放攻击等安全性问题。
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.AuthenticationType.Digest">
+            <summary>
+            摘要认证
+            摘要认证被设计用来弥补基本认证的缺点。摘要认证基于请求-响应（challenge-response）模式，而且使用了哈希加密算法（常用为MD5），从而某些程度上解决了基本认证安全性的问题。
+            服务器返回的初始401响应的www认证头（WWW-Authenticate header）中多出了一个称为nonce的随机数的字段。服务端保证每个401响应中的nonce值唯一。如：
+            Authorization: Digest username =”admin”, realm =”HiPER”
+            接下来的客户端响应中将包含由用户名、密码、nonce和其他信息组成的数据的哈希值（如使用MD5加密）。所有被加密的数据服务端也具有，因此服务端执行同样加密过程。如果二者一直则认证成功。
+            因为如MD5等哈希加密算法是不可逆的，因此用户名密码明文无法被窃听破解。因为服务器对同一个nonce的请求只接受一次客户端请求，从而能避免重放攻击。
+            但是，digest的安全性也有缺点：
+            1）只有密码密码被加密，而客户端最终请求的被保护资源是明文传送的，可被窃听
+            2）客户端无法确认服务端的正确身份，缺少对服务端的认证方式
+            3）近年来，随着计算机性能的提高等因素，传统高强度加密算法的破解已成可能。而MD5更是已有破解方法。更多安全性问题请参考RFC2617。
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.AuthenticationType.NTLM">
+            <summary>
+            NT LAN Manager
+            NTLM是一种网络认证协议，与NTLM Hash的关系就是：NTLM 网络认证协议是以 NTLM Hash 作为根本凭证进行认证的协议。也就是说，NTLM与NTLM Hash 相互对应。
+            在本地认证的过程中，其实就是将用户输入的密码转换为 NTLM Hash 与 SAM 中的 NTLM Hash 进行比较。
+            NTLM Hash的产生
+            1.先将用户的密码转化为十六进制格式。   
+            2.将十六进制格式的密码进行 Unicode 编码。
+            3.使用 MD4 摘要算法对 Unicode 编码数据进行 Hash 计算。
+            假设我的密码是admin，那么操作系统会将admin转换为十六进制，经过Unicode转换后，再调用MD4加密算法加密，这个加密结果的十六进制就是NTLM Hash。
+            1 admin                 -> hex(16进制编码)       = 61646d696e 
+            2 61646d696e            -> Unicode              = 610064006d0069006e00
+            3 610064006d0069006e00  -> MD4                  = 209c6174da490caeb422f3fa5a7ae634
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.AuthenticationType.Negotiate">
+            <summary>
+            Kerberose相比NTML有很大改善：速度快，而且允许相互认证、认证代理和简单的信任关系。
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.AuthenticationType.Kerberos">
+            <summary>
+            服务器与客户端通过第三方的Kerberos服务器完成认证。
+            Kerberose相比NTML有很大改善：速度快，而且允许相互认证、认证代理和简单的信任关系。
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.AuthenticationType.SPNEGO">
+            <summary>
+            全称是Simple and Protected GSS-API Negotiation，是微软提供的一种使用GSS-API认证机制的安全协议，用于使Webserver共享Windows Credentials，它扩展了Kerberos(一种网络认证协议)。
+            SPNEGO适用于客户端需要认证，但是客户端服务端都不清楚对方支持什么认证协议的场合。
+            SPENGO其实是一种”伪认证机制“（pseudo-mechanism），用以协商出真正的认证机制。
+            最常见的是微软的HTTP协商认证扩展（HTTP Negotiate authentication extension），协商的最终机制在NTML和Kerberos中选择。Kerberos因其优点优先使用。
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.CacheDependency">
+            <summary>
+            缓存依赖条件
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.CacheDependency.None">
+            <summary>
+            无依赖，长期存活
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.CacheDependency.AbsoluteTime">
+            <summary>
+            绝对时间过期
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.CacheDependency.RelativeTime">
+            <summary>
+            相对时间过期
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.CacheDependency.File">
+            <summary>
+            依赖文件变化失效
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.DeviceAt">
+            <summary>
+            设备接入
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.DeviceBoundary">
+            <summary>
+            通信波特率
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod">
+            <summary>
+            http请求方法
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod.Head">
+            <summary>
+            HEAD方法请求一个与GET请求的响应相同的响应，但没有响应体.
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod.Get">
+            <summary>
+            GET方法请求一个指定资源的表示形式. 使用GET的请求应该只被用于获取数据.
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod.Post">
+            <summary>
+            POST方法用于将实体提交到指定的资源，通常导致状态或服务器上的副作用的更改. 
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod.Options">
+            <summary>
+            OPTIONS方法用于描述目标资源的通信选项。
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod.Put">
+            <summary>
+            PUT方法用请求有效载荷替换目标资源的所有当前表示。
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod.Patch">
+            <summary>
+            PATCH方法用于对资源应用部分修改。
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod.Delete">
+            <summary>
+            DELETE方法删除指定的资源。
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod.Trace">
+            <summary>
+            TRACE方法沿着到目标资源的路径执行一个消息环回测试。
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpMethod.Connect">
+            <summary>
+            CONNECT方法建立一个到由目标资源标识的服务器的隧道。
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Enums.Hybird.HttpStatus">
+            <summary>
+            请求响应结果
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile">
+            <summary>
+            缓存策略
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile.#ctor">
+            <summary>
+            默认持久
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile.#ctor(System.DateTime)">
+            <summary>
+            绝对时间型
+            </summary>
+            <param name="expireTime"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile.#ctor(System.TimeSpan)">
+            <summary>
+            相对时间型
+            </summary>
+            <param name="remainTimeSpan"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile.#ctor(System.String)">
+            <summary>
+            监视文件型
+            </summary>
+            <param name="monitorFile"></param>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile.CacheDependency">
+            <summary>
+            存活依赖
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile.AbsoluteTime">
+            <summary>
+            绝对过期时间
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile.RelativeTime">
+            <summary>
+            相对存活时间
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.ServiceCentre.Models.Hybird.CachesProfile.File">
+            <summary>
+            监视文件变化
+            </summary>
+        </member>
+    </members>
+</doc>

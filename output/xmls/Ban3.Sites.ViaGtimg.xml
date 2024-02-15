@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Sites.ViaGtimg</name>
+    </assembly>
+    <members>
+        <member name="P:Ban3.Sites.ViaGtimg.Request.ReadBidAndAsk.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaGtimg.Request.ReadBrief.Code">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

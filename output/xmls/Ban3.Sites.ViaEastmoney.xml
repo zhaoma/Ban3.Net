@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Sites.ViaEastmoney</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Sites.ViaEastmoney.Constant">
+            <summary>
+            eastmoney的资源定义
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaEastmoney.Constant.UrlForGetCodes">
+            <summary>
+            从东财获取所有标的（代码与名称）
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Ban3.Sites.ViaEastmoney.Constant.UrlForHoldersA(System.Int32,System.Int32)" -->
+        <member name="M:Ban3.Sites.ViaEastmoney.Constant.UrlForHoldersB(System.Int32,System.Int32)">
+            <summary>
+            十大股东
+            </summary>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Sites.ViaEastmoney.Constant.UrlForHolders(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="code">十大股东？A/B</param>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Sites.ViaEastmoney.Entries.QueryDataPackage`1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.QueryDataPackage`1.Pages">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.QueryDataPackage`1.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaEastmoney.Entries.StockCode">
+            <summary>
+            来自eastmoney的StockCode
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockCode.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockCode.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaEastmoney.Entries.StockCodes">
+            <summary>
+            来自eastmoney的StockCode结构体
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockCodes.Total">
+            <summary>
+            条目数量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockCodes.Diff">
+            <summary>
+            数据集合
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaEastmoney.Entries.StockCodesPackage">
+            <summary>
+            来自eastmoney的StockCode数据包
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockCodesPackage.Data">
+            <summary>
+            StockCodes外一层
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaEastmoney.Entries.StockHolder">
+            <summary>
+            股东数据
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.Code">
+            <summary>
+            Stock.Code
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.Symbol">
+            <summary>
+            Stock.Symbol
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.OrganizationCode">
+            <summary>
+            股东代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.ReportDate">
+            <summary>
+            报告期
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HolderName">
+            <summary>
+            股东名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HoldNumber">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HoldRatioFree">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HoldChangeSubject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HoldChangeRatio">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.IsHoldOrganization">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HoldRank">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.StockName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HolderCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.StockTypeCode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HolderState">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HolderCapital">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HoldRatio">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HoldRatioChange">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HolderType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.SharesType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Entries.StockHolder.HolderCodeOld">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaEastmoney.Helper">
+            
+        </member>
+        <member name="M:Ban3.Sites.ViaEastmoney.Helper.DownloadAllCodes">
+            <summary>
+            下载所有标的代码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Sites.ViaEastmoney.Helper.Query``1(Ban3.Sites.ViaEastmoney.Request.Query)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Sites.ViaEastmoney.Helper.Query``1(Ban3.Sites.ViaEastmoney.Enums.ReportName,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reportName"></param>
+            <param name="pageNumber"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Sites.ViaEastmoney.Request.DownloadAllCodes">
+            <summary>
+            请求eastmoney的StockCodes
+            </summary>
+        </member>
+        <member name="M:Ban3.Sites.ViaEastmoney.Request.DownloadAllCodes.#ctor">
+            
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Request.Query.Condition">
+            
+        </member>
+        <member name="M:Ban3.Sites.ViaEastmoney.Request.Query.#ctor">
+            
+        </member>
+        <member name="T:Ban3.Sites.ViaEastmoney.Response.DownloadAllCodesResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaEastmoney.Response.QueryResult`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Ban3.Sites.ViaEastmoney.Response.QueryResult`1.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Response.QueryResult`1.Version">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaEastmoney.Response.QueryResult`1.Result">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Infrastructures.SignalRClient</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Infrastructures.SignalRClient.Entries.Client">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.SignalRClient.Entries.Client.Send(Ban3.Infrastructures.SignalRClient.Notify)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.SignalRClient.Entries.Client.ReceivedNotify">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.SignalRClient.Entries.MessageHub">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.SignalRClient.Entries.MessageHub.HandleAllMessage(Ban3.Infrastructures.SignalRClient.Notify)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.SignalRClient.Entries.MessageHub.HandleOthersMessage(Ban3.Infrastructures.SignalRClient.Notify)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.SignalRClient.Entries.MessageHub.OnConnectedAsync">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.SignalRClient.Entries.MessageHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.SignalRClient.Notify">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.SignalRClient.Notify.From">
+            <summary>
+            来源
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.SignalRClient.Notify.To">
+            <summary>
+            目的地
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.SignalRClient.Notify.ControlCode">
+            <summary>
+            关键字
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.SignalRClient.Notify.Content">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.SignalRClient.Helper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.SignalRClient.Helper.SendBySignalR(Ban3.Infrastructures.SignalRClient.Notify)">
+            <summary>
+            发布消息
+            </summary>
+            <param name="notify"></param>
+        </member>
+        <member name="M:Ban3.Infrastructures.SignalRClient.Helper.BindToSignalR(System.Action{Ban3.Infrastructures.SignalRClient.Notify})">
+            <summary>
+            收听消息
+            </summary>
+            <param name="action"></param>
+        </member>
+    </members>
+</doc>

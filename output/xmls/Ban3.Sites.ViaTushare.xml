@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Sites.ViaTushare</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Sites.ViaTushare.Entries.ApiResponseData">
+            <summary>
+            接口返回的结果
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.ApiResponseData.Fields">
+            <summary>
+            索取的字段
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.ApiResponseData.Items">
+            <summary>
+            索取结果数组的集合
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaTushare.Entries.DateRange">
+            <summary>
+            查询使用的日期区间
+            </summary>
+        </member>
+        <member name="M:Ban3.Sites.ViaTushare.Entries.DateRange.#ctor">
+            <summary>
+            默认最近一个月
+            </summary>
+        </member>
+        <member name="M:Ban3.Sites.ViaTushare.Entries.DateRange.#ctor(System.Int32)">
+            <summary>
+            days以内
+            </summary>
+            <param name="days"></param>
+        </member>
+        <member name="M:Ban3.Sites.ViaTushare.Entries.DateRange.#ctor(System.Int32,System.Int32)">
+            <summary>
+            第freq个years年 
+            </summary>
+            <param name="years"></param>
+            <param name="freq"></param>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.DateRange.StartDate">
+            <summary>
+            查询日期格式yyyyMMdd
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.DateRange.EndDate">
+            <summary>
+            查询日期格式yyyyMMdd
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaTushare.Entries.StockBasic">
+            <summary>
+            基础信息
+            https://tushare.pro/document/2?doc_id=25
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockBasic.Code">
+            <summary>
+            TS代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockBasic.Symbol">
+            <summary>
+            股票代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockBasic.Name">
+            <summary>
+            股票名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockBasic.ListDate">
+            <summary>
+            上市日期
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaTushare.Entries.StockPrice">
+            <summary>
+            A股日线行情
+            https://tushare.pro/document/2?doc_id=27
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.Code">
+            <summary>
+            股票代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.TradeDate">
+            <summary>
+            交易日期
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.Open">
+            <summary>
+            开盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.High">
+            <summary>
+            最高价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.Low">
+            <summary>
+            最低价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.Close">
+            <summary>
+            收盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.PreClose">
+            <summary>
+            昨收价(前复权)
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.Change">
+            <summary>
+            涨跌额
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.ChangePercent">
+            <summary>
+            涨跌幅 （未复权 ）
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.Vol">
+            <summary>
+            成交量 （手）
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaTushare.Entries.StockPrice.Amount">
+            <summary>
+            成交额 （千元）
+            </summary>
+        </member>
+        <member name="M:Ban3.Sites.ViaTushare.Entries.StockPrice.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1908 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Sites.ViaWechat</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.ActionInt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.ActionInt.Scene">
+            <summary>
+            场景编号
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.ActionStr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.ActionStr.Scene">
+            <summary>
+            场景编码
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.AUTH.AccessToken">
+            <summary>
+            授权令牌
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.AUTH.AccessToken.AcessToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.AUTH.AccessToken.ExpiresIn">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.AUTH.AccessTokenForWeb">
+            <summary>
+            Web令牌完整信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.AUTH.AccessTokenForWeb.RefreshToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.AUTH.AccessTokenForWeb.OpenId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.AUTH.AccessTokenForWeb.Scope">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.AUTH.AccessTokenForWeb.UnionId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.AUTH.WebAuthToken">
+            <summary>
+            令牌
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.AUTH.WebAuthToken.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.AUTH.WebAuthToken.AcessToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Content.ArticleInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.ArticleInfo.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.ArticleInfo.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.ArticleInfo.PicUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.ArticleInfo.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Content.MaterialInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MaterialInfo.title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MaterialInfo.introduction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Content.MediaInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MediaInfo.media_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MediaInfo.name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MediaInfo.update_time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MediaInfo.url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MediaInfo.UploadTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Content.MediaItem">
+            <summary>
+            多媒体项
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MediaItem.MediaId">
+            <summary>
+            多媒体标识
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Content.MusicInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MusicInfo.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MusicInfo.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MusicInfo.MusicUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MusicInfo.HQMusicUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.MusicInfo.ThumbMediaId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Content.NewsDetail">
+            <summary>
+            图文素材
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsDetail.rank">
+            <summary>
+            rank
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsDetail.title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsDetail.thumb_media_id">
+            <summary>
+            封面素材
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsDetail.author">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsDetail.digest">
+            <summary>
+            导语
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsDetail.show_cover_pic">
+            <summary>
+            显示封面
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsDetail.content">
+            <summary>
+            正文
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsDetail.content_source_url">
+            <summary>
+            来源地址
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Content.NewsList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsList.news_item">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Content.NewsMedia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.NewsMedia.content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Content.Video">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.Video.MediaId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.Video.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Content.Video.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.Card">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.Card.card_type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.Card.cash">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardAdvancedInfo.use_condition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.logo_url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.brand_name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.code_type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.sub_title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.color">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.notice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.service_phone">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.sku">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.date_info">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.use_custom_code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.bind_openid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.can_share">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.can_give_friend">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.get_limit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.center_title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.center_sub_title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardBaseInfo.center_url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardDateInfo.type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardDateInfo.fixed_begin_term">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardDateInfo.fixed_term">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardSku.quantity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardUseCondition.accept_category">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardUseCondition.reject_category">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.CardUseCondition.can_use_with_other_discount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.Cash">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.Cash.base_info">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.Cash.advanced_info">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.Cash.least_cost">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.Cash.reduce_cost">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.Coupon">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.Coupon.Card">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.Qrcode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.Qrscene">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.Qrscene.expire_seconds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Platforms.WeChatClient.Entries.Entries.Qrscene.action_name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.Qrscene.action_info">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.QrsceneLimitInt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Platforms.WeChatClient.Entries.Entries.QrsceneLimitInt.action_name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.QrsceneLimitInt.action_info">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.QrsceneLimitStr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Platforms.WeChatClient.Entries.Entries.QrsceneLimitStr.action_name">
+            <summary>
+            action_name
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.QrsceneLimitStr.action_info">
+            <summary>
+            action_info
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.SceneInt">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.SceneInt.scene_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.SceneStr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.SceneStr.SceneString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.TemplateMessageItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.TemplateMessageItem.value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.TemplateMessageItem.color">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.User">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.subscribe">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.openid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.nickname">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.sex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.language">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.city">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.province">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.country">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.headimgurl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.subscribe_time">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.unionid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.remark">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.groupid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.tagid_list">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.User.SubscribeTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Entries.UserTags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.UserTags.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.UserTags.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Entries.UserTags.Count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.APITicket.errcode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.APITicket.errmsg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.APITicket.ticket">
+            <summary>
+            JS-SDK使用权限
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.APITicket.expires_in">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.JS.Config">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.Config.debug">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.Config.appId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.Config.timestamp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.Config.nonceStr">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.Config.signature">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.Config.jsApiList">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.JS.Config.url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Platforms.WeChatClient.Entries.JS.Config.#ctor">
+            ctor
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.TemplateMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.TemplateMessage.first">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.TemplateMessage.keyword1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.TemplateMessage.keyword2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.TemplateMessage.keyword3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.TemplateMessage.remark">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.UI.Button">
+            <summary>
+            一级菜单数组，个数应为1~3个
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.Button.SubButton">
+            <summary>
+            二级菜单数组，个数应为1~5个
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.UI.ConditionalMenu">
+            <summary>
+            个性化菜单
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.ConditionalMenu.Button">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.ConditionalMenu.Matchrule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.UI.MatchRule">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MatchRule.group_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MatchRule.sex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MatchRule.client_platform_type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MatchRule.country">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MatchRule.province">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MatchRule.city">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MatchRule.language">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.UI.Menu">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.Menu.Button">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.UI.MenuItem">
+            <summary>
+            微信菜单项
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MenuItem.Key">
+            <summary>
+            菜单KEY值，用于消息接口推送，不超过128字节
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MenuItem.Url">
+            <summary>
+            按键链接
+            view类型必须	网页链接，用户点击菜单可打开链接，不超过1024字节
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MenuItem.Type">
+            <summary>
+            菜单的响应动作类型
+            1、click：点击推事件
+            用户点击click类型按钮后，微信服务器会通过消息接口推送消息类型为event 的结构给开发者（参考消息接口指南），并且带上按钮中开发者填写的key值，开发者可以通过自定义的key值与用户进行交互；
+            2、view：跳转URL
+            用户点击view类型按钮后，微信客户端将会打开开发者在按钮中填写的网页URL，可与网页授权获取用户基本信息接口结合，获得用户基本信息。
+            3、scancode_push：扫码推事件
+            用户点击按钮后，微信客户端将调起扫一扫工具，完成扫码操作后显示扫描结果（如果是URL，将进入URL），且会将扫码的结果传给开发者，开发者可以下发消息。
+            4、scancode_waitmsg：扫码推事件且弹出“消息接收中”提示框
+            用户点击按钮后，微信客户端将调起扫一扫工具，完成扫码操作后，将扫码的结果传给开发者，同时收起扫一扫工具，然后弹出“消息接收中”提示框，随后可能会收到开发者下发的消息。
+            5、pic_sysphoto：弹出系统拍照发图
+            用户点击按钮后，微信客户端将调起系统相机，完成拍照操作后，会将拍摄的相片发送给开发者，并推送事件给开发者，同时收起系统相机，随后可能会收到开发者下发的消息。
+            6、pic_photo_or_album：弹出拍照或者相册发图
+            用户点击按钮后，微信客户端将弹出选择器供用户选择“拍照”或者“从手机相册选择”。用户选择后即走其他两种流程。
+            7、pic_weixin：弹出微信相册发图器
+            用户点击按钮后，微信客户端将调起微信相册，完成选择操作后，将选择的相片发送给开发者的服务器，并推送事件给开发者，同时收起相册，随后可能会收到开发者下发的消息。
+            8、location_select：弹出地理位置选择器
+            用户点击按钮后，微信客户端将调起地理位置选择工具，完成选择操作后，将选择的地理位置发送给开发者的服务器，同时收起位置选择工具，随后可能会收到开发者下发的消息。
+            9、media_id：下发消息（除文本消息）
+            用户点击media_id类型按钮后，微信服务器会将开发者填写的永久素材id对应的素材下发给用户，永久素材类型可以是图片、音频、视频、图文消息。请注意：永久素材id必须是在“素材管理/新增永久素材”接口上传后获得的合法id。
+            10、view_limited：跳转图文消息URL
+            用户点击view_limited类型按钮后，微信客户端将打开开发者在按钮中填写的永久素材id对应的图文消息URL，永久素材类型只支持图文消息。请注意：永久素材id必须是在“素材管理/新增永久素材”接口上传后获得的合法id。
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MenuItem.Name">
+            <summary>
+            菜单标题，不超过16个字节，子菜单不超过40个字节
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.UI.MenuItem.MediaId">
+            <summary>
+            media_id类型和view_limited类型必须
+            调用新增永久素材接口返回的合法media_id
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Entries.Users">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Entries.Users.OpenId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Request.AddNews">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.AddNews.articles">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Request.BatchGet">
+            <summary>
+            Z
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.BatchGet.type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.BatchGet.offset">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.BatchGet.count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Platforms.WeChatClient.Request.Login">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.Login.access_token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.Login.expires_in">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.Login.refresh_token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.Login.openid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.Login.scope">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Platforms.WeChatClient.Request.Login.unionid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Enums.WeChatRequestMsgType">
+            <summary>
+            接收消息类型
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatRequestMsgType.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatRequestMsgType.Image">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatRequestMsgType.Voice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatRequestMsgType.Video">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatRequestMsgType.Location">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatRequestMsgType.Link">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatRequestMsgType.Event">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatResponseMsgType.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatResponseMsgType.Image">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatResponseMsgType.Voice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatResponseMsgType.Video">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatResponseMsgType.Music">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Enums.WeChatResponseMsgType.News">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.IMessageBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.IMessageBase.ToUserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.IMessageBase.FromUserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.IMessageBase.CreateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.IMessageBase.MsgType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageBase">
+            <summary>
+            接收到请求的消息
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageBase.ToUserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageBase.FromUserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageBase.CreateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageBase.MsgType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageEvent">
+            <summary>
+            文本消息
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageEvent.Event">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageEvent.EventKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageEvent.Ticket">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageEvent.Latitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageEvent.Longitude">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageEvent.Precision">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageImage">
+            <summary>
+            图片消息
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageImage.MsgId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageImage.PicUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLink">
+            <summary>
+            链接消息
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLink.MsgId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLink.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLink.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLink.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLocation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLocation.MsgId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLocation.Location_X">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLocation.Location_Y">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLocation.Scale">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageLocation.Label">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageText">
+            <summary>
+            文本消息
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageText.MsgId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageText.Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageVideo">
+            <summary>
+            语音消息
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageVideo.MsgId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageVideo.MediaId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageVideo.ThumbMediaId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageVoice">
+            <summary>
+            语音消息
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageVoice.MsgId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageVoice.Format">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageVoice.MediaId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.MessageVoice.Recognition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendMpTemplateMessage">
+            <summary>
+            发送模版消息（小程序）
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendMpTemplateMessage.Token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendMpTemplateMessage.ToUserOpenId">
+            <summary>
+            接收人的 open id
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendMpTemplateMessage.FormId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendMpTemplateMessage.TpltId">
+            <summary>
+            消息模板
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendMpTemplateMessage.PageUrl">
+            <summary>
+            小程序跳转的页面路径
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendMpTemplateMessage.Keyword1">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendMpTemplateMessage.Keyword2">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendMpTemplateMessage.Keyword3">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendTemplateMessage">
+            <summary>
+            模板信息（公众号）
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendTemplateMessage.touser">
+            <summary>
+            收件人
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendTemplateMessage.template_id">
+            <summary>
+            模板主键（微信）
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Requests.Platforms.WeChat.SendTemplateMessage.url">
+            <summary>
+            链接地址
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.AddMaterial">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.AddMaterial.MediaId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.AddMaterial.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.AddMedia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.AddMedia.type">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.AddMedia.media_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.AddMedia.created_at">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.BatchgetMedia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.BatchgetMedia.total_count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.BatchgetMedia.item_count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.BatchgetMedia.item">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.BatchgetNews">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.BatchgetNews.total_count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.BatchgetNews.item_count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.BatchgetNews.item">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.CreateQrcode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.CreateQrcode.ticket">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.CreateQrcode.expire_seconds">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.CreateQrcode.url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.ErrorInfo">
+            <summary>
+            响应基类
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.ErrorInfo.errcode">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.ErrorInfo.errmsg">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetOpenId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetOpenId.access_token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetOpenId.expires_in">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetOpenId.refresh_token">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetOpenId.openid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetOpenId.scope">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetOpenId.unionid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUser.openid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUser.nickname">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUser.sex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUser.province">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUser.city">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUser.country">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUser.headimgurl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUser.unionid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUsers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUsers.total">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUsers.count">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUsers.data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUsers.next_openid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUserTags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.GetUserTags.tags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.LoginResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.LoginResult.OpenID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.LoginResult.nickname">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.LoginResult.sex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.LoginResult.province">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.LoginResult.city">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.LoginResult.country">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.LoginResult.headimgurl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.LoginResult.unionid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.IMessageBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.IMessageBase.ToUserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.IMessageBase.FromUserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.IMessageBase.CreateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.IMessageBase.MsgType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.IMessageBase.FuncFlag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageBase">
+            <summary>
+            响应回复消息
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageBase.ToUserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageBase.FromUserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageBase.CreateTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageBase.MsgType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageBase.FuncFlag">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageImage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageImage.Image">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageMusic">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageMusic.Music">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageNews">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageNews.ArticleCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageNews.Articles">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageNews.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageText.Content">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageVideo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageVideo.Video">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageVoice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.MessageVoice.Voice">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.PushCoupon">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.PushCoupon.touser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.PushCoupon.wxcard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.PushCoupon.msgtype">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.ResponseCard">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.ResponseCard.card_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.PushMedia">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.PushMedia.touser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.PushMedia.mpnews">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.PushMedia.msgtype">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.ResponseNews">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.ResponseNews.media_id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.Response">
+            <summary>
+            响应基类
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.Response.errcode">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.Response.errmsg">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="T:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.Upload">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Infrastructures.Common.Contracts.Responses.Platforms.WeChat.Upload.url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForGetAccessToken">
+            <summary>
+            获取访问token
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForGetAccessTokenOnWeb">
+            <summary>
+            获取到网页授权access_token
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForCreateMenu">
+            <summary>
+            创建菜单
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForCreateConditionalMenu">
+            <summary>
+            创建个性化菜单
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForGetUserTags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForCreateUserTags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForUpdateUserTags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForDeleteUserTags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForGetUsers">
+            <summary>
+            获取用户列表
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForReadGuest">
+            <summary>
+            读取用户信息
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForApiBase">
+            <summary>
+            不弹出授权页面，直接跳转，只能获取用户openid
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForApiUserInfo">
+            <summary>
+            弹出授权页面，可通过openid拿到昵称、性别、所在地。并且，即使在未关注的情况下，只要用户授权，也能获取其信息
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForMessage">
+            <summary>
+            发送消息
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForUploadimg">
+            <summary>
+            上传图片
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForBatchgetMaterial">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForAddNews">
+            <summary>
+            新增图文素材
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForAddMaterial">
+            <summary>
+            新增媒体素材
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForAddMedia">
+            <summary>
+            新增多媒体
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForCreateQrcode">
+            <summary>
+            生成场景二维码
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForCreateQrcodeImage">
+            <summary>
+            下载二维码图片
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForGenerateShortUrl">
+            <summary>
+            生成短链接
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForSendTemplateMessage">
+            <summary>
+            模板消息推送Url(公众号)
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForSendMpTemplateMessage">
+            <summary>
+            模板消息推送Url(小程序)
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForOpenRefreshToken">
+            <summary>
+            刷新或续期access_token使用
+            </summary>
+        </member>
+        <member name="F:Ban3.Infrastructures.Common.Contracts.Servers.WeChat.UrlForGetJsapiTicket">
+            <summary>
+            JS-SDK使用权限签名算法（jsapi_ticket）
+            </summary>
+        </member>
+    </members>
+</doc>

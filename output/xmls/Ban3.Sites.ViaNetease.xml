@@ -1,0 +1,434 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Sites.ViaNetease</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Sites.ViaNetease.Entries.StockFinance">
+            <summary>
+            财务信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockFinance.Date">
+            <summary>
+            报告期
+            第一行
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockFinance.Earnings">
+            <summary>
+            每股收益
+            第二行
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockFinance.Equity">
+            <summary>
+            每股净资产
+            第三行
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockFinance.Assets">
+            <summary>
+            总资产
+            第十五行
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockFinance.Debts">
+            <summary>
+            总负债
+            第十七行
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockFinance.Profits">
+            <summary>
+            总利润
+            第十行
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockFinance.RateOfReturn">
+            <summary>
+            收益率
+            第二十行
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaNetease.Entries.StockGroup">
+            <summary>
+            股票分组定义
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockGroup.Identity">
+            <summary>
+            标识
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockGroup.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockGroup.NeteasePrefix">
+            <summary>
+            网易详情数据前缀
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockGroup.StockCount">
+            <summary>
+            股票数
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockGroup.CodePrefix">
+            <summary>
+            编码前缀
+            sh/sz
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaNetease.Entries.StockM1">
+            <summary>
+            1分钟价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockM1.Time">
+            <summary>
+            时间HHmm
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockM1.Bid">
+            <summary>
+            买盘
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockM1.Ask">
+            <summary>
+            卖盘
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockM1.Volume">
+            <summary>
+            交易量
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaNetease.Entries.StockPrice">
+            <summary>
+            历史价格信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.Date">
+            <summary>
+            日期yyyy-MM-dd
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.Symbol">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.Close">
+            <summary>
+            收盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.High">
+            <summary>
+            最高价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.Low">
+            <summary>
+            最低价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.Open">
+            <summary>
+            开盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.CloseBefore">
+            <summary>
+            前收盘
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.Change">
+            <summary>
+            涨幅(金额)
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.ChangeRatio">
+            <summary>
+            涨幅
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.TurnoverRate">
+            <summary>
+            换手率
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.Volume">
+            <summary>
+            交易量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.Amount">
+            <summary>
+            交易额
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.TotalValue">
+            <summary>
+            总市值
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockPrice.TradableValue">
+            <summary>
+            流通市值
+            </summary>
+        </member>
+        <member name="M:Ban3.Sites.ViaNetease.Entries.StockPrice.ToRowString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Ban3.Sites.ViaNetease.Entries.StockRecord">
+            <summary>
+            即时信息
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Type">
+            <summary>
+            类型(SZ/SH)
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Code">
+            <summary>
+            编码
+            1/0+代码 1=深圳 0=上海
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Symbol">
+            <summary>
+            代码
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Arrow">
+            <summary>
+            方向
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Percent">
+            <summary>
+            涨幅=*100
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.High">
+            <summary>
+            最高价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Low">
+            <summary>
+            最低价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Open">
+            <summary>
+            开盘价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Price">
+            <summary>
+            现价
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.YestClose">
+            <summary>
+            前收
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.UpDown">
+            <summary>
+            涨幅(金额)
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Askvol5">
+            <summary>
+            卖5量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Askvol4">
+            <summary>
+            卖4量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Askvol3">
+            <summary>
+            卖3量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Askvol2">
+            <summary>
+            卖2量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Askvol1">
+            <summary>
+            卖一量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Ask5">
+            <summary>
+            卖5
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Ask4">
+            <summary>
+            卖4
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Ask3">
+            <summary>
+            卖3
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Ask2">
+            <summary>
+            卖2
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Ask1">
+            <summary>
+            卖1
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bid1">
+            <summary>
+            买1
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bid2">
+            <summary>
+            买2
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bid3">
+            <summary>
+            买3
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bid4">
+            <summary>
+            买4
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bid5">
+            <summary>
+            买5
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bidvol1">
+            <summary>
+            买1量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bidvol2">
+            <summary>
+            买2量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bidvol3">
+            <summary>
+            买3量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bidvol4">
+            <summary>
+            买4量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Bidvol5">
+            <summary>
+            买5量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Volume">
+            <summary>
+            成交量
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.TurnOver">
+            <summary>
+            成交额
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockRecord.Time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaNetease.Entries.StockToday">
+            <summary>
+            M1行情
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockToday.Count">
+            <summary>
+            记录数(242)
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockToday.Symbol">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockToday.Name">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockToday.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Entries.StockToday.M1S">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Ban3.Sites.ViaNetease.Helper.DownloadFinances(Ban3.Sites.ViaNetease.Request.DownloadFinances)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns>Netease StockFinance List</returns>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Request.ReadRealTime.PrefixesAndCodes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaNetease.Response.DownloadDailyPricesResult">
+            <summary>
+            下载日行情结果，获取byte[]
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Response.DownloadDailyPricesResult.Path">
+            
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Response.DownloadFinancesResult.Data">
+            
+        </member>
+        <member name="P:Ban3.Sites.ViaNetease.Response.ReadRealtimePricesResult.Data">
+            
+        </member>
+    </members>
+</doc>

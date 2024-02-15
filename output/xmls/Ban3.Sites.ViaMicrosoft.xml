@@ -1,0 +1,954 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Sites.ViaMicrosoft</name>
+    </assembly>
+    <members>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Builds.Build.Id">
+            <summary>
+            The ID of the build.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Builds.Build.BuildNumber">
+            <summary>
+            The build number/name of the build.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.TeamProject.Id">
+            <summary>
+            Project identifier.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.TeamProject.Name">
+            <summary>
+            Project name.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.TeamProject.Description">
+            <summary>
+            The project's description (if any).
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.TeamProject.Revision">
+            <summary>
+            Project revision.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.TeamProject.Url">
+            <summary>
+            Url to the full version of the object.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.TeamProject.State">
+            <summary>
+            Project state.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.TeamProject.Visibility">
+            <summary>
+            Project visibility.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.TeamProject.LastUpdateTime">
+            <summary>
+            Project last update time.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Ban3.Sites.ViaMicrosoft.Entities.Core.TeamProject.DefaultTeamImageUrl" -->
+        <member name="T:Ban3.Sites.ViaMicrosoft.Entities.Core.WebApiTeamRef">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.WebApiTeamRef.Id">
+            <summary>
+            Team(Identity) Guid.A Team Foundation ID.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.WebApiTeamRef.Name">
+            <summary>
+            Team name
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.Core.WebApiTeamRef.Url">
+            <summary>
+             Team REST API Url
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Entities.IdentityDescriptor">
+            <summary>
+            An Identity descriptor is a wrapper for the identity type (Windows SID, Passport)
+            along with a unique identifier such as the SID or PUID.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.IdentityDescriptor.Identifier">
+            <summary>
+            The unique identifier for this identity, not exceeding 256 chars, which will be persisted.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.IdentityDescriptor.IdentityType">
+            <summary>
+            Type of descriptor(for example, Windows, Passport, etc.).
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Entities.IdentityRef">
+            <summary>
+            @TFVC..
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.IdentityRef.DisplayName">
+            <summary>
+            This is the non-unique display name of the graph subject.
+            To change this field, you must alter its value in the source provider.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.IdentityRef.UniqueName">
+            <summary>
+            Deprecated - use Domain+PrincipalName instead
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.IdentityRef.Url">
+            <summary>
+            This url is the full route to the source resource of this graph subject.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.IdentityRef.ImageUrl">
+            <summary>
+            Deprecated - Available in the "avatar" entry of the IdentityRef "_links" dictionary
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Entities.PropertiesCollection">
+            <summary>
+            The class represents a property bag as a collection of key-value pairs.
+            Values of all primitive types (any type with a TypeCode != TypeCode.Object) except for DBNull are accepted.
+            Values of type Byte[], Int32, Double, DateType and String preserve their type,
+            other primitives are retuned as a String. Byte[] expected as base64 encoded string.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.PropertiesCollection.Count">
+            <summary>
+            The count of properties in the collection.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.PropertiesCollection.Item">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.PropertiesCollection.Keys">
+            <summary>
+            The set of keys in the collection.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.PropertiesCollection.Values">
+            <summary>
+            The set of values in the collection.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.AssociatedWorkItem.Url">
+            <summary>
+            REST Url of the work item.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranch.Children">
+            <summary>
+            List of children for the branch.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranch.Mappings">
+            <summary>
+            List of branch mappings.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranch.Parent">
+            <summary>
+            Path of the branch's parent.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranch.RelatedBranches">
+            <summary>
+            List of paths of the related branches.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranchMapping.Depth">
+            <summary>
+            Depth of the branch.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranchMapping.ServerItem">
+            <summary>
+            Server item for the branch.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranchMapping.Type">
+            <summary>
+            Type of the branch.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranchRef.CreatedDate">
+            <summary>
+            Creation date of the branch.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranchRef.Description">
+            <summary>
+            Description of the branch.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranchRef.IsDeleted">
+            <summary>
+            Is the branch deleted?
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranchRef.Owner">
+            <summary>
+            Alias or display name of user
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranchRef.Path">
+            <summary>
+            Path for the branch.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcBranchRef.Url">
+            <summary>
+            URL to retrieve the item.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChange.ChangeType">
+            <summary>
+            The type of change that was made to the item.
+            Enums/VersionControlChangeType
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChange.Item">
+            <summary>
+            Current version.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChange.MergeSources">
+            <summary>
+            List of merge sources in case of rename or branch creation.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChange.NewContent">
+            <summary>
+            Content of the item after the change.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChange.PendingVersion">
+            <summary>
+            Version at which a (shelved) change was pended against
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChange.SourceServerItem">
+            <summary>
+            Path of the item on the server.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChange.Url">
+            <summary>
+            URL to retrieve the item.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangeset.AccountId">
+            <summary>
+            Account Id of the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangeset.Changes">
+            <summary>
+            List of associated changes.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangeset.CheckinNotes">
+            <summary>
+            Checkin Notes for the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangeset.CollectionId">
+            <summary>
+            Collection Id of the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangeset.HasMoreChanges">
+            <summary>
+            Are more changes available.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangeset.PolicyOverride">
+            <summary>
+            Policy Override for the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangeset.TeamProjectIds">
+            <summary>
+            Team Project Ids for the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangeset.Url">
+            <summary>
+            URL to retrieve the item.
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangesetRef">
+            <summary>
+            变更集
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangesetRef.Author">
+            <summary>
+            Alias or display name of user
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangesetRef.CheckedInBy">
+            <summary>
+            Alias or display name of user
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangesetRef.CreatedDate">
+            <summary>
+            Creation date of the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangesetRef.Comment">
+            <summary>
+            Comment for the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangesetRef.CommentTruncated">
+            <summary>
+            Was the Comment result truncated?
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcChangesetRef.WorkItems">
+            <summary>
+            List of work items associated with the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcItem.Encoding">
+            <summary>
+            File encoding from database, -1 represents binary.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcItem.HashValue">
+            <summary>
+            MD5 hash as a base 64 string, applies to files only.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcItem.Size">
+            <summary>
+            The size of the file, if applicable.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcItem.Url">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcItem.Version">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcItemDescriptor.RecursionLevel">
+            <summary>
+            Enums.VersionControlRecursionType
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcItemDescriptor.VersionOption">
+            <summary>
+            Enums.TfvcVersionOption
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcItemDescriptor.VersionType">
+            <summary>
+            Enums.TfvcVersionType
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcMergeSource.IsRename">
+            <summary>
+            Indicates if this a rename source. If false, it is a merge source.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcMergeSource.ServerItem">
+            <summary>
+            The server item of the merge source
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcMergeSource.VersionFrom">
+            <summary>
+            Start of the version range
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcMergeSource.VersionTo">
+            <summary>
+            End of the version range
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcShallowBranchRef.Path">
+            <summary>
+            Path for the branch.
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Entities.TFVC.TfvcShelvesetRef">
+            <summary>
+            搁置集
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Entities.WIQL.WorkItemCommentVersionRef">
+            <summary>
+            Represents the reference to a specific version of a comment on a Work Item.
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Enums.ProjectState">
+            <summary>
+            The current state of the project.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.ProjectState.All">
+            <summary>
+            All projects regardless of state.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.ProjectState.CreatePending">
+            <summary>
+            Project has been queued for creation, but the process has not yet started.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.ProjectState.Deleted">
+            <summary>
+            Project has been deleted.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.ProjectState.Deleting">
+            <summary>
+            Project is in the process of being deleted.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.ProjectState.New">
+            <summary>
+            Project is in the process of being created.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.ProjectState.Unchanged">
+            <summary>
+            Project has not been changed.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.ProjectState.WellFormed">
+            <summary>
+            Project is completely created and ready to use.
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Enums.ProjectVisibility">
+            <summary>
+            Indicates whom the project is visible to.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.ProjectVisibility.Private">
+            <summary>
+            The project is only visible to users with explicit access.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.ProjectVisibility.Public">
+            <summary>
+            The project is visible to all.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.VersionControlRecursionType.Full">
+            <summary>
+            Return specified item and all descendants
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.VersionControlRecursionType.None">
+            <summary>
+            Only return the specified item.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.VersionControlRecursionType.OneLevel">
+            <summary>
+            Return the specified item and its direct children.
+            </summary>
+        </member>
+        <member name="F:Ban3.Sites.ViaMicrosoft.Enums.VersionControlRecursionType.OneLevelPlusNestedEmptyFolders">
+            <summary>
+            Return the specified item and its direct children, 
+            as well as recursive chains of nested child folders 
+            that only contain a single folder.
+            </summary>
+        </member>
+        <member name="M:Ban3.Sites.ViaMicrosoft.Helper.GetEnum``1(System.String)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="val">注意，区分大小写</param>
+            <returns></returns>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.ReportChangeset.ChangesetId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.ReportChangeset.Author">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.ReportChangeset.CreatedDate">
+            <summary>
+            Creation date of the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.ReportChangeset.Comment">
+            <summary>
+            Comment for the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.ReportChangeset.CommentTruncated">
+            <summary>
+            Was the Comment result truncated?
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.ReportShelveset.Owner">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.ReportShelveset.CreatedDate">
+            <summary>
+            Creation date of the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.ReportShelveset.Comment">
+            <summary>
+            Comment for the changeset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.ReportShelveset.CommentTruncated">
+            <summary>
+            Was the Comment result truncated?
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Models.SummaryTeam">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.Target.Instance">
+            <summary>
+            Azure DevOps server name ({server:port})
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.Target.Collection">
+            <summary>
+            The name of the Azure DevOps collection.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.Target.Project">
+            <summary>
+            Project ID or project name
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.Target.APIVersion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.Target.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Models.Target.Password">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Ban3.Sites.ViaMicrosoft.Request.Core.GetPortrait">
+            <summary>
+            下载头像
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Core.GetProjects.StateFilter">
+            <summary>
+            Filter on team projects in a specific team project state (default: WellFormed).
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Core.GetTeams.ExpandIdentity">
+            <summary>
+            A value indicating whether or not to
+            expand Identity information in the result WebApiTeam object.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Core.GetTeams.Mine">
+            <summary>
+            If true, then return all teams requesting user is member.
+            Otherwise return all teams user has read access.
+            </summary>
+        </member>
+        <member name="M:Ban3.Sites.ViaMicrosoft.Request.IRequest.Method">
+            <summary>
+            准备请求的方法
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Sites.ViaMicrosoft.Request.IRequest.Resource">
+            <summary>
+            准备请求的资源地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ban3.Sites.ViaMicrosoft.Request.IRequest.JsonBody">
+            <summary>
+            准备请求Body
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.MultiPageQuery.Skip">
+            <summary>
+            Number of results to skip. Default: null
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.MultiPageQuery.Top">
+            <summary>
+            The maximum number of results to return. Default: null
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.LimitTeamIds">
+            <summary>
+            限定组
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.LimitIdentityIds">
+            <summary>
+            限定创建者
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.Keyword">
+            <summary>
+            包含关键字
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.Exclude">
+            <summary>
+            不包含关键字
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.FromDate">
+            <summary>
+            起始日期
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.ToDate">
+            <summary>
+            截至日期
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.PageSize">
+            <summary>
+            页尺寸
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.PageNo">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.CommentAuthor">
+            <summary>
+            评论作者
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.Reports.DataFilter.Ref">
+            <summary>
+            报告目标，changeset/shelveset
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranch.Path">
+            <summary>
+            Full path to the branch.Default: $/ Examples: $/, $/MyProject, $/MyProject/SomeFolder.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranch.IncludeChildren">
+            <summary>
+            Return the child branches for each root branch.Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranch.IncludeParent">
+            <summary>
+            Return the parent branch, if there is one. Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranches.IncludeChildren">
+            <summary>
+            Return the child branches for each root branch.Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranches.IncludeDeleted">
+            <summary>
+            Return deleted branches.Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranches.IncludeLinks">
+            <summary>
+            Return links.Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranches.IncludeParent">
+            <summary>
+            Return the parent branch, if there is one. Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranchRefs.ScopePath">
+            <summary>
+            Full path to the branch.Default: $/ Examples: $/, $/MyProject, $/MyProject/SomeFolder.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranchRefs.IncludeDeleted">
+            <summary>
+            Return deleted branches.Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetBranchRefs.IncludeLinks">
+            <summary>
+            Return links.Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangeset.OrderBy">
+            <summary>
+            Results are sorted by ID in descending order by default. Use id asc to sort by ID in ascending order.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangeset.IncludeDetails">
+            <summary>
+            Include policy details and check-in notes in the response. Default: false
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangeset.IncludeSourceRename">
+            <summary>
+            Include renames. Default: false
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangeset.IncludeWorkItems">
+            <summary>
+            Return the child branches for each root branch.Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangeset.MaxChangeCount">
+            <summary>
+            Return deleted branches.Default: False
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangeset.MaxCommentLength">
+            <summary>
+            Include details about associated work items in the response. Default: null
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangeset.SearchCriteria">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangesets.OrderBy">
+            <summary>
+            Results are sorted by ID in descending order by default. Use id asc to sort by ID in ascending order.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangesets.MaxCommentLength">
+            <summary>
+            Include details about associated work items in the response. Default: null
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetChangesets.SearchCriteria">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItem.Path">
+            <summary>
+            Version control path of an individual item to return.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItem.Download">
+            <summary>
+            If true, create a downloadable attachment.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItem.FileName">
+            <summary>
+            file name of item returned.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItem.IncludeContent">
+            <summary>
+            Set to true to include item content when requesting json. Default is false.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItem.ScopePath">
+            <summary>
+            Version control path of a folder to return multiple items.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItem.VersionDescriptor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItems.IncludeLinks">
+            <summary>
+            True to include links.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItems.ScopePath">
+            <summary>
+            Version control path of a folder to return multiple items.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItems.RecursionLevel">
+            <summary>
+            None(just the item), or OneLevel(contents of a folder).
+            Enums.VersionControlRecursionType
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.GetItems.VersionDescriptor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsRequestData.ChangesetIds">
+            <summary>
+            List of changeset Ids.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsRequestData.CommentLength">
+            <summary>
+            Length of the comment.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsRequestData.IncludeLinks">
+            <summary>
+            Whether to include the _links field on the shallow references
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsSearchCriteria.Author">
+            <summary>
+            Alias or display name of user who made the changes
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsSearchCriteria.FollowRenames">
+            <summary>
+            Whether or not to follow renames for the given item being queried
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsSearchCriteria.FromDate">
+            <summary>
+            If provided, only include changesets created after this date (string) Think of a better name for this.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsSearchCriteria.FromId">
+            <summary>
+            If provided, only include changesets after this changesetID
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsSearchCriteria.IncludeLinks">
+            <summary>
+            Whether to include the _links field on the shallow references
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsSearchCriteria.ItemPath">
+            <summary>
+            Path of item to search under
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsSearchCriteria.ToDate">
+            <summary>
+            If provided, only include changesets created before this date (string) Think of a better name for this.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcChangesetsSearchCriteria.ToId">
+            <summary>
+            If provided, a version descriptor for the latest change list to include
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcItemRequestData.IncludeLinks">
+            <summary>
+            Whether to include the _links field on the shallow references
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcShelvesetRequestData.IncludeDetails">
+            <summary>
+            Whether to include policyOverride and notes Only applies 
+            when requesting a single deep shelveset
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcShelvesetRequestData.IncludeLinks">
+            <summary>
+            Whether to include the _links field on the shallow references. 
+            Does not apply when requesting a single deep shelveset object. 
+            Links will always be included in the deep shelveset.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcShelvesetRequestData.IncludeWorkItems">
+            <summary>
+            Whether to include workItems
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcShelvesetRequestData.MaxChangeCount">
+            <summary>
+            Max number of changes to include
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcShelvesetRequestData.MaxCommentLength">
+            <summary>
+            Max length of comment
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcShelvesetRequestData.Name">
+            <summary>
+            Shelveset's name
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcShelvesetRequestData.Owner">
+            <summary>
+            Owner's ID. Could be a name or a guid.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcVersionDescriptor.VersionOption">
+            <summary>
+            Enums.TfvcVersionOption
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Request.TFVC.TfvcVersionDescriptor.VersionType">
+            <summary>
+            Enums.TfvcVersionType
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Response.WIQL.WorkItemQueryResult.QueryType">
+            <summary>
+            The type of the query
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Response.WIQL.WorkItemQueryResult.QueryResultType">
+            <summary>
+            The result type
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Response.WIQL.WorkItemQueryResult.AsOf">
+            <summary>
+            The date the query was run in the context of.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Response.WIQL.WorkItemQueryResult.Columns">
+            <summary>
+            The columns of the query.
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaMicrosoft.Response.WIQL.WorkItemQueryResult.WorkItems">
+            <summary>
+            The work items returned by the query.
+            </summary>
+        </member>
+    </members>
+</doc>

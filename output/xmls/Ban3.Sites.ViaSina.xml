@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Ban3.Sites.ViaSina</name>
+    </assembly>
+    <members>
+        <member name="T:Ban3.Sites.ViaSina.Entries.ShareBonus">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.MarkTime">
+            <summary>
+            除权日
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.EventType">
+            <summary>
+            事件类型
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.EventSubject">
+            <summary>
+            事件主题
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.Sbonus">
+            <summary>
+            送股(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.Zbonus">
+            <summary>
+            转增(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.Xmoney">
+            <summary>
+            派息(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.Pbonus">
+            <summary>
+            配股(每十股)
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.Pprice">
+            <summary>
+            配股价格
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.Pcapital">
+            <summary>
+            基准股本
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Entries.ShareBonus.Lifted">
+            <summary>
+            解禁数量
+            </summary>
+        </member>
+        <member name="M:Ban3.Sites.ViaSina.Helper.GetResult(Ban3.Sites.ViaSina.Request.DownloadEvents)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns>Sina ShareBonus List</returns>
+        </member>
+        <member name="T:Ban3.Sites.ViaSina.Request.DownloadEvents">
+            
+        </member>
+        <member name="M:Ban3.Sites.ViaSina.Request.DownloadEvents.#ctor(System.String)">
+            
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Request.DownloadEvents.Code">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Ban3.Sites.ViaSina.Request.DownloadLifts.Code">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>
