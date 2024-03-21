@@ -1,6 +1,6 @@
 ﻿//  —————————————————————————————————————————————————————————————————————————————
 //  zhaoma@hotmail.com   2023
-// WTFPL . DRY . KISS . YAGNI
+//  WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
 namespace Ban3.Infrastructures.ServiceCentre.ServiceTags;
