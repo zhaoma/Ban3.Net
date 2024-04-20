@@ -48,7 +48,7 @@ public class Signalert
     /// </summary>
     /// <returns></returns>
     public static List<Contracts.Entities.Stock> TargetCodes()
-        => Collector.LoadAllCodes().Where(o => o.Code.EndsWith(".SH") || o.Code.EndsWith(".SZ")).ToList();
+        => Collector.LoadAllCodes();//.Where(o => o.Code.EndsWith(".SH") || o.Code.EndsWith(".SZ")).ToList();
 
     #region 复权
 
