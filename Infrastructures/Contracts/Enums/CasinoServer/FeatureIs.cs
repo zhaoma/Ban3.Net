@@ -2,15 +2,25 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues;
+namespace Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 
 /// <summary>
-/// 移动平均线,Moving Average
-/// 5日线和20日线
+/// 备注特征
 /// </summary>
-public interface IMA:IIndicatorValue
+public enum FeatureIs
 {
-    decimal Short { get; set; }
+    /// <summary>
+    /// 常规
+    /// </summary>
+    Normal,
 
-    decimal Long { get; set; }
+    /// <summary>
+    /// 上升
+    /// </summary>
+    Plus,
+
+    /// <summary>
+    /// 下降
+    /// </summary>
+    Minus
 }

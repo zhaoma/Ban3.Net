@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Ban3.Implements.Alpha.Components.CacheServer;
 
+/// <summary>
+/// 使用Runtime.Caching实现缓存组件
+/// </summary>
 public class RuntimeCaching : ICacheServer
 {
     private readonly ILoggerServer _logger;

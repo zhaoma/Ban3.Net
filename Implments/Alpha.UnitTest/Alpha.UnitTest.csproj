@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageLicenseExpression>WTFPL</PackageLicenseExpression>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Ban3.Implements.Alpha.UnitTest</AssemblyName>
+    <RootNamespace>Ban3.Implements.Alpha.UnitTest</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
+    <Title>Ban3.Implements.Alpha.UnitTest</Title>
+    <Configurations>Release;Debug</Configurations>
+    <BaseOutputPath>..\..\output</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\output\</OutputPath>
+    <DocumentationFile>..\..\output\xmls\Ban3.Implements.Alpha.xml</DocumentationFile>
+    <AllowedReferenceRelatedFileExtensions>
+      .allowedextension
+    </AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alpha\Alpha.csproj" />
+  </ItemGroup>
+</Project>

@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\..\..\Infrastr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "..\..\..\Productions\Casino\Contracts\Contracts.csproj", "{349D3484-09C9-4F45-86CC-4974E49D129C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alpha.UnitTest", "..\..\..\Implments\Alpha.UnitTest\Alpha.UnitTest.csproj", "{7273CB98-AB13-4675-AF26-D0355865DB4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{349D3484-09C9-4F45-86CC-4974E49D129C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{349D3484-09C9-4F45-86CC-4974E49D129C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{349D3484-09C9-4F45-86CC-4974E49D129C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7273CB98-AB13-4675-AF26-D0355865DB4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7273CB98-AB13-4675-AF26-D0355865DB4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7273CB98-AB13-4675-AF26-D0355865DB4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7273CB98-AB13-4675-AF26-D0355865DB4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{E10AF3C2-0563-4702-A940-AD9EF385D69F} = {3D2BB97D-999B-447F-A247-AE0BB40AF413}
 		{6CEE6D94-D57E-45A6-8A75-C9936AD85BA2} = {3D2BB97D-999B-447F-A247-AE0BB40AF413}
 		{349D3484-09C9-4F45-86CC-4974E49D129C} = {84AA83E3-02AA-4A43-A00F-A5CA4832475C}
+		{7273CB98-AB13-4675-AF26-D0355865DB4D} = {42022B22-9FDB-42FC-BFCA-1F9D6AD531C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E39B2A3-7179-4FE7-85C7-E8B5F52B6FD0}

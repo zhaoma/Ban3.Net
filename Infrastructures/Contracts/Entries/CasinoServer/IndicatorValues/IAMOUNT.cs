@@ -5,10 +5,9 @@
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues;
 
 /// <summary>
-/// 移动平均线,Moving Average
-/// 5日线和20日线
+/// 成交量5日线和20日线
 /// </summary>
-public interface IMA:IIndicatorValue
+public interface IAMOUNT
 {
     decimal Short { get; set; }
 

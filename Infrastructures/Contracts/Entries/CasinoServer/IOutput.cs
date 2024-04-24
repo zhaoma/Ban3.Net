@@ -13,6 +13,11 @@ namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 public interface IOutput
 {
     /// <summary>
+    /// AMOUNT:M5,M10
+    /// </summary>
+    IAMOUNT AMOUNT { get; set; }
+
+    /// <summary>
     /// MA:M5,M30
     /// </summary>
     IMA MA { get; set; }
@@ -23,7 +28,7 @@ public interface IOutput
     IMACD MACD { get; set; }
 
     /// <summary>
-    /// MX:RG,RGMA
+    /// MX:BUY,SELL
     /// </summary>
     IMX MX { get; set; }
 

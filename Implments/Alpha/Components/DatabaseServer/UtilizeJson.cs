@@ -8,11 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ban3.Implements.Alpha.Components.DatabaseServer;
 
+/// <summary>
+/// 使用json文件实现数据储存组件
+/// </summary>
 public class UtilizeJson : IDatabaseServer
 {
     private readonly ILoggerServer _logger;
@@ -79,6 +81,17 @@ public class UtilizeJson : IDatabaseServer
         catch (Exception ex) { _logger.Error(ex); }
 
         return new List<T>();
+    }
+
+    public T Load<T>(string key)
+    {
+        try
+        {
+            return TypeFolder<T>(typeof(T),()=> key).ReadFileAs<T>();
+        }
+        catch (Exception ex) { _logger.Error(ex); }
+
+        return default(T);
     }
 
     /*

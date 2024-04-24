@@ -8,16 +8,16 @@ using Newtonsoft.Json;
 namespace Ban3.Implements.Alpha.Entries.CasinoServer;
 
 /// <summary>
-/// 
+/// Casino市场标的信息
 /// </summary>
 public class Stock : IStock
 {
-    [JsonProperty("code")]
+    [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
     public string Code { get; set; } = string.Empty;
 
-    [JsonProperty("symbol")]
+    [JsonProperty("symbol", NullValueHandling = NullValueHandling.Ignore)]
     public string Symbol { get; set; } = string.Empty;
 
-    [JsonProperty("name")]
+    [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
     public string Name { get; set; } = string.Empty;
 }

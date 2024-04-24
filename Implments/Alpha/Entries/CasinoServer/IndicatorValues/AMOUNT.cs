@@ -10,23 +10,23 @@ using Newtonsoft.Json.Converters;
 namespace Ban3.Implements.Alpha.Entries.CasinoServer.IndicatorValues;
 
 /// <summary>
-/// 买卖线指标值
+/// 移动平均线指标值
 /// </summary>
-public class MX : IMX
+public class AMOUNT:IAMOUNT
 {
     [JsonProperty("index", NullValueHandling = NullValueHandling.Ignore)]
     [JsonConverter(typeof(StringEnumConverter))]
-    public IndexIs Index { get; set; } = IndexIs.MX;
+    public IndexIs Index { get; set; } = IndexIs.AMOUNT;
 
     /// <summary>
-    /// 买线
+    /// 短期,5日线
     /// </summary>
-    [JsonProperty("buy", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal Buy { get; set; }
+    [JsonProperty("short", NullValueHandling = NullValueHandling.Ignore)]
+    public decimal Short { get; set; }
 
     /// <summary>
-    /// 卖线
+    /// 长期,20日线
     /// </summary>
-    [JsonProperty("sell", NullValueHandling = NullValueHandling.Ignore)]
-    public decimal Sell { get; set; }
+    [JsonProperty("long", NullValueHandling = NullValueHandling.Ignore)]
+    public decimal Long { get; set; }
 }

@@ -20,7 +20,7 @@ public interface IResult
     /// <summary>
     /// 笔记集合
     /// </summary>
-    List<IRemark> Remarks { get; set; }
+    List<IRemark>? Remarks { get; set; }
 
     /// <summary>
     /// 当前建议
@@ -30,5 +30,5 @@ public interface IResult
     /// <summary>
     /// 笔记文本
     /// </summary>
-    string Note { get; set; }
+    List<INotice>? Notices { get; set; }
 }

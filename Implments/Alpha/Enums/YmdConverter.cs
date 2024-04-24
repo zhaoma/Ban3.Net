@@ -2,15 +2,13 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues;
+using Ban3.Infrastructures.Common.Models;
 
-/// <summary>
-/// 移动平均线,Moving Average
-/// 5日线和20日线
-/// </summary>
-public interface IMA:IIndicatorValue
+namespace Ban3.Implements.Alpha.Enums;
+
+public class YmdConverter : DateTimeConverter
 {
-    decimal Short { get; set; }
-
-    decimal Long { get; set; }
+    public YmdConverter() : base("yyyyMMdd")
+    {
+    }
 }

@@ -5,6 +5,7 @@
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues;
 
 /// <summary>
+/// 买卖线
 /// W1:=(2*CLOSE+HIGH+LOW)/4;
 /// W2:=EMA(W1,4);
 /// W3:=EMA(W2,4);

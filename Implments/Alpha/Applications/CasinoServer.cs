@@ -11,17 +11,17 @@ using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using Ban3.Sites.ViaSina;
 using Ban3.Sites.ViaTushare;
-using log4net.Repository.Hierarchy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ban3.Implements.Alpha.Applications;
 
-public class CasinoServer:ICasinoServer
+/// <summary>
+/// 股市服务
+/// </summary>
+public class CasinoServer : ICasinoServer
 {
     private readonly ICacheServer _cacheServer;
     private readonly IChartServer _chartServer;
@@ -32,11 +32,11 @@ public class CasinoServer:ICasinoServer
     private readonly IMessageServer _messageServer;
 
     public CasinoServer(
-        ICacheServer cacheServer, 
+        ICacheServer cacheServer,
         IChartServer chartServer,
         IDatabaseServer databaseServer,
-        IHttpServer httpServer, 
-        ILoggerServer logger,        
+        IHttpServer httpServer,
+        ILoggerServer logger,
         IMailServer mailServer,
         IMessageServer messageServer)
     {
@@ -142,25 +142,7 @@ public class CasinoServer:ICasinoServer
 
         _databaseServer.SaveList<Price>(dailyPrices, () => $"{stock.Code}.{CycleIs.Daily}");
 
-        if (dailyPrices != null && dailyPrices.Any())
-        {
-            var weekly = new List<Price>();
-
-            var monthly = new List<Price>();
-
-            for (int i = 1; i <= dailyPrices.Count; i++)
-            {
-                AppendLatest(weekly,dailyPrices[i - 1], CycleIs.Weekly);
-
-                AppendLatest(monthly,dailyPrices[i - 1], CycleIs.Monthly);
-            }
-
-            _databaseServer.SaveList<Price>(weekly, () => $"{stock.Code}.{CycleIs.Weekly}");
-
-            _databaseServer.SaveList<Price>(monthly, () => $"{stock.Code}.{CycleIs.Monthly}");
-        }
-
-        return Task.FromResult( true );
+        return Task.FromResult(true);
     }
 
     private Price ReinstateOnePrice(List<Reinstate>? seeds, Price price)
@@ -168,7 +150,7 @@ public class CasinoServer:ICasinoServer
         var newPrice = new Price
         {
             Code = price.Code,
-            TradeDate = price.TradeDate,
+            MarkTime = price.MarkTime,
             Change = price.Change,
             ChangePercent = price.ChangePercent,
             Volumn = price.Volumn,
@@ -187,13 +169,13 @@ public class CasinoServer:ICasinoServer
             {
                 foreach (var s in seeds)
                 {
-                    if (s.MarkTime.Subtract(price.TradeDate.ToDateTimeEx()).TotalDays > 0)
+                    if (s.MarkTime.Subtract(price.MarkTime).TotalDays > 0)
                     {
-                        newPrice.Open =Math.Round(price.Open / s.Factor, 2);
-                        newPrice.High =Math.Round(price.High / s.Factor, 2);
+                        newPrice.Open = Math.Round(price.Open / s.Factor, 2);
+                        newPrice.High = Math.Round(price.High / s.Factor, 2);
                         newPrice.Low = Math.Round(price.Low / s.Factor, 2);
                         newPrice.Close = Math.Round(price.Close / s.Factor, 2);
-                        newPrice.PreClose =Math.Round(price.PreClose / s.Factor, 2);
+                        newPrice.PreClose = Math.Round(price.PreClose / s.Factor, 2);
                     }
                 }
             }
@@ -206,64 +188,16 @@ public class CasinoServer:ICasinoServer
         return newPrice;
     }
 
-    private void AppendLatest(List<Price> prices, Price addPrice, CycleIs cycle)
-    {
-        Price price = new Price
-        {
-            Code = addPrice.Code,
-            MarkTime = addPrice.MarkTime,
-            Open = addPrice.Open,
-            High = addPrice.High,
-            Low = addPrice.Low,
-            Close = addPrice.Close,
-            PreClose = addPrice.PreClose,
-            Volumn = addPrice.Volumn,
-            Amount = addPrice.Amount
-        };
-        if (!prices.Any())
-        {
-            prices.Add(price);
-            return;
-        }
 
-        Price price2 = prices.Last();
-        string strValue = End(price2.MarkTime, cycle).ToYmd();
-        string strValue2 = End(price.MarkTime, cycle).ToYmd();
-        if (strValue.ToInt().Equals(strValue2.ToInt()))
-        {
-            price2.Close = price.Close;
-            price2.High = Math.Max(price2.High, price.High);
-            price2.Low = Math.Min(price2.Low, price.Low);
-            price2.Volumn += price.Volumn;
-            price2.Amount += price.Amount;
-            price2.Change = price2.Close - price2.PreClose;
-            price2.ChangePercent = ((price2.PreClose != 0.0M) ? (Math.Round((price2.Close - price2.PreClose) / price2.PreClose * 100.0M, 2)) : 0M);
-        }
-        else
-        {
-            prices.Add(price);
-        }
-    }
-
-    private DateTime End(DateTime begin, CycleIs stockCycle)
-    {
-        if (stockCycle != CycleIs.Weekly)
-        {
-            return begin.FindMonthEnd();
-        }
-
-        return begin.FindWeekEnd();
-    }
-
-    public List<IPrice> LoadPrices(IStock stock,CycleIs? cycle)
+    public List<IPrice> LoadPrices(IStock stock, CycleIs? cycle)
     {
         var key = cycle != null ? stock.Code : $"{stock.Code}.{cycle}";
-        return _databaseServer.LoadList<IPrice>(typeof(Price),() => key);
+        return _databaseServer.LoadList<IPrice>(typeof(Price), () => key);
     }
 
-    public Task<IResult>? Calculate(IStock stock)
+    public Task<IResult> Calculate(IStock stock)
     {
-       var dailyPrices= _databaseServer.LoadList<Price>(typeof(Price), () => $"{stock.Code}.{CycleIs.Daily}");
+        var dailyPrices = _databaseServer.LoadList<Price>(typeof(Price), () => $"{stock.Code}.{CycleIs.Daily}");
 
         if (dailyPrices == null || !dailyPrices.Any())
         {
@@ -274,82 +208,49 @@ public class CasinoServer:ICasinoServer
         var result = new Result
         {
             Stock = stock,
-            Suggest=SuggestIs.Skip
+            Suggest = SuggestIs.Skip,
+            Remarks = new IndicatorParameter().GenerateRemarks(dailyPrices)
         };
 
-        var weekly = new List<Price>();
-
-        var monthly = new List<Price>();
-
-        for (int i = 1; i <= dailyPrices.Count; i++)
-        {
-            AppendLatest(weekly, dailyPrices[i - 1], CycleIs.Weekly);
-
-            AppendLatest(monthly, dailyPrices[i - 1], CycleIs.Monthly);
-
-            result.Remarks.Add(
-                new Remark
-                {
-                    DayPrice = dailyPrices[i - 1],
-                    Suggest = SuggestIs.Skip,
-                    Outputs = new Dictionary<CycleIs, IOutput> {
-                        OneDay(),
-                    }
-                }) ;
-        }
+        _databaseServer.Create<Result>(result, (_) => stock.Code);
 
         return Task.FromResult((IResult)result);
     }
 
-    private Output OneDay(List<Price> daily,int index)
-    {
-        return new Output { 
-        Keys=new List<string>(),
-        MA=
-        };
-    }
-
-    /// <summary>
-    /// RefMACD
-    /// </summary>
-    /// <param name="current"></param>
-    /// <param name="yest"></param>
-    /// <param name="days"></param>
-    /// <param name="round"></param>
-    /// <returns></returns>
-    private decimal EMA(decimal current, decimal yest, int days, int round = 3)
-    {
-        return Math.Round((current * 2.0M + yest * (decimal)(days - 1)) / (decimal)(days + 1), round);
-    }
-
-    private decimal MA(List<Price> prices,Func<Price,decimal> selectValue, int current, int N)
-    {
-        decimal num = 0.0M;
-        int num2 = 0;
-        for (int i = 0; i < N; i++)
-        {
-            if (current > i)
-            {
-                num2++;
-                num += selectValue(prices[Math.Max(0, current - i)]);
-            }
-        }
-
-        return Math.Round(num / (decimal)num2, 0);
-    }
-
     public IResult LoadResult(IStock stock)
-    {
-
-    }
+        => _databaseServer.Load<Result>(stock.Code);
 
     public Task<bool> GenerateSummary()
     {
+        try
+        {
+            var summary = new Summary { MarkTime = DateTime.Now, Results = new List<IResult>() };
 
+            var stocks = LoadTargets();
+
+            foreach (var stock in stocks)
+            {
+                var r = LoadResult(stock);
+                summary.Results.Add(new Result
+                {
+                    Stock = r.Stock,
+                    Suggest = r.Suggest,
+                    Notices = r.Notices,
+                });
+            }
+
+            _databaseServer.Create<Summary>(summary, (_) => "all");
+
+            return Task.FromResult(true);
+        }
+        catch (Exception ex)
+        {
+            _logger.Error(ex);
+        }
+
+        return Task.FromResult(false);
     }
 
     public ISummary LoadSummary()
-    {
-
-    }
+        => _databaseServer.Load<Summary>("all");
 }

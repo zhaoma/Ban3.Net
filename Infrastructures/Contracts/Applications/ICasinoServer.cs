@@ -3,6 +3,7 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
+using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -38,7 +39,7 @@ public interface ICasinoServer
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    List<IPrice> LoadPrices(IStock target);
+    List<IPrice> LoadPrices(IStock target, CycleIs? cycle);
 
     /// <summary>
     /// 计算指标与特征值

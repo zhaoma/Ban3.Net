@@ -24,6 +24,8 @@ public interface IDatabaseServer
 
     List<T> LoadList<T>(Type type, Func<string>? key=null);
 
+    T Load<T>(string key);
+
     /// <summary>
     /// 创建记录
     /// </summary>

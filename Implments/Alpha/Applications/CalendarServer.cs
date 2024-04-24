@@ -9,6 +9,9 @@ using System.Text;
 
 namespace Ban3.Implements.Alpha.Applications;
 
+/// <summary>
+/// 日历服务
+/// </summary>
 public class CalendarServer:ICalendarServer
 {
 }

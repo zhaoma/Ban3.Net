@@ -15,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace Ban3.Implements.Alpha.Components.HttpServer;
 
+/// <summary>
+/// 使用Net.Http实现数据爬虫服务
+/// </summary>
 public class UtilizeNetHttp : IHttpServer
 {
     private readonly ILoggerServer _logger;

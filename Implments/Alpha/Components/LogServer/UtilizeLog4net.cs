@@ -9,7 +9,7 @@ using System;
 namespace Ban3.Implements.Alpha.Components.LogServer;
 
 /// <summary>
-/// 用Log4net记录日志
+/// 用Log4net实现日志组件
 /// </summary>
 public class UtilizeLog4net:ILoggerServer
 {

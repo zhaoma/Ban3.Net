@@ -11,36 +11,36 @@ using System.Collections.Generic;
 namespace Ban3.Implements.Alpha.Entries.CasinoServer.IndicatorParameters;
 
 /// <summary>
-/// 买卖线参数
+/// 成交量参数
 /// </summary>
-public class MX : IIndicatorParameter
+public class AMOUNT : IIndicatorParameter
 {
-    public MX() { }
+    public AMOUNT() { }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="shortPeriod"></param>
     /// <param name="longPeriod"></param>
-    public MX(int n, int m)
+    public AMOUNT(int shortPeriod, int longPeriod)
     {
         Parameters = new Dictionary<string, int>
         {
-            {"N",n },
-            {"M",m }
+            {"SHORT",shortPeriod },
+            {"LONG",longPeriod }
         };
     }
 
     [JsonProperty("index", NullValueHandling = NullValueHandling.Ignore)]
     [JsonConverter(typeof(StringEnumConverter))]
-    public IndexIs Index { get; set; } = IndexIs.MX;
+    public IndexIs Index { get; set; } = IndexIs.MA;
 
     [JsonProperty("parameters", NullValueHandling = NullValueHandling.Ignore)]
     public Dictionary<string, int> Parameters { get; set; }
         = new Dictionary<string, int>
         {
-            {"N",2 },
-            {"M",4 }
+            {"SHORT",5 },
+            {"LONG",10 }
         };
 
 

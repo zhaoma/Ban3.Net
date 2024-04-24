@@ -10,6 +10,11 @@ namespace Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 public enum IndexIs
 {
     /// <summary>
+    /// 成交量
+    /// </summary>
+    AMOUNT,
+
+    /// <summary>
     /// 收盘价均线
     /// </summary>
     MA,
