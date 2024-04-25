@@ -6,7 +6,7 @@ using Ban3.Infrastructures.Components.Entries.MessageServer;
 using System;
 using System.Threading.Tasks;
 
-namespace Ban3.Infrastructures.Components.Services;
+namespace Ban3.Infrastructures.Components;
 
 /// <summary>
 /// 消息服务

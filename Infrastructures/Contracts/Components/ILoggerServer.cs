@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Ban3.Infrastructures.Components.Services;
+namespace Ban3.Infrastructures.Components;
 
 /// <summary>
 /// 日志记录服务

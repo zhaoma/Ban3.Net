@@ -5,7 +5,7 @@
 using Ban3.Infrastructures.Components.Entries.MailServer;
 using System.Threading.Tasks;
 
-namespace Ban3.Infrastructures.Components.Services;
+namespace Ban3.Infrastructures.Components;
 
 /// <summary>
 /// 邮件发送服务

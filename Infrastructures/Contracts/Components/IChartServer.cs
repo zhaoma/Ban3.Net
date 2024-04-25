@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ban3.Infrastructures.Contracts.Components;
+namespace Ban3.Infrastructures.Components;
 
 public interface IChartServer
 {

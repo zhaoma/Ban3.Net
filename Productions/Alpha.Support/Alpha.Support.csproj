@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Ban3.Implements.Alpha.Support</AssemblyName>
+    <RootNamespace>Ban3.Implements.Alpha.Support</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <DebugType>embedded</DebugType>
+    <Title>Ban3.Implements.Alpha.Support</Title>
+    <Version>1.1.1</Version>
+    <Authors>zhaoma</Authors>
+    <Company>BAN3</Company>
+    <Description>Alpha.Support</Description>
+    <PackageIcon>icon.png</PackageIcon>
+    <AssemblyVersion>1.1.1.1</AssemblyVersion>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <Configurations>Release;Debug</Configurations>
+    <BaseOutputPath>..\..\output</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\output\</OutputPath>
+    <DocumentationFile>..\..\output\xmls\Ban3.Implements.Alpha.Support.xml</DocumentationFile>
+    <AllowedReferenceRelatedFileExtensions>
+      .allowedextension
+    </AllowedReferenceRelatedFileExtensions>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <ProjectReference Include="..\..\Implments\Alpha\Alpha.csproj" />
+    <None Update="readme.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
