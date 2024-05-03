@@ -6,6 +6,9 @@ using Autofac;
 
 namespace Ban3.Implements.Alpha;
 
+/// <summary>
+/// 
+/// </summary>
 public static class Settings
 {
     public static IContainer? Instance;
@@ -19,7 +22,7 @@ public static class Settings
         Instance = builder.Build();
     }
 
-    private static void RegisterImplements(this ContainerBuilder builder)
+    public static void RegisterImplements(this ContainerBuilder builder)
     {
         builder.RegisterType<Applications.CasinoServer>()
             .As<Infrastructures.Contracts.Applications.ICasinoServer>()
@@ -27,6 +30,10 @@ public static class Settings
 
         builder.RegisterType<Components.CacheServer.RuntimeCaching>()
             .As<Infrastructures.Components.ICacheServer>()
+            .SingleInstance();
+
+        builder.RegisterType<Components.ChartServer.UtilizeEcharts>()
+            .As<Infrastructures.Components.IChartServer>()
             .SingleInstance();
 
         builder.RegisterType<Components.DatabaseServer.UtilizeJson>()
@@ -40,5 +47,15 @@ public static class Settings
         builder.RegisterType<Components.LogServer.UtilizeLog4net>()
             .As<Infrastructures.Components.ILoggerServer>()
             .SingleInstance();
+
+        builder.RegisterType<Components.MailServer.UtilizeOutlook>()
+            .As<Infrastructures.Components.IMailServer>()
+            .SingleInstance();
+
+        builder.RegisterType<Components.MessageServer.UtilizeSignalR>()
+            .As<Infrastructures.Components.IMessageServer>()
+            .SingleInstance();
     }
+
+    public static T Resolve<T>() => Instance.Resolve<T>();
 }

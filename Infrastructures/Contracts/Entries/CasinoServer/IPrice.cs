@@ -19,7 +19,12 @@ public interface IPrice
     /// <summary>
     /// 行情时间(日，周月最后交易日)
     /// </summary>
-    DateTime MarkTime { get; set; }
+    DateTime MarkTime { get;  }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    string TradeDate { get; set; }
 
     /// <summary>
     /// 前收
@@ -45,7 +50,9 @@ public interface IPrice
     /// 最低价
     /// </summary>
     decimal Low { get; set; }
+    decimal Change { get; set; }
 
+    decimal ChangePercent { get; set; }
     /// <summary>
     /// 交易量
     /// </summary>

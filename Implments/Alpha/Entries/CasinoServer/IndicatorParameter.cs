@@ -39,7 +39,7 @@ public class IndicatorParameter
 
     public List<IRemark> GenerateRemarks(List<Price> dailyPrices)
     {
-        var remarks=new List<IRemark>();
+        var remarks = new List<IRemark>();
 
         var weekly = new List<Price>();
 
@@ -49,14 +49,14 @@ public class IndicatorParameter
 
         for (int i = 0; i < dailyPrices.Count; i++)
         {
-            weekly.AppendLatest(dailyPrices[i - 1], CycleIs.Weekly);
+            weekly.AppendLatest(dailyPrices[i], CycleIs.Weekly);
 
-            monthly.AppendLatest(dailyPrices[i - 1], CycleIs.Monthly);
+            monthly.AppendLatest(dailyPrices[i], CycleIs.Monthly);
 
             remarks.Add(
                 new Remark
                 {
-                    DayPrice = dailyPrices[i - 1],
+                    DayPrice = dailyPrices[i],
                     Suggest = SuggestIs.Skip,
                     Outputs = new Dictionary<CycleIs, IOutput> {
                         {CycleIs.Daily,dailyIndex[i]},
@@ -73,7 +73,7 @@ public class IndicatorParameter
     {
         var outputs = prices.Select((p, index) => new Output
         {
-            AMOUNT=new IndicatorValues.AMOUNT
+            AMOUNT = new IndicatorValues.AMOUNT
             {
                 Short = prices.MA((p) => p.Amount, index, AMOUNT.Parameters["SHORT"]),
                 Long = prices.MA((p) => p.Amount, index, AMOUNT.Parameters["LONG"])
@@ -97,9 +97,9 @@ public class IndicatorParameter
         var mx2 = mx1.Select((p, index) => mx1.EMA(index, MX.Parameters["M"])).ToList();
         var mx3 = mx2.Select((p, index) => mx2.EMA(index, MX.Parameters["M"])).ToList();
 
-        var buy = mx3.Select((p, index) => index > 0 ? (mx3[index] - mx3[index - 1]) / mx3[index - 1] * 100m : 0).ToList();
+        var buy = mx3.Select((p, index) => index > 0 && mx3[index - 1] > 0 ? (mx3[index] - mx3[index - 1]) / mx3[index - 1] * 100m : 0).ToList();
 
-        for (var i=0;i<outputs.Count; i++)
+        for (var i = 0; i < outputs.Count; i++)
         {
             outputs[i].MACD.DEA = outputs.Select(o => o.MACD.DIF).ToList().EMA(i, MACD.Parameters["MID"]);
             outputs[i].MACD.Histogram = outputs[i].MACD.DIF - outputs[i].MACD.DEA;

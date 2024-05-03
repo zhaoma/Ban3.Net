@@ -2,28 +2,18 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Contracts.Applications;
+using Ban3.Infrastructures.Components;
+using Ban3.Infrastructures.Components.Entries.MailServer;
+using System.Threading.Tasks;
 
-namespace Ban3.Implements.Alpha.Support;
+namespace Ban3.Implements.Alpha.Components.MailServer;
 
 /// <summary>
 /// 
 /// </summary>
-public class Program
+public class UtilizeOutlook:IMailServer
 {
-    static void Main(string[] args)
-    {
-        Console.WriteLine("HELLO");
+    public bool Send(IAccount account, IMail mail) {  return false; }
 
-        Settings.Init();
-
-        var casino=Settings.Resolve<ICasinoServer>();
-
-        var stocks=casino.LoadStocks();
-
-        var now = DateTime.Now;
-        casino.DailyTask(stocks);
-
-        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalMinutes} minutes elapsed.");
-    }
+    public Task<bool> SendAsync(IAccount account, IMail mail) { return Task.FromResult(true); }
 }

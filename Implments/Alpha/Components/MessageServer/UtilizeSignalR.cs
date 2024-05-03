@@ -2,28 +2,19 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Contracts.Applications;
+using Ban3.Infrastructures.Components;
+using Ban3.Infrastructures.Components.Entries.MessageServer;
+using System;
+using System.Threading.Tasks;
 
-namespace Ban3.Implements.Alpha.Support;
+namespace Ban3.Implements.Alpha.Components.MessageServer;
 
 /// <summary>
 /// 
 /// </summary>
-public class Program
+public class UtilizeSignalR:IMessageServer
 {
-    static void Main(string[] args)
-    {
-        Console.WriteLine("HELLO");
+    public Task<bool> Publish(INotify notify) {  return Task.FromResult(true); }
 
-        Settings.Init();
-
-        var casino=Settings.Resolve<ICasinoServer>();
-
-        var stocks=casino.LoadStocks();
-
-        var now = DateTime.Now;
-        casino.DailyTask(stocks);
-
-        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalMinutes} minutes elapsed.");
-    }
+    public Task<bool> Subscribe(Action<INotify> action) { return Task.FromResult(true); }
 }

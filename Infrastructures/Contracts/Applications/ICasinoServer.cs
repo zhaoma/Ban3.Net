@@ -15,41 +15,104 @@ namespace Ban3.Infrastructures.Contracts.Applications;
 public interface ICasinoServer
 {
     /// <summary>
+    /// 每日任务
+    /// </summary>
+    void DailyTask(List<IStock> stocks);
+
+    /// <summary>
+    /// 标的任务
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    bool OnesTask(IStock stock);
+
+    /// <summary>
     /// 准备标的
     /// </summary>
-    /// <param name="withEvents">下载事件数据（周期长）</param>
     /// <returns></returns>
-    Task<bool> PrepareAsync(bool withEvents);
+    bool PrepareStocks();
 
     /// <summary>
     /// 获取标的
     /// </summary>
     /// <returns></returns>
-    List<IStock> LoadTargets();
+    List<IStock> LoadStocks();
 
     /// <summary>
-    /// 收集行情数据
+    /// 准备所有标的分红解禁事件信息
+    /// </summary>
+    void PrepareAllBonus();
+
+    /// <summary>
+    /// 准备标的分红解禁事件信息
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    bool PrepareOnesBonus(IStock stock);
+
+    /// <summary>
+    /// 获取标的分红解禁事件信息
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    List<IBonus> LoadOnesBonus(IStock stock);
+
+    /// <summary>
+    /// 收集所有标的行情数据
+    /// </summary>
+    /// <returns></returns>
+    bool CollectAllPrices();
+
+    /// <summary>
+    /// 收集标的行情数据
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    Task<bool> CollectPrices(IStock target);
+    bool CollectOnesPrices(IStock target);
 
     /// <summary>
     /// 获取价格数据
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    List<IPrice> LoadPrices(IStock target, CycleIs? cycle);
+    List<IPrice> LoadOnesPrices(IStock target, CycleIs? cycle);
 
     /// <summary>
-    /// 计算指标与特征值
+    /// 计算所有标的复权因子
     /// </summary>
-    /// <param name="target"></param>
     /// <returns></returns>
-    Task<IResult> Calculate(IStock target);
+    bool CalculateAllSeeds();
 
     /// <summary>
-    /// 获取指标与特征是
+    /// 计算标的复权因子
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    bool CalculateOnesSeeds(IStock stock);
+
+    /// <summary>
+    /// 获取复权因子
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    List<IReinstate> LoadOnesSeeds(IStock stock);
+
+    /// <summary>
+    /// 计算标的复权价格
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    bool ReinstateOnesPrices(IStock stock);
+
+    /// <summary>
+    /// 分析标的指标与特征值
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    bool AnalyzeOne(IStock stock);
+
+    /// <summary>
+    /// 获取标的指标与特征值
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>

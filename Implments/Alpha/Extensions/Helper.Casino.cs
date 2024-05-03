@@ -21,7 +21,7 @@ public static partial class Helper
         Price price = new Price
         {
             Code = addPrice.Code,
-            MarkTime = addPrice.MarkTime,
+            TradeDate = addPrice.MarkTime.ToYmd(),
             Open = addPrice.Open,
             High = addPrice.High,
             Low = addPrice.Low,
@@ -81,7 +81,7 @@ public static partial class Helper
             counter += i - start;
         }
 
-        return Math.Round(total / counter, 3);
+        return counter > 0 ? Math.Round(total / counter, 3) : 0;
     }
 
     public static decimal EMA(
@@ -99,7 +99,7 @@ public static partial class Helper
             counter += i - start;
         }
 
-        return Math.Round(total / counter, 3);
+        return counter > 0 ? Math.Round(total / counter, 3) : 0;
     }
 
     public static decimal MA(
@@ -118,7 +118,7 @@ public static partial class Helper
             counter++;
         }
 
-        return Math.Round(total / counter, 3);
+        return counter > 0 ? Math.Round(total / counter, 3) : 0;
     }
 
     public static decimal MA(
@@ -136,7 +136,7 @@ public static partial class Helper
             counter++;
         }
 
-        return Math.Round(total / counter, 3);
+        return counter > 0 ? Math.Round(total / counter, 3) : 0;
     }
 
 

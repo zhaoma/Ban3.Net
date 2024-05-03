@@ -31,12 +31,15 @@ public class Price : IPrice
     [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
     public string Code { get; set; } = string.Empty;
 
+    [JsonProperty("tradeDate", NullValueHandling = NullValueHandling.Ignore)]
+    public string TradeDate { get; set; } = string.Empty;
+
     /// <summary>
     /// 行情时间
     /// </summary>
     [JsonProperty("markTime", NullValueHandling = NullValueHandling.Ignore)]
     [JsonConverter(typeof(YmdConverter))]
-    public DateTime MarkTime { get; set; }
+    public DateTime MarkTime { get => TradeDate.ToDateTimeEx(); }
 
     /// <summary>
     /// 开盘价
@@ -106,7 +109,7 @@ public class Price : IPrice
     public Price(List<string> row)
     {
         Code = row[0];
-        MarkTime = row[1].ToDateTimeEx();
+        TradeDate = row[1];
         Open = row[2].ToDecimal();
         High = row[3].ToDecimal();
         Low = row[4].ToDecimal();

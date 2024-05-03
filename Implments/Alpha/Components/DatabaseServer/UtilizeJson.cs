@@ -19,14 +19,21 @@ public class UtilizeJson : IDatabaseServer
 {
     private readonly ILoggerServer _logger;
     private string EntityFolder<T>(T entity, Func<T, string> key)
-        => TypeFolder<T>(typeof(T), () => key(entity));
+        => TypeFolder(typeof(T), () => key(entity));
 
-    private string TypeFolder<T>(Type type, Func<string>? key = null)
+    private string TypeFolder(Type type, Func<string>? key = null)
     {
         var folder = Path.Combine(Infrastructures.Common.Config.LocalStorage?.RootPath, type.Name);
-        return key == null
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
+
+        var fullPath= key == null
             ? Path.Combine(folder, "all.json")
             : Path.Combine(folder, $"{key()}.json");
+
+        return fullPath;
     }
 
     public UtilizeJson(ILoggerServer logger)
@@ -63,7 +70,7 @@ public class UtilizeJson : IDatabaseServer
     {
         try
         {
-            TypeFolder<T>(typeof(T), key)
+            TypeFolder(typeof(T), key)
         .WriteFile(entities.ObjToJson());
             return true;
         }
@@ -76,7 +83,7 @@ public class UtilizeJson : IDatabaseServer
     {
         try
         {
-            return TypeFolder<T>(type,key).ReadFileAs<List<T>>();
+            return TypeFolder(type,key).ReadFileAs<List<T>>()!;
         }
         catch (Exception ex) { _logger.Error(ex); }
 
@@ -87,7 +94,7 @@ public class UtilizeJson : IDatabaseServer
     {
         try
         {
-            return TypeFolder<T>(typeof(T),()=> key).ReadFileAs<T>();
+            return TypeFolder(typeof(T),()=> key).ReadFileAs<T>()!;
         }
         catch (Exception ex) { _logger.Error(ex); }
 

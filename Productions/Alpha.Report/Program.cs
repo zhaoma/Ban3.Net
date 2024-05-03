@@ -1,15 +1,28 @@
+//  ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.StaticFiles;
 
 namespace Ban3.Implements.Alpha.Report;
 
+/// <summary>
+/// 
+/// </summary>
 public class Program
 {
     public static void Main(string[] args)
     {
-
         #region  web app run
 
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureContainer<ContainerBuilder>(
+            build => build.RegisterImplements()
+            );
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddCors(options =>
