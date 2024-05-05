@@ -2,34 +2,38 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
-using System;
+using Ban3.Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues;
+using System.Collections.Generic;
 
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// Casino指标值,关键特征
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class Output
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// AMOUNT:M5,M10
+    /// </summary>
+    public AMOUNT AMOUNT { get; set; }
 
     /// <summary>
-    /// 
+    /// MA:M5,M30
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
+    public MA MA { get; set; }
 
     /// <summary>
-    /// 
+    /// MACD:DIF,DEA,MACD
     /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
+    public MACD MACD { get; set; }
 
     /// <summary>
-    /// 
+    /// MX:BUY,SELL
     /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public MX MX { get; set; }
+
+    /// <summary>
+    /// 关键特征
+    /// </summary>
+    public List<string> Keys { get; set; }
 }

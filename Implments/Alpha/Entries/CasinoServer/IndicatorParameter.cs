@@ -17,18 +17,25 @@ namespace Ban3.Implements.Alpha.Entries.CasinoServer;
 /// </summary>
 public class IndicatorParameter
 {
+    /// see interface
     [JsonProperty("amount", NullValueHandling = NullValueHandling.Ignore)]
     public AMOUNT AMOUNT { get; set; }
 
+    /// see interface
     [JsonProperty("ma", NullValueHandling = NullValueHandling.Ignore)]
     public MA MA { get; set; }
 
+    /// see interface
     [JsonProperty("macd", NullValueHandling = NullValueHandling.Ignore)]
     public MACD MACD { get; set; }
 
+    /// see interface
     [JsonProperty("mx", NullValueHandling = NullValueHandling.Ignore)]
     public MX MX { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public IndicatorParameter()
     {
         AMOUNT = new AMOUNT();
@@ -37,9 +44,14 @@ public class IndicatorParameter
         MX = new MX();
     }
 
-    public List<IRemark> GenerateRemarks(List<Price> dailyPrices)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dailyPrices"></param>
+    /// <returns></returns>
+    public List<Remark> GenerateRemarks(List<Price> dailyPrices)
     {
-        var remarks = new List<IRemark>();
+        var remarks = new List<Remark>();
 
         var weekly = new List<Price>();
 
@@ -58,11 +70,9 @@ public class IndicatorParameter
                 {
                     DayPrice = dailyPrices[i],
                     Suggest = SuggestIs.Skip,
-                    Outputs = new Dictionary<CycleIs, IOutput> {
-                        {CycleIs.Daily,dailyIndex[i]},
-                        {CycleIs.Weekly,Serials(weekly).Last() },
-                        {CycleIs.Monthly,Serials(monthly).Last() }
-                    }
+                    DayOutput=dailyIndex[i],
+                    WeekOutput=Serials(weekly).Last(),
+                    MonthOutput=Serials(monthly).Last()
                 });
         }
 
@@ -73,22 +83,22 @@ public class IndicatorParameter
     {
         var outputs = prices.Select((p, index) => new Output
         {
-            AMOUNT = new IndicatorValues.AMOUNT
+            AMOUNT = new Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues.AMOUNT
             {
                 Short = prices.MA((p) => p.Amount, index, AMOUNT.Parameters["SHORT"]),
                 Long = prices.MA((p) => p.Amount, index, AMOUNT.Parameters["LONG"])
             },
-            MA = new IndicatorValues.MA
+            MA = new Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues.MA
             {
                 Short = prices.MA((p) => p.Close, index, MA.Parameters["SHORT"]),
                 Long = prices.MA((p) => p.Close, index, MA.Parameters["LONG"])
             },
-            MACD = new IndicatorValues.MACD
+            MACD = new Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues.MACD
             {
                 DIF = prices.EMA((p) => p.Close, index, MACD.Parameters["SHORT"])
                     - prices.EMA((p) => p.Close, index, MACD.Parameters["LONG"])
             },
-            MX = new IndicatorValues.MX()
+            MX = new Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues.MX()
         }).ToList();
 
         var mxs = prices.Select((p) => (2 * p.Close + p.High + p.Low) / 4).ToList();

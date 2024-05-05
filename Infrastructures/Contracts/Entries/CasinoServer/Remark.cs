@@ -2,34 +2,37 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
-using System;
+using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// Casino笔记
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class Remark
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// 参考价格
+    /// </summary>
+    public Price DayPrice { get; set; }
 
     /// <summary>
-    /// 
+    /// 日线价格，指标值,关键特征
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
+    public Output DayOutput { get; set; }
 
     /// <summary>
-    /// 
+    /// 周线价格，指标值,关键特征
     /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
+    public Output WeekOutput { get; set; }
 
     /// <summary>
-    /// 
+    /// 月线价格，指标值,关键特征
     /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public Output MonthOutput { get; set; }
+
+    /// <summary>
+    /// 买卖建议
+    /// </summary>
+    public SuggestIs Suggest { get; set; }
 }

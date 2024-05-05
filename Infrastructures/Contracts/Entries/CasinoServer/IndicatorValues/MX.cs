@@ -2,28 +2,26 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components.Entries.MessageServer;
-using System;
-using System.Threading.Tasks;
-
-namespace Ban3.Infrastructures.Components;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues;
 
 /// <summary>
-/// 消息服务
+/// 买卖线
+/// W1:=(2*CLOSE+HIGH+LOW)/4;
+/// W2:=EMA(W1,4);
+/// W3:=EMA(W2,4);
+/// W4:=EMA(W3,4);
+/// Buy:(W4-REF(W4,1))/REF(W4,1)*100,COLORRED;
+/// Sell:MA(RG,2),COLORGREEN;
 /// </summary>
-public interface IMessageServer
+public class MX : IndicatorValue
 {
     /// <summary>
-    /// 发布通知
+    /// 买线
     /// </summary>
-    /// <param name="notify"></param>
-    /// <returns></returns>
-    Task<bool> Publish(Notify notify);
+    public decimal Buy { get; set; }
 
     /// <summary>
-    /// 收听
+    /// 卖线
     /// </summary>
-    /// <param name="action"></param>
-    /// <returns></returns>
-    Task<bool> Subscribe(Action<Notify> action);
+    public decimal Sell { get; set; }
 }

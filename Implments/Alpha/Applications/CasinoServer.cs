@@ -2,24 +2,17 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Implements.Alpha.Entries.CasinoServer;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Components;
 using Ban3.Infrastructures.Contracts.Applications;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
-using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
-using Ban3.Sites.ViaSina;
-using Ban3.Sites.ViaTushare;
-using log4net.Repository.Hierarchy;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Ban3.Implements.Alpha.Applications;
 
 /// <summary>
-/// 股市服务
+/// 股市服务，批处理部分
 /// </summary>
 public partial class CasinoServer : ICasinoServer
 {
@@ -31,6 +24,16 @@ public partial class CasinoServer : ICasinoServer
     private readonly IMailServer _mailServer;
     private readonly IMessageServer _messageServer;
 
+    /// <summary>
+    /// ctor
+    /// </summary>
+    /// <param name="cacheServer"></param>
+    /// <param name="chartServer"></param>
+    /// <param name="databaseServer"></param>
+    /// <param name="httpServer"></param>
+    /// <param name="logger"></param>
+    /// <param name="mailServer"></param>
+    /// <param name="messageServer"></param>
     public CasinoServer(
         ICacheServer cacheServer,
         IChartServer chartServer,
@@ -50,9 +53,21 @@ public partial class CasinoServer : ICasinoServer
     }
 
     /// <summary>
+    /// 基础数据准备
+    /// </summary>
+    public void BaseTask()
+    {
+        PrepareStocks();
+
+        PrepareAllBonus();
+
+        CalculateAllSeeds();
+    }
+
+    /// <summary>
     /// 每日任务
     /// </summary>
-    public void DailyTask(List<IStock> stocks)
+    public void DailyTask(List<Stock> stocks)
     {
         stocks.ParallelExecute((stock) =>
         {
@@ -65,13 +80,11 @@ public partial class CasinoServer : ICasinoServer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    public bool OnesTask(IStock stock)
+    public bool OnesTask(Stock stock)
     {
         var now = DateTime.Now;
 
-        var result=CollectOnesPrices(stock);
-
-        result= result&&CalculateOnesSeeds(stock);
+        var result = CollectOnesPrices(stock);
 
         result = result && ReinstateOnesPrices(stock);
 

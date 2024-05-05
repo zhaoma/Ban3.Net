@@ -41,12 +41,33 @@ public interface ICacheServer
     /// <returns></returns>
     bool Flush();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     Task<bool> SetAsync<T>(string key, T value);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
     Task<T> LoadAsync<T>(string key);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     Task<bool> RemoveAsync(string key);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     Task<bool> FlushAsync();
-
 }

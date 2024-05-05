@@ -2,34 +2,32 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
 using System;
 
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// Casino推测买卖记录
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class TradeDetail
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// 购买时间
+    /// </summary>
+    public DateTime BuyTime { get; set; }
 
     /// <summary>
-    /// 
+    /// 购买价格
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
+    public decimal BuyPrice { get; set; }
 
     /// <summary>
-    /// 
+    /// 售出时间
     /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
+    public DateTime SellTime { get; set; }
 
     /// <summary>
-    /// 
+    /// 售出价格
     /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public decimal SellPrice { get; set; }
 }

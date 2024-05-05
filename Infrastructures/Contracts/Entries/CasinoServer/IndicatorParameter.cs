@@ -5,38 +5,23 @@
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using System.Collections.Generic;
 
-namespace Ban3.Implements.Alpha.Entries.CasinoServer.IndicatorParameters;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
-/// 买卖线参数
+/// Casino使用的指标输入参数
 /// </summary>
-public class MX : Infrastructures.Contracts.Entries.CasinoServer.IndicatorParameter
+public class IndicatorParameter
 {
     /// <summary>
-    /// 
+    /// 指标类型
     /// </summary>
-    public MX()
-    {
-        Index = IndexIs.MX;
-        Parameters = new Dictionary<string, int>
-        {
-            {"N",2 },
-            {"M",4 }
-        };
-    }
+    public IndexIs Index { get; set; }
 
     /// <summary>
-    /// 
+    /// 入参
+    /// MA:D5,D30
+    /// MACD:(13.26.9)
+    /// MXCD:(2,4)
     /// </summary>
-    /// <param name="n"></param>
-    /// <param name="m"></param>
-    public MX(int n, int m)
-    {
-        Index = IndexIs.MX;
-        Parameters = new Dictionary<string, int>
-        {
-            {"N",n },
-            {"M",m }
-        };
-    }
+    public Dictionary<string, int> Parameters { get; set; }
 }

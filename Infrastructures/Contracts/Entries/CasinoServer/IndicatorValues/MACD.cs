@@ -2,34 +2,28 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
-using System;
-
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// 指数平滑异同移动平均线,Moving Average Convergence Divergence
+/// DIF:EMA(CLOSE,SHORT)-EMA(CLOSE,LONG);
+/// DEA:EMA(DIF,MID);
+/// Histogram(MACD):(DIF-DEA)*2,COLORSTICK;
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class MACD : IndicatorValue
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// 收市价SHORT日异同移动平均线与LONG日异同移动平均线
+    /// </summary>
+    public decimal DIF { get; set; }
 
     /// <summary>
-    /// 
+    /// DIF的M日的平均的异同移动平均线
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
+    public decimal DEA { get; set; }
 
     /// <summary>
-    /// 
+    /// 用DIF减DEA
     /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public decimal Histogram { get; set; }
 }

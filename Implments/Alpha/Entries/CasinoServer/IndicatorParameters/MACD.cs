@@ -2,10 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
 namespace Ban3.Implements.Alpha.Entries.CasinoServer.IndicatorParameters;
@@ -16,17 +13,31 @@ namespace Ban3.Implements.Alpha.Entries.CasinoServer.IndicatorParameters;
 /// DEA:EMA(DIF,MID);
 /// MACD:(DIF-DEA)*2,COLORSTICK;
 /// </summary>
-public class MACD : IIndicatorParameter
+public class MACD : Infrastructures.Contracts.Entries.CasinoServer.IndicatorParameter
 {
-    public MACD() { }
+    /// <summary>
+    /// 
+    /// </summary>
+    public MACD()
+    {
+        Index = IndexIs.MACD;
+        Parameters = new Dictionary<string, int>
+        {
+            {"SHORT",12 },
+            {"LONG",26 },
+            {"MID",9 }
+        };
+    }
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="shortPeriod"></param>
     /// <param name="longPeriod"></param>
-    public MACD(int shortPeriod, int longPeriod,int midPeriod)
+    /// <param name="midPeriod"></param>
+    public MACD(int shortPeriod, int longPeriod, int midPeriod)
     {
+        Index = IndexIs.MACD;
         Parameters = new Dictionary<string, int>
         {
             {"SHORT",shortPeriod },
@@ -34,17 +45,4 @@ public class MACD : IIndicatorParameter
             {"midPeriod",9 }
         };
     }
-
-    [JsonProperty("index", NullValueHandling = NullValueHandling.Ignore)]
-    [JsonConverter(typeof(StringEnumConverter))]
-    public IndexIs Index { get; set; } = IndexIs.MACD;
-
-    [JsonProperty("parameters", NullValueHandling = NullValueHandling.Ignore)]
-    public Dictionary<string, int> Parameters { get; set; }
-        = new Dictionary<string, int>
-        {
-            {"SHORT",12 },
-            {"LONG",26 },
-            {"MID",9 }
-        };
 }

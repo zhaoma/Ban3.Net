@@ -24,7 +24,7 @@ public class UtilizeNetHttp : IHttpServer
     private HttpClient _client;
     static readonly object ObjectLock = new();
 
-    private HttpClient Client(IHost host)
+    private HttpClient Client(Host host)
     {
         if (_client != null) return _client;
 
@@ -65,7 +65,7 @@ public class UtilizeNetHttp : IHttpServer
         return _client;
     }
 
-    private HttpRequestMessage Request(IResource resource)
+    private HttpRequestMessage Request(Resource resource)
     {
         var request = new HttpRequestMessage
         {
@@ -74,15 +74,15 @@ public class UtilizeNetHttp : IHttpServer
         };
 
         if (resource.Bytes != null)
-            request.Content= new ByteArrayContent(resource.Bytes);
+            request.Content = new ByteArrayContent(resource.Bytes);
 
         if (resource.StreamContent != null)
             request.Content = new StreamContent(resource.StreamContent);
 
         if (!string.IsNullOrEmpty(resource.StringContent))
             request.Content = new StringContent(
-                resource.StringContent, 
-                Encoding.GetEncoding(resource.ContentEncoding), 
+                resource.StringContent,
+                Encoding.GetEncoding(resource.ContentEncoding),
                 resource.ContentMediaType);
 
         if (resource.Headers != null && resource.Headers.Any())
@@ -103,15 +103,26 @@ public class UtilizeNetHttp : IHttpServer
 
     }
 
-    private async Task<HttpResponseMessage> Request(IHost host, IResource resource)
-        =>await Client(host).SendAsync(Request(resource));
+    private async Task<HttpResponseMessage> Request(Host host, Resource resource)
+        => await Client(host).SendAsync(Request(resource));
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="logger"></param>
     public UtilizeNetHttp(ILoggerServer logger)
     {
         _logger = logger;
     }
 
-    public async Task<T> RequestGeneric<T>(IHost host, IResource resource)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="host"></param>
+    /// <param name="resource"></param>
+    /// <returns></returns>
+    public async Task<T> RequestGeneric<T>(Host host, Resource resource)
     {
         var content = await RequestString(host, resource);
 
@@ -120,14 +131,20 @@ public class UtilizeNetHttp : IHttpServer
             content = content.RemoveJsonpTags(resource.JsonpPrefix);
         }
 
-        return content.JsonToObj<T>();
+        return content.JsonToObj<T>()!;
     }
 
-    public async Task<bool> RequestVoid(IHost host, IResource resource)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="host"></param>
+    /// <param name="resource"></param>
+    /// <returns></returns>
+    public async Task<bool> RequestVoid(Host host, Resource resource)
     {
         try
         {
-            using var response = await Request(host,resource);
+            using var response = await Request(host, resource);
 
             return true;
         }
@@ -139,25 +156,44 @@ public class UtilizeNetHttp : IHttpServer
         return false;
     }
 
-    public async Task<string> RequestString(IHost host, IResource resource)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="host"></param>
+    /// <param name="resource"></param>
+    /// <returns></returns>
+    public async Task<string> RequestString(Host host, Resource resource)
     {
         using var response = await Request(host, resource);
         return await response.Content.ReadAsStringAsync();
     }
 
-    public async Task<byte[]> RequestBytes(IHost host, IResource resource)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="host"></param>
+    /// <param name="resource"></param>
+    /// <returns></returns>
+    public async Task<byte[]> RequestBytes(Host host, Resource resource)
     {
         using var response = await Request(host, resource);
         return await response.Content.ReadAsByteArrayAsync();
     }
 
-    public async Task<bool> Download(IHost host, IResource resource, string savePath)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="host"></param>
+    /// <param name="resource"></param>
+    /// <param name="savePath"></param>
+    /// <returns></returns>
+    public async Task<bool> Download(Host host, Resource resource, string savePath)
     {
         try
         {
             using var response = await Request(host, resource);
 
-            var inputStream =await response.Content.ReadAsStreamAsync();
+            var inputStream = await response.Content.ReadAsStreamAsync();
 
             using var fileStream = File.Create(savePath);
 

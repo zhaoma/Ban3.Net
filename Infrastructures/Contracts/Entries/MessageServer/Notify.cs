@@ -2,34 +2,32 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
-using System;
+using System.Collections.Generic;
 
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Components.Entries.MessageServer;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// 消息
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class Notify
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// 通知来源
+    /// </summary>
+    public string From { get; set; } = string.Empty;
 
     /// <summary>
-    /// 
+    /// 通知目标
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
+    public string To { get; set; } = string.Empty;
 
     /// <summary>
-    /// 
+    /// 控制码
     /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
+    public string ControlCode { get; set; } = string.Empty;
 
     /// <summary>
-    /// 
+    /// 通知主体
     /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public Dictionary<string, object> Body { get; set; }
 }

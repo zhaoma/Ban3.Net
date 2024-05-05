@@ -2,6 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Contracts.Applications;
 
 namespace Ban3.Implements.Alpha.Support;
@@ -13,17 +14,29 @@ public class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("HELLO");
-
         Settings.Init();
 
-        var casino=Settings.Resolve<ICasinoServer>();
-
-        var stocks=casino.LoadStocks();
-
         var now = DateTime.Now;
+
+        var casino = Settings.Resolve<ICasinoServer>();
+
+        casino.BaseTask();
+
+        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalSeconds.ToInt()} [BaseTask] seconds elapsed.");
+
+        now = DateTime.Now;
+
+        var stocks = casino.LoadStocks();
+
         casino.DailyTask(stocks);
 
-        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalMinutes} minutes elapsed.");
+        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalSeconds.ToInt()} [DailyTask] seconds elapsed.");
+
+        now = DateTime.Now;
+
+        casino.GenerateSummary(stocks);
+
+        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalSeconds.ToInt()} [GenerateSummary] seconds elapsed.");
+
     }
 }

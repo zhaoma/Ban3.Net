@@ -2,28 +2,16 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components.Entries.MessageServer;
 using System;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Ban3.Infrastructures.Components;
+namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
 /// <summary>
-/// 消息服务
+/// 日历事件
 /// </summary>
-public interface IMessageServer
+public class Event
 {
-    /// <summary>
-    /// 发布通知
-    /// </summary>
-    /// <param name="notify"></param>
-    /// <returns></returns>
-    Task<bool> Publish(Notify notify);
 
-    /// <summary>
-    /// 收听
-    /// </summary>
-    /// <param name="action"></param>
-    /// <returns></returns>
-    Task<bool> Subscribe(Action<Notify> action);
 }

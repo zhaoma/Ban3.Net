@@ -18,7 +18,7 @@ public interface IMailServer
     /// <param name="account"></param>
     /// <param name="mail"></param>
     /// <returns></returns>
-    bool Send(IAccount account, IMail mail);
+    bool Send(Account account, Mail mail);
 
     /// <summary>
     /// 异步发送
@@ -26,5 +26,5 @@ public interface IMailServer
     /// <param name="account"></param>
     /// <param name="mail"></param>
     /// <returns></returns>
-    Task<bool> SendAsync(IAccount account, IMail mail);
+    Task<bool> SendAsync(Account account, Mail mail);
 }

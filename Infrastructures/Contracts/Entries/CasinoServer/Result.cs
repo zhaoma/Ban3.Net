@@ -2,34 +2,33 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
-using System;
+using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
+using System.Collections.Generic;
 
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// Casino结果
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class Result
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// 标的信息
+    /// </summary>
+    public Stock Stock { get; set; }
 
     /// <summary>
-    /// 
+    /// 笔记集合
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
+    public List<Remark>? Remarks { get; set; }
 
     /// <summary>
-    /// 
+    /// 当前建议
     /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
+    public SuggestIs Suggest { get; set; }
 
     /// <summary>
-    /// 
+    /// 笔记文本
     /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public List<Notice>? Notices { get; set; }
 }

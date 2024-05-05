@@ -2,34 +2,22 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
 using System;
 
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// 复权因子
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class Reinstate
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// 除权日期
+    /// </summary>
+    public DateTime MarkTime { get; set; }
 
     /// <summary>
-    /// 
+    /// 除权因子
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public decimal Factor { get; set; }
 }

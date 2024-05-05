@@ -2,34 +2,37 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
-using System;
+using System.Collections.Generic;
 
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Components.Entries.MailServer;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// 邮件发送目标邮件
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class Mail
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// 收件人
+    /// </summary>
+    public Dictionary<string, string> To { get; set; }
 
     /// <summary>
-    /// 
+    /// 抄送
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
+    public Dictionary<string, string> CC { get; set; }
 
     /// <summary>
-    /// 
+    /// 主题
     /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
+    public string Subject { get; set; } = string.Empty;
 
     /// <summary>
-    /// 
+    /// 正文
     /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public string HtmlBody { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 发件人
+    /// </summary>
+    public KeyValuePair<string, string> From { get; set; }
 }

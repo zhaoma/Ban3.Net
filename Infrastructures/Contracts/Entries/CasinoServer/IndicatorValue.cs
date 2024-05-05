@@ -2,28 +2,17 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components.Entries.MessageServer;
-using System;
-using System.Threading.Tasks;
+using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 
-namespace Ban3.Infrastructures.Components;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
-/// 消息服务
+/// Casino使用的指标输出结果
 /// </summary>
-public interface IMessageServer
+public class IndicatorValue
 {
     /// <summary>
-    /// 发布通知
+    /// 指标类型
     /// </summary>
-    /// <param name="notify"></param>
-    /// <returns></returns>
-    Task<bool> Publish(Notify notify);
-
-    /// <summary>
-    /// 收听
-    /// </summary>
-    /// <param name="action"></param>
-    /// <returns></returns>
-    Task<bool> Subscribe(Action<Notify> action);
+    public IndexIs Index { get; set; }
 }

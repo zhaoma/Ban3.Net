@@ -4,6 +4,7 @@
 
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Components;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -36,11 +37,22 @@ public class UtilizeJson : IDatabaseServer
         return fullPath;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="logger"></param>
     public UtilizeJson(ILoggerServer logger)
     {
         _logger = logger;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public T Create<T>(T entity, Func<T, string> key)
     {
         try
@@ -51,9 +63,23 @@ public class UtilizeJson : IDatabaseServer
         return entity;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public T Update<T>(T entity, Func<T, string> key)
         => Create(entity, key);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public bool Delete<T>(T entity, Func<T, string> key)
     {
         try
@@ -66,6 +92,13 @@ public class UtilizeJson : IDatabaseServer
         return false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entities"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public bool SaveList<T>(List<T> entities, Func<string>? key = null)
     {
         try
@@ -79,6 +112,13 @@ public class UtilizeJson : IDatabaseServer
         return false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="type"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public List<T> LoadList<T>(Type type, Func<string>? key = null)
     {
         try
@@ -90,15 +130,21 @@ public class UtilizeJson : IDatabaseServer
         return new List<T>();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public T Load<T>(string key)
     {
         try
         {
-            return TypeFolder(typeof(T),()=> key).ReadFileAs<T>()!;
+            return TypeFolder(typeof(T), () => key).ReadFileAs<T>()!;
         }
         catch (Exception ex) { _logger.Error(ex); }
 
-        return default(T);
+        return default!;
     }
 
     /*
@@ -107,51 +153,67 @@ public class UtilizeJson : IDatabaseServer
 
      */
 
+    /// see interface
     public T Create<T>(T entity, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public T Retrieve<T>(T entity, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public T Retrieve<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public IEnumerable<T> RetrieveList<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public int Update<T>(T entity, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public int Update<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public int Delete<T>(T entity, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public int Delete<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public Task<T> CreateAsync<T>(T entity, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public Task<T> RetrieveAsync<T>(T entity, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public Task<T> RetrieveAsync<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public Task<IEnumerable<T>> RetrieveListAsync<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public Task<int> UpdateAsync<T>(T entity, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public Task<int> UpdateAsync<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public Task<int> DeleteAsync<T>(T entity, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 
+    /// see interface
     public Task<int> DeleteAsync<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null)
         => throw new NotImplementedException();
 }

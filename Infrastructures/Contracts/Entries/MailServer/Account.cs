@@ -2,34 +2,40 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
-using System;
-
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Components.Entries.MailServer;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// 邮件发送账号
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class Account
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// 服务器地址
+    /// </summary>
+    public string ServerEndpoint { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 服务器端口
+    /// </summary>
+    public int ServerPort { get; set; }
+
+    /// <summary>
+    /// SSL
+    /// </summary>
+    public bool EnableSsl { get; set; }
+
+    /// <summary>
+    /// 账号
+    /// </summary>
+    public string UserName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 密码
+    /// </summary>
+    public string Password { get; set; } = string.Empty;
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public string TagName { get; set; } = string.Empty;
 }

@@ -2,41 +2,22 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using System.Collections.Generic;
 
-namespace Ban3.Implements.Alpha.Entries.CasinoServer.IndicatorParameters;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
-/// 买卖线参数
+/// 
 /// </summary>
-public class MX : Infrastructures.Contracts.Entries.CasinoServer.IndicatorParameter
+public class TradeRecord
 {
     /// <summary>
-    /// 
+    /// 编码
     /// </summary>
-    public MX()
-    {
-        Index = IndexIs.MX;
-        Parameters = new Dictionary<string, int>
-        {
-            {"N",2 },
-            {"M",4 }
-        };
-    }
+    public string Code { get; set; } = string.Empty;
 
     /// <summary>
-    /// 
+    /// 推测买卖记录集合
     /// </summary>
-    /// <param name="n"></param>
-    /// <param name="m"></param>
-    public MX(int n, int m)
-    {
-        Index = IndexIs.MX;
-        Parameters = new Dictionary<string, int>
-        {
-            {"N",n },
-            {"M",m }
-        };
-    }
+    public List<TradeDetail> Details { get; set; }
 }

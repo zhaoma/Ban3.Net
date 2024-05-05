@@ -1,4 +1,8 @@
-﻿using Ban3.Implements.Alpha.Entries.CasinoServer;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Implements.Alpha.Extensions;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
@@ -7,14 +11,14 @@ using Ban3.Sites.ViaTushare;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ban3.Implements.Alpha.Applications;
 
+/// <summary>
+/// 数据准备部分
+/// </summary>
 public partial class CasinoServer
 {
-
     /// <summary>
     /// 准备标的
     /// </summary>
@@ -25,7 +29,9 @@ public partial class CasinoServer
         {
             var codesResponse = new Sites.ViaTushare.Request.GetStockBasic().GetResult();
             var stocks = codesResponse.Data.ObjToJson().JsonToObj<List<Stock>>();
-            return _databaseServer.SaveList<Stock>(stocks);
+            if (stocks != null && stocks.Any()) { _databaseServer.SaveList<Stock>(stocks); }
+
+            return true;
         }
         catch (Exception ex)
         {
@@ -34,7 +40,6 @@ public partial class CasinoServer
 
         return false;
     }
-
 
     /// <summary>
     /// 准备所有标的分红解禁事件信息
@@ -55,7 +60,7 @@ public partial class CasinoServer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    public bool PrepareOnesBonus(IStock stock)
+    public bool PrepareOnesBonus(Stock stock)
     {
         try
         {
@@ -73,7 +78,6 @@ public partial class CasinoServer
 
         return false;
     }
-
 
     /// <summary>
     /// 收集所有标的行情数据
@@ -97,7 +101,7 @@ public partial class CasinoServer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    public bool CollectOnesPrices(IStock stock)
+    public bool CollectOnesPrices(Stock stock)
     {
         try
         {
@@ -109,7 +113,7 @@ public partial class CasinoServer
 
             var pricesResult = new Sites.ViaTushare.Request.GetStockPrice(getDailyParams).GetResult();
 
-            var prices = pricesResult.Data.ObjToJson().JsonToObj<List<Price>>();
+            var prices = pricesResult.Data.ObjToJson().JsonToObj<List<Price>>()!;
 
             return _databaseServer.SaveList<Price>(prices, () => stock.Code);
         }
@@ -117,7 +121,6 @@ public partial class CasinoServer
 
         return false;
     }
-
 
     /// <summary>
     /// 计算所有标的复权因子
@@ -139,10 +142,9 @@ public partial class CasinoServer
     /// <summary>
     /// 计算标的复权因子
     /// </summary>
-    /// <param name="prices"></param>
-    /// <param name="events"></param>
+    /// <param name="stock"></param>
     /// <returns></returns>
-    public bool CalculateOnesSeeds(IStock stock)
+    public bool CalculateOnesSeeds(Stock stock)
     {
         var result = new List<Reinstate>();
         try
@@ -180,8 +182,7 @@ public partial class CasinoServer
         return false;
     }
 
-
-    private Price ReinstateOnePrice(List<IReinstate>? seeds, IPrice price)
+    private Price ReinstateOnePrice(List<Reinstate>? seeds, Infrastructures.Contracts.Entries.CasinoServer.Price price)
     {
         var newPrice = new Price
         {
@@ -229,7 +230,7 @@ public partial class CasinoServer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    public bool ReinstateOnesPrices(IStock stock)
+    public bool ReinstateOnesPrices(Infrastructures.Contracts.Entries.CasinoServer.Stock stock)
     {
         try
         {
@@ -250,7 +251,7 @@ public partial class CasinoServer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    public bool AnalyzeOne(IStock stock)
+    public bool AnalyzeOne(Infrastructures.Contracts.Entries.CasinoServer.Stock stock)
     {
         try
         {
@@ -266,8 +267,8 @@ public partial class CasinoServer
             {
                 Stock = stock,
                 Suggest = SuggestIs.Skip,
-                Remarks = new IndicatorParameter().GenerateRemarks(dailyPrices)
-            };
+                Remarks = new Alpha.Entries.CasinoServer.IndicatorParameter().GenerateRemarks(dailyPrices)
+            }.GenerateSuggest();
 
             _databaseServer.Create<Result>(result, (_) => stock.Code);
             return true;
@@ -277,40 +278,35 @@ public partial class CasinoServer
         return false;
     }
 
-
     /// <summary>
     /// 生成汇总报告
     /// </summary>
     /// <returns></returns>
-    public Task<bool> GenerateSummary()
+    public bool GenerateSummary(List<Infrastructures.Contracts.Entries.CasinoServer.Stock> stocks)
     {
         try
         {
-            var summary = new Summary { MarkTime = DateTime.Now, Results = new List<IResult>() };
-
-            var stocks = LoadStocks();
+            var summary = new Summary { MarkTime = DateTime.Now, Records = new List<Infrastructures.Contracts.Entries.CasinoServer.TradeRecord>() };
 
             foreach (var stock in stocks)
             {
                 var r = LoadResult(stock);
-                summary.Results.Add(new Result
+                summary.Records.Add(new TradeRecord
                 {
-                    Stock = r.Stock,
-                    Suggest = r.Suggest,
-                    Notices = r.Notices,
+                    Code = r.Stock.Code,
+                    Details = r.GenerateDetails()
                 });
             }
 
             _databaseServer.Create<Summary>(summary, (_) => "all");
 
-            return Task.FromResult(true);
+            return true;
         }
         catch (Exception ex)
         {
             _logger.Error(ex);
         }
 
-        return Task.FromResult(false);
+        return false;
     }
-
 }

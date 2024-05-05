@@ -5,7 +5,6 @@
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Ban3.Infrastructures.Contracts.Applications;
 
@@ -15,16 +14,21 @@ namespace Ban3.Infrastructures.Contracts.Applications;
 public interface ICasinoServer
 {
     /// <summary>
+    /// 基础数据准备
+    /// </summary>
+    void BaseTask();
+
+    /// <summary>
     /// 每日任务
     /// </summary>
-    void DailyTask(List<IStock> stocks);
+    void DailyTask(List<Stock> stocks);
 
     /// <summary>
     /// 标的任务
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    bool OnesTask(IStock stock);
+    bool OnesTask(Stock stock);
 
     /// <summary>
     /// 准备标的
@@ -36,7 +40,7 @@ public interface ICasinoServer
     /// 获取标的
     /// </summary>
     /// <returns></returns>
-    List<IStock> LoadStocks();
+    List<Stock> LoadStocks();
 
     /// <summary>
     /// 准备所有标的分红解禁事件信息
@@ -48,14 +52,14 @@ public interface ICasinoServer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    bool PrepareOnesBonus(IStock stock);
+    bool PrepareOnesBonus(Stock stock);
 
     /// <summary>
     /// 获取标的分红解禁事件信息
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    List<IBonus> LoadOnesBonus(IStock stock);
+    List<Bonus> LoadOnesBonus(Stock stock);
 
     /// <summary>
     /// 收集所有标的行情数据
@@ -68,14 +72,15 @@ public interface ICasinoServer
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    bool CollectOnesPrices(IStock target);
+    bool CollectOnesPrices(Stock target);
 
     /// <summary>
     /// 获取价格数据
     /// </summary>
     /// <param name="target"></param>
+    /// <param name="cycle"></param>
     /// <returns></returns>
-    List<IPrice> LoadOnesPrices(IStock target, CycleIs? cycle);
+    List<Price> LoadOnesPrices(Stock target, CycleIs? cycle);
 
     /// <summary>
     /// 计算所有标的复权因子
@@ -88,45 +93,45 @@ public interface ICasinoServer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    bool CalculateOnesSeeds(IStock stock);
+    bool CalculateOnesSeeds(Stock stock);
 
     /// <summary>
     /// 获取复权因子
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    List<IReinstate> LoadOnesSeeds(IStock stock);
+    List<Reinstate> LoadOnesSeeds(Stock stock);
 
     /// <summary>
     /// 计算标的复权价格
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    bool ReinstateOnesPrices(IStock stock);
+    bool ReinstateOnesPrices(Stock stock);
 
     /// <summary>
     /// 分析标的指标与特征值
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    bool AnalyzeOne(IStock stock);
+    bool AnalyzeOne(Stock stock);
 
     /// <summary>
     /// 获取标的指标与特征值
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    IResult LoadResult(IStock target);
+    Result LoadResult(Stock target);
 
     /// <summary>
     /// 生成汇总报告
     /// </summary>
     /// <returns></returns>
-    Task<bool> GenerateSummary();
+    bool GenerateSummary(List<Stock> stocks);
 
     /// <summary>
     /// 获取汇总报告
     /// </summary>
     /// <returns></returns>
-    ISummary LoadSummary();
+    Summary LoadSummary();
 }

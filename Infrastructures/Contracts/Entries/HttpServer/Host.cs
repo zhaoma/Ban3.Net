@@ -2,34 +2,40 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
-using log4net;
-using System;
-
-namespace Ban3.Implements.Alpha.Components.LogServer;
+namespace Ban3.Infrastructures.Components.Entries.HttpServer;
 
 /// <summary>
-/// 用Log4net实现日志组件
+/// HTTP请求主机
 /// </summary>
-public class UtilizeLog4net:ILoggerServer
+public class Host
 {
-    private readonly ILog Logger = LogManager.GetLogger(typeof(UtilizeLog4net));
+    /// <summary>
+    /// 匿名访问
+    /// </summary>
+    public bool Anonymous { get; set; }
 
     /// <summary>
-    /// 
+    /// 主机地址
     /// </summary>
-    /// <param name="ex"></param>
-    public void Error(Exception ex) => Logger.Error(ex);
+    public string BaseUrl { get; set; } = string.Empty;
 
     /// <summary>
-    /// 
+    /// 用户名
     /// </summary>
-    /// <param name="message"></param>
-    public void Info(string message) => Logger.Info(message);
+    public string UserName { get; set; } = string.Empty;
 
     /// <summary>
-    /// 
+    /// 密码
     /// </summary>
-    /// <param name="message"></param>
-    public void Debug(string message) => Logger.Debug(message);
+    public string Password { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 域名
+    /// </summary>
+    public string Domain { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 验证方式
+    /// </summary>
+    public string AuthenticationType { get; set; } = string.Empty;
 }

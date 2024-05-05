@@ -13,7 +13,19 @@ namespace Ban3.Implements.Alpha.Components.MailServer;
 /// </summary>
 public class UtilizeOutlook:IMailServer
 {
-    public bool Send(IAccount account, IMail mail) {  return false; }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="account"></param>
+    /// <param name="mail"></param>
+    /// <returns></returns>
+    public bool Send(Account account, Mail mail) {  return false; }
 
-    public Task<bool> SendAsync(IAccount account, IMail mail) { return Task.FromResult(true); }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="account"></param>
+    /// <param name="mail"></param>
+    /// <returns></returns>
+    public Task<bool> SendAsync(Account account, Mail mail) { return Task.FromResult(true); }
 }

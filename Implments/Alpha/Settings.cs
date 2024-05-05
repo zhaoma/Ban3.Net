@@ -11,8 +11,14 @@ namespace Ban3.Implements.Alpha;
 /// </summary>
 public static class Settings
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static IContainer? Instance;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static void Init()
     {
         var builder = new ContainerBuilder();
@@ -22,6 +28,10 @@ public static class Settings
         Instance = builder.Build();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="builder"></param>
     public static void RegisterImplements(this ContainerBuilder builder)
     {
         builder.RegisterType<Applications.CasinoServer>()
@@ -57,5 +67,10 @@ public static class Settings
             .SingleInstance();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
     public static T Resolve<T>() => Instance.Resolve<T>();
 }

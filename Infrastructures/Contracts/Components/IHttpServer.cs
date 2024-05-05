@@ -19,7 +19,7 @@ public interface IHttpServer
     /// <param name="host"></param>
     /// <param name="resource"></param>
     /// <returns></returns>
-    Task<T> RequestGeneric<T>(IHost host, IResource resource);
+    Task<T> RequestGeneric<T>(Host host, Resource resource);
 
     /// <summary>
     /// 发送请求
@@ -27,7 +27,7 @@ public interface IHttpServer
     /// <param name="host"></param>
     /// <param name="resource"></param>
     /// <returns></returns>
-    Task<bool> RequestVoid(IHost host, IResource resource);
+    Task<bool> RequestVoid(Host host, Resource resource);
 
     /// <summary>
     /// 请求文本
@@ -35,7 +35,7 @@ public interface IHttpServer
     /// <param name="host"></param>
     /// <param name="resource"></param>
     /// <returns></returns>
-    Task<string> RequestString(IHost host, IResource resource);
+    Task<string> RequestString(Host host, Resource resource);
 
     /// <summary>
     /// 请求字节组
@@ -43,7 +43,7 @@ public interface IHttpServer
     /// <param name="host"></param>
     /// <param name="resource"></param>
     /// <returns></returns>
-    Task<byte[]> RequestBytes(IHost host, IResource resource);
+    Task<byte[]> RequestBytes(Host host, Resource resource);
 
     /// <summary>
     /// 下载资源
@@ -52,5 +52,5 @@ public interface IHttpServer
     /// <param name="resource"></param>
     /// <param name="savePath"></param>
     /// <returns></returns>
-    Task<bool> Download(IHost host, IResource resource, string savePath);
+    Task<bool> Download(Host host, Resource resource, string savePath);
 }

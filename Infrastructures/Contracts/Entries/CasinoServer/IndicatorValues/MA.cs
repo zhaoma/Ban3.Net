@@ -2,28 +2,21 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components.Entries.MessageServer;
-using System;
-using System.Threading.Tasks;
-
-namespace Ban3.Infrastructures.Components;
+namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues;
 
 /// <summary>
-/// 消息服务
+/// 移动平均线,Moving Average
+/// 5日线和20日线
 /// </summary>
-public interface IMessageServer
+public class MA : IndicatorValue
 {
     /// <summary>
-    /// 发布通知
+    /// 短期线
     /// </summary>
-    /// <param name="notify"></param>
-    /// <returns></returns>
-    Task<bool> Publish(Notify notify);
+    public decimal Short { get; set; }
 
     /// <summary>
-    /// 收听
+    /// 长期线
     /// </summary>
-    /// <param name="action"></param>
-    /// <returns></returns>
-    Task<bool> Subscribe(Action<Notify> action);
+    public decimal Long { get; set; }
 }

@@ -14,16 +14,57 @@ namespace Ban3.Infrastructures.Components;
 /// </summary>
 public interface IDatabaseServer
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     T Create<T>(T entity, Func<T, string> key);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     T Update<T>(T entity, Func<T, string> key);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     bool Delete<T>(T entity, Func<T, string> key);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entities"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     bool SaveList<T>( List<T> entities, Func<string>? key=null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="type"></param>
+    /// <param name="key"></param>
+    /// <returns></returns>
     List<T> LoadList<T>(Type type, Func<string>? key=null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
     T Load<T>(string key);
 
     /// <summary>
@@ -102,19 +143,79 @@ public interface IDatabaseServer
     /// <returns></returns>
     int Delete<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     Task<T> CreateAsync<T>(T entity, IDbTransaction? transaction = null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     Task<T> RetrieveAsync<T>(T entity, IDbTransaction? transaction = null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="conditionOrSql"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     Task<T> RetrieveAsync<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="conditionOrSql"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     Task<IEnumerable<T>> RetrieveListAsync<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     Task<int> UpdateAsync<T>(T entity, IDbTransaction? transaction = null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="conditionOrSql"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     Task<int> UpdateAsync<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     Task<int> DeleteAsync<T>(T entity, IDbTransaction? transaction = null);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="conditionOrSql"></param>
+    /// <param name="transaction"></param>
+    /// <returns></returns>
     Task<int> DeleteAsync<T>(T entity, string conditionOrSql, IDbTransaction? transaction = null);
 }
