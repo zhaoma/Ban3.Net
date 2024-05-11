@@ -1,10 +1,15 @@
-﻿using Ban3.Infrastructures.Contracts.Entries.CalendarServer;
-using System;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Ban3.Implements.Alpha.Applications;
 
+/// <summary>
+/// 
+/// </summary>
 public partial class CalendarServer
 {
     /// <summary>

@@ -27,6 +27,23 @@ public interface IDatabaseServer
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <param name="content"></param>
+    /// <returns></returns>
+    bool Save<T>(string key, string content);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    string Read<T>(string key);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     /// <param name="entity"></param>
     /// <param name="key"></param>
     /// <returns></returns>

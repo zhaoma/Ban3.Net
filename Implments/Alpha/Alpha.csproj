@@ -44,13 +44,14 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="8.0.0" />
+    <PackageReference Include="Ban3.Infrastructures.Charts" Version="1.0.7" />
     <PackageReference Include="Ban3.Infrastructures.Common" Version="1.2.4" />
     <PackageReference Include="Ban3.Sites.ViaEastmoney" Version="1.0.3" />
     <PackageReference Include="Ban3.Sites.ViaNetease" Version="1.0.3" />
     <PackageReference Include="Ban3.Sites.ViaSina" Version="1.0.4" />
     <PackageReference Include="Ban3.Sites.ViaSohu" Version="1.0.3" />
     <PackageReference Include="Ban3.Sites.ViaTushare" Version="1.0.6" />
-    <PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
+    <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
   </ItemGroup>
 

@@ -2,8 +2,11 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Implements.Alpha.Extensions;
 using Ban3.Infrastructures.Common.Extensions;
+using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.Contracts.Applications;
+using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 namespace Ban3.Implements.Alpha.Support;
 
@@ -12,31 +15,64 @@ namespace Ban3.Implements.Alpha.Support;
 /// </summary>
 public class Program
 {
+    private static ICasinoServer _server;
+
     static void Main(string[] args)
     {
-        Settings.Init();
+        ("args: -full:               execute base task.\n" +
+        "      -one [code partern]: execute one task.\n" +
+        "      -any:                collect all price with delay.\n" +
+        "      -summary:            generate summary report.\n\n").WriteColorLine(ConsoleColor.DarkRed);
 
-        var now = DateTime.Now;
+            Settings.Init();
 
-        var casino = Settings.Resolve<ICasinoServer>();
+            _server = Settings.Resolve<ICasinoServer>();
 
-        casino.BaseTask();
+        if (args != null && args.Length > 0)
+        {
+            switch (args[0].ToLower())
+            {
+                case "-full":
+                    _server.BaseTask();
+                    var stocks = _server.LoadStocks();
+                    _server.DailyTask(stocks);
+                    _server.GenerateSummary(stocks);
+                    break;
 
-        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalSeconds.ToInt()} [BaseTask] seconds elapsed.");
+                case "-one":
+                    if (args.Length > 1)
+                    {
+                        var stock = _server.LoadStocks().FindLast(o => o.Code.Contains(args[1]));
+                        if (stock != null)
+                        {
+                            $"Parse {stock.Symbol}->{stock.Name}".WriteColorLine(ConsoleColor.DarkYellow);
+                            _server.OnesTask(stock);
+                        }
+                    }
+                    break;
 
-        now = DateTime.Now;
+                case "-any":
+                    var all = _server.LoadStocks();
+                    foreach (var stock in all)
+                    {
+                        $"Parse {stock.Symbol}->{stock.Name}".WriteColorLine(ConsoleColor.DarkYellow);
+                        _server.OnesTask(stock);
+                        (1, 2).RandomDelay();
+                    }
+                    _server.GenerateSummary(_server.LoadStocks());
+                    break;
 
-        var stocks = casino.LoadStocks();
+                case "-summary":
+                    _server.GenerateSummary(_server.LoadStocks());
+                    break;
 
-        casino.DailyTask(stocks);
+                default:
+                    //"Unsupported args input..".WriteColorLine(ConsoleColor.DarkYellow);
 
-        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalSeconds.ToInt()} [DailyTask] seconds elapsed.");
-
-        now = DateTime.Now;
-
-        casino.GenerateSummary(stocks);
-
-        Console.WriteLine($"{DateTime.Now.Subtract(now).TotalSeconds.ToInt()} [GenerateSummary] seconds elapsed.");
-
+                    var summary=_server.LoadSummary().Latest();
+                    Console.WriteLine(summary.Records.Count());
+                    break;
+            }
+        }
     }
 }

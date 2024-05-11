@@ -67,6 +67,42 @@ public class UtilizeJson : IDatabaseServer
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <param name="content"></param>
+    /// <returns></returns>
+    public bool Save<T>(string key,string content)
+    {
+        try
+        {
+            TypeFolder(typeof(T),()=> key).WriteFile(content);
+            return true;
+        }
+        catch (Exception ex) { _logger.Error(ex); }
+
+        return false;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    public string Read<T>(string key)
+    {
+        try
+        {
+            return TypeFolder(typeof(T), () => key).ReadFile();
+        }
+        catch (Exception ex) { _logger.Error(ex); }
+
+        return string.Empty;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     /// <param name="entity"></param>
     /// <param name="key"></param>
     /// <returns></returns>

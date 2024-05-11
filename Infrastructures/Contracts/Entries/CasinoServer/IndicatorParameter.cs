@@ -3,6 +3,8 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
@@ -15,6 +17,7 @@ public class IndicatorParameter
     /// <summary>
     /// 指标类型
     /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
     public IndexIs Index { get; set; }
 
     /// <summary>

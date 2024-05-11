@@ -2,6 +2,10 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
+
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
@@ -24,4 +28,10 @@ public class Stock
     /// 名称
     /// </summary>
     public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// 当前建议
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
+    public SuggestIs Suggest { get; set; }
 }

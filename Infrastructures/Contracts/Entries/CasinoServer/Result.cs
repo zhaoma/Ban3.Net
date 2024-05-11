@@ -3,6 +3,8 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
@@ -18,6 +20,11 @@ public class Result
     public Stock Stock { get; set; }
 
     /// <summary>
+    /// 最新价格
+    /// </summary>
+    public Price LatestPrice { get; set; }
+
+    /// <summary>
     /// 笔记集合
     /// </summary>
     public List<Remark>? Remarks { get; set; }
@@ -25,6 +32,7 @@ public class Result
     /// <summary>
     /// 当前建议
     /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
     public SuggestIs Suggest { get; set; }
 
     /// <summary>

@@ -37,6 +37,7 @@
       <PackagePath>\</PackagePath>
     </None>
     <None Include="FodyWeavers.xsd" />
+    <PackageReference Include="Ban3.Infrastructures.Consoles" Version="1.1.1" />
     <PackageReference Include="Costura.Fody" Version="5.7.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

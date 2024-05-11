@@ -2,6 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Charts.Composites;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using System.Collections.Generic;
@@ -71,9 +72,24 @@ public partial class CasinoServer
         => _databaseServer.Load<Result>(stock.Code);
 
     /// <summary>
+    /// 获取Candlestick
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    public string LoadCandlestickDiagram(Stock stock) 
+        => _databaseServer.Read<Diagram>(stock.Code);
+
+    /// <summary>
     /// 获取汇总报告
     /// </summary>
     /// <returns></returns>
     public Summary LoadSummary()
         => _databaseServer.Load<Summary>("all");
+
+    /// <summary>
+    /// 获取Treemap
+    /// </summary>
+    /// <returns></returns>
+    public string LoadTreemapDiagram()
+        => _databaseServer.Read<Diagram>("all");
 }

@@ -3,6 +3,7 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Implements.Alpha.Extensions;
+using Ban3.Infrastructures.Charts.Composites;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
@@ -29,7 +30,15 @@ public partial class CasinoServer
         {
             var codesResponse = new Sites.ViaTushare.Request.GetStockBasic().GetResult();
             var stocks = codesResponse.Data.ObjToJson().JsonToObj<List<Stock>>();
-            if (stocks != null && stocks.Any()) { _databaseServer.SaveList<Stock>(stocks); }
+            if (stocks != null && stocks.Any())
+            {
+                var exists = LoadStocks();
+                var newList = stocks.Where(o => exists.All(x => x.Code != o.Code)).ToList();
+                newList.ForEach(x => { x.Suggest = SuggestIs.Skip; });
+                exists.AddRange(newList);
+
+                _databaseServer.SaveList<Stock>(exists);
+            }
 
             return true;
         }
@@ -48,7 +57,7 @@ public partial class CasinoServer
     {
         var codes = LoadStocks();
 
-        foreach (var c in codes)
+        foreach (var c in codes.Where(o => o.Suggest != SuggestIs.Ignore))
         {
             PrepareOnesBonus(c);
             (3, 7).RandomDelay();
@@ -88,12 +97,17 @@ public partial class CasinoServer
         var result = true;
         var codes = LoadStocks();
 
-        foreach (var c in codes)
+        foreach (var c in codes.Where(o => o.Suggest != SuggestIs.Ignore))
         {
             result = result && CollectOnesPrices(c);
         }
 
         return result;
+    }
+
+    public bool CollectRecentPrices(List<Stock> stocks)
+    {
+        return true;
     }
 
     /// <summary>
@@ -105,21 +119,33 @@ public partial class CasinoServer
     {
         try
         {
-            var getDailyParams = new Sites.ViaTushare.Request.GetDailyParams(new List<string> { stock.Code })
-            {
-                StartDate = DateTime.Now.AddYears(-10).ToYmd(),
-                EndDate = DateTime.Now.AddDays(1).ToYmd()
-            };
-
-            var pricesResult = new Sites.ViaTushare.Request.GetStockPrice(getDailyParams).GetResult();
-
-            var prices = pricesResult.Data.ObjToJson().JsonToObj<List<Price>>()!;
+            var prices = CollectAnyPrices(new List<string> { stock.Code }, 360);
 
             return _databaseServer.SaveList<Price>(prices, () => stock.Code);
         }
         catch (Exception ex) { _logger.Error(ex); }
 
         return false;
+    }
+
+    private List<Price> CollectAnyPrices(List<string> codes, int months)
+        => CollectAnyPrices(codes, DateTime.Now.AddMonths(0 - months).ToYmd(), DateTime.Now.AddDays(1).ToYmd());
+
+    private List<Price> CollectAnyPrices(List<string> codes, string startYmd, string endYmd)
+    {
+        var getDailyParams = new Sites.ViaTushare.Request.GetDailyParams(codes)
+        {
+            StartDate = startYmd,
+            EndDate = endYmd
+        };
+
+        var pricesResult = new Sites.ViaTushare.Request.GetStockPrice(getDailyParams).GetResult();
+
+        var prices = pricesResult.Data.ObjToJson().JsonToObj<List<Price>>().OrderBy(o => o.TradeDate).ToList();
+
+        prices.ForEach(price => { price.MarkTime = price.TradeDate.ToDateTimeEx(); });
+
+        return prices;
     }
 
     /// <summary>
@@ -131,7 +157,7 @@ public partial class CasinoServer
         var result = true;
         var codes = LoadStocks();
 
-        foreach (var c in codes)
+        foreach (var c in codes.Where(o => o.Suggest != SuggestIs.Ignore))
         {
             result = result && CalculateOnesSeeds(c);
         }
@@ -182,17 +208,17 @@ public partial class CasinoServer
         return false;
     }
 
-    private Price ReinstateOnePrice(List<Reinstate>? seeds, Infrastructures.Contracts.Entries.CasinoServer.Price price)
+    private Price ReinstateOnePrice(List<Reinstate>? seeds, Price price)
     {
         var newPrice = new Price
         {
             Code = price.Code,
+            MarkTime = price.MarkTime,
             TradeDate = price.TradeDate,
             Change = price.Change,
             ChangePercent = price.ChangePercent,
             Volumn = price.Volumn,
             Amount = price.Amount,
-
             Open = price.Open,
             High = price.High,
             Low = price.Low,
@@ -230,7 +256,7 @@ public partial class CasinoServer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    public bool ReinstateOnesPrices(Infrastructures.Contracts.Entries.CasinoServer.Stock stock)
+    public bool ReinstateOnesPrices(Stock stock)
     {
         try
         {
@@ -251,7 +277,7 @@ public partial class CasinoServer
     /// </summary>
     /// <param name="stock"></param>
     /// <returns></returns>
-    public bool AnalyzeOne(Infrastructures.Contracts.Entries.CasinoServer.Stock stock)
+    public bool AnalyzeOne(Stock stock)
     {
         try
         {
@@ -267,9 +293,11 @@ public partial class CasinoServer
             {
                 Stock = stock,
                 Suggest = SuggestIs.Skip,
+                LatestPrice = dailyPrices.Last(),
                 Remarks = new Alpha.Entries.CasinoServer.IndicatorParameter().GenerateRemarks(dailyPrices)
             }.GenerateSuggest();
 
+            _databaseServer.Save<Diagram>(stock.Code, _chartServer.CandlestickDiagram(result));
             _databaseServer.Create<Result>(result, (_) => stock.Code);
             return true;
         }
@@ -282,21 +310,31 @@ public partial class CasinoServer
     /// 生成汇总报告
     /// </summary>
     /// <returns></returns>
-    public bool GenerateSummary(List<Infrastructures.Contracts.Entries.CasinoServer.Stock> stocks)
+    public bool GenerateSummary(List<Stock> stocks)
     {
         try
         {
-            var summary = new Summary { MarkTime = DateTime.Now, Records = new List<Infrastructures.Contracts.Entries.CasinoServer.TradeRecord>() };
+            var summary = new Summary { MarkTime = DateTime.Now, Records = new List<TradeRecord>() };
 
             foreach (var stock in stocks)
             {
                 var r = LoadResult(stock);
-                summary.Records.Add(new TradeRecord
+                var details = r.GenerateDetails();
+
+                if (details.Any())
                 {
-                    Code = r.Stock.Code,
-                    Details = r.GenerateDetails()
-                });
+                    summary.Records.Add(new TradeRecord
+                    {
+                        Code = r.Stock.Code,
+                        LatestClose = r.LatestPrice.Close,
+                        Details = details
+                    });
+                }
             }
+
+            var latest=summary.Latest();
+
+            _databaseServer.Save<Diagram>("all", _chartServer.TreemapDiagram(latest));
 
             _databaseServer.Create<Summary>(summary, (_) => "all");
 

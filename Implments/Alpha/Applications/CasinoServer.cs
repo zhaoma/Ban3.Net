@@ -6,8 +6,10 @@ using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Components;
 using Ban3.Infrastructures.Contracts.Applications;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
+using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ban3.Implements.Alpha.Applications;
 
@@ -69,7 +71,7 @@ public partial class CasinoServer : ICasinoServer
     /// </summary>
     public void DailyTask(List<Stock> stocks)
     {
-        stocks.ParallelExecute((stock) =>
+        stocks.Where(o => o.Suggest != SuggestIs.Ignore).ParallelExecute((stock) =>
         {
             OnesTask(stock);
         }, 20);

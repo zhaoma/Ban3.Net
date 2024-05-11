@@ -68,6 +68,13 @@ public interface ICasinoServer
     bool CollectAllPrices();
 
     /// <summary>
+    /// 收集指定标的近期行情数据
+    /// </summary>
+    /// <param name="stocks"></param>
+    /// <returns></returns>
+    bool CollectRecentPrices(List<Stock> stocks);
+
+    /// <summary>
     /// 收集标的行情数据
     /// </summary>
     /// <param name="target"></param>
@@ -124,6 +131,12 @@ public interface ICasinoServer
     Result LoadResult(Stock target);
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="stock"></param>
+    /// <returns></returns>
+    string LoadCandlestickDiagram(Stock stock);
+    /// <summary>
     /// 生成汇总报告
     /// </summary>
     /// <returns></returns>
@@ -134,4 +147,10 @@ public interface ICasinoServer
     /// </summary>
     /// <returns></returns>
     Summary LoadSummary();
+
+    /// <summary>
+    /// 获取Treemap
+    /// </summary>
+    /// <returns></returns>
+    string LoadTreemapDiagram();
 }

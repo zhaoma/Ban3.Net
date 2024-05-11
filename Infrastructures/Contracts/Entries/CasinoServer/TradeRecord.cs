@@ -17,6 +17,11 @@ public class TradeRecord
     public string Code { get; set; } = string.Empty;
 
     /// <summary>
+    /// 最新价格
+    /// </summary>
+    public decimal LatestClose { get; set; }
+
+    /// <summary>
     /// 推测买卖记录集合
     /// </summary>
     public List<TradeDetail> Details { get; set; }

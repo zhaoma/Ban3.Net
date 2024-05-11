@@ -53,17 +53,17 @@ public class IndicatorParameter
     {
         var remarks = new List<Remark>();
 
-        var weekly = new List<Price>();
+        //var weekly = new List<Price>();
 
-        var monthly = new List<Price>();
+        //var monthly = new List<Price>();
 
         var dailyIndex = Serials(dailyPrices);
 
         for (int i = 0; i < dailyPrices.Count; i++)
         {
-            weekly.AppendLatest(dailyPrices[i], CycleIs.Weekly);
+            //weekly.AppendLatest(dailyPrices[i], CycleIs.Weekly);
 
-            monthly.AppendLatest(dailyPrices[i], CycleIs.Monthly);
+            //monthly.AppendLatest(dailyPrices[i], CycleIs.Monthly);
 
             remarks.Add(
                 new Remark
@@ -71,8 +71,8 @@ public class IndicatorParameter
                     DayPrice = dailyPrices[i],
                     Suggest = SuggestIs.Skip,
                     DayOutput=dailyIndex[i],
-                    WeekOutput=Serials(weekly).Last(),
-                    MonthOutput=Serials(monthly).Last()
+                    //WeekOutput=Serials(weekly).Last(),
+                    //MonthOutput=Serials(monthly).Last()
                 });
         }
 

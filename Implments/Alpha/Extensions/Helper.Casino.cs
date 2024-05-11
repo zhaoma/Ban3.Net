@@ -27,7 +27,8 @@ public static partial class Helper
         Price price = new Price
         {
             Code = addPrice.Code,
-            TradeDate = addPrice.MarkTime.ToYmd(),
+            MarkTime = addPrice.MarkTime,
+            TradeDate = addPrice.TradeDate,
             Open = addPrice.Open,
             High = addPrice.High,
             Low = addPrice.Low,
@@ -210,7 +211,11 @@ public static partial class Helper
         switch (currentSuggest)
         {
             case SuggestIs.Skip:
-                if (yesterday.MA.Short < yesterday.MA.Long && today.MA.Short > today.MA.Long)
+                if (yesterday.MA.Short < yesterday.MA.Long
+                && today.MA.Short > today.MA.Long
+                && today.MX.Buy > today.MX.Sell
+                && today.MACD.DIF > 0
+                && today.MACD.DIF > today.MACD.DEA)
                     return SuggestIs.Buy;
                 break;
 
@@ -240,26 +245,29 @@ public static partial class Helper
     /// <returns></returns>
     public static List<TradeDetail> GenerateDetails(this Result result)
     {
-        var details=new List<TradeDetail>();
+        var details = new List<TradeDetail>();
         if (result.Remarks != null && result.Remarks.Any())
         {
             foreach (var r in result.Remarks)
             {
-                if (r.Suggest == SuggestIs.Buy)
+                if (DateTime.Now.Subtract(r.DayPrice.MarkTime).TotalDays < 500)
                 {
-                    details.Add(new TradeDetail
+                    if (r.Suggest == SuggestIs.Buy && details.All(o => o.SellPrice != 0))
                     {
-                        BuyTime = r.DayPrice.MarkTime,
-                        BuyPrice = r.DayPrice.Close,
-                        SellPrice = 0
-                    });
-                }
+                        details.Add(new TradeDetail
+                        {
+                            BuyTime = r.DayPrice.MarkTime,
+                            BuyPrice = r.DayPrice.Close,
+                            SellPrice = 0
+                        });
+                    }
 
-                if (r.Suggest == SuggestIs.Sell)
-                {
-                    var l = details.Last(o => o.SellPrice == 0);
-                    l.SellPrice = r.DayPrice.Close;
-                    l.SellTime = r.DayPrice.MarkTime;
+                    if (r.Suggest == SuggestIs.Sell && details.Any(o => o.SellPrice == 0))
+                    {
+                        var l = details.Last(o => o.SellPrice == 0);
+                        l.SellPrice = r.DayPrice.Close;
+                        l.SellTime = r.DayPrice.MarkTime;
+                    }
                 }
             }
         }
@@ -309,5 +317,29 @@ public static partial class Helper
 
         return Infrastructures.Common.Extensions.Helper
             .IsLimit(to.ToDouble(), price.PreClose.ToDouble(), percent);
+    }
+
+    /// <summary>
+    /// 汇总报告生产
+    /// </summary>
+    /// <param name="summary"></param>
+    /// <returns></returns>
+    public static Summary Latest(this Summary summary)
+    {
+        var result=new Summary {MarkTime=summary.MarkTime,Records=new List<TradeRecord>() };
+
+        foreach (var record in summary.Records)
+        {
+            if (record.Details.Any(x => x.SellPrice == 0))
+            {
+                result.Records.Add(new TradeRecord
+                {
+                    Code=record.Code,
+                    Details=record.Details.Where(x=>x.SellPrice == 0).ToList()
+                });
+            }
+        }
+
+        return result;
     }
 }
