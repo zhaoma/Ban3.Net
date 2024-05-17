@@ -16,6 +16,7 @@ using Ban3.Infrastructures.Charts.Styles;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Components;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -194,11 +195,11 @@ public class UtilizeEcharts : IChartServer
                         {
                             Name = f.Key,
                             Value = f.Value,
-                            Children = stocksSummary.Records.Where(o => o.Code.StartsWith($"{f.Key}."))
+                            Children = stocksSummary.Records.Where(o => o.Code.StartsWith($"{f.Key}"))
                                 .Select(d => new TreemapRecord
                                 {
                                     Name = d.Code,
-                                    Value = stocksSummary.MarkTime.Subtract(d.Details.FirstOrDefault().BuyTime).TotalDays.ToInt()
+                                    Value = Convert.ToInt32(stocksSummary.MarkTime.Subtract(d.Details.FirstOrDefault().BuyTime).TotalDays)
                                 }).ToList()
                         })
                         .ToList()

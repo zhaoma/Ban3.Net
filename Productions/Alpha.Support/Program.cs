@@ -6,6 +6,7 @@ using Ban3.Implements.Alpha.Extensions;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.Contracts.Applications;
+using Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 namespace Ban3.Implements.Alpha.Support;
@@ -24,9 +25,9 @@ public class Program
         "      -any:                collect all price with delay.\n" +
         "      -summary:            generate summary report.\n\n").WriteColorLine(ConsoleColor.DarkRed);
 
-            Settings.Init();
+        Settings.Init();
 
-            _server = Settings.Resolve<ICasinoServer>();
+        _server = Settings.Resolve<ICasinoServer>();
 
         if (args != null && args.Length > 0)
         {
@@ -69,10 +70,17 @@ public class Program
                 default:
                     //"Unsupported args input..".WriteColorLine(ConsoleColor.DarkYellow);
 
-                    var summary=_server.LoadSummary().Latest();
+                    var summary = _server.LoadSummary().Latest();
                     Console.WriteLine(summary.Records.Count());
                     break;
             }
         }
+
+        var r = new ResponseStatus {
+            Time = DateTime.Now.ToYmd(),
+            Response = Infrastructures.Contracts.Enums.CalendarServer.AttendeeStatus.Tentative };
+
+
+        Console.WriteLine(r.ObjToJson());
     }
 }

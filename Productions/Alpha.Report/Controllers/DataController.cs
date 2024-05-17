@@ -10,7 +10,7 @@ namespace Ban3.Implements.Alpha.Report.Controllers;
 /// <summary>
 /// 
 /// </summary>
-public class HomeController : Controller
+public class DataController : Controller
 {
     private ICasinoServer _casino;
 
@@ -18,9 +18,9 @@ public class HomeController : Controller
     /// 
     /// </summary>
     /// <param name="casino"></param>
-    public HomeController(ICasinoServer casino)
+    public DataController(ICasinoServer casino)
     {
-        _casino= casino;
+        _casino = casino;
     }
 
     /// <summary>
@@ -29,19 +29,21 @@ public class HomeController : Controller
     /// <returns></returns>
     public IActionResult Index()
     {
-        return View();
+        return RedirectToAction("Index");
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public IActionResult Treemap()
+        => Content(_casino.LoadTreemapDiagram());
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public IActionResult One(string id)
-    {
-        var stock = _casino
-            .LoadStocks()
-            .First(o => o.Code.Contains(id));
-        return View(stock);
-    }
+    public IActionResult Candlestick(string id)
+        => Content(_casino.LoadCandlestickDiagram(new Infrastructures.Contracts.Entries.CasinoServer.Stock { Code = id }));
 }

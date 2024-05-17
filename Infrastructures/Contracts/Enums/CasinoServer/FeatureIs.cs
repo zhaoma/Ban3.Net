@@ -22,5 +22,45 @@ public enum FeatureIs
     /// <summary>
     /// 下降
     /// </summary>
-    Minus
+    Minus,
+
+    /// <summary>
+    /// 涨停
+    /// </summary>
+    LimitUp,
+
+    /// <summary>
+    /// 跌停
+    /// </summary>
+    LimitDown,
+
+    /// <summary>
+    /// 周期买点
+    /// </summary>
+    DotBuy,
+
+    /// <summary>
+    /// 周期卖点
+    /// </summary>
+    DotSell,
+
+    /// <summary>
+    /// 触涨停
+    /// </summary>
+    ReachUp,
+
+    /// <summary>
+    /// 触跌停
+    /// </summary>
+    ReachDown,
+
+    /// <summary>
+    /// MACD上穿0
+    /// </summary>
+    Launch,
+
+    /// <summary>
+    /// MACD下穿0
+    /// </summary>
+    Hold
 }

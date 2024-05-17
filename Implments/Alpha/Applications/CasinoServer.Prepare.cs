@@ -295,7 +295,7 @@ public partial class CasinoServer
                 Suggest = SuggestIs.Skip,
                 LatestPrice = dailyPrices.Last(),
                 Remarks = new Alpha.Entries.CasinoServer.IndicatorParameter().GenerateRemarks(dailyPrices)
-            }.GenerateSuggest();
+            }.GenerateSuggestsAndNotices();
 
             _databaseServer.Save<Diagram>(stock.Code, _chartServer.CandlestickDiagram(result));
             _databaseServer.Create<Result>(result, (_) => stock.Code);

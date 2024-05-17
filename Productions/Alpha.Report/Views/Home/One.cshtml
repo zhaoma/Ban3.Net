@@ -1,0 +1,13 @@
+﻿@model Ban3.Infrastructures.Contracts.Entries.CasinoServer.Stock
+@{
+    ViewData["Title"] = Model != null ? $"{Model.Name}/{Model.Symbol}":"kanban4";
+}
+
+<div 
+    class="container renderCharts" 
+    renderElement="treemapContainer"
+     dataUrl="/data/Candlestick/@Model?.Code"
+     id="partsContainer">
+    <div class="col" id="treemapContainer" style="height:900px;">
+    </div>
+</div>

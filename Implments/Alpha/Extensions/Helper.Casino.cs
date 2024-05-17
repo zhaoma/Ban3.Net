@@ -7,6 +7,7 @@ using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Ban3.Implements.Alpha.Extensions;
@@ -187,10 +188,12 @@ public static partial class Helper
     /// </summary>
     /// <param name="result"></param>
     /// <returns></returns>
-    public static Result GenerateSuggest(this Result result)
+    public static Result GenerateSuggestsAndNotices(this Result result)
     {
         if (result.Remarks != null && result.Remarks.Any() && result.Suggest != SuggestIs.Ignore)
         {
+            if (result.Notices == null) result.Notices = new List<Notice>();
+
             for (var i = 1; i < result.Remarks.Count; i++)
             {
                 if (result.Remarks[i - 1].DayOutput != null
@@ -198,6 +201,27 @@ public static partial class Helper
                 {
                     result.Remarks[i].Suggest = Judge(result.Remarks[i - 1].DayOutput, result.Remarks[i].DayOutput, result.Suggest);
                     result.Suggest = result.Remarks[i].Suggest;
+
+                    if (result.Remarks[i].DayPrice.LimitFeature(out var feature))
+                    {
+                        result.Notices.Add(new Notice
+                        {
+                            Code = result.Stock.Code,
+                            MarkTime = result.Remarks[i].DayPrice.MarkTime,
+                            Feature = feature
+                        });
+                    }
+
+                    if (result.Remarks[i].DayOutput.OutputFeature(result.Remarks[i - 1].DayOutput, out var f,out var s))
+                    {
+                        result.Notices.Add(new Notice
+                        {
+                            Code = result.Stock.Code,
+                            MarkTime = result.Remarks[i].DayPrice.MarkTime,
+                            Feature = f,
+                            Note=s
+                        });
+                    }
                 }
             }
         }
@@ -305,18 +329,60 @@ public static partial class Helper
     /// <returns></returns>
     public static bool IsLimit(this Price price,bool upOrDown, bool closeOrReach)
     {
-        var percent = upOrDown ? 10 : -10;
+        var percent = upOrDown ? 10m : -10m;
 
         if (price.Code.StartsWith("30") || price.Code.StartsWith("68"))
-            percent = upOrDown ? 20 : -20;
+            percent = upOrDown ? 20m : -20m;
 
         if (price.Code.StartsWith("4") || price.Code.StartsWith("8"))
-            percent = upOrDown ? 30 : -30;
+            percent = upOrDown ? 30m : -30m;
 
         var to = closeOrReach ? price.Close : (upOrDown ? price.High : price.Low);
 
-        return Infrastructures.Common.Extensions.Helper
-            .IsLimit(to.ToDouble(), price.PreClose.ToDouble(), percent);
+        return to.IsLimit(price.PreClose, percent);
+    }
+
+    static bool IsLimit(this decimal close, decimal preClose, decimal changeRatio)
+    {
+        var num = Math.Round(preClose * (changeRatio / 100m + 1m), 2);
+        var num2 = Math.Round(close, 2);
+        return num.Equals(num2);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="price"></param>
+    /// <param name="feature"></param>
+    /// <returns></returns>
+    public static bool LimitFeature(this Price price,out FeatureIs feature)
+    {
+        if (price.IsLimit(true, true))
+        {
+            feature=FeatureIs.LimitUp;
+            return true;
+        }
+
+        if (price.IsLimit(true, false))
+        {
+            feature = FeatureIs.ReachUp;
+            return true;
+        }
+
+        if (price.IsLimit(false, true))
+        {
+            feature = FeatureIs.LimitDown;
+            return true;
+        }
+
+        if (price.IsLimit(false, false))
+        {
+            feature = FeatureIs.ReachDown;
+            return true;
+        }
+
+        feature = FeatureIs.Normal;
+        return false;
     }
 
     /// <summary>
@@ -341,5 +407,73 @@ public static partial class Helper
         }
 
         return result;
+    }
+
+    static bool OutputFeature(this Output today,Output yesterday, out FeatureIs feature,out string note)
+    {
+        if (yesterday.MACD.DIF < 0 && today.MACD.DIF > 0)
+        {
+            feature = FeatureIs.Launch;
+            note = "DIF上穿0";
+            return true;
+        }
+
+        if (yesterday.MACD.DIF < yesterday.MACD.DEA && today.MACD.DIF > today.MACD.DEA)
+        {
+            feature = FeatureIs.Plus;
+            note = "MACD金叉";
+            return true;
+        }
+        if (yesterday.MA.Short < yesterday.MA.Long && today.MA.Short > today.MA.Long)
+        {
+            feature = FeatureIs.Plus;
+            note = "MA金叉";
+            return true;
+        }
+        if (yesterday.MX.Buy < yesterday.MX.Sell && today.MX.Buy > today.MX.Sell)
+        {
+            feature = FeatureIs.Plus;
+            note = "MX金叉";
+            return true;
+        }
+
+        if (yesterday.MACD.DIF > 0 && today.MACD.DIF < 0)
+        {
+            feature = FeatureIs.Hold;
+            note = "DIF下穿0";
+            return true;
+        }
+
+        if (yesterday.MACD.DIF > yesterday.MACD.DEA && today.MACD.DIF < today.MACD.DEA)
+        {
+            feature = FeatureIs.Minus;
+            note = "MACD死叉";
+            return true;
+        }
+        if (yesterday.MA.Short > yesterday.MA.Long && today.MA.Short < today.MA.Long)
+        {
+            feature = FeatureIs.Minus;
+            note = "MA死叉";
+            return true;
+        }
+        if (yesterday.MX.Buy > yesterday.MX.Sell && today.MX.Buy < today.MX.Sell)
+        {
+            feature = FeatureIs.Minus;
+            note = "MX死叉";
+            return true;
+        }
+
+        feature = FeatureIs.Normal;
+        note = "";
+        return false;
+    }
+
+    static void AddNotice(this List<Notice> notices, Notice notice)
+    {
+        if (notices.Any(n => n.MarkTime.ToYmd() == notice.MarkTime.ToYmd() && n.Feature == notice.Feature))
+        {
+            return;
+        }
+        notices.Add(notice);
     }
 }
