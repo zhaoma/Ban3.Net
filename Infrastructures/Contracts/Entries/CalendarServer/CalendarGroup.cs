@@ -12,7 +12,7 @@ namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 /// <summary>
 /// 日历分组
 /// </summary>
-public class Group
+public class CalendarGroup
 {
 
     /// <summary>

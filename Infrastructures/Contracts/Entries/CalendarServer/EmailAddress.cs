@@ -1,29 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Contracts.Materials;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
-/// <summary>
-/// 邮件地址
-/// Includes the name and SMTP address of the attendee.
-/// https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/emailaddress
-/// </summary>
-public class EmailAddress
+public class EmailAddress:IEmailAddress
 {
-    /// <summary>
-    /// 显示名称
-    /// The display name of the person or entity.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "name")]
     public string Name { get; set; }
 
-    /// <summary>
-    /// 邮件
-    /// The email address of the person or entity.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "address")]
     public string Address { get; set; }
 
     /// <summary>
@@ -31,7 +17,8 @@ public class EmailAddress
     /// </summary>
     public EmailAddress()
     {
-
+        Name = string.Empty;
+        Address = string.Empty;
     }
 
     /// <summary>

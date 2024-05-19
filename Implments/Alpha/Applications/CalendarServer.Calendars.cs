@@ -18,7 +18,7 @@ public partial class CalendarServer
     /// <param name="owner"></param>
     /// <param name="group"></param>
     /// <returns></returns>
-    public List<Calendar> SyncCalendars(Owner owner, Group group)
+    public List<Calendar> SyncCalendars(Owner owner, CalendarGroup group)
     {
         return new List<Calendar>();
     }

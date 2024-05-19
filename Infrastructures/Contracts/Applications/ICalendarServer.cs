@@ -17,7 +17,7 @@ public interface ICalendarServer
     /// </summary>
     /// <param name="owner"></param>
     /// <returns></returns>
-    List<Group> SyncGroups(Owner owner);
+    List<CalendarGroup> SyncGroups(Owner owner);
 
     /// <summary>
     /// 提交日历组
@@ -25,7 +25,7 @@ public interface ICalendarServer
     /// <param name="owner"></param>
     /// <param name="group"></param>
     /// <returns></returns>
-    bool PostGroup(Owner owner, Group group);
+    bool PostGroup(Owner owner, CalendarGroup group);
 
     /// <summary>
     /// 清除日历组
@@ -33,7 +33,7 @@ public interface ICalendarServer
     /// <param name="owner"></param>
     /// <param name="group"></param>
     /// <returns></returns>
-    bool RemoveGroup(Owner owner, Group group);
+    bool RemoveGroup(Owner owner, CalendarGroup group);
 
     /// <summary>
     /// 同步日历
@@ -41,7 +41,7 @@ public interface ICalendarServer
     /// <param name="owner"></param>
     /// <param name="group"></param>
     /// <returns></returns>
-    List<Calendar> SyncCalendars(Owner owner,Group group);
+    List<Calendar> SyncCalendars(Owner owner,CalendarGroup group);
 
     /// <summary>
     /// 提交日历

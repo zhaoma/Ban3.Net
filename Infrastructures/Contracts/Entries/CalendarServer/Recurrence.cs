@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Contracts.Materials.Calendars;
+using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
@@ -14,19 +16,19 @@ namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 /// This field is omitted for single events or instances of recurring events.
 /// http://tools.ietf.org/html/rfc5545#section-3.8.5
 /// </summary>
-public class Recurrence
+public class Recurrence: IRecurrence
 {
     /// <summary>
     /// 事件频率
     /// The frequency of an event.
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "pattern")]
-    public RecurrencePattern Pattern { get; set; }
+    public IRecurrencePattern? Pattern { get; set; }
 
     /// <summary>
     /// 事件周期
     /// The duration of an event.
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "range")]
-    public RecurrenceRange Range { get; set; }
+    public IRecurrenceRange? Range { get; set; }
 }

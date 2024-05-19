@@ -6,8 +6,11 @@ using Ban3.Implements.Alpha.Extensions;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.Contracts.Applications;
+using Ban3.Infrastructures.Contracts.Entries;
 using Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
+using Ban3.Infrastructures.Contracts.Enums;
+using System.Net.NetworkInformation;
 
 namespace Ban3.Implements.Alpha.Support;
 
@@ -76,11 +79,17 @@ public class Program
             }
         }
 
-        var r = new ResponseStatus {
-            Time = DateTime.Now.ToYmd(),
-            Response = Infrastructures.Contracts.Enums.CalendarServer.AttendeeStatus.Tentative };
+        var r = new LocationAddress
+        {
+            Type = PhysicalAddressType.Business,
 
+        };
 
         Console.WriteLine(r.ObjToJson());
+
+        var d = new ItemBody { Content = "xx" };
+        Console.WriteLine(d.ObjToJson());
+
+        Console.ReadKey();
     }
 }

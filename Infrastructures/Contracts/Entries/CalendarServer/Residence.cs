@@ -1,5 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -8,11 +10,11 @@ namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 /// <summary>
 /// 地址
 /// </summary>
-public class Residence : Item
+public class Residence : MetaValue
 {
     /// <summary>
     ///是否是现居住地址
     /// </summary>
-    [DataMember]
+    
     public bool Current { get; set; }
 }

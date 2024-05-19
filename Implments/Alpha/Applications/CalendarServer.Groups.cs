@@ -17,9 +17,9 @@ public partial class CalendarServer
     /// </summary>
     /// <param name="owner"></param>
     /// <returns></returns>
-    public List<Group> SyncGroups(Owner owner)
+    public List<CalendarGroup> SyncGroups(Owner owner)
     {
-        return new List<Group>();
+        return new List<CalendarGroup>();
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public partial class CalendarServer
     /// <param name="owner"></param>
     /// <param name="group"></param>
     /// <returns></returns>
-    public bool PostGroup(Owner owner, Group group)
+    public bool PostGroup(Owner owner, CalendarGroup group)
     {
         return true;
     }
@@ -39,7 +39,7 @@ public partial class CalendarServer
     /// <param name="owner"></param>
     /// <param name="group"></param>
     /// <returns></returns>
-    public bool RemoveGroup(Owner owner, Group group)
+    public bool RemoveGroup(Owner owner, CalendarGroup group)
     {
         return true;
     }

@@ -1,5 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -19,12 +21,12 @@ public class Relation
     /// <summary>
     ///关系，比如父母，兄弟等
     /// </summary>
-    [DataMember]
+    
     public string Type { get; set; }
 
     /// <summary>
     /// 查看器中翻译
     /// </summary>
-    [DataMember]
+    
     public string FormattedType { get; set; }
 }

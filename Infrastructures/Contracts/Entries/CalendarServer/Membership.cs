@@ -1,7 +1,8 @@
-﻿using System;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Text;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
@@ -13,12 +14,12 @@ public class Membership
     /// <summary>
     /// 小组成员
     /// </summary>
-    [DataMember]
-    public List<ContactGroupMembership> ContactGroupMembership { get; set; }
+    
+    public List<ContactGroupMembership>? ContactGroupMembership { get; set; }
 
     /// <summary>
     /// 域成员
     /// </summary>
-    [DataMember]
-    public List<DomainMembership> DomainMembership { get; set; }
+    
+    public List<DomainMembership>? DomainMembership { get; set; }
 }

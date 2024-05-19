@@ -2,7 +2,10 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
+using Ban3.Infrastructures.Contracts.Materials.Calendars;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
@@ -11,54 +14,45 @@ using System.Text;
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
 /// <summary>
-/// 日历
+/// 日历信息
+/// https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/calendar
+/// https://developers.google.com/calendar/v3/reference/calendars#resource
 /// </summary>
-public class Calendar
+public class Calendar: ICalendarOnMicrosoft,ICalendarOnGoogle
 {
+    public string Id { get; set; } = string.Empty;
+
+    public string Name { get; set; } = string.Empty;
+
+    public string Etag { get; set; } = string.Empty;
 
     #region Peroperty
+
+    public List<OnlineMeetingProviderType>? AllowedOnlineMeetingProviders { get; set; }
 
     /// <summary>
     /// 用户在日历的有效角色
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "accessRole")]
-    public string AccessRole { get; set; }
+    public string AccessRole { get; set; } = string.Empty;
 
     /// <summary>
     /// 所在日历组
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "groupId")]
-    public string GroupId { get; set; }
+    public string GroupId { get; set; } = string.Empty;
 
     /// <summary>
     /// 背景颜色
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "backgroundColor")]
-    public string BackgroundColor { get; set; }
+    public string BackgroundColor { get; set; } = string.Empty;
 
-    /// <summary>
-    ///日历编辑
-    /// True if the user can write to the calendar, false otherwise. 
-    /// This property is true for the user who created the calendar. 
-    /// This property is also true for a user who has been shared a calendar and granted write access.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "canEdit")]
-    public bool CanEdit { get; set; }
+    public bool CanEdit { get; set; } = true;
 
-    /// <summary>
-    /// 日历分享
-    /// True if the user has the permission to share the calendar, false otherwise. 
-    /// Only the user who created the calendar can share it.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "canShare")]
-    public bool CanShare { get; set; }
+    public bool CanShare { get; set; } = true;
 
-    /// <summary>
-    /// 日历私人主题
-    /// True if the user can read calendar items that have been marked private, false otherwise.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "canViewPrivateItems")]
-    public bool CanViewPrivateItems { get; set; }
+    public bool CanViewPrivateItems { get; set; } = true;
 
     /// <summary>
     /// 日历版本标识
@@ -69,13 +63,9 @@ public class Calendar
     /// 对应GOOGLE的ETag
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "changeKey")]
-    public string ChangeKey { get; set; }
+    public string ChangeKey { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 日历颜色主题
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "color")]
-    public string Color { get; set; }
+    public CalendarColor Color { get; set; }
 
     /// <summary>
     /// 日历颜色ID
@@ -83,19 +73,26 @@ public class Calendar
     /// The property values are: LightBlue=0, LightGreen=1, LightOrange=2, LightGray=3, LightYellow=4, LightTeal=5, LightPink=6, LightBrown=7, LightRed=8, MaxColor=9, Auto=-1
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "colorId")]
-    public string ColorId { get; set; }
+    [JsonConverter(typeof(StringEnumConverter))]
+    public CalendarColor ColorId { get; set; }
 
-    /// <summary>
-    /// 日历描述(GOOGLE)
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "description")]
-    public string Description { get; set; }
+    public OnlineMeetingProviderType? DefaultOnlineMeetingProvider { get; set; }
+
+    public string HexColor { get; set; } = string.Empty;
+
+    public bool IsDefaultCalendar { get; set; } = true;
+
+    public bool IsRemovable { get; set; } = true;
+
+    public bool IsTallyingResponses { get; set; } = true;
+
+    public string Description { get; set; } = string.Empty;
 
     /// <summary>
     /// 此日历上默认提醒(GOOGLE)
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "defaultReminders")]
-    public List<Reminder> DefaultReminders { get; set; }
+    public List<Reminder>? DefaultReminders { get; set; }
 
     /// <summary>
     /// 是否从列表中删除这个条目
@@ -107,7 +104,7 @@ public class Calendar
     /// 前景颜色
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "foregroundColor")]
-    public string ForegroundColor { get; set; }
+    public string ForegroundColor { get; set; } = string.Empty;
 
     /// <summary>
     /// 日历是否被隐藏在列表中
@@ -115,49 +112,25 @@ public class Calendar
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "hidden")]
     public bool Hidden { get; set; }
 
-    /// <summary>
-    /// 日历类型(GOOGLE)
-    /// Type of the resource ("calendar#calendar").
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "kind")]
-    public string Kind { get; set; }
+    public string Kind { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 地理位置(GOOGLE)
-    /// Geographic location of the calendar as free-form text. 
-    /// Optional.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "location")]
-    public string Location { get; set; }
+    public string Location { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 日历名称(MS)
-    /// The calendar name.
-    /// 对应GOOGLE的SUMMARY
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "name")]
-    public string Name { get; set; }
+    public string Summary { get; set; } = string.Empty;
 
     ///// <summary>
     ///// 已验证用户接受此日历通知
     ///// </summary>
-    //[DataMember]
+    //
     //public NotificationSettings NotificationSettings { get; set; }
 
     /// <summary>
     /// 源数据
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "originalData")]
-    public string OriginalData { get; set; }
+    public string OriginalData { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 日历拥有者信息
-    /// If set, this represents the user who created or added the calendar. 
-    /// For a calendar that the user created or added, the owner property is set to the user. 
-    /// For a calendar shared with the user, the owner property is set to the person who shared that calendar with the user.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "owner")]
-    public EmailAddress Owner { get; set; }
+    public EmailAddress? Owner { get; set; }
 
     /// <summary>
     /// 日历是否为认证用户设置的主日历
@@ -175,21 +148,17 @@ public class Calendar
     /// 已验证用户为该日历设置的摘要
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "summaryOverride")]
-    public string SummaryOverride { get; set; }
+    public string SummaryOverride { get; set; } = string.Empty;
 
-    /// <summary>
-    /// 日历时区(GOOGLE)
-    /// The time zone of the calendar. (Formatted as an IANA Time Zone Database name, e.g. "Europe/Zurich".) 
-    /// Optional.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "timeZone")]
-    public string TimeZone { get; set; }
+    public string TimeZone { get; set; } = string.Empty;
 
     /// <summary>
     /// 事件信息
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "events")]
-    public List<Event> Events { get; set; }
+    public List<Event>? Events { get; set; }
 
     #endregion
+
+    public IConferenceProperty? ConferenceProperties { get; set; }
 }

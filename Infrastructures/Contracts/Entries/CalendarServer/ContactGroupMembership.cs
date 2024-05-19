@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
@@ -13,6 +14,6 @@ public class ContactGroupMembership
     /// <summary>
     /// 联系组Id
     /// </summary>
-    [DataMember]
+    
     public string ContactGroupId { get; set; }
 }

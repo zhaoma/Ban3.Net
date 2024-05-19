@@ -1,4 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,7 +26,7 @@ public class Reminder
     /// Required when adding a reminder.
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "method")]
-    public string Method { get; set; }
+    public ReminderMethod Method { get; set; }
 
     /// <summary>
     /// 提前分钟数
@@ -31,10 +36,4 @@ public class Reminder
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "minutes")]
     public int Minutes { get; set; }
 
-    /// <summary>
-    /// 默认提醒是否适用于该事件
-    /// Whether the default reminders of the calendar apply to the event.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "useDefault")]
-    public bool UseDefault { get; set; }
 }

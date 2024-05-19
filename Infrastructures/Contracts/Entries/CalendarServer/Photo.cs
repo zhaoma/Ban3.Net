@@ -1,4 +1,8 @@
-﻿using System;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
@@ -10,12 +14,12 @@ public class Photo
     /// <summary>
     ///照片的Url
     /// </summary>
-    [DataMember]
+    
     public string Url { get; set; }
 
     /// <summary>
     /// 照片是否是默认照片
     /// </summary>
-    [DataMember]
+    
     public string Default { get; set; }
 }

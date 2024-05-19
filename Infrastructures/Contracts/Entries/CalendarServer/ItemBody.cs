@@ -1,27 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
+using Ban3.Infrastructures.Contracts.Materials;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
-/// <summary>
-/// 表示项目正文的属性，例如邮件、事件或组帖子。(MS)
-/// https://developer.microsoft.com/zh-cn/graph/docs/api-reference/v1.0/resources/itembody
-/// </summary>
 [Serializable, DataContract]
-public class ItemBody
+public class ItemBody : IItemBody
 {
-    /// <summary>
-    /// 内容的类型。可能的值为 Text 和 HTML。
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "contentType")]
-    public string ContentType { get; set; } = "HTML";
+    public BodyType ContentType { get; set; } = BodyType.Html;
 
-    /// <summary>
-    /// 项目的内容。
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "content")]
-    public string Content { get; set; }
+    public string Content { get; set; } = string.Empty;
 }

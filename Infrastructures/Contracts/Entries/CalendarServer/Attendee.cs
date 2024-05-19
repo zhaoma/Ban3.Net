@@ -1,8 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
+using Ban3.Infrastructures.Contracts.Materials;
+using Ban3.Infrastructures.Contracts.Materials.Calendars;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
@@ -11,34 +15,19 @@ namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 /// https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/attendee
 /// https://developers.google.com/calendar/v3/reference/events#resource-representations
 /// </summary>
-public class Attendee
+public class Attendee:IAttendeeOnMicrosoft
 {
-    /// <summary>
-    /// 类型
-    /// The attendee type: required, optional, resource.(MS)
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    public string Type { get; set; }
+    public AttendeeType Type { get; set; }
 
-    /// <summary>
-    /// 邮箱地址
-    /// Includes the name and SMTP address of the attendee.
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    public EmailAddress EmailAddress { get; set; }
+    public IEmailAddress? EmailAddress { get; set; }
 
-    /// <summary>
-    /// 响应/回应
-    /// The attendee's response (none, accepted, declined, etc.) for the event and date-time that the response was sent.(MS)
-    /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    public ResponseStatus Status { get; set; }
+    public IResponseStatus? Status { get; set; }
 
     /// <summary>
     /// 额外的参与者
     /// Number of additional guests. Optional. The default is 0.(GOOGLE)
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    [JsonProperty("additionalGuests", NullValueHandling = NullValueHandling.Ignore)]
     public int AdditionalGuests { get; set; }
 
     /// <summary>
@@ -46,16 +35,16 @@ public class Attendee
     /// The attendee's response comment. 
     /// Optional.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    public string Comment { get; set; }
+    [JsonProperty("comment",NullValueHandling = NullValueHandling.Ignore)]
+    public string Comment { get; set; } = string.Empty;
 
     /// <summary>
     /// 姓名(GOOGLE)
     /// The attendee's name, if available. 
     /// Optional.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    public string DisplayName { get; set; }
+    [JsonProperty("displayName",NullValueHandling = NullValueHandling.Ignore)]
+    public string DisplayName { get; set; } = string.Empty;
 
     /// <summary>
     /// 邮箱(GOOGLE)
