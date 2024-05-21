@@ -3,10 +3,9 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
+using Ban3.Infrastructures.Contracts.Materials;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Newtonsoft.Json.Converters;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
@@ -15,7 +14,7 @@ namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 /// (MS)没有列表只有一个ReminderMinutesBeforeStart
 /// https://developers.google.com/calendar/v3/reference/events#resource-representations
 /// </summary>
-public class Reminder
+public class Reminder : IZero
 {
     /// <summary>
     /// 提醒方法
@@ -25,7 +24,7 @@ public class Reminder
     /// "popup" - Reminders are sent via a UI popup.
     /// Required when adding a reminder.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "method")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public ReminderMethod Method { get; set; }
 
     /// <summary>
@@ -33,7 +32,5 @@ public class Reminder
     /// Number of minutes before the start of the event when the reminder should trigger. Valid values are between 0 and 40320 (4 weeks in minutes).
     /// Required when adding a reminder.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "minutes")]
     public int Minutes { get; set; }
-
 }

@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 namespace Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 
@@ -15,13 +14,11 @@ public enum EventTransparency
     /// The event does block time on the calendar.
     /// This is equivalent to setting Show me as to Busy in the Calendar UI.
     /// </summary>
-    [JsonProperty("opaque")]
     Opaque,
 
     /// <summary>
     /// The event does not block time on the calendar.
     /// This is equivalent to setting Show me as to Available in the Calendar UI.
     /// </summary>
-    [JsonProperty("transparent")]
     Transparent
 }

@@ -3,6 +3,7 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer.IndicatorValues;
+using Ban3.Infrastructures.Contracts.Materials;
 using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
@@ -10,7 +11,7 @@ namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 /// <summary>
 /// Casino指标值,关键特征
 /// </summary>
-public class Output
+public class Output : IZero
 {
     /// <summary>
     /// AMOUNT:M5,M10
@@ -35,5 +36,5 @@ public class Output
     /// <summary>
     /// 关键特征
     /// </summary>
-    public List<string> Keys { get; set; }
+    public List<string>? Keys { get; set; }
 }

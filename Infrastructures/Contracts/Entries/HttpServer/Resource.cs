@@ -2,6 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Materials;
 using System.Collections.Generic;
 using System.IO;
 
@@ -10,7 +11,7 @@ namespace Ban3.Infrastructures.Components.Entries.HttpServer;
 /// <summary>
 /// HTTP请求资源
 /// </summary>
-public class Resource
+public class Resource:IZero
 {
     /// <summary>
     /// 资源地址
@@ -40,17 +41,17 @@ public class Resource
     /// <summary>
     /// 请求头
     /// </summary>
-    public Dictionary<string, string> Headers { get; set; }
+    public Dictionary<string, string>? Headers { get; set; }
 
     /// <summary>
     /// 请求字节组
     /// </summary>
-    public byte[] Bytes { get; set; }
+    public byte[]? Bytes { get; set; }
 
     /// <summary>
     /// 请求流
     /// </summary>
-    public Stream StreamContent { get; set; }
+    public Stream? StreamContent { get; set; }
 
     /// <summary>
     /// 请求文本

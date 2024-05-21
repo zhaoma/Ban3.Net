@@ -10,6 +10,7 @@ using Ban3.Infrastructures.Contracts.Entries;
 using Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using Ban3.Infrastructures.Contracts.Enums;
+using Ban3.Infrastructures.Contracts.Materials.Calendars;
 using System.Net.NetworkInformation;
 
 namespace Ban3.Implements.Alpha.Support;
@@ -79,16 +80,43 @@ public class Program
             }
         }
 
-        var r = new LocationAddress
+        var r = new Calendar
         {
-            Type = PhysicalAddressType.Business,
-
+            Id="CalendarId",
+            GroupId="GroupId",
+            Color=Infrastructures.Contracts.Enums.CalendarServer.CalendarColor.LightBlue,
+            HexColor="#003399",
+            Etag="Etag",
+            ChangeKey="ChangeKey"
         };
 
         Console.WriteLine(r.ObjToJson());
+        Console.WriteLine();
+        Console.WriteLine("GOOGLE-g");
+     var g=   r as ICalendarOnGoogle;
 
-        var d = new ItemBody { Content = "xx" };
-        Console.WriteLine(d.ObjToJson());
+        Console.WriteLine();
+        Console.WriteLine(g.ObjToJson());
+        Console.WriteLine();
+        Console.WriteLine("MICROSOFT");
+        Console.WriteLine();
+        Console.WriteLine(((ICalendarOnMicrosoft)r).ObjToJson());
+
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
+        var a = new Attendee { 
+            Type =Infrastructures.Contracts.Enums.CalendarServer.AttendeeType.Required,
+            EmailAddress =new EmailAddress {
+            Name="zhaoma@hotail.com"
+            },
+        Status=new ResponseStatus { 
+        Time=DateTime.Now,
+        Response=Infrastructures.Contracts.Enums.CalendarServer.ResponseType.Organizer
+        }
+        };
+        Console.WriteLine(a.ObjToJson());
 
         Console.ReadKey();
     }

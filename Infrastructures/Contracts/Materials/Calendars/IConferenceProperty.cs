@@ -1,16 +1,17 @@
-﻿using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Ban3.Infrastructures.Contracts.Materials.Calendars;
 
-public interface IConferenceProperty
+public interface IConferenceProperty : IZero
 {
     /// <summary>
     /// 此日历支持的会议解决方案类型。
     /// </summary>
-    [JsonProperty("allowedConferenceSolutionTypes", NullValueHandling = NullValueHandling.Ignore)]
     IEnumerable<ConferenceSolutionType>? AllowedConferenceSolutionTypes { get; set; }
 }

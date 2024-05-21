@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 namespace Ban3.Infrastructures.Contracts.Enums;
 
@@ -11,15 +10,11 @@ namespace Ban3.Infrastructures.Contracts.Enums;
 /// </summary>
 public enum Sensitivity
 {
-    [JsonProperty("normal")]
     Normal,
 
-    [JsonProperty("personal")]
     Personal,
 
-    [JsonProperty("private")]
     Private,
 
-    [JsonProperty("confidential")]
     Confidential
 }

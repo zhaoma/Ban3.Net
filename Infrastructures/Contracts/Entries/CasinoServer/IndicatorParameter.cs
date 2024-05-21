@@ -3,6 +3,7 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
+using Ban3.Infrastructures.Contracts.Materials;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 /// <summary>
 /// Casino使用的指标输入参数
 /// </summary>
-public class IndicatorParameter
+public class IndicatorParameter : IZero
 {
     /// <summary>
     /// 指标类型
@@ -26,5 +27,5 @@ public class IndicatorParameter
     /// MACD:(13.26.9)
     /// MXCD:(2,4)
     /// </summary>
-    public Dictionary<string, int> Parameters { get; set; }
+    public Dictionary<string, int>? Parameters { get; set; }
 }

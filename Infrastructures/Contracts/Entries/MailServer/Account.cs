@@ -2,12 +2,14 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Materials;
+
 namespace Ban3.Infrastructures.Components.Entries.MailServer;
 
 /// <summary>
 /// 邮件发送账号
 /// </summary>
-public class Account
+public class Account : IZero
 {
     /// <summary>
     /// 服务器地址

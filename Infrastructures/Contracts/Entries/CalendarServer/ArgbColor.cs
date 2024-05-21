@@ -2,7 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Newtonsoft.Json;
+using Ban3.Infrastructures.Contracts.Materials;
 using System;
 using System.Globalization;
 
@@ -11,7 +11,7 @@ namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 /// <summary>
 /// 颜色结构定义
 /// </summary>
-public class ArgbColor
+public class ArgbColor : IZero
 {
     /// <summary>
     /// 实例化
@@ -27,7 +27,6 @@ public class ArgbColor
     /// <summary>
     /// 颜色整数值
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "argbValue")]
     public int ArgbValue
     {
         get { return _argbValue; }

@@ -2,6 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Materials;
 using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
@@ -9,7 +10,7 @@ namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 /// <summary>
 /// 
 /// </summary>
-public class TradeRecord
+public class TradeRecord : IZero
 {
     /// <summary>
     /// 编码
@@ -24,5 +25,5 @@ public class TradeRecord
     /// <summary>
     /// 推测买卖记录集合
     /// </summary>
-    public List<TradeDetail> Details { get; set; }
+    public List<TradeDetail>? Details { get; set; }
 }

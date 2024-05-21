@@ -3,24 +3,26 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Ban3.Infrastructures.Contracts.Materials.Calendars;
 
 /// <summary>
-/// 
+/// 日历信息
+/// https://developers.google.com/calendar/v3/reference/calendars#resource
 /// </summary>
-public interface ICalendarOnGoogle
+public interface ICalendarOnGoogle: IZero
 {
     /// <summary>
     /// 此日历的会议属性，例如允许举行哪些类型的会议。
     /// </summary>
     [JsonProperty("conferenceProperties", NullValueHandling = NullValueHandling.Ignore)]
-    IConferenceProperty? ConferenceProperties { get; set;}
+    IConferenceProperty? ConferenceProperties { get; set; }
 
     /// <summary>
     /// 日历描述(GOOGLE)
     /// </summary>
-    [JsonProperty("description",NullValueHandling = NullValueHandling.Ignore)]
+    [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
     string Description { get; set; }
 
     /// <summary>
@@ -32,7 +34,7 @@ public interface ICalendarOnGoogle
     /// <summary>
     /// 日历的标识符。要检索 ID，请调用 calendarList.list() 方法。
     /// </summary>
-    [JsonProperty("id",NullValueHandling = NullValueHandling.Ignore )]
+    [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
     string Id { get; set; }
 
     /// <summary>

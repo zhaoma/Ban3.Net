@@ -3,7 +3,6 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Contracts.Materials.Calendars;
-using Newtonsoft.Json;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
@@ -22,13 +21,11 @@ public class Recurrence: IRecurrence
     /// 事件频率
     /// The frequency of an event.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "pattern")]
     public IRecurrencePattern? Pattern { get; set; }
 
     /// <summary>
     /// 事件周期
     /// The duration of an event.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "range")]
     public IRecurrenceRange? Range { get; set; }
 }

@@ -2,6 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Materials;
 using System;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
@@ -9,12 +10,12 @@ namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 /// <summary>
 /// Casino价格信息
 /// </summary>
-public class Price
+public class Price : IZero
 {
     /// <summary>
     /// 编码
     /// </summary>
-    public string Code { get; set; } = string.Empty;
+    public string? Code { get; set; }
 
     /// <summary>
     /// 行情时间(日，周月最后交易日)
@@ -24,7 +25,7 @@ public class Price
     /// <summary>
     /// 
     /// </summary>
-    public string TradeDate { get; set; } = string.Empty;
+    public string? TradeDate { get; set; }
 
     /// <summary>
     /// 前收

@@ -1,14 +1,21 @@
-﻿using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Ban3.Infrastructures.Contracts.Entries.CalendarServer;
+using Newtonsoft.Json.Serialization;
 
 namespace Ban3.Infrastructures.Contracts.Materials.Calendars;
 
-public interface ICalendarOnMicrosoft
+/// <summary>
+/// 日历信息
+/// https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/calendar
+/// </summary>
+public interface ICalendarOnMicrosoft : IZero
 {
     /// <summary>
     /// Represent the online meeting service providers that can be used to create online meetings in this calendar. 
@@ -73,6 +80,17 @@ public interface ICalendarOnMicrosoft
     /// </summary>
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "id")]
     string Id { get; set; }
+
+    /// <summary>
+    /// 日历版本标识
+    /// Identifies the version of the calendar object. 
+    /// Every time the calendar is changed, changeKey changes as well. 
+    /// This allows Exchange to apply changes to the correct version of the object. 
+    /// Read-only.
+    /// 对应GOOGLE的ETag
+    /// </summary>
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "changeKey")]
+    string ChangeKey { get; set; }
 
     /// <summary>
     /// true if this is the default calendar where new events are created by default, false otherwise.

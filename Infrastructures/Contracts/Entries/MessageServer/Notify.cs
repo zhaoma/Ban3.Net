@@ -2,6 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Materials;
 using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.Components.Entries.MessageServer;
@@ -9,7 +10,7 @@ namespace Ban3.Infrastructures.Components.Entries.MessageServer;
 /// <summary>
 /// 消息
 /// </summary>
-public class Notify
+public class Notify : IZero
 {
     /// <summary>
     /// 通知来源

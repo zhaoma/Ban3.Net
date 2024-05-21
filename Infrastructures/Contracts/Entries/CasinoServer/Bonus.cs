@@ -2,6 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Materials;
 using System;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
@@ -9,7 +10,7 @@ namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 /// <summary>
 /// 分红除权信息
 /// </summary>
-public class Bonus
+public class Bonus : IZero
 {
     /// <summary>
     /// 除权日

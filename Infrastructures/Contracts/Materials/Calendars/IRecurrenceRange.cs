@@ -6,6 +6,7 @@ using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using System;
+using Newtonsoft.Json.Serialization;
 
 namespace Ban3.Infrastructures.Contracts.Materials.Calendars;
 
@@ -13,7 +14,7 @@ namespace Ban3.Infrastructures.Contracts.Materials.Calendars;
 /// 周期时段定义
 /// https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/recurrencerange
 /// </summary>
-public interface IRecurrenceRange
+public interface IRecurrenceRange : IZero
 {
     /// <summary>
     /// 类型（开始时间/终止时间）
@@ -26,7 +27,6 @@ public interface IRecurrenceRange
     /// numbered:Event repeats for the numberOfOccurrences based on the recurrence pattern beginning on the startDate.
     /// (type, startDate, numberOfOccurrences)Repeat event in the date range starting on June 1, 2017, for 10 occurrences.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "type")]
     [JsonConverter(typeof(StringEnumConverter))]
     RecurrenceRangeType Type { get; set; }
 
@@ -37,7 +37,6 @@ public interface IRecurrenceRange
     /// Must be the same value as the start property of the recurring event. 
     /// Required.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "startDate")]
     DateTime StartDate { get; set; }
 
     /// <summary>
@@ -46,7 +45,6 @@ public interface IRecurrenceRange
     /// Depending on the recurrence pattern of the event, the last occurrence of the meeting may not be this date. 
     /// Required if type is endDate.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "endDate")]
     DateTime? EndDate { get; set; }
 
     /// <summary>
@@ -54,7 +52,6 @@ public interface IRecurrenceRange
     /// Time zone for the startDate and endDate properties. 
     /// Optional. If not specified, the time zone of the event is used.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "recurrenceTimeZone")]
     string RecurrenceTimeZone { get; set; }
 
     /// <summary>
@@ -62,6 +59,5 @@ public interface IRecurrenceRange
     /// The number of times to repeat the event. 
     /// Required and must be positive if type is numbered.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "numberOfOccurrences")]
-    int NumberOfOccurrences { get; set; }
+    int? NumberOfOccurrences { get; set; }
 }

@@ -2,12 +2,14 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Materials;
+
 namespace Ban3.Infrastructures.Components.Entries.HttpServer;
 
 /// <summary>
 /// HTTP请求主机
 /// </summary>
-public class Host
+public class Host:IZero
 {
     /// <summary>
     /// 匿名访问

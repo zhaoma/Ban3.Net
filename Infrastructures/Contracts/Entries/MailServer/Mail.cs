@@ -2,6 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
+using Ban3.Infrastructures.Contracts.Materials;
 using System.Collections.Generic;
 
 namespace Ban3.Infrastructures.Components.Entries.MailServer;
@@ -9,7 +10,7 @@ namespace Ban3.Infrastructures.Components.Entries.MailServer;
 /// <summary>
 /// 邮件发送目标邮件
 /// </summary>
-public class Mail
+public class Mail : IZero
 {
     /// <summary>
     /// 收件人
@@ -19,7 +20,7 @@ public class Mail
     /// <summary>
     /// 抄送
     /// </summary>
-    public Dictionary<string, string> CC { get; set; }
+    public Dictionary<string, string>? CC { get; set; }
 
     /// <summary>
     /// 主题

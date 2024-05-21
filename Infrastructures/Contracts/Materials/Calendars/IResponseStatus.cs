@@ -13,7 +13,7 @@ namespace Ban3.Infrastructures.Contracts.Materials.Calendars;
 /// 响应状态(邀请)
 /// https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/responsestatus
 /// </summary>
-public interface IResponseStatus
+public interface IResponseStatus : IZero
 {
     /// <summary>
     /// 响应信息
@@ -23,7 +23,6 @@ public interface IResponseStatus
     /// "tentative" - The attendee has tentatively accepted the invitation.
     /// "accepted" - The attendee has accepted the invitation.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "response")]
     [JsonConverter(typeof(StringEnumConverter))]
     ResponseType Response { get; set; }
 
@@ -33,6 +32,5 @@ public interface IResponseStatus
     /// It uses ISO 8601 format and is always in UTC time. 
     /// For example, midnight UTC on Jan 1, 2014 would look like this: '2014-01-01T00:00:00Z'
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "time")]
     DateTime Time { get; set; }
 }

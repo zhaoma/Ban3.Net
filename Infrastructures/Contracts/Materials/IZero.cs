@@ -2,21 +2,14 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-namespace Ban3.Infrastructures.Contracts.Enums.CalendarServer;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
-/// <summary>
-/// 事件类型
-/// 事件类型。 可取值为 singleInstance、occurrence、exception、seriesMaster。 
-/// 单实例、事件、异常、序列主机
-/// 只读。
-/// </summary>
-public enum EventType
+namespace Ban3.Infrastructures.Contracts.Materials;
+
+[JsonObject(
+    ItemNullValueHandling = NullValueHandling.Ignore,
+    NamingStrategyType = typeof(CamelCaseNamingStrategy))]
+public interface IZero
 {
-    SingleInstance,
-
-    Occurrence,
-
-    Exception,
-
-    SeriesMaster
 }

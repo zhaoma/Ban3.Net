@@ -6,13 +6,14 @@ using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using System;
+using Ban3.Infrastructures.Contracts.Materials;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
 /// Casino笔记
 /// </summary>
-public class Notice
+public class Notice : IZero
 {
     /// <summary>
     /// 编码
@@ -33,5 +34,5 @@ public class Notice
     /// <summary>
     /// 备注信息
     /// </summary>
-    public string Note { get; set; } = string.Empty;
+    public string? Note { get; set; }
 }

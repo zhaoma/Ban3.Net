@@ -5,13 +5,14 @@
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
+using Ban3.Infrastructures.Contracts.Materials;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
 /// <summary>
 /// Casino标的
 /// </summary>
-public class Stock
+public class Stock : IZero
 {
     /// <summary>
     /// 代码

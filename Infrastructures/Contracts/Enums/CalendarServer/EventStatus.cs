@@ -14,13 +14,11 @@ public enum EventStatus
     /// <summary>
     /// The event is confirmed. This is the default status.
     /// </summary>
-    [JsonProperty("confirmed")]
     confirmed,
 
     /// <summary>
     /// The event is tentatively confirmed.
     /// </summary>
-    [JsonProperty("tentative")]
     Tentative,
 
     /// <summary>
@@ -30,6 +28,5 @@ public enum EventStatus
     /// or if the showDeleted flag is set to true. 
     /// The get method always returns them.
     /// </summary>
-    [JsonProperty("cancelled")]
     Cancelled,
 }

@@ -6,7 +6,7 @@ using Ban3.Infrastructures.Contracts.Materials;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 
-public class EmailAddress:IEmailAddress
+public class EmailAddress : IEmailAddress
 {
     public string Name { get; set; }
 

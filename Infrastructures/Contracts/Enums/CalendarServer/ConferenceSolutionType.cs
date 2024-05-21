@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 namespace Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 
@@ -10,12 +9,9 @@ namespace Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 /// </summary>
 public enum ConferenceSolutionType
 {
-    [JsonProperty("eventHangout")]
     EventHangout,
 
-    [JsonProperty("eventNamedHangout")]
     EventNamedHangout,
 
-    [JsonProperty("hangoutsMeet")]
     HangoutsMeet
 }

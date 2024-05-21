@@ -15,19 +15,17 @@ namespace Ban3.Infrastructures.Contracts.Materials.Calendars;
 /// This field is omitted for single events or instances of recurring events.
 /// http://tools.ietf.org/html/rfc5545#section-3.8.5
 /// </summary>
-public interface IRecurrence
+public interface IRecurrence : IZero
 {
     /// <summary>
     /// 事件频率
     /// The frequency of an event.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "pattern")]
     IRecurrencePattern? Pattern { get; set; }
 
     /// <summary>
     /// 事件周期
     /// The duration of an event.
     /// </summary>
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "range")]
     IRecurrenceRange? Range { get; set; }
 }

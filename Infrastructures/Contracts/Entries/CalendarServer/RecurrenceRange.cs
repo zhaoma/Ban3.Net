@@ -22,5 +22,5 @@ public class RecurrenceRange : IRecurrenceRange
 
     public string RecurrenceTimeZone { get; set; }
 
-    public int NumberOfOccurrences { get; set; }
+    public int? NumberOfOccurrences { get; set; }
 }

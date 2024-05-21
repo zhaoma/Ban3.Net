@@ -4,8 +4,6 @@
 
 using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 using Ban3.Infrastructures.Contracts.Materials.Calendars;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 
@@ -20,9 +18,14 @@ public class RecurrencePattern : IRecurrencePattern
     public RecurrencePatternType Type { get; set; }
 
     public int Interval { get; set; }
+
     public int Month { get; set; }
+
     public int DayOfMonth { get; set; }
+
     public List<DayOfWeek>? DaysOfWeek { get; set; }
+
     public DayOfWeek FirstDayOfWeek { get; set; } = DayOfWeek.Sunday;
+
     public string Index { get; set; }
 }

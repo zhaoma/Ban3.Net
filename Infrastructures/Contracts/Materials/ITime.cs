@@ -10,13 +10,12 @@ namespace Ban3.Infrastructures.Contracts.Materials;
 /// 时间信息
 /// https://developer.microsoft.com/en-us/graph/docs/api-reference/v1.0/resources/datetimetimezone
 /// </summary>
-public interface ITime
+public interface ITime : IZero
 {
     /// <summary>
     /// 日期(GOOGLE)
     /// The date, in the format "yyyy-mm-dd", if this is an all-day event.
     /// </summary>
-    [JsonProperty("date",NullValueHandling = NullValueHandling.Ignore)]
     string Date { get; set; }
 
     /// <summary>
@@ -26,7 +25,6 @@ public interface ITime
     /// https://tools.ietf.org/html/rfc3339
     /// 注意:OUTLOOK只有DateTime没有Date
     /// </summary>
-    [JsonProperty("dateTime", NullValueHandling = NullValueHandling.Ignore )]
     string DateTime { get; set; }
 
     /// <summary>
@@ -35,7 +33,6 @@ public interface ITime
     /// For recurring events this field is required and specifies the time zone in which the recurrence is expanded. 
     /// For single events this field is optional and indicates a custom time zone for the event start/end.
     /// </summary>
-    [JsonProperty("timeZone", NullValueHandling = NullValueHandling.Ignore)]
     string TimeZone { get; set; }
 
     /*

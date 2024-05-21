@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
 
 namespace Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 
@@ -11,21 +10,15 @@ namespace Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 /// </summary>
 public enum ShowAs
 {
-    [JsonProperty("free")]
     Free,
 
-    [JsonProperty("tentative")]
     Tentative,
 
-    [JsonProperty("busy")]
     Busy,
 
-    [JsonProperty("oof")]
     Oof,
 
-    [JsonProperty("workingElsewhere")]
     WorkingElsewhere,
 
-    [JsonProperty("unknown")]
     Unknown
 }
