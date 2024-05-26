@@ -1,8 +1,14 @@
 ﻿var currentParts = '';
-var currentCharts = "";
+var currentCharts = '';
+var currentCode = '';
 
 $(document).ready(function () {
     initContainer($(document));
+
+    $(document).dblclick(function (e) {
+        console.log("dblclick")
+        bindCharts('treemapContainer', '/data/Treemap');
+    });
 });
 
 function clearNav() {
@@ -159,6 +165,23 @@ function bindCharts(elementId, dataUrl) {
 
         window.onresize = currentChart.resize;
         initGrid();
+    });
+
+    currentChart.on('click', function (params) {
+        console.log(params);
+        if (params.seriesType == 'treemap') {
+            showOne(currentChart, params.name);
+        }
+    });
+}
+
+function showOne(charts, code) {
+    $.get('/data/Candlestick/' + code, function (rawData) {
+        $("#oneModal").modal('show');
+        var diagramOption = eval("(" + rawData + ")");
+        diagramOption && charts.setOption(diagramOption);
+
+        window.onresize = charts.resize;
     });
 }
 

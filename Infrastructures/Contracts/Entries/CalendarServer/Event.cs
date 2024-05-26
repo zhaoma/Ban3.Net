@@ -6,8 +6,6 @@ using Ban3.Infrastructures.Contracts.Enums;
 using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 using Ban3.Infrastructures.Contracts.Materials;
 using Ban3.Infrastructures.Contracts.Materials.Calendars;
-using Ban3.Infrastructures.Contracts.Response;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 

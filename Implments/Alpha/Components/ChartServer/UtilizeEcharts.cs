@@ -198,7 +198,7 @@ public class UtilizeEcharts : IChartServer
                             Children = stocksSummary.Records.Where(o => o.Code.StartsWith($"{f.Key}"))
                                 .Select(d => new TreemapRecord
                                 {
-                                    Name = d.Code,
+                                    Name = $"{d.Code} [{d.LatestClose}]",
                                     Value = Convert.ToInt32(stocksSummary.MarkTime.Subtract(d.Details.FirstOrDefault().BuyTime).TotalDays)
                                 }).ToList()
                         })

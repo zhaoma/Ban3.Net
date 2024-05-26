@@ -111,6 +111,13 @@ html {
     color: darkred;
 }
 
+.indexContainer {
+    margin-top: 20px;
+}
+.oneContainer {
+    margin-top: 20px;
+}
+
 .indexBox {
     margin-top: 2rem !important;
     background-color: #000;

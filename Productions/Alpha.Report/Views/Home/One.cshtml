@@ -3,11 +3,9 @@
     ViewData["Title"] = Model != null ? $"{Model.Name}/{Model.Symbol}":"kanban4";
 }
 
-<div 
-    class="container renderCharts" 
-    renderElement="treemapContainer"
+<div class="container oneContainer renderCharts"
+     renderElement="oneContainer"
      dataUrl="/data/Candlestick/@Model?.Code"
-     id="partsContainer">
-    <div class="col" id="treemapContainer" style="height:900px;">
-    </div>
+     id="oneContainer"
+     style="background-color:#FFF;height:900px;">
 </div>

@@ -143,7 +143,7 @@ public partial class CasinoServer
 
         var prices = pricesResult.Data.ObjToJson().JsonToObj<List<Price>>().OrderBy(o => o.TradeDate).ToList();
 
-        prices.ForEach(price => { price.MarkTime = price.TradeDate.ToDateTimeEx(); });
+        prices.ForEach(price => { price.MarkTime = price.TradeDate!.ToDateTimeEx(); });
 
         return prices;
     }
@@ -193,7 +193,10 @@ public partial class CasinoServer
                                                                            Math.Round(e.Pbonus, 0) / 10M *
                                                                            Math.Round(e.Pprice, 2)), 4);
 
-                        result.Add(new Reinstate { MarkTime = e.MarkTime, Factor = thisSeed });
+                        if (thisSeed != 1)
+                        {
+                            result.Add(new Reinstate { MarkTime = e.MarkTime, Factor = thisSeed });
+                        }
                     }
                 }
             }

@@ -27,7 +27,8 @@ public class Program
         ("args: -full:               execute base task.\n" +
         "      -one [code partern]: execute one task.\n" +
         "      -any:                collect all price with delay.\n" +
-        "      -summary:            generate summary report.\n\n").WriteColorLine(ConsoleColor.DarkRed);
+        "      -summary:            generate summary report.\n\n")
+        .WriteColorLine(ConsoleColor.DarkRed);
 
         Settings.Init();
 
@@ -72,14 +73,12 @@ public class Program
                     break;
 
                 default:
-                    //"Unsupported args input..".WriteColorLine(ConsoleColor.DarkYellow);
-
-                    var summary = _server.LoadSummary().Latest();
-                    Console.WriteLine(summary.Records.Count());
+                    "Unsupported args input..".WriteColorLine(ConsoleColor.DarkYellow);
                     break;
             }
         }
 
+        /*
         var r = new Calendar
         {
             Id="CalendarId",
@@ -93,7 +92,7 @@ public class Program
         Console.WriteLine(r.ObjToJson());
         Console.WriteLine();
         Console.WriteLine("GOOGLE-g");
-     var g=   r as ICalendarOnGoogle;
+        var g=   r as ICalendarOnGoogle;
 
         Console.WriteLine();
         Console.WriteLine(g.ObjToJson());
@@ -117,7 +116,7 @@ public class Program
         }
         };
         Console.WriteLine(a.ObjToJson());
-
+        */
         Console.ReadKey();
     }
 }
