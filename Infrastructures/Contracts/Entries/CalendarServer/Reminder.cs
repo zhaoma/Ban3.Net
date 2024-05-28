@@ -20,7 +20,8 @@ public class Reminder : IZero
     /// 提醒方法
     /// The method used by this reminder. Possible values are:
     /// "email" - Reminders are sent via email.
-    /// "sms" - Reminders are sent via SMS.These are only available for G Suite customers.Requests to set SMS reminders for other account types are ignored.
+    /// "sms" - Reminders are sent via SMS.These are only available for G Suite customers.
+    /// Requests to set SMS reminders for other account types are ignored.
     /// "popup" - Reminders are sent via a UI popup.
     /// Required when adding a reminder.
     /// </summary>
@@ -29,7 +30,8 @@ public class Reminder : IZero
 
     /// <summary>
     /// 提前分钟数
-    /// Number of minutes before the start of the event when the reminder should trigger. Valid values are between 0 and 40320 (4 weeks in minutes).
+    /// Number of minutes before the start of the event when the reminder should trigger. 
+    /// Valid values are between 0 and 40320 (4 weeks in minutes).
     /// Required when adding a reminder.
     /// </summary>
     public int Minutes { get; set; }

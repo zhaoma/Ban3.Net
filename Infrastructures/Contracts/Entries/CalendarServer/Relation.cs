@@ -19,12 +19,10 @@ public class Relation : IZero
     /// <summary>
     ///关系，比如父母，兄弟等
     /// </summary>
-
     public string Type { get; set; }
 
     /// <summary>
     /// 查看器中翻译
     /// </summary>
-
     public string FormattedType { get; set; }
 }

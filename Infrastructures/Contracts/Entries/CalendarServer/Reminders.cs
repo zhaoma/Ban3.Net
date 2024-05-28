@@ -19,7 +19,7 @@ public class Reminders : IZero
     public bool UseDefault { get; set; }
 
     /// <summary>
-    /// 
+    /// 提醒方式
     /// </summary>
-    public IEnumerable<Reminder> Overrides { get; set; }
+    public IEnumerable<Reminder>? Overrides { get; set; }
 }

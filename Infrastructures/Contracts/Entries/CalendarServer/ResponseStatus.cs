@@ -16,7 +16,14 @@ namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 /// </summary>
 public class ResponseStatus : IResponseStatus
 {
+    /// <summary>
+    /// 响应类型
+    /// </summary>
+    [JsonConverter(typeof(StringEnumConverter))]
     public ResponseType Response { get; set; }
 
+    /// <summary>
+    /// 响应时间
+    /// </summary>
     public DateTime Time { get; set; }
 }

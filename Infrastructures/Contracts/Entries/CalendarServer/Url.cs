@@ -13,13 +13,11 @@ public class Url:MetaValue
 {
     /// <summary>
     /// URL的类型
-    /// </summary>
-    
+    /// </summary>    
     public string Type { get; set; }
 
     /// <summary>
     /// 查看账户的只读类型
-    /// </summary>
-    
+    /// </summary>    
     public string FormattedType { get; set; }
 }

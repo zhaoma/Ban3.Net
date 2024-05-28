@@ -4,6 +4,8 @@
 
 using Ban3.Infrastructures.Contracts.Enums.CalendarServer;
 using Ban3.Infrastructures.Contracts.Materials.Calendars;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 using System;
 
 namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
@@ -14,6 +16,7 @@ namespace Ban3.Infrastructures.Contracts.Entries.CalendarServer;
 /// </summary>
 public class RecurrenceRange : IRecurrenceRange
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public RecurrenceRangeType Type { get; set; }
 
     public DateTime StartDate { get; set; }
