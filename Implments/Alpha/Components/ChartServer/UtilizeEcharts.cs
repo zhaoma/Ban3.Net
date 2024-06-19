@@ -14,7 +14,7 @@ using Ban3.Infrastructures.Charts.Enums;
 using Ban3.Infrastructures.Charts.Labels;
 using Ban3.Infrastructures.Charts.Styles;
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Components;
+using Ban3.Infrastructures.Contracts.Components;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using System;
 using System.Collections.Generic;

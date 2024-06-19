@@ -2,28 +2,21 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components.Entries.MessageServer;
-using System;
-using System.Threading.Tasks;
+using System.Net;
+using System.Text;
 
-namespace Ban3.Infrastructures.Contracts.Components;
+namespace Ban3.Infrastructures.Contracts.Entries.CommunicationServer;
 
 /// <summary>
-/// 消息服务
+/// 
 /// </summary>
-public interface IMessageServer
+public class Address
 {
-    /// <summary>
-    /// 发布通知
-    /// </summary>
-    /// <param name="notify"></param>
-    /// <returns></returns>
-    Task<bool> Publish(Notify notify);
+    public static EndPoint _endPoint { get; set; }
 
-    /// <summary>
-    /// 收听
-    /// </summary>
-    /// <param name="action"></param>
-    /// <returns></returns>
-    Task<bool> Subscribe(Action<Notify> action);
+    public string IP { get; set; }
+
+    public int Port { get; set; }
+
+     
 }

@@ -1,16 +1,19 @@
-﻿using Ban3.Infrastructures.Charts;
+﻿//  —————————————————————————————————————————————————————————————————————————————
+//  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
+//  —————————————————————————————————————————————————————————————————————————————
+
+using Ban3.Infrastructures.Charts;
 using Ban3.Infrastructures.Charts.Components;
 using Ban3.Infrastructures.Charts.Enums;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace Ban3.Implements.Alpha.Extensions;
 
+/// <summary>
+/// 图表的一些静态扩展方法
+/// </summary>
 public static partial class Helper
 {
     public static Series[] AMOUNT(this Result stockResult, int? index, out List<string> legendData)

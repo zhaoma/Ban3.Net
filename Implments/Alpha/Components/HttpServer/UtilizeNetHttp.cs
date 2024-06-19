@@ -4,7 +4,7 @@
 
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Components.Entries.HttpServer;
-using Ban3.Infrastructures.Components;
+using Ban3.Infrastructures.Contracts.Components;
 using System;
 using System.IO;
 using System.Linq;

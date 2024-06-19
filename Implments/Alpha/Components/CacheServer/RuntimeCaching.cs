@@ -3,7 +3,7 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Components;
+using Ban3.Infrastructures.Contracts.Components;
 using System;
 using System.Runtime.Caching;
 using System.Threading.Tasks;

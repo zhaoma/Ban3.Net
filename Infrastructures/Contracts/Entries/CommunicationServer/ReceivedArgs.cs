@@ -4,28 +4,11 @@
 
 using System;
 
-namespace Ban3.Infrastructures.Contracts.Components;
+namespace Ban3.Infrastructures.Contracts.Entries.CommunicationServer;
 
-/// <summary>
-/// 日志记录服务
-/// </summary>
-public interface ILoggerServer
+public class ReceivedArgs:EventArgs
 {
-    /// <summary>
-    /// 错误
-    /// </summary>
-    /// <param name="ex"></param>
-    void Error(Exception ex);
+    public Address Address { get; set; } 
 
-    /// <summary>
-    /// 信息
-    /// </summary>
-    /// <param name="message"></param>
-    void Info(string message);
-
-    /// <summary>
-    /// 调试
-    /// </summary>
-    /// <param name="message"></param>
-    void Debug(string message);
+    public byte[] Data { get; set; }
 }

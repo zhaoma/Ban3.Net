@@ -4,7 +4,7 @@
 
 using System.Threading.Tasks;
 
-namespace Ban3.Infrastructures.Components;
+namespace Ban3.Infrastructures.Contracts.Components;
 
 /// <summary>
 /// 数据缓存服务

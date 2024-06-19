@@ -3,7 +3,7 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Components;
+using Ban3.Infrastructures.Contracts.Components;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

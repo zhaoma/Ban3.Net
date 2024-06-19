@@ -2,16 +2,9 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Implements.Alpha.Extensions;
 using Ban3.Infrastructures.Common.Extensions;
 using Ban3.Infrastructures.Consoles;
 using Ban3.Infrastructures.Contracts.Applications;
-using Ban3.Infrastructures.Contracts.Entries;
-using Ban3.Infrastructures.Contracts.Entries.CalendarServer;
-using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
-using Ban3.Infrastructures.Contracts.Enums;
-using Ban3.Infrastructures.Contracts.Materials.Calendars;
-using System.Net.NetworkInformation;
 
 namespace Ban3.Implements.Alpha.Support;
 
@@ -78,6 +71,11 @@ public class Program
             }
         }
 
+        Console.ReadKey();
+    }
+
+    static void Temp()
+    {
         /*
         var r = new Calendar
         {
@@ -117,6 +115,5 @@ public class Program
         };
         Console.WriteLine(a.ObjToJson());
         */
-        Console.ReadKey();
     }
 }

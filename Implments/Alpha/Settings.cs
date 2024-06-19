@@ -39,31 +39,31 @@ public static class Settings
             .SingleInstance();
 
         builder.RegisterType<Components.CacheServer.RuntimeCaching>()
-            .As<Infrastructures.Components.ICacheServer>()
+            .As<Infrastructures.Contracts.Components.ICacheServer>()
             .SingleInstance();
 
         builder.RegisterType<Components.ChartServer.UtilizeEcharts>()
-            .As<Infrastructures.Components.IChartServer>()
+            .As<Infrastructures.Contracts.Components.IChartServer>()
             .SingleInstance();
 
         builder.RegisterType<Components.DatabaseServer.UtilizeJson>()
-            .As<Infrastructures.Components.IDatabaseServer>()
+            .As<Infrastructures.Contracts.Components.IDatabaseServer>()
             .SingleInstance();
 
         builder.RegisterType<Components.HttpServer.UtilizeNetHttp>()
-            .As<Infrastructures.Components.IHttpServer>()
+            .As<Infrastructures.Contracts.Components.IHttpServer>()
             .SingleInstance();
 
         builder.RegisterType<Components.LogServer.UtilizeLog4net>()
-            .As<Infrastructures.Components.ILoggerServer>()
+            .As<Infrastructures.Contracts.Components.ILoggerServer>()
             .SingleInstance();
 
         builder.RegisterType<Components.MailServer.UtilizeOutlook>()
-            .As<Infrastructures.Components.IMailServer>()
+            .As<Infrastructures.Contracts.Components.IMailServer>()
             .SingleInstance();
 
         builder.RegisterType<Components.MessageServer.UtilizeSignalR>()
-            .As<Infrastructures.Components.IMessageServer>()
+            .As<Infrastructures.Contracts.Components.IMessageServer>()
             .SingleInstance();
     }
 

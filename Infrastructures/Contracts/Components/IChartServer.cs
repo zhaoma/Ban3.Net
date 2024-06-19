@@ -4,7 +4,7 @@
 
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 
-namespace Ban3.Infrastructures.Components;
+namespace Ban3.Infrastructures.Contracts.Components;
 
 /// <summary>
 /// 图表服务

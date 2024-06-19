@@ -2,29 +2,22 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components.Entries.MailServer;
-using System.Threading.Tasks;
+using Ban3.Infrastructures.Contracts.Entries.CommunicationServer;
+using Ban3.Infrastructures.Contracts.Materials;
+using System;
 
 namespace Ban3.Infrastructures.Contracts.Components;
 
 /// <summary>
-/// 邮件发送服务
+/// 通讯服务
 /// </summary>
-public interface IMailServer
+public interface ICommunicationServer : IZero, IDisposable
 {
-    /// <summary>
-    /// 同步发送
-    /// </summary>
-    /// <param name="account"></param>
-    /// <param name="mail"></param>
-    /// <returns></returns>
-    bool Send(Account account, Mail mail);
+    bool StartListen(Address address);
 
-    /// <summary>
-    /// 异步发送
-    /// </summary>
-    /// <param name="account"></param>
-    /// <param name="mail"></param>
-    /// <returns></returns>
-    Task<bool> SendAsync(Account account, Mail mail);
+    event EventHandler<ReceivedArgs> Received;
+
+    bool StopListen(Address address);
+
+
 }

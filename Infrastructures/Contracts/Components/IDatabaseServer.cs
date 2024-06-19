@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace Ban3.Infrastructures.Components;
+namespace Ban3.Infrastructures.Contracts.Components;
 
 /// <summary>
 /// 数据持久化服务

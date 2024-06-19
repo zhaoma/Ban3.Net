@@ -2,7 +2,7 @@
 //  zhaoma@hotmail.com . WTFPL . DRY . KISS . YAGNI
 //  —————————————————————————————————————————————————————————————————————————————
 
-using Ban3.Infrastructures.Components;
+using Ban3.Infrastructures.Contracts.Components;
 using Ban3.Infrastructures.Components.Entries.MessageServer;
 using System;
 using System.Threading.Tasks;

@@ -5,7 +5,7 @@
 using Ban3.Infrastructures.Components.Entries.HttpServer;
 using System.Threading.Tasks;
 
-namespace Ban3.Infrastructures.Components;
+namespace Ban3.Infrastructures.Contracts.Components;
 
 /// <summary>
 /// HTTP请求服务

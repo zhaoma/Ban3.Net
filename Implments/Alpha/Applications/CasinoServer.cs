@@ -3,7 +3,7 @@
 //  —————————————————————————————————————————————————————————————————————————————
 
 using Ban3.Infrastructures.Common.Extensions;
-using Ban3.Infrastructures.Components;
+using Ban3.Infrastructures.Contracts.Components;
 using Ban3.Infrastructures.Contracts.Applications;
 using Ban3.Infrastructures.Contracts.Entries.CasinoServer;
 using Ban3.Infrastructures.Contracts.Enums.CasinoServer;
