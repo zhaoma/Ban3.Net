@@ -23,9 +23,9 @@ public class Program
         "      -summary:            generate summary report.\n\n")
         .WriteColorLine(ConsoleColor.DarkRed);
 
-        Settings.Init();
+        DependencyInjection.Init();
 
-        _server = Settings.Resolve<ICasinoServer>();
+        _server = DependencyInjection.Resolve<ICasinoServer>();
 
         if (args != null && args.Length > 0)
         {

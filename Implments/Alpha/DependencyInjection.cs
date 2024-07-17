@@ -9,7 +9,7 @@ namespace Ban3.Implements.Alpha;
 /// <summary>
 /// 
 /// </summary>
-public static class Settings
+public static class DependencyInjection
 {
     /// <summary>
     /// 

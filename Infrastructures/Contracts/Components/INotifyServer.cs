@@ -25,8 +25,16 @@ public interface INotifyServer : IZero, IDisposable
 
     bool Stop();
 
-    bool Publish();
+    /// <summary>
+    /// 生产
+    /// </summary>
+    /// <returns></returns>
+    bool Produce();
 
+    /// <summary>
+    /// 消费
+    /// </summary>
+    /// <returns></returns>
     bool Consume();
 
 

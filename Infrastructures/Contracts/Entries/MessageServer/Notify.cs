@@ -13,14 +13,14 @@ namespace Ban3.Infrastructures.Components.Entries.MessageServer;
 public class Notify : IZero
 {
     /// <summary>
-    /// 通知来源
+    /// 交换器
     /// </summary>
-    public string From { get; set; } = string.Empty;
+    public string Exchange { get; set; } = string.Empty;
 
     /// <summary>
-    /// 通知目标
+    /// 路由键名
     /// </summary>
-    public string To { get; set; } = string.Empty;
+    public string RoutingKey { get; set; } = string.Empty;
 
     /// <summary>
     /// 控制码
